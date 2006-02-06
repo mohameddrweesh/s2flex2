@@ -1,0 +1,33 @@
+<project name="S2flex2_swc" default="build" basedir=".">
+
+	<property file="build.properties"/>
+	<!-- build -->
+	<target name="build">
+    <java jar="${compc}"
+        fork="true"
+        failonerror="true"
+        maxmemory="128m"
+        >
+		<arg value="-keep-generated-actionscript=true"/>
+		<arg value="-library-path"/>
+		<arg value="${frameworks.dir}"/>
+
+		<arg value="-actionscript-classpath"/>
+		<arg value="."/>
+		<arg value="src/actionscript3"/>
+		<arg value="-library-path"/>
+		<arg value="${frameworks.dir}"/>
+		<arg value="${frameworks.dir}/framework.swc"/>
+		<arg value="${frameworks.dir}/rpc.swc"/>
+		<arg value="-o"/>
+		<arg value="dist/S2comp.swc"/>
+		<arg value="-include-classes"/>		
+		<!--<arg value="org.seasar.flex2.rpc.RemoteObject"/>-->
+		<arg value="org.seasar.flex2.net.NetConnection2"/>
+		<arg value="org.seasar.flex2.rpc.remoting.SimpleAMF"/>
+		<!--<arg value="org.seasar.flex2.rpc.remoting.S2AMF0Object"/>-->
+		<!--<arg value="org.seasar.flex2.rpc.remoting.S2RemoteObject"/>-->
+		<!--<arg value="org.seasar.flex2.rpc.remoting.S2AMF0Object"/>-->
+	  </java>
+  </target>
+</project>

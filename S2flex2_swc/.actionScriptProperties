@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actionScriptProperties mainApplicationPath="S2flex2_swc.as" version="4">
+<compiler coach="true" copyDependentFiles="false" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="true" htmlHistoryManagement="false" htmlPlayerVersion="8.5.0" htmlPlayerVersionCheck="true" outputFolderPath="bin" strict="true">
+<classPath>
+<classPathEntry kind="1" path="${DOCUMENTS}\S2flex2_swc\src\actionscript3"/>
+</classPath>
+<libraryPath>
+<libraryPathEntry kind="3" linkType="2" path="${FRAMEWORKS}/playerglobal.swc"/>
+<libraryPathEntry kind="3" linkType="1" path="${FRAMEWORKS}/framework.swc" sourcepath="${FRAMEWORKS}"/>
+<libraryPathEntry kind="3" linkType="1" path="${FRAMEWORKS}/rpc.swc"/>
+</libraryPath>
+<sourcePath>
+<sourcePathEntry kind="3" path="${FRAMEWORKS}/framework.swc" sourcepath="${FRAMEWORKS}"/>
+</sourcePath>
+</compiler>
+<applications>
+<application path="S2flex2_swc.as"/>
+</applications>
+</actionScriptProperties>
