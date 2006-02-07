@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.macromedia.com/2005/mxml" 
+	xmlns="*"
+	xmlns:s2="org.seasar.flex2.rpc.remoting.*"  layout="absolute" >
+	<s2:SimpleAMF id="amf" result="onResult(event)" concurrency="single" destination="org.openamf.examples.TestBean" showBusyCursor="false" gatewayUrl="http://localhost:8080/openamf/gateway" />
+<mx:Script>
+	<![CDATA[
+		import mx.controls.Alert;
+		import mx.rpc.events.FaultEvent;
+		import mx.rpc.events.ResultEvent;
+		import flash.events.Event;
+		import mx.utils.ObjectUtil;
+		
+		public function doRemoteCall():void{
+			//openAMFsample 
+			amf.remoteCall("getTestValue");
+		}		
+		public function onResult(event:Event){
+			result_txt.text = mx.utils.ObjectUtil.toString( ResultEvent(event).result );
+		}
+		public function onFault(event:Event){
+			result_txt.text=mx.utils.ObjectUtil.toString( FaultEvent(event).fault );
+		}
+
+	]]>
+</mx:Script>
+	<mx:TextArea x="10" y="20" id="result_txt"/>
+	<mx:Button x="118" y="19" label="getTestValue" id="trigger_btn" click="doRemoteCall();"/>
+</mx:Application>

@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services-config xmlns="http://www.macromedia.com/2005/flex-service-config">
+
+    <services>
+
+        <!--
+                REMOTING SERVICE
+        -->
+        <service id="remoting-service"
+            class="flex.messaging.services.RemotingService"
+            messageTypes="flex.messaging.messages.RPCMessage">
+
+            <adapters>
+                <adapter-definition id="java-object" class="flex.messaging.services.remoting.adapters.JavaAdapter" default="true"/>
+            </adapters>
+
+            <default-channels>
+                <channel ref="local-amf"/>
+            </default-channels>
+
+			<!-- Runtime management console destination -->
+            <destination id="RuntimeManagement">
+                <properties>
+                    <source>flex.management.MBeanServerGateway</source>
+                </properties>
+            </destination>
+
+            <!-- destination used by the ServerLogTarget in logging -->
+            <destination id="serverLog">
+                <properties>
+                    <source>dev.logging.serverlog</source>
+                </properties>
+            </destination>
+            <destination id="FlexStoreCatalogRO">
+                <properties>
+                    <source>samples.flexstore.Catalog</source>
+                </properties>
+            </destination>
+			<!-- 追加 -->
+			<destination id="Hello">
+				<properties>
+					<source>samples.Hello</source>
+				</properties>
+				<channels>
+					<channel ref="local-amf"/>
+				</channels>
+			</destination>
+			<!-- 追加ここまで -->
+			<destination id="TestBean">
+				<properties>
+					<source>org.openamf.examples.TestBean</source>
+					<service-name>TestBean</service-name>
+				</properties>
+				<channels>
+					<channel ref="open-amf"/>
+				</channels>
+			</destination>
+			
+        </service>
+
+
+
+
+        <!--
+                MESSAGE SERVICE
+        -->
+ <!--       <service-include file-path="flex-message-service.xml" /> -->
+
+        <!--
+                DATA SERVICE
+        -->
+<!--        <service-include file-path="flex-data-service.xml" /> -->
+
+    </services>
+
+    <security>
+
+        <security-constraint id="sample-users">
+            <auth-method>Custom</auth-method>
+            <roles>
+                <role>sampleusers</role>
+            </roles>
+        </security-constraint>
+
+        <login-command class="flex.messaging.security.JRunLoginCommand" server="JRun"/>
+
+    </security>
+
+    <channels>
+
+        <channel-definition id="my-amf" class="mx.messaging.channels.AMFChannel">
+            <endpoint uri="/dev/messagebroker/amf" port="8100" class="flex.messaging.endpoints.AMFEndpoint"/>
+            <properties>
+                <polling-enabled>false</polling-enabled>
+            </properties>
+        </channel-definition>
+		<!-- 追加 -->
+		<channel-definition id="local-amf" class="mx.messaging.channels.AMFChannel">
+            <endpoint uri="/flex2service/messagebroker/amf" port="8080" class="flex.messaging.endpoints.AMFEndpoint"/>
+            <properties>
+                <polling-enabled>false</polling-enabled>
+                <serialization>
+                    <!--
+                    <custom-serializer type="xml" class="flex.messaging.io.amf.serializers.XMLSerializer" />
+                    <custom-serializer type="typed-object" class="coldfusion.flash.messaging.io.amf.serializers.TypedObjectSerializer"/>
+                    -->
+                    <custom-deserializer type="typed-object" class="flex.messaging.io.amf.serializers.TypedObjectDeserializer" />
+                    <custom-serializer type="typed-object" class="flex.messaging.io.amf.serializers.TypedObjectSerializer"/>
+                </serialization>                
+            </properties>
+        </channel-definition>
+		<!-- 追加おわり -->
+		<channel-definition id="open-amf" class="mx.messaging.channels.NetConnectionChannel">
+            <endpoint uri="http://localhost:8080/openamf/gateway" port="8080" class="flex.messaging.endpoints.AMFEndpoint"/>
+            <properties>
+                <polling-enabled>false</polling-enabled>
+                <serialization>
+                    <!--
+                    <custom-serializer type="xml" class="flex.messaging.io.amf.serializers.XMLSerializer" />
+                    <custom-serializer type="typed-object" class="coldfusion.flash.messaging.io.amf.serializers.TypedObjectSerializer"/>
+                    
+                    <custom-deserializer type="typed-object" class="flex.messaging.io.amf.serializers.TypedObjectDeserializer" />
+                    <custom-serializer type="typed-object" class="flex.messaging.io.amf.serializers.TypedObjectSerializer"/>
+               --> </serialization>                
+            </properties>
+        </channel-definition>		
+<!--
+        <channel-definition id="my-secure-amf" class="mx.messaging.channels.SecureAMFChannel">
+            <endpoint uri="/dev/messagebroker/amfsecure" port="9100" class="flex.messaging.endpoints.AMFEndpoint"/>
+        </channel-definition>
+
+        <channel-definition id="my-polling-amf" class="mx.messaging.channels.AMFChannel">
+            <endpoint uri="/dev/messagebroker/amfpolling" port="8100" class="flex.messaging.endpoints.AMFEndpoint"/>
+            <properties>
+                <polling-enabled>true</polling-enabled>
+                <polling-interval-seconds>8</polling-interval-seconds>
+            </properties>
+        </channel-definition>
+
+        <channel-definition id="my-rtmp" class="mx.messaging.channels.RTMPChannel">
+            <endpoint uri="rtmp:///dev/rtmp" port="2035" class="flex.messaging.endpoints.RTMPEndpoint"/>
+            <properties>
+                <idle-timeout-minutes>20</idle-timeout-minutes>
+            </properties>
+        </channel-definition>
+
+        <channel-definition id="my-http" class="mx.messaging.channels.HTTPChannel">
+            <endpoint uri="http://localhost:8100/dev/messagebroker/http" port="8100" class="flex.messaging.endpoints.HTTPEndpoint"/>
+        </channel-definition>
+-->
+    </channels>
+
+    <clusters>
+        <cluster id="default-cluster" properties="jgroups-default.xml" />    
+    </clusters>
+    
+    <debugging>
+        <!--
+        TODO: Design a remote debugging system. Perhaps we'd define a special
+        messaging service destination (ideally with a real-time channel) that
+        users could subscribe to from a Flex client?
+        -->
+    </debugging>
+
+    <logging level="Debug">
+
+        <target class="flex.messaging.log.ConsoleTarget" level="Debug">
+            <properties>
+                <prefix>[Flex] </prefix>
+                <includeDate>false</includeDate>
+                <includeTime>false</includeTime>
+                <includeLevel>false</includeLevel>
+                <includeCategory>false</includeCategory>
+            </properties>
+            <filters>
+                <pattern>Service</pattern>
+                <pattern>Endpoint</pattern>
+                <!-- <pattern>Message</pattern> -->
+                <!-- <pattern>HTTP</pattern> -->
+                <pattern>Remoting</pattern>
+            </filters>
+        </target>
+
+    </logging>
+
+    <system>
+        <locale>
+            <default-locale>en</default-locale>
+            <supported-locale>de</supported-locale>
+            <supported-locale>fr</supported-locale>
+            <supported-locale>es</supported-locale>
+        </locale>
+    </system>
+
+</services-config>
