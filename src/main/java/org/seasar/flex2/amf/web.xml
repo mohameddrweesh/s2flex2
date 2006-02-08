@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE web-app  PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.2//EN"  "http://java.sun.com/j2ee/dtds/web-app_2_2.dtd">
+
+<web-app>
+    <servlet>
+        <servlet-name>s2servlet</servlet-name>
+        <servlet-class>org.seasar.framework.container.servlet.S2ContainerServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>gateway</servlet-name>
+        <servlet-class>org.seasar.flex2.amf.impl.AmfGateway</servlet-class>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>s2servlet</servlet-name>
+        <url-pattern>/s2servlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>gateway</servlet-name>
+        <url-pattern>/gateway</url-pattern>
+    </servlet-mapping>
+</web-app>
