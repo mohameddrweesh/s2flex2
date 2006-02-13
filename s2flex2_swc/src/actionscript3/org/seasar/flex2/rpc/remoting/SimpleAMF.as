@@ -16,23 +16,19 @@ package org.seasar.flex2.rpc.remoting {
 
 	/**
 	 * 
-	 * @author USER
+	 * @author nod
 	 * 
 	 */
 	dynamic public class SimpleAMF extends RemoteObject
 	{
-
 		[DefaultTriggerEvent("result")]
 
-		// IMPORTANT: the Events below aren't used.  They shouldn't be asdoc'd or
-		// otherwise documented for now.  They are just here for metadata for Brady.
 		/** @private
 		*/
 		[Event("fault")]
 		/** @private
 		*/
 		[Event("result")]
-
 	    private var _con:AMF0Connection;
 	    
 	    [Inspectable(type="String")]
@@ -50,7 +46,7 @@ package org.seasar.flex2.rpc.remoting {
 			
 		}
 
-		public  function remoteCall(methodName:Object, ...args):void {
+		public function remoteCall(methodName:Object, ...args):void {
 			if(_con==null){
 				initConnection();
 			}
