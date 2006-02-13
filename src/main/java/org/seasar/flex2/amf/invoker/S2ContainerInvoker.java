@@ -15,12 +15,10 @@
  */
 package org.seasar.flex2.amf.invoker;
 
-import org.seasar.extension.component.ComponentInvoker;
 import org.seasar.flex2.amf.ServiceInvoker;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.factory.BeanDescFactory;
 import org.seasar.framework.container.S2Container;
-import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
 import org.seasar.framework.exception.InvocationTargetRuntimeException;
 import org.seasar.framework.util.ClassUtil;
 
