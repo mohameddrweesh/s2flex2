@@ -15,11 +15,13 @@
  */
 package org.seasar.flex2.amf.invoker;
 
+import org.seasar.extension.component.ComponentInvoker;
 import org.seasar.flex2.amf.ServiceInvoker;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.factory.BeanDescFactory;
 import org.seasar.framework.container.S2Container;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
+import org.seasar.framework.exception.InvocationTargetRuntimeException;
 import org.seasar.framework.util.ClassUtil;
 
 /**
@@ -27,22 +29,28 @@ import org.seasar.framework.util.ClassUtil;
  *  
  */
 public class S2ContainerInvoker implements ServiceInvoker {
-
+    
+    private S2Container container;
+    
 	public S2ContainerInvoker() {
 	}
+    
+    public void setContainer(S2Container container) {
+        this.container = container;
+    }
 
 	/**
 	 * @see org.seasar.amf.ServiceInvoker#supports(java.lang.String,
 	 *      java.lang.String, java.lang.Object)
 	 */
 	public boolean supports(String serviceName, String methodName, Object[] args) {
-		S2Container container = SingletonS2ContainerFactory.getContainer();
-		if (container.hasComponentDef(serviceName)) {
+		S2Container root = container.getRoot();
+		if (root.hasComponentDef(serviceName)) {
 			return true;
 		}
 		try {
 			Class clazz = ClassUtil.forName(serviceName);
-			if (container.hasComponentDef(clazz)) {
+			if (root.hasComponentDef(clazz)) {
 				return true;
 			}
 		} catch (Throwable ignore) {
@@ -57,17 +65,21 @@ public class S2ContainerInvoker implements ServiceInvoker {
 	public Object invoke(String serviceName, String methodName, Object[] args)
 			throws Throwable {
 
-		S2Container container = SingletonS2ContainerFactory.getContainer();
+		S2Container root = container.getRoot();
 		Object component = null;
 		Class clazz = null;
-		if (container.hasComponentDef(serviceName)) {
-			component = container.getComponent(serviceName);
+		if (root.hasComponentDef(serviceName)) {
+			component = root.getComponent(serviceName);
 		} else {
 			clazz = ClassUtil.forName(serviceName);
-			component = container.getComponent(clazz);
+			component = root.getComponent(clazz);
 		}
 		BeanDesc beanDesc = BeanDescFactory.getBeanDesc(component.getClass());
-		return beanDesc.invoke(component, methodName, args);
+        try {
+            return beanDesc.invoke(component, methodName, args);
+        } catch (InvocationTargetRuntimeException e) {
+            throw e.getCause();
+        }
 	}
 
 }
