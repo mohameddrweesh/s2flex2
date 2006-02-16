@@ -1,4 +1,4 @@
-<project name="s2-backport175" default="dist" basedir=".">
+<project name="s2flex2" default="dist" basedir=".">
 	<property name="ver" value="B1"/>
 
 	<target name="dist">
