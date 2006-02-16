@@ -133,9 +133,8 @@ public class AmfWriterImpl implements AmfWriter {
 		}
 		addSharedObject(object);
 		String type = object.getClass().getName();
-		outputStream.writeByte(AmfDataType.OBJECT);
-		outputStream.writeUTF(AmfConstants.REMOTE_CLASS);
-		writeData(type);
+		outputStream.writeByte(AmfDataType.CUSTOM_CLASS);
+		outputStream.writeUTF(type);
 		BeanDesc beanDesc = BeanDescFactory.getBeanDesc(object.getClass());
 		for (int i = 0; i < beanDesc.getPropertyDescSize(); ++i) {
 			PropertyDesc pd = (PropertyDesc) beanDesc.getPropertyDesc(i);

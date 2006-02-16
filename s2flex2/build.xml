@@ -1,0 +1,21 @@
+<project name="s2-backport175" default="dist" basedir=".">
+	<property name="ver" value="B1"/>
+
+	<target name="dist">
+		<zip zipfile="target/S2Flex2-${ver}.zip">
+			<zipfileset prefix="s2flex2" dir=".">
+				<exclude name="**/target/**"/>
+			</zipfileset>
+			<zipfileset prefix="s2flex2/lib" dir="target">
+				<include name="s2flex2-${ver}.jar"/>
+			</zipfileset>
+			<zipfileset prefix="s2flex/resources" dir="src/test/resources">
+			    <include name="s2flex2.dicon"/>
+				<include name="app.dicon"/>
+				<include name="log4j.properties"/>
+				<include name="web.xml"/>
+			</zipfileset>
+		</zip>
+	</target>
+
+</project>
