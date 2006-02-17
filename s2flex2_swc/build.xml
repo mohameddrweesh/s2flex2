@@ -20,7 +20,7 @@
 		<arg value="${frameworks.dir}/framework.swc"/>
 		<arg value="${frameworks.dir}/rpc.swc"/>
 		<arg value="-o"/>
-		<arg value="dist/s2comp.swc"/>
+		<arg value="dist/s2flex2.swc"/>
     	<arg value="-namespace" />
     	<arg value="http://www.seasar.org/2005/mxml"/>
     	<arg value="Manifest.xml"/>
