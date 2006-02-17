@@ -8,8 +8,8 @@
       <libraryPathEntry kind="3" path="${FRAMEWORKS}/framework.swc" linkType="1" sourcepath="${FRAMEWORKS}"/>
       <libraryPathEntry kind="3" path="${FRAMEWORKS}/charts.swc" linkType="1"/>
       <libraryPathEntry kind="3" path="${FRAMEWORKS}/rpc.swc" linkType="1"/>
+      <libraryPathEntry kind="3" path="${DOCUMENTS}\s2flex2_examples\lib\s2comp.swc" linkType="1"/>
       <libraryPathEntry kind="3" path="${FRAMEWORKS}/automation.swc" linkType="1"/>
-      <libraryPathEntry kind="3" path="${WORKSPACE}\S2flex2_examples\lib\S2comp.swc" linkType="1"/>
     </libraryPath>
     <sourcePath>
       <sourcePathEntry kind="3" path="${FRAMEWORKS}/framework.swc" sourcepath="${FRAMEWORKS}"/>
