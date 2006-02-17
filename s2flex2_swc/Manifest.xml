@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<componentPackage>
+    <component id="SimpleAMF" class="org.seasar.flex2.rpc.remoting.SimpleAMF"/>
+<!--    <component id="AMF0Connection" class="org.seasar.flex2.net.AMF0NetConnection"/> -->
+</componentPackage>

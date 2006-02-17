@@ -26,15 +26,8 @@
     	<arg value="Manifest.xml"/>
     	<arg value="-include-namespaces" />
     	<arg value="http://www.seasar.org/2005/mxml" />
-		<!--<arg value="org.seasar.flex2.rpc.RemoteObject"/>-->
-		<!--<arg value="org.seasar.flex2.net.NetConnection2"/> -->
-		<!--<arg value="org.seasar.flex2.rpc.remoting.S2AMF0Object"/>-->
-		<!--<arg value="org.seasar.flex2.rpc.remoting.S2RemoteObject"/>-->
-		<!--<arg value="org.seasar.flex2.rpc.remoting.S2AMF0Object"/>-->
 		<arg value="-include-classes"/>		
-		<arg value="org.seasar.flex2.net.AMF0Connection"/>
 		<arg value="org.seasar.flex2.rpc.remoting.SimpleAMF"/>
-
 	  </java>
   </target>
 </project>
