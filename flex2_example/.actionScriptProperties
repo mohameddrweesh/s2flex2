@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actionScriptProperties version="4" mainApplicationPath="flex2_example.mxml">
+  <compiler copyDependentFiles="true" generateAccessible="false" strict="true" coach="true" htmlGenerate="true" htmlPlayerVersionCheck="true" htmlPlayerVersion="8.5.0" htmlExpressInstall="true" htmlHistoryManagement="false" outputFolderPath="bin">
+    <classPath/>
+    <libraryPath>
+      <libraryPathEntry kind="3" path="${FRAMEWORKS}/playerglobal.swc" linkType="2"/>
+      <libraryPathEntry kind="3" path="${BUILTIN}/utilities.swc" linkType="1"/>
+      <libraryPathEntry kind="3" path="${FRAMEWORKS}/framework.swc" linkType="1" sourcepath="${FRAMEWORKS}"/>
+      <libraryPathEntry kind="3" path="${FRAMEWORKS}/charts.swc" linkType="1"/>
+      <libraryPathEntry kind="3" path="${FRAMEWORKS}/rpc.swc" linkType="1"/>
+      <libraryPathEntry kind="3" path="${FRAMEWORKS}/automation.swc" linkType="1"/>
+    </libraryPath>
+    <sourcePath>
+      <sourcePathEntry kind="3" path="${FRAMEWORKS}/framework.swc" sourcepath="${FRAMEWORKS}"/>
+    </sourcePath>
+  </compiler>
+  <applications>
+    <application path="flex2_example.mxml"/>
+  </applications>
+</actionScriptProperties>

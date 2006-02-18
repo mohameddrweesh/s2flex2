@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.3//EN" 
+	"http://www.seasar.org/dtd/components23.dtd">
+<components namespace="amf">
+	<component name="s2containerInvoker"
+		class="org.seasar.flex2.amf.invoker.S2ContainerInvoker"/>
+	<component class="org.seasar.flex2.amf.impl.RequestProcessorImpl">
+		<initMethod>#self.addInvoker(s2containerInvoker)</initMethod>
+	</component>
+</components>
