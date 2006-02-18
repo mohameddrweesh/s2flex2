@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <actionScriptProperties version="4" mainApplicationPath="flex2_example.mxml">
-  <compiler copyDependentFiles="true" generateAccessible="false" strict="true" coach="true" htmlGenerate="true" htmlPlayerVersionCheck="true" htmlPlayerVersion="8.5.0" htmlExpressInstall="true" htmlHistoryManagement="false" outputFolderPath="bin">
+  <compiler additionalCompilerArguments="--services=.\lib\flex-services.xml" copyDependentFiles="true" generateAccessible="false" strict="true" coach="true" htmlGenerate="true" htmlPlayerVersionCheck="true" htmlPlayerVersion="8.5.0" htmlExpressInstall="true" htmlHistoryManagement="false" outputFolderPath="bin">
     <classPath/>
     <libraryPath>
       <libraryPathEntry kind="3" path="${FRAMEWORKS}/playerglobal.swc" linkType="2"/>
@@ -9,12 +9,16 @@
       <libraryPathEntry kind="3" path="${FRAMEWORKS}/charts.swc" linkType="1"/>
       <libraryPathEntry kind="3" path="${FRAMEWORKS}/rpc.swc" linkType="1"/>
       <libraryPathEntry kind="3" path="${FRAMEWORKS}/automation.swc" linkType="1"/>
+      <libraryPathEntry kind="3" path="${DOCUMENTS}\flex2_example\lib\s2flex2.swc" linkType="1" sourcepath="${DOCUMENTS}\s2flex2_swc\src\actionscript3"/>
     </libraryPath>
     <sourcePath>
       <sourcePathEntry kind="3" path="${FRAMEWORKS}/framework.swc" sourcepath="${FRAMEWORKS}"/>
+      <sourcePathEntry kind="3" path="${DOCUMENTS}\flex2_example\lib\s2flex2.swc" sourcepath="${DOCUMENTS}\s2flex2_swc\src\actionscript3"/>
     </sourcePath>
   </compiler>
   <applications>
+    <application path="s2flex2_example2.mxml"/>
     <application path="flex2_example.mxml"/>
+    <application path="s2flex2_example1.mxml"/>
   </applications>
 </actionScriptProperties>
