@@ -2,5 +2,7 @@
 <flexLibProperties version="1">
 <includeClasses/>
 <includeResources/>
-<namespaceManifests/>
+<namespaceManifests>
+<namespaceManifestEntry manifest="Manifest.xml" namespace="http://www.seasar.org/s2flex2/mxml"/>
+</namespaceManifests>
 </flexLibProperties>

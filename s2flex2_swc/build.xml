@@ -22,10 +22,10 @@
 		<arg value="-o"/>
 		<arg value="dist/s2flex2.swc"/>
     	<arg value="-namespace" />
-    	<arg value="http://www.seasar.org/2005/mxml"/>
+    	<arg value="http://www.seasar.org/s2flex2/mxml"/>
     	<arg value="Manifest.xml"/>
     	<arg value="-include-namespaces" />
-    	<arg value="http://www.seasar.org/2005/mxml" />
+    	<arg value="http://www.seasar.org/s2flex2/mxml" />
 		<arg value="-include-classes"/>		
 		<arg value="org.seasar.flex2.rpc.remoting.SimpleAMF"/>
 	  </java>
