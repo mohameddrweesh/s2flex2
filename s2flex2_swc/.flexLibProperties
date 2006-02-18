@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <flexLibProperties version="1">
-<includeClasses/>
+<includeClasses>
+        <class>org.seasar.flex2.rpc.remoting.SimpleAMF</class>
+</includeClasses>
 <includeResources/>
 <namespaceManifests>
 <namespaceManifestEntry manifest="Manifest.xml" namespace="http://www.seasar.org/s2flex2/mxml"/>
