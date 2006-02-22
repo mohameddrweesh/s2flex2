@@ -2,6 +2,7 @@
 <flexLibProperties version="1">
 <includeClasses>
         <class>org.seasar.flex2.rpc.remoting.SimpleAMF</class>
+        <class>org.seasar.flex2.rpc.remoting.S2Component</class>             
 </includeClasses>
 <includeResources/>
 <namespaceManifests>

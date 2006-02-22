@@ -28,6 +28,8 @@
     	<arg value="http://www.seasar.org/s2flex2/mxml" />
 		<arg value="-include-classes"/>		
 		<arg value="org.seasar.flex2.rpc.remoting.SimpleAMF"/>
+		<arg value="org.seasar.flex2.rpc.remoting.S2Component"/>    	
+    	
 	  </java>
   </target>
 </project>
