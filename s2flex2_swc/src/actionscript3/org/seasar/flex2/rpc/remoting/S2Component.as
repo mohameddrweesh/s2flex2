@@ -40,15 +40,15 @@ package org.seasar.flex2.rpc.remoting {
    		[Inspectable(type="Boolean",defaultValue="true")]
    		public var showBusyCursor:Boolean;
    		
-   		/** not implements */
+   		/* not implements */
    		[Inspectable(enumeration="single,last,multiple",defaultValue="single",category="General")]
    		public var concurrency:String;
 
-/*   		
+   		
 		public function S2Component(){
-			super();
+			super(null);
 		}
-*/		
+		
 		public var id:String;
 		
 		/**
