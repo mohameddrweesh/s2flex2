@@ -94,7 +94,7 @@ package org.seasar.flex2.rpc.remoting {
 			
 	    }
 		
-	    public function onResult(resultData:Object){
+	    public function onResult(resultData:*){
 	    	 if (this.showBusyCursor)
             {
                 CursorManager.removeBusyCursor();
@@ -103,7 +103,7 @@ package org.seasar.flex2.rpc.remoting {
 	    	dispatchEvent(resultEvent);
 	    }
 	    
-	    public function onFault(faultData:Object){
+	    public function onFault(faultData:*){
 	    	if (this.showBusyCursor)
             {
                 CursorManager.removeBusyCursor();
