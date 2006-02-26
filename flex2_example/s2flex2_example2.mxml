@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Application xmlns:mx="http://www.macromedia.com/2005/mxml" xmlns:s2="http://www.seasar.org/s2flex2/mxml" xmlns="*"  layout="absolute" >
 <mx:Script source="s2flex2_example2_script.as" />
-<s2:SimpleAMF id="amf" destination="addService" 
-	result="onResult(event)" fault="onFault(event)"  />
+<s2:S2Component id="amf" destination="addService" 
+	result="onResult(event)" fault="onFault(event)" showBusyCursor="true" />
 
 	<mx:Label x="122" y="48" text="+" height="20"/>
 	<mx:Label x="215" y="48" text="=" height="20"/>
