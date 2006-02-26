@@ -1,5 +1,6 @@
 <project name="s2flex2_swc" default="build" basedir=".">
 	<property file="build.properties"/>
+	<property name="ver" value="B1"/>
 	<!-- 
 	build
 	 -->
@@ -32,4 +33,14 @@
     	
 	  </java>
   </target>
+	<target name="dist">
+		<zip zipfile="target/S2Flex2-swc-${ver}.zip">
+			<zipfileset prefix="s2flex2_swc" dir=".">
+				<exclude name="**/target/**"/>
+				<exclude name="**/generated/**"/>
+				<exclude name="**/AMF0Connection.as"/>
+				<exclude name="**/*old.as"/>
+			</zipfileset>
+		</zip>
+	</target>
 </project>
