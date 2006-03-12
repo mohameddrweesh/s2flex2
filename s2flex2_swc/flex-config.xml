@@ -92,7 +92,7 @@
 	        'this' back to that instance.  In AS2 'this' was looked up dynamically based on where the method is invoked from-->
 	   <warn-scoping-change-in-this>false</warn-scoping-change-in-this>
 	   <!-- Missing namespace declaration-->
-	   <warn-missing-namespace-decl>true</warn-missing-namespace-decl>
+	   <warn-missing-namespace-decl>false</warn-missing-namespace-decl>
 
 	   <!-- only warning set to false by default -->
 	   <!-- The order in which properties of an object are iterated over within a '(for x in target)' statement is
