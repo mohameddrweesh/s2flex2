@@ -10,7 +10,7 @@
         failonerror="true"
         maxmemory="128m"
         >
-		<arg value="-keep-generated-actionscript=true"/>
+		<arg value="-keep-generated-actionscript=false"/>
 		<arg value="-library-path"/>
 		<arg value="${frameworks.dir}"/>
 		<arg value="-actionscript-classpath"/>
