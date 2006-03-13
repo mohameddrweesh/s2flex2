@@ -1,6 +1,6 @@
 <project name="s2flex2_swc" default="build" basedir=".">
 	<property file="build.properties"/>
-	<property name="ver" value="B1"/>
+	<property name="ver" value="B2"/>
 	<!-- 
 	build
 	 -->
