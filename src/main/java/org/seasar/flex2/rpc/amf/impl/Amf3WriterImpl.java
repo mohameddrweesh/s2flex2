@@ -257,16 +257,6 @@ public class Amf3WriterImpl extends AmfWriterImpl implements AmfWriter {
     }
 
 
-    private final void writeStringModifiedUTF8(String str) throws IOException {
-
-        byte[] bytearr = Amf3DataUtil.toBytesUTF8(str);
-        writeIntegerData((bytearr.length << 1) | Amf3DataType.OBJECT_INLINE);
-
-        if( bytearr.length > 0 ){
-            outputStream.write(bytearr, 0, bytearr.length);
-        }
-    }
-
     private void writeObjectClassDef(Object object) throws IOException {
 
         int class_index = references.getClassReferenceIndex(object.getClass());
@@ -326,6 +316,16 @@ public class Amf3WriterImpl extends AmfWriterImpl implements AmfWriter {
 
     private void writeReferenceIndex(int index) throws IOException {
         outputStream.writeByte(index << 1);
+    }
+
+    private final void writeStringModifiedUTF8(String str) throws IOException {
+
+        byte[] bytearr = Amf3DataUtil.toBytesUTF8(str);
+        writeIntegerData((bytearr.length << 1) | Amf3DataType.OBJECT_INLINE);
+
+        if( bytearr.length > 0 ){
+            outputStream.write(bytearr, 0, bytearr.length);
+        }
     }
 
     private final void writeTypeString(String propertyName)

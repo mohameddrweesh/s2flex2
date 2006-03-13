@@ -28,25 +28,29 @@ import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
 
 public class AmfGateway extends HttpServlet {
 
-	private RequestProcessor processor;
+    public final static String CONTENT_TYPE = "application/x-amf";
+    
+    private RequestProcessor processor;
 
-	public AmfGateway() {
-	}
+    public AmfGateway() {
+    }
 
-	public void init() throws ServletException {
-		S2Container container = SingletonS2ContainerFactory.getContainer();
-		processor = (RequestProcessor) container.getComponent(RequestProcessor.class);
-	}
+    public void init() throws ServletException {
+        S2Container container = SingletonS2ContainerFactory.getContainer();
+        processor = (RequestProcessor) container
+                .getComponent(RequestProcessor.class);
+    }
 
-	public void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws IOException, ServletException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ServletException {
 
-		response.getWriter().write("AmfGateway is running.");
-	}
+        response.getWriter().write("AmfGateway is running.");
+    }
 
-	public void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws IOException, ServletException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ServletException {
 
-		processor.process(request, response);
-	}
+        response.setContentType(CONTENT_TYPE);
+        processor.process(request, response);
+    }
 }
