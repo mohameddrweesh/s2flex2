@@ -321,7 +321,8 @@ public class Amf3WriterImpl extends AmfWriterImpl implements AmfWriter {
     private final void writeStringModifiedUTF8(String str) throws IOException {
 
         byte[] bytearr = Amf3DataUtil.toBytesUTF8(str);
-        writeIntegerData((bytearr.length << 1) | Amf3DataType.OBJECT_INLINE);
+        Integer stringInfo = new Integer((bytearr.length << 1) | Amf3DataType.OBJECT_INLINE);
+        writeIntegerData( stringInfo );
 
         if( bytearr.length > 0 ){
             outputStream.write(bytearr, 0, bytearr.length);

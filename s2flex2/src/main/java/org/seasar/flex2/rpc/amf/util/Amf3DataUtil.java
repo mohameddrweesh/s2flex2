@@ -82,11 +82,12 @@ public class Amf3DataUtil {
 
     public static int[] toVariableBytes(Integer value) {
         int[] list = new int[4];
+        int intValue = value.intValue();
 
         for (int i = 0; i < list.length; i++) {
-            list[i] = value & 0x7F;
-            value = value >>> 7;
-            if (value <= 0) {
+            list[i] = intValue & 0x7F;
+            intValue = intValue >>> 7;
+            if (intValue <= 0) {
                 break;
             }
         }
