@@ -38,8 +38,28 @@ public class Amf3References {
         propertyListReferences = new ArrayList<String[]>();
     }
 
+    public void addClassReference(Class o) {
+        classReferences.add(o);
+    }
+
+    public void addObjectReference(Object o) {
+        objectReferences.add(o);
+    }
+
+    public void addProperties(String[] o) {
+        propertyListReferences.add(o);
+    }
+
+    public void addStringReference(String o) {
+        stringReferences.add(o);
+    }
+
     public Class getClassAt(int index) {
         return classReferences.get(index);
+    }
+
+    public int getClassReferenceIndex(Class o) {
+        return classReferences.indexOf(o);
     }
 
     public Date getDateAt(int index) {
@@ -63,6 +83,10 @@ public class Amf3References {
     public Object getObjectAt(int index) {
         return objectReferences.get(index);
     }
+    
+    public int getObjectReferenceIndex(Object o) {
+        return objectReferences.indexOf(o);
+    }
 
     public String[] getPropertiesAt(int index) {
         return propertyListReferences.get(index);
@@ -72,6 +96,10 @@ public class Amf3References {
         return stringReferences.get(index);
     }
 
+    public int getStringReferenceIndex(String o) {
+        return stringReferences.indexOf(o);
+    }
+
     public Document getXmlDocumentAt(int index) {
         Object reference = objectReferences.get(index);
         if (reference instanceof Document) {
@@ -79,33 +107,5 @@ public class Amf3References {
         } else {
             return null;
         }
-    }
-
-    public void addClassReference(Class o) {
-        classReferences.add(o);
-    }
-
-    public void addObjectReference(Object o) {
-        objectReferences.add(o);
-    }
-    
-    public void addProperties(String[] o) {
-        propertyListReferences.add(o);
-    }
-
-    public void addStringReference(String o) {
-        stringReferences.add(o);
-    }
-
-    public int getClassReferenceIndex(Class o) {
-        return classReferences.indexOf(o);
-    }
-
-    public int getObjectReferenceIndex(Object o) {
-        return objectReferences.indexOf(o);
-    }
-
-    public int getStringReferenceIndex(String o) {
-        return stringReferences.indexOf(o);
     }
 }

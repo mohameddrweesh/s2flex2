@@ -17,7 +17,6 @@ package org.seasar.flex2.rpc.amf.impl;
 
 import java.io.DataInputStream;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -79,11 +78,11 @@ public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
         return obj;
     }
 
-    protected Boolean readBooleanFalse(){
+    protected Boolean readBooleanFalse() {
         return Boolean.FALSE;
     }
 
-    protected Boolean readBooleanTrue(){
+    protected Boolean readBooleanTrue() {
         return Boolean.TRUE;
     }
 
@@ -111,8 +110,7 @@ public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
             prop_values[i] = readAMF3Data();
         }
 
-        Amf3DataUtil.setProperties(object, props_num, prop_names,
-                prop_values);
+        Amf3DataUtil.setProperties(object, props_num, prop_names, prop_values);
 
         return object;
     }
