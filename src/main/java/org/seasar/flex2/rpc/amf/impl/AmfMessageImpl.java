@@ -23,7 +23,7 @@ import org.seasar.flex2.rpc.amf.AmfMessage;
 
 public class AmfMessageImpl implements AmfMessage {
 
-    private List<AmfBody> bodies = new ArrayList<AmfBody>();
+    private List bodies = new ArrayList();
     
     private int version = 0x00;
 

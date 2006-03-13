@@ -52,7 +52,7 @@ public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
     }
 
     protected List readArray() throws IOException {
-        int reference = readInteger();
+        int reference = readInteger().intValue();
 
         switch (reference & Amf3DataType.OBJECT_INLINE) {
             case Amf3DataType.OBJECT_REFERENCE:
@@ -143,7 +143,7 @@ public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
     }
 
     protected Date readDate() throws IOException {
-        int reference = readInteger();
+        int reference = readInteger().intValue();
 
         switch (reference & Amf3DataType.OBJECT_INLINE) {
             case Amf3DataType.OBJECT_REFERENCE:
@@ -183,7 +183,7 @@ public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
     }
 
     protected Object readObject() throws IOException {
-        int reference = readInteger();
+        int reference = readInteger().intValue();
 
         switch (reference & Amf3DataType.OBJECT_INLINE) {
             case Amf3DataType.OBJECT_REFERENCE:
@@ -195,7 +195,7 @@ public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
     }
 
     protected String readString() throws IOException {
-        int reference = readInteger();
+        int reference = readInteger().intValue();
         switch (reference & Amf3DataType.OBJECT_INLINE) {
             case Amf3DataType.OBJECT_REFERENCE:
                 return references.getStringAt(reference >>> 1);
@@ -210,7 +210,7 @@ public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
     }
 
     protected Document readXML() throws IOException {
-        int reference = readInteger();
+        int reference = readInteger().intValue();
         switch (reference & Amf3DataType.OBJECT_INLINE) {
             case Amf3DataType.OBJECT_REFERENCE:
                 return references.getXmlDocumentAt(reference >>> 1);
@@ -254,7 +254,7 @@ public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
 
     private final List readArrayData(int reference) throws IOException {
         int array_length = reference >> 1;
-        List<Object> array = new ArrayList<Object>(array_length);
+        List array = new ArrayList(array_length);
         references.addObjectReference(array);
         inputStream.readByte(); //class define byte
         for (int i = 0; i < array_length; i++) {

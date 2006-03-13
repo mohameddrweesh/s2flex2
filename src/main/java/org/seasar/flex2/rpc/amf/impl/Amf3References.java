@@ -23,19 +23,19 @@ import org.w3c.dom.Document;
 
 public class Amf3References {
     
-    private List<Class> classReferences;
+    private List classReferences;
 
-    private List<Object> objectReferences;
+    private List objectReferences;
 
-    private List<String[]> propertyListReferences;
+    private List propertyListReferences;
 
-    private List<String> stringReferences;
+    private List stringReferences;
 
     protected Amf3References() {
-        classReferences = new ArrayList<Class>();
-        objectReferences = new ArrayList<Object>();
-        stringReferences = new ArrayList<String>();
-        propertyListReferences = new ArrayList<String[]>();
+        classReferences = new ArrayList();
+        objectReferences = new ArrayList();
+        stringReferences = new ArrayList();
+        propertyListReferences = new ArrayList();
     }
 
     public void addClassReference(Class o) {
@@ -55,7 +55,12 @@ public class Amf3References {
     }
 
     public Class getClassAt(int index) {
-        return classReferences.get(index);
+        Object reference = classReferences.get(index);
+        if (reference instanceof Class) {
+            return (Class) reference;
+        } else {
+            return null;
+        }
     }
 
     public int getClassReferenceIndex(Class o) {
@@ -89,11 +94,21 @@ public class Amf3References {
     }
 
     public String[] getPropertiesAt(int index) {
-        return propertyListReferences.get(index);
+        Object reference = propertyListReferences.get(index);
+        if (reference instanceof String[]) {
+            return (String[]) reference;
+        } else {
+            return null;
+        }
     }
 
     public String getStringAt(int index) {
-        return stringReferences.get(index);
+        Object reference = stringReferences.get(index);
+        if (reference instanceof String) {
+            return (String) reference;
+        } else {
+            return null;
+        }
     }
 
     public int getStringReferenceIndex(String o) {
