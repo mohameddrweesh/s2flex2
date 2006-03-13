@@ -4,6 +4,8 @@ package org.seasar.flex2.rpc.remoting {
 	import flash.net.NetConnection;
 	import flash.net.ObjectEncoding;
 	import flash.net.Responder;
+	import flash.util.Proxy;
+	import flash.util.flash_proxy;
 	import flash.util.trace;
 	
 	import mx.core.IMXMLObject;
@@ -11,17 +13,20 @@ package org.seasar.flex2.rpc.remoting {
 	import mx.managers.CursorManager;
 	import mx.messaging.config.ServerConfig;
 	import mx.rpc.AbstractService;
+	import mx.rpc.Fault;
 	import mx.rpc.events.FaultEvent;
 	import mx.rpc.events.ResultEvent;
 	import mx.rpc.remoting.mxml.RemoteObject;
-	import mx.utils.ObjectUtil;
-
+/**
+* 
+*/
+	use namespace flash_proxy;
 	/**
 	 * S2Component Invoker
 	 * @author nod
 	 * @author sato-shi
 	 */
-	dynamic public class S2Component extends AbstractService implements IMXMLObject
+	public dynamic class S2Component extends AbstractService implements IMXMLObject
 	
 	{
 
@@ -73,7 +78,12 @@ package org.seasar.flex2.rpc.remoting {
 			
 		}
 
-		public  function remoteCall(methodName:Object, ...rest):void {
+	    flash_proxy override function callProperty(methodName:*, ...args):* {
+			 args.unshift(methodName);
+			 return remoteCall.apply(null,args);
+    	}
+
+		private function remoteCall(methodName:Object, ...rest):void {
 			if(_con==null){
 				initConnection();
 			}
@@ -107,7 +117,9 @@ package org.seasar.flex2.rpc.remoting {
             {
                 CursorManager.removeBusyCursor();
             }
-	    	var faultEvent:FaultEvent = new FaultEvent(result,null,null);
+            var fault:Fault = new Fault(result.code,result.description,result.details);
+
+	    	var faultEvent:FaultEvent = new FaultEvent(fault,null,null);
 	    	dispatchEvent(faultEvent);	
 	    }
 	}
