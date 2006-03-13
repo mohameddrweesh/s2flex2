@@ -256,7 +256,7 @@ public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
         int array_length = reference >> 1;
         List<Object> array = new ArrayList<Object>(array_length);
         references.addObjectReference(array);
-        int mark = inputStream.readByte();
+        inputStream.readByte(); //class define byte
         for (int i = 0; i < array_length; i++) {
             Object item = readAMF3Data();
             array.add(item);
