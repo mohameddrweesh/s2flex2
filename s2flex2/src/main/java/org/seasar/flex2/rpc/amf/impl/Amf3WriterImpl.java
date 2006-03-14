@@ -114,12 +114,12 @@ public class Amf3WriterImpl extends AmfWriterImpl implements AmfWriter {
 
     protected void writeInteger(Integer value) throws IOException {
         outputStream.writeByte(Amf3DataType.INTEGER);
-        if( value.intValue() >= 0){
+        if (value.intValue() >= 0) {
             writeIntegerData(value);
         } else {
             writeNegativeIntegerData(value);
         }
-        
+
     }
 
     protected void writeNull() throws IOException {
@@ -170,7 +170,8 @@ public class Amf3WriterImpl extends AmfWriterImpl implements AmfWriter {
         } else if (value instanceof BigDecimal) {
             writeString(value.toString());
         } else if (value instanceof Integer
-                && Integer.bitCount(((Integer) value).intValue()) < 32) {
+                && ((Integer) value).intValue() <= Amf3DataType.INTEGRR_MAX
+                && ((Integer) value).intValue() >= Amf3DataType.INTEGRR_MIN) {
             writeInteger((Integer) value);
         } else if (value instanceof Number) {
             writeNumber((Number) value);
@@ -250,27 +251,30 @@ public class Amf3WriterImpl extends AmfWriterImpl implements AmfWriter {
         outputStream.writeDouble(((Date) date).getTime());
     }
 
-    private void writeIntegerData(Integer value) throws IOException {
+    private final void writeIntegerData(Integer value) throws IOException {
         int[] list = Amf3DataUtil.toIntegerVariableBytes(value);
-        for (int i = list.length - 1; i >= 1; i--) {
-            if (list[i] != 0x00) {
-                outputStream
-                        .writeByte(Amf3DataType.INTEGER_DEMILITER | list[i]);
+        if( list.length <= 4 ){
+            for (int i = list.length - 1; i >= 1; i--) {
+                outputStream.writeByte(Amf3DataType.INTEGER_VARIABLED_FLAG | list[i]);
             }
+            outputStream.writeByte(list[0]);
         }
-        outputStream.writeByte(list[0]);
     }
 
-    private void writeNegativeIntegerData(Integer value) throws IOException {
+    private final void writeNegativeIntegerData(Integer value)
+            throws IOException {
         int[] list = Amf3DataUtil.toNegativeIntegerBytes(value);
-        for (int i = list.length - 1; i >= 1; i--) {
-            outputStream
-                        .writeByte(Amf3DataType.INTEGER_DEMILITER | list[i]);
+        if( list.length == 4 ){
+            outputStream.writeByte( Amf3DataType.INTEGER_VARIABLED_FLAG | Amf3DataType.INTEGER_NEGATIVE_SING | list[3]);
+
+            for (int i = list.length - 2; i >= 1; i--) {
+                outputStream.writeByte(Amf3DataType.INTEGER_VARIABLED_FLAG | list[i]);
+            }
+            outputStream.writeByte(list[0]);
         }
-        outputStream.writeByte(list[0]);
     }
 
-    private void writeObjectClassDef(Object object) throws IOException {
+    private final void writeObjectClassDef(Object object) throws IOException {
 
         int class_index = references.getClassReferenceIndex(object.getClass());
         int int_data = Amf3DataType.OBJECT_INLINE;
@@ -327,23 +331,23 @@ public class Amf3WriterImpl extends AmfWriterImpl implements AmfWriter {
         outputStream.writeByte(Amf3DataType.EMPTY_STRING);
     }
 
-    private void writeReferenceIndex(int index) throws IOException {
+    private final void writeReferenceIndex(int index) throws IOException {
         outputStream.writeByte(index << 1);
     }
 
     private final void writeStringModifiedUTF8(String str) throws IOException {
 
-        byte[] bytearr = Amf3DataUtil.toBytesUTF8(str);
-        Integer stringInfo = new Integer((bytearr.length << 1) | Amf3DataType.OBJECT_INLINE);
-        writeIntegerData( stringInfo );
+        byte[] bytearr = Amf3DataUtil.toUTF8StringBytes(str);
+        Integer stringInfo = new Integer((bytearr.length << 1)
+                | Amf3DataType.OBJECT_INLINE);
+        writeIntegerData(stringInfo);
 
-        if( bytearr.length > 0 ){
+        if (bytearr.length > 0) {
             outputStream.write(bytearr, 0, bytearr.length);
         }
     }
 
-    private final void writeTypeString(String propertyName)
-            throws IOException {
+    private final void writeTypeString(String propertyName) throws IOException {
         references.addStringReference(propertyName);
         writeStringModifiedUTF8(propertyName);
     }

@@ -39,7 +39,10 @@ public final class Amf3DataType {
     public static final byte CLASS_DEF_REFERENCE = 0x00;
     public static final byte CLASS_DEF_INLINE = 0x02;
     
-    public static final int INTEGER_DEMILITER = 0x80;
+    public static final int INTEGER_VARIABLED_FLAG = 0x80;
+    public static final int INTEGRR_MAX = 0xFFFFFFF;
+    public static final int INTEGRR_MIN = -0xFFFFFFF;
+    public static final int INTEGER_NEGATIVE_SING = 0x40;
     
     public static final byte EMPTY_STRING = 0x01;
     

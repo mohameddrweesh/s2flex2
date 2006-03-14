@@ -33,8 +33,33 @@ import org.w3c.dom.Element;
 
 public class Amf3DataUtil {
 
-    public static void setProperties(Object object, int props,
-            String[] names, Object[] values) {
+    public static int getIntegerByteLength(Integer value) {
+        if (value == null) {
+            return 0;
+        }
+        if (value.intValue() < 0) {
+            return 4;
+        }
+        if (value.intValue() >= 0x10000000) {
+            return -1;
+        }
+        if (value.intValue() >= 0x200000) {
+            return 4;
+        }
+        if (value.intValue() >= 0x4000) {
+            return 3;
+        }
+        if (value.intValue() >= 0x80) {
+            return 2;
+        }
+        if (value.intValue() >= 0x0) {
+            return 1;
+        }
+        return -1;
+    }
+
+    public static void setProperties(Object object, int props, String[] names,
+            Object[] values) {
         BeanDesc beanDesc = BeanDescFactory.getBeanDesc(object.getClass());
         for (int i = 0; i < props; i++) {
             if (beanDesc.hasPropertyDesc(names[i])) {
@@ -46,7 +71,70 @@ public class Amf3DataUtil {
         }
     }
 
-    public static byte[] toBytesUTF8(String str) {
+    public static Date toDate(double ms) {
+        Date date = new Date((long) ms);
+        return date;
+    }
+
+    public static Integer toInteger(int[] list, int bytes) {
+        int int_data = list[bytes - 1];
+        int offset = 0;
+
+        if (bytes < 4) {
+            offset = 7;
+        } else {
+            offset = 8;
+        }
+
+        for (int i = bytes - 1; i > 0; i--) {
+            int_data |= (list[i - 1] << offset);
+            offset += 7;
+        }
+
+        return Integer.valueOf(int_data);
+    }
+
+    public static int[] toIntegerVariableBytes(Integer value) {
+        int list_len = Amf3DataUtil.getIntegerByteLength(value);
+        if( list_len < 0 ){
+            return new int[0];
+        }
+        
+        int[] list = new int[list_len];
+        int intValue = value.intValue();
+
+        if (list_len < 4) {
+            list[0] = intValue & 0x7F;
+            intValue = intValue >>> 7;
+        } else {
+            list[0] = intValue & 0xFF;
+            intValue = intValue >>> 8;
+        }
+
+        for (int i = 1; i < list_len; i++) {
+            list[i] = intValue & 0x7F;
+            intValue = intValue >>> 7;
+        }
+        return list;
+    }
+
+    public static Integer toNegativeInteger(int[] list, int bytes) {
+        return Integer.valueOf(toInteger(list, bytes).intValue() | 0xF0000000);
+    }
+
+    public static int[] toNegativeIntegerBytes(Integer value) {
+        return toIntegerVariableBytes(value);
+    }
+
+    public static String toUTF8String(byte[] bytearr, int utflen) {
+        try {
+            return new String(bytearr, 0, utflen, "utf-8");
+        } catch (UnsupportedEncodingException e) {
+            return null;
+        }
+    }
+
+    public static byte[] toUTF8StringBytes(String str) {
         try {
             return str.getBytes("utf-8");
         } catch (UnsupportedEncodingException e) {
@@ -54,77 +142,6 @@ public class Amf3DataUtil {
         }
     }
 
-    public static Date toDate(double ms) {
-        Date date = new Date((long) ms);
-        return date;
-    }
-
-    public static Integer toInteger(int[] list, int bytes) {
-
-        int int_data = 0;
-        int offset = 0;
-        for (int i = list.length; i > 0; i--) {
-            if (list[i - 1] != 0x00) {
-                offset = (bytes - i) * 7;
-                int_data |= (list[i - 1] << offset);
-            }
-        }
-        return new Integer(int_data);
-    }
-    
-    public static int[] toIntegerVariableBytes(Integer value) {
-        int[] list = new int[4];
-        int intValue = value.intValue();
-
-        for (int i = 0; i < list.length; i++) {
-            list[i] = intValue & 0x7F;
-            intValue = intValue >>> 7;
-            if (intValue <= 0) {
-                break;
-            }
-        }
-        return list;
-    }
-    
-    public static Integer toNegativeInteger(int[] list, int bytes) {
-
-        int int_data = 0;
-        int offset = 0;
-        
-        for (int i = 1; i < list.length; i++) {
-            offset = ( bytes - i ) * 7 +1;
-            int_data |= (list[i - 1] << offset);
-        }
-        int_data |= list[ list.length -1 ];
-        
-        return new Integer(int_data | 0xF0000000);
-    }
-
-    public static int[] toNegativeIntegerBytes(Integer value) {
-        int[] list = new int[4];
-        int intValue = value.intValue();
-        
-        list[0] = intValue & 0xFF;
-        intValue = intValue >>> 8;
-        
-        for (int i = 1; i < list.length; i++) {
-            list[i] = intValue & 0x7F;
-            intValue = intValue >>> 7;
-            if (intValue <= 0) {
-                break;
-            }
-        }
-        return list;
-    }
-
-    public static String toStringUTF8(byte[] bytearr, int utflen) {
-        try {
-            return new String(bytearr, 0, utflen, "utf-8");
-        } catch (UnsupportedEncodingException e) {
-            return null;
-        }
-    }
-    
     public static Document toXmlDocument(String xml) {
         ByteArrayInputStream bain;
         try {
