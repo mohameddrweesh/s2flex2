@@ -8,6 +8,6 @@
 	<mx:Label x="215" y="48" text="=" height="20"/>
 	<mx:TextInput x="56" y="46" id="arg1_txt" width="58" tabIndex="1"/>
 	<mx:TextInput x="154" y="46" id="arg2_txt" width="46" tabIndex="2"/>
-	<mx:Button x="410" y="46" label="計算" click="calculate()" id="doBtn" tabIndex="3"/>
+	<mx:Button x="410" y="46" label="enter" click="calculate()" id="doBtn" tabIndex="3"/>
 	<mx:TextInput x="242" y="46" id="ans_txt" editable="false"/>	
 </mx:Application>

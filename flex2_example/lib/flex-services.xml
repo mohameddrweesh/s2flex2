@@ -26,6 +26,15 @@
 					<channel ref="s2-amf"/>
 				</channels>
 			</destination>
+			<destination id="exceptionService">
+				<properties>
+					<source>exceptionService</source>
+					<service-name>exceptionService</service-name>
+				</properties>
+				<channels>
+					<channel ref="s2-amf"/>
+				</channels>
+			</destination>	
         </service>
     </services>
     <security />

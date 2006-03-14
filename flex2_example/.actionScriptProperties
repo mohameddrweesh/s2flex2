@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<actionScriptProperties version="4" mainApplicationPath="flex2_example.mxml">
+<actionScriptProperties version="4" mainApplicationPath="s2flex2_example2.mxml">
   <compiler additionalCompilerArguments="--services=.\lib\flex-services.xml" copyDependentFiles="true" generateAccessible="false" strict="true" coach="true" htmlGenerate="true" htmlPlayerVersionCheck="true" htmlPlayerVersion="8.5.0" htmlExpressInstall="true" htmlHistoryManagement="false" outputFolderPath="bin">
     <classPath/>
     <libraryPath>
@@ -17,8 +17,8 @@
     </sourcePath>
   </compiler>
   <applications>
+    <application path="exception_example.mxml"/>
     <application path="s2flex2_example2.mxml"/>
     <application path="flex2_example.mxml"/>
-    <application path="s2flex2_example1.mxml"/>
   </applications>
 </actionScriptProperties>
