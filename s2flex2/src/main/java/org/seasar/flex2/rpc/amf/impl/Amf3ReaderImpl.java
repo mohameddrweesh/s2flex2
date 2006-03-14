@@ -134,8 +134,7 @@ public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
                 return super.readArray();
 
             case Amf3DataType.AMF3_DATA_MARKER:
-                dataType = inputStream.readByte();
-                return readAMF3Data(dataType);
+                return readAMF3Data(inputStream.readByte());
 
             default:
                 return null;
@@ -165,21 +164,26 @@ public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
     }
 
     protected Integer readInteger() throws IOException {
-        int[] list = new int[4];
-        int byte_count = 0;
-        for (int i = 0; i < list.length; i++) {
-            list[i] = inputStream.readByte();
-            byte_count++;
-            if ((list[i] >>> 7) == 0x00) {
-                break;
-            }
-            list[i] &= 0x7F;
-        }
-        if (list[byte_count - 1] == 0x00) {
+
+        int int_info = inputStream.readUnsignedByte();
+        
+        if (int_info == 0x00) {
             return new Integer(0);
-        } else {
-            return Amf3DataUtil.toInteger(list, byte_count);
         }
+        
+        if((int_info >>> 7) == 0x00) {
+            return Amf3DataUtil.toInteger(new int[]{int_info & 0x7F}, 1);
+        }
+
+        switch(int_info >>> 6){
+            case 0x02:
+                return readIntegerData(int_info);
+                
+            case 0x03:
+                return readNegativeIntegerData(int_info);
+        }
+        
+        return null;
     }
 
     protected Object readObject() throws IOException {
@@ -193,7 +197,7 @@ public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
         }
         return null;
     }
-
+    
     protected String readString() throws IOException {
         int reference = readInteger().intValue();
         switch (reference & Amf3DataType.OBJECT_INLINE) {
@@ -268,6 +272,34 @@ public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
         Date date = Amf3DataUtil.toDate(inputStream.readDouble());
         references.addObjectReference(date);
         return date;
+    }
+
+    private final Integer readIntegerData(int int_info) throws IOException {
+        int[] list = new int[4];
+        int byte_count = 1;
+        list[ 0 ] = int_info & 0x7F;
+        for (int i = 1; i < list.length; i++) {
+            list[i] = inputStream.readUnsignedByte();
+            byte_count++;
+            if ((list[i] >>> 7) == 0x00) {
+                break;
+            }
+            list[i] &= 0x7F;
+        }
+        return Amf3DataUtil.toInteger(list, byte_count);
+    }
+
+    private final Integer readNegativeIntegerData(int int_info) throws IOException {
+        int[] list = new int[4];
+        int byte_count = 1;
+        list[ 0 ] = int_info & 0x7F;
+        for (int i = 1; i < list.length-1; i++) {
+            list[i] = inputStream.readUnsignedByte();
+            list[i] &= 0x7F;
+        }
+        list[list.length -1] = inputStream.readUnsignedByte();
+        byte_count = list.length;
+        return Amf3DataUtil.toNegativeInteger(list, byte_count);
     }
 
     private final Class readObjectClassDef(int reference) throws IOException {
