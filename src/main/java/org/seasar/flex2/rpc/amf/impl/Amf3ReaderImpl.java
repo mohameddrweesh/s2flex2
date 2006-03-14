@@ -29,6 +29,8 @@ import org.seasar.flex2.rpc.amf.util.Amf3DataUtil;
 import org.seasar.framework.util.ClassUtil;
 import org.w3c.dom.Document;
 
+import sun.security.krb5.internal.bi;
+
 import flashgateway.io.ASObject;
 
 public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
@@ -277,22 +279,32 @@ public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
     private final Integer readIntegerData(int int_info) throws IOException {
         int[] list = new int[4];
         int byte_count = 1;
-        list[ 0 ] = int_info & 0x7F;
+        
+        list[ 0 ] = int_info & 0x3F;
+        
         for (int i = 1; i < list.length; i++) {
             list[i] = inputStream.readUnsignedByte();
             byte_count++;
             if ((list[i] >>> 7) == 0x00) {
                 break;
             }
+            if( byte_count == list.length ){
+                break;
+            }
             list[i] &= 0x7F;
         }
-        return Amf3DataUtil.toInteger(list, byte_count);
+        
+        if( byte_count > 0 ){
+            return Amf3DataUtil.toInteger(list, byte_count);
+        } else {
+            return Integer.valueOf(0);
+        }
     }
 
     private final Integer readNegativeIntegerData(int int_info) throws IOException {
         int[] list = new int[4];
         int byte_count = 1;
-        list[ 0 ] = int_info & 0x7F;
+        list[ 0 ] = int_info & 0x3F;
         for (int i = 1; i < list.length-1; i++) {
             list[i] = inputStream.readUnsignedByte();
             list[i] &= 0x7F;
@@ -336,7 +348,7 @@ public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
         if (str_length > 0) {
             byte[] bytearr = new byte[str_length * 2];
             inputStream.readFully(bytearr, 0, str_length);
-            str = Amf3DataUtil.toStringUTF8(bytearr, str_length);
+            str = Amf3DataUtil.toUTF8String(bytearr, str_length);
             references.addStringReference(str);
         } else {
             str = "";
@@ -350,7 +362,7 @@ public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
         int str_length = reference >>> 1;
         byte[] bytearr = new byte[str_length * 2];
         inputStream.readFully(bytearr, 0, str_length);
-        String xml_data = Amf3DataUtil.toStringUTF8(bytearr, str_length);
+        String xml_data = Amf3DataUtil.toUTF8String(bytearr, str_length);
 
         Document xml = Amf3DataUtil.toXmlDocument(xml_data);
         references.addObjectReference(xml);
