@@ -288,10 +288,9 @@ public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
             if ((list[i] >>> 7) == 0x00) {
                 break;
             }
-            if( byte_count == list.length ){
-                break;
+            if( byte_count < list.length ){
+                list[i] &= 0x7F;
             }
-            list[i] &= 0x7F;
         }
         
         if( byte_count > 0 ){
