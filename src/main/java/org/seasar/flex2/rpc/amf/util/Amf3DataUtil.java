@@ -71,16 +71,8 @@ public class Amf3DataUtil {
         }
         return new Integer(int_data);
     }
-
-    public static String toStringUTF8(byte[] bytearr, int utflen) {
-        try {
-            return new String(bytearr, 0, utflen, "utf-8");
-        } catch (UnsupportedEncodingException e) {
-            return null;
-        }
-    }
-
-    public static int[] toVariableBytes(Integer value) {
+    
+    public static int[] toIntegerVariableBytes(Integer value) {
         int[] list = new int[4];
         int intValue = value.intValue();
 
@@ -93,7 +85,46 @@ public class Amf3DataUtil {
         }
         return list;
     }
+    
+    public static Integer toNegativeInteger(int[] list, int bytes) {
 
+        int int_data = 0;
+        int offset = 0;
+        
+        for (int i = 1; i < list.length; i++) {
+            offset = ( bytes - i ) * 7 +1;
+            int_data |= (list[i - 1] << offset);
+        }
+        int_data |= list[ list.length -1 ];
+        
+        return new Integer(int_data | 0xF0000000);
+    }
+
+    public static int[] toNegativeIntegerBytes(Integer value) {
+        int[] list = new int[4];
+        int intValue = value.intValue();
+        
+        list[0] = intValue & 0xFF;
+        intValue = intValue >>> 8;
+        
+        for (int i = 1; i < list.length; i++) {
+            list[i] = intValue & 0x7F;
+            intValue = intValue >>> 7;
+            if (intValue <= 0) {
+                break;
+            }
+        }
+        return list;
+    }
+
+    public static String toStringUTF8(byte[] bytearr, int utflen) {
+        try {
+            return new String(bytearr, 0, utflen, "utf-8");
+        } catch (UnsupportedEncodingException e) {
+            return null;
+        }
+    }
+    
     public static Document toXmlDocument(String xml) {
         ByteArrayInputStream bain;
         try {

@@ -114,7 +114,12 @@ public class Amf3WriterImpl extends AmfWriterImpl implements AmfWriter {
 
     protected void writeInteger(Integer value) throws IOException {
         outputStream.writeByte(Amf3DataType.INTEGER);
-        writeIntegerData(value);
+        if( value.intValue() >= 0){
+            writeIntegerData(value);
+        } else {
+            writeNegativeIntegerData(value);
+        }
+        
     }
 
     protected void writeNull() throws IOException {
@@ -246,7 +251,7 @@ public class Amf3WriterImpl extends AmfWriterImpl implements AmfWriter {
     }
 
     private void writeIntegerData(Integer value) throws IOException {
-        int[] list = Amf3DataUtil.toVariableBytes(value);
+        int[] list = Amf3DataUtil.toIntegerVariableBytes(value);
         for (int i = list.length - 1; i >= 1; i--) {
             if (list[i] != 0x00) {
                 outputStream
@@ -256,6 +261,14 @@ public class Amf3WriterImpl extends AmfWriterImpl implements AmfWriter {
         outputStream.writeByte(list[0]);
     }
 
+    private void writeNegativeIntegerData(Integer value) throws IOException {
+        int[] list = Amf3DataUtil.toNegativeIntegerBytes(value);
+        for (int i = list.length - 1; i >= 1; i--) {
+            outputStream
+                        .writeByte(Amf3DataType.INTEGER_DEMILITER | list[i]);
+        }
+        outputStream.writeByte(list[0]);
+    }
 
     private void writeObjectClassDef(Object object) throws IOException {
 
