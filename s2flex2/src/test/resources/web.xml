@@ -9,7 +9,7 @@
     </servlet>
     <servlet>
         <servlet-name>gateway</servlet-name>
-        <servlet-class>org.seasar.flex2.amf.impl.AmfGateway</servlet-class>
+        <servlet-class>org.seasar.flex2.rpc.gateway.impl.AmfGateway/servlet-class>
         <load-on-startup>2</load-on-startup>
     </servlet>
     <servlet-mapping>

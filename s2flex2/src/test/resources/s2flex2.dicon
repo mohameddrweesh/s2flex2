@@ -3,8 +3,8 @@
 	"http://www.seasar.org/dtd/components23.dtd">
 <components namespace="amf">
 	<component name="s2containerInvoker"
-		class="org.seasar.flex2.amf.invoker.S2ContainerInvoker"/>
-	<component class="org.seasar.flex2.amf.impl.RequestProcessorImpl">
+		class="org.seasar.flex2.rpc.gateway.invoker.impl.S2ContainerInvoker"/>
+	<component class="org.seasar.flex2.rpc.gateway.impl.Amf3RequestProcessorImpl">
 		<initMethod>#self.addInvoker(s2containerInvoker)</initMethod>
 	</component>
 </components>
