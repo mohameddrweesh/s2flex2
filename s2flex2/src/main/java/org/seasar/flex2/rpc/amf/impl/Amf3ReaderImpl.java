@@ -29,12 +29,12 @@ import org.seasar.flex2.rpc.amf.util.Amf3DataUtil;
 import org.seasar.framework.util.ClassUtil;
 import org.w3c.dom.Document;
 
-import sun.security.krb5.internal.bi;
-
 import flashgateway.io.ASObject;
 
 public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
 
+    private static final Integer ZERO = new Integer(0);
+    
     private Amf3References references;
 
     public Amf3ReaderImpl(DataInputStream inputStream) {
@@ -296,7 +296,7 @@ public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
         if( byte_count > 0 ){
             return Amf3DataUtil.toInteger(list, byte_count);
         } else {
-            return Integer.valueOf(0);
+            return ZERO;
         }
     }
 
