@@ -327,8 +327,10 @@ public class Amf3WriterImpl extends AmfWriterImpl implements AmfWriter {
             int_data |= Amf3DataType.CLASS_DEF_INLINE;
             int_data = (beanDesc.getPropertyDescSize() << 4) | int_data;
             writeIntData( int_data );
+            
             String type = object.getClass().getName();
             writeTypeString(type);
+            
             for (int i = 0; i < beanDesc.getPropertyDescSize(); ++i) {
                 PropertyDesc pd = (PropertyDesc) beanDesc.getPropertyDesc(i);
                 if (pd.hasReadMethod()) {
