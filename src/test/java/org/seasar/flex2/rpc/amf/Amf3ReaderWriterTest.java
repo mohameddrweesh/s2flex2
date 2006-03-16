@@ -23,6 +23,7 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.math.BigDecimal;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -235,8 +236,8 @@ public class Amf3ReaderWriterTest extends TestCase {
     }
 
     public void testXml() throws Exception {
-        File testXml = new File(ClassLoader.getSystemResource("testXml.xml")
-                .getPath());
+        URL url = this.getClass().getClassLoader().getResource("testXml.xml");
+        File testXml = new File(url.getPath());
         DocumentBuilder builder = DocumentBuilderFactoryUtil
                 .newDocumentBuilder();
         Document xml1 = DocumentBuilderUtil.parse(builder,
