@@ -33,20 +33,14 @@ import javax.xml.parsers.DocumentBuilder;
 
 import junit.framework.TestCase;
 
-import org.seasar.flex2.rpc.amf.AmfBody;
-import org.seasar.flex2.rpc.amf.AmfMessage;
-import org.seasar.flex2.rpc.amf.AmfReader;
-import org.seasar.flex2.rpc.amf.AmfWriter;
-import org.seasar.flex2.rpc.amf.impl.AmfBodyImpl;
-import org.seasar.flex2.rpc.amf.impl.AmfMessageImpl;
 import org.seasar.flex2.rpc.amf.impl.Amf3ReaderImpl;
 import org.seasar.flex2.rpc.amf.impl.Amf3WriterImpl;
+import org.seasar.flex2.rpc.amf.impl.AmfBodyImpl;
+import org.seasar.flex2.rpc.amf.impl.AmfMessageImpl;
 import org.seasar.flex2.rpc.amf.util.Amf3DataUtil;
 import org.seasar.framework.util.DocumentBuilderFactoryUtil;
 import org.seasar.framework.util.DocumentBuilderUtil;
 import org.w3c.dom.Document;
-
-import com.sun.org.apache.bcel.internal.util.ClassLoader;
 
 public class Amf3ReaderWriterTest extends TestCase {
 
@@ -126,45 +120,45 @@ public class Amf3ReaderWriterTest extends TestCase {
         assertEquals("4", "4", value2.get("Ddd"));
         assertEquals("5", Boolean.TRUE, value2.get("Eee"));
         assertEquals("6", new Date(5), value2.get("Fff"));
-        List ggg2 = (List)value2.get("Ggg");
+        List ggg2 = (List) value2.get("Ggg");
         assertEquals("7", 2, ggg2.size());
         Map b4 = (Map) ggg2.get(0);
         Map b5 = (Map) ggg2.get(1);
         assertEquals("8", new Double(2), b4.get("Aaa"));
         assertEquals("9", new Double(3), b5.get("Aaa"));
-        Map hhh2 = (Map)value2.get("Hhh");
+        Map hhh2 = (Map) value2.get("Hhh");
         assertEquals("10", new Double(4), hhh2.get("Aaa"));
-        String iii2 = (String)value2.get("Iii");
+        String iii2 = (String) value2.get("Iii");
         assertEquals("11", iii, new BigDecimal(iii2));
     }
 
     public void testMapElementNumberLimitTest() throws Exception {
         Map value = new HashMap();
-        for( int i = 0; i < 100; i++ ){
+        for (int i = 0; i < 100; i++) {
             value.put("Ccc" + i, new Double(i));
         }
-        
+
         Map value2 = (Map) convertData(value);
-        for( int i = 0; i < 100; i++ ){
+        for (int i = 0; i < 100; i++) {
             assertEquals("3", new Double(i), value2.get("Ccc" + i));
         }
     }
-    
+
     public void testListElementNumberLimitTest() throws Exception {
         List value = new ArrayList();
 
-        for( int i = 0; i < 100; i++ ){
+        for (int i = 0; i < 100; i++) {
             value.add("" + i);
         }
-        
+
         List value2 = (List) convertData(value);
         assertEquals("1", 100, value2.size());
-        
-        for( int i = 0; i < 100; i++ ){
+
+        for (int i = 0; i < 100; i++) {
             assertEquals("2", "" + i, value2.get(i));
         }
     }
-    
+
     public void testNull() throws Exception {
         assertEquals("1", null, convertData(null));
     }
@@ -236,19 +230,23 @@ public class Amf3ReaderWriterTest extends TestCase {
         assertEquals("10", 4, hhh2.getAaa());
         BigDecimal iii2 = value2.getIii();
         assertEquals("11", iii, iii2);
-        
+
         assertEquals("12", null, value2.getHhh().getDdd());
     }
 
     public void testXml() throws Exception {
-        File testXml = new File( ClassLoader.getSystemResource("testXml.xml").getPath());
-        DocumentBuilder builder = DocumentBuilderFactoryUtil.newDocumentBuilder();
-        Document xml1 = DocumentBuilderUtil.parse(builder, new BufferedInputStream( new FileInputStream( testXml )));
-    
+        File testXml = new File(ClassLoader.getSystemResource("testXml.xml")
+                .getPath());
+        DocumentBuilder builder = DocumentBuilderFactoryUtil
+                .newDocumentBuilder();
+        Document xml1 = DocumentBuilderUtil.parse(builder,
+                new BufferedInputStream(new FileInputStream(testXml)));
+
         Document xml2 = (Document) convertData(xml1);
-        
-        assertEquals("1", Amf3DataUtil.toXmlString(xml1),Amf3DataUtil.toXmlString(xml2));
-        
+
+        assertEquals("1", Amf3DataUtil.toXmlString(xml1), Amf3DataUtil
+                .toXmlString(xml2));
+
     }
 
     protected Object convertData(Object data) throws Exception {
