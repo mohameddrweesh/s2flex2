@@ -91,7 +91,7 @@ public class Amf3DataUtil {
             offset += 7;
         }
 
-        return Integer.valueOf(int_data);
+        return new Integer(int_data);
     }
 
     public static int[] toIntegerVariableBytes(Integer value) {
@@ -119,7 +119,7 @@ public class Amf3DataUtil {
     }
 
     public static Integer toNegativeInteger(int[] list, int bytes) {
-        return Integer.valueOf(toInteger(list, bytes).intValue() | 0xF0000000);
+        return new Integer(toInteger(list, bytes).intValue() | 0xF0000000);
     }
 
     public static int[] toNegativeIntegerBytes(Integer value) {
