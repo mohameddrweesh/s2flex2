@@ -33,26 +33,23 @@ import org.w3c.dom.Element;
 
 public class Amf3DataUtil {
 
-    public static int getIntegerByteLength(Integer value) {
-        if (value == null) {
-            return 0;
-        }
-        if (value.intValue() < 0) {
+    public static int getIntByteLength(int value) {
+        if (value < 0) {
             return 4;
         }
-        if (value.intValue() >= 0x10000000) {
+        if (value >= 0x10000000) {
             return -1;
         }
-        if (value.intValue() >= 0x200000) {
+        if (value >= 0x200000) {
             return 4;
         }
-        if (value.intValue() >= 0x4000) {
+        if (value >= 0x4000) {
             return 3;
         }
-        if (value.intValue() >= 0x80) {
+        if (value >= 0x80) {
             return 2;
         }
-        if (value.intValue() >= 0x0) {
+        if (value >= 0x0) {
             return 1;
         }
         return -1;
@@ -76,7 +73,7 @@ public class Amf3DataUtil {
         return date;
     }
 
-    public static Integer toInteger(int[] list, int bytes) {
+    public static int toInt(int[] list, int bytes) {
         int int_data = list[bytes - 1];
         int offset = 0;
 
@@ -91,17 +88,17 @@ public class Amf3DataUtil {
             offset += 7;
         }
 
-        return new Integer(int_data);
+        return int_data;
     }
 
-    public static int[] toIntegerVariableBytes(Integer value) {
-        int list_len = Amf3DataUtil.getIntegerByteLength(value);
+    public static int[] toVariableIntBytes(int value) {
+        int list_len = Amf3DataUtil.getIntByteLength(value);
         if( list_len < 0 ){
             return new int[0];
         }
         
         int[] list = new int[list_len];
-        int intValue = value.intValue();
+        int intValue = value;
 
         if (list_len < 4) {
             list[0] = intValue & 0x7F;
@@ -118,12 +115,12 @@ public class Amf3DataUtil {
         return list;
     }
 
-    public static Integer toNegativeInteger(int[] list, int bytes) {
-        return new Integer(toInteger(list, bytes).intValue() | 0xF0000000);
+    public static int toNegativeInt(int[] list, int bytes) {
+        return toInt(list, bytes) | 0xF0000000;
     }
 
-    public static int[] toNegativeIntegerBytes(Integer value) {
-        return toIntegerVariableBytes(value);
+    public static int[] toNegativeIntBytes(int value) {
+        return toVariableIntBytes(value);
     }
 
     public static String toUTF8String(byte[] bytearr, int utflen) {

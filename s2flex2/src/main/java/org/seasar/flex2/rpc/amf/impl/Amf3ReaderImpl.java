@@ -19,6 +19,7 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import org.seasar.flex2.rpc.amf.AmfMessage;
@@ -33,8 +34,6 @@ import flashgateway.io.ASObject;
 
 public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
 
-    private static final Integer ZERO = new Integer(0);
-    
     private Amf3References references;
 
     public Amf3ReaderImpl(DataInputStream inputStream) {
@@ -54,7 +53,7 @@ public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
     }
 
     protected List readArray() throws IOException {
-        int reference = readInteger().intValue();
+        int reference = readInt();
 
         switch (reference & Amf3DataType.OBJECT_INLINE) {
             case Amf3DataType.OBJECT_REFERENCE:
@@ -144,7 +143,7 @@ public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
     }
 
     protected Date readDate() throws IOException {
-        int reference = readInteger().intValue();
+        int reference = readInt();
 
         switch (reference & Amf3DataType.OBJECT_INLINE) {
             case Amf3DataType.OBJECT_REFERENCE:
@@ -165,31 +164,12 @@ public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
         }
     }
 
-    protected Integer readInteger() throws IOException {
-
-        int int_info = inputStream.readUnsignedByte();
-        
-        if (int_info == 0x00) {
-            return new Integer(0);
-        }
-        
-        if((int_info >>> 7) == 0x00) {
-            return Amf3DataUtil.toInteger(new int[]{int_info & 0x7F}, 1);
-        }
-
-        switch(int_info >>> 6){
-            case 0x02:
-                return readIntegerData(int_info);
-                
-            case 0x03:
-                return readNegativeIntegerData(int_info);
-        }
-        
-        return null;
+    protected Integer readInteger() throws IOException {      
+        return new Integer( readInt() );
     }
 
     protected Object readObject() throws IOException {
-        int reference = readInteger().intValue();
+        int reference = readInt();
 
         switch (reference & Amf3DataType.OBJECT_INLINE) {
             case Amf3DataType.OBJECT_REFERENCE:
@@ -201,7 +181,7 @@ public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
     }
     
     protected String readString() throws IOException {
-        int reference = readInteger().intValue();
+        int reference = readInt();
         switch (reference & Amf3DataType.OBJECT_INLINE) {
             case Amf3DataType.OBJECT_REFERENCE:
                 return references.getStringAt(reference >>> 1);
@@ -210,13 +190,13 @@ public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
         }
         return null;
     }
-
+    
     protected void readVersion() throws IOException {
         message.setVersion(inputStream.readUnsignedShort());
     }
 
     protected Document readXML() throws IOException {
-        int reference = readInteger().intValue();
+        int reference = readInt();
         switch (reference & Amf3DataType.OBJECT_INLINE) {
             case Amf3DataType.OBJECT_REFERENCE:
                 return references.getXmlDocumentAt(reference >>> 1);
@@ -276,7 +256,29 @@ public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
         return date;
     }
 
-    private final Integer readIntegerData(int int_info) throws IOException {
+    private final int readInt() throws IOException {
+
+        int int_info = inputStream.readUnsignedByte();
+        
+        if (int_info >= 0x00) {
+        
+            if((int_info >>> 7) == 0x00) {
+                return Amf3DataUtil.toInt(new int[]{int_info & 0x7F}, 1);
+            }
+    
+            switch(int_info >>> 6){
+                case 0x02:
+                    return readIntData(int_info);
+                    
+                case 0x03:
+                    return readNegativeIntData(int_info);
+            }
+        }
+        
+        return 0;
+    }
+
+    private final int readIntData(int int_info) throws IOException {
         int[] list = new int[4];
         int byte_count = 1;
         
@@ -294,13 +296,13 @@ public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
         }
         
         if( byte_count > 0 ){
-            return Amf3DataUtil.toInteger(list, byte_count);
+            return Amf3DataUtil.toInt(list, byte_count);
         } else {
-            return ZERO;
+            return 0;
         }
     }
 
-    private final Integer readNegativeIntegerData(int int_info) throws IOException {
+    private final int readNegativeIntData(int int_info) throws IOException {
         int[] list = new int[4];
         int byte_count = 1;
         list[ 0 ] = int_info & 0x3F;
@@ -310,12 +312,12 @@ public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
         }
         list[list.length -1] = inputStream.readUnsignedByte();
         byte_count = list.length;
-        return Amf3DataUtil.toNegativeInteger(list, byte_count);
+        return Amf3DataUtil.toNegativeInt(list, byte_count);
     }
 
     private final Class readObjectClassDef(int reference) throws IOException {
 
-        Class clazz = Object.class;
+        Class clazz = ASObject.class;
 
         switch (reference & Amf3DataType.CLASS_DEF_INLINE) {
             case Amf3DataType.CLASS_DEF_REFERENCE:
@@ -325,8 +327,8 @@ public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
                 String class_name = readString();
                 if (class_name.length() > 0) {
                     clazz = ClassUtil.forName(class_name);
-                    references.addClassReference(clazz);
                 }
+                references.addClassReference(clazz);
                 break;
         }
         return clazz;
@@ -334,7 +336,7 @@ public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
 
     private final Object readObjectData(int reference) throws IOException {
         Class clazz = readObjectClassDef(reference);
-        if (clazz != null && !(Object.class.equals(clazz))) {
+        if (clazz != null && !(ASObject.class.equals(clazz))) {
             return readCustomClass(reference, clazz);
         } else {
             return readASObject();
