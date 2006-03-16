@@ -266,13 +266,7 @@ public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
                 return Amf3DataUtil.toInt(new int[]{int_info & 0x7F}, 1);
             }
     
-            switch(int_info >>> 6){
-                case 0x02:
-                    return readIntData(int_info);
-                    
-                case 0x03:
-                    return readNegativeIntData(int_info);
-            }
+            return readIntData(int_info);
         }
         
         return 0;
@@ -282,7 +276,7 @@ public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
         int[] list = new int[4];
         int byte_count = 1;
         
-        list[ 0 ] = int_info & 0x3F;
+        list[ 0 ] = int_info & 0x7F;
         
         for (int i = 1; i < list.length; i++) {
             list[i] = inputStream.readUnsignedByte();
@@ -296,23 +290,20 @@ public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
         }
         
         if( byte_count > 0 ){
-            return Amf3DataUtil.toInt(list, byte_count);
-        } else {
-            return 0;
+            if( byte_count < 4 ){
+                return Amf3DataUtil.toInt(list, byte_count);
+            } else {
+                switch(int_info >>> 6){
+                    case 0x02:
+                        return Amf3DataUtil.toInt(list, byte_count);
+                        
+                    case 0x03:
+                        return Amf3DataUtil.toNegativeInt(list, byte_count);
+                }
+            }
         }
-    }
-
-    private final int readNegativeIntData(int int_info) throws IOException {
-        int[] list = new int[4];
-        int byte_count = 1;
-        list[ 0 ] = int_info & 0x3F;
-        for (int i = 1; i < list.length-1; i++) {
-            list[i] = inputStream.readUnsignedByte();
-            list[i] &= 0x7F;
-        }
-        list[list.length -1] = inputStream.readUnsignedByte();
-        byte_count = list.length;
-        return Amf3DataUtil.toNegativeInt(list, byte_count);
+        
+        return 0;
     }
 
     private final Class readObjectClassDef(int reference) throws IOException {
