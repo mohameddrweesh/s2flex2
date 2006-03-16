@@ -138,6 +138,33 @@ public class Amf3ReaderWriterTest extends TestCase {
         assertEquals("11", iii, new BigDecimal(iii2));
     }
 
+    public void testMapElementNumberLimitTest() throws Exception {
+        Map value = new HashMap();
+        for( int i = 0; i < 100; i++ ){
+            value.put("Ccc" + i, new Double(i));
+        }
+        
+        Map value2 = (Map) convertData(value);
+        for( int i = 0; i < 100; i++ ){
+            assertEquals("3", new Double(i), value2.get("Ccc" + i));
+        }
+    }
+    
+    public void testListElementNumberLimitTest() throws Exception {
+        List value = new ArrayList();
+
+        for( int i = 0; i < 100; i++ ){
+            value.add("" + i);
+        }
+        
+        List value2 = (List) convertData(value);
+        assertEquals("1", 100, value2.size());
+        
+        for( int i = 0; i < 100; i++ ){
+            assertEquals("2", "" + i, value2.get(i));
+        }
+    }
+    
     public void testNull() throws Exception {
         assertEquals("1", null, convertData(null));
     }
@@ -209,6 +236,8 @@ public class Amf3ReaderWriterTest extends TestCase {
         assertEquals("10", 4, hhh2.getAaa());
         BigDecimal iii2 = value2.getIii();
         assertEquals("11", iii, iii2);
+        
+        assertEquals("12", null, value2.getHhh().getDdd());
     }
 
     public void testXml() throws Exception {
