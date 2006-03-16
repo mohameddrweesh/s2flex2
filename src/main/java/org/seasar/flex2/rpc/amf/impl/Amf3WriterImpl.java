@@ -18,6 +18,7 @@ package org.seasar.flex2.rpc.amf.impl;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
@@ -63,12 +64,17 @@ public class Amf3WriterImpl extends AmfWriterImpl implements AmfWriter {
             outputStream.writeByte(Amf3DataType.BOOLEAN_FALSE);
         }
     }
-
+    
+    protected void writeCollection(Collection value) throws IOException {
+        writeAMF3DataMaker();
+        writeCollectionData( value );
+    }
+    
     protected void writeCustomClass(Object object) throws IOException {
         writeAMF3DataMaker();
         writeCustomClassData(object);
     }
-
+    
     protected void writeData(Object value) throws IOException {
         if (value == null) {
             super.writeNull();
@@ -122,6 +128,11 @@ public class Amf3WriterImpl extends AmfWriterImpl implements AmfWriter {
 
     }
 
+    protected void writeIterator(Iterator value) throws IOException {
+        writeAMF3DataMaker();
+        writeIteratorData( value );
+    }
+    
     protected void writeNull() throws IOException {
         outputStream.writeByte(Amf3DataType.NULL);
     }
@@ -184,9 +195,9 @@ public class Amf3WriterImpl extends AmfWriterImpl implements AmfWriter {
             } else if (value instanceof Object[]) {
                 writeArrayData((Object[]) value);
             } else if (value instanceof Iterator) {
-                writeIterator((Iterator) value);
+                writeIteratorData((Iterator) value);
             } else if (value instanceof Collection) {
-                writeCollection((Collection) value);
+                writeCollectionData((Collection) value);
             } else if (value instanceof Map) {
                 writeObjectData((Map) value);
             } else if (value instanceof Document) {
@@ -210,11 +221,17 @@ public class Amf3WriterImpl extends AmfWriterImpl implements AmfWriter {
         }
 
         references.addObjectReference(array);
-        outputStream.writeByte(array.length << 1 | Amf3DataType.OBJECT_INLINE);
+        writeIntData(array.length << 1 | Amf3DataType.OBJECT_INLINE);
         outputStream.writeByte(Amf3DataType.EMPTY_STRING);
         for (int i = 0; i < array.length; i++) {
             writeAMF3Data(array[i]);
         }
+    }
+
+    private final void writeCollectionData(Collection value) throws IOException {
+        ArrayList list = new ArrayList();
+        list.addAll(value);
+        writeArrayData(list.toArray(new Object[list.size()]));
     }
 
     private final void writeCustomClassData(Object object) throws IOException {
@@ -251,8 +268,8 @@ public class Amf3WriterImpl extends AmfWriterImpl implements AmfWriter {
         outputStream.writeDouble(((Date) date).getTime());
     }
 
-    private final void writeIntegerData(Integer value) throws IOException {
-        int[] list = Amf3DataUtil.toIntegerVariableBytes(value);
+    private final void writeIntData( int value) throws IOException {
+        int[] list = Amf3DataUtil.toVariableIntBytes(value);
         if( list.length <= 4 ){
             for (int i = list.length - 1; i >= 1; i--) {
                 outputStream.writeByte(Amf3DataType.INTEGER_VARIABLED_FLAG | list[i]);
@@ -261,9 +278,21 @@ public class Amf3WriterImpl extends AmfWriterImpl implements AmfWriter {
         }
     }
 
+    private final void writeIntegerData(Integer value) throws IOException {
+        writeIntData( value.intValue() );
+    }
+    
+    private final void writeIteratorData(Iterator value) throws IOException {
+        ArrayList list = new ArrayList();
+        while (value.hasNext()) {
+            list.add(value.next());
+        }
+        writeArrayData(list.toArray(new Object[list.size()]));
+    }
+
     private final void writeNegativeIntegerData(Integer value)
             throws IOException {
-        int[] list = Amf3DataUtil.toNegativeIntegerBytes(value);
+        int[] list = Amf3DataUtil.toNegativeIntBytes(value.intValue());
         if( list.length == 4 ){
             outputStream.writeByte( Amf3DataType.INTEGER_VARIABLED_FLAG | Amf3DataType.INTEGER_NEGATIVE_SING | list[3]);
 
@@ -297,7 +326,7 @@ public class Amf3WriterImpl extends AmfWriterImpl implements AmfWriter {
 
             int_data |= Amf3DataType.CLASS_DEF_INLINE;
             int_data = (beanDesc.getPropertyDescSize() << 4) | int_data;
-            outputStream.writeByte(int_data);
+            writeIntData( int_data );
             String type = object.getClass().getName();
             writeTypeString(type);
             for (int i = 0; i < beanDesc.getPropertyDescSize(); ++i) {
@@ -332,7 +361,7 @@ public class Amf3WriterImpl extends AmfWriterImpl implements AmfWriter {
     }
 
     private final void writeReferenceIndex(int index) throws IOException {
-        outputStream.writeByte(index << 1);
+        writeIntData(index << 1);
     }
 
     private final void writeStringModifiedUTF8(String str) throws IOException {
