@@ -9,7 +9,7 @@
 			<zipfileset prefix="s2flex2/lib" dir="target">
 				<include name="s2flex2-${ver}.jar"/>
 			</zipfileset>
-			<zipfileset prefix="s2flex/resources" dir="src/test/resources">
+			<zipfileset prefix="s2flex2/resources" dir="src/test/resources">
 			    <include name="s2flex2.dicon"/>
 				<include name="app.dicon"/>
 				<include name="log4j.properties"/>
