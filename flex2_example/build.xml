@@ -15,6 +15,10 @@
 				<exclude name="bin/work/**"/>
 				<exclude name="bin/build.xml"/>
 				<exclude name="bin/lib/**"/>
+				<exclude name="bin/.classpath"/>
+				<exclude name="bin/.cvsignore"/>
+				<exclude name="bin/.tomcatplugin"/>
+				<exclude name="bin/build.xml"/>				
 				<exclude name="**/.settings/**"/>
 				<exclude name="build.xml"/>
 				<exclude name="**/.DS_Store"/>
