@@ -18,6 +18,7 @@
   </compiler>
   <applications>
     <application path="exception_example.mxml"/>
+    <application path="s2flex2_checkDto_example.mxml"/>
     <application path="s2flex2_example2.mxml"/>
     <application path="flex2_example.mxml"/>
   </applications>

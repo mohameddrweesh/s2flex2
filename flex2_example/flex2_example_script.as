@@ -5,7 +5,7 @@ import flash.net.Responder;
 import mx.rpc.events.ResultEvent;
 import examples.flex2.dto.AddDto;
 
-var gatewayURL:String = "http://localhost:8080/flex2_example/gateway";
+public var gatewayURL:String = "http://localhost:8080/flex2_example/gateway";
 
 public function calculateResult(result:String) {
     sum.text = result;
