@@ -34,7 +34,17 @@
 				<channels>
 					<channel ref="s2-amf"/>
 				</channels>
-			</destination>	
+			</destination>
+			<destination id="checkDtoService">
+				<properties>
+					<source>checkDtoService</source>
+					<service-name>checkDtoService</service-name>
+				</properties>
+				<channels>
+					<channel ref="s2-amf"/>
+				</channels>
+			</destination>
+					
         </service>
     </services>
     <security />
