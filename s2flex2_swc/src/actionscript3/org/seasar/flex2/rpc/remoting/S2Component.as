@@ -78,7 +78,7 @@
 			this.document=document;
 		}
 		 
-		 private function initConnection(){
+		 private function initConnection():void{
 			_con = new NetConnection();
 			_con.objectEncoding = ObjectEncoding.AMF3;
 			_con.addHeader("DescribeService", false, 0);
