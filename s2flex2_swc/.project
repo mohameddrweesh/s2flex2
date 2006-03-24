@@ -6,13 +6,13 @@
 	</projects>
 	<buildSpec>
 		<buildCommand>
-			<name>zorn.project.flexbuilder</name>
+			<name>com.adobe.flexbuilder.project.flexbuilder</name>
 			<arguments>
 			</arguments>
 		</buildCommand>
 	</buildSpec>
 	<natures>
-		<nature>zorn.project.actionscriptnature</nature>
-		<nature>zorn.project.flexlibnature</nature>
+		<nature>com.adobe.flexbuilder.project.actionscriptnature</nature>
+		<nature>com.adobe.flexbuilder.project.flexlibnature</nature>
 	</natures>
 </projectDescription>

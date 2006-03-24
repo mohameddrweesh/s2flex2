@@ -1,6 +1,6 @@
 <project name="s2flex2_swc" default="build" basedir=".">
 	<property file="build.properties"/>
-	<property name="ver" value="B2"/>
+	<property name="ver" value="B2a"/>
 	<!-- 
 	build
 	 -->
@@ -24,11 +24,11 @@
 		<arg value="dist/s2flex2.swc"/>
     	<arg value="-namespace" />
     	<arg value="http://www.seasar.org/s2flex2/mxml"/>
-    	<arg value="Manifest.xml"/>
+    	<arg value="src\resources\Manifest.xml"/>
     	<arg value="-include-namespaces" />
     	<arg value="http://www.seasar.org/s2flex2/mxml" />
 		<arg value="-include-classes"/>		
-		<arg value="org.seasar.flex2.rpc.remoting.SimpleAMF"/>
+		<!--<arg value="org.seasar.flex2.rpc.remoting.SimpleAMF"/> -->
 		<arg value="org.seasar.flex2.rpc.remoting.S2Component"/>    	
     	
 	  </java>
@@ -36,6 +36,7 @@
 	<target name="dist">
 		<zip zipfile="target/S2Flex2-swc-${ver}.zip">
 			<zipfileset prefix="s2flex2_swc" dir=".">
+				<exclude name="**/bin/**"/>
 				<exclude name="**/target/**"/>
 				<exclude name="**/generated/**"/>
 				<exclude name="**/AMF0Connection.as"/>
