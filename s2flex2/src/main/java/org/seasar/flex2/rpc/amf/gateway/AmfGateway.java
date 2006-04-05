@@ -42,8 +42,7 @@ public class AmfGateway extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
-
-        response.getWriter().write("AmfGateway is running...");
+        response.getWriter().write("AmfGateway is running on http ...");
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
