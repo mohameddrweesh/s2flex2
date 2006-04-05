@@ -33,6 +33,8 @@ import org.w3c.dom.Element;
 
 public class Amf3DataUtil {
 
+    private final static String STRING_ENCODE_NAME = "utf-8";
+
     public static int getIntByteLength(int value) {
         if (value < 0) {
             return 4;
@@ -93,10 +95,10 @@ public class Amf3DataUtil {
 
     public static int[] toVariableIntBytes(int value) {
         int list_len = Amf3DataUtil.getIntByteLength(value);
-        if( list_len < 0 ){
+        if (list_len < 0) {
             return new int[0];
         }
-        
+
         int[] list = new int[list_len];
         int intValue = value;
 
@@ -125,7 +127,7 @@ public class Amf3DataUtil {
 
     public static String toUTF8String(byte[] bytearr, int utflen) {
         try {
-            return new String(bytearr, 0, utflen, "utf-8");
+            return new String(bytearr, 0, utflen, STRING_ENCODE_NAME);
         } catch (UnsupportedEncodingException e) {
             return null;
         }
@@ -133,7 +135,7 @@ public class Amf3DataUtil {
 
     public static byte[] toUTF8StringBytes(String str) {
         try {
-            return str.getBytes("utf-8");
+            return str.getBytes(STRING_ENCODE_NAME);
         } catch (UnsupportedEncodingException e) {
             return new byte[0];
         }
@@ -142,7 +144,7 @@ public class Amf3DataUtil {
     public static Document toXmlDocument(String xml) {
         ByteArrayInputStream bain;
         try {
-            bain = new ByteArrayInputStream(xml.getBytes("utf-8"));
+            bain = new ByteArrayInputStream(xml.getBytes(STRING_ENCODE_NAME));
         } catch (UnsupportedEncodingException e) {
             return null;
         }

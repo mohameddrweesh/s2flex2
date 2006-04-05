@@ -13,16 +13,9 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.gateway;
+package org.seasar.flex2.rpc.gateway.session;
 
-import java.io.IOException;
+public interface SessionDecorator {
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-public interface RequestProcessor {
-
-	public void process(HttpServletRequest request, HttpServletResponse response)
-			throws IOException, ServletException;
+    String formatSessionId(String sessionId);
 }

@@ -22,34 +22,32 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.seasar.flex2.rpc.gateway.RequestProcessor;
+import org.seasar.flex2.rpc.amf.gateway.processor.AmfProcessor;
 import org.seasar.framework.container.S2Container;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
 
 public class AmfGateway extends HttpServlet {
 
-    public final static String CONTENT_TYPE = "application/x-amf";
-    
-    private RequestProcessor processor;
+    private final static String CONTENT_TYPE = "application/x-amf";
+
+    protected AmfProcessor processor;
 
     public AmfGateway() {
     }
 
     public void init() throws ServletException {
         S2Container container = SingletonS2ContainerFactory.getContainer();
-        processor = (RequestProcessor) container
-                .getComponent(RequestProcessor.class);
+        processor = (AmfProcessor) container.getComponent(AmfProcessor.class);
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
 
-        response.getWriter().write("AmfGateway is running.");
+        response.getWriter().write("AmfGateway is running...");
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
-
         response.setContentType(CONTENT_TYPE);
         processor.process(request, response);
     }

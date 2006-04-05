@@ -23,13 +23,13 @@ import org.w3c.dom.Document;
 
 public class Amf3References {
     
-    private List classReferences;
+    private final List classReferences;
 
-    private List objectReferences;
+    private final List objectReferences;
 
-    private List propertyListReferences;
+    private final List propertyListReferences;
 
-    private List stringReferences;
+    private final List stringReferences;
 
     protected Amf3References() {
         classReferences = new ArrayList();

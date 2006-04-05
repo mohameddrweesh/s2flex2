@@ -19,7 +19,6 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 import org.seasar.flex2.rpc.amf.data.AmfMessage;
@@ -53,11 +52,15 @@ public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
     }
 
     protected List readArray() throws IOException {
+        logger.debug("<amf3> readArray:");
+
         int reference = readInt();
 
         switch (reference & Amf3DataType.OBJECT_INLINE) {
+
             case Amf3DataType.OBJECT_REFERENCE:
                 return references.getListAt(reference >>> 1);
+
             case Amf3DataType.OBJECT_INLINE:
                 return readArrayData(reference);
         }
@@ -65,6 +68,8 @@ public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
     }
 
     protected Object readASObject() throws IOException {
+        logger.debug("<amf3> readASObject:");
+
         ASObject obj = new ASObject();
         references.addObjectReference(obj);
         while (true) {
@@ -80,15 +85,21 @@ public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
     }
 
     protected Boolean readBooleanFalse() {
+        logger.debug("<amf3> readBooleanFalse:");
+
         return Boolean.FALSE;
     }
 
     protected Boolean readBooleanTrue() {
+        logger.debug("<amf3> readBooleanTrue:");
+
         return Boolean.TRUE;
     }
 
     protected Object readCustomClass(int reference, Class clazz)
             throws IOException {
+        logger.debug("<amf3> readCustomClass:" + clazz.getName());
+
         Object object = ClassUtil.newInstance(clazz);
         references.addObjectReference(object);
 
@@ -123,14 +134,19 @@ public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
 
     protected Object readData(byte dataType) throws IOException {
         switch (dataType) {
+
             case AmfDataType.NULL:
                 return super.readNull();
+
             case AmfDataType.NUMBER:
                 return super.readNumber();
+
             case AmfDataType.BOOLEAN:
                 return super.readBoolean();
+
             case AmfDataType.STRING:
                 return super.readString();
+
             case AmfDataType.ARRAY:
                 return super.readArray();
 
@@ -143,18 +159,29 @@ public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
     }
 
     protected Date readDate() throws IOException {
+        Date result = null;
+
         int reference = readInt();
 
         switch (reference & Amf3DataType.OBJECT_INLINE) {
+
             case Amf3DataType.OBJECT_REFERENCE:
-                return references.getDateAt(reference >>> 1);
+                result = references.getDateAt(reference >>> 1);
+                break;
+
             case Amf3DataType.OBJECT_INLINE:
-                return readDateData();
+                result = readDateData();
+                break;
         }
-        return null;
+
+        logger.debug("<amf3> readDate:" + result);
+
+        return result;
     }
 
     protected void readHeader() throws IOException {
+        logger.debug("<amf3> readHeader:");
+
         int headerCount = inputStream.readUnsignedShort();
         for (int i = 0; i < headerCount; ++i) {
             inputStream.readUTF();
@@ -164,46 +191,75 @@ public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
         }
     }
 
-    protected Integer readInteger() throws IOException {      
-        return new Integer( readInt() );
+    protected Integer readInteger() throws IOException {
+        Integer result = new Integer(readInt());
+
+        logger.debug("<amf3> readInteger:" + result);
+
+        return result;
     }
 
     protected Object readObject() throws IOException {
+        logger.debug("<amf3> readObject:");
+
         int reference = readInt();
 
         switch (reference & Amf3DataType.OBJECT_INLINE) {
+
             case Amf3DataType.OBJECT_REFERENCE:
                 return references.getObjectAt(reference >>> 1);
+
             case Amf3DataType.OBJECT_INLINE:
                 return readObjectData(reference);
         }
+
         return null;
     }
-    
+
     protected String readString() throws IOException {
+        String result = null;
+
         int reference = readInt();
         switch (reference & Amf3DataType.OBJECT_INLINE) {
+
             case Amf3DataType.OBJECT_REFERENCE:
-                return references.getStringAt(reference >>> 1);
+                result = references.getStringAt(reference >>> 1);
+                break;
+
             case Amf3DataType.OBJECT_INLINE:
-                return readStringData(reference);
+                result = readStringData(reference);
+                break;
         }
-        return null;
+
+        logger.debug("<amf3> readString:" + result);
+
+        return result;
     }
-    
+
     protected void readVersion() throws IOException {
         message.setVersion(inputStream.readUnsignedShort());
+
+        logger.debug("<amf3> readVersion:" + message.getVersion());
     }
 
     protected Document readXML() throws IOException {
+        Document doc = null;
+
         int reference = readInt();
         switch (reference & Amf3DataType.OBJECT_INLINE) {
+
             case Amf3DataType.OBJECT_REFERENCE:
-                return references.getXmlDocumentAt(reference >>> 1);
+                doc = references.getXmlDocumentAt(reference >>> 1);
+                break;
+
             case Amf3DataType.OBJECT_INLINE:
-                return readXmlData(reference);
+                doc = readXmlData(reference);
+                break;
         }
-        return null;
+
+        logger.debug("<amf3> readXML:");
+
+        return doc;
     }
 
     private final Object readAMF3Data() throws IOException {
@@ -242,7 +298,7 @@ public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
         int array_length = reference >> 1;
         List array = new ArrayList(array_length);
         references.addObjectReference(array);
-        inputStream.readByte(); //class define byte
+        inputStream.readByte(); // class define byte
         for (int i = 0; i < array_length; i++) {
             Object item = readAMF3Data();
             array.add(item);
@@ -259,50 +315,50 @@ public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
     private final int readInt() throws IOException {
 
         int int_info = inputStream.readUnsignedByte();
-        
+
         if (int_info >= 0x00) {
-        
-            if((int_info >>> 7) == 0x00) {
-                return Amf3DataUtil.toInt(new int[]{int_info & 0x7F}, 1);
+
+            if ((int_info >>> 7) == 0x00) {
+                return Amf3DataUtil.toInt(new int[] { int_info & 0x7F }, 1);
             }
-    
+
             return readIntData(int_info);
         }
-        
+
         return 0;
     }
 
     private final int readIntData(int int_info) throws IOException {
         int[] list = new int[4];
         int byte_count = 1;
-        
-        list[ 0 ] = int_info & 0x7F;
-        
+
+        list[0] = int_info & 0x7F;
+
         for (int i = 1; i < list.length; i++) {
             list[i] = inputStream.readUnsignedByte();
             byte_count++;
             if ((list[i] >>> 7) == 0x00) {
                 break;
             }
-            if( byte_count < list.length ){
+            if (byte_count < list.length) {
                 list[i] &= 0x7F;
             }
         }
-        
-        if( byte_count > 0 ){
-            if( byte_count < 4 ){
+
+        if (byte_count > 0) {
+            if (byte_count < 4) {
                 return Amf3DataUtil.toInt(list, byte_count);
             } else {
-                switch(int_info >>> 6){
+                switch (int_info >>> 6) {
                     case 0x02:
                         return Amf3DataUtil.toInt(list, byte_count);
-                        
+
                     case 0x03:
                         return Amf3DataUtil.toNegativeInt(list, byte_count);
                 }
             }
         }
-        
+
         return 0;
     }
 
@@ -311,9 +367,11 @@ public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
         Class clazz = ASObject.class;
 
         switch (reference & Amf3DataType.CLASS_DEF_INLINE) {
+
             case Amf3DataType.CLASS_DEF_REFERENCE:
                 clazz = references.getClassAt(reference >>> 2);
                 break;
+
             case Amf3DataType.CLASS_DEF_INLINE:
                 String class_name = readString();
                 if (class_name.length() > 0) {

@@ -13,11 +13,17 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.amf.data;
+package org.seasar.flex2.rpc.gateway.session.impl;
 
-public interface AmfConstants {
+import org.seasar.flex2.rpc.gateway.session.SessionDecorator;
 
-    public String REMOTE_CLASS = "_remoteClass";
+public class TomcatSessionDecoratorImpl implements SessionDecorator{
 
-    public int MILLS_PER_HOUR = 3600000;
+    private static final String SESSIONID_PREFIX = ";jsessionid=";
+    
+    private static final String SESSIONID_SUFFIX = "?";   
+    
+    public final String formatSessionId(String sessionId) {
+        return SESSIONID_PREFIX + sessionId + SESSIONID_SUFFIX;
+    }
 }

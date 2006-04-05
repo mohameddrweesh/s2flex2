@@ -13,7 +13,7 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.amf;
+package org.seasar.flex2.rpc.amf.io;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

@@ -23,15 +23,15 @@ import org.seasar.flex2.rpc.amf.io.AmfReader;
 import org.seasar.flex2.rpc.amf.io.AmfWriter;
 import org.seasar.flex2.rpc.amf.io.impl.Amf3ReaderImpl;
 import org.seasar.flex2.rpc.amf.io.impl.Amf3WriterImpl;
-import org.seasar.flex2.rpc.gateway.RequestProcessor;
+import org.seasar.flex2.rpc.gateway.processor.RequestProcessor;
 
-public class Amf3RequestProcessorImpl extends AmfRequestProcessorImpl implements RequestProcessor {
+public class Amf3ProcessorImpl extends AmfProcessorImpl implements RequestProcessor {
 
     protected AmfReader createReader(DataInputStream in) {
         return new Amf3ReaderImpl(in);
     }
     
-    protected AmfWriter createAmfWriter(AmfMessage responseMessage, DataOutputStream outputStream) {
+    protected AmfWriter createWriter(AmfMessage responseMessage, DataOutputStream outputStream) {
         return new Amf3WriterImpl(outputStream, responseMessage);
     }
 }

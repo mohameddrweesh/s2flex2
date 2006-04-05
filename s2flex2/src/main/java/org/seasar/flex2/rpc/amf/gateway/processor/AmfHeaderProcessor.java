@@ -13,11 +13,15 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.amf.data;
+package org.seasar.flex2.rpc.amf.gateway.processor;
 
-public interface AmfConstants {
+import javax.servlet.http.HttpServletRequest;
 
-    public String REMOTE_CLASS = "_remoteClass";
+import org.seasar.flex2.rpc.amf.data.AmfMessage;
 
-    public int MILLS_PER_HOUR = 3600000;
+public interface AmfHeaderProcessor {
+
+    void processRequest(HttpServletRequest request, AmfMessage requestMessage);
+
+    void processResponse(HttpServletRequest request, AmfMessage responseMessage);
 }

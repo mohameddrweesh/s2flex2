@@ -19,46 +19,50 @@ import org.seasar.flex2.rpc.amf.data.AmfError;
 
 public class AmfErrorImpl implements AmfError {
 
-	private String code = "SERVER.PROCESSING";
-	private String type;
-	private String level = "error";
-	private String details;
-	private String description;
-	
-	public AmfErrorImpl(Throwable t) {
-		type = t.getClass().getName();
-		details = getStackTraceString(t);
-		description = t.getMessage();
-	}
+    private final String code = "SERVER.PROCESSING";
 
-	public String getCode() {
-		return code;
-	}
+    private final String type;
 
-	public String getType() {
-		return type;
-	}
+    private final String level = "error";
 
-	public String getLevel() {
-		return level;
-	}
+    private final String details;
 
-	public String getDetails() {
-		return details;
-	}
+    private final String description;
 
-	public String getDescription() {
-		return description;
-	}
-	
-	private static String getStackTraceString(Throwable t) {
-		StackTraceElement[] elements = t.getStackTrace();
-		StringBuffer buf = new StringBuffer(t.toString());
-		buf.append('\n');
-		for (int i = 0; i < elements.length; ++i) {
-			buf.append(elements[i].toString());
-			buf.append('\n');
-		}
-		return buf.toString();
-	}
+    public AmfErrorImpl(Throwable t) {
+        type = t.getClass().getName();
+        details = getStackTraceString(t);
+        description = t.getMessage();
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    private static String getStackTraceString(Throwable t) {
+        StackTraceElement[] elements = t.getStackTrace();
+        StringBuffer buf = new StringBuffer(t.toString());
+        buf.append('\n');
+        for (int i = 0; i < elements.length; ++i) {
+            buf.append(elements[i].toString());
+            buf.append('\n');
+        }
+        return buf.toString();
+    }
 }

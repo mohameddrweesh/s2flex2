@@ -13,11 +13,9 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.amf.data;
+package org.seasar.flex2.rpc.amf.gateway.processor;
 
-public interface AmfConstants {
+import org.seasar.flex2.rpc.gateway.processor.RequestProcessor;
 
-    public String REMOTE_CLASS = "_remoteClass";
-
-    public int MILLS_PER_HOUR = 3600000;
+public interface AmfProcessor extends RequestProcessor {
 }

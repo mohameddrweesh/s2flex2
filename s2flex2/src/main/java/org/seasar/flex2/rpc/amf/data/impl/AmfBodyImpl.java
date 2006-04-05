@@ -21,77 +21,83 @@ import org.seasar.flex2.rpc.amf.data.AmfBody;
 
 public class AmfBodyImpl implements AmfBody {
 
-	private static Object[] EMPTY_ARGS = new Object[0];
-	private String target;
-	private String response;
-	private Object data;
-	private String serviceName;
-	private String serviceMethodName;
-	private Object[] args;
-	
-	public AmfBodyImpl(String target, String response, Object data) {
-		this.target = target;
-		this.response = response;
-		this.data = data;
-	}
+    private final static Object[] EMPTY_ARGS = new Object[0];
 
-	public String getTarget() {
-		return target;
-	}
+    private final String target;
 
-	public String getResponse() {
-		return response;
-	}
+    private final String response;
 
-	public Object getData() {
-		return data;
-	}
-	
-	public String getServiceName() {
-		if (serviceName == null) {
-			setupTarget();
-		}
-		return serviceName;
-	}
+    private Object data;
 
-	public String getServiceMethodName() {
-		if (serviceMethodName == null) {
-			setupTarget();
-		}
-		return serviceMethodName;
-	}
+    private String serviceName;
 
-	public Object[] getArgs() {
-		if (args == null) {
-			setupData();
-		}
-		return args;
-	}
+    private String serviceMethodName;
 
-	public final String toString() {
-		StringBuffer buf = new StringBuffer();
-		buf.append("target=");
-		buf.append(target);
-		buf.append(",response=");
-		buf.append(response);
-		buf.append(",data=");
-		buf.append(data);
-		return buf.toString();
-	}
+    private Object[] args;
 
-	protected void setupTarget() {
-		int dotIndex = target.lastIndexOf('.');
-		if (dotIndex > 0) {
-			serviceName = target.substring(0, dotIndex);
-			serviceMethodName = target.substring(dotIndex + 1);
-		}
-	}
-	
-	protected void setupData() {
-		if (data != null && data instanceof List) {
-			args = ((List) data).toArray();
-		} else {
-			args = EMPTY_ARGS;
-		}
-	}
+    public AmfBodyImpl(String target, String response, Object data) {
+        this.target = target;
+        this.response = response;
+        this.data = data;
+    }
+
+    public String getTarget() {
+        return target;
+    }
+
+    public String getResponse() {
+        return response;
+    }
+
+    public Object getData() {
+        return data;
+    }
+
+    public String getServiceName() {
+        if (serviceName == null) {
+            setupTarget();
+        }
+        return serviceName;
+    }
+
+    public String getServiceMethodName() {
+        if (serviceMethodName == null) {
+            setupTarget();
+        }
+        return serviceMethodName;
+    }
+
+    public Object[] getArgs() {
+        if (args == null) {
+            setupData();
+        }
+        return args;
+    }
+
+    public final String toString() {
+        StringBuffer buf = new StringBuffer();
+        buf.append("target=");
+        buf.append(target);
+        buf.append(",response=");
+        buf.append(response);
+        buf.append(",data=");
+        buf.append(data);
+        return buf.toString();
+    }
+
+    protected void setupTarget() {
+        int dotIndex = target.lastIndexOf('.');
+        if (dotIndex > 0) {
+            serviceName = target.substring(0, dotIndex);
+            serviceMethodName = target.substring(dotIndex + 1);
+        }
+    }
+
+    protected void setupData() {
+        if (data != null && data instanceof List) {
+            args = ((List) data).toArray();
+        } else {
+            args = EMPTY_ARGS;
+        }
+    }
 }
