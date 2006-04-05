@@ -30,43 +30,13 @@ public class Amf3Gateway extends AmfGateway {
     public Amf3Gateway() {
     }
 
+    public void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ServletException {
+        response.getWriter().write("Amf3Gateway is running on http ...");
+    }
+    
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
-        // filterHeader( request );
-        checkSession(request);
-
         super.doPost(request, response);
-    }
-
-    private void filterHeader(HttpServletRequest request) {
-        Enumeration e = request.getHeaderNames();
-        while (e.hasMoreElements()) {
-            String elementName = (String) e.nextElement();
-            System.out.println(elementName + ":"
-                    + request.getHeader(elementName));
-        }
-        String flash_version = (String) request.getHeader("x-flash-version");
-        if (flash_version != null) {
-            StringTokenizer st = new StringTokenizer(flash_version, ",");
-            int st_count = st.countTokens();
-            int[] versions = new int[st_count];
-            for (int i = 0; i < st_count & st.hasMoreElements(); i++) {
-                versions[i] = Integer.parseInt((String) st.nextElement());
-            }
-            System.out.println(versions);
-        }
-    }
-
-    private void checkSession(HttpServletRequest request) {
-        // セッションを取得します
-        HttpSession session = request.getSession(false);
-
-        if (session == null) { // セッションが存在しない場合
-            session = request.getSession(true);
-            session.setAttribute("last-access", new Date());
-            System.out.println("Create session : " + session.getId());
-        }
-        Date date = (Date) session.getAttribute("last-access");
-        System.out.println("Last-Access:" + date);
     }
 }
