@@ -24,13 +24,17 @@ import org.seasar.framework.util.ClassUtil;
 
 public class S2ContainerInvoker implements ServiceInvoker {
     
-    protected S2Container container;
+    private S2Container container;
     
 	public S2ContainerInvoker() {
 	}
     
     public void setContainer(S2Container container) {
         this.container = container;
+    }
+    
+    public S2Container getContainer(){
+        return this.container;
     }
 
 	public boolean supports(String serviceName, String methodName, Object[] args) {
