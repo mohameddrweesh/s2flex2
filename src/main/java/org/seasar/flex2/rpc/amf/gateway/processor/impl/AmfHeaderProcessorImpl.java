@@ -23,8 +23,11 @@ import org.seasar.flex2.rpc.amf.gateway.processor.AmfHeaderProcessor;
 import org.seasar.flex2.rpc.amf.type.AmfHeaderType;
 import org.seasar.flex2.rpc.gateway.session.SessionDecorator;
 import org.seasar.flex2.rpc.gateway.util.HttpSessionUtil;
+import org.seasar.framework.log.Logger;
 
 public class AmfHeaderProcessorImpl implements AmfHeaderProcessor {
+    
+    protected static final Logger logger = Logger.getLogger(AmfHeaderProcessorImpl.class);
 
     private SessionDecorator sessionDecorator;
 
@@ -34,7 +37,10 @@ public class AmfHeaderProcessorImpl implements AmfHeaderProcessor {
 
     public void processResponse(HttpServletRequest request,
             AmfMessage responseMessage) {
-        setSessionId(request, responseMessage);
+
+        if (!request.isRequestedSessionIdValid()) {
+            setUrlSessionId(request, responseMessage);
+        }
     }
 
     public void setSessionDecorator(SessionDecorator sessionDecorator) {
@@ -45,18 +51,20 @@ public class AmfHeaderProcessorImpl implements AmfHeaderProcessor {
         return new AmfHeaderImpl(headerName, data);
     }
 
-    protected void setHeader(AmfMessage responseMessage, String headerName,
+    protected void addHeader(AmfMessage responseMessage, String headerName,
             String data) {
         AmfHeaderImpl header = createHeader(headerName, data);
         responseMessage.addHeader(header);
+        
+        logger.debug("header :" + headerName + "={" +  data + "}");
     }
 
-    private void setSessionId(HttpServletRequest request,
+    private void setUrlSessionId(HttpServletRequest request,
             AmfMessage responseMessage) {
         String sessionId = HttpSessionUtil.getSessionId(request);
         if (sessionId != null && sessionId.length() > 0) {
             sessionId = sessionDecorator.formatSessionId(sessionId);
-            setHeader(responseMessage, AmfHeaderType.APPEND_TO_GATEWAYURL,
+            addHeader(responseMessage, AmfHeaderType.APPEND_TO_GATEWAYURL,
                     sessionId);
         }
     }

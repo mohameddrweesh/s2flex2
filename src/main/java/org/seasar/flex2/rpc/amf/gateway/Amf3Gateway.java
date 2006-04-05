@@ -64,7 +64,7 @@ public class Amf3Gateway extends AmfGateway {
         if (session == null) { // ƒZƒbƒVƒ‡ƒ“‚ª‘¶İ‚µ‚È‚¢ê‡
             session = request.getSession(true);
             session.setAttribute("last-access", new Date());
-            System.out.println("This-Access is first Access : ");
+            System.out.println("Create session : " + session.getId());
         }
         Date date = (Date) session.getAttribute("last-access");
         System.out.println("Last-Access:" + date);
