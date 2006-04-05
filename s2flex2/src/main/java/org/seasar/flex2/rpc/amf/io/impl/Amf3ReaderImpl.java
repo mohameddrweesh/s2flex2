@@ -13,7 +13,7 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.amf.impl;
+package org.seasar.flex2.rpc.amf.io.impl;
 
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -22,8 +22,8 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import org.seasar.flex2.rpc.amf.AmfMessage;
-import org.seasar.flex2.rpc.amf.AmfReader;
+import org.seasar.flex2.rpc.amf.data.AmfMessage;
+import org.seasar.flex2.rpc.amf.io.AmfReader;
 import org.seasar.flex2.rpc.amf.type.Amf3DataType;
 import org.seasar.flex2.rpc.amf.type.AmfDataType;
 import org.seasar.flex2.rpc.amf.util.Amf3DataUtil;

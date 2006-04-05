@@ -13,17 +13,17 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.amf;
+package org.seasar.flex2.rpc.amf.data;
 
-public interface AmfError {
+public interface AmfConstants {
 
-	public String getCode();
-	
-	public String getType();
-	
-	public String getLevel();
-	
-	public String getDetails();
-	
-	public String getDescription();
+    public String REMOTE_CLASS = "_remoteClass";
+
+    public int MILLS_PER_HOUR = 3600000;
+    
+    public String RESPONSE_NULL = "null";
+    
+    public String RESPONSE_RESULT = "/onResult";
+    
+    public String RESPONSE_STATUS = "/onStatus";
 }

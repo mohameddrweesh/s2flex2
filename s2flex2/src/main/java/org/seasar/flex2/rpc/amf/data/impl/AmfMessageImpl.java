@@ -13,13 +13,13 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.amf.impl;
+package org.seasar.flex2.rpc.amf.data.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.seasar.flex2.rpc.amf.AmfBody;
-import org.seasar.flex2.rpc.amf.AmfMessage;
+import org.seasar.flex2.rpc.amf.data.AmfBody;
+import org.seasar.flex2.rpc.amf.data.AmfMessage;
 
 public class AmfMessageImpl implements AmfMessage {
 

@@ -15,10 +15,10 @@
  */
 package org.seasar.flex2.rpc.amf.util;
 
-import org.seasar.flex2.rpc.amf.AmfBody;
-import org.seasar.flex2.rpc.amf.AmfConstants;
-import org.seasar.flex2.rpc.amf.impl.AmfBodyImpl;
-import org.seasar.flex2.rpc.amf.impl.AmfErrorImpl;
+import org.seasar.flex2.rpc.amf.data.AmfBody;
+import org.seasar.flex2.rpc.amf.data.AmfConstants;
+import org.seasar.flex2.rpc.amf.data.impl.AmfBodyImpl;
+import org.seasar.flex2.rpc.amf.data.impl.AmfErrorImpl;
 
 public class AmfMessageUtil {
 

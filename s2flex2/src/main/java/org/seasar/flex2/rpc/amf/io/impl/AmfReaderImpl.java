@@ -13,7 +13,7 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.amf.impl;
+package org.seasar.flex2.rpc.amf.io.impl;
 
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -25,10 +25,12 @@ import java.util.TimeZone;
 
 import javax.xml.parsers.DocumentBuilder;
 
-import org.seasar.flex2.rpc.amf.AmfBody;
-import org.seasar.flex2.rpc.amf.AmfConstants;
-import org.seasar.flex2.rpc.amf.AmfMessage;
-import org.seasar.flex2.rpc.amf.AmfReader;
+import org.seasar.flex2.rpc.amf.data.AmfBody;
+import org.seasar.flex2.rpc.amf.data.AmfConstants;
+import org.seasar.flex2.rpc.amf.data.AmfMessage;
+import org.seasar.flex2.rpc.amf.data.impl.AmfBodyImpl;
+import org.seasar.flex2.rpc.amf.data.impl.AmfMessageImpl;
+import org.seasar.flex2.rpc.amf.io.AmfReader;
 import org.seasar.flex2.rpc.amf.type.AmfDataType;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
