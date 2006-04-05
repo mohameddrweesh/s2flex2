@@ -30,7 +30,7 @@ public class HttpSessionUtil {
                 return request.getRequestedSessionId();
             }
         } else {
-            HttpSession session = request.getSession();
+            HttpSession session = request.getSession(false);
             if( session == null ){
                 return null;
             } else {
