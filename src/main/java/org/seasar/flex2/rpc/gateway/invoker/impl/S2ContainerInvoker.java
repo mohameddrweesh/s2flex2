@@ -24,7 +24,7 @@ import org.seasar.framework.util.ClassUtil;
 
 public class S2ContainerInvoker implements ServiceInvoker {
     
-    private S2Container container;
+    protected S2Container container;
     
 	public S2ContainerInvoker() {
 	}
@@ -51,7 +51,17 @@ public class S2ContainerInvoker implements ServiceInvoker {
 	public Object invoke(String serviceName, String methodName, Object[] args)
 			throws Throwable {
 
-		S2Container root = container.getRoot();
+		Object component = createComponent(serviceName);
+		BeanDesc beanDesc = BeanDescFactory.getBeanDesc(component.getClass());
+        try {
+            return beanDesc.invoke(component, methodName, args);
+        } catch (InvocationTargetRuntimeException e) {
+            throw e.getCause();
+        }
+	}
+
+    protected Object createComponent(String serviceName) {
+        S2Container root = container.getRoot();
 		Object component = null;
 		Class clazz = null;
 		if (root.hasComponentDef(serviceName)) {
@@ -60,11 +70,6 @@ public class S2ContainerInvoker implements ServiceInvoker {
 			clazz = ClassUtil.forName(serviceName);
 			component = root.getComponent(clazz);
 		}
-		BeanDesc beanDesc = BeanDescFactory.getBeanDesc(component.getClass());
-        try {
-            return beanDesc.invoke(component, methodName, args);
-        } catch (InvocationTargetRuntimeException e) {
-            throw e.getCause();
-        }
-	}
+        return component;
+    }
 }
