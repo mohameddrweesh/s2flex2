@@ -28,14 +28,14 @@ import java.util.Map;
 
 import junit.framework.TestCase;
 
-import org.seasar.flex2.rpc.amf.AmfBody;
-import org.seasar.flex2.rpc.amf.AmfMessage;
-import org.seasar.flex2.rpc.amf.AmfReader;
-import org.seasar.flex2.rpc.amf.AmfWriter;
-import org.seasar.flex2.rpc.amf.impl.AmfBodyImpl;
-import org.seasar.flex2.rpc.amf.impl.AmfMessageImpl;
-import org.seasar.flex2.rpc.amf.impl.AmfReaderImpl;
-import org.seasar.flex2.rpc.amf.impl.AmfWriterImpl;
+import org.seasar.flex2.rpc.amf.data.AmfBody;
+import org.seasar.flex2.rpc.amf.data.AmfMessage;
+import org.seasar.flex2.rpc.amf.data.impl.AmfBodyImpl;
+import org.seasar.flex2.rpc.amf.data.impl.AmfMessageImpl;
+import org.seasar.flex2.rpc.amf.io.AmfReader;
+import org.seasar.flex2.rpc.amf.io.AmfWriter;
+import org.seasar.flex2.rpc.amf.io.impl.AmfReaderImpl;
+import org.seasar.flex2.rpc.amf.io.impl.AmfWriterImpl;
 
 public class AmfReaderWriterTest extends TestCase {
 

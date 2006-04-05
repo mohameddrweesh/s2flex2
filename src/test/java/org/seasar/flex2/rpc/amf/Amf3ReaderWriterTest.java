@@ -34,10 +34,14 @@ import javax.xml.parsers.DocumentBuilder;
 
 import junit.framework.TestCase;
 
-import org.seasar.flex2.rpc.amf.impl.Amf3ReaderImpl;
-import org.seasar.flex2.rpc.amf.impl.Amf3WriterImpl;
-import org.seasar.flex2.rpc.amf.impl.AmfBodyImpl;
-import org.seasar.flex2.rpc.amf.impl.AmfMessageImpl;
+import org.seasar.flex2.rpc.amf.data.AmfBody;
+import org.seasar.flex2.rpc.amf.data.AmfMessage;
+import org.seasar.flex2.rpc.amf.data.impl.AmfBodyImpl;
+import org.seasar.flex2.rpc.amf.data.impl.AmfMessageImpl;
+import org.seasar.flex2.rpc.amf.io.AmfReader;
+import org.seasar.flex2.rpc.amf.io.AmfWriter;
+import org.seasar.flex2.rpc.amf.io.impl.Amf3ReaderImpl;
+import org.seasar.flex2.rpc.amf.io.impl.Amf3WriterImpl;
 import org.seasar.flex2.rpc.amf.util.Amf3DataUtil;
 import org.seasar.framework.util.DocumentBuilderFactoryUtil;
 import org.seasar.framework.util.DocumentBuilderUtil;

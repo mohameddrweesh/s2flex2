@@ -13,7 +13,7 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.gateway.impl;
+package org.seasar.flex2.rpc.amf.gateway.processor.impl;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
@@ -28,13 +28,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.seasar.flex2.rpc.amf.AmfBody;
-import org.seasar.flex2.rpc.amf.AmfMessage;
-import org.seasar.flex2.rpc.amf.AmfReader;
-import org.seasar.flex2.rpc.amf.AmfWriter;
-import org.seasar.flex2.rpc.amf.impl.AmfMessageImpl;
-import org.seasar.flex2.rpc.amf.impl.AmfReaderImpl;
-import org.seasar.flex2.rpc.amf.impl.AmfWriterImpl;
+import org.seasar.flex2.rpc.amf.data.AmfBody;
+import org.seasar.flex2.rpc.amf.data.AmfMessage;
+import org.seasar.flex2.rpc.amf.data.impl.AmfMessageImpl;
+import org.seasar.flex2.rpc.amf.io.AmfReader;
+import org.seasar.flex2.rpc.amf.io.AmfWriter;
+import org.seasar.flex2.rpc.amf.io.impl.AmfReaderImpl;
+import org.seasar.flex2.rpc.amf.io.impl.AmfWriterImpl;
 import org.seasar.flex2.rpc.amf.util.AmfMessageUtil;
 import org.seasar.flex2.rpc.gateway.RequestProcessor;
 import org.seasar.flex2.rpc.gateway.invoker.ServiceInvoker;

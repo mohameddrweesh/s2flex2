@@ -13,11 +13,19 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.amf;
+package org.seasar.flex2.rpc.amf.data;
 
-import java.io.IOException;
+public interface AmfBody {
 
-public interface AmfWriter {
-
-	public void write() throws IOException;
+	public String getTarget();
+	
+	public String getResponse();
+	
+	public Object getData();
+	
+	public String getServiceName();
+	
+	public String getServiceMethodName();
+	
+	public Object[] getArgs();
 }
