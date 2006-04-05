@@ -21,7 +21,7 @@ import org.seasar.framework.container.S2Container;
 
 public class AmfProcessorTest extends S2TestCase {
     
-    private static String PATH = "AmfRequestProcessorTest.dicon";
+    private static String PATH = "AmfProcessorTest.dicon";
 
     public void testCreate() throws Exception {
         S2Container container = getContainer();
