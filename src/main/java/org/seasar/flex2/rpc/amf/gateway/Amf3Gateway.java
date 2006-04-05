@@ -16,14 +16,10 @@
 package org.seasar.flex2.rpc.amf.gateway;
 
 import java.io.IOException;
-import java.util.Date;
-import java.util.Enumeration;
-import java.util.StringTokenizer;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 public class Amf3Gateway extends AmfGateway {
 
@@ -34,7 +30,7 @@ public class Amf3Gateway extends AmfGateway {
             throws IOException, ServletException {
         response.getWriter().write("Amf3Gateway is running on http ...");
     }
-    
+
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
         super.doPost(request, response);
