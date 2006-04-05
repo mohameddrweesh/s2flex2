@@ -55,7 +55,7 @@ public class AmfHeaderProcessorImpl implements AmfHeaderProcessor {
             AmfMessage responseMessage) {
         String sessionId = HttpSessionUtil.getSessionId(request);
         if (sessionId != null && sessionId.length() > 0) {
-            sessionDecorator.formatSessionId(sessionId);
+            sessionId = sessionDecorator.formatSessionId(sessionId);
             setHeader(responseMessage, AmfHeaderType.APPEND_TO_GATEWAYURL,
                     sessionId);
         }
