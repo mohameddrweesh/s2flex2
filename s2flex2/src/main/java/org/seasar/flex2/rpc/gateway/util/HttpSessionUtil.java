@@ -23,12 +23,7 @@ public class HttpSessionUtil {
     public static String getSessionId( HttpServletRequest request ){    
 
         if( request.isRequestedSessionIdValid()){
-            if( !request.isRequestedSessionIdFromURL()){
-                return null;
-            } else {
-                // for sessionid from url
-                return request.getRequestedSessionId();
-            }
+            return request.getRequestedSessionId();
         } else {
             HttpSession session = request.getSession(false);
             if( session == null ){
