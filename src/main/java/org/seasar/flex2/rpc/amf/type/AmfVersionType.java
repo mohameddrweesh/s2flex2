@@ -13,11 +13,11 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.amf.data;
+package org.seasar.flex2.rpc.amf.type;
 
-public interface AmfConstants {
-
-    public String REMOTE_CLASS = "_remoteClass";
-
-    public int MILLS_PER_HOUR = 3600000;
+public interface AmfVersionType {
+    
+    final static int VERSION_0 = 0x00;
+    
+    final static int VERSION_3 = 0x03;
 }

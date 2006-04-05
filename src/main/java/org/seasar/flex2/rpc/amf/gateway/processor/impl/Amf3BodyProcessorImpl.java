@@ -13,22 +13,16 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.amf.util;
+package org.seasar.flex2.rpc.amf.gateway.processor.impl;
 
 import org.seasar.flex2.rpc.amf.data.AmfBody;
-import org.seasar.flex2.rpc.amf.data.AmfConstants;
 import org.seasar.flex2.rpc.amf.data.impl.AmfBodyImpl;
-import org.seasar.flex2.rpc.amf.data.impl.AmfErrorImpl;
 
-public class AmfMessageUtil {
+public class Amf3BodyProcessorImpl extends AmfBodyProcessorImpl {
 
-    public static AmfBody createResultResponseBody(String target, Object result) {
-        return new AmfBodyImpl(target + AmfConstants.RESPONSE_RESULT,
-                AmfConstants.RESPONSE_NULL, result);
-    }
-    
-    public static AmfBody createStatusResponseBody(String target, Throwable t) {
-        return new AmfBodyImpl(target + AmfConstants.RESPONSE_STATUS,
-                AmfConstants.RESPONSE_NULL, new AmfErrorImpl(t));
+    private static final String RESPONSE_TARGET = "";
+
+    protected AmfBody createBody(String response, Object result) {
+        return new AmfBodyImpl(response, RESPONSE_TARGET, result);
     }
 }

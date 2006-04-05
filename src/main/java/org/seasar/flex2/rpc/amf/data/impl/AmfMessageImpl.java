@@ -19,13 +19,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.seasar.flex2.rpc.amf.data.AmfBody;
+import org.seasar.flex2.rpc.amf.data.AmfHeader;
 import org.seasar.flex2.rpc.amf.data.AmfMessage;
 
 public class AmfMessageImpl implements AmfMessage {
 
     private List bodies = new ArrayList();
-    
-    private int version = 0x00;
+
+    private List headers = new ArrayList();
+
+    private int version = 0x03;
 
     public AmfMessageImpl() {
     }
@@ -49,5 +52,16 @@ public class AmfMessageImpl implements AmfMessage {
     public void setVersion(int version) {
         this.version = version;
     }
-       
+
+    public void addHeader(AmfHeader body) {
+        headers.add(body);
+    }
+
+    public AmfHeader getHeader(int index) {
+        return (AmfHeader) headers.get(index);
+    }
+
+    public int getHeaderSize() {
+        return headers.size();
+    }
 }

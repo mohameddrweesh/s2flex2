@@ -19,5 +19,5 @@ import java.io.IOException;
 
 public interface AmfWriter {
 
-	public void write() throws IOException;
+	void write() throws IOException;
 }

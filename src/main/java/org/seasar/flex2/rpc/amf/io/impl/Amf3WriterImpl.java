@@ -24,6 +24,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.seasar.flex2.rpc.amf.data.AmfHeader;
 import org.seasar.flex2.rpc.amf.data.AmfMessage;
 import org.seasar.flex2.rpc.amf.io.AmfWriter;
 import org.seasar.flex2.rpc.amf.type.Amf3DataType;
@@ -43,7 +44,7 @@ public class Amf3WriterImpl extends AmfWriterImpl implements AmfWriter {
 
     public void write() throws IOException {
         writeVersion();
-        writeHeader();
+        writeHeaders();
         writeBodies();
     }
 
@@ -114,8 +115,19 @@ public class Amf3WriterImpl extends AmfWriterImpl implements AmfWriter {
         writeDateData(date);
     }
 
-    protected void writeHeader() throws IOException {
-        outputStream.writeShort(0x00);
+    protected void writeHeader(AmfHeader header) throws IOException {
+        outputStream.writeUTF(header.getName());
+        outputStream.writeBoolean(header.isRequired());
+        outputStream.writeInt(header.getLength());
+        writeData(header.getData());
+    }
+
+    protected void writeHeaders() throws IOException {
+        int header_size = message.getHeaderSize();
+        outputStream.writeShort(header_size);
+        for (int i = 0; i < header_size; ++i) {
+            writeHeader(message.getHeader(i));
+        }
     }
 
     protected void writeInteger(Integer value) throws IOException {

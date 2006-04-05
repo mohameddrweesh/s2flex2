@@ -45,7 +45,7 @@ import flashgateway.io.ASObject;
 
 public class AmfReaderImpl implements AmfReader {
 
-    private static Logger logger = Logger.getLogger(AmfReaderImpl.class);
+    protected static final Logger logger = Logger.getLogger(AmfReaderImpl.class);
 
     protected DataInputStream inputStream;
 
@@ -105,32 +105,32 @@ public class AmfReaderImpl implements AmfReader {
 
     protected Object readData(byte dataType) throws IOException {
         switch (dataType) {
-        case AmfDataType.NUMBER:
-            return readNumber();
-        case AmfDataType.BOOLEAN:
-            return readBoolean();
-        case AmfDataType.STRING:
-            return readString();
-        case AmfDataType.DATE:
-            return readDate();
-        case AmfDataType.XML:
-            return readXML();
-        case AmfDataType.NULL:
-            return readNull();
-        case AmfDataType.ARRAY_SHARED_OBJECT:
-            return readArraySharedObject();
-        case AmfDataType.AS_OBJECT:
-            return readASObject();
-        case AmfDataType.OBJECT:
-            return readObject();
-        case AmfDataType.CUSTOM_CLASS:
-            return readCustomClass();
-        case AmfDataType.ARRAY:
-            return readArray();
-        case AmfDataType.FLASHED_SHARED_OBJECT:
-            return readFlashedSharedObject();
-        default:
-            return null;
+            case AmfDataType.NUMBER:
+                return readNumber();
+            case AmfDataType.BOOLEAN:
+                return readBoolean();
+            case AmfDataType.STRING:
+                return readString();
+            case AmfDataType.DATE:
+                return readDate();
+            case AmfDataType.XML:
+                return readXML();
+            case AmfDataType.NULL:
+                return readNull();
+            case AmfDataType.ARRAY_SHARED_OBJECT:
+                return readArraySharedObject();
+            case AmfDataType.AS_OBJECT:
+                return readASObject();
+            case AmfDataType.OBJECT:
+                return readObject();
+            case AmfDataType.CUSTOM_CLASS:
+                return readCustomClass();
+            case AmfDataType.ARRAY:
+                return readArray();
+            case AmfDataType.FLASHED_SHARED_OBJECT:
+                return readFlashedSharedObject();
+            default:
+                return null;
         }
     }
 

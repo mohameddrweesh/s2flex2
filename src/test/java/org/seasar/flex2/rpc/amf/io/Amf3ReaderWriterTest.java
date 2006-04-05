@@ -13,7 +13,7 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.amf;
+package org.seasar.flex2.rpc.amf.io;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
@@ -42,9 +42,11 @@ import org.seasar.flex2.rpc.amf.io.AmfReader;
 import org.seasar.flex2.rpc.amf.io.AmfWriter;
 import org.seasar.flex2.rpc.amf.io.impl.Amf3ReaderImpl;
 import org.seasar.flex2.rpc.amf.io.impl.Amf3WriterImpl;
+import org.seasar.flex2.rpc.amf.type.AmfVersionType;
 import org.seasar.flex2.rpc.amf.util.Amf3DataUtil;
 import org.seasar.framework.util.DocumentBuilderFactoryUtil;
 import org.seasar.framework.util.DocumentBuilderUtil;
+import org.seasar.framework.util.ResourceUtil;
 import org.w3c.dom.Document;
 
 public class Amf3ReaderWriterTest extends TestCase {
@@ -240,7 +242,7 @@ public class Amf3ReaderWriterTest extends TestCase {
     }
 
     public void testXml() throws Exception {
-        URL url = this.getClass().getClassLoader().getResource("testXml.xml");
+        URL url =ResourceUtil.getResource("org/seasar/flex2/rpc/amf/io/testXml.xml");
         File testXml = new File(url.getPath());
         DocumentBuilder builder = DocumentBuilderFactoryUtil
                 .newDocumentBuilder();
@@ -267,6 +269,7 @@ public class Amf3ReaderWriterTest extends TestCase {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         DataOutputStream dos = new DataOutputStream(baos);
         AmfMessage message = new AmfMessageImpl();
+        message.setVersion( AmfVersionType.VERSION_3 );
         AmfBody body = new AmfBodyImpl("target", "response", data);
         message.addBody(body);
         AmfWriter writer = new Amf3WriterImpl(dos, message);
