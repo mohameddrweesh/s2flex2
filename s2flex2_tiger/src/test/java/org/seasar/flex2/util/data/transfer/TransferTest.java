@@ -18,8 +18,6 @@ package org.seasar.flex2.util.data.transfer;
 import javax.servlet.http.HttpSession;
 
 import org.seasar.extension.unit.S2TestCase;
-import org.seasar.flex2.util.data.transfer.Storage;
-import org.seasar.flex2.util.data.transfer.Transfer;
 import org.seasar.flex2.util.data.transfer.impl.HttpSessionDataStorage;
 
 public class TransferTest extends S2TestCase {
@@ -38,17 +36,26 @@ public class TransferTest extends S2TestCase {
         super(name);
     }
 
-    public void testImport() {
+    public void testExportTo() {
         HttpSession session = createMockHttpSession();
         Storage storage = new HttpSessionDataStorage( session );
         TestClass testClass = createTarget();
+        testClass.setStrData("moji");
         Transfer.exportTo(storage, testClass);
         assertEquals("1", session.getAttribute("strData"), testClass.getStrData() );
     }
-
+    
+    public void testImportTo() {
+        HttpSession session = createMockHttpSession();
+        session.setAttribute("strData", "moji");
+        Storage storage = new HttpSessionDataStorage( session );
+        TestClass testClass = createTarget();
+        Transfer.importTo(storage, testClass);
+        assertEquals("1", testClass.getStrData(), session.getAttribute("strData") );
+    }
+    
     private TestClass createTarget() {
         TestClass testClass = new TestClass();
-        testClass.setStrData("moji");
         return testClass;
     }
 

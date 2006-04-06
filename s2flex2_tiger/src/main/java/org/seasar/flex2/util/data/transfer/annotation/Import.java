@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2006 the Seasar Foundation and the Others.
+ * Copyright 2004-2005 the Seasar Foundation and the Others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,21 +13,17 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.util.data.transfer;
+package org.seasar.flex2.util.data.transfer.annotation;
 
-import org.seasar.flex2.util.data.transfer.annotation.Export;
-import org.seasar.flex2.util.data.transfer.annotation.Import;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-public class TestClass {
-    private String strData;
+import org.seasar.flex2.util.data.transfer.StorageType;
 
-    @Export(storage = StorageType.SESSION)
-    public String getStrData() {
-        return strData;
-    }
-    
-    @Import(storage = StorageType.SESSION)
-    public void setStrData(String strData) {
-        this.strData = strData;
-    }
+@Retention(RetentionPolicy.RUNTIME)
+@Target( { ElementType.FIELD, ElementType.METHOD })
+public @interface Import {
+    String storage() default StorageType.SESSION;
 }

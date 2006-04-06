@@ -44,17 +44,29 @@ public class AnnotationHandlerFactoryTest extends S2TestCase {
         assertTrue("1", annHandler instanceof TigerAnnotationHandler);
     }
 
-    public void testCreateExportStrage() {
+    public void testGetExportStorageType() {
         Object o = createTarget();
         AnnotationHandler annHandler = AnnotationHandlerFactory
                 .getAnnotationHandler();
         BeanDesc beanDesc = new BeanDescImpl(o.getClass());
-        for (int i = 0; i < beanDesc.getPropertyDescSize(); ++i) {
-            PropertyDesc propertyDesc = beanDesc.getPropertyDesc(i);
-            String storage = annHandler.getStorageType(beanDesc,
-                    propertyDesc);
-            assertEquals("2", storage, StorageType.SESSION);
-        }
+        PropertyDesc propertyDesc = beanDesc.getPropertyDesc("strData");
+        String exportStorage = annHandler.getExportStorageType(beanDesc,
+                propertyDesc);
+
+        assertEquals("1", exportStorage, StorageType.SESSION);
+    }
+
+    public void testGetImportStorageType() {
+        Object o = createTarget();
+        AnnotationHandler annHandler = AnnotationHandlerFactory
+                .getAnnotationHandler();
+        BeanDesc beanDesc = new BeanDescImpl(o.getClass());
+        PropertyDesc propertyDesc = beanDesc.getPropertyDesc("strData");
+        String importStorage = annHandler.getImportStorageType(beanDesc,
+                propertyDesc);
+
+        assertEquals("1", importStorage, StorageType.REQUEST);
+
     }
 
     private Object createTarget() {
