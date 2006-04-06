@@ -23,6 +23,8 @@ import org.seasar.framework.beans.PropertyDesc;
  */
 public interface AnnotationHandler {
 
-    String getStorageType(BeanDesc beanDesc, PropertyDesc propertyDesc);
+    String getExportStorageType(BeanDesc beanDesc, PropertyDesc propertyDesc);
+
+    String getImportStorageType(BeanDesc beanDesc, PropertyDesc propertyDesc);
 
 }

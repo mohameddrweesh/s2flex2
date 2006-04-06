@@ -27,14 +27,21 @@ public class Transfer {
 
     public static void importTo(Storage storage, Object target) {
         BeanDesc beanDesc = new BeanDescImpl(target.getClass());
+        AnnotationHandler handler = AnnotationHandlerFactory
+                .getAnnotationHandler();
 
         Enumeration names = storage.getPropertyNames();
         while (names.hasMoreElements()) {
             String name = (String) names.nextElement();
             if (beanDesc.hasPropertyDesc(name)) {
-                PropertyDesc pd = beanDesc.getPropertyDesc(name);
-                if (pd.hasWriteMethod()) {
-                    pd.setValue(target, storage.getProperty(name));
+                PropertyDesc propertyDesc = beanDesc.getPropertyDesc(name);
+                String type = handler.getImportStorageType(beanDesc,
+                        propertyDesc);
+                if (type != null && storage.getName().equals(type)) {
+                    if (propertyDesc.hasWriteMethod()) {
+                        propertyDesc
+                                .setValue(target, storage.getProperty(name));
+                    }
                 }
             }
         }
@@ -50,7 +57,7 @@ public class Transfer {
             if (!propertyDesc.hasReadMethod()) {
                 break;
             }
-            String type = handler.getStorageType(beanDesc, propertyDesc);
+            String type = handler.getExportStorageType(beanDesc, propertyDesc);
             if (type != null && storage.getName().equals(type)) {
                 String propertyName = propertyDesc.getPropertyName();
                 Object propertyValue = propertyDesc.getValue(target);
