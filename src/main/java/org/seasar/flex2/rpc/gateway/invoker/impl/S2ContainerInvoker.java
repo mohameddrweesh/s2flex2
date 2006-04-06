@@ -16,6 +16,7 @@
 package org.seasar.flex2.rpc.gateway.invoker.impl;
 
 import org.seasar.flex2.rpc.gateway.invoker.ServiceInvoker;
+import org.seasar.flex2.rpc.gateway.invoker.exception.ServiceNotFoundRuntimeException;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.factory.BeanDescFactory;
 import org.seasar.framework.container.S2Container;
@@ -55,16 +56,20 @@ public class S2ContainerInvoker implements ServiceInvoker {
 	public Object invoke(String serviceName, String methodName, Object[] args)
 			throws Throwable {
 
-		Object component = createComponent(serviceName);
-		BeanDesc beanDesc = BeanDescFactory.getBeanDesc(component.getClass());
+		Object component = findComponent(serviceName);
+		return invokeServiceMethod(methodName, args, component);
+	}
+
+    protected Object invokeServiceMethod(String methodName, Object[] args, Object component) throws Throwable {
+        BeanDesc beanDesc = BeanDescFactory.getBeanDesc(component.getClass());
         try {
             return beanDesc.invoke(component, methodName, args);
         } catch (InvocationTargetRuntimeException e) {
             throw e.getCause();
         }
-	}
+    }
 
-    protected Object createComponent(String serviceName) {
+    protected Object findComponent(String serviceName) {
         S2Container root = container.getRoot();
 		Object component = null;
 		Class clazz = null;
@@ -74,6 +79,11 @@ public class S2ContainerInvoker implements ServiceInvoker {
 			clazz = ClassUtil.forName(serviceName);
 			component = root.getComponent(clazz);
 		}
+        
+        if (component == null) {
+            throw new ServiceNotFoundRuntimeException(serviceName);
+        }
+        
         return component;
     }
 }
