@@ -23,11 +23,9 @@ import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
 import org.seasar.framework.beans.impl.BeanDescImpl;
 
-
-
 public class Transfer {
-    
-    public static void importTo( Storage storage, Object target){
+
+    public static void importTo(Storage storage, Object target) {
         BeanDesc beanDesc = new BeanDescImpl(target.getClass());
 
         Enumeration names = storage.getPropertyNames();
@@ -42,24 +40,23 @@ public class Transfer {
         }
     }
 
-    public static void exportTo( Storage storage, Object target){
+    public static void exportTo(Storage storage, Object target) {
         BeanDesc beanDesc = new BeanDescImpl(target.getClass());
-        AnnotationHandler handler = AnnotationHandlerFactory.getAnnotationHandler();
-        
+        AnnotationHandler handler = AnnotationHandlerFactory
+                .getAnnotationHandler();
+
         for (int i = 0; i < beanDesc.getPropertyDescSize(); ++i) {
             PropertyDesc propertyDesc = beanDesc.getPropertyDesc(i);
             if (!propertyDesc.hasReadMethod()) {
                 break;
             }
             String type = handler.getStorageType(beanDesc, propertyDesc);
-            if( type != null ){
+            if (type != null && storage.getName().equals(type)) {
                 String propertyName = propertyDesc.getPropertyName();
-                if( storage.getName().equals( type )){
-                    storage.setProperty(propertyName,propertyDesc.getValue(target));
-                }
+                Object propertyValue = propertyDesc.getValue(target);
+                storage.setProperty(propertyName, propertyValue);
             }
         }
     }
-    
-    
+
 }
