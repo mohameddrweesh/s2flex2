@@ -22,7 +22,8 @@ import org.seasar.flex2.util.data.transfer.impl.HttpSessionDataStorage;
 import org.seasar.framework.container.S2Container;
 
 public class MessagingServiceInvoker extends S2ContainerInvoker {
-
+    public final static String SESSION_STORAGE = "sessionStorage";
+    
     public MessagingServiceInvoker() {
     }
 
@@ -38,10 +39,11 @@ public class MessagingServiceInvoker extends S2ContainerInvoker {
             Transfer.exportTo(storage, component);
         }
     }
-
+    
     private Storage createSessionDataStorage() {
         S2Container root = getContainer().getRoot();
-        Storage storage = (Storage)root.getComponent(HttpSessionDataStorage.class);
+        
+        Storage storage = (Storage)root.getComponent(SESSION_STORAGE);
         return storage;
     }
 }
