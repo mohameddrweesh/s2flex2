@@ -12,4 +12,6 @@
 	</component>
 	
 	<component class="org.seasar.flex2.rpc.amf.gateway.processor.impl.Amf3ProcessorImpl" />
+
+	<component name="sessionStorage" class="org.seasar.flex2.util.data.transfer.impl.HttpSessionDataStorage" instance="session" />
 </components>

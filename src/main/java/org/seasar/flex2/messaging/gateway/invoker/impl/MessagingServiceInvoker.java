@@ -41,7 +41,7 @@ public class MessagingServiceInvoker extends S2ContainerInvoker {
 
     private Storage createSessionDataStorage() {
         S2Container root = getContainer().getRoot();
-        Storage storage = new HttpSessionDataStorage(root.getSession());
+        Storage storage = (Storage)root.getComponent(HttpSessionDataStorage.class);
         return storage;
     }
 }
