@@ -65,7 +65,7 @@ public class AnnotationHandlerFactoryTest extends S2TestCase {
         String importStorage = annHandler.getImportStorageType(beanDesc,
                 propertyDesc);
 
-        assertEquals("1", importStorage, StorageType.REQUEST);
+        assertEquals("1", importStorage, StorageType.SESSION);
 
     }
 
