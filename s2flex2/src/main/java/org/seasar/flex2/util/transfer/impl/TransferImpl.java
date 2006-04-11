@@ -30,7 +30,7 @@ public class TransferImpl implements Transfer {
     private final AnnotationHandler handler = AnnotationHandlerFactory
             .getAnnotationHandler();
 
-    public void importTo(Storage storage, Object target) {
+    public void importToData(Storage storage, Object target) {
         BeanDesc beanDesc = BeanDescFactory.getBeanDesc(target.getClass());
 
         Enumeration prop_names = storage.getPropertyNames();
@@ -50,7 +50,7 @@ public class TransferImpl implements Transfer {
         }
     }
 
-    public void exportTo(Storage storage, Object target) {
+    public void exportToStorage(Object target, Storage storage) {
         BeanDesc beanDesc = BeanDescFactory.getBeanDesc(target.getClass());
 
         for (int i = 0; i < beanDesc.getPropertyDescSize(); ++i) {
