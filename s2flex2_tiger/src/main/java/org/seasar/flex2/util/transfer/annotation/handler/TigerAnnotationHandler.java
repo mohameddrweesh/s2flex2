@@ -13,12 +13,13 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.util.data.transfer.annotation.handler;
+package org.seasar.flex2.util.transfer.annotation.handler;
 
 import java.lang.reflect.Method;
 
-import org.seasar.flex2.util.data.transfer.annotation.Export;
-import org.seasar.flex2.util.data.transfer.annotation.Import;
+import org.seasar.flex2.util.data.transfer.annotation.handler.ConstantAnnotationHandler;
+import org.seasar.flex2.util.transfer.annotation.Export;
+import org.seasar.flex2.util.transfer.annotation.Import;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
 
