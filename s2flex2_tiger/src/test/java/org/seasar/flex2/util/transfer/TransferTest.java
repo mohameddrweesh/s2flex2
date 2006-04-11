@@ -50,7 +50,7 @@ public class TransferTest extends S2TestCase {
         Storage storage = new HttpSessionDataStorage(session);
         TestClass testClass = createTarget();
         testClass.setStrData("moji");
-        transfer.exportTo(storage, testClass);
+        transfer.exportToStorage(testClass, storage);
         assertEquals("1", session.getAttribute("strData"), testClass
                 .getStrData());
     }
@@ -60,7 +60,7 @@ public class TransferTest extends S2TestCase {
         session.setAttribute("strData", "moji");
         Storage storage = new HttpSessionDataStorage(session);
         TestClass testClass = createTarget();
-        transfer.importTo(storage, testClass);
+        transfer.importToData(storage, testClass);
         assertEquals("1", testClass.getStrData(), session
                 .getAttribute("strData"));
     }
