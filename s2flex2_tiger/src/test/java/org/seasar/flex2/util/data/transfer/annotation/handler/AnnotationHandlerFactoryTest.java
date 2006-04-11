@@ -13,11 +13,12 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.util.data.transfer;
+package org.seasar.flex2.util.data.transfer.annotation.handler;
 
 import org.seasar.extension.unit.S2TestCase;
-import org.seasar.flex2.util.data.transfer.annotation.AnnotationHandler;
-import org.seasar.flex2.util.data.transfer.annotation.AnnotationHandlerFactory;
+import org.seasar.flex2.util.data.transfer.TestClass;
+import org.seasar.flex2.util.data.transfer.annotation.handler.TigerAnnotationHandler;
+import org.seasar.flex2.util.data.transfer.storage.StorageType;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
 import org.seasar.framework.beans.impl.BeanDescImpl;

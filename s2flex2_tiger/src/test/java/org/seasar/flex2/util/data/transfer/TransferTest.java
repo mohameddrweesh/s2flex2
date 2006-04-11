@@ -18,11 +18,20 @@ package org.seasar.flex2.util.data.transfer;
 import javax.servlet.http.HttpSession;
 
 import org.seasar.extension.unit.S2TestCase;
-import org.seasar.flex2.util.data.transfer.impl.HttpSessionDataStorage;
+import org.seasar.flex2.util.data.transfer.storage.Storage;
+import org.seasar.flex2.util.data.transfer.storage.impl.HttpSessionDataStorage;
+import org.seasar.framework.container.S2Container;
 
 public class TransferTest extends S2TestCase {
 
+    private final static String PATH = "TransferTest.dicon";
+
+    private Transfer transfer;
+
     protected void setUp() throws Exception {
+        include(PATH);
+        S2Container container = getContainer();
+        transfer = (Transfer) container.getComponent(Transfer.class);
     }
 
     /*
@@ -38,22 +47,24 @@ public class TransferTest extends S2TestCase {
 
     public void testExportTo() {
         HttpSession session = createMockHttpSession();
-        Storage storage = new HttpSessionDataStorage( session );
+        Storage storage = new HttpSessionDataStorage(session);
         TestClass testClass = createTarget();
         testClass.setStrData("moji");
-        Transfer.exportTo(storage, testClass);
-        assertEquals("1", session.getAttribute("strData"), testClass.getStrData() );
+        transfer.exportTo(storage, testClass);
+        assertEquals("1", session.getAttribute("strData"), testClass
+                .getStrData());
     }
-    
+
     public void testImportTo() {
         HttpSession session = createMockHttpSession();
         session.setAttribute("strData", "moji");
-        Storage storage = new HttpSessionDataStorage( session );
+        Storage storage = new HttpSessionDataStorage(session);
         TestClass testClass = createTarget();
-        Transfer.importTo(storage, testClass);
-        assertEquals("1", testClass.getStrData(), session.getAttribute("strData") );
+        transfer.importTo(storage, testClass);
+        assertEquals("1", testClass.getStrData(), session
+                .getAttribute("strData"));
     }
-    
+
     private TestClass createTarget() {
         TestClass testClass = new TestClass();
         return testClass;
@@ -62,5 +73,5 @@ public class TransferTest extends S2TestCase {
     private HttpSession createMockHttpSession() {
         HttpSession session = getRequest().getSession();
         return session;
-    }    
+    }
 }
