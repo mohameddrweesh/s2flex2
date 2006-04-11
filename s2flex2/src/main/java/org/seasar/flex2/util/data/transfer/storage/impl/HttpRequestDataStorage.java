@@ -13,13 +13,13 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.util.data.transfer.impl;
+package org.seasar.flex2.util.data.transfer.storage.impl;
 
 import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.seasar.flex2.util.data.transfer.Storage;
+import org.seasar.flex2.util.data.transfer.storage.Storage;
 
 
 

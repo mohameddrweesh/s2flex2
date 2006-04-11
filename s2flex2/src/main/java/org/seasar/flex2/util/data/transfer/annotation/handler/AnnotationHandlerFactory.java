@@ -13,16 +13,16 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.util.data.transfer.annotation;
+package org.seasar.flex2.util.data.transfer.annotation.handler;
 
 import org.seasar.framework.exception.ClassNotFoundRuntimeException;
 import org.seasar.framework.util.ClassUtil;
 
 public class AnnotationHandlerFactory {
 
-    private static final String TIGER_ANNOTATION_HANDLER_CLASS_NAME = "org.seasar.flex2.util.data.transfer.TigerAnnotationHandler";
+    private static final String TIGER_ANNOTATION_HANDLER_CLASS_NAME = "org.seasar.flex2.util.data.transfer.annotation.handler.TigerAnnotationHandler";
     
-    private static final String BACKPORT175_ANNOTATION_HANDLER_CLASS_NAME = "org.seasar.flex2.util.data.transfer.Backport175ActionAnnotationHandler";
+    private static final String BACKPORT175_ANNOTATION_HANDLER_CLASS_NAME = "org.seasar.flex2.util.data.transfer.annotation.handler.Backport175ActionAnnotationHandler";
 
     private static AnnotationHandler annotationHandler;
     

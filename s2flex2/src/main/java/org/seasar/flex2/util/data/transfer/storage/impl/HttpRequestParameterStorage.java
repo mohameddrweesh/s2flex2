@@ -13,40 +13,39 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.util.data.transfer.impl;
+package org.seasar.flex2.util.data.transfer.storage.impl;
 
 import java.util.Enumeration;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 
-import org.seasar.flex2.util.data.transfer.Storage;
+import org.seasar.flex2.util.data.transfer.storage.Storage;
 
 
 
-public class HttpSessionDataStorage implements Storage {
+public class HttpRequestParameterStorage implements Storage {
     
-    private final static String SESSION = "session";
+    private final static String REQUEST = "request";
 
-    private final HttpSession session;
+    private final HttpServletRequest request;
 
-    public HttpSessionDataStorage(HttpSession session) {
-        this.session = session;
+    public HttpRequestParameterStorage(HttpServletRequest request) {
+        this.request = request;
     }
 
     public Object getProperty(String name) {
-        return session.getAttribute(name);
+        return request.getParameter(name);
     }
 
     public Enumeration getPropertyNames() {
 
-        return session.getAttributeNames();
+        return request.getParameterNames();
     }
 
     public void setProperty(String name, Object value) {
-        session.setAttribute(name, value);
     }
 
     public String getName() {
-        return SESSION;
+        return REQUEST;
     }
 }

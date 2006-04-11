@@ -13,9 +13,18 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.util.data.transfer;
+package org.seasar.flex2.util.data.transfer.annotation.handler;
 
-public interface StorageType {
-    final static String SESSION = "session";
-    final static String REQUEST = "request";
+import org.seasar.framework.beans.BeanDesc;
+import org.seasar.framework.beans.PropertyDesc;
+
+/**
+ * @author Katsuhiko Nagashima
+ */
+public interface AnnotationHandler {
+
+    String getExportStorageType(BeanDesc beanDesc, PropertyDesc propertyDesc);
+
+    String getImportStorageType(BeanDesc beanDesc, PropertyDesc propertyDesc);
+
 }
