@@ -1,4 +1,4 @@
-package org.seasar.flex2.util.data.transfer;
+package org.seasar.flex2.util.transfer;
 
 import org.seasar.flex2.util.data.transfer.storage.Storage;
 

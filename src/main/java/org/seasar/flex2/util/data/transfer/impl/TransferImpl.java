@@ -17,10 +17,10 @@ package org.seasar.flex2.util.data.transfer.impl;
 
 import java.util.Enumeration;
 
-import org.seasar.flex2.util.data.transfer.Transfer;
 import org.seasar.flex2.util.data.transfer.annotation.handler.AnnotationHandler;
 import org.seasar.flex2.util.data.transfer.annotation.handler.AnnotationHandlerFactory;
 import org.seasar.flex2.util.data.transfer.storage.Storage;
+import org.seasar.flex2.util.transfer.Transfer;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
 import org.seasar.framework.beans.factory.BeanDescFactory;

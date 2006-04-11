@@ -16,8 +16,8 @@
 package org.seasar.flex2.messaging.gateway.invoker.impl;
 
 import org.seasar.flex2.rpc.gateway.invoker.impl.S2ContainerInvoker;
-import org.seasar.flex2.util.data.transfer.Transfer;
 import org.seasar.flex2.util.data.transfer.storage.Storage;
+import org.seasar.flex2.util.transfer.Transfer;
 import org.seasar.framework.container.S2Container;
 
 public class MessagingServiceInvoker extends S2ContainerInvoker {
