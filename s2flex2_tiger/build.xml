@@ -1,0 +1,12 @@
+<project name="s2flex2" default="dist" basedir=".">
+	<property name="ver" value="B1"/>
+
+	<target name="dist">
+		<zip zipfile="target/S2Flex2_tiger-${ver}.zip">
+			<zipfileset prefix="s2flex2_tiger" dir=".">
+				<exclude name="**/target/**"/>
+			</zipfileset>
+		</zip>
+	</target>
+
+</project>
