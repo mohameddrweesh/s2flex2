@@ -13,44 +13,45 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.util.data.transfer;
+package org.seasar.flex2.util.data.transfer.impl;
 
 import java.util.Enumeration;
 
-import org.seasar.flex2.util.data.transfer.annotation.AnnotationHandler;
-import org.seasar.flex2.util.data.transfer.annotation.AnnotationHandlerFactory;
+import org.seasar.flex2.util.data.transfer.Transfer;
+import org.seasar.flex2.util.data.transfer.annotation.handler.AnnotationHandler;
+import org.seasar.flex2.util.data.transfer.annotation.handler.AnnotationHandlerFactory;
+import org.seasar.flex2.util.data.transfer.storage.Storage;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
-import org.seasar.framework.beans.impl.BeanDescImpl;
+import org.seasar.framework.beans.factory.BeanDescFactory;
 
-public class Transfer {
+public class TransferImpl implements Transfer {
 
-    public static void importTo(Storage storage, Object target) {
-        BeanDesc beanDesc = new BeanDescImpl(target.getClass());
-        AnnotationHandler handler = AnnotationHandlerFactory
-                .getAnnotationHandler();
+    private final AnnotationHandler handler = AnnotationHandlerFactory
+            .getAnnotationHandler();
 
-        Enumeration names = storage.getPropertyNames();
-        while (names.hasMoreElements()) {
-            String name = (String) names.nextElement();
-            if (beanDesc.hasPropertyDesc(name)) {
-                PropertyDesc propertyDesc = beanDesc.getPropertyDesc(name);
+    public void importTo(Storage storage, Object target) {
+        BeanDesc beanDesc = BeanDescFactory.getBeanDesc(target.getClass());
+
+        Enumeration prop_names = storage.getPropertyNames();
+        while (prop_names.hasMoreElements()) {
+            String prop_name = (String) prop_names.nextElement();
+            if (beanDesc.hasPropertyDesc(prop_name)) {
+                PropertyDesc propertyDesc = beanDesc.getPropertyDesc(prop_name);
                 String type = handler.getImportStorageType(beanDesc,
                         propertyDesc);
-                if (type != null && storage.getName().equals(type)) {
+                if (isTransfer(type, storage)) {
                     if (propertyDesc.hasWriteMethod()) {
-                        propertyDesc
-                                .setValue(target, storage.getProperty(name));
+                        propertyDesc.setValue(target, storage
+                                .getProperty(prop_name));
                     }
                 }
             }
         }
     }
 
-    public static void exportTo(Storage storage, Object target) {
-        BeanDesc beanDesc = new BeanDescImpl(target.getClass());
-        AnnotationHandler handler = AnnotationHandlerFactory
-                .getAnnotationHandler();
+    public void exportTo(Storage storage, Object target) {
+        BeanDesc beanDesc = BeanDescFactory.getBeanDesc(target.getClass());
 
         for (int i = 0; i < beanDesc.getPropertyDescSize(); ++i) {
             PropertyDesc propertyDesc = beanDesc.getPropertyDesc(i);
@@ -58,7 +59,7 @@ public class Transfer {
                 break;
             }
             String type = handler.getExportStorageType(beanDesc, propertyDesc);
-            if (type != null && storage.getName().equals(type)) {
+            if (isTransfer(type, storage)) {
                 String propertyName = propertyDesc.getPropertyName();
                 Object propertyValue = propertyDesc.getValue(target);
                 storage.setProperty(propertyName, propertyValue);
@@ -66,4 +67,7 @@ public class Transfer {
         }
     }
 
+    private final boolean isTransfer(String type, Storage storage) {
+        return (type != null && storage.getName().equalsIgnoreCase(type));
+    }
 }

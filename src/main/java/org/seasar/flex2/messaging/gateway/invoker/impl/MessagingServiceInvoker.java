@@ -16,14 +16,15 @@
 package org.seasar.flex2.messaging.gateway.invoker.impl;
 
 import org.seasar.flex2.rpc.gateway.invoker.impl.S2ContainerInvoker;
-import org.seasar.flex2.util.data.transfer.Storage;
 import org.seasar.flex2.util.data.transfer.Transfer;
-import org.seasar.flex2.util.data.transfer.impl.HttpSessionDataStorage;
+import org.seasar.flex2.util.data.transfer.storage.Storage;
 import org.seasar.framework.container.S2Container;
 
 public class MessagingServiceInvoker extends S2ContainerInvoker {
     public final static String SESSION_STORAGE = "sessionStorage";
-    
+
+    private Transfer transfer;
+
     public MessagingServiceInvoker() {
     }
 
@@ -32,18 +33,22 @@ public class MessagingServiceInvoker extends S2ContainerInvoker {
 
         Object component = findComponent(serviceName);
         Storage storage = createSessionDataStorage();
-        Transfer.importTo(storage, component);
+        transfer.importTo(storage, component);
         try {
             return super.invokeServiceMethod(methodName, args, component);
         } finally {
-            Transfer.exportTo(storage, component);
+            transfer.exportTo(storage, component);
         }
     }
-    
+
+    public void setTransfer(Transfer transfer) {
+        this.transfer = transfer;
+    }
+
     private Storage createSessionDataStorage() {
         S2Container root = getContainer().getRoot();
-        
-        Storage storage = (Storage)root.getComponent(SESSION_STORAGE);
+
+        Storage storage = (Storage) root.getComponent(SESSION_STORAGE);
         return storage;
     }
 }
