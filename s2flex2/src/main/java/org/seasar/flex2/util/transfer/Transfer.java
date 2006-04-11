@@ -1,6 +1,6 @@
 package org.seasar.flex2.util.transfer;
 
-import org.seasar.flex2.util.data.transfer.storage.Storage;
+import org.seasar.flex2.util.transfer.storage.Storage;
 
 public interface Transfer {
 
