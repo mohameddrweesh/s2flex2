@@ -34,9 +34,6 @@ public class TransferTest extends S2TestCase {
         transfer = (Transfer) container.getComponent(Transfer.class);
     }
 
-    /*
-     * @see TestCase#tearDown()
-     */
     protected void tearDown() throws Exception {
         super.tearDown();
     }
