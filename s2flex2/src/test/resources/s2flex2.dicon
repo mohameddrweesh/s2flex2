@@ -2,6 +2,7 @@
 <!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.3//EN" 
 	"http://www.seasar.org/dtd/components23.dtd">
 <components namespace="amf-gateway">
+	<component class="org.seasar.flex2.util.transfer.impl.TransferImpl" />
 	
 	<component class="org.seasar.flex2.rpc.gateway.session.impl.TomcatSessionDecoratorImpl" />
 	<component class="org.seasar.flex2.rpc.amf.gateway.processor.impl.AmfHeaderProcessorImpl" />
