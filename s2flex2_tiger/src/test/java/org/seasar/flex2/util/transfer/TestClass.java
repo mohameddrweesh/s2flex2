@@ -15,9 +15,9 @@
  */
 package org.seasar.flex2.util.transfer;
 
-import org.seasar.flex2.util.data.transfer.storage.StorageType;
 import org.seasar.flex2.util.transfer.annotation.Export;
 import org.seasar.flex2.util.transfer.annotation.Import;
+import org.seasar.flex2.util.transfer.storage.StorageType;
 
 public class TestClass {
     private String strData;

@@ -17,9 +17,9 @@ package org.seasar.flex2.util.transfer.annotation.handler;
 
 import java.lang.reflect.Method;
 
-import org.seasar.flex2.util.data.transfer.annotation.handler.ConstantAnnotationHandler;
 import org.seasar.flex2.util.transfer.annotation.Export;
 import org.seasar.flex2.util.transfer.annotation.Import;
+import org.seasar.flex2.util.transfer.annotation.handler.ConstantAnnotationHandler;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
 

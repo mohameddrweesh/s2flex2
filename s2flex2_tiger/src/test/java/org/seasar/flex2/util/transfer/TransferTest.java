@@ -18,8 +18,8 @@ package org.seasar.flex2.util.transfer;
 import javax.servlet.http.HttpSession;
 
 import org.seasar.extension.unit.S2TestCase;
-import org.seasar.flex2.util.data.transfer.storage.Storage;
-import org.seasar.flex2.util.data.transfer.storage.impl.HttpSessionDataStorage;
+import org.seasar.flex2.util.transfer.storage.Storage;
+import org.seasar.flex2.util.transfer.storage.impl.HttpSessionDataStorage;
 import org.seasar.framework.container.S2Container;
 
 public class TransferTest extends S2TestCase {
