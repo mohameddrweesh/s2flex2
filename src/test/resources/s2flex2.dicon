@@ -7,12 +7,13 @@
 	<component class="org.seasar.flex2.rpc.gateway.session.impl.TomcatSessionDecoratorImpl" />
 	<component class="org.seasar.flex2.rpc.amf.gateway.processor.impl.AmfHeaderProcessorImpl" />
 	
-	<component name="s2containerInvoker" class="org.seasar.flex2.rpc.gateway.invoker.impl.S2ContainerInvoker" />
+	<component name="s2containerInvoker" class="org.seasar.flex2.messaging.gateway.invoker.impl.MessagingServiceInvoker" />
 	<component class="org.seasar.flex2.rpc.amf.gateway.processor.impl.Amf3BodyProcessorImpl">
 		<initMethod>#self.addInvoker(s2containerInvoker)</initMethod>
 	</component>
 	
 	<component class="org.seasar.flex2.rpc.amf.gateway.processor.impl.Amf3ProcessorImpl" />
-
-	<component name="sessionStorage" class="org.seasar.flex2.util.data.transfer.impl.HttpSessionDataStorage" instance="session" />
+	
+	<component name="sessionStorage" class="org.seasar.flex2.util.transfer.storage.impl.HttpSessionDataStorage" instance="session" />
+	<component name="requestStorage" class="org.seasar.flex2.util.transfer.storage.impl.HttpRequestDataStorage" instance="request" />
 </components>
