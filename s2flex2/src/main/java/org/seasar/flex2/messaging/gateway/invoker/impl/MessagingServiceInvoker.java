@@ -21,10 +21,10 @@ import org.seasar.flex2.util.transfer.storage.Storage;
 import org.seasar.framework.container.S2Container;
 
 public class MessagingServiceInvoker extends S2ContainerInvoker {
-    public final static String SESSION_STORAGE = "sessionStorage";
+    public final static String SERVICE_DATA_STORAGE = "serviceDataStorage";
 
     private Transfer transfer;
-
+    
     public MessagingServiceInvoker() {
     }
 
@@ -32,7 +32,7 @@ public class MessagingServiceInvoker extends S2ContainerInvoker {
             throws Throwable {
 
         Object component = findComponent(serviceName);
-        Storage storage = createSessionDataStorage();
+        Storage storage = createDataStorage();
         transfer.importToData(storage, component);
         try {
             return super.invokeServiceMethod(methodName, args, component);
@@ -45,10 +45,10 @@ public class MessagingServiceInvoker extends S2ContainerInvoker {
         this.transfer = transfer;
     }
 
-    private Storage createSessionDataStorage() {
+    protected Storage createDataStorage() {
         S2Container root = getContainer().getRoot();
 
-        Storage storage = (Storage) root.getComponent(SESSION_STORAGE);
+        Storage storage = (Storage) root.getComponent(SERVICE_DATA_STORAGE);
         return storage;
     }
 }
