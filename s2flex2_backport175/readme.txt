@@ -1,0 +1,1 @@
+mvn install:install-file -Dfile=C:\workspace\s2flex2\target\s2flex2-B5.jar -DgroupId=org.seasar.flex2 -DartifactId=s2flex2 -Dversion=B5 -Dpackaging=jar
