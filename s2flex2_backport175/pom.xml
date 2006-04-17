@@ -55,13 +55,12 @@
     <name>The Seasar Foundation</name>
     <url>http://www.seasar.org/</url>
   </organization>
- <build>
+  <build>
     <defaultGoal>validate</defaultGoal>
     <pluginManagement>
     <plugins>
       <plugin>
-          <!-- <artifactId>maven-compiler-plugin</artifactId> -->
-          <artifactId>maven-deploy-plugin</artifactId>
+          <artifactId>maven-compiler-plugin</artifactId>
           <configuration>
             <encoding>UTF-8</encoding>
           </configuration>
@@ -69,7 +68,7 @@
       </plugins>
     </pluginManagement>
     <plugins>
-	<plugin>
+      <plugin>
         <groupId>org.seasar.maven.plugin.backport175</groupId>
         <artifactId>maven-backport175-plugin</artifactId>
         <executions>
@@ -79,9 +78,10 @@
               <goal>testAnnotationc</goal>
             </goals>
             <configuration>
-            <!--
-              <verbose>true</verbose
-             --> 
+              <verbose>true</verbose>
+              <properties>
+              	<property>annotations.properties</property>
+              </properties>
             </configuration>
           </execution>
         </executions>
@@ -104,15 +104,15 @@
   </pluginRepositories>
   <dependencies>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
+      <groupId>backport175</groupId>
+      <artifactId>backport175</artifactId>
+      <version>1.0</version>
       <type>jar</type>
     </dependency>
     <dependency>
       <groupId>org.seasar.container</groupId>
       <artifactId>s2-extension</artifactId>
-      <version>2.3.7</version>
+      <version>2.4.0-beta-1</version>
       <type>jar</type>
     </dependency>
     <dependency>
@@ -123,12 +123,13 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>backport175</groupId>
-      <artifactId>backport175</artifactId>
-      <version>1.0</version>
-      <type>jar</type>
+      <groupId>org.seasar.container</groupId>
+      <artifactId>s2-framework</artifactId>
+      <version>2.4.0-beta-1</version>
+      <type>test-jar</type>
+      <scope>test</scope>
     </dependency>
-   <dependency>
+    <dependency>
       <groupId>org.seasar.flex2</groupId>
       <artifactId>s2flex2</artifactId>
       <version>B5</version>
