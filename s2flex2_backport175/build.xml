@@ -8,35 +8,4 @@
 			</zipfileset>
 		</zip>
 	</target>
-    <path id="project.class.path">
-        <pathelement path="./lib/backport175-1.0.jar" />
-        <pathelement path="./lib/s2flex2-B5.jar" />
-        <pathelement path="./lib/s2-extension-2.3.7.jar" />
-        <pathelement path="./lib/s2-framework-2.3.7.jar" />
-        <pathelement path="./lib/junit-3.8.1.jar" />
-        <pathelement path="./lib/geronimo-j2ee_1.4_spec-1.0.jar" />
-    </path>
-
-    <target name="build">
-        <taskdef
-            name="annotationc"
-            classname="org.codehaus.backport175.compiler.task.AnnotationCTask"
-            classpathref="project.class.path"
-        />
-     <!--   
-    <javac srcdir="${basedir}/src" classpathref="project.class.path"
-      destdir="${basedir}/target/classes" encoding="MS932" debug="on" debuglevel="lines,vars,source">
-            
-        <classpath refid="project.class.path"/>    
-    </javac>
-   -->
-        <annotationc verbose="true" destdir="${basedir}/target/test-classes" classpathref="project.class.path"
-                properties="${basedir}/annotations.properties">
-            <src path="${basedir}/src" />
-            <classpath path="${basedir}/target/classes"/>
-            <fileset dir="src">
-                <include name="**/*.java" />
-            </fileset>
-        </annotationc>
-	</target>
 </project>
