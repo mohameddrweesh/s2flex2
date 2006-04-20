@@ -26,20 +26,24 @@ public class TigerAnnotationHandler extends BasicAnnotationHandlerImpl {
     public String getExportStorageType(final PropertyDesc propertyDesc) {
         Method method = propertyDesc.getReadMethod();
         Export storageType = method.getAnnotation(Export.class);
+        
+        String type = null;
         if (storageType != null) {
-            return storageType.storage();
+            type = storageType.storage();
         }
 
-        return null;
+        return type;
     }
     
     public String getImportStorageType(final PropertyDesc propertyDesc) {
         Method method = propertyDesc.getWriteMethod();
         Import storageType = method.getAnnotation(Import.class);
+        
+        String type = null;
         if (storageType != null) {
-            return storageType.storage();
+            type = storageType.storage();
         }
 
-        return null;
+        return type;
     }
 }
