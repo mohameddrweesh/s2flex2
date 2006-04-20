@@ -19,27 +19,35 @@ import org.seasar.extension.unit.S2TestCase;
 import org.seasar.flex2.rpc.amf.gateway.processor.impl.AmfBodyProcessorImpl;
 import org.seasar.flex2.rpc.amf.gateway.processor.impl.AmfHeaderProcessorImpl;
 import org.seasar.flex2.rpc.amf.gateway.processor.impl.AmfProcessorImpl;
-import org.seasar.flex2.rpc.amf.io.factory.impl.AmfReaderFactoryImpl;
-import org.seasar.flex2.rpc.amf.io.factory.impl.AmfWriterFactoryImpl;
+import org.seasar.flex2.rpc.amf.io.factory.impl.Amf3ReaderFactoryImpl;
+import org.seasar.flex2.rpc.amf.io.factory.impl.Amf3WriterFactoryImpl;
 import org.seasar.framework.container.S2Container;
 
-public class AmfProcessorTest extends S2TestCase {
-    
-    private static String PATH = "AmfProcessorTest.dicon";
+public class Amf3ProcessorTest extends S2TestCase {
+
+    private static String PATH = "Amf3ProcessorTest.dicon";
 
     public void testCreateProcessor() throws Exception {
         S2Container container = getContainer();
-        Object processor = container.getComponent( AmfProcessor.class );
+        Object processor = container.getComponent(AmfProcessor.class);
         assertTrue("1", processor instanceof AmfProcessorImpl);
-        
-        AmfProcessorImpl processorImpl = (AmfProcessorImpl)processor;
-        assertTrue("2", processorImpl.getBodyProcessor() instanceof AmfBodyProcessorImpl);
-        assertTrue("3", processorImpl.getHeaderProcessor() instanceof AmfHeaderProcessorImpl);
-        assertTrue("4", processorImpl.getReaderFactory() instanceof AmfReaderFactoryImpl);
-        assertTrue("5", processorImpl.getWriterFactory() instanceof AmfWriterFactoryImpl);
-        
+
+        AmfProcessorImpl processorImpl = (AmfProcessorImpl) processor;
+        assertTrue(
+                "2",
+                processorImpl.getBodyProcessor() instanceof AmfBodyProcessorImpl);
+        assertTrue(
+                "3",
+                processorImpl.getHeaderProcessor() instanceof AmfHeaderProcessorImpl);
+        assertTrue(
+                "4",
+                processorImpl.getReaderFactory() instanceof Amf3ReaderFactoryImpl);
+        assertTrue(
+                "5",
+                processorImpl.getWriterFactory() instanceof Amf3WriterFactoryImpl);
+
     }
-    
+
     protected void setUp() throws Exception {
         include(PATH);
     }

@@ -17,8 +17,9 @@ package org.seasar.flex2.rpc.amf.gateway.processor.impl;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.seasar.flex2.rpc.amf.data.AmfHeader;
 import org.seasar.flex2.rpc.amf.data.AmfMessage;
-import org.seasar.flex2.rpc.amf.data.impl.AmfHeaderImpl;
+import org.seasar.flex2.rpc.amf.data.factory.AmfHeaderFactory;
 import org.seasar.flex2.rpc.amf.gateway.processor.AmfHeaderProcessor;
 import org.seasar.flex2.rpc.amf.type.AmfHeaderType;
 import org.seasar.flex2.rpc.gateway.session.SessionDecorator;
@@ -29,7 +30,13 @@ public class AmfHeaderProcessorImpl implements AmfHeaderProcessor {
     
     protected static final Logger logger = Logger.getLogger(AmfHeaderProcessorImpl.class);
 
+    private AmfHeaderFactory headerFactory;
+
     private SessionDecorator sessionDecorator;
+    
+    public AmfHeaderFactory getHeaderFactory() {
+        return headerFactory;
+    }
 
     public void processRequest(HttpServletRequest request,
             AmfMessage requestMessage) {
@@ -42,18 +49,18 @@ public class AmfHeaderProcessorImpl implements AmfHeaderProcessor {
             setUrlSessionId(request, responseMessage);
         }
     }
+    
+    public void setHeaderFactory(AmfHeaderFactory headerFactory) {
+        this.headerFactory = headerFactory;
+    }
 
     public void setSessionDecorator(SessionDecorator sessionDecorator) {
         this.sessionDecorator = sessionDecorator;
     }
 
-    protected AmfHeaderImpl createHeader(String headerName, String data) {
-        return new AmfHeaderImpl(headerName, data);
-    }
-
     protected void addHeader(AmfMessage responseMessage, String headerName,
             String data) {
-        AmfHeaderImpl header = createHeader(headerName, data);
+        AmfHeader header = headerFactory.createHeader(headerName, data);
         responseMessage.addHeader(header);
         
         logger.debug("header :" + headerName + "={" +  data + "}");

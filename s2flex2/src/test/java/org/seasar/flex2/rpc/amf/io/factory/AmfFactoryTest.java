@@ -13,33 +13,31 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.amf.gateway.processor;
+package org.seasar.flex2.rpc.amf.io.factory;
 
 import org.seasar.extension.unit.S2TestCase;
-import org.seasar.flex2.rpc.amf.gateway.processor.impl.AmfBodyProcessorImpl;
-import org.seasar.flex2.rpc.amf.gateway.processor.impl.AmfHeaderProcessorImpl;
-import org.seasar.flex2.rpc.amf.gateway.processor.impl.AmfProcessorImpl;
 import org.seasar.flex2.rpc.amf.io.factory.impl.AmfReaderFactoryImpl;
 import org.seasar.flex2.rpc.amf.io.factory.impl.AmfWriterFactoryImpl;
 import org.seasar.framework.container.S2Container;
 
-public class AmfProcessorTest extends S2TestCase {
-    
-    private static String PATH = "AmfProcessorTest.dicon";
+public class AmfFactoryTest extends S2TestCase {
 
-    public void testCreateProcessor() throws Exception {
+    private static String PATH = "AmfFactoryTest.dicon";
+
+    public void testCreateReader() throws Exception {
         S2Container container = getContainer();
-        Object processor = container.getComponent( AmfProcessor.class );
-        assertTrue("1", processor instanceof AmfProcessorImpl);
-        
-        AmfProcessorImpl processorImpl = (AmfProcessorImpl)processor;
-        assertTrue("2", processorImpl.getBodyProcessor() instanceof AmfBodyProcessorImpl);
-        assertTrue("3", processorImpl.getHeaderProcessor() instanceof AmfHeaderProcessorImpl);
-        assertTrue("4", processorImpl.getReaderFactory() instanceof AmfReaderFactoryImpl);
-        assertTrue("5", processorImpl.getWriterFactory() instanceof AmfWriterFactoryImpl);
-        
+        Object factory = container.getComponent(AmfReaderFactory.class);
+        assertNotNull("1", factory);
+        assertTrue("2", factory instanceof AmfReaderFactoryImpl);
     }
-    
+
+    public void testCreateWriter() throws Exception {
+        S2Container container = getContainer();
+        Object factory = container.getComponent(AmfWriterFactory.class);
+        assertNotNull("1", factory);
+        assertTrue("2", factory instanceof AmfWriterFactoryImpl);
+    }
+
     protected void setUp() throws Exception {
         include(PATH);
     }
