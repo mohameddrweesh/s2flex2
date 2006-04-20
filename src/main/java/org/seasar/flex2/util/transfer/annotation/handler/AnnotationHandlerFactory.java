@@ -15,6 +15,7 @@
  */
 package org.seasar.flex2.util.transfer.annotation.handler;
 
+import org.seasar.flex2.util.transfer.annotation.handler.impl.BasicAnnotationHandlerImpl;
 import org.seasar.framework.exception.ClassNotFoundRuntimeException;
 import org.seasar.framework.util.ClassUtil;
 
@@ -27,7 +28,7 @@ public class AnnotationHandlerFactory {
     private static AnnotationHandler annotationHandler;
     
     static {
-        Class clazz = ConstantAnnotationHandler.class;
+        Class clazz = BasicAnnotationHandlerImpl.class;
         try {
             clazz = ClassUtil.forName(TIGER_ANNOTATION_HANDLER_CLASS_NAME);
         } catch (ClassNotFoundRuntimeException ignore) {

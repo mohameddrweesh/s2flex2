@@ -13,21 +13,20 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.util.transfer.annotation.handler;
+package org.seasar.flex2.util.transfer.annotation.handler.impl;
 
-import org.seasar.framework.beans.BeanDesc;
+import org.seasar.flex2.util.transfer.annotation.handler.AnnotationHandler;
 import org.seasar.framework.beans.PropertyDesc;
 
-public class ConstantAnnotationHandler implements AnnotationHandler {
+public class BasicAnnotationHandlerImpl implements AnnotationHandler {
 
-    public String getExportStorageType(BeanDesc beanDesc, PropertyDesc propertyDesc) {
+    public String getExportStorageType(PropertyDesc propertyDesc) {
         // TODO Auto-generated method stub
         return null;
     }
 
-    public String getImportStorageType(BeanDesc beanDesc, PropertyDesc propertyDesc) {
+    public String getImportStorageType(PropertyDesc propertyDesc) {
         // TODO Auto-generated method stub
         return null;
     }
-
 }
