@@ -22,9 +22,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.seasar.flex2.rpc.amf.data.AmfBody;
 import org.seasar.flex2.rpc.amf.data.AmfMessage;
-import org.seasar.flex2.rpc.amf.data.impl.AmfBodyImpl;
-import org.seasar.flex2.rpc.amf.data.impl.AmfErrorImpl;
-import org.seasar.flex2.rpc.amf.data.impl.AmfMessageImpl;
+import org.seasar.flex2.rpc.amf.data.factory.AmfBodyFactory;
+import org.seasar.flex2.rpc.amf.data.factory.AmfErrorFactory;
+import org.seasar.flex2.rpc.amf.data.factory.AmfMessageFactory;
 import org.seasar.flex2.rpc.amf.gateway.processor.AmfBodyProcessor;
 import org.seasar.flex2.rpc.gateway.invoker.ServiceInvoker;
 import org.seasar.flex2.rpc.gateway.invoker.exception.InvokerNotFoundRuntimeException;
@@ -34,18 +34,30 @@ public class AmfBodyProcessorImpl implements AmfBodyProcessor {
     private static final String RESPONSE_RESULT = "/onResult";
 
     private static final String RESPONSE_STATUS = "/onStatus";
+
+    private AmfBodyFactory bodyFactory;
+
+    private AmfErrorFactory errorFactory;
     
-    private static final String RESPONSE_NULL = "null";
-
     private List invokers = new ArrayList();
-
+    
+    private AmfMessageFactory messageFactory;
+    
     public void addInvoker(ServiceInvoker invoker) {
         invokers.add(invoker);
     }
 
+    public AmfBodyFactory getBodyFactory() {
+        return bodyFactory;
+    }
+
+    public AmfMessageFactory getMessageFactory() {
+        return messageFactory;
+    }
+
     public AmfMessage process(HttpServletRequest request,
             AmfMessage requestMessage) {
-        AmfMessage responseMessage = createResponseMessage(requestMessage);
+        AmfMessage responseMessage = messageFactory.createMessage(requestMessage.getVersion());
 
         for (int i = 0; i < requestMessage.getBodySize(); ++i) {
             AmfBody requestBody = requestMessage.getBody(i);
@@ -55,7 +67,30 @@ public class AmfBodyProcessorImpl implements AmfBodyProcessor {
         return responseMessage;
     }
 
-    protected ServiceInvoker chooseInvoker(AmfBody requestBody) {
+    public void setBodyFactory(AmfBodyFactory bodyFactory) {
+        this.bodyFactory = bodyFactory;
+    }
+
+    public void setMessageFactory(AmfMessageFactory messageFactory) {
+        this.messageFactory = messageFactory;
+    }
+
+    protected AmfBody processBody(HttpServletRequest request,
+            AmfBody requestBody) {
+
+        try {
+            ServiceInvoker invoker = chooseInvoker(requestBody);
+            Object result = invoker.invoke(requestBody.getServiceName(),
+                    requestBody.getServiceMethodName(), requestBody.getArgs());
+            return createResponseBody(requestBody.getResponse()
+                    + RESPONSE_RESULT, result);
+        } catch (Throwable throwable) {
+            return createResponseBody(requestBody.getResponse()
+                    + RESPONSE_STATUS, errorFactory.createError(throwable));
+        }
+    }
+
+    private final ServiceInvoker chooseInvoker(AmfBody requestBody) {
         for (int i = 0; i < invokers.size(); ++i) {
             ServiceInvoker invoker = (ServiceInvoker) invokers.get(i);
             if (invoker.supports(requestBody.getServiceName(), requestBody
@@ -66,29 +101,7 @@ public class AmfBodyProcessorImpl implements AmfBodyProcessor {
         throw new InvokerNotFoundRuntimeException(requestBody.getServiceName());
     }
 
-    protected AmfMessage createResponseMessage(AmfMessage requestMessage) {
-        AmfMessageImpl responseMessage = new AmfMessageImpl();
-        responseMessage.setVersion(requestMessage.getVersion());
-
-        return responseMessage;
-    }
-
-    protected AmfBody processBody(HttpServletRequest request,
-            AmfBody requestBody) {
-
-        try {
-            ServiceInvoker invoker = chooseInvoker(requestBody);
-            Object result = invoker.invoke(requestBody.getServiceName(),
-                    requestBody.getServiceMethodName(), requestBody.getArgs());
-            return createBody(requestBody.getResponse() + RESPONSE_RESULT,
-                    result);
-        } catch (Throwable t) {
-            return createBody(requestBody.getResponse() + RESPONSE_STATUS,
-                    new AmfErrorImpl(t));
-        }
-    }
-
-    protected AmfBody createBody(String response, Object result) {
-        return new AmfBodyImpl(response, RESPONSE_NULL, result);
+    private AmfBody createResponseBody(String target, Object result) {
+        return bodyFactory.createBody(target, null, result);
     }
 }

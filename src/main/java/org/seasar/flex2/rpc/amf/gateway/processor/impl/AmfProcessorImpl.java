@@ -32,8 +32,8 @@ import org.seasar.flex2.rpc.amf.gateway.processor.AmfHeaderProcessor;
 import org.seasar.flex2.rpc.amf.gateway.processor.AmfProcessor;
 import org.seasar.flex2.rpc.amf.io.AmfReader;
 import org.seasar.flex2.rpc.amf.io.AmfWriter;
-import org.seasar.flex2.rpc.amf.io.impl.AmfReaderImpl;
-import org.seasar.flex2.rpc.amf.io.impl.AmfWriterImpl;
+import org.seasar.flex2.rpc.amf.io.factory.AmfReaderFactory;
+import org.seasar.flex2.rpc.amf.io.factory.AmfWriterFactory;
 import org.seasar.framework.log.Logger;
 
 public class AmfProcessorImpl implements AmfProcessor {
@@ -41,6 +41,26 @@ public class AmfProcessorImpl implements AmfProcessor {
     private AmfBodyProcessor bodyProcessor;
 
     private AmfHeaderProcessor headerProcessor;
+    
+    private AmfReaderFactory readerFactory;
+    
+    private AmfWriterFactory writerFactory;
+
+    public AmfBodyProcessor getBodyProcessor() {
+        return bodyProcessor;
+    }
+
+    public AmfHeaderProcessor getHeaderProcessor() {
+        return headerProcessor;
+    }
+
+    public AmfReaderFactory getReaderFactory() {
+        return readerFactory;
+    }
+
+    public AmfWriterFactory getWriterFactory() {
+        return writerFactory;
+    }
 
     public void process(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
@@ -56,18 +76,18 @@ public class AmfProcessorImpl implements AmfProcessor {
             headerProcessor.processResponse(request, responseMessage);
 
             writeMessage(response, responseMessage);
-        } catch (Throwable t) {
-            Logger.getLogger(AmfProcessorImpl.class).log(t);
-            if (t instanceof RuntimeException) {
-                throw (RuntimeException) t;
-            } else if (t instanceof Error) {
-                throw (Error) t;
-            } else if (t instanceof IOException) {
-                throw (IOException) t;
-            } else if (t instanceof ServletException) {
-                throw (ServletException) t;
+        } catch (Throwable throwable) {
+            Logger.getLogger(AmfProcessorImpl.class).log(throwable);
+            if (throwable instanceof RuntimeException) {
+                throw (RuntimeException) throwable;
+            } else if (throwable instanceof Error) {
+                throw (Error) throwable;
+            } else if (throwable instanceof IOException) {
+                throw (IOException) throwable;
+            } else if (throwable instanceof ServletException) {
+                throw (ServletException) throwable;
             } else {
-                throw new ServletException(t);
+                throw new ServletException(throwable);
             }
         }
     }
@@ -80,14 +100,12 @@ public class AmfProcessorImpl implements AmfProcessor {
         this.headerProcessor = headerProcessor;
     }
 
-    protected AmfWriter createWriter(AmfMessage responseMessage,
-            DataOutputStream outputStream) {
-        AmfWriter writer = new AmfWriterImpl(outputStream, responseMessage);
-        return writer;
+    public void setReaderFactory(AmfReaderFactory readerFactory) {
+        this.readerFactory = readerFactory;
     }
 
-    protected AmfReader createReader(DataInputStream in) {
-        return new AmfReaderImpl(in);
+    public void setWriterFactory(AmfWriterFactory writerFactory) {
+        this.writerFactory = writerFactory;
     }
 
     protected AmfMessage readMessage(HttpServletRequest request)
@@ -98,7 +116,8 @@ public class AmfProcessorImpl implements AmfProcessor {
             is = new BufferedInputStream(is);
         }
         DataInputStream inputStream = new DataInputStream(is);
-        AmfReader reader = createReader(inputStream);
+        AmfReader reader = readerFactory.createReader(inputStream);
+        
         return reader.read();
     }
 
@@ -107,11 +126,12 @@ public class AmfProcessorImpl implements AmfProcessor {
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         DataOutputStream outputStream = new DataOutputStream(baos);
-        AmfWriter writer = createWriter(responseMessage, outputStream);
+        AmfWriter writer = writerFactory.createWriter( outputStream, responseMessage);
         writer.write();
 
         response.setContentLength(baos.size());
         baos.writeTo(response.getOutputStream());
+        
         outputStream.flush();
     }
 }
