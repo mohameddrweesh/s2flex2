@@ -19,12 +19,11 @@ import java.lang.reflect.Method;
 
 import org.seasar.flex2.util.transfer.annotation.Export;
 import org.seasar.flex2.util.transfer.annotation.Import;
-import org.seasar.flex2.util.transfer.annotation.handler.ConstantAnnotationHandler;
-import org.seasar.framework.beans.BeanDesc;
+import org.seasar.flex2.util.transfer.annotation.handler.impl.BasicAnnotationHandlerImpl;
 import org.seasar.framework.beans.PropertyDesc;
 
-public class TigerAnnotationHandler extends ConstantAnnotationHandler {
-    public String getExportStorageType(BeanDesc beanDesc, PropertyDesc propertyDesc) {
+public class TigerAnnotationHandler extends BasicAnnotationHandlerImpl {
+    public String getExportStorageType(final PropertyDesc propertyDesc) {
         Method method = propertyDesc.getReadMethod();
         Export storageType = method.getAnnotation(Export.class);
         if (storageType != null) {
@@ -34,7 +33,7 @@ public class TigerAnnotationHandler extends ConstantAnnotationHandler {
         return null;
     }
     
-    public String getImportStorageType(BeanDesc beanDesc, PropertyDesc propertyDesc) {
+    public String getImportStorageType(final PropertyDesc propertyDesc) {
         Method method = propertyDesc.getWriteMethod();
         Import storageType = method.getAnnotation(Import.class);
         if (storageType != null) {

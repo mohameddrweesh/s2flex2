@@ -30,9 +30,6 @@ public class AnnotationHandlerFactoryTest extends S2TestCase {
     protected void setUp() throws Exception {
     }
 
-    /*
-     * @see TestCase#tearDown()
-     */
     protected void tearDown() throws Exception {
         super.tearDown();
     }
@@ -53,8 +50,7 @@ public class AnnotationHandlerFactoryTest extends S2TestCase {
                 .getAnnotationHandler();
         BeanDesc beanDesc = new BeanDescImpl(o.getClass());
         PropertyDesc propertyDesc = beanDesc.getPropertyDesc("strData");
-        String exportStorage = annHandler.getExportStorageType(beanDesc,
-                propertyDesc);
+        String exportStorage = annHandler.getExportStorageType(propertyDesc);
 
         assertEquals("1", exportStorage, StorageType.SESSION);
     }
@@ -65,8 +61,7 @@ public class AnnotationHandlerFactoryTest extends S2TestCase {
                 .getAnnotationHandler();
         BeanDesc beanDesc = new BeanDescImpl(o.getClass());
         PropertyDesc propertyDesc = beanDesc.getPropertyDesc("strData");
-        String importStorage = annHandler.getImportStorageType(beanDesc,
-                propertyDesc);
+        String importStorage = annHandler.getImportStorageType(propertyDesc);
 
         assertEquals("1", importStorage, StorageType.SESSION);
 
