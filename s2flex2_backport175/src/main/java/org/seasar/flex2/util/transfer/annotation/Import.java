@@ -15,9 +15,7 @@
  */
 package org.seasar.flex2.util.transfer.annotation;
 
-import org.seasar.flex2.util.transfer.storage.StorageType;
 /*
- *
  * @Retention(RetentionPolicy.RUNTIME)
  * @Target( { ElementType.FIELD, ElementType.METHOD })
  */
