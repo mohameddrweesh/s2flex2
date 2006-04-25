@@ -1,0 +1,66 @@
+<flex-config>
+   <compiler>
+      <accessible>false</accessible>
+      <show-coach-warnings>true</show-coach-warnings>
+      <debug>false</debug>
+      <external-library-path>
+         <path-element>C:/Program Files/Adobe/Flex Builder 2 Beta 2/Flex Framework 2/frameworks/libs/playerglobal.swc</path-element>
+      </external-library-path>
+      <keep-generated-actionscript>false</keep-generated-actionscript>
+      <include-libraries>
+      <!--
+ 	    <library>C:/Program Files/Adobe/Flex Builder 2 Beta 2/Flex Framework 2/frameworks/locale/ja_JP/framework_rb.swc</library>
+ 	    <library>C:/Program Files/Adobe/Flex Builder 2 Beta 2/Flex Framework 2/frameworks/locale/en_US/framework_rb.swc</library> 	    
+ 	    -->
+      </include-libraries>
+      <library-path>
+         <path-element>C:/Program Files/Adobe/Flex Builder 2 Beta 2/Flex Framework 2/frameworks/libs</path-element>
+      </library-path>
+      <namespaces>
+         <namespace>
+            <uri>http://www.adobe.com/2006/mxml</uri>
+            <manifest>mxml-manifest.xml</manifest>
+         </namespace>
+      </namespaces>
+      <optimize>true</optimize>
+      <show-binding-warnings>true</show-binding-warnings>
+      <show-dependency-warnings>false</show-dependency-warnings>
+      <show-deprecation-warnings>true</show-deprecation-warnings>
+      <strict>true</strict>
+      <verbose-stacktraces>false</verbose-stacktraces>
+	   <warn-undefined-reference>false</warn-undefined-reference>
+	   <warn-undefined-function>true</warn-undefined-function>
+	   <warn-wrong-number-of-args>true</warn-wrong-number-of-args>
+	   <warn-assigning-undefined-to-non-object-type>true</warn-assigning-undefined-to-non-object-type>
+	   <warn-no-type-decl>true</warn-no-type-decl>
+	   <warn-bad-undefined-comparision>true</warn-bad-undefined-comparision>
+	   <warn-wrong-arg-type>true</warn-wrong-arg-type>
+	   <warn-var-hidden-by-function>true</warn-var-hidden-by-function>
+	   <warn-duplicate-func-def>true</warn-duplicate-func-def>
+	   <warn-constructor-returns-value>true</warn-constructor-returns-value>
+	   <warn-bad-type-cast>true</warn-bad-type-cast>
+	   <warn-boolean-constructor-with-no-args>true</warn-boolean-constructor-with-no-args>
+	   <warn-math-expressions-treat-null-like-zero>true</warn-math-expressions-treat-null-like-zero>
+	   <warn-array-tostring-changes>true</warn-array-tostring-changes>
+	   <warn-deprecated-property-error>true</warn-deprecated-property-error>
+	   <warn-deprecated-function-error>true</warn-deprecated-function-error>
+	   <warn-super-only-works-for-class-objects>true</warn-super-only-works-for-class-objects>
+	   <warn-class-is-sealed>true</warn-class-is-sealed>
+	   <warn-scoping-change-in-this>false</warn-scoping-change-in-this>
+	   <warn-missing-namespace-decl>true</warn-missing-namespace-decl>
+	   <warn-for-var-in-changes>false</warn-for-var-in-changes>
+	   <warn-deprecated-event-handler-error>true</warn-deprecated-event-handler-error>
+	   <warn-no-constructor>false</warn-no-constructor>
+	   <warn-function-parameter-declared-as-void>true</warn-function-parameter-declared-as-void>
+	   <warn-no-explicit-super-call-in-constructor>false</warn-no-explicit-super-call-in-constructor>
+       <warn-xml-class-has-changed>false</warn-xml-class-has-changed>
+   </compiler>
+   <usenetwork>true</usenetwork>
+   <metadata>
+      <title>Adobe Flex 2.0b Application</title>
+      <description>http://www.macromedia.com/flex</description>
+      <publisher>unknown</publisher>
+      <creator>unknown</creator>
+      <language>EN</language>
+   </metadata>
+</flex-config>
