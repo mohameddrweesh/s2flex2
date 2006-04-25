@@ -32,6 +32,10 @@
 	import mx.rpc.events.FaultEvent;
 	import mx.rpc.events.ResultEvent;
 	import mx.rpc.remoting.mxml.RemoteObject;
+	import flash.events.EventDispatcher;
+	import flash.events.StatusEvent;
+	import flash.events.SecurityErrorEvent;
+	import mx.rpc.remoting.Operation;
 	use namespace flash_proxy;
 
 	public dynamic class S2Flex2Service extends AbstractService implements IMXMLObject
@@ -60,14 +64,20 @@
    		/* not implements */
    		[Inspectable(enumeration="single,last,multiple",defaultValue="single",category="General")]
    		public var concurrency:String;
-
-		[Inspectable]
-		public operations:Array;
 		   		
 		public function S2Flex2Service(){
 			super(null);
 		}
 		
+		public override function set operations(value:Object):void
+		{
+			this.operations=value;
+		}
+		public override function get operations():Object
+		{
+			return this.operations;
+		}
+		    
 		public var id:String;
 		
 		private var document:Object;
@@ -139,7 +149,7 @@
             dispatcher.addEventListener(SecurityErrorEvent.SECURITY_ERROR, securityErrorHandler);
         }
         
-	    private function netStatusHandler(event:NetStatusEvent):void {
+	    private function netStatusHandler(event:StatusEvent):void {
 	    	dispatchEvent(event);
 	    }
          
