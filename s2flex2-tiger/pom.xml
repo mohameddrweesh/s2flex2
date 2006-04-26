@@ -5,9 +5,9 @@
 >
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.seasar.flex2</groupId>
-  <artifactId>s2flex2_tiger</artifactId>
+  <artifactId>s2flex2-tiger</artifactId>
   <packaging>jar</packaging>
-  <name>S2Flex2_tiger</name>
+  <name>S2Flex2-tiger</name>
   <version>B2</version>
   <description></description>
   <url>http://s2flex2.sandbox.seasar.org/</url>
@@ -47,8 +47,8 @@
     </license>
   </licenses>
   <scm>
-    <connection>scm:svn:https://www.seasar.org/svn/sandbox/s2flex2/trunk/s2flex2_tiger/</connection>
-    <developerConnection>scm:svn:https://www.seasar.org/svn/sandbox/s2flex2/trunk/s2flex2_tiger/</developerConnection>
+    <connection>scm:svn:https://www.seasar.org/svn/sandbox/s2flex2/trunk/s2flex2-tiger/</connection>
+    <developerConnection>scm:svn:https://www.seasar.org/svn/sandbox/s2flex2/trunk/s2flex2-tiger/</developerConnection>
     <url>http://www.seasar.org/websvn/listing.php?repname=sandbox.s2flex2</url>
   </scm>
   <organization>
