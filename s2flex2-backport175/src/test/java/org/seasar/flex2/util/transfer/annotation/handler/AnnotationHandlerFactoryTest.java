@@ -19,7 +19,6 @@ import org.seasar.extension.unit.S2TestCase;
 import org.seasar.flex2.util.transfer.TestClass;
 import org.seasar.flex2.util.transfer.annotation.handler.AnnotationHandler;
 import org.seasar.flex2.util.transfer.annotation.handler.AnnotationHandlerFactory;
-import org.seasar.flex2.util.transfer.annotation.handler.Backport175ActionAnnotationHandler;
 import org.seasar.flex2.util.transfer.storage.StorageType;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
@@ -53,7 +52,7 @@ public class AnnotationHandlerFactoryTest extends S2TestCase {
                 .getAnnotationHandler();
         BeanDesc beanDesc = new BeanDescImpl(o.getClass());
         PropertyDesc propertyDesc = beanDesc.getPropertyDesc("strData");
-        String exportStorage = annHandler.getExportStorageType(beanDesc,
+        String exportStorage = annHandler.getExportStorageType(
                 propertyDesc);
 
         assertEquals("1", exportStorage, StorageType.SESSION);
@@ -65,7 +64,7 @@ public class AnnotationHandlerFactoryTest extends S2TestCase {
                 .getAnnotationHandler();
         BeanDesc beanDesc = new BeanDescImpl(o.getClass());
         PropertyDesc propertyDesc = beanDesc.getPropertyDesc("strData");
-        String importStorage = annHandler.getImportStorageType(beanDesc,
+        String importStorage = annHandler.getImportStorageType(
                 propertyDesc);
 
        assertEquals("1", importStorage, StorageType.SESSION);

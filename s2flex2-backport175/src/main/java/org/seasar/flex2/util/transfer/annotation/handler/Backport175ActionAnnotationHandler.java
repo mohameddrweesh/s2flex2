@@ -21,28 +21,28 @@ import org.codehaus.backport175.reader.Annotation;
 import org.codehaus.backport175.reader.Annotations;
 import org.seasar.flex2.util.transfer.annotation.Export;
 import org.seasar.flex2.util.transfer.annotation.Import;
-import org.seasar.framework.beans.BeanDesc;
+import org.seasar.flex2.util.transfer.annotation.handler.impl.BasicAnnotationHandlerImpl;
 import org.seasar.framework.beans.PropertyDesc;
 
-public class Backport175ActionAnnotationHandler extends ConstantAnnotationHandler {
-    public String getExportStorageType(BeanDesc beanDesc, PropertyDesc propertyDesc) {
+public class Backport175ActionAnnotationHandler extends BasicAnnotationHandlerImpl {
+
+	public String getExportStorageType(PropertyDesc propertyDesc) {
         Method method = propertyDesc.getReadMethod();
         Annotation annotation =Annotations.getAnnotation(Export.class,method);
         if(annotation!= null){
         	return ((Export)annotation).storage();
         }
         return null;
-    }
+	}
     
-    public String getImportStorageType(BeanDesc beanDesc, PropertyDesc propertyDesc) {
+	public String getImportStorageType(PropertyDesc propertyDesc) {
         Method method = propertyDesc.getWriteMethod();
         Annotation annotation =Annotations.getAnnotation(Import.class,method);
         if(annotation!= null){
         	return ((Import)annotation).storage();
         }
         return null;
-  
-    }
+	}
 }
 
 /*
