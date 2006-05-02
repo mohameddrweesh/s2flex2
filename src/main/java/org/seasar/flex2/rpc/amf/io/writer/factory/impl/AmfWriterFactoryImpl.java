@@ -4,6 +4,7 @@ import java.io.DataOutputStream;
 
 import org.seasar.flex2.rpc.amf.data.AmfMessage;
 import org.seasar.flex2.rpc.amf.io.AmfSharedObject;
+import org.seasar.flex2.rpc.amf.io.factory.AmfSharedObjectFactory;
 import org.seasar.flex2.rpc.amf.io.writer.AmfWriter;
 import org.seasar.flex2.rpc.amf.io.writer.factory.AmfWriterFactory;
 import org.seasar.flex2.rpc.amf.io.writer.impl.AmfWriterImpl;
@@ -13,6 +14,17 @@ public class AmfWriterFactoryImpl implements AmfWriterFactory {
 
     private S2Container container;
 
+    private AmfSharedObjectFactory sharedObjectFactory;
+
+    public AmfWriter createWriter(final DataOutputStream dataOutputStream,
+            final AmfMessage message) {
+        AmfWriterImpl writer = (AmfWriterImpl) container
+                .getComponent(AmfWriterImpl.class);
+        writer.config(message, dataOutputStream);
+        writer.setSharedObject(sharedObjectFactory.createSharedObject());
+        return writer;
+    }
+
     public S2Container getContainer() {
         return container;
     }
@@ -21,12 +33,7 @@ public class AmfWriterFactoryImpl implements AmfWriterFactory {
         this.container = container;
     }
 
-    public AmfWriter createWriter(final DataOutputStream dataOutputStream,
-            final AmfMessage message) {
-        AmfWriterImpl writer = (AmfWriterImpl) container
-                .getComponent(AmfWriterImpl.class);
-        writer.config(message, dataOutputStream);
-        writer.setSharedObject((AmfSharedObject)container.getComponent(AmfSharedObject.class));
-        return writer;
+    public void setSharedObjectFactory(AmfSharedObjectFactory sharedObjectFactory) {
+        this.sharedObjectFactory = sharedObjectFactory;
     }
 }

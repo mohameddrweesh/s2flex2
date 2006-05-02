@@ -30,8 +30,8 @@ public class Amf3ObjectReferences {
     private ArrayList referenceList;
 
     public Amf3ObjectReferences() {
-    	referenceMap = new HashMap(64);
-    	referenceList = new ArrayList(64);
+    	referenceMap = new HashMap(256);
+    	referenceList = new ArrayList(256);
     }
 
     public void addReference(Object value) {

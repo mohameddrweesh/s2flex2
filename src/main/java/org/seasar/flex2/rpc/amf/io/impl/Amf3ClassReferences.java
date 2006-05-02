@@ -27,8 +27,8 @@ public class Amf3ClassReferences {
     private final Map propertiesReferences;
 
     public Amf3ClassReferences() {
-        classReferences = new ArrayList();
-        propertiesReferences = new HashMap();
+        classReferences = new ArrayList(64);
+        propertiesReferences = new HashMap(64);
     }
 
     public void addClassReference(Class o) {
