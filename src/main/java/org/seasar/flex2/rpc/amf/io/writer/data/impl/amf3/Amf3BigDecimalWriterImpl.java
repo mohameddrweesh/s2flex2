@@ -13,11 +13,16 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.amf.io;
+package org.seasar.flex2.rpc.amf.io.writer.data.impl.amf3;
 
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.math.BigDecimal;
 
-public interface AmfWriter {
+public class Amf3BigDecimalWriterImpl extends Amf3StringWriterImpl {
 
-	void write() throws IOException;
+    protected final void processWriteObjectData(Object object,
+            DataOutputStream outputStream) throws IOException {
+        super.processWriteObjectData(((BigDecimal)object).toString(), outputStream);
+    }
 }

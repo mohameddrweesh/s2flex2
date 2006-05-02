@@ -33,8 +33,7 @@ public final class Amf3DataType {
     public static final byte OBJECT_REFERENCE = 0x00;
     public static final byte OBJECT_INLINE = 0x01;
     
-    public static final byte OBJECT_SERIALIZED = 0x04;
-    public static final byte OBJECT_DESERIALIZED = 0x08;
+    public static final byte UNTYPED_OBJECT = 0x08;
     
     public static final byte CLASS_DEF_REFERENCE = 0x00;
     public static final byte CLASS_DEF_INLINE = 0x02;

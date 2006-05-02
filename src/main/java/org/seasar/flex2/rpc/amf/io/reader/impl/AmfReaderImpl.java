@@ -13,7 +13,7 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.amf.io.impl;
+package org.seasar.flex2.rpc.amf.io.reader.impl;
 
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -30,7 +30,7 @@ import org.seasar.flex2.rpc.amf.data.AmfConstants;
 import org.seasar.flex2.rpc.amf.data.AmfMessage;
 import org.seasar.flex2.rpc.amf.data.impl.AmfBodyImpl;
 import org.seasar.flex2.rpc.amf.data.impl.AmfMessageImpl;
-import org.seasar.flex2.rpc.amf.io.AmfReader;
+import org.seasar.flex2.rpc.amf.io.reader.AmfReader;
 import org.seasar.flex2.rpc.amf.type.AmfDataType;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
@@ -45,7 +45,8 @@ import flashgateway.io.ASObject;
 
 public class AmfReaderImpl implements AmfReader {
 
-    protected static final Logger logger = Logger.getLogger(AmfReaderImpl.class);
+    protected static final Logger logger = Logger
+            .getLogger(AmfReaderImpl.class);
 
     protected DataInputStream inputStream;
 
