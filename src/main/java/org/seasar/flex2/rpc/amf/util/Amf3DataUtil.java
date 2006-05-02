@@ -35,7 +35,7 @@ public class Amf3DataUtil {
 
     private final static String STRING_ENCODE_NAME = "utf-8";
 
-    public static int getIntByteLength(int value) {
+    public final static int getIntByteLength(int value) {
         if (value < 0) {
             return 4;
         }
@@ -57,7 +57,7 @@ public class Amf3DataUtil {
         return -1;
     }
 
-    public static void setProperties(Object object, int props, String[] names,
+    public final static void setProperties(Object object, int props, String[] names,
             Object[] values) {
         BeanDesc beanDesc = BeanDescFactory.getBeanDesc(object.getClass());
         for (int i = 0; i < props; i++) {
@@ -70,12 +70,12 @@ public class Amf3DataUtil {
         }
     }
 
-    public static Date toDate(double ms) {
+    public final static Date toDate(double ms) {
         Date date = new Date((long) ms);
         return date;
     }
 
-    public static int toInt(int[] list, int bytes) {
+    public final static int toInt(int[] list, int bytes) {
         int int_data = list[bytes - 1];
         int offset = 0;
 
@@ -93,7 +93,7 @@ public class Amf3DataUtil {
         return int_data;
     }
 
-    public static int[] toVariableIntBytes(int value) {
+    public final static int[] toVariableIntBytes(int value) {
         int list_len = Amf3DataUtil.getIntByteLength(value);
         if (list_len < 0) {
             return new int[0];
@@ -117,15 +117,15 @@ public class Amf3DataUtil {
         return list;
     }
 
-    public static int toNegativeInt(int[] list, int bytes) {
+    public final static int toNegativeInt(int[] list, int bytes) {
         return toInt(list, bytes) | 0xF0000000;
     }
 
-    public static int[] toNegativeIntBytes(int value) {
+    public final static int[] toNegativeIntBytes(int value) {
         return toVariableIntBytes(value);
     }
 
-    public static String toUTF8String(byte[] bytearr, int utflen) {
+    public final static String toUTF8String(byte[] bytearr, int utflen) {
         try {
             return new String(bytearr, 0, utflen, STRING_ENCODE_NAME);
         } catch (UnsupportedEncodingException e) {
@@ -133,7 +133,7 @@ public class Amf3DataUtil {
         }
     }
 
-    public static byte[] toUTF8StringBytes(String str) {
+    public final static byte[] toUTF8StringBytes(String str) {
         try {
             return str.getBytes(STRING_ENCODE_NAME);
         } catch (UnsupportedEncodingException e) {
@@ -141,7 +141,7 @@ public class Amf3DataUtil {
         }
     }
 
-    public static Document toXmlDocument(String xml) {
+    public final static Document toXmlDocument(String xml) {
         ByteArrayInputStream bain;
         try {
             bain = new ByteArrayInputStream(xml.getBytes(STRING_ENCODE_NAME));
@@ -155,7 +155,7 @@ public class Amf3DataUtil {
         return DocumentBuilderUtil.parse(builder, bis);
     }
 
-    public static String toXmlString(Document document) {
+    public final static String toXmlString(Document document) {
         Element element = document.getDocumentElement();
         return DomUtil.toString(element);
     }
