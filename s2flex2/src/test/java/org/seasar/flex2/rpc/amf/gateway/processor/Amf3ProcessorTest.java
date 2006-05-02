@@ -19,8 +19,8 @@ import org.seasar.extension.unit.S2TestCase;
 import org.seasar.flex2.rpc.amf.gateway.processor.impl.AmfBodyProcessorImpl;
 import org.seasar.flex2.rpc.amf.gateway.processor.impl.AmfHeaderProcessorImpl;
 import org.seasar.flex2.rpc.amf.gateway.processor.impl.AmfProcessorImpl;
-import org.seasar.flex2.rpc.amf.io.factory.impl.Amf3ReaderFactoryImpl;
-import org.seasar.flex2.rpc.amf.io.factory.impl.Amf3WriterFactoryImpl;
+import org.seasar.flex2.rpc.amf.io.reader.factory.impl.Amf3ReaderFactoryImpl;
+import org.seasar.flex2.rpc.amf.io.writer.factory.impl.Amf3WriterFactoryImpl;
 import org.seasar.framework.container.S2Container;
 
 public class Amf3ProcessorTest extends S2TestCase {

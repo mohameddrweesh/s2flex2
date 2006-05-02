@@ -32,25 +32,39 @@ import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 
-import junit.framework.TestCase;
-
+import org.seasar.extension.unit.S2TestCase;
 import org.seasar.flex2.rpc.amf.data.AmfBody;
 import org.seasar.flex2.rpc.amf.data.AmfMessage;
+import org.seasar.flex2.rpc.amf.data.factory.AmfBodyFactory;
+import org.seasar.flex2.rpc.amf.data.factory.AmfMessageFactory;
 import org.seasar.flex2.rpc.amf.data.impl.AmfBodyImpl;
 import org.seasar.flex2.rpc.amf.data.impl.AmfMessageImpl;
-import org.seasar.flex2.rpc.amf.io.AmfReader;
-import org.seasar.flex2.rpc.amf.io.AmfWriter;
-import org.seasar.flex2.rpc.amf.io.impl.Amf3ReaderImpl;
-import org.seasar.flex2.rpc.amf.io.impl.Amf3WriterImpl;
-import org.seasar.flex2.rpc.amf.type.AmfVersionType;
+import org.seasar.flex2.rpc.amf.io.reader.AmfReader;
+import org.seasar.flex2.rpc.amf.io.reader.factory.AmfReaderFactory;
+import org.seasar.flex2.rpc.amf.io.writer.AmfWriter;
+import org.seasar.flex2.rpc.amf.io.writer.factory.AmfWriterFactory;
 import org.seasar.flex2.rpc.amf.util.Amf3DataUtil;
 import org.seasar.framework.util.DocumentBuilderFactoryUtil;
 import org.seasar.framework.util.DocumentBuilderUtil;
 import org.seasar.framework.util.ResourceUtil;
 import org.w3c.dom.Document;
 
-public class Amf3ReaderWriterTest extends TestCase {
+public class Amf3ReaderWriterTest extends S2TestCase {
 
+    private final static String PATH = "Amf3ReaderWriterTest.dicon";
+
+    protected void setUp() throws Exception {
+        include(PATH);
+    }
+
+    public AmfMessageFactory amfMessageFactory;
+
+    public AmfBodyFactory amfBodyFactory;
+
+    public AmfWriterFactory amfWriterFactory;
+
+    public AmfReaderFactory amfReaderFactory;
+    
     public void testNumber() throws Exception {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         DataOutputStream dos = new DataOutputStream(baos);
@@ -58,12 +72,12 @@ public class Amf3ReaderWriterTest extends TestCase {
         AmfBody body = new AmfBodyImpl("aaa.Hoge.foo", "response",
                 new Double(1));
         message.addBody(body);
-        AmfWriter writer = new Amf3WriterImpl(dos, message);
+        AmfWriter writer = amfWriterFactory.createWriter(dos, message);
         writer.write();
 
         ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
         DataInputStream dis = new DataInputStream(bais);
-        AmfReader reader = new Amf3ReaderImpl(dis);
+        AmfReader reader = amfReaderFactory.createReader(dis);
         AmfMessage message2 = reader.read();
         assertEquals("1", 1, message2.getBodySize());
         AmfBody body2 = message2.getBody(0);
@@ -73,8 +87,8 @@ public class Amf3ReaderWriterTest extends TestCase {
     }
 
     public void testBoolean() throws Exception {
-        AmfReader reader = new Amf3ReaderImpl(
-                convertDataInputStream(Boolean.TRUE));
+        AmfReader reader = amfReaderFactory
+        .createReader(convertDataInputStream(Boolean.TRUE));
         AmfMessage message2 = reader.read();
         AmfBody body2 = message2.getBody(0);
         assertEquals("1", Boolean.TRUE, body2.getData());
@@ -238,11 +252,12 @@ public class Amf3ReaderWriterTest extends TestCase {
         BigDecimal iii2 = value2.getIii();
         assertEquals("11", iii, iii2);
 
-        assertEquals("12", null, value2.getHhh().getDdd());
+        assertNull("12", value2.getHhh().getDdd());
     }
 
     public void testXml() throws Exception {
-        URL url =ResourceUtil.getResource("org/seasar/flex2/rpc/amf/io/testXml.xml");
+        URL url = ResourceUtil
+                .getResource("org/seasar/flex2/rpc/amf/io/testXml.xml");
         File testXml = new File(url.getPath());
         DocumentBuilder builder = DocumentBuilderFactoryUtil
                 .newDocumentBuilder();
@@ -258,7 +273,7 @@ public class Amf3ReaderWriterTest extends TestCase {
 
     protected Object convertData(Object data) throws Exception {
         DataInputStream dis = convertDataInputStream(data);
-        AmfReader reader = new Amf3ReaderImpl(dis);
+        AmfReader reader = amfReaderFactory.createReader(dis);
         AmfMessage message = reader.read();
         AmfBody body = message.getBody(0);
         return body.getData();
@@ -268,11 +283,10 @@ public class Amf3ReaderWriterTest extends TestCase {
             throws Exception {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         DataOutputStream dos = new DataOutputStream(baos);
-        AmfMessage message = new AmfMessageImpl();
-        message.setVersion( AmfVersionType.VERSION_3 );
-        AmfBody body = new AmfBodyImpl("target", "response", data);
+        AmfMessage message = amfMessageFactory.createMessage(3);
+        AmfBody body = amfBodyFactory.createBody("target", "response", data);
         message.addBody(body);
-        AmfWriter writer = new Amf3WriterImpl(dos, message);
+        AmfWriter writer = amfWriterFactory.createWriter(dos, message);
         writer.write();
 
         ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());

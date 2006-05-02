@@ -13,13 +13,24 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.amf.io;
+package org.seasar.flex2.rpc.amf.io.writer.data.impl.amf;
 
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 
-import org.seasar.flex2.rpc.amf.data.AmfMessage;
+public class AmfCollectionWriterImpl extends AmfArrayWriterImpl {
 
-public interface AmfReader {
+    public void write(Object value, DataOutputStream outputStream)
+            throws IOException {
+        write((Collection) value, outputStream);
+    }
 
-	AmfMessage read() throws IOException;
+    protected void write(Collection value, DataOutputStream outputStream)
+            throws IOException {
+        ArrayList list = new ArrayList();
+        list.addAll(value);
+        write(list.toArray(new Object[list.size()]), outputStream);
+    }
 }

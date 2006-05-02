@@ -30,10 +30,10 @@ import org.seasar.flex2.rpc.amf.data.AmfMessage;
 import org.seasar.flex2.rpc.amf.gateway.processor.AmfBodyProcessor;
 import org.seasar.flex2.rpc.amf.gateway.processor.AmfHeaderProcessor;
 import org.seasar.flex2.rpc.amf.gateway.processor.AmfProcessor;
-import org.seasar.flex2.rpc.amf.io.AmfReader;
-import org.seasar.flex2.rpc.amf.io.AmfWriter;
-import org.seasar.flex2.rpc.amf.io.factory.AmfReaderFactory;
-import org.seasar.flex2.rpc.amf.io.factory.AmfWriterFactory;
+import org.seasar.flex2.rpc.amf.io.reader.AmfReader;
+import org.seasar.flex2.rpc.amf.io.reader.factory.AmfReaderFactory;
+import org.seasar.flex2.rpc.amf.io.writer.AmfWriter;
+import org.seasar.flex2.rpc.amf.io.writer.factory.AmfWriterFactory;
 import org.seasar.framework.log.Logger;
 
 public class AmfProcessorImpl implements AmfProcessor {

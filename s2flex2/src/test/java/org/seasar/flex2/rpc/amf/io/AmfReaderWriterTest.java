@@ -26,32 +26,47 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import junit.framework.TestCase;
-
+import org.seasar.extension.unit.S2TestCase;
 import org.seasar.flex2.rpc.amf.data.AmfBody;
 import org.seasar.flex2.rpc.amf.data.AmfMessage;
-import org.seasar.flex2.rpc.amf.data.impl.AmfBodyImpl;
-import org.seasar.flex2.rpc.amf.data.impl.AmfMessageImpl;
-import org.seasar.flex2.rpc.amf.io.AmfReader;
-import org.seasar.flex2.rpc.amf.io.AmfWriter;
-import org.seasar.flex2.rpc.amf.io.impl.AmfReaderImpl;
-import org.seasar.flex2.rpc.amf.io.impl.AmfWriterImpl;
+import org.seasar.flex2.rpc.amf.data.factory.AmfBodyFactory;
+import org.seasar.flex2.rpc.amf.data.factory.AmfMessageFactory;
+import org.seasar.flex2.rpc.amf.io.reader.AmfReader;
+import org.seasar.flex2.rpc.amf.io.reader.factory.AmfReaderFactory;
+import org.seasar.flex2.rpc.amf.io.writer.AmfWriter;
+import org.seasar.flex2.rpc.amf.io.writer.factory.AmfWriterFactory;
 
-public class AmfReaderWriterTest extends TestCase {
+public class AmfReaderWriterTest extends S2TestCase {
+
+    private final static String PATH = "AmfReaderWriterTest.dicon";
+
+    protected void setUp() throws Exception {
+        include(PATH);
+    }
+
+    public AmfMessageFactory amfMessageFactory;
+
+    public AmfBodyFactory amfBodyFactory;
+
+    public AmfWriterFactory amfWriterFactory;
+
+    public AmfReaderFactory amfReaderFactory;
 
     public void testNumber() throws Exception {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         DataOutputStream dos = new DataOutputStream(baos);
-        AmfMessage message = new AmfMessageImpl();
-        AmfBody body = new AmfBodyImpl("aaa.Hoge.foo", "response",
+        AmfMessage message = amfMessageFactory.createMessage(0);
+
+        AmfBody body = amfBodyFactory.createBody("aaa.Hoge.foo", "response",
                 new Double(1));
         message.addBody(body);
-        AmfWriter writer = new AmfWriterImpl(dos, message);
+        AmfWriter writer = amfWriterFactory.createWriter(dos, message);
         writer.write();
 
         ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
         DataInputStream dis = new DataInputStream(bais);
-        AmfReader reader = new AmfReaderImpl(dis);
+
+        AmfReader reader = amfReaderFactory.createReader(dis);
         AmfMessage message2 = reader.read();
         assertEquals("1", 1, message2.getBodySize());
         AmfBody body2 = message2.getBody(0);
@@ -61,8 +76,8 @@ public class AmfReaderWriterTest extends TestCase {
     }
 
     public void testBoolean() throws Exception {
-        AmfReader reader = new AmfReaderImpl(
-                convertDataInputStream(Boolean.TRUE));
+        AmfReader reader = amfReaderFactory
+                .createReader(convertDataInputStream(Boolean.TRUE));
         AmfMessage message2 = reader.read();
         AmfBody body2 = message2.getBody(0);
         assertEquals("1", Boolean.TRUE, body2.getData());
@@ -202,7 +217,7 @@ public class AmfReaderWriterTest extends TestCase {
 
     protected Object convertData(Object data) throws Exception {
         DataInputStream dis = convertDataInputStream(data);
-        AmfReader reader = new AmfReaderImpl(dis);
+        AmfReader reader = amfReaderFactory.createReader(dis);
         AmfMessage message = reader.read();
         AmfBody body = message.getBody(0);
         return body.getData();
@@ -212,10 +227,10 @@ public class AmfReaderWriterTest extends TestCase {
             throws Exception {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         DataOutputStream dos = new DataOutputStream(baos);
-        AmfMessage message = new AmfMessageImpl();
-        AmfBody body = new AmfBodyImpl("target", "response", data);
+        AmfMessage message = amfMessageFactory.createMessage(0);
+        AmfBody body = amfBodyFactory.createBody("target", "response", data);
         message.addBody(body);
-        AmfWriter writer = new AmfWriterImpl(dos, message);
+        AmfWriter writer = amfWriterFactory.createWriter(dos, message);
         writer.write();
 
         ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
