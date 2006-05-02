@@ -36,14 +36,13 @@ public class Amf3WriterImpl extends AmfWriterImpl {
     }
 
     public void write() throws IOException {
-        initializeSharedObject();
         writeVersion();
         writeHeaders();
         writeBodies();
     }
 
-    protected void initializeSharedObject() {
-        super.initializeSharedObject();
+    protected void clean() {
+        super.clean();
         references.initialize();
     }
 

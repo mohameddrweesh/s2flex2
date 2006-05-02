@@ -62,14 +62,14 @@ public class AmfWriterImpl implements AmfWriter {
         writeBodies();
     }
 
-    protected void initializeSharedObject() {
+    protected void clean() {
         sharedObject.initialize();
     }
 
     protected void writeBodies() throws IOException {
         outputStream.writeShort(message.getBodySize());
         for (int i = 0; i < message.getBodySize(); ++i) {
-            initializeSharedObject();
+            clean();
             writeBody(message.getBody(i));
         }
     }
