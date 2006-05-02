@@ -2,8 +2,8 @@
 <!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.3//EN" 
 	"http://www.seasar.org/dtd/components23.dtd">
 <components namespace="amf-gateway">
-	<component class="org.seasar.flex2.rpc.amf.io.factory.impl.Amf3ReaderFactoryImpl" />
-	<component class="org.seasar.flex2.rpc.amf.io.factory.impl.Amf3WriterFactoryImpl" />
+	<component class="org.seasar.flex2.rpc.amf.io.reader.factory.impl.Amf3ReaderFactoryImpl" />
+	<component class="org.seasar.flex2.rpc.amf.io.writer.factory.impl.Amf3WriterFactoryImpl" />
 	<component class="org.seasar.flex2.rpc.amf.data.factory.impl.Amf3BodyFactoryImpl" />
 	<component class="org.seasar.flex2.rpc.amf.data.factory.impl.AmfErrorFactoryImpl" />
 	<component class="org.seasar.flex2.rpc.amf.data.factory.impl.AmfHeaderFactoryImpl" />
