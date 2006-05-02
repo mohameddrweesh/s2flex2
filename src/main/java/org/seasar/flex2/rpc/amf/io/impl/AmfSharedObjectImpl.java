@@ -24,6 +24,7 @@ public class AmfSharedObjectImpl implements AmfSharedObject {
     protected ArrayList sharedObjects;
 
     public AmfSharedObjectImpl() {
+        sharedObjects = new ArrayList();
     }
 
     public void addSharedObject(Object o) {
@@ -39,7 +40,7 @@ public class AmfSharedObjectImpl implements AmfSharedObject {
         return -1;
     }
 
-    public void clean() {
-        sharedObjects = new ArrayList();
+    public void initialize() {
+        sharedObjects.clear();
     }
 }

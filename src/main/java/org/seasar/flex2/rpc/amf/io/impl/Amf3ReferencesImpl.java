@@ -47,7 +47,7 @@ public class Amf3ReferencesImpl implements Amf3References {
         stringReferences.addReference(object);
     }
     
-    public void clean() {
+    public void initialize() {
         objectReferences.initialize();
         stringReferences.initialize();
         classReferences.initialize();
