@@ -25,7 +25,7 @@ public interface Amf3References {
     
     void addStringReference(String object);
 
-    void clean();
+    void initialize();
 
     int getClassReferenceIndex(Class clazz);
     

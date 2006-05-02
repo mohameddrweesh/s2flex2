@@ -63,7 +63,7 @@ public class AmfWriterImpl implements AmfWriter {
     }
 
     protected void initializeSharedObject() {
-        sharedObject.clean();
+        sharedObject.initialize();
     }
 
     protected void writeBodies() throws IOException {

@@ -44,7 +44,7 @@ public class Amf3WriterImpl extends AmfWriterImpl {
 
     protected void initializeSharedObject() {
         super.initializeSharedObject();
-        references.clean();
+        references.initialize();
     }
 
     protected void writeHeader(AmfHeader header) throws IOException {

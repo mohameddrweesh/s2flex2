@@ -7,5 +7,5 @@ public interface AmfSharedObject {
 
     int getSharedIndex(Object value);
 
-    void clean();
+    void initialize();
 }
