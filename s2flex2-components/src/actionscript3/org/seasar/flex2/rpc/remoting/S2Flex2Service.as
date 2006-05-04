@@ -19,7 +19,7 @@
 	import flash.events.EventDispatcher;
 	import flash.events.IOErrorEvent;
 	import flash.events.SecurityErrorEvent;
-	import flash.events.StatusEvent;
+	import flash.events.NetStatusEvent;
 	import flash.net.NetConnection;
 	import flash.net.ObjectEncoding;
 	import flash.net.Responder;
@@ -36,11 +36,13 @@
 	import mx.rpc.events.ResultEvent;
 	import mx.rpc.remoting.Operation;
 	import mx.rpc.Fault;
+	import mx.controls.Alert;
+	import mx.utils.ObjectUtil;
 
 	use namespace flash_proxy;
 
 	[Event(name="ioError", type="flash.events.IOErrorEvent")]
-	[Event(name="netStatus",type="flash.events.StatusEvent")]
+	[Event(name="netStatus",type="flash.events.NetStatusEvent")]
 	[Event(name="securityError",type="flash.events.SecurityErrorEvent")]
 	
 	public dynamic class S2Flex2Service extends AbstractService implements IMXMLObject
@@ -48,27 +50,26 @@
 	{
 		/** @private
 		*/
-		//[Event("fault")]
+		[Event("fault")]
 		/** @private
 		*/
-		//[Event("result")]
+		[Event("result")]
 		
     private var _con:NetConnection;
 	    
-	  [Inspectable(type="String")]
+	    [Inspectable(type="String")]
 		public var gatewayUrl:String;
    
-    [Inspectable(type="Boolean",defaultValue="true")]
-   	public var showBusyCursor:Boolean;
+   		[Inspectable(type="Boolean",defaultValue="true")]
+   		public var showBusyCursor:Boolean;
    		
-   	/* not implements */
-   	[Inspectable(enumeration="single,last,multiple",defaultValue="single",category="General")]
-   	public var concurrency:String;
+   		/* not implements */
+   		[Inspectable(enumeration="single,last,multiple",defaultValue="single",category="General")]
+   		public var concurrency:String;
 		   		
 		public function S2Flex2Service(){
 			super(null);
 		}
-
 		public var id:String;
 		
 		private var document:Object;
@@ -79,21 +80,21 @@
 		}
 		 
 		 private function initConnection():void{
-				_con = new NetConnection();
-				configureListeners(_con);
-				_con.objectEncoding = ObjectEncoding.AMF3;
-				_con.addHeader("DescribeService", false, 0);
-				var config:XML = ServerConfig.xml;
-				if(this.gatewayUrl == null){	
-					this.gatewayUrl=config.channels.channel.(@id==config..destination.(@id==this.destination).channels.channel.@ref).endpoint.@uri.toString();
-				}
-				_con.connect(this.gatewayUrl);	
+			_con = new NetConnection();
+			configureListeners(_con);
+			_con.objectEncoding = ObjectEncoding.AMF3;
+			_con.addHeader("DescribeService", false, 0);
+			var config:XML = ServerConfig.xml;
+			if(this.gatewayUrl == null){	
+				this.gatewayUrl=config.channels.channel.(@id==config..destination.(@id==this.destination).channels.channel.@ref).endpoint.@uri.toString();
+			}
+			_con.connect(this.gatewayUrl);	
 		}
 
-		flash_proxy override function callProperty(methodName:*, ...args):* {
-			args.unshift(methodName);
-			return remoteCall.apply(null,args);
-		}
+	    flash_proxy override function callProperty(methodName:*, ...args):* {
+			 args.unshift(methodName);
+			 return remoteCall.apply(null,args);
+    	}
 
 		private function remoteCall(methodName:Object, ...rest):void {
 			if(_con==null||!_con.connected){
@@ -103,7 +104,8 @@
 	        {
 	            CursorManager.setBusyCursor();
 	        }
-	    	
+	   
+	   /* 	
 	    if(!_con.connected){
 	    	dispatchEvent(
 		    	new IOErrorEvent(
@@ -113,7 +115,7 @@
 		    	"gateway is not connected..("+ this.gatewayUrl+")" )
 	    	);
 	    }
-	      
+	    */  
 			var callMethod:String =this.destination +"." +methodName; 
 			var responder:Responder = new Responder(this.onResult,this.onFault);
 			
@@ -123,42 +125,56 @@
 			}else{
 				_con.call(callMethod,responder);
 			}			
-		}
+	  }
 		
-		public function onResult(result:*):void{
-	  	if (this.showBusyCursor)
-      {
-				CursorManager.removeBusyCursor();
-			}
-			var resultEvent:ResultEvent=new ResultEvent(result,null,null);
-	    dispatchEvent(resultEvent);
-		}
+	    public function onResult(result:*):void{
+				if (this.showBusyCursor)
+        {
+         	CursorManager.removeBusyCursor();
+        }
+	    	var resultEvent:ResultEvent=new ResultEvent(result,null,null);
+	    	dispatchEvent(resultEvent);
+	    }
 	    
-		public function onFault(result:*):void{
-			if (this.showBusyCursor)
-			{
-      	CursorManager.removeBusyCursor();
-			}
-      var fault:Fault = new Fault(result.code,result.description,result.details);
-	    var faultEvent:FaultEvent = new FaultEvent(fault,null,null);
-	    dispatchEvent(faultEvent);	
-		}
-		private function configureListeners(dispatcher:EventDispatcher):void {
-			dispatcher.addEventListener(NetStatusEvent.NET_STATUS, netStatusHandler);
-			dispatcher.addEventListener(SecurityErrorEvent.SECURITY_ERROR, securityErrorHandler);
-			dispatcher.addEventListener(flash.events.IOErrorEvent.IO_ERROR , ioErrorHandler);
-		}
-        
-		private function netStatusHandler(event:StatusEvent):void {
-			dispatchEvent(event);
-		}
+	    public function onFault(result:*):void{
+	    	if (this.showBusyCursor)
+            {
+                CursorManager.removeBusyCursor();
+            }
+            var fault:Fault = new Fault(result.code,result.description,result.details);
+
+	    	var faultEvent:FaultEvent = new FaultEvent(fault,null,null);
+	    	dispatchEvent(faultEvent);	
+	    }
 	    
-		private function securityErrorHandler(event:SecurityErrorEvent):void {
-			dispatchEvent(event);
-		}
+	    private function configureListeners(dispatcher:EventDispatcher):void {
+            dispatcher.addEventListener(NetStatusEvent.NET_STATUS, netStatusHandler);
+            dispatcher.addEventListener(SecurityErrorEvent.SECURITY_ERROR, securityErrorHandler);
+            dispatcher.addEventListener(flash.events.IOErrorEvent.IO_ERROR , ioErrorHandler);
+      }
         
-		private function ioErrorHandler(event:IOErrorEvent ):void {
-    	dispatchEvent(event);
-		} 
+	    private function netStatusHandler(event:NetStatusEvent):void {
+	    	if (this.showBusyCursor)
+        {
+          CursorManager.removeBusyCursor();
+        }
+	    	dispatchEvent(event);
+	    }
+	    
+			private function securityErrorHandler(event:SecurityErrorEvent):void {
+	    	if (this.showBusyCursor)
+        {
+          CursorManager.removeBusyCursor();
+        }
+        dispatchEvent(event);
+      }
+        
+      private function ioErrorHandler(event:IOErrorEvent ):void {
+	    	if (this.showBusyCursor)
+        {
+          CursorManager.removeBusyCursor();
+        }
+       	dispatchEvent(event);
+      } 
 	}
 }
