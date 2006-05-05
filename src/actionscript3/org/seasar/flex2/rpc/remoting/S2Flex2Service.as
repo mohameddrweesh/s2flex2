@@ -105,17 +105,6 @@
 	            CursorManager.setBusyCursor();
 	        }
 	   
-	   /* 	
-	    if(!_con.connected){
-	    	dispatchEvent(
-		    	new IOErrorEvent(
-		    		"ioError",
-		    		false,
-		    		false,
-		    	"gateway is not connected..("+ this.gatewayUrl+")" )
-	    	);
-	    }
-	    */  
 			var callMethod:String =this.destination +"." +methodName; 
 			var responder:Responder = new Responder(this.onResult,this.onFault);
 			
@@ -158,6 +147,7 @@
         {
           CursorManager.removeBusyCursor();
         }
+				_con =null;
 	    	dispatchEvent(event);
 	    }
 	    
