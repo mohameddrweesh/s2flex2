@@ -5,16 +5,12 @@
 >
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.seasar.flex2</groupId>
-  <artifactId>s2flex2-backport175</artifactId>
+  <artifactId>s2-flex2-backport175</artifactId>
   <packaging>jar</packaging>
   <name>S2Flex2-backport175</name>
   <version>B1</version>
   <description></description>
   <url>http://s2flex2.sandbox.seasar.org/</url>
-  <issueManagement>
-    <system>sourceforge.jp</system>
-    <url><![CDATA[http://sourceforge.jp/tracker/?atid=6582&group_id=689&func=browse]]></url>
-  </issueManagement>
   <inceptionYear>2006</inceptionYear>
   <mailingLists>
     <mailingList>
