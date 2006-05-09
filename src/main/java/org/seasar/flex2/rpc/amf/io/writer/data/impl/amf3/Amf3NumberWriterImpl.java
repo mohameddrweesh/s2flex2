@@ -18,10 +18,10 @@ package org.seasar.flex2.rpc.amf.io.writer.data.impl.amf3;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.seasar.flex2.rpc.amf.io.writer.data.Amf3ObjectWriter;
+import org.seasar.flex2.rpc.amf.io.writer.data.Amf3DataWriter;
 import org.seasar.flex2.rpc.amf.type.Amf3DataType;
 
-public class Amf3NumberWriterImpl implements Amf3ObjectWriter {
+public class Amf3NumberWriterImpl implements Amf3DataWriter {
 
     public void writeData(Object value, DataOutputStream outputStream)
             throws IOException {

@@ -22,8 +22,8 @@ import org.seasar.flex2.rpc.amf.data.AmfBody;
 import org.seasar.flex2.rpc.amf.data.AmfMessage;
 import org.seasar.flex2.rpc.amf.io.AmfSharedObject;
 import org.seasar.flex2.rpc.amf.io.writer.AmfWriter;
-import org.seasar.flex2.rpc.amf.io.writer.data.AmfObjectWriter;
-import org.seasar.flex2.rpc.amf.io.writer.factory.AmfObjectWriterFactory;
+import org.seasar.flex2.rpc.amf.io.writer.data.AmfDataWriter;
+import org.seasar.flex2.rpc.amf.io.writer.data.factory.AmfDataWriterFactory;
 
 public class AmfWriterImpl implements AmfWriter {
 
@@ -33,7 +33,7 @@ public class AmfWriterImpl implements AmfWriter {
 
     protected AmfSharedObject sharedObject;
 
-    protected AmfObjectWriterFactory writerFactory;
+    protected AmfDataWriterFactory writerFactory;
 
     public void config(AmfMessage message, DataOutputStream outputStream) {
         this.message = message;
@@ -44,7 +44,7 @@ public class AmfWriterImpl implements AmfWriter {
         return sharedObject;
     }
 
-    public AmfObjectWriterFactory getWriterFactory() {
+    public AmfDataWriterFactory getWriterFactory() {
         return writerFactory;
     }
 
@@ -52,7 +52,7 @@ public class AmfWriterImpl implements AmfWriter {
         this.sharedObject = sharedObject;
     }
 
-    public void setWriterFactory(AmfObjectWriterFactory writerFactory) {
+    public void setWriterFactory(AmfDataWriterFactory writerFactory) {
         this.writerFactory = writerFactory;
     }
 
@@ -83,7 +83,7 @@ public class AmfWriterImpl implements AmfWriter {
     }
 
     protected final void writeData(final Object value) throws IOException {
-        AmfObjectWriter writer = writerFactory.createObjectWriter(value);
+        AmfDataWriter writer = writerFactory.createObjectWriter(value);
         writer.write(value, outputStream);
     }
 }

@@ -13,12 +13,12 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.amf.io.writer.factory;
+package org.seasar.flex2.rpc.amf.io.writer.data.factory;
 
-import org.seasar.flex2.rpc.amf.io.writer.data.Amf3ObjectWriter;
+import org.seasar.flex2.rpc.amf.io.writer.data.Amf3DataWriter;
 
-public interface Amf3ObjectWriterFactory extends AmfObjectWriterFactory{
+public interface Amf3DataWriterFactory extends AmfDataWriterFactory{
 
-    Amf3ObjectWriter createObjectDataWriter(Object value);
+    Amf3DataWriter createObjectDataWriter(Object value);
 
 }

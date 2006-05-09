@@ -19,13 +19,13 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.seasar.flex2.rpc.amf.io.writer.data.AmfObjectWriter;
+import org.seasar.flex2.rpc.amf.io.writer.data.AmfDataWriter;
 import org.seasar.flex2.rpc.amf.type.AmfDataType;
 import org.seasar.framework.util.DomUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-public class AmfXmlWriterImpl implements AmfObjectWriter {
+public class AmfXmlWriterImpl implements AmfDataWriter {
 
     public void write(Object value, DataOutputStream outputStream)
             throws IOException {

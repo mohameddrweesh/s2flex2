@@ -18,14 +18,14 @@ package org.seasar.flex2.rpc.amf.io.writer.data.impl.amf;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.seasar.flex2.rpc.amf.io.writer.data.AmfObjectWriter;
+import org.seasar.flex2.rpc.amf.io.writer.data.AmfDataWriter;
 import org.seasar.flex2.rpc.amf.type.AmfDataType;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
 import org.seasar.framework.beans.factory.BeanDescFactory;
 
 public class AmfCustomClassWriterImpl extends AmfSharedObjectWriterImpl
-        implements AmfObjectWriter {
+        implements AmfDataWriter {
 
     public void write(Object value, DataOutputStream outputStream)
             throws IOException {
