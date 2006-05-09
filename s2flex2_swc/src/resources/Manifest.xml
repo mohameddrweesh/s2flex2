@@ -1,4 +1,0 @@
-<?xml version="1.0"?>
-<componentPackage>
-    <component id="S2Component" class="org.seasar.flex2.rpc.remoting.S2Component"/>    
-</componentPackage>
