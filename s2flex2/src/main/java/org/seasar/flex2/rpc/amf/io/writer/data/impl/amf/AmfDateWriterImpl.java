@@ -21,10 +21,10 @@ import java.util.Date;
 import java.util.TimeZone;
 
 import org.seasar.flex2.rpc.amf.data.AmfConstants;
-import org.seasar.flex2.rpc.amf.io.writer.data.AmfObjectWriter;
+import org.seasar.flex2.rpc.amf.io.writer.data.AmfDataWriter;
 import org.seasar.flex2.rpc.amf.type.AmfDataType;
 
-public class AmfDateWriterImpl implements AmfObjectWriter {
+public class AmfDateWriterImpl implements AmfDataWriter {
 
     public void write(Object value, DataOutputStream outputStream)
             throws IOException {

@@ -18,20 +18,20 @@ package org.seasar.flex2.rpc.amf.io.writer.data.impl.amf3;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.seasar.flex2.rpc.amf.io.writer.data.Amf3ObjectWriter;
-import org.seasar.flex2.rpc.amf.io.writer.factory.Amf3ObjectWriterFactory;
+import org.seasar.flex2.rpc.amf.io.writer.data.Amf3DataWriter;
+import org.seasar.flex2.rpc.amf.io.writer.data.factory.Amf3DataWriterFactory;
 
 public abstract class Amf3CustomObjectWriterImpl extends Amf3ObjectWriterImpl {
 
-    protected Amf3ObjectWriterFactory writerFactory;
+    protected Amf3DataWriterFactory writerFactory;
 
-    public void setWriterFactory(Amf3ObjectWriterFactory writerFactory) {
+    public void setWriterFactory(Amf3DataWriterFactory writerFactory) {
         this.writerFactory = writerFactory;
     }
 
     protected void writeEntryData(Object value, DataOutputStream outputStream)
             throws IOException {
-        Amf3ObjectWriter dataWriter = writerFactory
+        Amf3DataWriter dataWriter = writerFactory
                 .createObjectDataWriter(value);
         dataWriter.writeData(value, outputStream);
     }

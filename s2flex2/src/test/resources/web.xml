@@ -9,7 +9,7 @@
     </servlet>
     <servlet>
         <servlet-name>gateway</servlet-name>
-        <servlet-class>org.seasar.flex2.rpc.amf.gateway.Amf3Gateway</servlet-class>
+        <servlet-class>org.seasar.flex2.rpc.amf.gateway.AmfGateway</servlet-class>
         <load-on-startup>2</load-on-startup>
     </servlet>
     <servlet-mapping>
@@ -20,4 +20,13 @@
         <servlet-name>gateway</servlet-name>
         <url-pattern>/gateway</url-pattern>
     </servlet-mapping>
+
+	<filter>
+		<filter-name>s2filter</filter-name>
+		<filter-class>org.seasar.framework.container.filter.S2ContainerFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>s2filter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 </web-app>
