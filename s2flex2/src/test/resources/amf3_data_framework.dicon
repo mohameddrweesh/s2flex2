@@ -7,10 +7,10 @@
 	<component class="org.seasar.flex2.rpc.amf.data.factory.impl.AmfHeaderFactoryImpl" />
 	<component class="org.seasar.flex2.rpc.amf.data.factory.impl.AmfMessageFactoryImpl" />
 
-	<component class="org.seasar.flex2.rpc.amf.io.impl.Amf3ReferencesImpl" />
-	<component class="org.seasar.flex2.rpc.amf.io.factory.impl.Amf3ReferencesFactoryImpl" instance="request" />
-	<component class="org.seasar.flex2.rpc.amf.io.impl.AmfSharedObjectImpl" />
-	<component class="org.seasar.flex2.rpc.amf.io.factory.impl.AmfSharedObjectFactoryImpl" instance="request" />
+	<component class="org.seasar.flex2.rpc.amf.io.impl.Amf3ReferencesImpl" instance="request" />
+	<component class="org.seasar.flex2.rpc.amf.io.factory.impl.Amf3ReferencesFactoryImpl"  />
+	<component class="org.seasar.flex2.rpc.amf.io.impl.AmfSharedObjectImpl" instance="request" />
+	<component class="org.seasar.flex2.rpc.amf.io.factory.impl.AmfSharedObjectFactoryImpl" />
 	
 	<component class="org.seasar.flex2.rpc.amf.io.reader.factory.impl.Amf3ReaderFactoryImpl" />
 	<component class="org.seasar.flex2.rpc.amf.io.writer.factory.impl.Amf3WriterFactoryImpl" />
