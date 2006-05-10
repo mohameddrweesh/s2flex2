@@ -18,24 +18,23 @@
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.events.IOErrorEvent;
-	import flash.events.NetStatusEvent;
 	import flash.events.SecurityErrorEvent;
+	import flash.events.NetStatusEvent;
 	import flash.net.NetConnection;
 	import flash.net.ObjectEncoding;
 	import flash.net.Responder;
 	import flash.utils.Proxy;
 	import flash.utils.flash_proxy;
 	
-	import mx.controls.Alert;
 	import mx.core.IMXMLObject;
-
 	import mx.managers.CursorManager;
 	import mx.messaging.config.ServerConfig;
 	import mx.rpc.AbstractService;
-	import mx.rpc.Fault;
 	import mx.rpc.events.FaultEvent;
 	import mx.rpc.events.ResultEvent;
 	import mx.rpc.remoting.Operation;
+	import mx.rpc.Fault;
+	import mx.controls.Alert;
 	import mx.utils.ObjectUtil;
 
 	use namespace flash_proxy;
@@ -47,7 +46,6 @@
 	public dynamic class S2Flex2Service extends AbstractService implements IMXMLObject
 	
 	{
-
 		/** @private
 		*/
 		[Event("fault")]
@@ -132,7 +130,7 @@
             }
             var fault:Fault = new Fault(result.code,result.description,result.details);
 
-	    	var faultEvent:FaultEvent = new FaultEvent(result.code,false,false,fault);
+	    	var faultEvent:FaultEvent = new FaultEvent("fault",false,true,fault,null,null);
 	    	dispatchEvent(faultEvent);	
 	    }
 	    
