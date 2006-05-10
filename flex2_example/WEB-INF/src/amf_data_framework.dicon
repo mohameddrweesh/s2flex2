@@ -9,8 +9,8 @@
 	<component class="org.seasar.flex2.rpc.amf.data.factory.impl.AmfMessageFactoryImpl" />
 	
 	
-	<component class="org.seasar.flex2.rpc.amf.io.impl.AmfSharedObjectImpl" />
-	<component class="org.seasar.flex2.rpc.amf.io.factory.impl.AmfSharedObjectFactoryImpl" instance="request" />
+	<component class="org.seasar.flex2.rpc.amf.io.impl.AmfSharedObjectImpl" instance="request" />
+	<component class="org.seasar.flex2.rpc.amf.io.factory.impl.AmfSharedObjectFactoryImpl" />
 	
 	<component class="org.seasar.flex2.rpc.amf.io.reader.factory.impl.AmfReaderFactoryImpl" />
 	<component class="org.seasar.flex2.rpc.amf.io.writer.factory.impl.AmfWriterFactoryImpl" />
