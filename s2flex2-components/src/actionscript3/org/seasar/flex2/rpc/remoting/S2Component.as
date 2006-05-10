@@ -45,10 +45,10 @@
 
 		/** @private
 		*/
-		[Event("fault")]
+		[Event(name="fault", type="mx.rpc.events.FaultEvent")]
 		/** @private
 		*/
-		[Event("result")]
+		[Event(name="result", type="mx.rpc.events.ResultEvent")]
 
 	    private var _con:NetConnection;
 	    
@@ -117,7 +117,7 @@
             {
                 CursorManager.removeBusyCursor();
             }
-	    	var resultEvent:ResultEvent=new ResultEvent(result,null,null);
+	    	var resultEvent:ResultEvent=new ResultEvent("result",false,true,result,null,null);
 	    	dispatchEvent(resultEvent);
 	    }
 	    
@@ -127,8 +127,8 @@
                 CursorManager.removeBusyCursor();
             }
             var fault:Fault = new Fault(result.code,result.description,result.details);
-//fault,null,null);
-	    	var faultEvent:FaultEvent = new FaultEvent(result.code,false,false,fault);
+
+	    	var faultEvent:FaultEvent = new FaultEvent("fault",false,true,fault,null,null);
 	    	dispatchEvent(faultEvent);	
 	    }
 	}
