@@ -44,16 +44,15 @@
 	[Event(name="securityError",type="flash.events.SecurityErrorEvent")]
 	
 	public dynamic class S2Flex2Service extends AbstractService implements IMXMLObject
-	
 	{
 		/** @private
 		*/
-		[Event("fault")]
+		[Event(name="fault", type="mx.rpc.events.FaultEvent")]
 		/** @private
 		*/
-		[Event("result")]
+		[Event(name="result", type="mx.rpc.events.ResultEvent")]
 		
-    private var _con:NetConnection;
+    	private var _con:NetConnection;
 	    
 	    [Inspectable(type="String")]
 		public var gatewayUrl:String;
@@ -115,11 +114,11 @@
 	  }
 		
 	    public function onResult(result:*):void{
-				if (this.showBusyCursor)
-        {
-         	CursorManager.removeBusyCursor();
-        }
-	    	var resultEvent:ResultEvent=new ResultEvent(result,null,null);
+			if (this.showBusyCursor)
+        	{
+         		CursorManager.removeBusyCursor();
+        	}
+	    	var resultEvent:ResultEvent=new ResultEvent("result",false,true,result,null,null);
 	    	dispatchEvent(resultEvent);
 	    }
 	    
