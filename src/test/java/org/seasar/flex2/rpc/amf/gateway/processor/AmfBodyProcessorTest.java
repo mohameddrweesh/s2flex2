@@ -21,9 +21,11 @@ public class AmfBodyProcessorTest extends S2TestCase {
         assertTrue(
                 "2",
                 processorImpl.getBodyFactory() instanceof AmfBodyFactory);
+        /*
         assertTrue(
                 "3",
                 processorImpl.getErrorFactory() instanceof AmfErrorFactory);
+         */
         assertTrue(
                 "4",
                 processorImpl.getMessageFactory() instanceof AmfMessageFactory);
