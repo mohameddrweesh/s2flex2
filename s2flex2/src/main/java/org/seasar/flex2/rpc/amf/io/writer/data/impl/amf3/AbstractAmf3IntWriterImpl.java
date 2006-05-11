@@ -19,20 +19,20 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.seasar.flex2.rpc.amf.io.writer.data.Amf3DataWriter;
-import org.seasar.flex2.rpc.amf.io.writer.data.factory.Amf3DataWriterFactory;
+import org.seasar.flex2.rpc.amf.type.Amf3DataType;
+import org.seasar.flex2.rpc.amf.util.Amf3DataUtil;
 
-public abstract class Amf3CustomObjectWriterImpl extends Amf3ObjectWriterImpl {
+public abstract class AbstractAmf3IntWriterImpl implements Amf3DataWriter {
 
-    protected Amf3DataWriterFactory writerFactory;
-
-    public void setWriterFactory(Amf3DataWriterFactory writerFactory) {
-        this.writerFactory = writerFactory;
-    }
-
-    protected void writeEntryData(Object value, DataOutputStream outputStream)
+    protected final void writeIntData(int value, DataOutputStream outputStream)
             throws IOException {
-        Amf3DataWriter dataWriter = writerFactory
-                .createObjectDataWriter(value);
-        dataWriter.writeData(value, outputStream);
+        int[] list = Amf3DataUtil.toVariableIntBytes(value);
+        if (list.length <= 4) {
+            for (int i = list.length - 1; i >= 1; i--) {
+                outputStream.writeByte(Amf3DataType.INTEGER_VARIABLED_FLAG
+                        | list[i]);
+            }
+            outputStream.writeByte(list[0]);
+        }
     }
 }

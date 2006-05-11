@@ -18,21 +18,20 @@ package org.seasar.flex2.rpc.amf.io.writer.data.impl.amf3;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.seasar.flex2.rpc.amf.io.writer.data.Amf3DataWriter;
 import org.seasar.flex2.rpc.amf.type.Amf3DataType;
 import org.seasar.flex2.rpc.amf.util.Amf3DataUtil;
 
-public abstract class Amf3IntWriterImpl implements Amf3DataWriter {
+public abstract class AbstractAmf3UTF8StringWriterImpl extends AbstractAmf3IntWriterImpl {
 
-    protected final void writeIntData(int value, DataOutputStream outputStream)
-            throws IOException {
-        int[] list = Amf3DataUtil.toVariableIntBytes(value);
-        if (list.length <= 4) {
-            for (int i = list.length - 1; i >= 1; i--) {
-                outputStream.writeByte(Amf3DataType.INTEGER_VARIABLED_FLAG
-                        | list[i]);
-            }
-            outputStream.writeByte(list[0]);
+    protected final void writeUTF8String(final String value,
+            final DataOutputStream outputStream) throws IOException {
+
+        byte[] bytearr = Amf3DataUtil.toUTF8StringBytes(value);
+        int stringDef = (bytearr.length << 1) | Amf3DataType.OBJECT_INLINE;
+        writeIntData(stringDef, outputStream);
+
+        if (bytearr.length > 0) {
+            outputStream.write(bytearr, 0, bytearr.length);
         }
     }
 }

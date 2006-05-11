@@ -20,7 +20,7 @@ import java.io.IOException;
 
 import org.seasar.flex2.rpc.amf.type.Amf3DataType;
 
-public class Amf3ArrayWriterImpl extends Amf3CustomObjectWriterImpl {
+public class Amf3ArrayWriterImpl extends AbstractAmf3TypedObjectWriterImpl {
 
     public final int getObjectType() {
         return Amf3DataType.ARRAY;

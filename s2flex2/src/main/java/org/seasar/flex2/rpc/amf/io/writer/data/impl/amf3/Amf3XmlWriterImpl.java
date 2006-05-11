@@ -22,7 +22,7 @@ import org.seasar.flex2.rpc.amf.type.Amf3DataType;
 import org.seasar.flex2.rpc.amf.util.Amf3DataUtil;
 import org.w3c.dom.Document;
 
-public class Amf3XmlWriterImpl extends Amf3ObjectWriterImpl {
+public class Amf3XmlWriterImpl extends AbstractAmf3ObjectWriterImpl {
 
     public int getObjectType() {
         return Amf3DataType.XML;

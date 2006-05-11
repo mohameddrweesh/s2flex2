@@ -21,7 +21,7 @@ import java.io.IOException;
 import org.seasar.flex2.rpc.amf.type.Amf3DataType;
 import org.seasar.flex2.rpc.amf.util.Amf3DataUtil;
 
-public class Amf3IntegerWriterImpl extends Amf3IntWriterImpl {
+public class Amf3IntegerWriterImpl extends AbstractAmf3IntWriterImpl {
 
     public void write(Object value, DataOutputStream outputStream)
             throws IOException {
