@@ -21,7 +21,7 @@ import java.io.IOException;
 import org.seasar.flex2.rpc.amf.io.factory.Amf3ReferencesFactory;
 import org.seasar.flex2.rpc.amf.type.Amf3DataType;
 
-public abstract class Amf3ObjectWriterImpl extends Amf3UTF8StringWriterImpl {
+public abstract class AbstractAmf3ObjectWriterImpl extends AbstractAmf3UTF8StringWriterImpl {
 
 	protected Amf3ReferencesFactory referencesFactory;
 

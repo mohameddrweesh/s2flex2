@@ -20,7 +20,7 @@ import java.io.IOException;
 
 import org.seasar.flex2.rpc.amf.type.Amf3DataType;
 
-public abstract class Amf3CustomClassWriterImpl extends Amf3CustomObjectWriterImpl {
+public abstract class AbstractAmf3ClassObjectWriterImpl extends AbstractAmf3TypedObjectWriterImpl {
 
     protected final void writeClassReference(final Object object,
             final DataOutputStream outputStream) throws IOException {

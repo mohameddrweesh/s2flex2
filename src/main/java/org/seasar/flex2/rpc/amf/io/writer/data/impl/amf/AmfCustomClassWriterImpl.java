@@ -24,7 +24,7 @@ import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
 import org.seasar.framework.beans.factory.BeanDescFactory;
 
-public class AmfCustomClassWriterImpl extends AmfSharedObjectWriterImpl
+public class AmfCustomClassWriterImpl extends AbstractAmfObjectWriterImpl
         implements AmfDataWriter {
 
     public void write(Object value, DataOutputStream outputStream)

@@ -21,7 +21,7 @@ import java.util.Date;
 
 import org.seasar.flex2.rpc.amf.type.Amf3DataType;
 
-public class Amf3DateWriterImpl extends Amf3ObjectWriterImpl {
+public class Amf3DateWriterImpl extends AbstractAmf3ObjectWriterImpl {
 
     public int getObjectType() {
         return Amf3DataType.DATE;

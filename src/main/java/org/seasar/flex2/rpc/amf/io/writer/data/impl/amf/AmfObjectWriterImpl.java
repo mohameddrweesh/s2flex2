@@ -22,7 +22,7 @@ import java.util.Map;
 
 import org.seasar.flex2.rpc.amf.type.AmfDataType;
 
-public class AmfObjectWriterImpl extends AmfSharedObjectWriterImpl {
+public class AmfObjectWriterImpl extends AbstractAmfObjectWriterImpl {
 
     public void write(Object value, DataOutputStream outputStream)
             throws IOException {

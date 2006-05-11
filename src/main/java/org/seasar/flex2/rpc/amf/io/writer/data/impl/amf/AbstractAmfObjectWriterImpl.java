@@ -24,7 +24,7 @@ import org.seasar.flex2.rpc.amf.io.writer.data.AmfDataWriter;
 import org.seasar.flex2.rpc.amf.io.writer.data.factory.AmfDataWriterFactory;
 import org.seasar.flex2.rpc.amf.type.AmfDataType;
 
-public abstract class AmfSharedObjectWriterImpl implements AmfDataWriter {
+public abstract class AbstractAmfObjectWriterImpl implements AmfDataWriter {
 
     protected AmfSharedObjectFactory sharedObjectFactory;
 
