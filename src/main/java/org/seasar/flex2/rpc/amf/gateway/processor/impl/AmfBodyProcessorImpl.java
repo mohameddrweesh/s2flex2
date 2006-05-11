@@ -71,6 +71,10 @@ public class AmfBodyProcessorImpl implements AmfBodyProcessor {
         this.bodyFactory = bodyFactory;
     }
 
+    public void setErrorFactory(AmfErrorFactory errorFactory) {
+        this.errorFactory = errorFactory;
+    }
+
     public void setMessageFactory(AmfMessageFactory messageFactory) {
         this.messageFactory = messageFactory;
     }
