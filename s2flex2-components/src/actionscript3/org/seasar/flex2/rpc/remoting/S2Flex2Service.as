@@ -76,7 +76,7 @@
 			this.document=document;
 		}
 		 
-		 private function initConnection():void{
+		 protected function initConnection():void{
 			_con = new NetConnection();
 			configureListeners(_con);
 			_con.objectEncoding = ObjectEncoding.AMF3;
@@ -141,27 +141,27 @@
         
 	    private function netStatusHandler(event:NetStatusEvent):void {
 	    	if (this.showBusyCursor)
-        {
-          CursorManager.removeBusyCursor();
-        }
-				_con =null;
+        	{
+				CursorManager.removeBusyCursor();
+        	}
+			//_con =null;
 	    	dispatchEvent(event);
 	    }
 	    
-			private function securityErrorHandler(event:SecurityErrorEvent):void {
-	    	if (this.showBusyCursor)
-        {
-          CursorManager.removeBusyCursor();
-        }
-        dispatchEvent(event);
-      }
+		private function securityErrorHandler(event:SecurityErrorEvent):void {
+		    if (this.showBusyCursor)
+	        {
+	          CursorManager.removeBusyCursor();
+	        }
+	        dispatchEvent(event);
+      	}
         
-      private function ioErrorHandler(event:IOErrorEvent ):void {
-	    	if (this.showBusyCursor)
-        {
-          CursorManager.removeBusyCursor();
-        }
-       	dispatchEvent(event);
+		private function ioErrorHandler(event:IOErrorEvent ):void {
+			if (this.showBusyCursor)
+			{
+				CursorManager.removeBusyCursor();
+			}
+		dispatchEvent(event);
       } 
 	}
 }
