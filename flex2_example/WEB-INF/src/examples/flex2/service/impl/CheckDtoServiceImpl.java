@@ -16,7 +16,7 @@ public class CheckDtoServiceImpl implements CheckDtoService {
 		internalList.add("blue");
 		internalList.add("yellow");
 		
-		for(int i=1;i<256;i++){
+		for(int i=1;i<3000;i++){
 			CheckDto checkDto = new CheckDto();
 			checkDto.setAddress("address"+i);
 			checkDto.setB(i%2==0);
