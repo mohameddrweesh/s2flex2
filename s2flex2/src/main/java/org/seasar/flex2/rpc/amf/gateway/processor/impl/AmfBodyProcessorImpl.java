@@ -51,6 +51,10 @@ public class AmfBodyProcessorImpl implements AmfBodyProcessor {
         return bodyFactory;
     }
 
+    public AmfErrorFactory getErrorFactory() {
+        return errorFactory;
+    }
+
     public AmfMessageFactory getMessageFactory() {
         return messageFactory;
     }
