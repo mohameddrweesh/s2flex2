@@ -52,7 +52,7 @@
 		*/
 		[Event(name="result", type="mx.rpc.events.ResultEvent")]
 		
-    	private var _con:NetConnection;
+    	protected var _con:NetConnection;
 	    
 	    [Inspectable(type="String")]
 		public var gatewayUrl:String;
