@@ -8,7 +8,7 @@
   <artifactId>s2-flex2</artifactId>
   <packaging>jar</packaging>
   <name>s2Flex2</name>
-  <version>B5</version>
+  <version>B4</version>
   <description></description>
   <url>http://s2flex2.sandbox.seasar.org/</url>
   <issueManagement>
@@ -104,7 +104,7 @@
       <uniqueVersion>false</uniqueVersion>
       <id>maven.seasar.org</id>
       <name>The Seasar Foundation Maven2 Repository</name>
-      <url>scp://www.seasar.org/home/groups/s2flex2/maven/maven2</url>
+      <url>scp://www.seasar.org/home/groups/sandbox/s2flex2/maven/maven2</url>
     </repository>
   </distributionManagement>
 </project>
