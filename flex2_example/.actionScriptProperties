@@ -17,6 +17,7 @@
     </sourcePath>
   </compiler>
   <applications>
+    <application path="\flex2_example\bin\s2flex2_checkDto_example.swf"/>
     <application path="s2flex2_example2.mxml"/>
     <application path="exception_example.mxml"/>
     <application path="\flex2_example\bin\s2flex2_example2.html"/>
