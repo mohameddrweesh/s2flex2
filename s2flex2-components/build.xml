@@ -38,6 +38,7 @@
 				<exclude name="**/target/**"/>
 				<exclude name="**/generated/**"/>
 				<exclude name="**/AMF0Connection.as"/>
+				<exclude name="**/RemoteService.as"/>
 				<exclude name="**/*old.as"/>
 			</zipfileset>
 		</zip>
