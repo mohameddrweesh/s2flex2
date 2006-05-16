@@ -23,12 +23,12 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.seasar.flex2.rpc.amf.data.Amf3Constants;
 import org.seasar.flex2.rpc.amf.io.writer.data.Amf3DataWriter;
 import org.seasar.flex2.rpc.amf.io.writer.data.AmfDataWriter;
 import org.seasar.flex2.rpc.amf.io.writer.data.factory.Amf3DataWriterFactory;
 import org.seasar.flex2.rpc.amf.io.writer.data.impl.amf.AmfNullWriterImpl;
 import org.seasar.flex2.rpc.amf.io.writer.data.impl.amf3.Amf3NullWriterImpl;
-import org.seasar.flex2.rpc.amf.type.Amf3DataType;
 import org.w3c.dom.Document;
 
 public class Amf3DataWriterFactoryImpl implements Amf3DataWriterFactory {
@@ -40,20 +40,12 @@ public class Amf3DataWriterFactoryImpl implements Amf3DataWriterFactory {
     public Amf3DataWriterFactoryImpl() {
     }
 
-    public Amf3DataWriter createObjectDataWriter(Object value) {
+    public Amf3DataWriter createDataValueWriter(Object value) {
 
         Amf3DataWriter writer = null;
         do {
             if (value == null) {
                 writer = new Amf3NullWriterImpl();
-                break;
-            }
-            if (value instanceof String) {
-                writer = (Amf3DataWriter) dataWriterMap.get(String.class);
-                break;
-            }
-            if (value instanceof BigDecimal) {
-                writer = (Amf3DataWriter) dataWriterMap.get(BigDecimal.class);
                 break;
             }
             if (value instanceof Short) {
@@ -64,12 +56,20 @@ public class Amf3DataWriterFactoryImpl implements Amf3DataWriterFactory {
             }
             if (value instanceof Integer) {
                 int data = ((Integer) value).intValue();
-                if (data <= Amf3DataType.INTEGRR_MAX
-                        && data >= Amf3DataType.INTEGRR_MIN) {
+                if (data <= Amf3Constants.INTEGRR_MAX
+                        && data >= Amf3Constants.INTEGRR_MIN) {
                     writer = (Amf3DataWriter) dataWriterMap
                             .get(Integer.class);
                     break;
                 }
+            }
+            if (value instanceof String) {
+                writer = (Amf3DataWriter) dataWriterMap.get(String.class);
+                break;
+            }
+            if (value instanceof BigDecimal) {
+                writer = (Amf3DataWriter) dataWriterMap.get(BigDecimal.class);
+                break;
             }
             if (value instanceof Number) {
                 writer = (Amf3DataWriter) dataWriterMap.get(Number.class);
@@ -110,7 +110,7 @@ public class Amf3DataWriterFactoryImpl implements Amf3DataWriterFactory {
         return writer;
     }
 
-    public AmfDataWriter createObjectWriter(Object value) {
+    public AmfDataWriter createDataWriter(Object value) {
 
         AmfDataWriter writer = null;
         do {

@@ -16,9 +16,7 @@
 package org.seasar.flex2.rpc.amf.io.impl;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.w3c.dom.Document;
@@ -37,24 +35,6 @@ public class Amf3ObjectReferences {
     public void addReference(Object value) {
     	referenceList.add(value);
     	referenceMap.put(value,new Integer( referenceList.size() -1 ));
-    }
-
-    public Date getDateAt(int index) {
-        Object reference = referenceList.get(index);
-        if (reference instanceof Date) {
-            return (Date) reference;
-        } else {
-            return null;
-        }
-    }
-
-    public List getListAt(int index) {
-        Object reference = referenceList.get(index);
-        if (reference instanceof List) {
-            return (List) reference;
-        } else {
-            return null;
-        }
     }
 
     public Object getAt(int index) {

@@ -19,6 +19,6 @@ import org.seasar.flex2.rpc.amf.io.writer.data.Amf3DataWriter;
 
 public interface Amf3DataWriterFactory extends AmfDataWriterFactory{
 
-    Amf3DataWriter createObjectDataWriter(Object value);
+    Amf3DataWriter createDataValueWriter(Object value);
 
 }

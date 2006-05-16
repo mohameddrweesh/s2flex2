@@ -1,21 +1,11 @@
 <?xml version="1.0" encoding="Shift_JIS"?>
 <!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.3//EN" 
 	"http://www.seasar.org/dtd/components23.dtd">
-<components namespace="amf_data_framework" >
+<components namespace="amf_writer_framework" >
+	<include path="amf_data.dicon" />
 	
-	<component class="org.seasar.flex2.rpc.amf.data.factory.impl.AmfBodyFactoryImpl" />
-	<component class="org.seasar.flex2.rpc.amf.data.factory.impl.AmfErrorFactoryImpl" />
-	<component class="org.seasar.flex2.rpc.amf.data.factory.impl.AmfHeaderFactoryImpl" />
-	<component class="org.seasar.flex2.rpc.amf.data.factory.impl.AmfMessageFactoryImpl" />
-	
-	
-	<component class="org.seasar.flex2.rpc.amf.io.impl.AmfSharedObjectImpl" instance="request" />
-	<component class="org.seasar.flex2.rpc.amf.io.factory.impl.AmfSharedObjectFactoryImpl" />
-	
-	<component class="org.seasar.flex2.rpc.amf.io.reader.factory.impl.AmfReaderFactoryImpl" />
-	<component class="org.seasar.flex2.rpc.amf.io.writer.factory.impl.AmfWriterFactoryImpl" />
 	<component class="org.seasar.flex2.rpc.amf.io.writer.impl.AmfWriterImpl" instance="request" />
-	
+	<component class="org.seasar.flex2.rpc.amf.io.writer.factory.impl.AmfWriterFactoryImpl" />
 	
 	<component name="amfStringWriterImpl" class="org.seasar.flex2.rpc.amf.io.writer.data.impl.amf.AmfStringWriterImpl" autoBinding="none" />
 	<component name="amfBigDecimalWriterImpl" class="org.seasar.flex2.rpc.amf.io.writer.data.impl.amf.AmfBigDecimalWriterImpl" autoBinding="none" />

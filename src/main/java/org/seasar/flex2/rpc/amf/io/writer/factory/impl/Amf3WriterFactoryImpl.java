@@ -47,6 +47,14 @@ public class Amf3WriterFactoryImpl implements AmfWriterFactory {
         return container;
     }
 
+    public Amf3ReferencesFactory getReferencesFactory() {
+        return referencesFactory;
+    }
+
+    public AmfSharedObjectFactory getSharedObjectFactory() {
+        return sharedObjectFactory;
+    }
+
     public void setContainer(S2Container container) {
         this.container = container;
     }

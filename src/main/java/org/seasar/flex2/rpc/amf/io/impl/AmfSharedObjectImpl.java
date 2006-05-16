@@ -40,7 +40,15 @@ public class AmfSharedObjectImpl implements AmfSharedObject {
         return -1;
     }
 
+    public int getSize() {
+        return sharedObjects.size();
+    }
+
     public void initialize() {
         sharedObjects.clear();
+    }
+
+    public Object getSharedObject(int index) {
+        return sharedObjects.get(index);
     }
 }

@@ -51,7 +51,7 @@ import org.w3c.dom.Document;
 
 public class Amf3ReaderWriterTest extends S2TestCase {
 
-    private final static String PATH = "Amf3ReaderWriterTest.dicon";
+    private final static String PATH = "amf3.dicon";
 
     protected void setUp() throws Exception {
         include(PATH);

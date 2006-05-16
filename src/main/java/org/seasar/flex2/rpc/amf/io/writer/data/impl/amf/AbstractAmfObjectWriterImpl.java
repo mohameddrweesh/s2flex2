@@ -26,16 +26,16 @@ import org.seasar.flex2.rpc.amf.type.AmfDataType;
 
 public abstract class AbstractAmfObjectWriterImpl implements AmfDataWriter {
 
-    protected AmfSharedObjectFactory sharedObjectFactory;
+    private AmfSharedObjectFactory sharedObjectFactory;
 
-    protected AmfDataWriterFactory writerFactory;
+    private AmfDataWriterFactory writerFactory;
 
     public void setSharedObjectFactory(
             AmfSharedObjectFactory sharedObjectFactory) {
         this.sharedObjectFactory = sharedObjectFactory;
     }
 
-    public void setWriter(AmfDataWriterFactory writerFactory) {
+    public void setWriterFactory(AmfDataWriterFactory writerFactory) {
         this.writerFactory = writerFactory;
     }
 
@@ -44,13 +44,13 @@ public abstract class AbstractAmfObjectWriterImpl implements AmfDataWriter {
     }
 
     protected void writeData( Object value, DataOutputStream outputStream) throws IOException{
-        AmfDataWriter dataWriter = writerFactory.createObjectWriter(value);
+        AmfDataWriter dataWriter = writerFactory.createDataWriter(value);
         dataWriter.write(value, outputStream);
     }
     
     protected final void writeSharedIndex(int index,
             DataOutputStream outputStream) throws IOException {
-        outputStream.writeByte(AmfDataType.FLASHED_SHARED_OBJECT);
+        outputStream.writeByte(AmfDataType.FLUSHED_SHARED_OBJECT);
         outputStream.writeShort(index);
     }
 }

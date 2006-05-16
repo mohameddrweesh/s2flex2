@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="Shift_JIS"?>
 <!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.3//EN" 
 	"http://www.seasar.org/dtd/components23.dtd">
-<components>
-	<include path="amf3_data_framework.dicon" />
+<components namespace="amf" >
+	<include path="amf_reader_framework.dicon" />
+	<include path="amf_writer_framework.dicon" />
 </components>

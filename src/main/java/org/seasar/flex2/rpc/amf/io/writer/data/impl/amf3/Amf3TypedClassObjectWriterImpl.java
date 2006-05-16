@@ -18,6 +18,7 @@ package org.seasar.flex2.rpc.amf.io.writer.data.impl.amf3;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import org.seasar.flex2.rpc.amf.data.Amf3Constants;
 import org.seasar.flex2.rpc.amf.type.Amf3DataType;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
@@ -50,8 +51,8 @@ public class Amf3TypedClassObjectWriterImpl extends AbstractAmf3ClassObjectWrite
 
     private final void writeClassDef(final BeanDesc beanDesc,
             final DataOutputStream outputStream) throws IOException {
-        int int_data = Amf3DataType.OBJECT_INLINE;
-        int_data |= Amf3DataType.CLASS_DEF_INLINE;
+        int int_data = Amf3Constants.OBJECT_INLINE;
+        int_data |= Amf3Constants.CLASS_DEF_INLINE;
         int_data = (beanDesc.getPropertyDescSize() << 4) | int_data;
         writeIntData(int_data, outputStream);
     }

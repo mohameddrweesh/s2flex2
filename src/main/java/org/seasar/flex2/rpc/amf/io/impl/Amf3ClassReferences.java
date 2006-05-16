@@ -41,7 +41,7 @@ public class Amf3ClassReferences {
 
     public Class getClassAt(int index) {
         Object reference = classReferences.get(index);
-        if (reference instanceof Class) {
+        if (reference != null) {
             return (Class) reference;
         } else {
             return null;

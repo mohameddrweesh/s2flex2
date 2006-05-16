@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.seasar.flex2.rpc.amf.data.Amf3Constants;
 import org.seasar.flex2.rpc.amf.type.Amf3DataType;
 
 public class Amf3InitializedObjectWriterImpl extends AbstractAmf3ClassObjectWriterImpl {
@@ -36,11 +37,11 @@ public class Amf3InitializedObjectWriterImpl extends AbstractAmf3ClassObjectWrit
     protected final void writeClassReferenceDef(final Object object,
             final DataOutputStream outputStream) throws IOException {
         addClassReference(object.getClass());
-        int int_data = Amf3DataType.OBJECT_INLINE;
-        int_data |= Amf3DataType.CLASS_DEF_INLINE;
-        int_data |= Amf3DataType.UNTYPED_OBJECT;
+        int int_data = Amf3Constants.OBJECT_INLINE;
+        int_data |= Amf3Constants.CLASS_DEF_INLINE;
+        int_data |= Amf3Constants.UNTYPED_OBJECT;
         writeIntData(int_data, outputStream);
-        outputStream.writeByte(Amf3DataType.EMPTY_STRING); // there is no
+        outputStream.writeByte(Amf3Constants.EMPTY_STRING_DATA); // there is no
         // class-def
     }
 
@@ -53,7 +54,7 @@ public class Amf3InitializedObjectWriterImpl extends AbstractAmf3ClassObjectWrit
             writeObjectEntry(outputStream, (Map.Entry) i.next());
         }
 
-        outputStream.writeByte(Amf3DataType.EMPTY_STRING);
+        outputStream.writeByte(Amf3Constants.EMPTY_STRING_DATA);
     }
 
     private final void writeObjectEntry(final DataOutputStream outputStream,

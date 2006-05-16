@@ -21,7 +21,8 @@ import java.io.IOException;
 import org.seasar.flex2.rpc.amf.io.writer.data.Amf3DataWriter;
 import org.seasar.flex2.rpc.amf.io.writer.data.factory.Amf3DataWriterFactory;
 
-public abstract class AbstractAmf3TypedObjectWriterImpl extends AbstractAmf3ObjectWriterImpl {
+public abstract class AbstractAmf3TypedObjectWriterImpl extends
+        AbstractAmf3ObjectWriterImpl {
 
     protected Amf3DataWriterFactory writerFactory;
 
@@ -31,8 +32,7 @@ public abstract class AbstractAmf3TypedObjectWriterImpl extends AbstractAmf3Obje
 
     protected void writeEntryData(Object value, DataOutputStream outputStream)
             throws IOException {
-        Amf3DataWriter dataWriter = writerFactory
-                .createObjectDataWriter(value);
+        Amf3DataWriter dataWriter = writerFactory.createDataValueWriter(value);
         dataWriter.writeData(value, outputStream);
     }
 }
