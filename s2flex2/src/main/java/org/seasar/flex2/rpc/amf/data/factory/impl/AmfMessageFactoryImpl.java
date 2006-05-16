@@ -7,10 +7,10 @@ import org.seasar.flex2.rpc.amf.data.impl.AmfMessageImpl;
 public class AmfMessageFactoryImpl implements AmfMessageFactory {
 
     public AmfMessage createMessage( int version ) {
-        AmfMessageImpl responseMessage = new AmfMessageImpl();
-        responseMessage.setVersion(version);
+        AmfMessageImpl message = new AmfMessageImpl();
+        message.setVersion(version);
 
-        return responseMessage;
+        return message;
     }
 
 }

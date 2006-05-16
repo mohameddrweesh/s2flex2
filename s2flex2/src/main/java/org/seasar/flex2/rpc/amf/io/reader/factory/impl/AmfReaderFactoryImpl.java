@@ -17,13 +17,36 @@ package org.seasar.flex2.rpc.amf.io.reader.factory.impl;
 
 import java.io.DataInputStream;
 
+import org.seasar.flex2.rpc.amf.io.factory.AmfSharedObjectFactory;
 import org.seasar.flex2.rpc.amf.io.reader.AmfReader;
 import org.seasar.flex2.rpc.amf.io.reader.factory.AmfReaderFactory;
 import org.seasar.flex2.rpc.amf.io.reader.impl.AmfReaderImpl;
+import org.seasar.framework.container.S2Container;
 
 public class AmfReaderFactoryImpl implements AmfReaderFactory {
 
+    private S2Container container;
+
+    private AmfSharedObjectFactory sharedObjectFactory;
+
     public AmfReader createReader(final DataInputStream dataInputStream) {
-        return new AmfReaderImpl(dataInputStream);
+        AmfReaderImpl reader = (AmfReaderImpl) container
+                .getComponent(AmfReaderImpl.class);
+        reader.config(dataInputStream);
+        reader.setSharedObject(sharedObjectFactory.createSharedObject());
+        return reader;
+    }
+
+    public S2Container getContainer() {
+        return container;
+    }
+
+    public void setContainer(S2Container container) {
+        this.container = container;
+    }
+
+    public void setSharedObjectFactory(
+            AmfSharedObjectFactory sharedObjectFactory) {
+        this.sharedObjectFactory = sharedObjectFactory;
     }
 }

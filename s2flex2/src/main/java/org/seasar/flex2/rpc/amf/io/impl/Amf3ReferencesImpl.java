@@ -64,4 +64,20 @@ public class Amf3ReferencesImpl implements Amf3References {
     public int getStringReferenceIndex(String object) {
         return stringReferences.getReferenceIndex(object);
     }
+
+    public Class getClassAt(int index) {
+        return classReferences.getClassAt(index);
+    }
+
+    public Object getObjectAt(int index) {
+        return objectReferences.getAt(index);
+    }
+
+    public String getStringAt(int index) {
+        return (String)stringReferences.getAt(index);
+    }
+    
+    public String[] getPropertiesAt( Class clazz ){
+        return classReferences.getPropertiesAt( clazz );
+    }
 }

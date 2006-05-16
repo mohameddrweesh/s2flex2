@@ -31,29 +31,25 @@ public class AmfWriterImpl implements AmfWriter {
 
     protected DataOutputStream outputStream;
 
-    protected AmfSharedObject sharedObject;
+    private AmfSharedObject sharedObject;
 
-    protected AmfDataWriterFactory writerFactory;
+    private AmfDataWriterFactory dataWriterFactory;
 
     public void config(AmfMessage message, DataOutputStream outputStream) {
         this.message = message;
         this.outputStream = outputStream;
     }
-
-    public AmfSharedObject getSharedObject() {
-        return sharedObject;
-    }
-
-    public AmfDataWriterFactory getWriterFactory() {
-        return writerFactory;
+    
+    public AmfDataWriterFactory getDataWriterFactory() {
+        return dataWriterFactory;
     }
 
     public void setSharedObject(AmfSharedObject sharedObject) {
         this.sharedObject = sharedObject;
     }
 
-    public void setWriterFactory(AmfDataWriterFactory writerFactory) {
-        this.writerFactory = writerFactory;
+    public void setDataWriterFactory(AmfDataWriterFactory writerFactory) {
+        this.dataWriterFactory = writerFactory;
     }
 
     public void write() throws IOException {
@@ -83,7 +79,11 @@ public class AmfWriterImpl implements AmfWriter {
     }
 
     protected final void writeData(final Object value) throws IOException {
-        AmfDataWriter writer = writerFactory.createObjectWriter(value);
+        AmfDataWriter writer = dataWriterFactory.createDataWriter(value);
         writer.write(value, outputStream);
+    }
+
+    public AmfSharedObject getSharedObject() {
+        return sharedObject;
     }
 }

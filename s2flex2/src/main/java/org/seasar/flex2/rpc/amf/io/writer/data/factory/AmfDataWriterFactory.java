@@ -19,6 +19,6 @@ import org.seasar.flex2.rpc.amf.io.writer.data.AmfDataWriter;
 
 public interface AmfDataWriterFactory {
 
-    AmfDataWriter createObjectWriter(Object value);
+    AmfDataWriter createDataWriter(Object value);
 
 }

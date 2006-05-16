@@ -15,34 +15,17 @@
  */
 package org.seasar.flex2.rpc.amf.io.reader.impl;
 
-import java.io.DataInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 import org.seasar.flex2.rpc.amf.data.AmfMessage;
-import org.seasar.flex2.rpc.amf.io.impl.Amf3ClassReferences;
-import org.seasar.flex2.rpc.amf.io.impl.Amf3ObjectReferences;
+import org.seasar.flex2.rpc.amf.io.Amf3References;
 import org.seasar.flex2.rpc.amf.io.reader.AmfReader;
-import org.seasar.flex2.rpc.amf.type.Amf3DataType;
-import org.seasar.flex2.rpc.amf.type.AmfDataType;
-import org.seasar.flex2.rpc.amf.util.Amf3DataUtil;
-import org.seasar.framework.util.ClassUtil;
-import org.w3c.dom.Document;
-
-import flashgateway.io.ASObject;
 
 public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
 
-    private Amf3ObjectReferences objectReferences;
-    
-    private Amf3ObjectReferences stringReferences;
-    
-    private Amf3ClassReferences classReferences;
-    
-    public Amf3ReaderImpl(DataInputStream inputStream) {
-        super(inputStream);
+    private Amf3References references;
+
+    public Amf3ReaderImpl() {
     }
 
     public AmfMessage read() throws IOException {
@@ -52,139 +35,9 @@ public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
         return message;
     }
 
-    protected void initializeSharedObject() {
-        super.initializeSharedObject();
-        objectReferences = new Amf3ObjectReferences();
-        stringReferences = new Amf3ObjectReferences();
-        classReferences = new Amf3ClassReferences();
-    }
-
-    protected List readArray() throws IOException {
-        logger.debug("<amf3> readArray:");
-
-        int reference = readInt();
-
-        switch (reference & Amf3DataType.OBJECT_INLINE) {
-
-            case Amf3DataType.OBJECT_REFERENCE:
-                return objectReferences.getListAt(reference >>> 1);
-
-            case Amf3DataType.OBJECT_INLINE:
-                return readArrayData(reference);
-        }
-        return null;
-    }
-
-    protected Object readASObject() throws IOException {
-        logger.debug("<amf3> readASObject:");
-
-        ASObject obj = new ASObject();
-        objectReferences.addReference(obj);
-        while (true) {
-            String prop_name = readString();
-            if (prop_name.length() <= 0) {
-                break;
-            }
-            //
-            Object value = readAMF3Data();
-            obj.put(prop_name, value);
-        }
-        return obj;
-    }
-
-    protected Boolean readBooleanFalse() {
-        logger.debug("<amf3> readBooleanFalse:");
-
-        return Boolean.FALSE;
-    }
-
-    protected Boolean readBooleanTrue() {
-        logger.debug("<amf3> readBooleanTrue:");
-
-        return Boolean.TRUE;
-    }
-
-    protected Object readCustomClass(int reference, Class clazz)
-            throws IOException {
-        logger.debug("<amf3> readCustomClass:" + clazz.getName());
-
-        Object object = ClassUtil.newInstance(clazz);
-        objectReferences.addReference(object);
-
-        int props_num = 0;
-        String[] prop_names = null;
-        if ((reference & Amf3DataType.CLASS_DEF_INLINE) == Amf3DataType.CLASS_DEF_INLINE) {
-            props_num = reference >>> 4;
-            prop_names = new String[props_num];
-            for (int i = 0; i < props_num; i++) {
-                prop_names[i] = readString();
-            }
-            classReferences.addProperties(clazz, prop_names);
-        } else {
-            prop_names = classReferences.getPropertiesAt(clazz);
-            props_num = prop_names.length;
-        }
-
-        Object[] prop_values = new Object[props_num];
-        for (int i = 0; i < props_num; i++) {
-            prop_values[i] = readAMF3Data();
-        }
-
-        Amf3DataUtil.setProperties(object, props_num, prop_names, prop_values);
-
-        return object;
-    }
-
-    protected Object readData() throws IOException {
-        byte dataType = inputStream.readByte();
-        return readData(dataType);
-    }
-
-    protected Object readData(byte dataType) throws IOException {
-        switch (dataType) {
-
-            case AmfDataType.NULL:
-                return super.readNull();
-
-            case AmfDataType.NUMBER:
-                return super.readNumber();
-
-            case AmfDataType.BOOLEAN:
-                return super.readBoolean();
-
-            case AmfDataType.STRING:
-                return super.readString();
-
-            case AmfDataType.ARRAY:
-                return super.readArray();
-
-            case Amf3DataType.AMF3_DATA_MARKER:
-                return readAMF3Data(inputStream.readByte());
-
-            default:
-                return null;
-        }
-    }
-
-    protected Date readDate() throws IOException {
-        Date result = null;
-
-        int reference = readInt();
-
-        switch (reference & Amf3DataType.OBJECT_INLINE) {
-
-            case Amf3DataType.OBJECT_REFERENCE:
-                result = objectReferences.getDateAt(reference >>> 1);
-                break;
-
-            case Amf3DataType.OBJECT_INLINE:
-                result = readDateData();
-                break;
-        }
-
-        logger.debug("<amf3> readDate:" + result);
-
-        return result;
+    protected void clean() {
+        super.clean();
+        references.initialize();
     }
 
     protected void readHeader() throws IOException {
@@ -193,55 +46,10 @@ public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
         int headerCount = inputStream.readUnsignedShort();
         for (int i = 0; i < headerCount; ++i) {
             inputStream.readUTF();
-            readBoolean();
+            inputStream.readByte();
             inputStream.readInt();
             readData();
         }
-    }
-
-    protected Integer readInteger() throws IOException {
-        Integer result = new Integer(readInt());
-
-        logger.debug("<amf3> readInteger:" + result);
-
-        return result;
-    }
-
-    protected Object readObject() throws IOException {
-        logger.debug("<amf3> readObject:");
-
-        int reference = readInt();
-
-        switch (reference & Amf3DataType.OBJECT_INLINE) {
-
-            case Amf3DataType.OBJECT_REFERENCE:
-                return objectReferences.getAt(reference >>> 1);
-
-            case Amf3DataType.OBJECT_INLINE:
-                return readObjectData(reference);
-        }
-
-        return null;
-    }
-
-    protected String readString() throws IOException {
-        String result = null;
-
-        int reference = readInt();
-        switch (reference & Amf3DataType.OBJECT_INLINE) {
-
-            case Amf3DataType.OBJECT_REFERENCE:
-                result = (String)stringReferences.getAt(reference >>> 1);
-                break;
-
-            case Amf3DataType.OBJECT_INLINE:
-                result = readStringData(reference);
-                break;
-        }
-
-        logger.debug("<amf3> readString:" + result);
-
-        return result;
     }
 
     protected void readVersion() throws IOException {
@@ -250,181 +58,11 @@ public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
         logger.debug("<amf3> readVersion:" + message.getVersion());
     }
 
-    protected Document readXML() throws IOException {
-        Document doc = null;
-
-        int reference = readInt();
-        switch (reference & Amf3DataType.OBJECT_INLINE) {
-
-            case Amf3DataType.OBJECT_REFERENCE:
-                doc = objectReferences.getXmlDocumentAt(reference >>> 1);
-                break;
-
-            case Amf3DataType.OBJECT_INLINE:
-                doc = readXmlData(reference);
-                break;
-        }
-
-        logger.debug("<amf3> readXML:");
-
-        return doc;
+    public Amf3References getReferences() {
+        return references;
     }
 
-    private final Object readAMF3Data() throws IOException {
-        byte dataType = inputStream.readByte();
-        return readAMF3Data(dataType);
-    }
-
-    private final Object readAMF3Data(byte dataType) throws IOException {
-        switch (dataType) {
-            case Amf3DataType.NULL:
-                return super.readNull();
-            case Amf3DataType.NUMBER:
-                return super.readNumber();
-            case Amf3DataType.INTEGER:
-                return readInteger();
-            case Amf3DataType.BOOLEAN_FALSE:
-                return readBooleanFalse();
-            case Amf3DataType.BOOLEAN_TRUE:
-                return readBooleanTrue();
-            case Amf3DataType.STRING:
-                return readString();
-            case Amf3DataType.DATE:
-                return readDate();
-            case Amf3DataType.ARRAY:
-                return readArray();
-            case Amf3DataType.OBJECT:
-                return readObject();
-            case Amf3DataType.XML:
-                return readXML();
-            default:
-                return null;
-        }
-    }
-
-    private final List readArrayData(int reference) throws IOException {
-        int array_length = reference >> 1;
-        List array = new ArrayList(array_length);
-        objectReferences.addReference(array);
-        inputStream.readByte(); // class define byte
-        for (int i = 0; i < array_length; i++) {
-            Object item = readAMF3Data();
-            array.add(item);
-        }
-        return array;
-    }
-
-    private final Date readDateData() throws IOException {
-        Date date = Amf3DataUtil.toDate(inputStream.readDouble());
-        objectReferences.addReference(date);
-        return date;
-    }
-
-    private final int readInt() throws IOException {
-
-        int int_info = inputStream.readUnsignedByte();
-
-        if (int_info >= 0x00) {
-
-            if ((int_info >>> 7) == 0x00) {
-                return Amf3DataUtil.toInt(new int[] { int_info & 0x7F }, 1);
-            }
-
-            return readIntData(int_info);
-        }
-
-        return 0;
-    }
-
-    private final int readIntData(int int_info) throws IOException {
-        int[] list = new int[4];
-        int byte_count = 1;
-
-        list[0] = int_info & 0x7F;
-
-        for (int i = 1; i < list.length; i++) {
-            list[i] = inputStream.readUnsignedByte();
-            byte_count++;
-            if ((list[i] >>> 7) == 0x00) {
-                break;
-            }
-            if (byte_count < list.length) {
-                list[i] &= 0x7F;
-            }
-        }
-
-        if (byte_count > 0) {
-            if (byte_count < 4) {
-                return Amf3DataUtil.toInt(list, byte_count);
-            } else {
-                switch (int_info >>> 6) {
-                    case 0x02:
-                        return Amf3DataUtil.toInt(list, byte_count);
-
-                    case 0x03:
-                        return Amf3DataUtil.toNegativeInt(list, byte_count);
-                }
-            }
-        }
-
-        return 0;
-    }
-
-    private final Class readObjectClassDef(int reference) throws IOException {
-
-        Class clazz = ASObject.class;
-
-        switch (reference & Amf3DataType.CLASS_DEF_INLINE) {
-
-            case Amf3DataType.CLASS_DEF_REFERENCE:
-                clazz = classReferences.getClassAt(reference >>> 2);
-                break;
-
-            case Amf3DataType.CLASS_DEF_INLINE:
-                String class_name = readString();
-                if (class_name.length() > 0) {
-                    clazz = ClassUtil.forName(class_name);
-                }
-                classReferences.addClassReference(clazz);
-                break;
-        }
-        return clazz;
-    }
-
-    private final Object readObjectData(int reference) throws IOException {
-        Class clazz = readObjectClassDef(reference);
-        if (clazz != null && !(ASObject.class.equals(clazz))) {
-            return readCustomClass(reference, clazz);
-        } else {
-            return readASObject();
-        }
-    }
-
-    private final String readStringData(int reference) throws IOException {
-        int str_length = reference >> 1;
-        String str = null;
-        if (str_length > 0) {
-            byte[] bytearr = new byte[str_length * 2];
-            inputStream.readFully(bytearr, 0, str_length);
-            str = Amf3DataUtil.toUTF8String(bytearr, str_length);
-            stringReferences.addReference(str);
-        } else {
-            str = "";
-        }
-
-        return str;
-    }
-
-    private final Document readXmlData(int reference) throws IOException {
-
-        int str_length = reference >>> 1;
-        byte[] bytearr = new byte[str_length * 2];
-        inputStream.readFully(bytearr, 0, str_length);
-        String xml_data = Amf3DataUtil.toUTF8String(bytearr, str_length);
-
-        Document xml = Amf3DataUtil.toXmlDocument(xml_data);
-        objectReferences.addReference(xml);
-
-        return xml;
+    public void setReferences(Amf3References references) {
+        this.references = references;
     }
 }

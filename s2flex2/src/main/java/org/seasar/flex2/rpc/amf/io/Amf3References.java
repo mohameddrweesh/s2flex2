@@ -25,11 +25,19 @@ public interface Amf3References {
     
     void addStringReference(String object);
 
-    void initialize();
+    Class getClassAt( int index );
 
     int getClassReferenceIndex(Class clazz);
+
+    Object getObjectAt( int index );
     
     int getObjectReferenceIndex(Object object);
     
+    String[] getPropertiesAt( Class clazz );
+    
+    String getStringAt( int index );
+    
     int getStringReferenceIndex(String object);
+    
+    void initialize();
 }

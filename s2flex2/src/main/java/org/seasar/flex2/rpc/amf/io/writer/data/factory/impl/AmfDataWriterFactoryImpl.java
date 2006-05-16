@@ -39,7 +39,7 @@ public class AmfDataWriterFactoryImpl implements AmfDataWriterFactory {
         this.writerMap = writerMap;
     }
 
-    public AmfDataWriter createObjectWriter(Object value) {
+    public AmfDataWriter createDataWriter(Object value) {
 
         AmfDataWriter writer = null;
         do {

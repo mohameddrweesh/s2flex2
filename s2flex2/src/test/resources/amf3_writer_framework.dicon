@@ -1,18 +1,9 @@
 <?xml version="1.0" encoding="Shift_JIS"?>
 <!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.3//EN" 
 	"http://www.seasar.org/dtd/components23.dtd">
-<components namespace="amf3_data_framework" >
-	<component class="org.seasar.flex2.rpc.amf.data.factory.impl.Amf3BodyFactoryImpl" />
-	<component class="org.seasar.flex2.rpc.amf.data.factory.impl.AmfErrorFactoryImpl" />
-	<component class="org.seasar.flex2.rpc.amf.data.factory.impl.AmfHeaderFactoryImpl" />
-	<component class="org.seasar.flex2.rpc.amf.data.factory.impl.AmfMessageFactoryImpl" />
-
-	<component class="org.seasar.flex2.rpc.amf.io.impl.Amf3ReferencesImpl" instance="request" />
-	<component class="org.seasar.flex2.rpc.amf.io.factory.impl.Amf3ReferencesFactoryImpl"  />
-	<component class="org.seasar.flex2.rpc.amf.io.impl.AmfSharedObjectImpl" instance="request" />
-	<component class="org.seasar.flex2.rpc.amf.io.factory.impl.AmfSharedObjectFactoryImpl" />
+<components namespace="amf3_writer_framework" >
+	<include path="amf3_data.dicon" />
 	
-	<component class="org.seasar.flex2.rpc.amf.io.reader.factory.impl.Amf3ReaderFactoryImpl" />
 	<component class="org.seasar.flex2.rpc.amf.io.writer.factory.impl.Amf3WriterFactoryImpl" />
 	<component class="org.seasar.flex2.rpc.amf.io.writer.impl.Amf3WriterImpl" instance="request" />
 	

@@ -2,7 +2,7 @@
 <!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.3//EN" 
 	"http://www.seasar.org/dtd/components23.dtd">
 <components>
-	<include path="amf3_data_framework.dicon" />
+	<include path="amf3.dicon" />
 	
 	<component class="org.seasar.flex2.rpc.gateway.session.impl.TomcatSessionDecoratorImpl" />
 	<component class="org.seasar.flex2.rpc.amf.gateway.processor.impl.AmfHeaderProcessorImpl" />

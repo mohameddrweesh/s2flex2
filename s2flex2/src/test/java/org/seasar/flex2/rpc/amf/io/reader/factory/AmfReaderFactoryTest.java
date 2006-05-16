@@ -13,31 +13,37 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.amf.io.factory;
+package org.seasar.flex2.rpc.amf.io.reader.factory;
 
 import org.seasar.extension.unit.S2TestCase;
+import org.seasar.flex2.rpc.amf.io.reader.data.factory.AmfDataReaderFactory;
 import org.seasar.flex2.rpc.amf.io.reader.factory.AmfReaderFactory;
-import org.seasar.flex2.rpc.amf.io.reader.factory.impl.Amf3ReaderFactoryImpl;
-import org.seasar.flex2.rpc.amf.io.writer.factory.AmfWriterFactory;
-import org.seasar.flex2.rpc.amf.io.writer.factory.impl.Amf3WriterFactoryImpl;
+import org.seasar.flex2.rpc.amf.io.reader.factory.impl.AmfReaderFactoryImpl;
+import org.seasar.flex2.rpc.amf.io.reader.impl.AmfReaderImpl;
 import org.seasar.framework.container.S2Container;
 
-public class Amf3FactoryTest extends S2TestCase {
+public class AmfReaderFactoryTest extends S2TestCase {
 
-    private static String PATH = "Amf3FactoryTest.dicon";
+    private static String PATH = "amf_reader_framework.dicon";
 
-    public void testCreateReader() throws Exception {
+    public void testCreateReaderFactory() throws Exception {
         S2Container container = getContainer();
         Object factory = container.getComponent(AmfReaderFactory.class);
         assertNotNull("1", factory);
-        assertTrue("2", factory instanceof Amf3ReaderFactoryImpl);
+        assertTrue("2", factory instanceof AmfReaderFactoryImpl);
     }
 
-    public void testCreateWriter() throws Exception {
+    public void testCreateReader() throws Exception {
         S2Container container = getContainer();
-        Object factory = container.getComponent(AmfWriterFactory.class);
-        assertNotNull("1", factory);
-        assertTrue("2", factory instanceof Amf3WriterFactoryImpl);
+        Object object = container.getComponent(AmfReaderImpl.class);
+
+        assertTrue("1", object instanceof AmfReaderImpl);
+
+        AmfReaderImpl reader = (AmfReaderImpl) object;
+        AmfDataReaderFactory dataFactory = reader.getDataReaderFactory();
+        assertNotNull("2", dataFactory);
+        assertTrue("3", dataFactory instanceof AmfDataReaderFactory);
+
     }
 
     protected void setUp() throws Exception {
