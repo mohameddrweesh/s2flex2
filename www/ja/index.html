@@ -23,11 +23,11 @@
         </tr>
         <tr>
           <td rowspan="2"><img src="images/top04.gif" alt="" height="49" width="235"></td>
-          <td><a href="http://www.seasar.org/index.html"><img src="images/menu01_b_ja.gif" height="30" width="78" border="0" alt="" id="menu01" onMouseOver="swap(1)" onMouseOut="restore(1)"></a></td>
-          <td><a href="http://www.seasar.org/projects.html"><img src="images/menu02_b_ja.gif" height="30" width="101" border="0" alt="" id="menu02" onMouseOver="swap(2)" onMouseOut="restore(2)"></a></td>
-          <td><a href="http://www.seasar.org/products.html"><img src="images/menu03_b_ja.gif" height="30" width="110" border="0" alt="" id="menu03" onMouseOver="swap(3)" onMouseOut="restore(3)"></a></td>
-          <td><a href="http://www.seasar.org/resources.html"><img src="images/menu04_b_ja.gif" height="30" width="113" border="0" alt="" id="menu04" onMouseOver="swap(4)" onMouseOut="restore(4)"></a></td>
-          <td><img src="images/menu05_b_ja.gif" height="30" width="109" border="0" alt="" id="menu05" onMouseOver="swap(5)" onMouseOut="restore(5)"></td>
+          <td><a href="http://www.seasar.org/index.html"><img src="images/menu01_b_ja.gif" height="30" width="78" border="0" alt="" id="menu01" onmouseover="swap(1)" onmouseout="restore(1)"></a></td>
+          <td><a href="http://www.seasar.org/projects.html"><img src="images/menu02_b_ja.gif" height="30" width="101" border="0" alt="" id="menu02" onmouseover="swap(2)" onmouseout="restore(2)"></a></td>
+          <td><a href="http://www.seasar.org/products.html"><img src="images/menu03_b_ja.gif" height="30" width="110" border="0" alt="" id="menu03" onmouseover="swap(3)" onmouseout="restore(3)"></a></td>
+          <td><a href="http://www.seasar.org/resources.html"><img src="images/menu04_b_ja.gif" height="30" width="113" border="0" alt="" id="menu04" onmouseover="swap(4)" onmouseout="restore(4)"></a></td>
+          <td><img src="images/menu05_b_ja.gif" height="30" width="109" border="0" alt="" id="menu05" onmouseover="swap(5)" onmouseout="restore(5)"></td>
           <td><img height="30" width="34" src="images/menu06.gif" alt=""></td>
         </tr>
         <tr>
@@ -43,14 +43,51 @@
             <h1>&nbsp;</h1>
             <h1>S2Flex2</h1>
             <h3><a name="abstraction">概要</a></h3>
-            <p>S2Flex2は、現在パブリックベータ2である<a href="http://labs.macromedia.com/" target="_blank">Flex2</a>と<a href="http://s2container.seasar.org/ja/index.html">Seasar2</a>を連携させるものです。
+            <p>S2Flex2は、現在パブリックベータ3である<a href="http://labs.macromedia.com/" target="_blank">Flex2</a>と<a href="http://s2container.seasar.org/ja/index.html">Seasar2</a>を連携させるものです。
               S2Flex2を使うとFlex2からSeasar2に登録されているコンポーネントを簡単に呼び出すことができるようになります。</p>
             <p>S2Flex2は現在のところ以下の２つから構成されています。</p>
-            <ul><li>AMF3のGateway</li>
-              <li>S2Flex2のGatewayに接続するmxmlタグコンポーネント</li>
+            <ul>
+              <li>S2Flex2
+                <ul>
+                  <li>AMF3のGateway</li>
+                </ul>
+              </li>
+              <li>S2Flex2-components
+                <ul>
+                  <li>S2Flex2のGatewayに接続するmxmlタグコンポーネント</li>
+                </ul>
+              </li>
             </ul>            
             <h3><a name="news">お知らせ</a></h3>
-            <p>[2006/03/31] flex2_example Beta3(Flex2 Beta2対応)リリース</p>
+            <h4>[2006/05/16] S2Flex2 Beta4(Flex2 Beta3対応)リリース</h4>
+			<h5>S2Flex2本体についてBeta4をリリースいたしました。</h5>
+			<ul>
+              <li>AMFの応答(Response)部分を変更してパフォーマンスを改善しました。</li>
+            </ul>
+			<h5>S2Flex2-components(S2Flex-swcより改名)Beta3をリリースしました。</h5>
+			<ul>
+			  <li>名称を変更しました。(S2Flex2-swc -&gt;S2Flex2-components)</li>
+		      <li>Flex Beta 3に対応しました。</li>
+		      <li>NetConnection
+              でのイベントを受け取れるようにしました。[Seasar-user:3546]
+                <br>
+                S2Componentの替わりにS2Flex2Serviceを利用することで以下のイベントを受け取ることができます。<br>		        
+                <ul>
+                  <li>netStatus</li>
+	                <li>ioError</li>
+                  <li>securityError</li>
+                </ul>
+		      </li>
+	        </ul>			
+			<h5>Flex2-exampe Beta3をリリースしました。 </h5>
+			<ul>
+			  <li>サンプルのmxmlをFlex Builder 2Beta3対応でコンパイルできるように修正しました。
+</li>
+		      <li>s2flex2_checkDto_example.mxmlのリスト出力の数を3000に変更しました。</li>
+			  <li>同梱しているs2flex2をBeta4に差し替えました。</li>
+			  <li>同梱しているコンポーネントをs2flex2-componentsのもの(s2flex2-component.swc)に変更しました。</li>
+			</ul>			
+			<h4>[2006/03/31] flex2_example Beta3(Flex2 Beta2対応)リリース</h4>
 			<p>ExampleのBeta3(Flex2 Beta2対応)をリリースいたしました。</p>
 			<ul>
 			<li>mxmlのタグコンポーネントを入れ替えました。(FlexBuilder2 Beta2でコンパイルしたもの) </li>
@@ -77,9 +114,9 @@
 			<h3><a name="download">ダウンロード</a></h3>
 			<ul>
 			
-			<li><a href="../download/2006-03-17/S2Flex2-B3.zip">S2Flex2 Beta3</a></li>
-			<li><a href="../download/2006-03-29/flex2-example-B3.zip">S2Flex2 Example Beta3 (Flex2 Beta2対応)</a></li>
-			<li><a href="../download/2006-03-29/S2Flex2-swc-B2a.zip">S2Flex2 swc Beta2a(Flex2 Beta2対応)</a></li>
+			<li><a href="../download/2006-05-16/S2Flex2-B4.zip">S2Flex2 Beta4</a></li>
+			<li><a href="../download/2006-05-16/flex2-example-B4.zip">S2Flex2 Example Beta4 (Flex2 Beta3対応)</a></li>
+			<li><a href="../download/2006-05-16/S2Flex2-components-B3.zip">S2Flex2 components Beta3(Flex2 Beta3対応)</a></li>
 			</ul>
 
             <!-- document end -->
