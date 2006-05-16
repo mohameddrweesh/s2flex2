@@ -19,7 +19,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Date;
 
-import org.seasar.flex2.rpc.amf.data.Amf3Constants;
+import org.seasar.flex2.rpc.amf.data.Amf3DataConstants;
 import org.seasar.flex2.rpc.amf.type.Amf3DataType;
 
 public class Amf3DateWriterImpl extends AbstractAmf3ObjectWriterImpl {
@@ -36,7 +36,7 @@ public class Amf3DateWriterImpl extends AbstractAmf3ObjectWriterImpl {
     private final void writeDateData(final Date date,
             DataOutputStream outputStream) throws IOException {
         addObjectReference(date);
-        outputStream.writeByte(Amf3Constants.OBJECT_INLINE);
+        outputStream.writeByte(Amf3DataConstants.OBJECT_INLINE);
         outputStream.writeDouble(((Date) date).getTime());
     }
 }

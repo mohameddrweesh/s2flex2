@@ -18,10 +18,10 @@ package org.seasar.flex2.rpc.amf.gateway.processor.impl;
 import javax.servlet.http.HttpServletRequest;
 
 import org.seasar.flex2.rpc.amf.data.AmfHeader;
+import org.seasar.flex2.rpc.amf.data.AmfHeaderConstants;
 import org.seasar.flex2.rpc.amf.data.AmfMessage;
 import org.seasar.flex2.rpc.amf.data.factory.AmfHeaderFactory;
 import org.seasar.flex2.rpc.amf.gateway.processor.AmfHeaderProcessor;
-import org.seasar.flex2.rpc.amf.type.AmfHeaderType;
 import org.seasar.flex2.rpc.gateway.session.SessionDecorator;
 import org.seasar.flex2.rpc.gateway.util.HttpSessionUtil;
 import org.seasar.framework.log.Logger;
@@ -71,7 +71,7 @@ public class AmfHeaderProcessorImpl implements AmfHeaderProcessor {
         String sessionId = HttpSessionUtil.getSessionId(request);
         if (sessionId != null && sessionId.length() > 0) {
             sessionId = sessionDecorator.formatSessionId(sessionId);
-            addHeader(responseMessage, AmfHeaderType.APPEND_TO_GATEWAYURL,
+            addHeader(responseMessage, AmfHeaderConstants.APPEND_TO_GATEWAYURL,
                     sessionId);
         }
     }

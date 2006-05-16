@@ -18,7 +18,7 @@ package org.seasar.flex2.rpc.amf.io.writer.data.impl.amf3;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.seasar.flex2.rpc.amf.data.Amf3Constants;
+import org.seasar.flex2.rpc.amf.data.Amf3DataConstants;
 import org.seasar.flex2.rpc.amf.io.writer.data.Amf3DataWriter;
 import org.seasar.flex2.rpc.amf.util.Amf3DataUtil;
 
@@ -29,7 +29,7 @@ public abstract class AbstractAmf3IntWriterImpl implements Amf3DataWriter {
         int[] list = Amf3DataUtil.toVariableIntBytes(value);
         if (list.length <= 4) {
             for (int i = list.length - 1; i >= 1; i--) {
-                outputStream.writeByte(Amf3Constants.INTEGER_INCLUDE_NEXT_BYTE
+                outputStream.writeByte(Amf3DataConstants.INTEGER_INCLUDE_NEXT_BYTE
                         | list[i]);
             }
             outputStream.writeByte(list[0]);

@@ -18,7 +18,7 @@ package org.seasar.flex2.rpc.amf.io.reader.data.impl.amf3;
 import java.io.DataInputStream;
 import java.io.IOException;
 
-import org.seasar.flex2.rpc.amf.data.Amf3Constants;
+import org.seasar.flex2.rpc.amf.data.Amf3DataConstants;
 import org.seasar.flex2.rpc.amf.io.factory.Amf3ReferencesFactory;
 
 public abstract class AbstractAmf3ObjectReaderImpl extends
@@ -84,13 +84,13 @@ public abstract class AbstractAmf3ObjectReaderImpl extends
         Object result = null;
 
         int reference = readInt( inputStream );
-        switch (reference & Amf3Constants.OBJECT_INLINE) {
+        switch (reference & Amf3DataConstants.OBJECT_INLINE) {
 
-            case Amf3Constants.OBJECT_REFERENCE:
+            case Amf3DataConstants.OBJECT_REFERENCE:
                 result = readReferencedObject( reference, inputStream );
                 break;
 
-            case Amf3Constants.OBJECT_INLINE:
+            case Amf3DataConstants.OBJECT_INLINE:
                 result = readInlinedObject( reference, inputStream );
                 break;
                 
