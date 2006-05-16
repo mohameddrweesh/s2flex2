@@ -18,7 +18,7 @@ package org.seasar.flex2.rpc.amf.io.writer.data.impl.amf3;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.seasar.flex2.rpc.amf.data.Amf3Constants;
+import org.seasar.flex2.rpc.amf.data.Amf3DataConstants;
 import org.seasar.flex2.rpc.amf.type.Amf3DataType;
 
 public class Amf3ArrayWriterImpl extends AbstractAmf3TypedObjectWriterImpl {
@@ -41,9 +41,9 @@ public class Amf3ArrayWriterImpl extends AbstractAmf3TypedObjectWriterImpl {
             final DataOutputStream outputStream) throws IOException {
         addObjectReference(array);
         
-        int arrayDef = array.length << 1 | Amf3Constants.OBJECT_INLINE;
+        int arrayDef = array.length << 1 | Amf3DataConstants.OBJECT_INLINE;
         writeIntData(arrayDef, outputStream);
-        outputStream.writeByte(Amf3Constants.EMPTY_STRING_DATA);
+        outputStream.writeByte(Amf3DataConstants.EMPTY_STRING_DATA);
         
         for (int i = 0; i < array.length; i++) {
             writeArrayElement(outputStream, array[i]);

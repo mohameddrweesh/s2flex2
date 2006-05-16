@@ -15,7 +15,7 @@
  */
 package org.seasar.flex2.rpc.amf.data;
 
-public interface Amf3Constants {
+public interface Amf3DataConstants {
 
     public static final byte CLASS_DEF_INLINE = 0x02;
 

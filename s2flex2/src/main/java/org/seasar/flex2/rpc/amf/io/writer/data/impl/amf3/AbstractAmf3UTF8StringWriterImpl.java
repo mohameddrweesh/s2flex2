@@ -18,7 +18,7 @@ package org.seasar.flex2.rpc.amf.io.writer.data.impl.amf3;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.seasar.flex2.rpc.amf.data.Amf3Constants;
+import org.seasar.flex2.rpc.amf.data.Amf3DataConstants;
 import org.seasar.flex2.rpc.amf.util.Amf3DataUtil;
 
 public abstract class AbstractAmf3UTF8StringWriterImpl extends
@@ -28,7 +28,7 @@ public abstract class AbstractAmf3UTF8StringWriterImpl extends
             final DataOutputStream outputStream) throws IOException {
 
         byte[] bytearr = Amf3DataUtil.toUTF8StringBytes(value);
-        int stringDef = (bytearr.length << 1) | Amf3Constants.OBJECT_INLINE;
+        int stringDef = (bytearr.length << 1) | Amf3DataConstants.OBJECT_INLINE;
         writeIntData(stringDef, outputStream);
 
         if (bytearr.length > 0) {

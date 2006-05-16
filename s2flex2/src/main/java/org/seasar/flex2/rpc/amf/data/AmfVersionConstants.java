@@ -13,10 +13,11 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.amf.type;
+package org.seasar.flex2.rpc.amf.data;
 
-public interface AmfHeaderType {
+public interface AmfVersionConstants {
     
-	static final String APPEND_TO_GATEWAYURL = "AppendToGatewayUrl";
-
+    final static int VERSION_0 = 0x00;
+    
+    final static int VERSION_3 = 0x03;
 }
