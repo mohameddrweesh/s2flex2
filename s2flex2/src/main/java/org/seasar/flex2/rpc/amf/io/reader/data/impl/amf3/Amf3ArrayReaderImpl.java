@@ -48,7 +48,7 @@ public class Amf3ArrayReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
         inputStream.readByte(); // class define byte
         for (int i = 0; i < array_length; i++) {
             byte dataType = inputStream.readByte();
-            Object item = writeEntryData(dataType, inputStream);
+            Object item = writeElementData(dataType, inputStream);
             logger.debug("[" + i + "]=" + item);
             array.add(item);
         }

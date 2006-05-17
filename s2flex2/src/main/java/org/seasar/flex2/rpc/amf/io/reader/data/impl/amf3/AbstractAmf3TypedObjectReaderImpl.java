@@ -30,7 +30,7 @@ public abstract class AbstractAmf3TypedObjectReaderImpl extends
         this.readerFactory = readerFactory;
     }
 
-    protected final Object writeEntryData(final byte dataType,
+    protected final Object writeElementData(final byte dataType,
             final DataInputStream inputStream) throws IOException {
         AmfDataReader dataReader = readerFactory.createAmf3DataReader(dataType);
         return dataReader.read(inputStream);

@@ -61,6 +61,6 @@ public class Amf3InitializedObjectWriterImpl extends AbstractAmf3ClassObjectWrit
             final Map.Entry entry) throws IOException {
         String propertyName = (String) entry.getKey();
         writeTypeString(propertyName, outputStream);
-        writeEntryData(entry.getValue(), outputStream);
+        writeElementData(entry.getValue(), outputStream);
     }
 }
