@@ -10,15 +10,4 @@
             <arg>".*Impl"</arg>
         </initMethod>
     </component> 
-    <!--   
-	<component class="org.seasar.framework.container.autoregister.MetaAutoRegister">
-		<meta name="autoRegister">
-			<meta name="AmfRemotingService"</meta>
-		</meta>
-		<initMethod name="addClassPattern">
-			<arg>"examples.flex2.service.impl"</arg>
-			<arg>".*Impl"</arg>
-		</initMethod>
-    </component>
-    -->
 </components>
