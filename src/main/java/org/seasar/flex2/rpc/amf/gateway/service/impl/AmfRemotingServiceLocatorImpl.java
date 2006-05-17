@@ -32,6 +32,10 @@ public class AmfRemotingServiceLocatorImpl extends ServiceLocatorImpl implements
     
     private ServiceRepository repository;
 
+    public ServiceRepository getRepository() {
+        return repository;
+    }
+
     public Object getService(final String serviceName) {
         Object service = null;
 
@@ -47,6 +51,10 @@ public class AmfRemotingServiceLocatorImpl extends ServiceLocatorImpl implements
         }
 
         return service;
+    }
+
+    public void setRepository(ServiceRepository repository) {
+        this.repository = repository;
     }
 
     private final boolean canRegisterService(Object service) {
@@ -70,13 +78,5 @@ public class AmfRemotingServiceLocatorImpl extends ServiceLocatorImpl implements
 
         return componentDef
                 .getMetaDef(AmfRemotingServiceConstants.AMF_REMOTING_SERVICE) != null;
-    }
-
-    public ServiceRepository getRepository() {
-        return repository;
-    }
-
-    public void setRepository(ServiceRepository repository) {
-        this.repository = repository;
     }
 }
