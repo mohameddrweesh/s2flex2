@@ -13,10 +13,10 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.util.transfer;
+package org.seasar.flex2.util.data.transfer;
 
 import org.seasar.extension.unit.S2TestCase;
-import org.seasar.flex2.util.transfer.Transfer;
+import org.seasar.flex2.util.data.transfer.Transfer;
 import org.seasar.framework.container.S2Container;
 
 public class TransferTest extends S2TestCase {
