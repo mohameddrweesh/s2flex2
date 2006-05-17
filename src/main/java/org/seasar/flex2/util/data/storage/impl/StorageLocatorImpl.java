@@ -16,6 +16,7 @@
 package org.seasar.flex2.util.data.storage.impl;
 
 import org.seasar.flex2.util.data.storage.Storage;
+import org.seasar.flex2.util.data.storage.StorageLocator;
 import org.seasar.framework.container.S2Container;
 
 public class StorageLocatorImpl implements StorageLocator {

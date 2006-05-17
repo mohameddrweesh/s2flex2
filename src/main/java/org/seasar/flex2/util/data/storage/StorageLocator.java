@@ -13,13 +13,11 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.gateway.invoker.exception;
+package org.seasar.flex2.util.data.storage;
 
-import org.seasar.framework.exception.SRuntimeException;
 
-public class ServiceNotFoundRuntimeException extends SRuntimeException {
-	
-	public ServiceNotFoundRuntimeException(String serviceName) {
-		super("EFLX0001", new Object[]{serviceName});
-	}
+
+public interface StorageLocator {
+
+    Storage getStorage( String storageName );
 }

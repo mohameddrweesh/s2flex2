@@ -13,12 +13,11 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.util.data.storage.impl;
+package org.seasar.flex2.rpc.gateway.service;
 
-import org.seasar.flex2.util.data.storage.Storage;
+public interface ServiceLocator {
 
-
-public interface StorageLocator {
-
-    Storage getStorage( String storageName );
+	Object getService( String serviceName );
+    
+    boolean isSupportService(String serviceName, String methodName);
 }
