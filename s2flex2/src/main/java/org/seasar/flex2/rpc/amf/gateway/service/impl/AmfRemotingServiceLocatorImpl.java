@@ -16,9 +16,10 @@
 package org.seasar.flex2.rpc.amf.gateway.service.impl;
 
 import org.seasar.flex2.rpc.amf.gateway.service.AmfRemotingServiceLocator;
+import org.seasar.flex2.rpc.amf.gateway.service.AmfRemotingServiceType;
 import org.seasar.flex2.rpc.gateway.service.ServiceRepository;
+import org.seasar.flex2.rpc.gateway.service.exception.InvalidServiceRuntimeException;
 import org.seasar.flex2.rpc.gateway.service.impl.ServiceLocatorImpl;
-import org.seasar.flex2.rpc.gateway.service.impl.ServiceRepositoryImpl;
 import org.seasar.framework.container.ComponentDef;
 import org.seasar.framework.container.S2Container;
 
@@ -36,6 +37,8 @@ public class AmfRemotingServiceLocatorImpl extends ServiceLocatorImpl implements
             service = super.getService(serviceName);
             if (canRegisterService(service)) {
                 repository.addService(serviceName, service);
+            } else {
+                throw new InvalidServiceRuntimeException( serviceName );
             }
         }
 
@@ -43,14 +46,12 @@ public class AmfRemotingServiceLocatorImpl extends ServiceLocatorImpl implements
     }
 
     private final boolean canRegisterService(Object service) {
-        boolean canRegister = false;
-        
+
         S2Container root = container.getRoot();
-        ComponentDef componentDef = root.getComponentDef(service);
-        
-        
-        
-        return canRegister;
+        ComponentDef componentDef = root.getComponentDef(service.getClass());
+
+        return componentDef
+                .getMetaDef(AmfRemotingServiceType.AMF_REMOTING_SERVICE) != null;
     }
 
     public ServiceRepository getRepository() {
@@ -60,5 +61,4 @@ public class AmfRemotingServiceLocatorImpl extends ServiceLocatorImpl implements
     public void setRepository(ServiceRepository repository) {
         this.repository = repository;
     }
-
 }

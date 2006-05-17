@@ -25,9 +25,6 @@ public class ServiceRepositoryImpl implements ServiceRepository {
 
     private final Map serviceCache = Collections.synchronizedMap(new HashMap());
 
-    private ServiceRepositoryImpl() {
-    }
-
     public Object getService(final String serviceName) {
         Object service = serviceCache.get(serviceName);
         return service;
