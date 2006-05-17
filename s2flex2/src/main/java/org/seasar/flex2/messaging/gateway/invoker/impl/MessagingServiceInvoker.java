@@ -15,40 +15,44 @@
  */
 package org.seasar.flex2.messaging.gateway.invoker.impl;
 
-import org.seasar.flex2.rpc.gateway.invoker.impl.S2ContainerInvoker;
-import org.seasar.flex2.util.transfer.Transfer;
-import org.seasar.flex2.util.transfer.storage.Storage;
-import org.seasar.framework.container.S2Container;
+import org.seasar.flex2.rpc.gateway.invoker.impl.ServiceInvokerImpl;
+import org.seasar.flex2.util.data.storage.Storage;
+import org.seasar.flex2.util.data.storage.StorageLocator;
+import org.seasar.flex2.util.data.transfer.Transfer;
 
-public class MessagingServiceInvoker extends S2ContainerInvoker {
-    public final static String SERVICE_DATA_STORAGE = "serviceDataStorage";
+public class MessagingServiceInvoker extends ServiceInvokerImpl {
+    
+    private final static String SERVICE_DATA_STORAGE = "serviceDataStorage";
+    
+    private StorageLocator storageLocator;
 
     private Transfer transfer;
     
     public MessagingServiceInvoker() {
     }
 
+    public StorageLocator getStorageLocator() {
+        return storageLocator;
+    }
+
     public Object invoke(String serviceName, String methodName, Object[] args)
             throws Throwable {
 
-        Object component = findComponent(serviceName);
-        Storage storage = createDataStorage();
+        Object component = serviceLocator.getService(serviceName);
+        Storage storage = storageLocator.getStorage( SERVICE_DATA_STORAGE );
         transfer.importToComponent(storage, component);
         try {
-            return super.invokeServiceMethod(methodName, args, component);
+            return super.invokeServiceMethod(component, methodName, args);
         } finally {
             transfer.exportToStorage(component, storage);
         }
     }
 
-    public void setTransfer(Transfer transfer) {
-        this.transfer = transfer;
+    public void setStorageLocator(StorageLocator storageLocator) {
+        this.storageLocator = storageLocator;
     }
 
-    protected Storage createDataStorage() {
-        S2Container root = getContainer().getRoot();
-
-        Storage storage = (Storage) root.getComponent(SERVICE_DATA_STORAGE);
-        return storage;
+    public void setTransfer(Transfer transfer) {
+        this.transfer = transfer;
     }
 }
