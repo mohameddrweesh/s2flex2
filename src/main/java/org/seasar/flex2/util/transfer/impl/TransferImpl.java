@@ -18,8 +18,8 @@ package org.seasar.flex2.util.transfer.impl;
 import java.util.Enumeration;
 
 import org.seasar.flex2.util.transfer.Transfer;
+import org.seasar.flex2.util.transfer.annotation.factory.AnnotationHandlerFactory;
 import org.seasar.flex2.util.transfer.annotation.handler.AnnotationHandler;
-import org.seasar.flex2.util.transfer.annotation.handler.AnnotationHandlerFactory;
 import org.seasar.flex2.util.transfer.storage.Storage;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
@@ -30,7 +30,7 @@ public class TransferImpl implements Transfer {
     private final AnnotationHandler handler = AnnotationHandlerFactory
             .getAnnotationHandler();
 
-    public void importToData(Storage storage, Object target) {
+    public void importToComponent(Storage storage, Object target) {
         BeanDesc beanDesc = BeanDescFactory.getBeanDesc(target.getClass());
 
         Enumeration prop_names = storage.getPropertyNames();

@@ -33,7 +33,7 @@ public class MessagingServiceInvoker extends S2ContainerInvoker {
 
         Object component = findComponent(serviceName);
         Storage storage = createDataStorage();
-        transfer.importToData(storage, component);
+        transfer.importToComponent(storage, component);
         try {
             return super.invokeServiceMethod(methodName, args, component);
         } finally {

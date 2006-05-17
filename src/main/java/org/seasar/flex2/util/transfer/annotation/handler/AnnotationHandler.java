@@ -17,9 +17,6 @@ package org.seasar.flex2.util.transfer.annotation.handler;
 
 import org.seasar.framework.beans.PropertyDesc;
 
-/**
- * @author Katsuhiko Nagashima
- */
 public interface AnnotationHandler {
 
     String getExportStorageType(PropertyDesc propertyDesc);
