@@ -13,20 +13,20 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.util.transfer.annotation.handler;
+package org.seasar.flex2.util.data.transfer.annotation.handler;
 
 import java.lang.reflect.Method;
 
-import org.seasar.flex2.util.transfer.annotation.Export;
-import org.seasar.flex2.util.transfer.annotation.Import;
-import org.seasar.flex2.util.transfer.annotation.handler.impl.BasicAnnotationHandlerImpl;
+import org.seasar.flex2.util.data.transfer.annotation.Export;
+import org.seasar.flex2.util.data.transfer.annotation.Import;
+import org.seasar.flex2.util.data.transfer.annotation.handler.impl.BasicAnnotationHandlerImpl;
 import org.seasar.framework.beans.PropertyDesc;
 
 public class TigerAnnotationHandler extends BasicAnnotationHandlerImpl {
     public String getExportStorageType(final PropertyDesc propertyDesc) {
         Method method = propertyDesc.getReadMethod();
         Export storageType = method.getAnnotation(Export.class);
-        
+
         String type = null;
         if (storageType != null) {
             type = storageType.storage();
@@ -34,11 +34,11 @@ public class TigerAnnotationHandler extends BasicAnnotationHandlerImpl {
 
         return type;
     }
-    
+
     public String getImportStorageType(final PropertyDesc propertyDesc) {
         Method method = propertyDesc.getWriteMethod();
         Import storageType = method.getAnnotation(Import.class);
-        
+
         String type = null;
         if (storageType != null) {
             type = storageType.storage();

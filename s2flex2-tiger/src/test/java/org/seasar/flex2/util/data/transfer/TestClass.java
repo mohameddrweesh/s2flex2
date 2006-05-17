@@ -13,11 +13,11 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.util.transfer;
+package org.seasar.flex2.util.data.transfer;
 
-import org.seasar.flex2.util.transfer.annotation.Export;
-import org.seasar.flex2.util.transfer.annotation.Import;
-import org.seasar.flex2.util.transfer.storage.StorageType;
+import org.seasar.flex2.util.data.storage.StorageType;
+import org.seasar.flex2.util.data.transfer.annotation.Export;
+import org.seasar.flex2.util.data.transfer.annotation.Import;
 
 public class TestClass {
     private String strData;
@@ -26,7 +26,7 @@ public class TestClass {
     public String getStrData() {
         return strData;
     }
-    
+
     @Import(storage = StorageType.SESSION)
     public void setStrData(String strData) {
         this.strData = strData;
