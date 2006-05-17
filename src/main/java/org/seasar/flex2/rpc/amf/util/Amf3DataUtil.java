@@ -57,14 +57,16 @@ public class Amf3DataUtil {
         return -1;
     }
 
-    public final static void setProperties(Object object, int props, String[] names,
-            Object[] values) {
+    public final static void setProperties(Object object,
+            String[] propertyNames, Object[] propertyValues) {
+        int propertiesNumber = propertyNames.length;
         BeanDesc beanDesc = BeanDescFactory.getBeanDesc(object.getClass());
-        for (int i = 0; i < props; i++) {
-            if (beanDesc.hasPropertyDesc(names[i])) {
-                PropertyDesc pd = beanDesc.getPropertyDesc(names[i]);
-                if (pd.hasWriteMethod()) {
-                    pd.setValue(object, values[i]);
+        for (int i = 0; i < propertiesNumber; i++) {
+            if (beanDesc.hasPropertyDesc(propertyNames[i])) {
+                PropertyDesc propertyDef = beanDesc
+                        .getPropertyDesc(propertyNames[i]);
+                if (propertyDef.hasWriteMethod()) {
+                    propertyDef.setValue(object, propertyValues[i]);
                 }
             }
         }

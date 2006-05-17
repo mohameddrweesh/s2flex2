@@ -88,7 +88,7 @@ public class Amf3TypedClassObjectWriterImpl extends AbstractAmf3ClassObjectWrite
             final PropertyDesc propertyDef, final Object target)
             throws IOException {
         if (propertyDef.hasReadMethod()) {
-            writeEntryData(propertyDef.getValue(target), outputStream);
+            writeElementData(propertyDef.getValue(target), outputStream);
         }
     }
 }

@@ -30,7 +30,7 @@ public abstract class AbstractAmf3TypedObjectWriterImpl extends
         this.writerFactory = writerFactory;
     }
 
-    protected void writeEntryData(Object value, DataOutputStream outputStream)
+    protected void writeElementData(Object value, DataOutputStream outputStream)
             throws IOException {
         Amf3DataWriter dataWriter = writerFactory.createDataValueWriter(value);
         dataWriter.writeData(value, outputStream);

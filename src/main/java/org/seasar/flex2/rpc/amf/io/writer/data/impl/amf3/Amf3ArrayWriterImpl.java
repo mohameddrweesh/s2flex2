@@ -34,7 +34,7 @@ public class Amf3ArrayWriterImpl extends AbstractAmf3TypedObjectWriterImpl {
 
     private final void writeArrayElement(final DataOutputStream outputStream,
             Object element) throws IOException {
-        writeEntryData(element, outputStream);
+        writeElementData(element, outputStream);
     }
 
     private final void writeArrayElements(final Object[] array,
