@@ -15,8 +15,10 @@
  */
 package org.seasar.flex2.rpc.amf.gateway.service.impl;
 
+import org.seasar.flex2.rpc.amf.gateway.service.AmfRemotingServiceConstants;
 import org.seasar.flex2.rpc.amf.gateway.service.AmfRemotingServiceLocator;
-import org.seasar.flex2.rpc.amf.gateway.service.AmfRemotingServiceType;
+import org.seasar.flex2.rpc.amf.gateway.service.annotation.factory.AnnotationHandlerFactory;
+import org.seasar.flex2.rpc.amf.gateway.service.annotation.handler.AnnotationHandler;
 import org.seasar.flex2.rpc.gateway.service.ServiceRepository;
 import org.seasar.flex2.rpc.gateway.service.exception.InvalidServiceRuntimeException;
 import org.seasar.flex2.rpc.gateway.service.impl.ServiceLocatorImpl;
@@ -25,7 +27,9 @@ import org.seasar.framework.container.S2Container;
 
 public class AmfRemotingServiceLocatorImpl extends ServiceLocatorImpl implements
         AmfRemotingServiceLocator {
-
+    private final AnnotationHandler annotationHandler = AnnotationHandlerFactory
+    .getAnnotationHandler();
+    
     private ServiceRepository repository;
 
     public Object getService(final String serviceName) {
@@ -38,7 +42,7 @@ public class AmfRemotingServiceLocatorImpl extends ServiceLocatorImpl implements
             if (canRegisterService(service)) {
                 repository.addService(serviceName, service);
             } else {
-                throw new InvalidServiceRuntimeException( serviceName );
+                throw new InvalidServiceRuntimeException(serviceName);
             }
         }
 
@@ -49,9 +53,23 @@ public class AmfRemotingServiceLocatorImpl extends ServiceLocatorImpl implements
 
         S2Container root = container.getRoot();
         ComponentDef componentDef = root.getComponentDef(service.getClass());
+        if (!hasAmfRemotingServiceMetadata( componentDef )) {
+            if( !hasAmfRemotingServiceAnnotation( componentDef )){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private final boolean hasAmfRemotingServiceAnnotation(ComponentDef componentDef) {
+        return annotationHandler.hasAmfRemotingService(componentDef);
+    }
+
+    private final boolean hasAmfRemotingServiceMetadata(
+            ComponentDef componentDef) {
 
         return componentDef
-                .getMetaDef(AmfRemotingServiceType.AMF_REMOTING_SERVICE) != null;
+                .getMetaDef(AmfRemotingServiceConstants.AMF_REMOTING_SERVICE) != null;
     }
 
     public ServiceRepository getRepository() {
