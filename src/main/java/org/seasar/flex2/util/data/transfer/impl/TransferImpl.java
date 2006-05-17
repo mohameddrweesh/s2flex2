@@ -27,7 +27,7 @@ import org.seasar.framework.beans.factory.BeanDescFactory;
 
 public class TransferImpl implements Transfer {
 
-    private final AnnotationHandler handler = AnnotationHandlerFactory
+    private final AnnotationHandler annotationHandler = AnnotationHandlerFactory
             .getAnnotationHandler();
 
     public void importToComponent(Storage storage, Object target) {
@@ -38,7 +38,7 @@ public class TransferImpl implements Transfer {
             String prop_name = (String) prop_names.nextElement();
             if (beanDesc.hasPropertyDesc(prop_name)) {
                 PropertyDesc propertyDesc = beanDesc.getPropertyDesc(prop_name);
-                String type = handler.getImportStorageType(propertyDesc);
+                String type = annotationHandler.getImportStorageType(propertyDesc);
                 if (isTransfer(type, storage)) {
                     if (propertyDesc.hasWriteMethod()) {
                         propertyDesc.setValue(target, storage
@@ -57,7 +57,7 @@ public class TransferImpl implements Transfer {
             if (!propertyDesc.hasReadMethod()) {
                 break;
             }
-            String type = handler.getExportStorageType(propertyDesc);
+            String type = annotationHandler.getExportStorageType(propertyDesc);
             if (isTransfer(type, storage)) {
                 String propertyName = propertyDesc.getPropertyName();
                 Object propertyValue = propertyDesc.getValue(target);
