@@ -25,20 +25,20 @@ public class ServiceRepositoryImpl implements ServiceRepository {
 
     private final Map serviceCache = Collections.synchronizedMap(new HashMap());
 
+    public void addService(String serviceName, Object service) {
+        serviceCache.put(serviceName, service);
+    }
+
+    public void clear() {
+        serviceCache.clear();
+    }
+
     public Object getService(final String serviceName) {
         Object service = serviceCache.get(serviceName);
         return service;
     }
 
-    public void addService(String serviceName, Object service) {
-        serviceCache.put(serviceName, service);
-    }
-
     public boolean hasService(String serviceName) {
         return serviceCache.containsKey(serviceName);
-    }
-
-    public void clear() {
-        serviceCache.clear();
     }
 }
