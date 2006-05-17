@@ -13,18 +13,19 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.util.transfer.annotation;
+package org.seasar.flex2.util.data.transfer.annotation;
 
 /*
  *
  * @Retention(RetentionPolicy.RUNTIME)
  * @Target( { ElementType.FIELD, ElementType.METHOD })
  */
-public interface Import {
-	/**  
-	 * org.codehaus.backport175.DefaultValue (StorageType.SESSION) <-- notwork -->
+public interface Export {
+
+	/**
+     * org.codehaus.backport175.DefaultValue(org.seasar.flex2.util.data.storage.StorageType.StorageType.SESSION)
+     * 
      * @org.codehaus.backport175.DefaultValue ("session")
-	 */
+     */
 	String storage();
-	
 }

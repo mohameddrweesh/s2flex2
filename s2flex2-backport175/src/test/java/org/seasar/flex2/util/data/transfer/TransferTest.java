@@ -13,13 +13,13 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.util.transfer;
+package org.seasar.flex2.util.data.transfer;
 
 import javax.servlet.http.HttpSession;
 
 import org.seasar.extension.unit.S2TestCase;
-import org.seasar.flex2.util.transfer.storage.Storage;
-import org.seasar.flex2.util.transfer.storage.impl.HttpSessionDataStorage;
+import org.seasar.flex2.util.data.storage.Storage;
+import org.seasar.flex2.util.data.storage.impl.HttpSessionDataStorage;
 import org.seasar.framework.container.S2Container;
 
 public class TransferTest extends S2TestCase {
@@ -58,7 +58,7 @@ public class TransferTest extends S2TestCase {
         session.setAttribute("strData", "moji");
         Storage storage = new HttpSessionDataStorage(session);
         TestClass testClass = createTarget();
-        transfer.importToData(storage, testClass);
+        transfer.importToComponent(storage, testClass);
         assertEquals("1", testClass.getStrData(), session
                 .getAttribute("strData"));
     }
