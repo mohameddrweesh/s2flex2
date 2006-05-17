@@ -21,8 +21,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.seasar.flex2.util.transfer.storage.Storage;
 
-
-
 public class HttpRequestDataStorage implements Storage {
     
     private final static String REQUEST = "request";

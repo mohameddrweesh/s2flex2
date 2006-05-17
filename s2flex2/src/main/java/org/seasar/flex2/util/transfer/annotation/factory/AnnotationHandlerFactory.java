@@ -13,8 +13,9 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.util.transfer.annotation.handler;
+package org.seasar.flex2.util.transfer.annotation.factory;
 
+import org.seasar.flex2.util.transfer.annotation.handler.AnnotationHandler;
 import org.seasar.flex2.util.transfer.annotation.handler.impl.BasicAnnotationHandlerImpl;
 import org.seasar.framework.exception.ClassNotFoundRuntimeException;
 import org.seasar.framework.util.ClassUtil;

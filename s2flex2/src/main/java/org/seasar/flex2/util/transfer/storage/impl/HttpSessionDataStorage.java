@@ -21,10 +21,8 @@ import javax.servlet.http.HttpSession;
 
 import org.seasar.flex2.util.transfer.storage.Storage;
 
-
-
 public class HttpSessionDataStorage implements Storage {
-    
+
     private final static String SESSION = "session";
 
     private final HttpSession session;
