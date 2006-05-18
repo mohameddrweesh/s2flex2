@@ -19,7 +19,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.seasar.flex2.rpc.amf.data.Amf3DataType;
-import org.seasar.flex2.rpc.amf.util.Amf3DataUtil;
+import org.seasar.flex2.rpc.amf.io.util.Amf3DataUtil;
 import org.w3c.dom.Document;
 
 public class Amf3XmlWriterImpl extends AbstractAmf3ObjectWriterImpl {

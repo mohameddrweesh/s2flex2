@@ -18,7 +18,7 @@ package org.seasar.flex2.rpc.amf.io.reader.data.impl.amf3;
 import java.io.DataInputStream;
 import java.io.IOException;
 
-import org.seasar.flex2.rpc.amf.util.Amf3DataUtil;
+import org.seasar.flex2.rpc.amf.io.util.Amf3DataUtil;
 import org.w3c.dom.Document;
 
 public class Amf3XmlReaderImpl extends AbstractAmf3UTF8StringReaderImpl {
