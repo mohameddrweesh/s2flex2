@@ -29,70 +29,70 @@
 
     <component name="readerMap" class="java.util.HashMap">
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.rpc.amf.type.AmfDataType@TYPE_NULL</arg>
+	        <arg>@org.seasar.flex2.rpc.amf.data.AmfDataType@TYPE_NULL</arg>
 	        <arg>amfNullReaderImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.rpc.amf.type.AmfDataType@TYPE_NUMBER</arg>
+	        <arg>@org.seasar.flex2.rpc.amf.data.AmfDataType@TYPE_NUMBER</arg>
 	        <arg>amfNumberReaderImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.rpc.amf.type.AmfDataType@TYPE_BOOLEAN</arg>
+	        <arg>@org.seasar.flex2.rpc.amf.data.AmfDataType@TYPE_BOOLEAN</arg>
 	        <arg>amfBooleanReaderImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.rpc.amf.type.AmfDataType@TYPE_STRING</arg>
+	        <arg>@org.seasar.flex2.rpc.amf.data.AmfDataType@TYPE_STRING</arg>
 	        <arg>amfStringReaderImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.rpc.amf.type.AmfDataType@TYPE_ARRAY</arg>
+	        <arg>@org.seasar.flex2.rpc.amf.data.AmfDataType@TYPE_ARRAY</arg>
 	        <arg>amfArrayReaderImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.rpc.amf.type.Amf3DataType@TYPE_AMF3_DATA_MARKER</arg>
+	        <arg>@org.seasar.flex2.rpc.amf.data.Amf3DataType@TYPE_AMF3_DATA_MARKER</arg>
 	        <arg>amf3DataReaderImpl</arg>
 	    </initMethod>	    
 	</component>
 	
 	<component name="amf3DataReaderMap" class="java.util.HashMap">
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.rpc.amf.type.Amf3DataType@TYPE_NULL</arg>
+	        <arg>@org.seasar.flex2.rpc.amf.data.Amf3DataType@TYPE_NULL</arg>
 	        <arg>amfNullReaderImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.rpc.amf.type.Amf3DataType@TYPE_BOOLEAN_FALSE</arg>
+	        <arg>@org.seasar.flex2.rpc.amf.data.Amf3DataType@TYPE_BOOLEAN_FALSE</arg>
 	        <arg>amf3BooleanFalseReaderImpl</arg>
 	    </initMethod>
    	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.rpc.amf.type.Amf3DataType@TYPE_BOOLEAN_TRUE</arg>
+	        <arg>@org.seasar.flex2.rpc.amf.data.Amf3DataType@TYPE_BOOLEAN_TRUE</arg>
 	        <arg>amf3BooleanTrueReaderImpl</arg>
 	    </initMethod>
    	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.rpc.amf.type.Amf3DataType@TYPE_INTEGER</arg>
+	        <arg>@org.seasar.flex2.rpc.amf.data.Amf3DataType@TYPE_INTEGER</arg>
 	        <arg>amf3IntegerReaderImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.rpc.amf.type.Amf3DataType@TYPE_NUMBER</arg>
+	        <arg>@org.seasar.flex2.rpc.amf.data.Amf3DataType@TYPE_NUMBER</arg>
 	        <arg>amfNumberReaderImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.rpc.amf.type.Amf3DataType@TYPE_STRING</arg>
+	        <arg>@org.seasar.flex2.rpc.amf.data.Amf3DataType@TYPE_STRING</arg>
 	        <arg>amf3StringReaderImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.rpc.amf.type.Amf3DataType@TYPE_DATE</arg>
+	        <arg>@org.seasar.flex2.rpc.amf.data.Amf3DataType@TYPE_DATE</arg>
 	        <arg>amf3DateReaderImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.rpc.amf.type.Amf3DataType@TYPE_ARRAY</arg>
+	        <arg>@org.seasar.flex2.rpc.amf.data.Amf3DataType@TYPE_ARRAY</arg>
 	        <arg>amf3ArrayReaderImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.rpc.amf.type.Amf3DataType@TYPE_OBJECT</arg>
+	        <arg>@org.seasar.flex2.rpc.amf.data.Amf3DataType@TYPE_OBJECT</arg>
 	        <arg>amf3ObjectReaderImpl</arg>
 	    </initMethod>
    	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.rpc.amf.type.Amf3DataType@TYPE_XML</arg>
+	        <arg>@org.seasar.flex2.rpc.amf.data.Amf3DataType@TYPE_XML</arg>
 	        <arg>amf3XmlReaderImpl</arg>
 	    </initMethod>
 	</component>
