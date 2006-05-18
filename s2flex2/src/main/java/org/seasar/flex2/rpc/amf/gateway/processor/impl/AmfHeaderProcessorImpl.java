@@ -23,7 +23,7 @@ import org.seasar.flex2.rpc.amf.data.AmfMessage;
 import org.seasar.flex2.rpc.amf.data.factory.AmfHeaderFactory;
 import org.seasar.flex2.rpc.amf.gateway.processor.AmfHeaderProcessor;
 import org.seasar.flex2.rpc.gateway.session.SessionDecorator;
-import org.seasar.flex2.rpc.gateway.util.HttpSessionUtil;
+import org.seasar.flex2.rpc.gateway.session.util.HttpSessionUtil;
 import org.seasar.framework.log.Logger;
 
 public class AmfHeaderProcessorImpl implements AmfHeaderProcessor {
