@@ -18,8 +18,8 @@ package org.seasar.flex2.rpc.amf.io.writer.data.impl.amf;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import org.seasar.flex2.rpc.amf.data.AmfDataType;
 import org.seasar.flex2.rpc.amf.io.writer.data.AmfDataWriter;
-import org.seasar.flex2.rpc.amf.type.AmfDataType;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
 import org.seasar.framework.beans.factory.BeanDescFactory;

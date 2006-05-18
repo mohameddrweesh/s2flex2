@@ -16,6 +16,8 @@
 package org.seasar.flex2.rpc.amf.io.reader.data.factory;
 
 import org.seasar.extension.unit.S2TestCase;
+import org.seasar.flex2.rpc.amf.data.Amf3DataType;
+import org.seasar.flex2.rpc.amf.data.AmfDataType;
 import org.seasar.flex2.rpc.amf.io.reader.data.AmfDataReader;
 import org.seasar.flex2.rpc.amf.io.reader.data.factory.impl.Amf3DataReaderFactoryImpl;
 import org.seasar.flex2.rpc.amf.io.reader.data.impl.amf.AmfArrayReaderImpl;
@@ -32,8 +34,6 @@ import org.seasar.flex2.rpc.amf.io.reader.data.impl.amf3.Amf3IntegerReaderImpl;
 import org.seasar.flex2.rpc.amf.io.reader.data.impl.amf3.Amf3ObjectReaderImpl;
 import org.seasar.flex2.rpc.amf.io.reader.data.impl.amf3.Amf3StringReaderImpl;
 import org.seasar.flex2.rpc.amf.io.reader.data.impl.amf3.Amf3XmlReaderImpl;
-import org.seasar.flex2.rpc.amf.type.Amf3DataType;
-import org.seasar.flex2.rpc.amf.type.AmfDataType;
 import org.seasar.framework.container.S2Container;
 
 public class Amf3DataReaderFactoryTest extends S2TestCase {

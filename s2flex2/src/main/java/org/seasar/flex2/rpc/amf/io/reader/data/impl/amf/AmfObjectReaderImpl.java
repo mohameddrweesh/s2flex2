@@ -19,7 +19,7 @@ import java.io.DataInputStream;
 import java.io.IOException;
 
 import org.seasar.flex2.rpc.amf.data.AmfConstants;
-import org.seasar.flex2.rpc.amf.type.AmfDataType;
+import org.seasar.flex2.rpc.amf.data.AmfDataType;
 
 import flashgateway.io.ASObject;
 

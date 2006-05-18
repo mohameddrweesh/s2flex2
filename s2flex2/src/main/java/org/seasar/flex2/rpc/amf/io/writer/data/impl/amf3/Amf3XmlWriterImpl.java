@@ -18,7 +18,7 @@ package org.seasar.flex2.rpc.amf.io.writer.data.impl.amf3;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.seasar.flex2.rpc.amf.type.Amf3DataType;
+import org.seasar.flex2.rpc.amf.data.Amf3DataType;
 import org.seasar.flex2.rpc.amf.util.Amf3DataUtil;
 import org.w3c.dom.Document;
 

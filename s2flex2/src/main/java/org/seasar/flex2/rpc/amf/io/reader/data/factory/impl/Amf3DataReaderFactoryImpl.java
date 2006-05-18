@@ -17,10 +17,10 @@ package org.seasar.flex2.rpc.amf.io.reader.data.factory.impl;
 
 import java.util.HashMap;
 
+import org.seasar.flex2.rpc.amf.data.Amf3DataType;
+import org.seasar.flex2.rpc.amf.data.AmfDataType;
 import org.seasar.flex2.rpc.amf.io.reader.data.AmfDataReader;
 import org.seasar.flex2.rpc.amf.io.reader.data.factory.Amf3DataReaderFactory;
-import org.seasar.flex2.rpc.amf.type.Amf3DataType;
-import org.seasar.flex2.rpc.amf.type.AmfDataType;
 
 public class Amf3DataReaderFactoryImpl extends AmfDataReaderFactoryImpl implements Amf3DataReaderFactory {
 
