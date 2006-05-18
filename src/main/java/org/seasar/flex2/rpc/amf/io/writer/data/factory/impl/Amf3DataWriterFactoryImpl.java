@@ -23,7 +23,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.seasar.flex2.rpc.amf.data.Amf3DataConstants;
+import org.seasar.flex2.rpc.amf.data.Amf3Constants;
 import org.seasar.flex2.rpc.amf.io.writer.data.Amf3DataWriter;
 import org.seasar.flex2.rpc.amf.io.writer.data.AmfDataWriter;
 import org.seasar.flex2.rpc.amf.io.writer.data.factory.Amf3DataWriterFactory;
@@ -56,8 +56,8 @@ public class Amf3DataWriterFactoryImpl implements Amf3DataWriterFactory {
             }
             if (value instanceof Integer) {
                 int data = ((Integer) value).intValue();
-                if (data <= Amf3DataConstants.INTEGRR_MAX
-                        && data >= Amf3DataConstants.INTEGRR_MIN) {
+                if (data <= Amf3Constants.INTEGRR_MAX
+                        && data >= Amf3Constants.INTEGRR_MIN) {
                     writer = (Amf3DataWriter) dataWriterMap
                             .get(Integer.class);
                     break;

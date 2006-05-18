@@ -18,7 +18,7 @@ package org.seasar.flex2.rpc.amf.io.reader.data.impl.amf3;
 import java.io.DataInputStream;
 import java.io.IOException;
 
-import org.seasar.flex2.rpc.amf.data.Amf3DataConstants;
+import org.seasar.flex2.rpc.amf.data.Amf3Constants;
 import org.seasar.flex2.rpc.amf.io.reader.data.AmfDataReader;
 import org.seasar.flex2.rpc.amf.util.Amf3DataUtil;
 import org.seasar.framework.util.ClassUtil;
@@ -72,13 +72,13 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
 
         Class clazz = ASObject.class;
 
-        switch (objectDef & Amf3DataConstants.CLASS_DEF_INLINE) {
+        switch (objectDef & Amf3Constants.CLASS_DEF_INLINE) {
 
-            case Amf3DataConstants.CLASS_DEF_REFERENCE:
+            case Amf3Constants.CLASS_DEF_REFERENCE:
                 clazz = getClassAt(objectDef >>> 2);
                 break;
 
-            case Amf3DataConstants.CLASS_DEF_INLINE:
+            case Amf3Constants.CLASS_DEF_INLINE:
                 String class_name = (String)stringReader.read( inputStream );
                 if (class_name.length() > 0) {
                     clazz = ClassUtil.forName(class_name);
@@ -128,7 +128,7 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
 
     private final String[] readPropertiesOfClass(final int objectDef, final Class clazz, final DataInputStream inputStream) throws IOException {
         String[] propertyNames;
-        if ((objectDef & Amf3DataConstants.CLASS_DEF_INLINE) == Amf3DataConstants.CLASS_DEF_INLINE) {
+        if ((objectDef & Amf3Constants.CLASS_DEF_INLINE) == Amf3Constants.CLASS_DEF_INLINE) {
             int propertyNumber = objectDef >>> 4;
             propertyNames = new String[propertyNumber];
             for (int i = 0; i < propertyNumber; i++) {

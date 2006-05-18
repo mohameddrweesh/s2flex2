@@ -18,7 +18,7 @@ package org.seasar.flex2.rpc.amf.io.writer.data.impl.amf3;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.seasar.flex2.rpc.amf.data.Amf3DataConstants;
+import org.seasar.flex2.rpc.amf.data.Amf3Constants;
 
 public abstract class AbstractAmf3ClassObjectWriterImpl extends
         AbstractAmf3TypedObjectWriterImpl {
@@ -39,7 +39,7 @@ public abstract class AbstractAmf3ClassObjectWriterImpl extends
 
     protected final void writeClassReferenceIndex(final int referenceIndex,
             final DataOutputStream outputStream) throws IOException {
-        int referenceDef = Amf3DataConstants.OBJECT_INLINE;
+        int referenceDef = Amf3Constants.OBJECT_INLINE;
         referenceDef = referenceIndex << 2 | referenceDef;
         writeIntData(referenceDef, outputStream);
     }

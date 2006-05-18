@@ -18,7 +18,7 @@ package org.seasar.flex2.rpc.amf.io.reader.data.impl.amf3;
 import java.io.DataInputStream;
 import java.io.IOException;
 
-import org.seasar.flex2.rpc.amf.data.Amf3DataConstants;
+import org.seasar.flex2.rpc.amf.data.Amf3Constants;
 import org.seasar.flex2.rpc.amf.io.reader.data.AmfDataReader;
 import org.seasar.flex2.rpc.amf.util.Amf3DataUtil;
 import org.seasar.framework.log.Logger;
@@ -47,18 +47,18 @@ public abstract class AbstractAmf3IntReaderImpl implements AmfDataReader {
 
     private final int readIntData(final int intData,
             final DataInputStream inputStream) throws IOException {
-        int[] list = new int[Amf3DataConstants.INTEGER_DATA_MAX_BYTES];
+        int[] list = new int[Amf3Constants.INTEGER_DATA_MAX_BYTES];
         int byte_count = 1;
 
         list[0] = intData & 0x7F;
 
-        for (int i = 1; i < Amf3DataConstants.INTEGER_DATA_MAX_BYTES; i++) {
+        for (int i = 1; i < Amf3Constants.INTEGER_DATA_MAX_BYTES; i++) {
             list[i] = inputStream.readUnsignedByte();
             byte_count++;
             if ((list[i] >>> 7) == 0x00) {
                 break;
             }
-            if (byte_count < Amf3DataConstants.INTEGER_DATA_MAX_BYTES) {
+            if (byte_count < Amf3Constants.INTEGER_DATA_MAX_BYTES) {
                 list[i] &= 0x7F;
             }
         }

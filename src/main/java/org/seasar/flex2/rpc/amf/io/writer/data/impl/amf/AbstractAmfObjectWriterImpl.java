@@ -18,11 +18,11 @@ package org.seasar.flex2.rpc.amf.io.writer.data.impl.amf;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import org.seasar.flex2.rpc.amf.data.AmfDataType;
 import org.seasar.flex2.rpc.amf.io.AmfSharedObject;
 import org.seasar.flex2.rpc.amf.io.factory.AmfSharedObjectFactory;
 import org.seasar.flex2.rpc.amf.io.writer.data.AmfDataWriter;
 import org.seasar.flex2.rpc.amf.io.writer.data.factory.AmfDataWriterFactory;
-import org.seasar.flex2.rpc.amf.type.AmfDataType;
 
 public abstract class AbstractAmfObjectWriterImpl implements AmfDataWriter {
 

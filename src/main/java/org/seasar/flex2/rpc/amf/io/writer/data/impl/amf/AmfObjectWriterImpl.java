@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.seasar.flex2.rpc.amf.type.AmfDataType;
+import org.seasar.flex2.rpc.amf.data.AmfDataType;
 
 public class AmfObjectWriterImpl extends AbstractAmfObjectWriterImpl {
 

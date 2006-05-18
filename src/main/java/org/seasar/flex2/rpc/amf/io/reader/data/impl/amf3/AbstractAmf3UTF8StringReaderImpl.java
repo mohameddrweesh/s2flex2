@@ -18,7 +18,7 @@ package org.seasar.flex2.rpc.amf.io.reader.data.impl.amf3;
 import java.io.DataInputStream;
 import java.io.IOException;
 
-import org.seasar.flex2.rpc.amf.data.Amf3DataConstants;
+import org.seasar.flex2.rpc.amf.data.Amf3Constants;
 import org.seasar.flex2.rpc.amf.util.Amf3DataUtil;
 
 public abstract class AbstractAmf3UTF8StringReaderImpl extends AbstractAmf3ObjectReaderImpl {
@@ -31,7 +31,7 @@ public abstract class AbstractAmf3UTF8StringReaderImpl extends AbstractAmf3Objec
             inputStream.readFully(charArray, 0, str_length);
             str = Amf3DataUtil.toUTF8String(charArray, str_length);
         } else {
-            str = Amf3DataConstants.EMPTY_STRING;
+            str = Amf3Constants.EMPTY_STRING;
         }
 
         return str;
