@@ -19,8 +19,8 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.seasar.flex2.rpc.amf.data.Amf3Constants;
+import org.seasar.flex2.rpc.amf.io.util.Amf3DataUtil;
 import org.seasar.flex2.rpc.amf.io.writer.data.Amf3DataWriter;
-import org.seasar.flex2.rpc.amf.util.Amf3DataUtil;
 
 public abstract class AbstractAmf3IntWriterImpl implements Amf3DataWriter {
 

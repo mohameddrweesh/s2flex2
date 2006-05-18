@@ -20,7 +20,7 @@ import java.io.IOException;
 
 import org.seasar.flex2.rpc.amf.data.Amf3Constants;
 import org.seasar.flex2.rpc.amf.data.Amf3DataType;
-import org.seasar.flex2.rpc.amf.util.Amf3DataUtil;
+import org.seasar.flex2.rpc.amf.io.util.Amf3DataUtil;
 
 public class Amf3IntegerWriterImpl extends AbstractAmf3IntWriterImpl {
 

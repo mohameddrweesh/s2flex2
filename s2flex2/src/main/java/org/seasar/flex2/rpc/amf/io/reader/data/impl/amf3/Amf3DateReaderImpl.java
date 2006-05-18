@@ -19,7 +19,7 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.Date;
 
-import org.seasar.flex2.rpc.amf.util.Amf3DataUtil;
+import org.seasar.flex2.rpc.amf.io.util.Amf3DataUtil;
 
 public class Amf3DateReaderImpl extends AbstractAmf3ObjectReaderImpl {
 
