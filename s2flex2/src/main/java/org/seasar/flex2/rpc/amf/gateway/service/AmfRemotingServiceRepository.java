@@ -15,7 +15,8 @@
  */
 package org.seasar.flex2.rpc.amf.gateway.service;
 
-import org.seasar.flex2.rpc.gateway.service.ServiceLocator;
+import org.seasar.flex2.rpc.gateway.service.ServiceRepository;
 
-public interface AmfRemotingServiceLocator extends ServiceLocator {
+public interface AmfRemotingServiceRepository extends ServiceRepository {
+    void removeService(Class serviceClass);
 }

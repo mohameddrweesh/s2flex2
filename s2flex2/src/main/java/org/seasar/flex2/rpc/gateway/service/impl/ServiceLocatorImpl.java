@@ -20,7 +20,7 @@ import org.seasar.flex2.rpc.gateway.service.exception.ServiceNotFoundRuntimeExce
 import org.seasar.framework.container.S2Container;
 import org.seasar.framework.util.ClassUtil;
 
-public class ServiceLocatorImpl implements ServiceLocator {
+public abstract class ServiceLocatorImpl implements ServiceLocator {
 
     protected S2Container container;
 

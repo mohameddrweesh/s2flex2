@@ -16,20 +16,21 @@
 package org.seasar.flex2.rpc.gateway.service.impl;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.WeakHashMap;
 
 import org.seasar.flex2.rpc.gateway.service.ServiceRepository;
 
-public class ServiceRepositoryImpl implements ServiceRepository {
+public abstract class ServiceRepositoryImpl implements ServiceRepository {
 
-    private final Map serviceCache = Collections.synchronizedMap(new HashMap());
+    protected final Map serviceCache = Collections
+            .synchronizedMap(new WeakHashMap(64));
 
     public void addService(String serviceName, Object service) {
         serviceCache.put(serviceName, service);
     }
 
-    public void clear() {
+    public void clearService() {
         serviceCache.clear();
     }
 
@@ -40,5 +41,9 @@ public class ServiceRepositoryImpl implements ServiceRepository {
 
     public boolean hasService(String serviceName) {
         return serviceCache.containsKey(serviceName);
+    }
+
+    public void removeService(String serviceName) {
+        serviceCache.remove(serviceName);
     }
 }
