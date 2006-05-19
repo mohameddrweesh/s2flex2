@@ -45,22 +45,3 @@ public class Backport175ActionAnnotationHandler extends
         return null;
     }
 }
-
-/*
- * Column column = (Column) getPropertyAnnotation(Column.class,pd); return
- * (column!=null)?column.value():null;
- * 
- * private Annotation getPropertyAnnotation(Class clazz,PropertyDesc pd){
- * if(pd.getWriteMethod() != null){ Annotation annotation =
- * Annotations.getAnnotation(clazz,pd.getWriteMethod()); if(annotation!=null){
- * return annotation; } } if(pd.getReadMethod() != null){ return
- * Annotations.getAnnotation(clazz,pd.getReadMethod()); } return null; } public
- * String getColumnAnnotation(PropertyDesc pd) { Column column = (Column)
- * getPropertyAnnotation(Column.class,pd); return
- * (column!=null)?column.value():null; }
- * 
- */
-/*
- * Annotation annotation = Annotations.getAnnotation(clazz,pd.getWriteMethod());
- * if(annotation!=null){ return annotation;
- */
