@@ -7,4 +7,6 @@ public interface AddService {
     public int calculate(int arg1, int arg2);
     
     public AddDto calculate2(AddDto addDto);
+    
+    public AddDto getAddDtoData();
 }
