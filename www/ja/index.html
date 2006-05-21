@@ -23,11 +23,11 @@
         </tr>
         <tr>
           <td rowspan="2"><img src="images/top04.gif" alt="" height="49" width="235"></td>
-          <td><a href="http://www.seasar.org/index.html"><img src="images/menu01_b_ja.gif" height="30" width="78" border="0" alt="" id="menu01" onmouseover="swap(1)" onmouseout="restore(1)"></a></td>
-          <td><a href="http://www.seasar.org/projects.html"><img src="images/menu02_b_ja.gif" height="30" width="101" border="0" alt="" id="menu02" onmouseover="swap(2)" onmouseout="restore(2)"></a></td>
-          <td><a href="http://www.seasar.org/products.html"><img src="images/menu03_b_ja.gif" height="30" width="110" border="0" alt="" id="menu03" onmouseover="swap(3)" onmouseout="restore(3)"></a></td>
-          <td><a href="http://www.seasar.org/resources.html"><img src="images/menu04_b_ja.gif" height="30" width="113" border="0" alt="" id="menu04" onmouseover="swap(4)" onmouseout="restore(4)"></a></td>
-          <td><img src="images/menu05_b_ja.gif" height="30" width="109" border="0" alt="" id="menu05" onmouseover="swap(5)" onmouseout="restore(5)"></td>
+          <td><a href="http://www.seasar.org/index.html"><img src="images/menu01_b_ja.gif" height="30" width="78" border="0" alt="" id="menu01" onMouseOver="swap(1)" onMouseOut="restore(1)"></a></td>
+          <td><a href="http://www.seasar.org/projects.html"><img src="images/menu02_b_ja.gif" height="30" width="101" border="0" alt="" id="menu02" onMouseOver="swap(2)" onMouseOut="restore(2)"></a></td>
+          <td><a href="http://www.seasar.org/products.html"><img src="images/menu03_b_ja.gif" height="30" width="110" border="0" alt="" id="menu03" onMouseOver="swap(3)" onMouseOut="restore(3)"></a></td>
+          <td><a href="http://www.seasar.org/resources.html"><img src="images/menu04_b_ja.gif" height="30" width="113" border="0" alt="" id="menu04" onMouseOver="swap(4)" onMouseOut="restore(4)"></a></td>
+          <td><img src="images/menu05_b_ja.gif" height="30" width="109" border="0" alt="" id="menu05" onMouseOver="swap(5)" onMouseOut="restore(5)"></td>
           <td><img height="30" width="34" src="images/menu06.gif" alt=""></td>
         </tr>
         <tr>
@@ -45,11 +45,23 @@
             <h3><a name="abstraction">概要</a></h3>
             <p>S2Flex2は、現在パブリックベータ3である<a href="http://labs.macromedia.com/" target="_blank">Flex2</a>と<a href="http://s2container.seasar.org/ja/index.html">Seasar2</a>を連携させるものです。
               S2Flex2を使うとFlex2からSeasar2に登録されているコンポーネントを簡単に呼び出すことができるようになります。</p>
-            <p>S2Flex2は現在のところ以下の２つから構成されています。</p>
+            <p>S2Flex2は現在のところ以下のプロジェクトで構成されています。</p>
             <ul>
               <li>S2Flex2
                 <ul>
                   <li>AMF3対応のGatewayServlet</li>
+                </ul>
+              </li>
+              <li>S2Flex2-Backport175
+                <ul>
+                  <li> Backport175 アノテーションを利用して、メタデータ定義、セッションデータのバインディングをJavaソースに記述する為のアドオン </li>
+                  <li>Java実行環境がJ2SDK1.4のときに利用します。Tiger(Java5)でS2Flex2を利用するときには、S2Flex2-Tigerを利用してください。</li>
+                </ul>
+              </li>
+              <li>S2Flex2-Tiger
+                <ul>
+                  <li> Tiger (Java5) アノテーションを使用してメタデータ定義、セッションデータのバインディングをJavaソースに記述する為のアドオン </li>
+                  <li>Java実行環境がTiger(Java5)の時に利用します。J2SDK1.4でS2Flex2を利用するときには、S2Flex2-Backport175を利用してください。</li>
                 </ul>
               </li>
               <li>S2Flex2-components
@@ -88,8 +100,7 @@
 	        </ul>			
 			<h5>Flex2-exampe Beta4をリリースしました。 </h5>
 			<ul>
-			  <li>サンプルのmxmlをFlex Builder 2Beta3対応でコンパイルできるように修正しました。
-</li>
+			  <li>サンプルのmxmlをFlex Builder 2Beta3対応でコンパイルできるように修正しました。</li>
 		      <li>s2flex2_checkDto_example.mxmlのリスト出力の数を3000に変更しました。</li>
 			  <li>同梱しているs2flex2をBeta4に差し替えました。</li>
 			  <li>同梱しているコンポーネントをs2flex2-componentsのもの(s2flex2-component.swc)に変更しました。</li>
@@ -109,8 +120,7 @@
 			</ul>
 
             <!-- document end -->
-            <!-- don't edit start -->
-          </td>
+            <!-- don't edit start -->          </td>
           <td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td>
         </tr>
         <tr>
