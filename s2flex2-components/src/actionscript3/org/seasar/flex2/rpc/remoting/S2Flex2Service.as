@@ -18,24 +18,25 @@
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.events.IOErrorEvent;
-	import flash.events.SecurityErrorEvent;
 	import flash.events.NetStatusEvent;
-	import flash.net.NetConnection;
+	import flash.events.SecurityErrorEvent;
 	import flash.net.ObjectEncoding;
 	import flash.net.Responder;
 	import flash.utils.Proxy;
 	import flash.utils.flash_proxy;
 	
+	import mx.controls.Alert;
 	import mx.core.IMXMLObject;
 	import mx.managers.CursorManager;
 	import mx.messaging.config.ServerConfig;
 	import mx.rpc.AbstractService;
+	import mx.rpc.Fault;
 	import mx.rpc.events.FaultEvent;
 	import mx.rpc.events.ResultEvent;
 	import mx.rpc.remoting.Operation;
-	import mx.rpc.Fault;
-	import mx.controls.Alert;
 	import mx.utils.ObjectUtil;
+	
+	import org.seasar.flex2.net.NetConnection;
 
 	use namespace flash_proxy;
 
@@ -52,7 +53,7 @@
 		*/
 		[Event(name="result", type="mx.rpc.events.ResultEvent")]
 		
-    	protected var _con:NetConnection;
+    	protected var _con:org.seasar.flex2.net.NetConnection;
 	    
 	    [Inspectable(type="String")]
 		public var gatewayUrl:String;
@@ -77,7 +78,7 @@
 		}
 		 
 		 protected function initConnection():void{
-			_con = new NetConnection();
+			_con = new org.seasar.flex2.net.NetConnection();
 			configureListeners(_con);
 			_con.objectEncoding = ObjectEncoding.AMF3;
 			_con.addHeader("DescribeService", false, 0);

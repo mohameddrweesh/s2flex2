@@ -15,8 +15,9 @@
  */
  package org.seasar.flex2.rpc.remoting
 {
-	import flash.net.NetConnection;
+	
 	import mx.messaging.config.ServerConfig;
+	import org.seasar.flex2.net.NetConnection;
 	
 	public dynamic class RemoteService extends S2Flex2Service
 	{
