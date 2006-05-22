@@ -28,6 +28,8 @@ public final class AmfDataType {
     public static final byte OBJECT = 3;
 
     public static final byte NULL = 5;
+    
+    public static final byte UNDEFINED = 6;
 
     public static final byte FLUSHED_SHARED_OBJECT = 7;
 
@@ -87,8 +89,6 @@ public final class AmfDataType {
                 return TYPE_STRING;
             case OBJECT:
                 return TYPE_OBJECT;
-            case NULL:
-                return TYPE_NULL;
             case FLUSHED_SHARED_OBJECT:
                 return TYPE_FLUSHED_SHARED_OBJECT;
             case ARRAY_SHARED_OBJECT:
@@ -105,8 +105,10 @@ public final class AmfDataType {
                 return TYPE_XML;
             case CUSTOM_CLASS:
                 return TYPE_CUSTOM_CLASS;
+            case NULL:
+            case UNDEFINED:
             default:
-                return "UNKNOWN";
+                return TYPE_NULL;
         }
     }
 }

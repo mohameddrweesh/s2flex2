@@ -19,6 +19,8 @@ public final class Amf3DataType {
 
     public static final byte AMF3_DATA_MARKER = 0x11;
 
+    public static final byte UNDEFINED = 0x00;
+    
     public static final byte NULL = 0x01;
 
     public static final byte BOOLEAN_FALSE = 0x02;
@@ -70,8 +72,6 @@ public final class Amf3DataType {
 
     public static final String toString(byte dataType) {
         switch (dataType) {
-            case NULL:
-                return TYPE_NULL;
             case BOOLEAN_FALSE:
                 return TYPE_BOOLEAN_FALSE;
             case BOOLEAN_TRUE:
@@ -92,8 +92,10 @@ public final class Amf3DataType {
                 return TYPE_XML;
             case AMF3_DATA_MARKER:
                 return TYPE_AMF3_DATA_MARKER;
+            case NULL:
+            case UNDEFINED:
             default:
-                return TYPE_UNKNOWN;
+                return TYPE_NULL;
         }
     }
 }
