@@ -23,7 +23,7 @@ public class Backport175AnnotationHandlerTest extends S2TestCase {
      */
     protected void tearDown() throws Exception {
         super.tearDown();
-       // container.destroy();
+        container.destroy();
     }
 
     public Backport175AnnotationHandlerTest(String name) {
