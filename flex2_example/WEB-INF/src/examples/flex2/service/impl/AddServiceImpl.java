@@ -5,9 +5,6 @@ import examples.flex2.service.AddService;
 
 public class AddServiceImpl implements AddService {
 
-    /**
-     * @Export(storage = "session")
-     */
 	private AddDto addDto;
 	
     public int calculate(int arg1, int arg2) {
@@ -28,8 +25,7 @@ public class AddServiceImpl implements AddService {
     	this.addDto = new AddDto();
     	return this.addDto;
     }
-    /**
-     * 
+    /** 
      * @Export(storage = "session") 
      */
 	public AddDto getAddDto() {
@@ -37,11 +33,9 @@ public class AddServiceImpl implements AddService {
 	}
 
     /**
-     * 
      * @Import(storage = "session") 
      */
 	public void setAddDto(AddDto addDto) {
 		this.addDto = addDto;
 	}
-    
 }
