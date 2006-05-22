@@ -10,7 +10,7 @@ import org.seasar.flex2.rpc.amf.gateway.service.annotation.factory.AnnotationHan
 import org.seasar.framework.container.ComponentDef;
 import org.seasar.framework.container.S2Container;
 
-public class Backport175AnnotationHandlerTest extends S2TestCase {
+public class Backport175ActionAnnotationHandlerTest extends S2TestCase {
 	private final String PATH = "MetaDataTest.dicon";
 	S2Container container;
     protected void setUp() throws Exception {
@@ -26,7 +26,7 @@ public class Backport175AnnotationHandlerTest extends S2TestCase {
         container.destroy();
     }
 
-    public Backport175AnnotationHandlerTest(String name) {
+    public Backport175ActionAnnotationHandlerTest(String name) {
         super(name);
     }
 
