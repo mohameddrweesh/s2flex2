@@ -42,8 +42,8 @@ public class Amf3XmlReaderImpl extends AbstractAmf3UTF8StringReaderImpl {
 
     private final Document readXmlData(int xmlDef,
             final DataInputStream inputStream) throws IOException {
-        String xml_data = readStringData(xmlDef, inputStream);
-        Document xml = Amf3DataUtil.toXmlDocument(xml_data);
+        String xmlStringData = readStringData(xmlDef, inputStream);
+        Document xml = Amf3DataUtil.toXmlDocument(xmlStringData);
         addObjectReference(xml);
 
         return xml;

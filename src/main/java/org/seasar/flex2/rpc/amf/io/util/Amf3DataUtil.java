@@ -61,9 +61,10 @@ public class Amf3DataUtil {
             String[] propertyNames, Object[] propertyValues) {
         int propertiesNumber = propertyNames.length;
         BeanDesc beanDesc = BeanDescFactory.getBeanDesc(object.getClass());
+        PropertyDesc propertyDef;
         for (int i = 0; i < propertiesNumber; i++) {
             if (beanDesc.hasPropertyDesc(propertyNames[i])) {
-                PropertyDesc propertyDef = beanDesc
+                propertyDef = beanDesc
                         .getPropertyDesc(propertyNames[i]);
                 if (propertyDef.hasWriteMethod()) {
                     propertyDef.setValue(object, propertyValues[i]);

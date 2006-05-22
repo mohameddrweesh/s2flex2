@@ -62,7 +62,7 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
             byte dataType = inputStream.readByte();
             Object value = writeElementData(dataType, inputStream);
             
-            logger.debug("property=" + propertyName + ",value=" + value);
+            logger.debug("<amf3> object property=" + propertyName + ",value=" + value);
             asobject.put(propertyName, value);
         }
         return asobject;
@@ -104,7 +104,7 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
             byte dataType = inputStream.readByte();
             Object value = writeElementData(dataType, inputStream);
             
-            logger.debug("property=" + propertyNames[ i ] + ",value=" + value);
+            logger.debug("<amf3> class property=" + propertyNames[ i ] + ",value=" + value);
             propertyValues[i] = value;
         }
 
