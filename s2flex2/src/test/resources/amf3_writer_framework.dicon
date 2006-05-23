@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="Shift_JIS"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.3//EN" 
 	"http://www.seasar.org/dtd/components23.dtd">
 <components namespace="amf3_writer_framework" >
@@ -6,12 +6,14 @@
 	
 	<component class="org.seasar.flex2.rpc.amf.io.writer.factory.impl.Amf3WriterFactoryImpl" />
 	<component class="org.seasar.flex2.rpc.amf.io.writer.impl.Amf3WriterImpl" instance="request" />
-	
+
+	<component name="amfNullWriterImpl" class="org.seasar.flex2.rpc.amf.io.writer.data.impl.amf.AmfNullWriterImpl" autoBinding="none" />	
 	<component name="amfStringWriterImpl" class="org.seasar.flex2.rpc.amf.io.writer.data.impl.amf.AmfStringWriterImpl" autoBinding="none" />
 	<component name="amfBigDecimalWriterImpl" class="org.seasar.flex2.rpc.amf.io.writer.data.impl.amf.AmfBigDecimalWriterImpl" autoBinding="none" />
 	<component name="amfNumberWriterImpl" class="org.seasar.flex2.rpc.amf.io.writer.data.impl.amf.AmfNumberWriterImpl" autoBinding="none" />
 	<component name="amfBooleanWriterImpl" class="org.seasar.flex2.rpc.amf.io.writer.data.impl.amf.AmfBooleanWriterImpl" autoBinding="none" />
 
+	<component name="amf3NullWriterImpl" class="org.seasar.flex2.rpc.amf.io.writer.data.impl.amf3.Amf3NullWriterImpl" />
 	<component name="amf3StringWriterImpl" class="org.seasar.flex2.rpc.amf.io.writer.data.impl.amf3.Amf3StringWriterImpl" />
 	<component name="amf3BigDecimalWriterImpl" class="org.seasar.flex2.rpc.amf.io.writer.data.impl.amf3.Amf3BigDecimalWriterImpl" />
 	<component name="amf3IntegerWriterImpl" class="org.seasar.flex2.rpc.amf.io.writer.data.impl.amf3.Amf3IntegerWriterImpl" />
@@ -25,104 +27,92 @@
 	<component name="amf3XmlWriterImpl" class="org.seasar.flex2.rpc.amf.io.writer.data.impl.amf3.Amf3XmlWriterImpl" />
 	<component name="amf3InitializedObjectWriterImpl" class="org.seasar.flex2.rpc.amf.io.writer.data.impl.amf3.Amf3InitializedObjectWriterImpl" />
 	<component name="amf3TypedClassObjectWriterImpl" class="org.seasar.flex2.rpc.amf.io.writer.data.impl.amf3.Amf3TypedClassObjectWriterImpl" />
+	<component name="amf3ExternalizableObjectWriterImpl" class="org.seasar.flex2.rpc.amf.io.writer.data.impl.amf3.Amf3ExternalizableObjectWriterImpl" />
 
     <component name="writerMap" class="java.util.HashMap">
+ 	    <initMethod name="put">
+	        <arg>@org.seasar.flex2.rpc.amf.data.AmfDataType@TYPE_NULL</arg>
+	        <arg>amfNullWriterImpl</arg>
+	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@java.lang.String@class</arg>
+	        <arg>@org.seasar.flex2.rpc.amf.data.AmfDataType@TYPE_STRING</arg>
 	        <arg>amfStringWriterImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@java.math.BigDecimal@class</arg>
-	        <arg>amfBigDecimalWriterImpl</arg>
-	    </initMethod>
-	    <initMethod name="put">
-	        <arg>@java.lang.Number@class</arg>
+	        <arg>@org.seasar.flex2.rpc.amf.data.AmfDataType@TYPE_NUMBER</arg>
 	        <arg>amfNumberWriterImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@java.lang.Boolean@class</arg>
+	        <arg>@org.seasar.flex2.rpc.amf.data.AmfDataType@TYPE_BOOLEAN</arg>
 	        <arg>amfBooleanWriterImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@java.util.Date@class</arg>
-	        <arg>amf3DateWriterImpl</arg>
-	    </initMethod>
-	    <initMethod name="put">
-	        <arg>@java.lang.reflect.Array@class</arg>
-	        <arg>amf3ArrayWriterImpl</arg>
-	    </initMethod>
-	    <initMethod name="put">
-	        <arg>@java.util.Iterator@class</arg>
-	        <arg>amf3IteratorWriterImpl</arg>
-	    </initMethod>
-	    <initMethod name="put">
-	        <arg>@java.util.Collection@class</arg>
-	        <arg>amf3CollectionWriterImpl</arg>
-	    </initMethod>
-	    <initMethod name="put">
-	        <arg>@java.util.Map@class</arg>
-	        <arg>amf3InitializedObjectWriterImpl</arg>
-	    </initMethod>
-	    <initMethod name="put">
-	        <arg>@java.lang.Class@class</arg>
-	        <arg>amf3TypedClassObjectWriterImpl</arg>
-	    </initMethod>
-	    <initMethod name="put">
-	        <arg>@org.w3c.dom.Document@class</arg>
-	        <arg>amf3XmlWriterImpl</arg>
+	        <arg>@java.math.BigDecimal@class.getName()</arg>
+	        <arg>amfBigDecimalWriterImpl</arg>
 	    </initMethod>
 	</component>
 	
 	<component name="dataWriterMap" class="java.util.HashMap">
 	    <initMethod name="put">
-	        <arg>@java.lang.String@class</arg>
+	        <arg>@org.seasar.flex2.rpc.amf.data.Amf3DataType@TYPE_NULL</arg>
+	        <arg>amf3NullWriterImpl</arg>
+	    </initMethod>	
+	    <initMethod name="put">
+	        <arg>@org.seasar.flex2.rpc.amf.data.Amf3DataType@TYPE_STRING</arg>
 	        <arg>amf3StringWriterImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@java.math.BigDecimal@class</arg>
-	        <arg>amf3BigDecimalWriterImpl</arg>
-	    </initMethod>
-	    <initMethod name="put">
-	        <arg>@java.lang.Integer@class</arg>
+	        <arg>@org.seasar.flex2.rpc.amf.data.Amf3DataType@TYPE_INTEGER</arg>
 	        <arg>amf3IntegerWriterImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@java.lang.Number@class</arg>
+	        <arg>@org.seasar.flex2.rpc.amf.data.Amf3DataType@TYPE_NUMBER</arg>
 	        <arg>amf3NumberWriterImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@java.lang.Boolean@class</arg>
+	        <arg>@org.seasar.flex2.rpc.amf.data.Amf3DataType@TYPE_BOOLEAN</arg>
 	        <arg>amf3BooleanWriterImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@java.util.Date@class</arg>
+	        <arg>@org.seasar.flex2.rpc.amf.data.Amf3DataType@TYPE_DATE</arg>
 	        <arg>amf3DateWriterImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@java.lang.reflect.Array@class</arg>
+	        <arg>@org.seasar.flex2.rpc.amf.data.Amf3DataType@TYPE_ARRAY</arg>
 	        <arg>amf3ArrayWriterImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@java.util.Iterator@class</arg>
-	        <arg>amf3IteratorWriterImpl</arg>
-	    </initMethod>
-	    <initMethod name="put">
-	        <arg>@java.util.Collection@class</arg>
-	        <arg>amf3CollectionWriterImpl</arg>
-	    </initMethod>
-	    <initMethod name="put">
-	        <arg>@java.util.Map@class</arg>
-	        <arg>amf3InitializedObjectWriterImpl</arg>
-	    </initMethod>
-	    <initMethod name="put">
-	        <arg>@java.lang.Class@class</arg>
+	        <arg>@org.seasar.flex2.rpc.amf.data.Amf3DataType@TYPE_OBJECT</arg>
 	        <arg>amf3TypedClassObjectWriterImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@org.w3c.dom.Document@class</arg>
+	        <arg>@org.seasar.flex2.rpc.amf.data.Amf3DataType@TYPE_XML</arg>
 	        <arg>amf3XmlWriterImpl</arg>
+	    </initMethod>
+	    <initMethod name="put">
+	        <arg>"org.seasar.flex2.rpc.amf.io.external.Externalizable"</arg>
+	        <arg>amf3ExternalizableObjectWriterImpl</arg>
+	    </initMethod>
+	    <initMethod name="put">
+	        <arg>@java.util.Iterator@class.getName()</arg>
+	        <arg>amf3IteratorWriterImpl</arg>
+	    </initMethod>
+	    <initMethod name="put">
+	        <arg>@java.util.Collection@class.getName()</arg>
+	        <arg>amf3CollectionWriterImpl</arg>
+	    </initMethod>
+	    <initMethod name="put">
+	        <arg>@java.util.Map@class.getName()</arg>
+	        <arg>amf3InitializedObjectWriterImpl</arg>
+	    </initMethod>
+	    <initMethod name="put">
+	        <arg>@java.math.BigDecimal@class.getName()</arg>
+	        <arg>amf3BigDecimalWriterImpl</arg>
 	    </initMethod>
 	</component>
 	
 	<component class="org.seasar.flex2.rpc.amf.io.writer.data.factory.impl.Amf3DataWriterFactoryImpl" />
+	
+	<component class="org.seasar.flex2.rpc.amf.io.external.impl.ExternalizeDataOutputImpl" instance="request" />
+	<component class="org.seasar.flex2.rpc.amf.io.external.factory.impl.ExternalizeDataOutputFactoryImpl" />
 </components>
