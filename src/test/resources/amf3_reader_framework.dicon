@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="Shift_JIS"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.3//EN" 
 	"http://www.seasar.org/dtd/components23.dtd">
 <components namespace="amf3_reader_framework" >
@@ -98,5 +98,7 @@
 	</component>
 	
 	<component class="org.seasar.flex2.rpc.amf.io.reader.data.factory.impl.Amf3DataReaderFactoryImpl" />	
-
+	
+	<component class="org.seasar.flex2.rpc.amf.io.external.impl.ExternalizeDataInputImpl" instance="request" />
+	<component class="org.seasar.flex2.rpc.amf.io.external.factory.impl.ExternalizeDataInputFactoryImpl" />
 </components>
