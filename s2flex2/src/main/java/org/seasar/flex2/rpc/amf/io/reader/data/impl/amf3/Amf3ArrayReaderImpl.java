@@ -41,12 +41,12 @@ public class Amf3ArrayReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
 
     private final List readArrayData(final int arrayDef,
             final DataInputStream inputStream) throws IOException {
-        int array_length = arrayDef >> 1;
-        List array = new ArrayList(array_length);
+        int arrayLength = arrayDef >> 1;
+        List array = new ArrayList(arrayLength);
         addObjectReference(array);
 
         inputStream.readByte(); // class define byte
-        for (int i = 0; i < array_length; i++) {
+        for (int i = 0; i < arrayLength; i++) {
             byte dataType = inputStream.readByte();
             Object item = writeElementData(dataType, inputStream);
             logger.debug("<amf3> array[" + i + "]=" + item);

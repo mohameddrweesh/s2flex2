@@ -19,6 +19,9 @@ import java.io.DataInputStream;
 import java.io.IOException;
 
 import org.seasar.flex2.rpc.amf.data.Amf3Constants;
+import org.seasar.flex2.rpc.amf.io.external.DataInput;
+import org.seasar.flex2.rpc.amf.io.external.Externalizable;
+import org.seasar.flex2.rpc.amf.io.external.factory.DataInputFactory;
 import org.seasar.flex2.rpc.amf.io.reader.data.AmfDataReader;
 import org.seasar.flex2.rpc.amf.io.util.Amf3DataUtil;
 import org.seasar.framework.util.ClassUtil;
@@ -27,48 +30,63 @@ import flashgateway.io.ASObject;
 
 public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
 
+    private DataInputFactory dataInputFactory;
+
     private AmfDataReader stringReader;
 
-    public Object read( final DataInputStream inputStream) throws IOException {
-        return readObject( inputStream );
+    public Object read(final DataInputStream inputStream) throws IOException {
+        return readObject(inputStream);
+    }
+
+    public void setDataInputFactory(DataInputFactory dataInputFactory) {
+        this.dataInputFactory = dataInputFactory;
     }
 
     public void setStringReader(AmfDataReader stringReader) {
         this.stringReader = stringReader;
     }
 
-    protected final Object readInlinedObject( final int reference, final DataInputStream inputStream) throws IOException {
-        Object object = readObjectData(reference, inputStream ); 
+    protected final Object readInlinedObject(final int reference,
+            final DataInputStream inputStream) throws IOException {
+        Object object = readObjectData(reference, inputStream);
         logger.debug("<amf3> read inline Object:");
         return object;
     }
 
-    protected final Object readReferencedObject( final int reference, final DataInputStream inputStream) throws IOException {
-        logger.debug("<amf3> read reference Object:" + (reference>>>1));
+    protected final Object readReferencedObject(final int reference,
+            final DataInputStream inputStream) throws IOException {
+        logger.debug("<amf3> read reference Object:" + (reference >>> 1));
         return getObjectAt(reference >>> 1);
     }
 
-    private final Object readASObjectData( final DataInputStream inputStream ) throws IOException {
+    private Object createClassInstance(final Class clazz) {
+        Object object = ClassUtil.newInstance(clazz);
+        addObjectReference(object);
+        return object;
+    }
+
+    private final Object readASObjectData(final DataInputStream inputStream)
+            throws IOException {
         logger.debug("<amf3> read ASObject:");
 
         ASObject asobject = new ASObject();
         addObjectReference(asobject);
         while (true) {
-            String propertyName = (String)stringReader.read( inputStream );
+            String propertyName = (String) stringReader.read(inputStream);
             if (propertyName.length() <= 0) {
                 break;
             }
-            //
-            byte dataType = inputStream.readByte();
-            Object value = writeElementData(dataType, inputStream);
-            
-            logger.debug("<amf3> object property=" + propertyName + ",value=" + value);
+            Object value = readPropertyValue(inputStream);
+
+            logger.debug("<amf3> object property=" + propertyName + ",value="
+                    + value);
             asobject.put(propertyName, value);
         }
         return asobject;
     }
 
-    private final Class readClassDef( final int objectDef, final DataInputStream inputStream ) throws IOException {
+    private final Class readClassDef(final int objectDef,
+            final DataInputStream inputStream) throws IOException {
 
         Class clazz = ASObject.class;
 
@@ -79,66 +97,119 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
                 break;
 
             case Amf3Constants.CLASS_DEF_INLINE:
-                String class_name = (String)stringReader.read( inputStream );
-                if (class_name.length() > 0) {
-                    clazz = ClassUtil.forName(class_name);
+                String className = (String) stringReader.read(inputStream);
+                if (className.length() > 0) {
+                    clazz = ClassUtil.forName(className);
                 }
                 addClassReference(clazz);
                 break;
         }
-        
+
         return clazz;
     }
 
-    private final Object readClassObjectData( final int objectDef, final Class clazz, final DataInputStream inputStream )
+    private final Object readClassObjectData(final int objectDef,
+            final Class clazz, final DataInputStream inputStream)
             throws IOException {
         logger.debug("<amf3> read tpyed class:" + clazz.getName());
 
-        Object object = ClassUtil.newInstance(clazz);
-        addObjectReference(object);
+        final Object object = createClassInstance(clazz);
 
-        String[] propertyNames = readPropertiesOfClass(objectDef, clazz, inputStream);
+        final String[] propertyNames = readClassProperties(objectDef, clazz,
+                inputStream);
 
-        Object[] propertyValues = new Object[propertyNames.length];
-        for (int i = 0; i < propertyNames.length; i++) {
-            byte dataType = inputStream.readByte();
-            Object value = writeElementData(dataType, inputStream);
-            
-            logger.debug("<amf3> class property=" + propertyNames[ i ] + ",value=" + value);
-            propertyValues[i] = value;
-        }
+        final Object[] propertyValues = readPropertyValues(propertyNames,
+                inputStream);
 
         Amf3DataUtil.setProperties(object, propertyNames, propertyValues);
 
         return object;
     }
 
-    private final Object readObjectData( final int objectDef, final DataInputStream inputStream ) throws IOException {
-        Class clazz = readClassDef(objectDef,inputStream);
-        
-        Object object;
-        if (clazz != null && !(ASObject.class.equals(clazz))) {
-            object = readClassObjectData(objectDef, clazz, inputStream);
-        } else {
-            object = readASObjectData( inputStream );
+    private final String[] readClassProperties(final int objectDef,
+            final Class clazz, final DataInputStream inputStream)
+            throws IOException {
+
+        String[] propertyNames;
+        switch (objectDef & Amf3Constants.CLASS_DEF_INLINE) {
+
+            case Amf3Constants.CLASS_DEF_INLINE:
+                propertyNames = readProperties(objectDef, clazz, inputStream);
+                break;
+
+            default:
+                propertyNames = getPropertiesOf(clazz);
+
         }
-        
+        return propertyNames;
+    }
+
+    private final Object readExternalizableObjectData(int objectDef,
+            Class clazz, DataInputStream inputStream) throws IOException {
+        logger.debug("<amf3> read externalizable class:" + clazz.getName());
+        Externalizable externalizable = (Externalizable) createClassInstance(clazz);
+        DataInput input = dataInputFactory.createDataIpput(inputStream);
+        externalizable.readExternal(input);
+
+        return externalizable;
+    }
+
+    private final Object readObjectData(final int objectDef,
+            final DataInputStream inputStream) throws IOException {
+
+        Class clazz = readClassDef(objectDef, inputStream);
+
+        Object object = null;
+        do {
+            if (clazz == null) {
+                break;
+            }
+            if (clazz == ASObject.class) {
+                object = readASObjectData(inputStream);
+                break;
+            }
+            if (clazz.isAssignableFrom(Externalizable.class)) {
+                object = readExternalizableObjectData(objectDef, clazz,
+                        inputStream);
+                break;
+            }
+
+            object = readClassObjectData(objectDef, clazz, inputStream);
+        } while (false);
+
         return object;
     }
 
-    private final String[] readPropertiesOfClass(final int objectDef, final Class clazz, final DataInputStream inputStream) throws IOException {
-        String[] propertyNames;
-        if ((objectDef & Amf3Constants.CLASS_DEF_INLINE) == Amf3Constants.CLASS_DEF_INLINE) {
-            int propertyNumber = objectDef >>> 4;
-            propertyNames = new String[propertyNumber];
-            for (int i = 0; i < propertyNumber; i++) {
-                propertyNames[i] = (String)stringReader.read( inputStream );
-            }
-            addClassProperties(clazz, propertyNames);
-        } else {
-            propertyNames = getPropertiesAt(clazz);
+    private final String[] readProperties(final int objectDef,
+            final Class clazz, final DataInputStream inputStream)
+            throws IOException {
+        int propertyNumber = objectDef >>> 4;
+        String[] propertyNames = new String[propertyNumber];
+        for (int i = 0; i < propertyNumber; i++) {
+            propertyNames[i] = (String) stringReader.read(inputStream);
         }
+        addClassProperties(clazz, propertyNames);
+
         return propertyNames;
+    }
+
+    private final Object readPropertyValue(final DataInputStream inputStream)
+            throws IOException {
+        byte dataType = inputStream.readByte();
+        return writeElementData(dataType, inputStream);
+    }
+
+    private final Object[] readPropertyValues(final String[] propertyNames,
+            final DataInputStream inputStream) throws IOException {
+        Object[] propertyValues = new Object[propertyNames.length];
+        for (int i = 0; i < propertyNames.length; i++) {
+            Object value = readPropertyValue(inputStream);
+
+            logger.debug("<amf3> class property=" + propertyNames[i]
+                    + ",value=" + value);
+            propertyValues[i] = value;
+        }
+        return propertyValues;
     }
 
 }

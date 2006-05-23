@@ -24,7 +24,8 @@ import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
 import org.seasar.framework.beans.factory.BeanDescFactory;
 
-public class Amf3TypedClassObjectWriterImpl extends AbstractAmf3ClassObjectWriterImpl {
+public class Amf3TypedClassObjectWriterImpl extends
+        AbstractAmf3ClassObjectWriterImpl {
 
     public int getObjectType() {
         return Amf3DataType.OBJECT;
@@ -35,44 +36,55 @@ public class Amf3TypedClassObjectWriterImpl extends AbstractAmf3ClassObjectWrite
         writeClassObject(object, outputStream);
     }
 
-    protected final void writeClassReferenceDef(final Object object,
+    protected void writeClassDefine(final BeanDesc beanDesc,
             final DataOutputStream outputStream) throws IOException {
-        addClassReference(object.getClass());
+        int classDef = Amf3Constants.OBJECT_INLINE;
+        classDef |= Amf3Constants.CLASS_DEF_INLINE;
+        classDef = (beanDesc.getPropertyDescSize() << 4) | classDef;
+        writeIntData(classDef, outputStream);
+    }
 
-        BeanDesc beanDesc = BeanDescFactory.getBeanDesc(object.getClass());
-        writeClassDef(beanDesc, outputStream);
-        writeClassName(object, outputStream);
+    protected final void writeClassName(final Object object,
+            final DataOutputStream outputStream) throws IOException {
+        String type = object.getClass().getName();
+        writeTypeString(type, outputStream);
+    }
 
+    protected final void writeClassObject(final Object value,
+            final DataOutputStream outputStream) throws IOException {
+        addObjectReference(value);
+        writeClassReference(value, outputStream);
+        writeClassObjectData(value, outputStream);
+    }
+
+    protected void writeClassObjectData(final Object value,
+            final DataOutputStream outputStream) throws IOException {
+        BeanDesc beanDesc = BeanDescFactory.getBeanDesc(value.getClass());
+        PropertyDesc propertyDef;
+        for (int i = 0; i < beanDesc.getPropertyDescSize(); ++i) {
+            propertyDef = (PropertyDesc) beanDesc.getPropertyDesc(i);
+            if (propertyDef.hasReadMethod()) {
+                writeElementData(propertyDef.getValue(value), outputStream);
+            }
+        }
+    }
+
+    protected void writeClassProperties(BeanDesc beanDesc,
+            final DataOutputStream outputStream) throws IOException {
         for (int i = 0; i < beanDesc.getPropertyDescSize(); ++i) {
             writeClassPropertyName(outputStream, (PropertyDesc) beanDesc
                     .getPropertyDesc(i));
         }
     }
 
-    private final void writeClassDef(final BeanDesc beanDesc,
+    protected final void writeClassReferenceDefine(final Object object,
             final DataOutputStream outputStream) throws IOException {
-        int int_data = Amf3Constants.OBJECT_INLINE;
-        int_data |= Amf3Constants.CLASS_DEF_INLINE;
-        int_data = (beanDesc.getPropertyDescSize() << 4) | int_data;
-        writeIntData(int_data, outputStream);
-    }
+        addClassReference(object.getClass());
 
-    private final void writeClassName(final Object object,
-            final DataOutputStream outputStream) throws IOException {
-        String type = object.getClass().getName();
-        writeTypeString(type, outputStream);
-    }
-
-    private final void writeClassObject(final Object value,
-            final DataOutputStream outputStream) throws IOException {
-        addObjectReference(value);
-        writeClassReference(value, outputStream);
-
-        BeanDesc beanDesc = BeanDescFactory.getBeanDesc(value.getClass());
-        for (int i = 0; i < beanDesc.getPropertyDescSize(); ++i) {
-            writeClassPropertyValue(outputStream, (PropertyDesc) beanDesc
-                    .getPropertyDesc(i), value);
-        }
+        BeanDesc beanDesc = BeanDescFactory.getBeanDesc(object.getClass());
+        writeClassDefine(beanDesc, outputStream);
+        writeClassName(object, outputStream);
+        writeClassProperties(beanDesc, outputStream);
     }
 
     private final void writeClassPropertyName(
@@ -80,15 +92,6 @@ public class Amf3TypedClassObjectWriterImpl extends AbstractAmf3ClassObjectWrite
             throws IOException {
         if (propertyDef.hasReadMethod()) {
             writeTypeString(propertyDef.getPropertyName(), outputStream);
-        }
-    }
-
-    private final void writeClassPropertyValue(
-            final DataOutputStream outputStream,
-            final PropertyDesc propertyDef, final Object target)
-            throws IOException {
-        if (propertyDef.hasReadMethod()) {
-            writeElementData(propertyDef.getValue(target), outputStream);
         }
     }
 }

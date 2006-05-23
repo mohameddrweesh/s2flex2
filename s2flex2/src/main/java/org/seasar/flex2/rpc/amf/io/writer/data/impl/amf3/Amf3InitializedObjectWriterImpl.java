@@ -34,15 +34,14 @@ public class Amf3InitializedObjectWriterImpl extends AbstractAmf3ClassObjectWrit
         writeObjectData((Map) object, outputStream);
     }
 
-    protected final void writeClassReferenceDef(final Object object,
+    protected final void writeClassReferenceDefine(final Object object,
             final DataOutputStream outputStream) throws IOException {
         addClassReference(object.getClass());
-        int int_data = Amf3Constants.OBJECT_INLINE;
-        int_data |= Amf3Constants.CLASS_DEF_INLINE;
-        int_data |= Amf3Constants.UNTYPED_OBJECT;
-        writeIntData(int_data, outputStream);
-        outputStream.writeByte(Amf3Constants.EMPTY_STRING_DATA); // there is no
-        // class-def
+        int classDef = Amf3Constants.OBJECT_INLINE;
+        classDef |= Amf3Constants.CLASS_DEF_INLINE;
+        classDef |= Amf3Constants.PROPERTY_DEF_WITH_VALUE;
+        writeIntData(classDef, outputStream);
+        outputStream.writeByte(Amf3Constants.EMPTY_STRING_DATA);
     }
 
     private final void writeObjectData(final Map value,

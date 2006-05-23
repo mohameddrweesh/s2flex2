@@ -30,11 +30,11 @@ public abstract class AbstractAmf3ClassObjectWriterImpl extends
         if (classIndex >= 0) {
             writeClassReferenceIndex(classIndex, outputStream);
         } else {
-            writeClassReferenceDef(object, outputStream);
+            writeClassReferenceDefine(object, outputStream);
         }
     }
 
-    protected abstract void writeClassReferenceDef(Object object,
+    protected abstract void writeClassReferenceDefine(Object object,
             DataOutputStream outputStream) throws IOException;
 
     protected final void writeClassReferenceIndex(final int referenceIndex,

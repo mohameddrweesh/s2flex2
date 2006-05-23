@@ -43,6 +43,8 @@ public final class Amf3DataType {
     
     public static final String TYPE_NULL = "AMF3_NULL";
 
+    public static final String TYPE_BOOLEAN = "AMF3_BOOLEAN";
+    
     public static final String TYPE_BOOLEAN_FALSE = "AMF3_BOOLEAN_TRUE";
 
     public static final String TYPE_BOOLEAN_TRUE = "AMF3_BOOLEAN_FALSE";
@@ -61,37 +63,44 @@ public final class Amf3DataType {
 
     public static final String TYPE_XML = "AMF3_XML";
 
-    public static final String TYPE_CUSTOM_CLASS = "AMF3_CUSTOM_CLASS";
-
     public static final String TYPE_AMF3_DATA_MARKER = "AMF3_DATA_MARKER";
-    
-    public static final String TYPE_UNKNOWN = "AMF3_UNKNOWN";
 
     private Amf3DataType() {
     }
 
     public static final String toString(byte dataType) {
         switch (dataType) {
+            
             case BOOLEAN_FALSE:
                 return TYPE_BOOLEAN_FALSE;
+            
             case BOOLEAN_TRUE:
                 return TYPE_BOOLEAN_TRUE;
+            
             case INTEGER:
                 return TYPE_INTEGER;
+            
             case NUMBER:
                 return TYPE_NUMBER;
+            
             case STRING:
                 return TYPE_STRING;
+            
             case DATE:
                 return TYPE_DATE;
+            
             case ARRAY:
                 return TYPE_ARRAY;
+            
             case OBJECT:
                 return TYPE_OBJECT;
+            
             case XML:
                 return TYPE_XML;
+            
             case AMF3_DATA_MARKER:
                 return TYPE_AMF3_DATA_MARKER;
+                
             case NULL:
             case UNDEFINED:
             default:
