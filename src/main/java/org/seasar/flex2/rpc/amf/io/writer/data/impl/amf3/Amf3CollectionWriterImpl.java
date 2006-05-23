@@ -31,6 +31,7 @@ public class Amf3CollectionWriterImpl extends Amf3ArrayWriterImpl {
             final DataOutputStream outputStream) throws IOException {
         ArrayList list = new ArrayList();
         list.addAll(value);
-        super.processWriteObjectData(list.toArray(new Object[list.size()]), outputStream);
+        super.processWriteObjectData(list.toArray(new Object[list.size()]),
+                outputStream);
     }
 }

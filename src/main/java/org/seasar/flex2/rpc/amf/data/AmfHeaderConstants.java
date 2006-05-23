@@ -16,7 +16,7 @@
 package org.seasar.flex2.rpc.amf.data;
 
 public interface AmfHeaderConstants {
-    
-	static final String APPEND_TO_GATEWAYURL = "AppendToGatewayUrl";
+
+    static final String APPEND_TO_GATEWAYURL = "AppendToGatewayUrl";
 
 }

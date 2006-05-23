@@ -17,15 +17,15 @@ package org.seasar.flex2.rpc.amf.data;
 
 public interface AmfBody {
 
-	public String getTarget();
-	
-	public String getResponse();
-	
-	public Object getData();
-	
-	public String getServiceName();
-	
-	public String getServiceMethodName();
-	
-	public Object[] getArgs();
+    String getTarget();
+
+    String getResponse();
+
+    Object getData();
+
+    String getServiceName();
+
+    String getServiceMethodName();
+
+    Object[] getArgs();
 }

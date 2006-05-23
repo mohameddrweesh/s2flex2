@@ -21,9 +21,11 @@ import java.io.IOException;
 import org.seasar.flex2.rpc.amf.data.Amf3Constants;
 import org.seasar.flex2.rpc.amf.io.util.Amf3DataUtil;
 
-public abstract class AbstractAmf3UTF8StringReaderImpl extends AbstractAmf3ObjectReaderImpl {
+public abstract class AbstractAmf3UTF8StringReaderImpl extends
+        AbstractAmf3ObjectReaderImpl {
 
-    protected final String readStringData( final int stringDef, final DataInputStream inputStream) throws IOException {
+    protected final String readStringData(final int stringDef,
+            final DataInputStream inputStream) throws IOException {
         int str_length = stringDef >> 1;
         String str = null;
         if (str_length > 0) {

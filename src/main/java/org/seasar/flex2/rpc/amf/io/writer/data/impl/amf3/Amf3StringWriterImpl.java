@@ -33,7 +33,7 @@ public class Amf3StringWriterImpl extends AbstractAmf3ObjectWriterImpl {
 
     private final void writeStringData(final String value,
             final DataOutputStream outputStream) throws IOException {
-    	addStringReference(value);
+        addStringReference(value);
         writeUTF8String(value, outputStream);
     }
 }

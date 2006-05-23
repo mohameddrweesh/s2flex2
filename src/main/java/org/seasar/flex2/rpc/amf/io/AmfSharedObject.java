@@ -22,8 +22,8 @@ public interface AmfSharedObject {
     int getSharedIndex(Object value);
 
     Object getSharedObject(int index);
-    
+
     int getSize();
-    
+
     void initialize();
 }

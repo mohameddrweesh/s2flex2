@@ -16,13 +16,13 @@
 package org.seasar.flex2.rpc.amf.data;
 
 public interface Amf3Constants {
-    
+
     static final byte CLASS_DEF_INLINE = 0x02;
 
     static final byte CLASS_DEF_REFERENCE = 0x00;
 
     static final String EMPTY_STRING = "";
-    
+
     static final byte EMPTY_STRING_DATA = 0x01;
 
     static final byte INTEGER_DATA_MAX_BYTES = 4;
@@ -38,13 +38,13 @@ public interface Amf3Constants {
     static final byte OBJECT_INLINE = 0x01;
 
     static final byte OBJECT_REFERENCE = 0x00;
-    
+
     static final byte PROPERTY_DEF = 0x0C;
-    
+
     static final byte PROPERTY_DEF_LIST = 0x00;
-    
+
     static final byte PROPERTY_DEF_SINGLE = 0x04;
-    
+
     static final byte PROPERTY_DEF_WITH_VALUE = 0x08;
-    
+
 }

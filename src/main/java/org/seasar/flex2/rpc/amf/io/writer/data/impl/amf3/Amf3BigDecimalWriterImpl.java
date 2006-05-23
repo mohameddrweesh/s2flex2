@@ -23,6 +23,7 @@ public class Amf3BigDecimalWriterImpl extends Amf3StringWriterImpl {
 
     protected final void processWriteObjectData(Object object,
             DataOutputStream outputStream) throws IOException {
-        super.processWriteObjectData(((BigDecimal)object).toString(), outputStream);
+        super.processWriteObjectData(((BigDecimal) object).toString(),
+                outputStream);
     }
 }

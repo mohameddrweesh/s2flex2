@@ -17,13 +17,13 @@ package org.seasar.flex2.rpc.amf.data;
 
 public interface AmfError {
 
-	public String getCode();
-	
-	public String getType();
-	
-	public String getLevel();
-	
-	public String getDetails();
-	
-	public String getDescription();
+    String getCode();
+
+    String getType();
+
+    String getLevel();
+
+    String getDetails();
+
+    String getDescription();
 }

@@ -26,11 +26,12 @@ public class AmfNumberReaderImpl implements AmfDataReader {
     private static final Logger logger = Logger
             .getLogger(AmfNumberReaderImpl.class);
 
-    public Object read( final DataInputStream outputStream) throws IOException {
+    public Object read(final DataInputStream outputStream) throws IOException {
         return readNumber(outputStream);
     }
 
-    private final Double readNumber( final DataInputStream inputStream) throws IOException {
+    private final Double readNumber(final DataInputStream inputStream)
+            throws IOException {
         double d = inputStream.readDouble();
         logger.debug("readNumber:" + d);
         return new Double(d);

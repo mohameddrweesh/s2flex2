@@ -17,19 +17,19 @@ package org.seasar.flex2.rpc.amf.data;
 
 public interface AmfMessage {
 
-    public int getBodySize();
-    
-    public AmfBody getBody(int index);
-    
-    public void addBody(AmfBody body);
-    
-    public int getVersion();
-    
-    public void setVersion( int amf_version );
-    
-    public int getHeaderSize();
-    
-    public AmfHeader getHeader( int index );
-    
-    public void addHeader(AmfHeader body);
+    int getBodySize();
+
+    AmfBody getBody(int index);
+
+    void addBody(AmfBody body);
+
+    int getVersion();
+
+    void setVersion(int amf_version);
+
+    int getHeaderSize();
+
+    AmfHeader getHeader(int index);
+
+    void addHeader(AmfHeader body);
 }

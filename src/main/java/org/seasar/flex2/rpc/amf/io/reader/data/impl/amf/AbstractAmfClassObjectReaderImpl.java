@@ -25,7 +25,8 @@ import org.seasar.framework.util.ClassUtil;
 
 import flashgateway.io.ASObject;
 
-public abstract class AbstractAmfClassObjectReaderImpl extends AbstractAmfObjectReaderImpl {
+public abstract class AbstractAmfClassObjectReaderImpl extends
+        AbstractAmfObjectReaderImpl {
 
     protected final Object translateBean(ASObject asObject) {
         String type = (String) asObject.get(AmfConstants.REMOTE_CLASS);

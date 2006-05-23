@@ -21,7 +21,7 @@ import java.io.IOException;
 import org.seasar.flex2.rpc.amf.io.reader.data.AmfDataReader;
 import org.seasar.flex2.rpc.amf.io.reader.data.factory.Amf3DataReaderFactory;
 
-public class Amf3DataReaderImpl implements AmfDataReader{
+public class Amf3DataReaderImpl implements AmfDataReader {
 
     protected Amf3DataReaderFactory readerFactory;
 
@@ -29,7 +29,8 @@ public class Amf3DataReaderImpl implements AmfDataReader{
         this.readerFactory = readerFactory;
     }
 
-    public final Object read(final DataInputStream inputStream) throws IOException {
+    public final Object read(final DataInputStream inputStream)
+            throws IOException {
         byte dataType = inputStream.readByte();
         AmfDataReader reader = readerFactory.createAmf3DataReader(dataType);
         return reader.read(inputStream);

@@ -29,7 +29,7 @@ public abstract class AbstractAmf3ObjectReaderImpl extends
     public void setReferencesFactory(Amf3ReferencesFactory referencesFactory) {
         this.referencesFactory = referencesFactory;
     }
-    
+
     protected final void addClassProperties(Class clazz, String[] properties) {
         referencesFactory.createReferences().addClassProperties(clazz,
                 properties);
@@ -47,7 +47,7 @@ public abstract class AbstractAmf3ObjectReaderImpl extends
         referencesFactory.createReferences().addStringReference(object);
     }
 
-    protected final Class getClassAt( int index ) {
+    protected final Class getClassAt(int index) {
         return referencesFactory.createReferences().getClassAt(index);
     }
 
@@ -56,7 +56,7 @@ public abstract class AbstractAmf3ObjectReaderImpl extends
                 clazz);
     }
 
-    protected final Object getObjectAt( int index ) {
+    protected final Object getObjectAt(int index) {
         return referencesFactory.createReferences().getObjectAt(index);
     }
 
@@ -65,11 +65,11 @@ public abstract class AbstractAmf3ObjectReaderImpl extends
                 object);
     }
 
-    protected final String[] getPropertiesOf( Class clazz ) {
+    protected final String[] getPropertiesOf(Class clazz) {
         return referencesFactory.createReferences().getPropertiesAt(clazz);
     }
 
-    protected final String getStringAt( int index ) {
+    protected final String getStringAt(int index) {
         return referencesFactory.createReferences().getStringAt(index);
     }
 
@@ -78,26 +78,29 @@ public abstract class AbstractAmf3ObjectReaderImpl extends
                 object);
     }
 
-    abstract protected Object readInlinedObject( int reference, DataInputStream inputStream) throws IOException;
+    abstract protected Object readInlinedObject(int reference,
+            DataInputStream inputStream) throws IOException;
 
-    protected final Object readObject( final DataInputStream inputStream) throws IOException {
+    protected final Object readObject(final DataInputStream inputStream)
+            throws IOException {
         Object result = null;
 
-        int reference = readInt( inputStream );
+        int reference = readInt(inputStream);
         switch (reference & Amf3Constants.OBJECT_INLINE) {
 
             case Amf3Constants.OBJECT_REFERENCE:
-                result = readReferencedObject( reference, inputStream );
+                result = readReferencedObject(reference, inputStream);
                 break;
 
             case Amf3Constants.OBJECT_INLINE:
-                result = readInlinedObject( reference, inputStream );
+                result = readInlinedObject(reference, inputStream);
                 break;
-                
+
             default:
         }
         return result;
     }
 
-    abstract protected Object readReferencedObject( int reference, DataInputStream inputStream) throws IOException;
+    abstract protected Object readReferencedObject(int reference,
+            DataInputStream inputStream) throws IOException;
 }

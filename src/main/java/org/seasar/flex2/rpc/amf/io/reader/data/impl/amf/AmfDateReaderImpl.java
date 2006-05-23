@@ -29,18 +29,19 @@ public class AmfDateReaderImpl implements AmfDataReader {
     private static final Logger logger = Logger
             .getLogger(AmfDateReaderImpl.class);
 
-    public Object read( final DataInputStream inputStream) throws IOException {
-        return readDate( inputStream );
+    public Object read(final DataInputStream inputStream) throws IOException {
+        return readDate(inputStream);
     }
 
-    private final Date readDate( final DataInputStream inputStream) throws IOException {
+    private final Date readDate(final DataInputStream inputStream)
+            throws IOException {
         double ms = inputStream.readDouble();
         int offset = inputStream.readUnsignedShort()
                 * AmfConstants.MILLS_PER_HOUR;
         int defaultOffset = TimeZone.getDefault().getRawOffset();
         ms += (double) defaultOffset - offset;
         Date date = new Date((long) ms);
-        
+
         logger.debug("readDate:" + date);
         return date;
     }

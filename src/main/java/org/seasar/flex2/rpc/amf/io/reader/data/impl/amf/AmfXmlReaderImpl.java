@@ -31,7 +31,8 @@ public class AmfXmlReaderImpl implements AmfDataReader {
     private static final Logger logger = Logger
             .getLogger(AmfXmlReaderImpl.class);
 
-    protected Document readXML( final DataInputStream inputStream) throws IOException {
+    protected Document readXML(final DataInputStream inputStream)
+            throws IOException {
         logger.debug("readXML:");
         inputStream.skip(4);
         DocumentBuilder builder = DocumentBuilderFactoryUtil
@@ -39,7 +40,7 @@ public class AmfXmlReaderImpl implements AmfDataReader {
         return DocumentBuilderUtil.parse(builder, inputStream);
     }
 
-    public Object read( final DataInputStream inputStream) throws IOException {
-        return readXML( inputStream );
+    public Object read(final DataInputStream inputStream) throws IOException {
+        return readXML(inputStream);
     }
 }

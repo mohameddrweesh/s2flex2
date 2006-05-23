@@ -24,7 +24,8 @@ public class Amf3StringReaderImpl extends AbstractAmf3UTF8StringReaderImpl {
         return readObject(inputStream);
     }
 
-    protected Object readInlinedObject(int reference, DataInputStream inputStream) throws IOException {
+    protected Object readInlinedObject(int reference,
+            DataInputStream inputStream) throws IOException {
         String result = readStringData(reference, inputStream);
         if (result.length() > 0) {
             addStringReference(result);
@@ -33,8 +34,9 @@ public class Amf3StringReaderImpl extends AbstractAmf3UTF8StringReaderImpl {
         return result;
     }
 
-    protected Object readReferencedObject(int reference, DataInputStream inputStream) throws IOException {
-        logger.debug("<amf3> read reference String:" + (reference>>>1));
+    protected Object readReferencedObject(int reference,
+            DataInputStream inputStream) throws IOException {
+        logger.debug("<amf3> read reference String:" + (reference >>> 1));
         return getStringAt(reference >>> 1);
     }
 }

@@ -28,7 +28,7 @@ public final class AmfDataType {
     public static final byte OBJECT = 3;
 
     public static final byte NULL = 5;
-    
+
     public static final byte UNDEFINED = 6;
 
     public static final byte FLUSHED_SHARED_OBJECT = 7;
