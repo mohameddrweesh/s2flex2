@@ -19,17 +19,14 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.seasar.flex2.rpc.amf.data.Amf3Constants;
-import org.seasar.flex2.rpc.amf.io.external.DataInput;
 import org.seasar.flex2.rpc.amf.io.external.DataOutput;
 import org.seasar.flex2.rpc.amf.io.external.Externalizable;
 import org.seasar.flex2.rpc.amf.io.external.factory.DataOutputFactory;
 import org.seasar.framework.beans.BeanDesc;
-import org.seasar.framework.beans.PropertyDesc;
-import org.seasar.framework.beans.factory.BeanDescFactory;
 
 public class Amf3ExternalizableObjectWriterImpl extends
         Amf3TypedClassObjectWriterImpl {
-    
+
     private DataOutputFactory dataOutputFactory;
 
     public void setDataOutputFactory(DataOutputFactory dataOutputFactory) {
@@ -46,13 +43,14 @@ public class Amf3ExternalizableObjectWriterImpl extends
 
     protected final void writeClassObjectData(final Object value,
             final DataOutputStream outputStream) throws IOException {
-        if( value instanceof Externalizable ){
+        if (value instanceof Externalizable) {
             Externalizable externalizable = (Externalizable) value;
-            DataOutput output = dataOutputFactory.createDataOutput(outputStream);
+            DataOutput output = dataOutputFactory
+                    .createDataOutput(outputStream);
             externalizable.writeExternal(output);
         }
     }
-    
+
     protected final void writeClassProperties(BeanDesc beanDesc,
             final DataOutputStream outputStream) throws IOException {
     }

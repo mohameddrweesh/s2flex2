@@ -26,21 +26,21 @@ public class AmfBooleanReaderImpl implements AmfDataReader {
     private static final Logger logger = Logger
             .getLogger(AmfNumberReaderImpl.class);
 
-    public Object read( final DataInputStream inputStream) throws IOException {
+    public Object read(final DataInputStream inputStream) throws IOException {
         return readBoolean(inputStream);
     }
 
-    private final Boolean readBoolean( final DataInputStream inputStream)
+    private final Boolean readBoolean(final DataInputStream inputStream)
             throws IOException {
         Boolean result = Boolean.FALSE;
-        
+
         byte value = inputStream.readByte();
         if (value == 1) {
-            result =  Boolean.TRUE;
+            result = Boolean.TRUE;
         }
-        
+
         logger.debug("readBoolean:" + result);
-        
+
         return result;
     }
 }

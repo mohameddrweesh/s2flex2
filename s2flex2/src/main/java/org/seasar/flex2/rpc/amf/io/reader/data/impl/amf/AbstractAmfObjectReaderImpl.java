@@ -60,8 +60,8 @@ public abstract class AbstractAmfObjectReaderImpl implements AmfDataReader {
         return sharedObjectFactory.createSharedObject();
     }
 
-    protected final Object readData( final byte dataType, final DataInputStream inputStream)
-            throws IOException {
+    protected final Object readData(final byte dataType,
+            final DataInputStream inputStream) throws IOException {
         AmfDataReader dataReader = dataReaderFactory.createDataReader(dataType);
         return dataReader.read(inputStream);
     }

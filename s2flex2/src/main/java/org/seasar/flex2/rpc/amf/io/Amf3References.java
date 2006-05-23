@@ -22,22 +22,22 @@ public interface Amf3References {
     void addClassReference(Class clazz);
 
     void addObjectReference(Object object);
-    
+
     void addStringReference(String object);
 
-    Class getClassAt( int index );
+    Class getClassAt(int index);
 
     int getClassReferenceIndex(Class clazz);
 
-    Object getObjectAt( int index );
-    
+    Object getObjectAt(int index);
+
     int getObjectReferenceIndex(Object object);
-    
-    String[] getPropertiesAt( Class clazz );
-    
-    String getStringAt( int index );
-    
+
+    String[] getPropertiesAt(Class clazz);
+
+    String getStringAt(int index);
+
     int getStringReferenceIndex(String object);
-    
+
     void initialize();
 }

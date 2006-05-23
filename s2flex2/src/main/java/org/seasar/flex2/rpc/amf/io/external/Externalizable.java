@@ -16,7 +16,7 @@
 package org.seasar.flex2.rpc.amf.io.external;
 
 public interface Externalizable {
-    
+
     void readExternal(DataInput input);
 
     void writeExternal(DataOutput output);

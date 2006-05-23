@@ -16,8 +16,8 @@
 package org.seasar.flex2.rpc.amf.data;
 
 public interface AmfVersionConstants {
-    
-    final static int VERSION_0 = 0x00;
-    
-    final static int VERSION_3 = 0x03;
+
+    static final int VERSION_0 = 0x00;
+
+    static final int VERSION_3 = 0x03;
 }

@@ -40,11 +40,11 @@ public class Amf3ArrayWriterImpl extends AbstractAmf3TypedObjectWriterImpl {
     private final void writeArrayElements(final Object[] array,
             final DataOutputStream outputStream) throws IOException {
         addObjectReference(array);
-        
+
         int arrayDef = array.length << 1 | Amf3Constants.OBJECT_INLINE;
         writeIntData(arrayDef, outputStream);
         outputStream.writeByte(Amf3Constants.EMPTY_STRING_DATA);
-        
+
         for (int i = 0; i < array.length; i++) {
             writeArrayElement(outputStream, array[i]);
         }

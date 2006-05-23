@@ -25,7 +25,8 @@ public class Amf3BooleanTrueReaderImpl implements AmfDataReader {
     private static final Logger logger = Logger
             .getLogger(Amf3BooleanTrueReaderImpl.class);
 
-    public final Object read( final DataInputStream inputStream) throws IOException {
+    public final Object read(final DataInputStream inputStream)
+            throws IOException {
         logger.debug("<amf3> readBooleanTrue:");
 
         return Boolean.TRUE;

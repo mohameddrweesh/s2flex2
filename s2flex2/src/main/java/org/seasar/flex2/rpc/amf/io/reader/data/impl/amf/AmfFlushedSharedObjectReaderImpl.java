@@ -18,7 +18,8 @@ package org.seasar.flex2.rpc.amf.io.reader.data.impl.amf;
 import java.io.DataInputStream;
 import java.io.IOException;
 
-public class AmfFlushedSharedObjectReaderImpl extends AbstractAmfObjectReaderImpl {
+public class AmfFlushedSharedObjectReaderImpl extends
+        AbstractAmfObjectReaderImpl {
 
     public Object read(final DataInputStream inputStream) throws IOException {
         int index = inputStream.readUnsignedShort();
