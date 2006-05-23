@@ -270,6 +270,55 @@ public class Amf3ReaderWriterTest extends S2TestCase {
                 .toXmlString(xml2));
 
     }
+    
+    public void testExterbalizableObject() throws Exception {
+        MyBean value = new MyBean();
+        value.setAaa(-1);
+        value.setBbb(0xFFFFFFF);
+        value.setCcc(-0xFFFFFFF);
+        value.setDdd("4");
+        value.setEee(true);
+        value.setFff(new Date(5));
+        List ggg = new ArrayList();
+        MyBean b1 = new MyBean();
+        b1.setAaa(0x200000);
+        ggg.add(b1);
+        MyBean b2 = new MyBean();
+        b2.setAaa(-0x200000);
+        ggg.add(b2);
+        value.setGgg(ggg);
+        MyBean hhh = new MyBean();
+        hhh.setAaa(4);
+        value.setHhh(hhh);
+        BigDecimal iii = new BigDecimal("1234567890123456789");
+        value.setIii(iii);
+        
+        TestExternalizeObject externalizableObject = new TestExternalizeObject();
+        externalizableObject.setMyBean(value);
+
+        TestExternalizeObject externalizeObject2 = (TestExternalizeObject) convertData(externalizableObject);
+        
+        MyBean value2 = externalizableObject.getMyBean();
+        assertEquals("1", -1, value2.getAaa());
+        assertEquals("2", 0xFFFFFFF, value2.getBbb());
+        assertEquals("3", -0xFFFFFFF, value2.getCcc(), 0);
+        assertEquals("4", "4", value2.getDdd());
+        assertEquals("5", true, value2.isEee());
+        assertEquals("6", new Date(5), value2.getFff());
+        List ggg2 = value2.getGgg();
+        assertEquals("7", 2, ggg2.size());
+        MyBean b4 = (MyBean) ggg2.get(0);
+        MyBean b5 = (MyBean) ggg2.get(1);
+        assertEquals("8", 0x200000, b4.getAaa());
+        assertEquals("9", -0x200000, b5.getAaa());
+        MyBean hhh2 = value2.getHhh();
+        assertEquals("10", 4, hhh2.getAaa());
+        BigDecimal iii2 = value2.getIii();
+        assertEquals("11", iii, iii2);
+
+        assertNull("12", value2.getHhh().getDdd());
+
+    }
 
     protected Object convertData(Object data) throws Exception {
         DataInputStream dis = convertDataInputStream(data);

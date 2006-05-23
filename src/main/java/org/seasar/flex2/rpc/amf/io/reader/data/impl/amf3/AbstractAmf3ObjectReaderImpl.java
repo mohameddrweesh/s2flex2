@@ -65,7 +65,7 @@ public abstract class AbstractAmf3ObjectReaderImpl extends
                 object);
     }
 
-    protected final String[] getPropertiesAt( Class clazz ) {
+    protected final String[] getPropertiesOf( Class clazz ) {
         return referencesFactory.createReferences().getPropertiesAt(clazz);
     }
 

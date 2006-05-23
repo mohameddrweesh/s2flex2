@@ -16,28 +16,35 @@
 package org.seasar.flex2.rpc.amf.data;
 
 public interface Amf3Constants {
-
-    public static final byte CLASS_DEF_INLINE = 0x02;
-
-    public static final byte CLASS_DEF_REFERENCE = 0x00;
-
-    public static final byte EMPTY_STRING_DATA = 0x01;
     
-    public static final String EMPTY_STRING = "";
+    static final byte CLASS_DEF_INLINE = 0x02;
 
-    public static final byte INTEGER_DATA_MAX_BYTES = 4;
+    static final byte CLASS_DEF_REFERENCE = 0x00;
 
-    public static final int INTEGER_NEGATIVE_SING = 0x40;
-
-    public static final int INTEGER_INCLUDE_NEXT_BYTE = 0x80;
-
-    public static final int INTEGRR_MAX = 0xFFFFFFF;
-
-    public static final int INTEGRR_MIN = -0xFFFFFFF;
-
-    public static final byte OBJECT_INLINE = 0x01;
-
-    public static final byte OBJECT_REFERENCE = 0x00;
+    static final String EMPTY_STRING = "";
     
-    public static final byte UNTYPED_OBJECT = 0x08;
+    static final byte EMPTY_STRING_DATA = 0x01;
+
+    static final byte INTEGER_DATA_MAX_BYTES = 4;
+
+    static final int INTEGER_INCLUDE_NEXT_BYTE = 0x80;
+
+    static final int INTEGER_NEGATIVE_SING = 0x40;
+
+    static final int INTEGRR_MAX = 0xFFFFFFF;
+
+    static final int INTEGRR_MIN = -0xFFFFFFF;
+
+    static final byte OBJECT_INLINE = 0x01;
+
+    static final byte OBJECT_REFERENCE = 0x00;
+    
+    static final byte PROPERTY_DEF = 0x0C;
+    
+    static final byte PROPERTY_DEF_LIST = 0x00;
+    
+    static final byte PROPERTY_DEF_SINGLE = 0x04;
+    
+    static final byte PROPERTY_DEF_WITH_VALUE = 0x08;
+    
 }

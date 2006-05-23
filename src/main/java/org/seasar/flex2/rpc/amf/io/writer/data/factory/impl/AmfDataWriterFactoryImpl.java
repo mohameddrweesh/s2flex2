@@ -32,9 +32,6 @@ public class AmfDataWriterFactoryImpl implements AmfDataWriterFactory {
 
     protected HashMap writerMap;
 
-    public AmfDataWriterFactoryImpl() {
-    }
-
     public void setWriterMap(HashMap writerMap) {
         this.writerMap = writerMap;
     }
