@@ -161,14 +161,17 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
 
         Object object = null;
         do {
+            
             if (clazz == null) {
                 break;
             }
+            
             if (clazz == ASObject.class) {
                 object = readASObjectData(inputStream);
                 break;
             }
-            if (clazz.isAssignableFrom(Externalizable.class)) {
+            
+            if (Externalizable.class.isAssignableFrom(clazz)) {
                 object = readExternalizableObjectData(objectDef, clazz,
                         inputStream);
                 break;
@@ -205,7 +208,7 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
         for (int i = 0; i < propertyNames.length; i++) {
             Object value = readPropertyValue(inputStream);
 
-            logger.debug("<amf3> class property=" + propertyNames[i]
+            logger.debug("<amf3> class property[" + i + "]=" + propertyNames[i]
                     + ",value=" + value);
             propertyValues[i] = value;
         }
