@@ -31,19 +31,19 @@ public class Amf3ReferencesImpl implements Amf3References {
         classReferences = new Amf3ClassReferences();
     }
 
-    public void addClassProperties(Class clazz, String[] properties) {
+    public void addClassProperties( final Class clazz, final String[] properties) {
         classReferences.addProperties(clazz, properties);
     }
 
-    public void addClassReference(Class clazz) {
+    public void addClassReference( final Class clazz) {
         classReferences.addClassReference(clazz);
     }
 
-    public void addObjectReference(Object object) {
+    public void addObjectReference( final Object object) {
         objectReferences.addReference(object);
     }
 
-    public void addStringReference(String object) {
+    public void addStringReference( final String object) {
         stringReferences.addReference(object);
     }
     
@@ -53,31 +53,31 @@ public class Amf3ReferencesImpl implements Amf3References {
         classReferences.initialize();
     }
 
-    public int getClassReferenceIndex(Class clazz) {
+    public int getClassReferenceIndex( final Class clazz) {
         return classReferences.getReferenceIndex(clazz);
     }
 
-    public int getObjectReferenceIndex(Object object) {
+    public int getObjectReferenceIndex( final Object object) {
         return objectReferences.getReferenceIndex(object);
     }
     
-    public int getStringReferenceIndex(String object) {
+    public int getStringReferenceIndex( final String object) {
         return stringReferences.getReferenceIndex(object);
     }
 
-    public Class getClassAt(int index) {
+    public Class getClassAt( final int index) {
         return classReferences.getClassAt(index);
     }
 
-    public Object getObjectAt(int index) {
+    public Object getObjectAt( final int index) {
         return objectReferences.getAt(index);
     }
 
-    public String getStringAt(int index) {
+    public String getStringAt( final int index) {
         return (String)stringReferences.getAt(index);
     }
     
-    public String[] getPropertiesAt( Class clazz ){
+    public String[] getPropertiesAt( final Class clazz ){
         return classReferences.getPropertiesAt( clazz );
     }
 }

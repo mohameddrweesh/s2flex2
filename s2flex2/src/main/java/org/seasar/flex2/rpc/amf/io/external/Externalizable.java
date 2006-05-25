@@ -15,6 +15,9 @@
  */
 package org.seasar.flex2.rpc.amf.io.external;
 
+import org.seasar.flex2.io.DataInput;
+import org.seasar.flex2.io.DataOutput;
+
 public interface Externalizable {
 
     void readExternal(DataInput input);

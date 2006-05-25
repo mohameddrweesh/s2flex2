@@ -38,8 +38,7 @@ public class Amf3DataWriterFactoryImpl implements Amf3DataWriterFactory {
     private HashMap writerMap;
 
     public final Amf3DataWriter createDataValueWriter( final Object value) {
-        String dataType = getAmf3DataType(value);
-        return (Amf3DataWriter) dataWriterMap.get(dataType);
+        return (Amf3DataWriter) dataWriterMap.get(getAmf3DataType(value));
     }
 
     public final AmfDataWriter createDataWriter( final Object value) {

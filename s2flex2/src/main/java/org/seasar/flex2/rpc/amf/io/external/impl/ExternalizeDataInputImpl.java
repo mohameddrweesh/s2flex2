@@ -31,10 +31,46 @@ public class ExternalizeDataInputImpl implements ExternalizeDataInput {
     public ExternalizeDataInputImpl() {
     }
 
+    public boolean readBoolean() throws IOException {
+        return false;
+    }
+
+    public int readByte() throws IOException {
+        return 0;
+    }
+
+    public void readBytes(byte[] bytes, int offset, int length)
+            throws IOException {
+    }
+
+    public double readDouble() throws IOException {
+        return 0;
+    }
+
+    public int readInt() throws IOException {
+        return 0;
+    }
+
+    public String readMultiByte(int length, String charSet) throws IOException {
+        return null;
+    }
+
     public Object readObject() throws IOException {
         byte dataType = inputStream.readByte();
         AmfDataReader dataReader = readerFactory.createAmf3DataReader(dataType);
         return dataReader.read(inputStream);
+    }
+
+    public Short readShort() throws IOException {
+        return null;
+    }
+
+    public String readUTF() throws IOException {
+        return null;
+    }
+
+    public String readUTFBytes(int length) throws IOException {
+        return null;
     }
 
     public void setInputStream(DataInputStream inputStream) {

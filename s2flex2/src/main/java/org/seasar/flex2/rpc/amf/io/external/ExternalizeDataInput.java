@@ -17,6 +17,8 @@ package org.seasar.flex2.rpc.amf.io.external;
 
 import java.io.DataInputStream;
 
+import org.seasar.flex2.io.DataInput;
+
 public interface ExternalizeDataInput extends DataInput {
     void setInputStream(DataInputStream inputStream);
 }

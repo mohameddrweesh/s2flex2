@@ -18,8 +18,8 @@ package org.seasar.flex2.rpc.amf.io.writer.data.impl.amf3;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import org.seasar.flex2.io.DataOutput;
 import org.seasar.flex2.rpc.amf.data.Amf3Constants;
-import org.seasar.flex2.rpc.amf.io.external.DataOutput;
 import org.seasar.flex2.rpc.amf.io.external.Externalizable;
 import org.seasar.flex2.rpc.amf.io.external.factory.DataOutputFactory;
 import org.seasar.framework.beans.BeanDesc;

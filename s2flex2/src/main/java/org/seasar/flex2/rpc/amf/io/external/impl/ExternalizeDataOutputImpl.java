@@ -43,4 +43,31 @@ public class ExternalizeDataOutputImpl implements ExternalizeDataOutput {
         Amf3DataWriter dataWriter = writerFactory.createDataValueWriter(object);
         dataWriter.writeData(object, outputStream);
     }
+
+    public void writeBoolean(boolean value) throws IOException {
+    }
+
+    public void writeByte(int value) throws IOException {
+    }
+
+    public void writeBytes(byte[] bytes, int offset, int length) throws IOException {
+    }
+
+    public void writeDouble(double value) throws IOException {
+    }
+
+    public void writeInt(int value) throws IOException {
+    }
+
+    public void writeMultiByte(String value, String charSet) throws IOException {
+    }
+
+    public void writeShort(int value) throws IOException {
+    }
+
+    public void writeUTF(String value) throws IOException {
+    }
+
+    public void writeUTFBytes(String value) throws IOException {
+    }
 }
