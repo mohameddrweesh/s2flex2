@@ -41,7 +41,6 @@ public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
     }
 
     protected void readHeader() throws IOException {
-        logger.debug("<amf3> readHeader:");
 
         int headerCount = inputStream.readUnsignedShort();
         for (int i = 0; i < headerCount; ++i) {
@@ -54,8 +53,6 @@ public class Amf3ReaderImpl extends AmfReaderImpl implements AmfReader {
 
     protected void readVersion() throws IOException {
         message.setVersion(inputStream.readUnsignedShort());
-
-        logger.debug("<amf3> readVersion:" + message.getVersion());
     }
 
     public Amf3References getReferences() {

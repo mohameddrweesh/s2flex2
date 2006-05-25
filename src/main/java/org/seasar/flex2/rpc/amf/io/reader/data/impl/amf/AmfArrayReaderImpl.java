@@ -31,12 +31,9 @@ public class AmfArrayReaderImpl extends AbstractAmfObjectReaderImpl {
         ArrayList array = new ArrayList();
         addSharedObject(array);
         int length = inputStream.readInt();
-        logger.debug("readArray:size=" + length);
         for (int i = 0; i < length; i++) {
             byte dataType = inputStream.readByte();
-            Object item = readData(dataType, inputStream);
-            logger.debug("[" + i + "]=" + item);
-            array.add(item);
+            array.add(readData(dataType, inputStream));
         }
         return array;
     }

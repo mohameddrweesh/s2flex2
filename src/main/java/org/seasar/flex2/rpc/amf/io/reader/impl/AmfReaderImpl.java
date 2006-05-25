@@ -26,12 +26,8 @@ import org.seasar.flex2.rpc.amf.io.AmfSharedObject;
 import org.seasar.flex2.rpc.amf.io.reader.AmfReader;
 import org.seasar.flex2.rpc.amf.io.reader.data.AmfDataReader;
 import org.seasar.flex2.rpc.amf.io.reader.data.factory.AmfDataReaderFactory;
-import org.seasar.framework.log.Logger;
 
 public class AmfReaderImpl implements AmfReader {
-
-    protected static final Logger logger = Logger
-            .getLogger(AmfReaderImpl.class);
 
     protected DataInputStream inputStream;
 

@@ -29,13 +29,11 @@ public class Amf3ArrayReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
     protected final Object readInlinedObject(final int reference,
             final DataInputStream inputStream) throws IOException {
         List array = readArrayData(reference, inputStream);
-        logger.debug("<amf3> read inlined Array:" + array);
         return array;
     }
 
     protected final Object readReferencedObject(final int reference,
             final DataInputStream inputStream) {
-        logger.debug("<amf3> read referenced Array:" + (reference >>> 1));
         return getObjectAt(reference >>> 1);
     }
 
@@ -49,7 +47,6 @@ public class Amf3ArrayReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
         for (int i = 0; i < arrayLength; i++) {
             byte dataType = inputStream.readByte();
             Object item = writeElementData(dataType, inputStream);
-            logger.debug("<amf3> array[" + i + "]=" + item);
             array.add(item);
         }
         return array;

@@ -19,15 +19,10 @@ import java.io.DataInputStream;
 import java.io.IOException;
 
 import org.seasar.flex2.rpc.amf.io.reader.data.AmfDataReader;
-import org.seasar.framework.log.Logger;
 
 public class AmfNullReaderImpl implements AmfDataReader {
 
-    private static final Logger logger = Logger
-            .getLogger(AmfNullReaderImpl.class);
-
     public Object read(DataInputStream inputStream) throws IOException {
-        logger.debug("readNull:");
         return null;
     }
 }

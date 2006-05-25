@@ -23,10 +23,6 @@ import org.seasar.flex2.rpc.amf.io.factory.impl.ByteArrayFactoryImpl;
 import org.seasar.flex2.rpc.amf.io.impl.ByteArrayImpl;
 import org.seasar.framework.container.S2Container;
 
-import org.seasar.flex2.rpc.amf.io.ByteArray;
-
-import sun.security.krb5.internal.ccache.ar;
-
 
 public class ByteArrayTest extends S2TestCase {
 

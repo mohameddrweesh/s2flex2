@@ -21,12 +21,8 @@ import java.io.IOException;
 import org.seasar.flex2.rpc.amf.data.Amf3Constants;
 import org.seasar.flex2.rpc.amf.io.reader.data.AmfDataReader;
 import org.seasar.flex2.rpc.amf.io.util.Amf3DataUtil;
-import org.seasar.framework.log.Logger;
 
 public abstract class AbstractAmf3IntReaderImpl implements AmfDataReader {
-
-    protected static final Logger logger = Logger
-            .getLogger(AbstractAmf3IntReaderImpl.class);
 
     protected final int readInt(final DataInputStream inputStream)
             throws IOException {

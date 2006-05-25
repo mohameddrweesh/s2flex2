@@ -33,7 +33,6 @@ public class AmfCustomClassReaderImpl extends AbstractAmfClassObjectReaderImpl {
     private final Object readCustomClass(final DataInputStream inputStream)
             throws IOException {
         String type = inputStream.readUTF();
-        logger.debug("readCustomClass:" + type);
         Class clazz = ClassUtil.forName(type);
         Object bean = ClassUtil.newInstance(clazz);
         addSharedObject(bean);
@@ -51,7 +50,6 @@ public class AmfCustomClassReaderImpl extends AbstractAmfClassObjectReaderImpl {
                 break;
             }
             Object value = readData(dataType, inputStream);
-            logger.debug("property=" + key + ",value=" + value);
             if (beanDesc.hasPropertyDesc(key)) {
                 PropertyDesc pd = beanDesc.getPropertyDesc(key);
                 if (pd.hasWriteMethod()) {

@@ -23,9 +23,6 @@ public class AmfFlushedSharedObjectReaderImpl extends
 
     public Object read(final DataInputStream inputStream) throws IOException {
         int index = inputStream.readUnsignedShort();
-        Object target = getSharedObject().getSharedObject(index);
-        logger.debug("readFlashedSharedObject:index=" + index + ",value="
-                + target);
-        return target;
+        return getSharedObject().getSharedObject(index);
     }
 }

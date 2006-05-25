@@ -19,12 +19,8 @@ import java.io.DataInputStream;
 import java.io.IOException;
 
 import org.seasar.flex2.rpc.amf.io.reader.data.AmfDataReader;
-import org.seasar.framework.log.Logger;
 
 public class AmfBooleanReaderImpl implements AmfDataReader {
-
-    private static final Logger logger = Logger
-            .getLogger(AmfNumberReaderImpl.class);
 
     public Object read(final DataInputStream inputStream) throws IOException {
         return readBoolean(inputStream);
@@ -38,8 +34,6 @@ public class AmfBooleanReaderImpl implements AmfDataReader {
         if (value == 1) {
             result = Boolean.TRUE;
         }
-
-        logger.debug("readBoolean:" + result);
 
         return result;
     }

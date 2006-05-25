@@ -22,12 +22,8 @@ import org.seasar.flex2.rpc.amf.io.AmfSharedObject;
 import org.seasar.flex2.rpc.amf.io.factory.AmfSharedObjectFactory;
 import org.seasar.flex2.rpc.amf.io.reader.data.AmfDataReader;
 import org.seasar.flex2.rpc.amf.io.reader.data.factory.AmfDataReaderFactory;
-import org.seasar.framework.log.Logger;
 
 public abstract class AbstractAmfObjectReaderImpl implements AmfDataReader {
-
-    protected static final Logger logger = Logger
-            .getLogger(AbstractAmfObjectReaderImpl.class);
 
     private AmfDataReaderFactory dataReaderFactory;
 
@@ -51,8 +47,6 @@ public abstract class AbstractAmfObjectReaderImpl implements AmfDataReader {
     }
 
     protected final void addSharedObject(Object value) {
-        logger.debug("addSharedObject:index=" + getSharedObject().getSize()
-                + ",value=" + value);
         getSharedObject().addSharedObject(value);
     }
 

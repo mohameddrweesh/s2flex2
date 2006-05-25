@@ -21,19 +21,14 @@ import java.io.IOException;
 import javax.xml.parsers.DocumentBuilder;
 
 import org.seasar.flex2.rpc.amf.io.reader.data.AmfDataReader;
-import org.seasar.framework.log.Logger;
 import org.seasar.framework.util.DocumentBuilderFactoryUtil;
 import org.seasar.framework.util.DocumentBuilderUtil;
 import org.w3c.dom.Document;
 
 public class AmfXmlReaderImpl implements AmfDataReader {
 
-    private static final Logger logger = Logger
-            .getLogger(AmfXmlReaderImpl.class);
-
     protected Document readXML(final DataInputStream inputStream)
             throws IOException {
-        logger.debug("readXML:");
         inputStream.skip(4);
         DocumentBuilder builder = DocumentBuilderFactoryUtil
                 .newDocumentBuilder();

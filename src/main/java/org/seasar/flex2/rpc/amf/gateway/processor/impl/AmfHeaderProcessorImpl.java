@@ -24,11 +24,8 @@ import org.seasar.flex2.rpc.amf.data.factory.AmfHeaderFactory;
 import org.seasar.flex2.rpc.amf.gateway.processor.AmfHeaderProcessor;
 import org.seasar.flex2.rpc.gateway.session.SessionDecorator;
 import org.seasar.flex2.rpc.gateway.session.util.HttpSessionUtil;
-import org.seasar.framework.log.Logger;
 
 public class AmfHeaderProcessorImpl implements AmfHeaderProcessor {
-    
-    protected static final Logger logger = Logger.getLogger(AmfHeaderProcessorImpl.class);
 
     private AmfHeaderFactory headerFactory;
 
@@ -62,8 +59,6 @@ public class AmfHeaderProcessorImpl implements AmfHeaderProcessor {
             String data) {
         AmfHeader header = headerFactory.createHeader(headerName, data);
         responseMessage.addHeader(header);
-        
-        logger.debug("header :" + headerName + "={" +  data + "}");
     }
 
     private void setUrlSessionId(HttpServletRequest request,

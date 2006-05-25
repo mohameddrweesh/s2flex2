@@ -30,13 +30,11 @@ public class Amf3XmlReaderImpl extends AbstractAmf3UTF8StringReaderImpl {
     protected final Object readInlinedObject(final int reference,
             final DataInputStream inputStream) throws IOException {
         Document doc = readXmlData(reference, inputStream);
-        logger.debug("<amf3> read inline XML:" + doc);
         return doc;
     }
 
     protected final Object readReferencedObject(int reference,
             final DataInputStream inputStream) throws IOException {
-        logger.debug("<amf3> read reference XML:" + (reference >>> 1));
         return getObjectAt(reference >>> 1);
     }
 

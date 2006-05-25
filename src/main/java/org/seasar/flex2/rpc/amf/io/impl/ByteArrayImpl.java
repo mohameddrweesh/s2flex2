@@ -32,6 +32,10 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
 
     private static final byte[] EMPTY_BYTES = new byte[0];
 
+    private DataInputStream dataInputStream;
+
+    private DataOutputStream dataOutputStream;
+
     private Amf3DataReaderFactory dataReaderFactory;
 
     private Amf3DataWriterFactory dataWriterFactory;
@@ -40,16 +44,16 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
 
     public ByteArrayImpl() {
         super(EMPTY_BYTES);
-        outputStream = new ByteArrayOutputStream();
+        initializeSreams();
     }
 
     public void flush() {
-        initBuffer( outputStream.toByteArray() );
+        initBuffer(outputStream.toByteArray());
         outputStream.reset();
     }
 
     public void initBuffer(byte[] bytes) {
-        if(bytes == null ){
+        if (bytes == null) {
             bytes = EMPTY_BYTES;
         }
         this.buf = bytes;
@@ -78,10 +82,8 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
     }
 
     public int readInt() throws IOException {
-        final AmfDataReader reader = dataReaderFactory
-                .createAmf3DataReader(Amf3DataType.INTEGER);
-        final Integer integer = (Integer) reader
-                .read(new DataInputStream(this));
+        final AmfDataReader reader = lookupDataReaderByType(Amf3DataType.INTEGER);
+        final Integer integer = (Integer) reader.read(dataInputStream);
         return integer.intValue();
     }
 
@@ -143,7 +145,7 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
         final Integer integer = new Integer(value);
         final Amf3DataWriter writer = dataWriterFactory
                 .createDataValueWriter(integer);
-        writer.writeDataValue(integer, new DataOutputStream(outputStream));
+        writer.writeDataValue(integer, dataOutputStream);
     }
 
     public void writeMultiByte(String value, String charSet) throws IOException {
@@ -169,5 +171,17 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
     public void writeUTFBytes(String value) throws IOException {
         // TODO Auto-generated method stub
 
+    }
+
+    private final void initializeSreams() {
+        outputStream = new ByteArrayOutputStream();
+        dataInputStream = new DataInputStream(this);
+        dataOutputStream = new DataOutputStream(outputStream);
+    }
+
+    private final AmfDataReader lookupDataReaderByType(byte type) {
+        final AmfDataReader reader = dataReaderFactory
+                .createAmf3DataReader(type);
+        return reader;
     }
 }
