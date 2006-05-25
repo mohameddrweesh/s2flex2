@@ -39,11 +39,6 @@ public class ExternalizeDataOutputImpl implements ExternalizeDataOutput {
         this.writerFactory = writerFactory;
     }
 
-    public void writeObject(Object object) throws IOException {
-        Amf3DataWriter dataWriter = writerFactory.createDataValueWriter(object);
-        dataWriter.writeData(object, outputStream);
-    }
-
     public void writeBoolean(boolean value) throws IOException {
     }
 
@@ -56,13 +51,28 @@ public class ExternalizeDataOutputImpl implements ExternalizeDataOutput {
     public void writeDouble(double value) throws IOException {
     }
 
+    public void writeFloat(float value) throws IOException {
+        // TODO Auto-generated method stub
+        
+    }
+
     public void writeInt(int value) throws IOException {
     }
 
     public void writeMultiByte(String value, String charSet) throws IOException {
     }
 
+    public void writeObject(Object object) throws IOException {
+        Amf3DataWriter dataWriter = writerFactory.createDataValueWriter(object);
+        dataWriter.writeData(object, outputStream);
+    }
+
     public void writeShort(int value) throws IOException {
+    }
+
+    public void writeUnsignedInt(int value) throws IOException {
+        // TODO Auto-generated method stub
+        
     }
 
     public void writeUTF(String value) throws IOException {

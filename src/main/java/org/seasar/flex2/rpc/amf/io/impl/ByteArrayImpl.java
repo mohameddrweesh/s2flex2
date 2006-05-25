@@ -21,7 +21,6 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.seasar.flex2.rpc.amf.data.Amf3DataType;
 import org.seasar.flex2.rpc.amf.io.ByteArray;
 import org.seasar.flex2.rpc.amf.io.reader.data.AmfDataReader;
 import org.seasar.flex2.rpc.amf.io.reader.data.factory.Amf3DataReaderFactory;
@@ -62,23 +61,24 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
     }
 
     public boolean readBoolean() throws IOException {
-        return false;
+        return dataInputStream.readBoolean();
     }
 
     public int readByte() throws IOException {
-        // TODO Auto-generated method stub
-        return 0;
+        return dataInputStream.readByte();
     }
 
     public void readBytes(byte[] bytes, int offset, int length)
             throws IOException {
-        // TODO Auto-generated method stub
-
+        dataInputStream.readFully(bytes, offset, length);
     }
 
     public double readDouble() throws IOException {
-        // TODO Auto-generated method stub
-        return 0;
+        return dataInputStream.readDouble();
+    }
+
+    public float readFloat() throws IOException {
+        return dataInputStream.readFloat();
     }
 
     public int readInt() throws IOException {
@@ -86,27 +86,35 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
     }
 
     public String readMultiByte(int length, String charSet) throws IOException {
-        // TODO Auto-generated method stub
+        //TODO
         return null;
     }
 
     public Object readObject() throws IOException {
-        // TODO Auto-generated method stub
-        return null;
+        byte dataType = dataInputStream.readByte();
+        final AmfDataReader reader = dataReaderFactory
+                .createAmf3DataReader(dataType);
+        return reader.read(dataInputStream);
     }
 
-    public Short readShort() throws IOException {
-        // TODO Auto-generated method stub
-        return null;
+    public short readShort() throws IOException {
+        return dataInputStream.readShort();
+    }
+
+    public int readUnsignedByte() throws IOException {
+        return dataInputStream.readUnsignedByte();
+    }
+
+    public int readUnsignedShort() throws IOException {
+        return dataInputStream.readUnsignedShort();
     }
 
     public String readUTF() throws IOException {
-        // TODO Auto-generated method stub
-        return null;
+        return dataInputStream.readUTF();
     }
 
     public String readUTFBytes(int length) throws IOException {
-        // TODO Auto-generated method stub
+        //TODO
         return null;
     }
 
@@ -119,24 +127,25 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
     }
 
     public void writeBoolean(boolean value) throws IOException {
-        // TODO Auto-generated method stub
-
+        dataOutputStream.writeBoolean(value);
     }
 
     public void writeByte(int value) throws IOException {
-        // TODO Auto-generated method stub
-
+        dataOutputStream.writeByte(value);
     }
 
     public void writeBytes(byte[] bytes, int offset, int length)
             throws IOException {
-        // TODO Auto-generated method stub
-
+        dataOutputStream.write(bytes, offset, length);
     }
 
     public void writeDouble(double value) throws IOException {
-        // TODO Auto-generated method stub
+        dataOutputStream.writeDouble(value);
+    }
 
+    public void writeFloat(float value) throws IOException {
+        dataOutputStream.writeFloat(value);
+        
     }
 
     public void writeInt(int value) throws IOException {
@@ -144,39 +153,31 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
     }
 
     public void writeMultiByte(String value, String charSet) throws IOException {
-        // TODO Auto-generated method stub
-
     }
 
     public void writeObject(Object object) throws IOException {
-        // TODO Auto-generated method stub
-
+        final Amf3DataWriter writer = dataWriterFactory
+                .createDataValueWriter(object);
+        writer.writeData(object, dataOutputStream);
     }
 
     public void writeShort(int value) throws IOException {
-        // TODO Auto-generated method stub
+        dataOutputStream.writeShort(value);
+    }
 
+    public void writeUnsignedInt(int value) throws IOException {
     }
 
     public void writeUTF(String value) throws IOException {
-        // TODO Auto-generated method stub
-
+        dataOutputStream.writeUTF(value);
     }
 
     public void writeUTFBytes(String value) throws IOException {
-        // TODO Auto-generated method stub
-
     }
 
     private final void initializeSreams() {
         outputStream = new ByteArrayOutputStream();
         dataInputStream = new DataInputStream(this);
         dataOutputStream = new DataOutputStream(outputStream);
-    }
-
-    private final AmfDataReader lookupDataReaderByType(byte type) {
-        final AmfDataReader reader = dataReaderFactory
-                .createAmf3DataReader(type);
-        return reader;
     }
 }
