@@ -27,12 +27,9 @@ public abstract class AbstractAmf3IntWriterImpl implements Amf3DataWriter {
     protected final void writeIntData(int value, DataOutputStream outputStream)
             throws IOException {
         int[] list = Amf3DataUtil.toVariableIntBytes(value);
-        if (list.length <= 4) {
-            for (int i = list.length - 1; i >= 1; i--) {
-                outputStream.writeByte(Amf3Constants.INTEGER_INCLUDE_NEXT_BYTE
-                        | list[i]);
-            }
-            outputStream.writeByte(list[0]);
+        for (int i = list.length - 1; i >= 1; i--) {
+            outputStream.writeByte(list[i] | Amf3Constants.INTEGER_INCLUDE_NEXT_BYTE);
         }
+        outputStream.writeByte(list[0]);
     }
 }

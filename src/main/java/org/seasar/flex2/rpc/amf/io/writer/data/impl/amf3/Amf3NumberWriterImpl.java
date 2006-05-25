@@ -23,19 +23,23 @@ import org.seasar.flex2.rpc.amf.io.writer.data.Amf3DataWriter;
 
 public class Amf3NumberWriterImpl implements Amf3DataWriter {
 
-    public void writeData(Object value, DataOutputStream outputStream)
-            throws IOException {
-        writeNumber((Number) value, outputStream);
-    }
-
     public void write(Object value, DataOutputStream outputStream)
             throws IOException {
         writeNumber((Number) value, outputStream);
     }
 
-    private final void writeNumber(Number value, DataOutputStream outputStream)
+    public void writeData(Object value, DataOutputStream outputStream)
             throws IOException {
         outputStream.writeByte(Amf3DataType.NUMBER);
+        writeDataValue( value, outputStream);
+    }
+
+    public void writeDataValue(Object value, DataOutputStream outputStream) throws IOException {
+        writeNumber((Number) value, outputStream);
+    }
+
+    private final void writeNumber(Number value, DataOutputStream outputStream)
+            throws IOException {
         outputStream.writeDouble(value.doubleValue());
     }
 }

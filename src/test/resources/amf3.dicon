@@ -4,4 +4,7 @@
 <components namespace="amf3" >
 	<include path="amf3_reader_framework.dicon" />
 	<include path="amf3_writer_framework.dicon" />
+	
+	<component class="org.seasar.flex2.rpc.amf.io.impl.ByteArrayImpl" instance="prototype" />
+	<component class="org.seasar.flex2.rpc.amf.io.factory.impl.ByteArrayFactoryImpl" />
 </components>

@@ -18,7 +18,7 @@ package org.seasar.flex2.rpc.amf.io.external.factory;
 import java.io.DataInputStream;
 
 import org.seasar.extension.unit.S2TestCase;
-import org.seasar.flex2.rpc.amf.io.external.DataInput;
+import org.seasar.flex2.io.DataInput;
 import org.seasar.flex2.rpc.amf.io.external.ExternalizeDataInput;
 import org.seasar.flex2.rpc.amf.io.external.factory.impl.ExternalizeDataInputFactoryImpl;
 import org.seasar.framework.container.S2Container;
