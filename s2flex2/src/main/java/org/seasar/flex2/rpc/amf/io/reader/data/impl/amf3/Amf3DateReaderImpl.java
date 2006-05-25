@@ -30,13 +30,11 @@ public class Amf3DateReaderImpl extends AbstractAmf3ObjectReaderImpl {
     protected final Object readInlinedObject(final int reference,
             final DataInputStream inputStream) throws IOException {
         Date date = readDateData(inputStream);
-        logger.debug("<amf3> read inline Date:" + date);
         return date;
     }
 
     protected final Object readReferencedObject(final int reference,
             final DataInputStream inputStream) throws IOException {
-        logger.debug("<amf3> read reference Date:" + (reference >>> 1));
         return getObjectAt(reference >>> 1);
     }
 

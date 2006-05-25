@@ -31,7 +31,6 @@ public class AmfObjectReaderImpl extends AbstractAmfClassObjectReaderImpl {
 
     private final Object readObject(final DataInputStream inputStream)
             throws IOException {
-        logger.debug("readObject:");
         ASObject asObject = new ASObject();
         addSharedObject(asObject);
 
@@ -44,7 +43,6 @@ public class AmfObjectReaderImpl extends AbstractAmfClassObjectReaderImpl {
             result = asObject;
         }
 
-        logger.debug("object class = " + result.getClass().getName());
         return result;
     }
 
@@ -56,9 +54,7 @@ public class AmfObjectReaderImpl extends AbstractAmfClassObjectReaderImpl {
             if (dataType == AmfDataType.EOM) {
                 break;
             }
-            Object value = readData(dataType, inputStream);
-            logger.debug("property=" + key + ",value=" + value);
-            asObject.put(key, value);
+            asObject.put(key, readData(dataType, inputStream));
         }
     }
 }

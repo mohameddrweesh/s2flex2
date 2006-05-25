@@ -19,12 +19,8 @@ import java.io.DataInputStream;
 import java.io.IOException;
 
 import org.seasar.flex2.rpc.amf.io.reader.data.AmfDataReader;
-import org.seasar.framework.log.Logger;
 
 public class AmfNumberReaderImpl implements AmfDataReader {
-
-    private static final Logger logger = Logger
-            .getLogger(AmfNumberReaderImpl.class);
 
     public Object read(final DataInputStream outputStream) throws IOException {
         return readNumber(outputStream);
@@ -33,7 +29,6 @@ public class AmfNumberReaderImpl implements AmfDataReader {
     private final Double readNumber(final DataInputStream inputStream)
             throws IOException {
         double d = inputStream.readDouble();
-        logger.debug("readNumber:" + d);
         return new Double(d);
     }
 }

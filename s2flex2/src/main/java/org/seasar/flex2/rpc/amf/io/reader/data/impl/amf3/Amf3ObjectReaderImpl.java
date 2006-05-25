@@ -49,13 +49,11 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
     protected final Object readInlinedObject(final int reference,
             final DataInputStream inputStream) throws IOException {
         Object object = readObjectData(reference, inputStream);
-        logger.debug("<amf3> read inline Object:");
         return object;
     }
 
     protected final Object readReferencedObject(final int reference,
             final DataInputStream inputStream) throws IOException {
-        logger.debug("<amf3> read reference Object:" + (reference >>> 1));
         return getObjectAt(reference >>> 1);
     }
 
@@ -67,7 +65,6 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
 
     private final Object readASObjectData(final DataInputStream inputStream)
             throws IOException {
-        logger.debug("<amf3> read ASObject:");
 
         ASObject asobject = new ASObject();
         addObjectReference(asobject);
@@ -76,11 +73,7 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
             if (propertyName.length() <= 0) {
                 break;
             }
-            Object value = readPropertyValue(inputStream);
-
-            logger.debug("<amf3> object property=" + propertyName + ",value="
-                    + value);
-            asobject.put(propertyName, value);
+            asobject.put(propertyName, readPropertyValue(inputStream));
         }
         return asobject;
     }
@@ -111,7 +104,6 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
     private final Object readClassObjectData(final int objectDef,
             final Class clazz, final DataInputStream inputStream)
             throws IOException {
-        logger.debug("<amf3> read tpyed class:" + clazz.getName());
 
         final Object object = createClassInstance(clazz);
 
@@ -146,7 +138,6 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
 
     private final Object readExternalizableObjectData(int objectDef,
             Class clazz, DataInputStream inputStream) throws IOException {
-        logger.debug("<amf3> read externalizable class:" + clazz.getName());
         Externalizable externalizable = (Externalizable) createClassInstance(clazz);
         DataInput input = dataInputFactory.createDataIpput(inputStream);
         externalizable.readExternal(input);
@@ -206,11 +197,7 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
             final DataInputStream inputStream) throws IOException {
         Object[] propertyValues = new Object[propertyNames.length];
         for (int i = 0; i < propertyNames.length; i++) {
-            Object value = readPropertyValue(inputStream);
-
-            logger.debug("<amf3> class property[" + i + "]=" + propertyNames[i]
-                    + ",value=" + value);
-            propertyValues[i] = value;
+            propertyValues[i] = readPropertyValue(inputStream);
         }
         return propertyValues;
     }

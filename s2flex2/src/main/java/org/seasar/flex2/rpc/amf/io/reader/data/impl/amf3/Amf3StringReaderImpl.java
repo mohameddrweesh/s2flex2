@@ -30,13 +30,11 @@ public class Amf3StringReaderImpl extends AbstractAmf3UTF8StringReaderImpl {
         if (result.length() > 0) {
             addStringReference(result);
         }
-        logger.debug("<amf3> read inline String:" + result);
         return result;
     }
 
     protected Object readReferencedObject(int reference,
             DataInputStream inputStream) throws IOException {
-        logger.debug("<amf3> read reference String:" + (reference >>> 1));
         return getStringAt(reference >>> 1);
     }
 }

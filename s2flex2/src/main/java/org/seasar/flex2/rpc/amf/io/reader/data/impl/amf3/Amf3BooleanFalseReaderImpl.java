@@ -19,16 +19,10 @@ import java.io.DataInputStream;
 import java.io.IOException;
 
 import org.seasar.flex2.rpc.amf.io.reader.data.AmfDataReader;
-import org.seasar.framework.log.Logger;
 
 public class Amf3BooleanFalseReaderImpl implements AmfDataReader {
-    private static final Logger logger = Logger
-            .getLogger(Amf3BooleanFalseReaderImpl.class);
-
     public final Object read(final DataInputStream inputStream)
             throws IOException {
-        logger.debug("<amf3> readBooleanFalse:");
-
         return Boolean.FALSE;
     }
 }

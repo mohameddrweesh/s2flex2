@@ -22,12 +22,8 @@ import java.util.TimeZone;
 
 import org.seasar.flex2.rpc.amf.data.AmfConstants;
 import org.seasar.flex2.rpc.amf.io.reader.data.AmfDataReader;
-import org.seasar.framework.log.Logger;
 
 public class AmfDateReaderImpl implements AmfDataReader {
-
-    private static final Logger logger = Logger
-            .getLogger(AmfDateReaderImpl.class);
 
     public Object read(final DataInputStream inputStream) throws IOException {
         return readDate(inputStream);
@@ -42,7 +38,6 @@ public class AmfDateReaderImpl implements AmfDataReader {
         ms += (double) defaultOffset - offset;
         Date date = new Date((long) ms);
 
-        logger.debug("readDate:" + date);
         return date;
     }
 }
