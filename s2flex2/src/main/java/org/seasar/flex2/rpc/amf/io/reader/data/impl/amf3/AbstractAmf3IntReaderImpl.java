@@ -47,33 +47,39 @@ public abstract class AbstractAmf3IntReaderImpl implements AmfDataReader {
 
     private final int readIntData(final int intData,
             final DataInputStream inputStream) throws IOException {
-        int[] list = new int[Amf3Constants.INTEGER_DATA_MAX_BYTES];
-        int byte_count = 1;
+        int[] intBytes = new int[Amf3Constants.INTEGER_DATA_MAX_BYTES];
+        int intByteLength = 1;
 
-        list[0] = intData & 0x7F;
+        intBytes[0] = intData & 0x7F;
 
         for (int i = 1; i < Amf3Constants.INTEGER_DATA_MAX_BYTES; i++) {
-            list[i] = inputStream.readUnsignedByte();
-            byte_count++;
-            if ((list[i] >>> 7) == 0x00) {
+            intBytes[i] = inputStream.readUnsignedByte();
+            intByteLength++;
+            if ((intBytes[i] >>> 7) == 0x00) {
                 break;
             }
-            if (byte_count < Amf3Constants.INTEGER_DATA_MAX_BYTES) {
-                list[i] &= 0x7F;
+            if (intByteLength < Amf3Constants.INTEGER_DATA_MAX_BYTES) {
+                intBytes[i] &= 0x7F;
             }
         }
 
-        int result = 0;
-        switch (intData >>> 6) {
-            case 0x02:
-                result = Amf3DataUtil.toInt(list, byte_count);
-                break;
-
-            case 0x03:
-                result = Amf3DataUtil.toNegativeInt(list, byte_count);
-                break;
-
-            default:
+        int result = 0;        
+        if (intByteLength < Amf3Constants.INTEGER_DATA_MAX_BYTES) {
+            return Amf3DataUtil.toInt(intBytes, intByteLength);
+        } else {
+            switch (intData >>> 6) {
+                
+                case 0x02:
+                    result = Amf3DataUtil.toInt(intBytes, intByteLength);
+                    break;
+                    
+                case 0x03:
+                    result = Amf3DataUtil.toNegativeInt(intBytes,
+                            intByteLength);
+                    break;
+                    
+                default:
+            }
         }
 
         return result;
