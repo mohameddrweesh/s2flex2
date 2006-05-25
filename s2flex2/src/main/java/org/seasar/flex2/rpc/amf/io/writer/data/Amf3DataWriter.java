@@ -22,7 +22,4 @@ public interface Amf3DataWriter extends AmfDataWriter {
 
     void writeData(Object value, DataOutputStream outputStream)
             throws IOException;
-
-    void writeDataValue(Object value, DataOutputStream outputStream)
-            throws IOException;
 }

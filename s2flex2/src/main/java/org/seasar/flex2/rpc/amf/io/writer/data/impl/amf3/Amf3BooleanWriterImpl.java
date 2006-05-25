@@ -33,10 +33,6 @@ public class Amf3BooleanWriterImpl implements Amf3DataWriter {
         writeBoolean((Boolean) value, outputStream);
     }
 
-    public void writeDataValue(Object value, DataOutputStream outputStream) throws IOException {
-        writeBoolean((Boolean) value, outputStream);
-    }
-
     private final void writeBoolean(final Boolean value,
             final DataOutputStream outputStream) throws IOException {
         if (value.booleanValue()) {

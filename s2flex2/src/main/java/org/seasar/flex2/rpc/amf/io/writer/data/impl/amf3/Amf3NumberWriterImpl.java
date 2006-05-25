@@ -31,10 +31,6 @@ public class Amf3NumberWriterImpl implements Amf3DataWriter {
     public void writeData(Object value, DataOutputStream outputStream)
             throws IOException {
         outputStream.writeByte(Amf3DataType.NUMBER);
-        writeDataValue( value, outputStream);
-    }
-
-    public void writeDataValue(Object value, DataOutputStream outputStream) throws IOException {
         writeNumber((Number) value, outputStream);
     }
 
