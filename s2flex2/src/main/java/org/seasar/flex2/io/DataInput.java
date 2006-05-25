@@ -25,6 +25,8 @@ public interface DataInput {
     void readBytes(byte[] bytes, int offset, int length) throws IOException;
 
     double readDouble() throws IOException;
+    
+    float readFloat() throws IOException;
 
     int readInt() throws IOException;
 
@@ -32,9 +34,13 @@ public interface DataInput {
 
     Object readObject() throws IOException;
 
-    Short readShort() throws IOException;
+    short readShort() throws IOException;
+
+    int readUnsignedByte() throws IOException;
+    
+    int readUnsignedShort() throws IOException;
 
     String readUTF() throws IOException;
-
+    
     String readUTFBytes(int length) throws IOException;
 }

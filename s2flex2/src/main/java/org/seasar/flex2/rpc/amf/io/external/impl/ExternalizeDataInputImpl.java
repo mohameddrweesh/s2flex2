@@ -47,6 +47,11 @@ public class ExternalizeDataInputImpl implements ExternalizeDataInput {
         return 0;
     }
 
+    public float readFloat() throws IOException {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
     public int readInt() throws IOException {
         return 0;
     }
@@ -61,8 +66,18 @@ public class ExternalizeDataInputImpl implements ExternalizeDataInput {
         return dataReader.read(inputStream);
     }
 
-    public Short readShort() throws IOException {
-        return null;
+    public short readShort() throws IOException {
+        return 0;
+    }
+
+    public int readUnsignedByte() throws IOException {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    public int readUnsignedShort() throws IOException {
+        // TODO Auto-generated method stub
+        return 0;
     }
 
     public String readUTF() throws IOException {
