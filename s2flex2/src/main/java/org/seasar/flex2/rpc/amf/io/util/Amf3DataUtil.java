@@ -22,6 +22,7 @@ import java.util.Date;
 
 import javax.xml.parsers.DocumentBuilder;
 
+import org.seasar.flex2.rpc.amf.data.Amf3Constants;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
 import org.seasar.framework.beans.factory.BeanDescFactory;
@@ -79,33 +80,33 @@ public class Amf3DataUtil {
     }
 
     public final static int toInt(int[] list, int bytes) {
-        int int_data = list[bytes - 1];
+        int intValue = list[bytes - 1];
         int offset = 0;
 
-        if (bytes < 4) {
+        if (bytes < Amf3Constants.INTEGER_DATA_MAX_BYTES) {
             offset = 7;
         } else {
             offset = 8;
         }
 
         for (int i = bytes - 1; i > 0; i--) {
-            int_data |= (list[i - 1] << offset);
+            intValue |= (list[i - 1] << offset);
             offset += 7;
         }
 
-        return int_data;
+        return intValue;
     }
 
-    public final static int[] toVariableIntBytes(int value) {
-        int list_len = Amf3DataUtil.getIntByteLength(value);
-        if (list_len < 0) {
+    public final static int[] toVariableIntBytes( final int value) {
+        int intByteLength = Amf3DataUtil.getIntByteLength(value);
+        if (intByteLength < 0) {
             return new int[0];
         }
 
-        int[] list = new int[list_len];
+        int[] list = new int[intByteLength];
         int intValue = value;
 
-        if (list_len < 4) {
+        if (intByteLength < 4) {
             list[0] = intValue & 0x7F;
             intValue = intValue >>> 7;
         } else {
@@ -113,7 +114,7 @@ public class Amf3DataUtil {
             intValue = intValue >>> 8;
         }
 
-        for (int i = 1; i < list_len; i++) {
+        for (int i = 1; i < intByteLength; i++) {
             list[i] = intValue & 0x7F;
             intValue = intValue >>> 7;
         }

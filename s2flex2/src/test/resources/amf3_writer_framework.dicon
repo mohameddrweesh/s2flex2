@@ -52,7 +52,7 @@
 	    </initMethod>
 	</component>
 	
-	<component name="dataWriterMap" class="java.util.HashMap">
+	<component name="amf3DataWriterMap" class="java.util.HashMap">
 	    <initMethod name="put">
 	        <arg>@org.seasar.flex2.rpc.amf.data.Amf3DataType@TYPE_NULL</arg>
 	        <arg>amf3NullWriterImpl</arg>

@@ -24,19 +24,24 @@ import org.seasar.flex2.rpc.amf.io.util.Amf3DataUtil;
 
 public class Amf3IntegerWriterImpl extends AbstractAmf3IntWriterImpl {
 
-    public void write(Object value, DataOutputStream outputStream)
-            throws IOException {
+    public final void write(final Object value,
+            final DataOutputStream outputStream) throws IOException {
         writeInteger((Integer) value, outputStream);
     }
 
-    public void writeData(Object value, DataOutputStream outputStream)
-            throws IOException {
-        writeInteger((Integer) value, outputStream);
-    }
-
-    private final void writeInteger(Integer value, DataOutputStream outputStream)
-            throws IOException {
+    public final void writeData(final Object value,
+            final DataOutputStream outputStream) throws IOException {
         outputStream.writeByte(Amf3DataType.INTEGER);
+        writeDataValue(value, outputStream);
+    }
+
+    public final void writeDataValue(final Object value,
+            final DataOutputStream outputStream) throws IOException {
+        writeInteger((Integer) value, outputStream);
+    }
+
+    private final void writeInteger(final Integer value,
+            final DataOutputStream outputStream) throws IOException {
         if (value.intValue() >= 0) {
             writeIntData(value.intValue(), outputStream);
         } else {
@@ -44,8 +49,8 @@ public class Amf3IntegerWriterImpl extends AbstractAmf3IntWriterImpl {
         }
     }
 
-    private final void writeNegativeIntData(int value,
-            DataOutputStream outputStream) throws IOException {
+    private final void writeNegativeIntData(final int value,
+            final DataOutputStream outputStream) throws IOException {
         int[] list = Amf3DataUtil.toNegativeIntBytes(value);
         if (list.length == 4) {
             outputStream.writeByte(Amf3Constants.INTEGER_INCLUDE_NEXT_BYTE

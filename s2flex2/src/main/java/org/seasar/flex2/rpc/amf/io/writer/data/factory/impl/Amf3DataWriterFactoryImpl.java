@@ -33,12 +33,12 @@ import org.w3c.dom.Document;
 
 public class Amf3DataWriterFactoryImpl implements Amf3DataWriterFactory {
 
-    private HashMap dataWriterMap;
+    private HashMap amf3DataWriterMap;
 
     private HashMap writerMap;
 
     public final Amf3DataWriter createDataValueWriter( final Object value) {
-        return (Amf3DataWriter) dataWriterMap.get(getAmf3DataType(value));
+        return (Amf3DataWriter) amf3DataWriterMap.get(getAmf3DataType(value));
     }
 
     public final AmfDataWriter createDataWriter( final Object value) {
@@ -53,8 +53,8 @@ public class Amf3DataWriterFactoryImpl implements Amf3DataWriterFactory {
         return writer;
     }
 
-    public void setDataWriterMap(HashMap dataWriterMap) {
-        this.dataWriterMap = dataWriterMap;
+    public void setAmf3DataWriterMap(HashMap dataWriterMap) {
+        this.amf3DataWriterMap = dataWriterMap;
     }
 
     public void setWriterMap(HashMap writerMap) {
@@ -118,6 +118,14 @@ public class Amf3DataWriterFactoryImpl implements Amf3DataWriterFactory {
                 dataType = Amf3DataType.TYPE_DATE;
                 break;
             }
+            if (value instanceof BigDecimal) {
+                dataType = BigDecimal.class.getName();
+                break;
+            }
+            if (value instanceof Number) {
+                dataType = Amf3DataType.TYPE_NUMBER;
+                break;
+            }
             if (value instanceof Object[]) {
                 dataType = Amf3DataType.TYPE_ARRAY;
                 break;
@@ -147,14 +155,6 @@ public class Amf3DataWriterFactoryImpl implements Amf3DataWriterFactory {
                     value.getClass() == Short.class
             ) {
                 dataType = Amf3DataType.TYPE_INTEGER;
-                break;
-            }
-            if (value instanceof BigDecimal) {
-                dataType = BigDecimal.class.getName();
-                break;
-            }
-            if (value instanceof Number) {
-                dataType = Amf3DataType.TYPE_NUMBER;
                 break;
             }
             dataType = Amf3DataType.TYPE_OBJECT;

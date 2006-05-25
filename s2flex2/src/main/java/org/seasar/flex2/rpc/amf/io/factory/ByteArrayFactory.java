@@ -13,16 +13,11 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.amf.io.writer.data;
+package org.seasar.flex2.rpc.amf.io.factory;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
+import org.seasar.flex2.rpc.amf.io.ByteArray;
 
-public interface Amf3DataWriter extends AmfDataWriter {
+public interface ByteArrayFactory {
 
-    void writeData(Object value, DataOutputStream outputStream)
-            throws IOException;
-
-    void writeDataValue(Object value, DataOutputStream outputStream)
-            throws IOException;
+    ByteArray createByteArray( byte[] bytes);
 }

@@ -23,13 +23,17 @@ import org.seasar.flex2.rpc.amf.io.writer.data.Amf3DataWriter;
 
 public class Amf3NullWriterImpl implements Amf3DataWriter {
 
-    public void write(Object value, DataOutputStream outputStream)
+    public final void write( final Object value, final DataOutputStream outputStream)
             throws IOException {
         outputStream.writeByte(Amf3DataType.NULL);
     }
 
-    public void writeData(Object value, DataOutputStream outputStream)
+    public final void writeData( final Object value, final DataOutputStream outputStream)
             throws IOException {
+        write(value, outputStream);
+    }
+
+    public final void writeDataValue( final Object value, final DataOutputStream outputStream) throws IOException {
         write(value, outputStream);
     }
 }
