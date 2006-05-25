@@ -13,10 +13,28 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.amf.io.external;
+package org.seasar.flex2.io;
 
 import java.io.IOException;
 
-public interface DataInput {
-    Object readObject() throws IOException;
+public interface DataOutput {
+    void writeBoolean(boolean value) throws IOException;
+
+    void writeByte(int value) throws IOException;
+
+    void writeBytes(byte[] bytes, int offset, int length) throws IOException;
+
+    void writeDouble(double value) throws IOException;
+
+    void writeInt(int value) throws IOException;
+
+    void writeMultiByte(String value, String charSet) throws IOException;
+
+    void writeObject(Object object) throws IOException;
+
+    void writeShort(int value) throws IOException;
+
+    void writeUTF(String value) throws IOException;
+
+    void writeUTFBytes(String value) throws IOException;
 }

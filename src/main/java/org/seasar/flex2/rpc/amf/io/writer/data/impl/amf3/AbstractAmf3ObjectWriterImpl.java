@@ -19,84 +19,96 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.seasar.flex2.rpc.amf.data.Amf3DataType;
+import org.seasar.flex2.rpc.amf.io.Amf3References;
 import org.seasar.flex2.rpc.amf.io.factory.Amf3ReferencesFactory;
 
 public abstract class AbstractAmf3ObjectWriterImpl extends
-        AbstractAmf3UTF8StringWriterImpl {
+		AbstractAmf3UTF8StringWriterImpl {
 
-    protected Amf3ReferencesFactory referencesFactory;
+	protected Amf3ReferencesFactory referencesFactory;
 
-    public abstract int getObjectType();
+	protected final void addClassProperties( final Class clazz, final String[] properties) {
+		Amf3References references = getReferences();
+		references.addClassProperties(clazz, properties);
+	}
 
-    public final void setReferencesFactory(
-            Amf3ReferencesFactory referencesFactory) {
-        this.referencesFactory = referencesFactory;
-    }
+	protected final void addClassReference( final Class clazz) {
+		Amf3References references = getReferences();
+		references.addClassReference(clazz);
+	}
 
-    public final void write(final Object value,
-            final DataOutputStream outputStream) throws IOException {
-        writeAMF3DataMaker(outputStream);
-        writeObjectData(value, outputStream);
-    }
+	protected final void addObjectReference( final Object object) {
+		Amf3References references = getReferences();
+		references.addObjectReference(object);
+	}
 
-    public final void writeData(Object value, DataOutputStream outputStream)
-            throws IOException {
-        writeObjectData(value, outputStream);
-    }
+	protected final void addStringReference( final String object) {
+		Amf3References references = getReferences();
+		references.addStringReference(object);
+	}
 
-    protected final void addClassProperties(Class clazz, String[] properties) {
-        referencesFactory.createReferences().addClassProperties(clazz,
-                properties);
-    }
+	protected final int getClassReferenceIndex( final Class clazz) {
+		Amf3References references = getReferences();
+		return references.getClassReferenceIndex(
+				clazz);
+	}
 
-    protected final void addClassReference(Class clazz) {
-        referencesFactory.createReferences().addClassReference(clazz);
-    }
+	protected final int getObjectReferenceIndex( final Object object) {
+		Amf3References references = getReferences();
+		return references.getObjectReferenceIndex(
+				object);
+	}
 
-    protected final void addObjectReference(Object object) {
-        referencesFactory.createReferences().addObjectReference(object);
-    }
+	public abstract int getObjectType();
 
-    protected final void addStringReference(String object) {
-        referencesFactory.createReferences().addStringReference(object);
-    }
+	private final Amf3References getReferences() {
+		Amf3References references = referencesFactory.createReferences();
+		return references;
+	}
 
-    protected final int getClassReferenceIndex(Class clazz) {
-        return referencesFactory.createReferences().getClassReferenceIndex(
-                clazz);
-    }
+	protected final int getStringReferenceIndex(String object) {
+		Amf3References references = getReferences();
+		return references.getStringReferenceIndex(
+				object);
+	}
 
-    protected final int getObjectReferenceIndex(Object object) {
-        return referencesFactory.createReferences().getObjectReferenceIndex(
-                object);
-    }
+	protected abstract void processWriteObjectData(final Object object,
+			final DataOutputStream outputStream) throws IOException;
 
-    protected final int getStringReferenceIndex(String object) {
-        return referencesFactory.createReferences().getStringReferenceIndex(
-                object);
-    }
+	public final void setReferencesFactory(
+			Amf3ReferencesFactory referencesFactory) {
+		this.referencesFactory = referencesFactory;
+	}
 
-    protected abstract void processWriteObjectData(final Object object,
-            final DataOutputStream outputStream) throws IOException;
+	public final void write(final Object value,
+			final DataOutputStream outputStream) throws IOException {
+		writeAMF3DataMaker(outputStream);
+		writeObjectData(value, outputStream);
+	}
 
-    protected final void writeObjectData(final Object object,
-            final DataOutputStream outputStream) throws IOException {
-        outputStream.writeByte(getObjectType());
-        int referenceIndex = getObjectReferenceIndex(object);
-        if (referenceIndex >= 0) {
-            writeReferenceIndex(referenceIndex, outputStream);
-        } else {
-            processWriteObjectData(object, outputStream);
-        }
-    }
+	private final void writeAMF3DataMaker( final DataOutputStream outputStream)
+			throws IOException {
+		outputStream.writeByte(Amf3DataType.AMF3_DATA_MARKER);
+	}
 
-    protected final void writeReferenceIndex(int index,
-            DataOutputStream outputStream) throws IOException {
-        writeIntData(index << 1, outputStream);
-    }
+	public final void writeData( final Object value, final DataOutputStream outputStream)
+			throws IOException {
+		writeObjectData(value, outputStream);
+	}
 
-    private final void writeAMF3DataMaker(DataOutputStream outputStream)
-            throws IOException {
-        outputStream.writeByte(Amf3DataType.AMF3_DATA_MARKER);
-    }
+	protected final void writeObjectData(final Object object,
+			final DataOutputStream outputStream) throws IOException {
+		outputStream.writeByte(getObjectType());
+		int referenceIndex = getObjectReferenceIndex(object);
+		if (referenceIndex >= 0) {
+			writeReferenceIndex(referenceIndex, outputStream);
+		} else {
+			processWriteObjectData(object, outputStream);
+		}
+	}
+
+	protected final void writeReferenceIndex( final int index,
+			 final DataOutputStream outputStream) throws IOException {
+		writeIntData(index << 1, outputStream);
+	}
 }
