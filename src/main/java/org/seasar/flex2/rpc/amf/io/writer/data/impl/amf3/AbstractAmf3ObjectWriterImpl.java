@@ -43,11 +43,6 @@ public abstract class AbstractAmf3ObjectWriterImpl extends
     public final void writeData(final Object value,
             final DataOutputStream outputStream) throws IOException {
         outputStream.writeByte(getObjectType());
-        writeDataValue(value, outputStream);
-    }
-
-    public final void writeDataValue(final Object value,
-            final DataOutputStream outputStream) throws IOException {
         writeObjectData(value, outputStream);
     }
 

@@ -32,11 +32,6 @@ public class Amf3IntegerWriterImpl extends AbstractAmf3IntWriterImpl {
     public final void writeData(final Object value,
             final DataOutputStream outputStream) throws IOException {
         outputStream.writeByte(Amf3DataType.INTEGER);
-        writeDataValue(value, outputStream);
-    }
-
-    public final void writeDataValue(final Object value,
-            final DataOutputStream outputStream) throws IOException {
         writeInteger((Integer) value, outputStream);
     }
 

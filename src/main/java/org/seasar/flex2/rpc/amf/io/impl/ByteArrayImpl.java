@@ -82,9 +82,7 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
     }
 
     public int readInt() throws IOException {
-        final AmfDataReader reader = lookupDataReaderByType(Amf3DataType.INTEGER);
-        final Integer integer = (Integer) reader.read(dataInputStream);
-        return integer.intValue();
+        return dataInputStream.readInt();
     }
 
     public String readMultiByte(int length, String charSet) throws IOException {
@@ -142,10 +140,7 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
     }
 
     public void writeInt(int value) throws IOException {
-        final Integer integer = new Integer(value);
-        final Amf3DataWriter writer = dataWriterFactory
-                .createDataValueWriter(integer);
-        writer.writeDataValue(integer, dataOutputStream);
+        dataOutputStream.writeInt(value);
     }
 
     public void writeMultiByte(String value, String charSet) throws IOException {

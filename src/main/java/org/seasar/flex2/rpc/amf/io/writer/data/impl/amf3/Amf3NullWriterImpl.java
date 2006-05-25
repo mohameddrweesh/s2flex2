@@ -32,8 +32,4 @@ public class Amf3NullWriterImpl implements Amf3DataWriter {
             throws IOException {
         write(value, outputStream);
     }
-
-    public final void writeDataValue( final Object value, final DataOutputStream outputStream) throws IOException {
-        write(value, outputStream);
-    }
 }
