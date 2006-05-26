@@ -18,6 +18,7 @@
 	
 	import mx.messaging.config.ServerConfig;
 	import org.seasar.flex2.net.NetConnection;
+	import flash.net.ObjectEncoding;
 	
 	public dynamic class RemoteService extends S2Flex2Service
 	{
@@ -25,7 +26,7 @@
    		public var useAMF0:Boolean;
    		
    		 protected override function initConnection():void{
-			_con = new NetConnection();
+			_con = new org.seasar.flex2.net.NetConnection();
 			super.configureListeners(_con);
 			if(useAMF0){
 				_con.objectEncoding = ObjectEncoding.AMF0;
