@@ -13,11 +13,28 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.amf.io.factory;
+package org.seasar.flex2.rpc.amf.data.factory.impl;
 
 import org.seasar.flex2.rpc.amf.data.ByteArray;
+import org.seasar.flex2.rpc.amf.data.factory.ByteArrayFactory;
+import org.seasar.framework.container.S2Container;
 
-public interface ByteArrayFactory {
+public class ByteArrayFactoryImpl implements ByteArrayFactory {
 
-    ByteArray createByteArray( byte[] bytes);
+    private S2Container container;
+
+    public S2Container getContainer() {
+        return container;
+    }
+
+    public void setContainer(S2Container container) {
+        this.container = container;
+    }
+
+    public ByteArray createByteArray(byte[] bytes) {
+        ByteArray bytearray = (ByteArray) container.getComponent(
+                ByteArray.class);
+        bytearray.initBuffer(bytes);
+        return bytearray;
+    }
 }
