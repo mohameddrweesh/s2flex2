@@ -42,9 +42,8 @@ public class Amf3DataReaderFactoryImpl extends AmfDataReaderFactoryImpl implemen
     }
     
     public AmfDataReader createAmf3DataReader(byte dataType) {
-        AmfDataReader reader = null;
         String key = Amf3DataType.toString(dataType);
-        reader = (AmfDataReader) amf3DataReaderMap.get(key);
+        AmfDataReader reader = (AmfDataReader) amf3DataReaderMap.get(key);
         return reader;
     }
 

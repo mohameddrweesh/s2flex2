@@ -25,6 +25,7 @@ import java.util.Map;
 import org.seasar.flex2.rpc.amf.data.Amf3Constants;
 import org.seasar.flex2.rpc.amf.data.Amf3DataType;
 import org.seasar.flex2.rpc.amf.data.AmfDataType;
+import org.seasar.flex2.rpc.amf.data.ByteArray;
 import org.seasar.flex2.rpc.amf.io.external.Externalizable;
 import org.seasar.flex2.rpc.amf.io.writer.data.Amf3DataWriter;
 import org.seasar.flex2.rpc.amf.io.writer.data.AmfDataWriter;
@@ -148,6 +149,10 @@ public class Amf3DataWriterFactoryImpl implements Amf3DataWriterFactory {
             }
             if (value instanceof Document) {
                 dataType = Amf3DataType.TYPE_XML;
+                break;
+            }
+            if (value instanceof ByteArray) {
+                dataType = Amf3DataType.TYPE_BYTEARRAY;
                 break;
             }
             if (
