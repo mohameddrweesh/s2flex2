@@ -259,5 +259,5 @@
 	<!-- 
 		special data components
 	-->
-	<component class="org.seasar.flex2.rpc.amf.io.impl.ByteArrayImpl" instance="prototype" />
+	<component class="org.seasar.flex2.rpc.amf.data.impl.ByteArrayImpl" instance="prototype" />
 </components>

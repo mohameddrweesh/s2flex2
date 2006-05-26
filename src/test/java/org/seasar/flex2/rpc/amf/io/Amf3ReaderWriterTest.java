@@ -22,9 +22,11 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -33,17 +35,21 @@ import java.util.Map;
 import javax.xml.parsers.DocumentBuilder;
 
 import org.seasar.extension.unit.S2TestCase;
+import org.seasar.flex2.io.charset.CharsetType;
 import org.seasar.flex2.rpc.amf.data.AmfBody;
 import org.seasar.flex2.rpc.amf.data.AmfMessage;
+import org.seasar.flex2.rpc.amf.data.ByteArray;
 import org.seasar.flex2.rpc.amf.data.factory.AmfBodyFactory;
 import org.seasar.flex2.rpc.amf.data.factory.AmfMessageFactory;
 import org.seasar.flex2.rpc.amf.data.impl.AmfBodyImpl;
 import org.seasar.flex2.rpc.amf.data.impl.AmfMessageImpl;
+import org.seasar.flex2.rpc.amf.io.factory.ByteArrayFactory;
 import org.seasar.flex2.rpc.amf.io.reader.AmfReader;
 import org.seasar.flex2.rpc.amf.io.reader.factory.AmfReaderFactory;
 import org.seasar.flex2.rpc.amf.io.util.Amf3DataUtil;
 import org.seasar.flex2.rpc.amf.io.writer.AmfWriter;
 import org.seasar.flex2.rpc.amf.io.writer.factory.AmfWriterFactory;
+import org.seasar.framework.container.S2Container;
 import org.seasar.framework.util.DocumentBuilderFactoryUtil;
 import org.seasar.framework.util.DocumentBuilderUtil;
 import org.seasar.framework.util.ResourceUtil;
@@ -64,7 +70,7 @@ public class Amf3ReaderWriterTest extends S2TestCase {
     public AmfWriterFactory amfWriterFactory;
 
     public AmfReaderFactory amfReaderFactory;
-    
+
     public void testNumber() throws Exception {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         DataOutputStream dos = new DataOutputStream(baos);
@@ -88,7 +94,7 @@ public class Amf3ReaderWriterTest extends S2TestCase {
 
     public void testBoolean() throws Exception {
         AmfReader reader = amfReaderFactory
-        .createReader(convertDataInputStream(Boolean.TRUE));
+                .createReader(convertDataInputStream(Boolean.TRUE));
         AmfMessage message2 = reader.read();
         AmfBody body2 = message2.getBody(0);
         assertEquals("1", Boolean.TRUE, body2.getData());
@@ -212,6 +218,25 @@ public class Amf3ReaderWriterTest extends S2TestCase {
         assertEquals("3", "222", value2.get(1));
     }
 
+    public void testXml() throws Exception {
+        Document xml1 = createXmlDocument();
+
+        Document xml2 = (Document) convertData(xml1);
+
+        assertEquals("1", Amf3DataUtil.toXmlString(xml1), Amf3DataUtil
+                .toXmlString(xml2));
+
+    }
+
+    public void testByteArray() throws Exception {
+        final byte[] bs = new byte[] { 1, 2, 3, 4, 5 };
+        ByteArray bytearray = createByteArrayOf(bs);
+
+        ByteArray bytearray1 = (ByteArray) convertData(bytearray);
+
+        assertTrue("1", Arrays.equals(bs, bytearray1.getBufferBytes()));
+    }
+
     public void testCustomClass() throws Exception {
         MyBean value = new MyBean();
         value.setAaa(-1);
@@ -234,6 +259,20 @@ public class Amf3ReaderWriterTest extends S2TestCase {
         BigDecimal iii = new BigDecimal("1234567890123456789");
         value.setIii(iii);
 
+        Document xml1 = createXmlDocument();
+        value.setDoc(xml1);
+
+        ByteArray bytearray = createByteArrayOf(null);
+        bytearray.writeBoolean(false);
+        bytearray.writeBoolean(true);
+        bytearray.writeInt(10902);
+        bytearray.writeUTF("あいうえお");
+        byte[] bytes1 = "バイト列".getBytes(CharsetType.UTF8);
+        bytearray.writeBytes(bytes1, 0, bytes1.length);
+        bytearray.writeObject(value.getFff());
+        bytearray.flush();
+        value.setByteArray(bytearray);
+
         MyBean value2 = (MyBean) convertData(value);
         assertEquals("1", -1, value2.getAaa());
         assertEquals("2", 0xFFFFFFF, value2.getBbb());
@@ -253,24 +292,24 @@ public class Amf3ReaderWriterTest extends S2TestCase {
         assertEquals("11", iii, iii2);
 
         assertNull("12", value2.getHhh().getDdd());
-    }
 
-    public void testXml() throws Exception {
-        URL url = ResourceUtil
-                .getResource("org/seasar/flex2/rpc/amf/io/testXml.xml");
-        File testXml = new File(url.getPath());
-        DocumentBuilder builder = DocumentBuilderFactoryUtil
-                .newDocumentBuilder();
-        Document xml1 = DocumentBuilderUtil.parse(builder,
-                new BufferedInputStream(new FileInputStream(testXml)));
-
-        Document xml2 = (Document) convertData(xml1);
-
-        assertEquals("1", Amf3DataUtil.toXmlString(xml1), Amf3DataUtil
+        Document xml2 = value2.getDoc();
+        assertEquals("13", Amf3DataUtil.toXmlString(xml1), Amf3DataUtil
                 .toXmlString(xml2));
 
+        ByteArray bytearray1 = value2.getByteArray();
+        assertEquals("14", false, bytearray1.readBoolean());
+        assertEquals("15", true, bytearray1.readBoolean());
+        assertEquals("16", 10902, bytearray1.readInt());
+        assertEquals("17", "あいうえお", bytearray1.readUTF());
+
+        byte[] bytes2 = new byte[bytes1.length];
+        bytearray1.readBytes(bytes2, 0, bytes2.length);
+        assertTrue("18", Arrays.equals(bytes1, bytes2));
+
+        assertEquals("19", value.getFff(), bytearray1.readObject());
     }
-    
+
     public void testExterbalizableObject() throws Exception {
         MyBean value = new MyBean();
         value.setAaa(-1);
@@ -292,12 +331,12 @@ public class Amf3ReaderWriterTest extends S2TestCase {
         value.setHhh(hhh);
         BigDecimal iii = new BigDecimal("1234567890123456789");
         value.setIii(iii);
-        
+
         TestExternalizeObject externalizableObject = new TestExternalizeObject();
         externalizableObject.setMyBean(value);
 
         TestExternalizeObject externalizeObject2 = (TestExternalizeObject) convertData(externalizableObject);
-        
+
         MyBean value2 = externalizableObject.getMyBean();
         assertEquals("1", -1, value2.getAaa());
         assertEquals("2", 0xFFFFFFF, value2.getBbb());
@@ -342,6 +381,26 @@ public class Amf3ReaderWriterTest extends S2TestCase {
         return new DataInputStream(bais);
     }
 
+    private final Document createXmlDocument() throws FileNotFoundException {
+        URL url = ResourceUtil
+                .getResource("org/seasar/flex2/rpc/amf/io/testXml.xml");
+        File testXml = new File(url.getPath());
+        DocumentBuilder builder = DocumentBuilderFactoryUtil
+                .newDocumentBuilder();
+        Document xml1 = DocumentBuilderUtil.parse(builder,
+                new BufferedInputStream(new FileInputStream(testXml)));
+        return xml1;
+    }
+
+    private final ByteArray createByteArrayOf(final byte[] bs) {
+        S2Container container = getContainer();
+        ByteArrayFactory bafactory = (ByteArrayFactory) container
+                .getComponent(ByteArrayFactory.class);
+
+        ByteArray bytearray = bafactory.createByteArray(bs);
+        return bytearray;
+    }
+
     public static class MyBean {
 
         private int aaa;
@@ -361,6 +420,10 @@ public class Amf3ReaderWriterTest extends S2TestCase {
         private MyBean hhh;
 
         private BigDecimal iii;
+
+        private Document doc;
+
+        private ByteArray byteArray;
 
         public int getAaa() {
             return aaa;
@@ -432,6 +495,22 @@ public class Amf3ReaderWriterTest extends S2TestCase {
 
         public void setIii(BigDecimal iii) {
             this.iii = iii;
+        }
+
+        public ByteArray getByteArray() {
+            return byteArray;
+        }
+
+        public void setByteArray(ByteArray byteArray) {
+            this.byteArray = byteArray;
+        }
+
+        public Document getDoc() {
+            return doc;
+        }
+
+        public void setDoc(Document doc) {
+            this.doc = doc;
         }
     }
 }

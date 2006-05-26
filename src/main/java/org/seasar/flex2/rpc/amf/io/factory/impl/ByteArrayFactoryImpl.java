@@ -15,7 +15,7 @@
  */
 package org.seasar.flex2.rpc.amf.io.factory.impl;
 
-import org.seasar.flex2.rpc.amf.io.ByteArray;
+import org.seasar.flex2.rpc.amf.data.ByteArray;
 import org.seasar.flex2.rpc.amf.io.factory.ByteArrayFactory;
 import org.seasar.framework.container.S2Container;
 

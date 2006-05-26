@@ -13,7 +13,7 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.amf.io;
+package org.seasar.flex2.rpc.amf.data;
 
 import org.seasar.flex2.io.DataInput;
 import org.seasar.flex2.io.DataOutput;
