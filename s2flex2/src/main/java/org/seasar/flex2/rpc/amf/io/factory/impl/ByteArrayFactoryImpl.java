@@ -17,7 +17,6 @@ package org.seasar.flex2.rpc.amf.io.factory.impl;
 
 import org.seasar.flex2.rpc.amf.io.ByteArray;
 import org.seasar.flex2.rpc.amf.io.factory.ByteArrayFactory;
-import org.seasar.flex2.rpc.amf.io.impl.ByteArrayImpl;
 import org.seasar.framework.container.S2Container;
 
 public class ByteArrayFactoryImpl implements ByteArrayFactory {
@@ -32,8 +31,9 @@ public class ByteArrayFactoryImpl implements ByteArrayFactory {
         this.container = container;
     }
 
-    public ByteArray createByteArray( byte[] bytes) {
-        ByteArrayImpl bytearray = (ByteArrayImpl) container.getRoot().getComponent(ByteArray.class);
+    public ByteArray createByteArray(byte[] bytes) {
+        ByteArray bytearray = (ByteArray) container.getComponent(
+                ByteArray.class);
         bytearray.initBuffer(bytes);
         return bytearray;
     }

@@ -20,4 +20,8 @@ import org.seasar.flex2.io.DataOutput;
 
 public interface ByteArray extends DataInput, DataOutput {
     void flush();
+
+    void initBuffer(byte[] bytes);
+
+    void reset();
 }

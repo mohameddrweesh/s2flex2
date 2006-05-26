@@ -29,8 +29,7 @@ public class Amf3DateReaderImpl extends AbstractAmf3ObjectReaderImpl {
 
     protected final Object readInlinedObject(final int reference,
             final DataInputStream inputStream) throws IOException {
-        Date date = readDateData(inputStream);
-        return date;
+        return readDateData(inputStream);
     }
 
     protected final Object readReferencedObject(final int reference,
