@@ -25,7 +25,7 @@ import org.seasar.framework.container.S2Container;
 
 public class ExternalDataInputFactoryTest extends S2TestCase {
 
-    private static String PATH = "amf3_reader_framework.dicon";
+    private static String PATH = "amf3.dicon";
 
     public void testCreateReaderFactory() throws Exception {
         S2Container container = getContainer();

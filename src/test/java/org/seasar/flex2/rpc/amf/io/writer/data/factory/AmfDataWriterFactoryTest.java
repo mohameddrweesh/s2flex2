@@ -50,7 +50,7 @@ import org.w3c.dom.Document;
 
 public class AmfDataWriterFactoryTest extends S2TestCase {
 
-    private static String PATH = "amf_writer_framework.dicon";
+    private static String PATH = "amf.dicon";
 
     public void testCreateDataWriterFactory() throws Exception {
         S2Container container = getContainer();
