@@ -58,13 +58,28 @@ public class ByteArrayTest extends S2TestCase {
         int writeInt = 9999;
 
         ByteArray bytearray = createByteArrayOf(null);
-
         bytearray.writeInt(writeInt);
+        bytearray.writeUnsignedInt(0xFF);
         bytearray.flush();
         bytearray.reset();
-        int readInt = bytearray.readInt();
 
-        assertEquals("1", writeInt, readInt);
+        assertEquals("1", 9999, bytearray.readInt());
+    }
+    
+    public void testReadWriteString() throws IOException {
+        String writeString = "あいうえお";
+
+        ByteArray bytearray = createByteArrayOf(null);
+
+        bytearray.writeUTF(writeString);
+        bytearray.writeUTFBytes(writeString);
+        bytearray.writeMultiByte(writeString, "shift-jis");
+        bytearray.flush();
+        bytearray.reset();
+
+        assertEquals("1", writeString, bytearray.readUTF());
+        assertEquals("2", "あいうえお", bytearray.readUTFBytes(15));
+        assertEquals("3", "あいうえ", bytearray.readMultiByte(8, "shift-jis"));
     }
 
     public void testReadWrite() throws IOException {
@@ -109,6 +124,37 @@ public class ByteArrayTest extends S2TestCase {
         assertEquals("5", 10000, bytearray.readInt());
         assertEquals("6", 10000.99999, bytearray.readDouble(), 0.0);
         assertTrue("7", nowDate.equals(bytearray.readObject()));
+    }
+    
+    public void testReadWrite2() throws IOException {
+        ByteArray bytearray = createByteArrayOf(null);
+
+        Date nowDate = new Date();
+        
+        bytearray.writeBoolean(false);
+        bytearray.writeBoolean(true);
+        bytearray.writeInt(9999);
+        bytearray.writeDouble(99999.99999);
+        bytearray.flush();
+        bytearray.reset();
+
+        assertEquals("1", false, bytearray.readBoolean());
+        assertEquals("2", true, bytearray.readBoolean());
+        
+        bytearray.writeInt(10000);
+        bytearray.writeDouble(10000.99999);
+        bytearray.writeObject(nowDate);
+        bytearray.writeBytes(new byte[]{00,00,0x27,0x0F}, 0, 4);
+        bytearray.flush();
+        bytearray.reset();
+        
+        assertEquals("3", false, bytearray.readBoolean());
+        assertEquals("4", true, bytearray.readBoolean());
+        assertEquals("5", 10000, bytearray.readInt());
+        assertEquals("6", 10000.99999, bytearray.readDouble(), 0.0);
+        assertTrue("7", nowDate.equals(bytearray.readObject()));
+        assertEquals("8", 9999, bytearray.readInt());
+        
     }
     
     private final ByteArray createByteArrayOf(final byte[] bs) {

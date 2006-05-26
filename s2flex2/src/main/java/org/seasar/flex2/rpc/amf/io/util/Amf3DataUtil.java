@@ -22,6 +22,7 @@ import java.util.Date;
 
 import javax.xml.parsers.DocumentBuilder;
 
+import org.seasar.flex2.io.charset.CharsetType;
 import org.seasar.flex2.rpc.amf.data.Amf3Constants;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
@@ -33,8 +34,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 public class Amf3DataUtil {
-
-    private final static String STRING_ENCODE_NAME = "utf-8";
 
     public final static int getIntByteLength(int value) {
         if (value < 0) {
@@ -131,7 +130,7 @@ public class Amf3DataUtil {
 
     public final static String toUTF8String(byte[] bytearr, int utflen) {
         try {
-            return new String(bytearr, 0, utflen, STRING_ENCODE_NAME);
+            return new String(bytearr, 0, utflen, CharsetType.UTF8);
         } catch (UnsupportedEncodingException e) {
             return null;
         }
@@ -139,7 +138,7 @@ public class Amf3DataUtil {
 
     public final static byte[] toUTF8StringBytes(String str) {
         try {
-            return str.getBytes(STRING_ENCODE_NAME);
+            return str.getBytes(CharsetType.UTF8);
         } catch (UnsupportedEncodingException e) {
             return new byte[0];
         }
@@ -148,7 +147,7 @@ public class Amf3DataUtil {
     public final static Document toXmlDocument(String xml) {
         ByteArrayInputStream bain;
         try {
-            bain = new ByteArrayInputStream(xml.getBytes(STRING_ENCODE_NAME));
+            bain = new ByteArrayInputStream(xml.getBytes(CharsetType.UTF8));
         } catch (UnsupportedEncodingException e) {
             return null;
         }

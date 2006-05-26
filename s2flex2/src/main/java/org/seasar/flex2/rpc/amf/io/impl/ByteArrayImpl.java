@@ -21,6 +21,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import org.seasar.flex2.io.charset.CharsetType;
 import org.seasar.flex2.rpc.amf.io.ByteArray;
 import org.seasar.flex2.rpc.amf.io.reader.data.AmfDataReader;
 import org.seasar.flex2.rpc.amf.io.reader.data.factory.Amf3DataReaderFactory;
@@ -52,12 +53,10 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
         this.pos = this.count;
     }
 
-    private byte[] mergaBuffers() {
-        byte[] writeBytes = outputStream.toByteArray();
-        byte[] newInitBytes = new byte[this.pos+writeBytes.length];
-        System.arraycopy(this.buf, 0, newInitBytes, 0, this.pos);
-        System.arraycopy(writeBytes, 0, newInitBytes, this.pos, writeBytes.length);
-        return newInitBytes;
+    public byte[] getBufferBytes() {
+        byte[] buffer = new byte[count];
+        System.arraycopy(buf, 0, buffer, 0, count);
+        return buffer;
     }
 
     public void initBuffer(byte[] bytes) {
@@ -95,8 +94,9 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
     }
 
     public String readMultiByte(int length, String charSet) throws IOException {
-        //TODO
-        return null;
+        byte[] charBytes = new byte[length];
+        read(charBytes, 0, length);
+        return new String(charBytes,charSet);
     }
 
     public Object readObject() throws IOException {
@@ -123,8 +123,7 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
     }
 
     public String readUTFBytes(int length) throws IOException {
-        //TODO
-        return null;
+        return readMultiByte(length, CharsetType.UTF8);
     }
 
     public void setDataReaderFactory(Amf3DataReaderFactory dataReaderFactory) {
@@ -154,7 +153,7 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
 
     public void writeFloat(float value) throws IOException {
         dataOutputStream.writeFloat(value);
-        
+
     }
 
     public void writeInt(int value) throws IOException {
@@ -162,6 +161,8 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
     }
 
     public void writeMultiByte(String value, String charSet) throws IOException {
+        byte[] charBytes = value.getBytes(charSet);
+        writeBytes(charBytes, 0, charBytes.length);
     }
 
     public void writeObject(Object object) throws IOException {
@@ -175,6 +176,7 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
     }
 
     public void writeUnsignedInt(int value) throws IOException {
+        writeInt(value & 0x7FFF);
     }
 
     public void writeUTF(String value) throws IOException {
@@ -182,11 +184,21 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
     }
 
     public void writeUTFBytes(String value) throws IOException {
+        writeMultiByte(value, CharsetType.UTF8);
     }
 
     private final void initializeSreams() {
         outputStream = new ByteArrayOutputStream();
         dataInputStream = new DataInputStream(this);
         dataOutputStream = new DataOutputStream(outputStream);
+    }
+
+    private byte[] mergaBuffers() {
+        byte[] writeBytes = outputStream.toByteArray();
+        byte[] newInitBytes = new byte[this.pos + writeBytes.length];
+        System.arraycopy(this.buf, 0, newInitBytes, 0, this.pos);
+        System.arraycopy(writeBytes, 0, newInitBytes, this.pos,
+                writeBytes.length);
+        return newInitBytes;
     }
 }

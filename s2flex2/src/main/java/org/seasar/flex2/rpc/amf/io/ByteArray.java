@@ -24,4 +24,6 @@ public interface ByteArray extends DataInput, DataOutput {
     void initBuffer(byte[] bytes);
 
     void reset();
+    
+    byte[] getBufferBytes();
 }

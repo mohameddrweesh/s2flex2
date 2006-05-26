@@ -3,13 +3,13 @@
 	"http://www.seasar.org/dtd/components23.dtd">
 <components namespace="amf3" >
 	<!--
-		Reader/Writer share data components
+		reader/writer share data components
 	-->
 	<component class="org.seasar.flex2.rpc.amf.io.impl.AmfSharedObjectImpl" instance="request" />
 	<component class="org.seasar.flex2.rpc.amf.io.impl.Amf3ReferencesImpl" instance="request" />
 
 	<!--
-		Reader/Writer share data factory components
+		reader/writer share data factory components
 	-->
 	<component class="org.seasar.flex2.rpc.amf.io.factory.impl.AmfSharedObjectFactoryImpl" />
 	<component class="org.seasar.flex2.rpc.amf.io.factory.impl.Amf3ReferencesFactoryImpl"  />

@@ -26,12 +26,12 @@ public abstract class AbstractAmf3UTF8StringReaderImpl extends
 
     protected final String readStringData(final int stringDef,
             final DataInputStream inputStream) throws IOException {
-        int str_length = stringDef >> 1;
+        int stringLength = stringDef >> 1;
         String str = null;
-        if (str_length > 0) {
-            byte[] charArray = new byte[str_length * 2];
-            inputStream.readFully(charArray, 0, str_length);
-            str = Amf3DataUtil.toUTF8String(charArray, str_length);
+        if (stringLength > 0) {
+            byte[] charArray = new byte[stringLength * 2];
+            inputStream.readFully(charArray, 0, stringLength);
+            str = Amf3DataUtil.toUTF8String(charArray, stringLength);
         } else {
             str = Amf3Constants.EMPTY_STRING;
         }
