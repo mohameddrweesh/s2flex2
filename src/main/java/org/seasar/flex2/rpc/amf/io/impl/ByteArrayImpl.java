@@ -47,8 +47,17 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
     }
 
     public void flush() {
-        initBuffer(outputStream.toByteArray());
+        initBuffer(mergaBuffers());
         outputStream.reset();
+        this.pos = this.count;
+    }
+
+    private byte[] mergaBuffers() {
+        byte[] writeBytes = outputStream.toByteArray();
+        byte[] newInitBytes = new byte[this.pos+writeBytes.length];
+        System.arraycopy(this.buf, 0, newInitBytes, 0, this.pos);
+        System.arraycopy(writeBytes, 0, newInitBytes, this.pos, writeBytes.length);
+        return newInitBytes;
     }
 
     public void initBuffer(byte[] bytes) {

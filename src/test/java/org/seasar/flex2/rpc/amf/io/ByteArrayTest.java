@@ -16,6 +16,7 @@
 package org.seasar.flex2.rpc.amf.io;
 
 import java.io.IOException;
+import java.util.Date;
 
 import org.seasar.extension.unit.S2TestCase;
 import org.seasar.flex2.rpc.amf.io.factory.ByteArrayFactory;
@@ -23,54 +24,98 @@ import org.seasar.flex2.rpc.amf.io.factory.impl.ByteArrayFactoryImpl;
 import org.seasar.flex2.rpc.amf.io.impl.ByteArrayImpl;
 import org.seasar.framework.container.S2Container;
 
-
 public class ByteArrayTest extends S2TestCase {
 
     private final static String PATH = "amf3.dicon";
-    
+
     protected void setUp() throws Exception {
         include(PATH);
     }
-    
-    public void testCreateTest(){
+
+    public void testCreateTest() {
         S2Container container = getContainer();
         Object bytearray = container.getComponent(ByteArray.class);
         assertNotNull("1", bytearray);
         assertTrue("2", bytearray instanceof ByteArrayImpl);
     }
 
-    public void testFactoryTest(){
+    public void testFactoryTest() {
         S2Container container = getContainer();
         Object factory = container.getComponent(ByteArrayFactory.class);
         assertNotNull("1", factory);
         assertTrue("2", factory instanceof ByteArrayFactoryImpl);
     }
-    
-    public void testFactoryCreateTest(){
-        final byte[] bs = new byte[]{1,2,3,4,5};
+
+    public void testFactoryCreateTest() {
+        final byte[] bs = new byte[] { 1, 2, 3, 4, 5 };
         ByteArray bytearray = createByteArrayOf(bs);
         assertNotNull("1", bytearray);
         assertTrue("2", bytearray instanceof ByteArrayImpl);
-        
-    }
-    
-    public void testReadWriteInteger() throws IOException{
-        int writeInt = 9999;
-        
-        ByteArray bytearray = createByteArrayOf(null);
-        
-        bytearray.writeInt(writeInt);
-        bytearray.flush();
-        
-        int readInt = bytearray.readInt();
-        
-        assertEquals("1",writeInt, readInt);
+
     }
 
+    public void testReadWriteInteger() throws IOException {
+        int writeInt = 9999;
+
+        ByteArray bytearray = createByteArrayOf(null);
+
+        bytearray.writeInt(writeInt);
+        bytearray.flush();
+        bytearray.reset();
+        int readInt = bytearray.readInt();
+
+        assertEquals("1", writeInt, readInt);
+    }
+
+    public void testReadWrite() throws IOException {
+        ByteArray bytearray = createByteArrayOf(null);
+
+        bytearray.writeBoolean(false);
+        bytearray.writeBoolean(true);
+        bytearray.writeInt(9999);
+        bytearray.writeDouble(99999.99999);
+        bytearray.flush();
+        bytearray.reset();
+
+        assertEquals("1", false, bytearray.readBoolean());
+        assertEquals("2", true, bytearray.readBoolean());
+        assertEquals("3", 9999, bytearray.readInt());
+        assertEquals("4", 99999.99999, bytearray.readDouble(), 0.0);
+    }
+
+    public void testReadWrite1() throws IOException {
+        ByteArray bytearray = createByteArrayOf(null);
+
+        Date nowDate = new Date();
+        
+        bytearray.writeBoolean(false);
+        bytearray.writeBoolean(true);
+        bytearray.writeInt(9999);
+        bytearray.writeDouble(99999.99999);
+        bytearray.flush();
+        bytearray.reset();
+
+        assertEquals("1", false, bytearray.readBoolean());
+        assertEquals("2", true, bytearray.readBoolean());
+        
+        bytearray.writeInt(10000);
+        bytearray.writeDouble(10000.99999);
+        bytearray.writeObject(nowDate);
+        bytearray.flush();
+        bytearray.reset();
+        
+        assertEquals("3", false, bytearray.readBoolean());
+        assertEquals("4", true, bytearray.readBoolean());
+        assertEquals("5", 10000, bytearray.readInt());
+        assertEquals("6", 10000.99999, bytearray.readDouble(), 0.0);
+        assertTrue("7", nowDate.equals(bytearray.readObject()));
+    }
+    
     private final ByteArray createByteArrayOf(final byte[] bs) {
         S2Container container = getContainer();
-        ByteArrayFactory bafactory = (ByteArrayFactory)container.getComponent(ByteArrayFactory.class);
-        
+        ByteArrayFactory bafactory = (ByteArrayFactory) container
+                .getComponent(ByteArrayFactory.class);
+
         ByteArray bytearray = bafactory.createByteArray(bs);
         return bytearray;
     }
