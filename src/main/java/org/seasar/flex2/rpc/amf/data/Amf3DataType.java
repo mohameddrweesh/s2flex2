@@ -40,6 +40,8 @@ public final class Amf3DataType {
     public static final byte OBJECT = 0x0A;
 
     public static final byte XML = 0x0B;
+    
+    public static final byte BYTEARRAY = 0x0C;
 
     public static final String TYPE_NULL = "AMF3_NULL";
 
@@ -62,6 +64,8 @@ public final class Amf3DataType {
     public static final String TYPE_DATE = "AMF3_DATE";
 
     public static final String TYPE_XML = "AMF3_XML";
+    
+    public static final String TYPE_BYTEARRAY = "AMF3_BYTEARRAY";
 
     public static final String TYPE_AMF3_DATA_MARKER = "AMF3_DATA_MARKER";
 
@@ -97,6 +101,9 @@ public final class Amf3DataType {
 
             case XML:
                 return TYPE_XML;
+                
+            case BYTEARRAY:
+                return TYPE_BYTEARRAY;
 
             case AMF3_DATA_MARKER:
                 return TYPE_AMF3_DATA_MARKER;
