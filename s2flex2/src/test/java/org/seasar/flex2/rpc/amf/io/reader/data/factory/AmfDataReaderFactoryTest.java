@@ -35,7 +35,7 @@ import org.seasar.framework.container.S2Container;
 
 public class AmfDataReaderFactoryTest extends S2TestCase {
 
-    private static String PATH = "amf_reader_framework.dicon";
+    private static String PATH = "amf.dicon";
 
     public void testCreateDataReaderFactory() throws Exception {
         S2Container container = getContainer();

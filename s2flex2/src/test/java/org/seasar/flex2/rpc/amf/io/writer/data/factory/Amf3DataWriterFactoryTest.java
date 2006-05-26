@@ -56,7 +56,7 @@ import org.w3c.dom.Document;
 
 public class Amf3DataWriterFactoryTest extends S2TestCase {
 
-    private static String PATH = "amf3_writer_framework.dicon";
+    private static String PATH = "amf3.dicon";
 
     public void testCreateDataWriterFactory() throws Exception {
         S2Container container = getContainer();
