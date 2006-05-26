@@ -337,7 +337,7 @@ public class Amf3ReaderWriterTest extends S2TestCase {
 
         TestExternalizeObject externalizeObject2 = (TestExternalizeObject) convertData(externalizableObject);
 
-        MyBean value2 = externalizableObject.getMyBean();
+        MyBean value2 = externalizeObject2.getMyBean();
         assertEquals("1", -1, value2.getAaa());
         assertEquals("2", 0xFFFFFFF, value2.getBbb());
         assertEquals("3", -0xFFFFFFF, value2.getCcc(), 0);
