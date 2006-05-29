@@ -32,13 +32,14 @@ public abstract class AbstractAmf3IntReaderImpl implements AmfDataReader {
         if (integerData >= 0x00) {
 
             if ((integerData >>> 7) == 0x00) {
-                return Amf3DataUtil.toInt(new int[] { integerData & 0x7F }, 1);
-            }
+                integerData = Amf3DataUtil.toInt(new int[] { integerData & 0x7F }, 1);
+            } else {
 
-            return readIntData(integerData, inputStream);
+                integerData = readIntData(integerData, inputStream);
+            }
         }
 
-        return 0;
+        return integerData;
     }
 
     private final int readIntData(final int intData,

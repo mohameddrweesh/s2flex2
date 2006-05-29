@@ -29,8 +29,7 @@ public class Amf3XmlReaderImpl extends AbstractAmf3UTF8StringReaderImpl {
 
     protected final Object readInlinedObject(final int reference,
             final DataInputStream inputStream) throws IOException {
-        Document doc = readXmlData(reference, inputStream);
-        return doc;
+        return readXmlData(reference, inputStream);
     }
 
     protected final Object readReferencedObject(int reference,

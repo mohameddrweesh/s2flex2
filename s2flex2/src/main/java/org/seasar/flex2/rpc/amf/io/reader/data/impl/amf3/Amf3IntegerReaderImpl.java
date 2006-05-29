@@ -26,7 +26,6 @@ public class Amf3IntegerReaderImpl extends AbstractAmf3IntReaderImpl {
 
     private final Integer readInteger(final DataInputStream inputStream)
             throws IOException {
-        Integer result = new Integer(readInt(inputStream));
-        return result;
+        return new Integer(readInt(inputStream));
     }
 }
