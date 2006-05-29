@@ -2,8 +2,8 @@
 	<property name="ver" value="B1"/>
 
 	<target name="dist">
-		<zip zipfile="target/S2Flex2-backport-${ver}.zip">
-			<zipfileset prefix="s2flex2-backport" dir=".">
+		<zip zipfile="target/S2Flex2-backport175-${ver}.zip">
+			<zipfileset prefix="s2flex2-backport175" dir=".">
 				<exclude name="**/target/**"/>
 			</zipfileset>
 		</zip>
