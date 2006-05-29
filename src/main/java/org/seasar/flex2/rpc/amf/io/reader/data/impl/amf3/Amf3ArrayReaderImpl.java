@@ -28,8 +28,7 @@ public class Amf3ArrayReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
 
     protected final Object readInlinedObject(final int reference,
             final DataInputStream inputStream) throws IOException {
-        List array = readArrayData(reference, inputStream);
-        return array;
+        return readArrayData(reference, inputStream);
     }
 
     protected final Object readReferencedObject(final int reference,

@@ -19,6 +19,7 @@ import java.io.DataInputStream;
 import java.io.IOException;
 
 import org.seasar.flex2.rpc.amf.data.Amf3Constants;
+import org.seasar.flex2.rpc.amf.io.Amf3References;
 import org.seasar.flex2.rpc.amf.io.factory.Amf3ReferencesFactory;
 
 public abstract class AbstractAmf3ObjectReaderImpl extends
@@ -31,50 +32,50 @@ public abstract class AbstractAmf3ObjectReaderImpl extends
     }
 
     protected final void addClassProperties(Class clazz, String[] properties) {
-        referencesFactory.createReferences().addClassProperties(clazz,
+        getReferences().addClassProperties(clazz,
                 properties);
     }
 
     protected final void addClassReference(Class clazz) {
-        referencesFactory.createReferences().addClassReference(clazz);
+        getReferences().addClassReference(clazz);
     }
 
     protected final void addObjectReference(Object object) {
-        referencesFactory.createReferences().addObjectReference(object);
+        getReferences().addObjectReference(object);
     }
 
     protected final void addStringReference(String object) {
-        referencesFactory.createReferences().addStringReference(object);
+        getReferences().addStringReference(object);
     }
 
     protected final Class getClassAt(int index) {
-        return referencesFactory.createReferences().getClassAt(index);
+        return getReferences().getClassAt(index);
     }
 
     protected final int getClassReferenceIndex(Class clazz) {
-        return referencesFactory.createReferences().getClassReferenceIndex(
+        return getReferences().getClassReferenceIndex(
                 clazz);
     }
 
     protected final Object getObjectAt(int index) {
-        return referencesFactory.createReferences().getObjectAt(index);
+        return getReferences().getObjectAt(index);
     }
 
     protected final int getObjectReferenceIndex(Object object) {
-        return referencesFactory.createReferences().getObjectReferenceIndex(
+        return getReferences().getObjectReferenceIndex(
                 object);
     }
 
     protected final String[] getPropertiesOf(Class clazz) {
-        return referencesFactory.createReferences().getPropertiesAt(clazz);
+        return getReferences().getPropertiesAt(clazz);
     }
 
     protected final String getStringAt(int index) {
-        return referencesFactory.createReferences().getStringAt(index);
+        return getReferences().getStringAt(index);
     }
 
     protected final int getStringReferenceIndex(String object) {
-        return referencesFactory.createReferences().getStringReferenceIndex(
+        return getReferences().getStringReferenceIndex(
                 object);
     }
 
@@ -103,4 +104,8 @@ public abstract class AbstractAmf3ObjectReaderImpl extends
 
     abstract protected Object readReferencedObject(int reference,
             DataInputStream inputStream) throws IOException;
+
+    private final Amf3References getReferences() {
+        return referencesFactory.createReferences();
+    }
 }
