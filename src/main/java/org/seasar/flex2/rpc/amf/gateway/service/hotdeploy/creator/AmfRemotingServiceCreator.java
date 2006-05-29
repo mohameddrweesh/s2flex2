@@ -31,7 +31,7 @@ public class AmfRemotingServiceCreator extends
 
     public boolean loadComponentDef(S2Container container, Class clazz) {
         boolean loadedComponentDef = super.loadComponentDef(container, clazz);
-        if (loadedComponentDef) {
+        if (isTarget(clazz)) {
             S2Container root = container.getRoot();
             AmfRemotingServiceRepository repository = (AmfRemotingServiceRepository) root
                     .getComponent(AmfRemotingServiceRepository.class);
