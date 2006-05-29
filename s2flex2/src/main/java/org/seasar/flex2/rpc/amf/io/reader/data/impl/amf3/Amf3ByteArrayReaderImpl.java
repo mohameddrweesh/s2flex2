@@ -22,6 +22,8 @@ import org.seasar.flex2.rpc.amf.data.ByteArray;
 import org.seasar.flex2.rpc.amf.data.factory.ByteArrayFactory;
 
 public class Amf3ByteArrayReaderImpl extends AbstractAmf3ObjectReaderImpl {
+    
+    private static final int READ_BUFFER_SIZE = 1024 * 8;
 
     private ByteArrayFactory byteArrayFactory;
     
@@ -49,9 +51,19 @@ public class Amf3ByteArrayReaderImpl extends AbstractAmf3ObjectReaderImpl {
 
     private final ByteArray readByteArrayData(final int bytearrayDef,
             final DataInputStream inputStream) throws IOException {
+        
         int bytearrayDataLength = bytearrayDef >> 1;
+        int totalReadByteLength = 0;
+        
         byte[] bytearrayData = new byte[bytearrayDataLength];
-        inputStream.read(bytearrayData, 0, bytearrayDataLength);
+        byte[] readBuffer = new byte[READ_BUFFER_SIZE];
+        
+        while( totalReadByteLength < bytearrayDataLength ){
+            int readByteLength = inputStream.read(readBuffer);
+            System.arraycopy(readBuffer, 0, bytearrayData, totalReadByteLength, readByteLength);
+            totalReadByteLength += readByteLength;
+        }
+        
         return byteArrayFactory.createByteArray(bytearrayData);
     }
 }
