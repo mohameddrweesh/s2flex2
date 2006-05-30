@@ -11,7 +11,7 @@
 <libraryPathEntry kind="3" linkType="1" path="${FRAMEWORKS}/libs/rpc.swc"/>
 <libraryPathEntry kind="3" linkType="1" path="${FRAMEWORKS}/libs/charts.swc"/>
 <libraryPathEntry kind="1" linkType="1" path="${FRAMEWORKS}/locale/{locale}"/>
-<libraryPathEntry kind="3" linkType="1" path="${DOCUMENTS}\flex2_example\src\lib\s2flex2-components.swc"/>
+<libraryPathEntry kind="3" linkType="1" path="${DOCUMENTS}\flex2_example\src\lib\swc\s2flex2-components.swc"/>
 </libraryPath>
 <sourcePath>
 <sourcePathEntry kind="3" path="${FRAMEWORKS}/libs/framework.swc" sourcepath="${FRAMEWORKS}/source"/>
