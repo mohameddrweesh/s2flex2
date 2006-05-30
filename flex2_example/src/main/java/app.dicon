@@ -4,11 +4,22 @@
 <components>
 	<include path="s2flex2.dicon"/>
 	
+	<component class="examples.flex2.camera.snapshot.service.impl.SnapshotServiceConfigImpl">
+        <property name="rootPath">application.getRealPath(".") + "\\snapshot\\"</property>
+        <property name="rootUri">"http://127.0.0.1/flex2_example/snapshot/"</property>
+        <property name="prefix">"snapshot_"</property>
+        <property name="suffix">".png"</property>
+    </component>
+    
 	<component
       class="org.seasar.framework.container.autoregister.FileSystemComponentAutoRegister">
         <initMethod name="addClassPattern">
             <arg>"examples.flex2"</arg>
-            <arg>".*ServiceImpl"</arg>
+            <arg>".*Impl"</arg>
+        </initMethod>
+        <initMethod name="addIgnoreClassPattern">
+            <arg>"examples.flex2"</arg>
+            <arg>".*ConfigImpl"</arg>
         </initMethod>
     </component>
     
@@ -22,4 +33,5 @@
 	        <arg>".*ServiceImpl"</arg>
 	    </initMethod>
 	</component>
+
 </components>
