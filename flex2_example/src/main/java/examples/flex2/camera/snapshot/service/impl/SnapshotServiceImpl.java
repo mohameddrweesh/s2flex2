@@ -29,7 +29,7 @@ public class SnapshotServiceImpl implements SnapshotService {
     public String save(Snapshot snapshot) {
         ByteArray bytearray = snapshot.getSource();
         byte[] buffer = bytearray.getBufferBytes();
-        File file = new File(serviceConfig.getRootPath() + createFileName());
+        File file = createSnapshotFile();
         FileOutputStream fileOutputSteam = FileOutputStreamUtil.create(file);
         try {
             fileOutputSteam.write(buffer);
@@ -49,7 +49,6 @@ public class SnapshotServiceImpl implements SnapshotService {
         return serviceConfig.getRootUri() + file.getName();
     }
 
-
     public void setFileNameResolver(FileNameResolver fileNameResolver) {
         this.fileNameResolver = fileNameResolver;
     }
@@ -62,5 +61,14 @@ public class SnapshotServiceImpl implements SnapshotService {
 
     private final String createFileName() {
         return serviceConfig.getPrefix() + fileNameResolver.getFileName(null) + serviceConfig.getSuffix();
+    }
+
+
+    private final File createSnapshotFile() {
+        File saveDir = new File(serviceConfig.getRootPath());
+        if( !saveDir.exists()){
+            saveDir.mkdir();
+        }
+        return new File(serviceConfig.getRootPath() + createFileName());
     }
 }
