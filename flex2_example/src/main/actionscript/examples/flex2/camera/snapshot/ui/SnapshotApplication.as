@@ -7,17 +7,17 @@ package examples.flex2.camera.snapshot.ui
     import flash.display.Bitmap;
     import flash.display.BitmapData;
     import flash.events.Event;
+    import flash.net.URLRequest;
+    import flash.net.navigateToURL;
     
     import mx.containers.Panel;
+    import mx.controls.Button;
     import mx.controls.LinkButton;
     import mx.core.Application;
     import mx.core.UIComponent;
     import mx.rpc.events.ResultEvent;
     
     import org.seasar.flex2.rpc.remoting.S2Flex2Service;
-    import flash.net.navigateToURL;
-    import flash.net.URLRequest;
-    import mx.controls.Button;
             
     public class SnapshotApplication extends Application
     {
@@ -71,11 +71,11 @@ package examples.flex2.camera.snapshot.ui
             private function createSnapshot():Snapshot{
                 var snapshot:Snapshot = new Snapshot();
                 snapshot.source = PNGEncoder.encode(snapshotbitmap.bitmapData);
-                
+                snapshot.source.compress();
                 return snapshot;
             }
             
-            private function sendSnapshotService( snapshot:Snapshot ){
+            private function sendSnapshotService( snapshot:Snapshot ):void{
                 snapshotService.addEventListener("result", resultSnapshotService);
                 snapshotService.addEventListener("fault", faultSnapshotService);
                 snapshotService.save( snapshot );
