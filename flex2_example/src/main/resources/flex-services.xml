@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services-config xmlns="http://www.macromedia.com/2005/flex-service-config">
+
+    <services>
+        <!--
+                REMOTING SERVICE
+        -->
+        <service id="remoting-service"
+            class="flex.messaging.services.RemotingService"
+            messageTypes="flex.messaging.messages.RPCMessage">
+
+            <adapters>
+                <adapter-definition id="java-object" class="flex.messaging.services.remoting.adapters.JavaAdapter" default="true"/>
+            </adapters>
+
+            <default-channels>
+                <channel ref="s2-amf"/>
+            </default-channels>
+			<!-- calculate -->
+			<destination id="addService">
+				<properties>
+					<source>addService</source>
+					<service-name>addService</service-name>
+				</properties>
+				<channels>
+					<channel ref="s2-amf"/>
+				</channels>
+			</destination>
+			<destination id="exceptionService">
+				<properties>
+					<source>exceptionService</source>
+					<service-name>exceptionService</service-name>
+				</properties>
+				<channels>
+					<channel ref="s2-amf"/>
+				</channels>
+			</destination>
+			<destination id="checkDtoService">
+				<properties>
+					<source>checkDtoService</source>
+					<service-name>checkDtoService</service-name>
+				</properties>
+				<channels>
+					<channel ref="s2-amf"/>
+				</channels>
+			</destination>
+					
+        </service>
+    </services>
+    <security />
+    <channels>
+    	<!-- 
+    	s2flex2 gateway
+    	-->
+        <channel-definition id="s2-amf" class="mx.messaging.channels.AMFChannel">
+            <endpoint uri="http://localhost/flex2_example/gateway"  class="flex.messaging.endpoints.AMFEndpoint"/>
+            <properties>
+                <polling-enabled>false</polling-enabled>
+            </properties>
+        </channel-definition>
+        <!--
+        openamf gateway 
+        -->
+ 		<channel-definition id="open-amf" class="mx.messaging.channels.NetConnectionChannel">
+            <endpoint uri="http://localhost:8080/openamf/gateway"  class="flex.messaging.endpoints.AMFEndpoint"/>
+            <properties>
+                <polling-enabled>false</polling-enabled>
+                <serialization />                
+            </properties>
+        </channel-definition>		
+    </channels>
+    <clusters>
+        <cluster id="default-cluster" properties="jgroups-default.xml" />    
+    </clusters>    
+    <debugging />
+    <logging level="Debug" />
+    <system>
+        <locale>
+            <default-locale>en</default-locale>
+            <supported-locale>de</supported-locale>
+            <supported-locale>fr</supported-locale>
+            <supported-locale>es</supported-locale>
+        </locale>
+    </system>
+</services-config>
