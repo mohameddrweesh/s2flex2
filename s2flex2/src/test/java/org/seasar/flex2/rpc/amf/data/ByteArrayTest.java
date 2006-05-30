@@ -13,7 +13,7 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.amf.io;
+package org.seasar.flex2.rpc.amf.data;
 
 import java.io.IOException;
 import java.util.Date;
@@ -148,6 +148,41 @@ public class ByteArrayTest extends S2TestCase {
         bytearray.writeBytes(new byte[]{00,00,0x27,0x0F}, 0, 4);
         bytearray.flush();
         bytearray.reset();
+        
+        assertEquals("3", false, bytearray.readBoolean());
+        assertEquals("4", true, bytearray.readBoolean());
+        assertEquals("5", 10000, bytearray.readInt());
+        assertEquals("6", 10000.99999, bytearray.readDouble(), 0.0);
+        assertTrue("7", nowDate.equals(bytearray.readObject()));
+        assertEquals("8", 9999, bytearray.readInt());
+        
+    }
+
+    public void testCompress() throws IOException {
+        ByteArray bytearray = createByteArrayOf(null);
+
+        Date nowDate = new Date();
+        
+        bytearray.writeBoolean(false);
+        bytearray.writeBoolean(true);
+        bytearray.writeInt(9999);
+        bytearray.writeDouble(99999.99999);
+        bytearray.flush();
+        bytearray.reset();
+
+        assertEquals("1", false, bytearray.readBoolean());
+        assertEquals("2", true, bytearray.readBoolean());
+        
+        bytearray.writeInt(10000);
+        bytearray.writeDouble(10000.99999);
+        bytearray.writeObject(nowDate);
+        bytearray.writeBytes(new byte[]{00,00,0x27,0x0F}, 0, 4);
+        bytearray.flush();
+        bytearray.reset();
+
+        
+        bytearray.compress();
+        bytearray.uncompress();
         
         assertEquals("3", false, bytearray.readBoolean());
         assertEquals("4", true, bytearray.readBoolean());
