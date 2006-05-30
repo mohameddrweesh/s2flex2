@@ -28,6 +28,7 @@ public class SnapshotServiceImpl implements SnapshotService {
 
     public String save(Snapshot snapshot) {
         ByteArray bytearray = snapshot.getSource();
+        bytearray.uncompress();
         byte[] buffer = bytearray.getBufferBytes();
         File file = createSnapshotFile();
         FileOutputStream fileOutputSteam = FileOutputStreamUtil.create(file);
