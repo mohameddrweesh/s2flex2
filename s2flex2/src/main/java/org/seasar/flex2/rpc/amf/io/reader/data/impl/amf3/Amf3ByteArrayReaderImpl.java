@@ -19,7 +19,7 @@ import java.io.DataInputStream;
 import java.io.IOException;
 
 import org.seasar.flex2.io.ByteArray;
-import org.seasar.flex2.io.external.factory.ByteArrayFactory;
+import org.seasar.flex2.io.factory.ByteArrayFactory;
 
 public class Amf3ByteArrayReaderImpl extends AbstractAmf3ObjectReaderImpl {
     

@@ -13,13 +13,13 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.io.external.factory.impl;
+package org.seasar.flex2.io.factory.impl;
 
 import java.io.DataOutputStream;
 
 import org.seasar.flex2.io.DataOutput;
 import org.seasar.flex2.io.external.ExternalizeDataOutput;
-import org.seasar.flex2.io.external.factory.DataOutputFactory;
+import org.seasar.flex2.io.factory.DataOutputFactory;
 import org.seasar.framework.container.S2Container;
 
 public class ExternalizeDataOutputFactoryImpl implements DataOutputFactory {
