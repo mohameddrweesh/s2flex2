@@ -4,8 +4,8 @@ import java.io.IOException;
 
 import org.seasar.flex2.io.DataInput;
 import org.seasar.flex2.io.DataOutput;
+import org.seasar.flex2.io.external.Externalizable;
 import org.seasar.flex2.rpc.amf.io.Amf3ReaderWriterTest.MyBean;
-import org.seasar.flex2.rpc.amf.io.external.Externalizable;
 
 public class TestExternalizeObject implements Externalizable {
     

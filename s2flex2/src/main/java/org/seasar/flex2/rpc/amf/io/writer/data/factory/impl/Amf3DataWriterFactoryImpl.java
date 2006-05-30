@@ -22,11 +22,11 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.seasar.flex2.io.ByteArray;
+import org.seasar.flex2.io.external.Externalizable;
 import org.seasar.flex2.rpc.amf.data.Amf3Constants;
 import org.seasar.flex2.rpc.amf.data.Amf3DataType;
 import org.seasar.flex2.rpc.amf.data.AmfDataType;
-import org.seasar.flex2.rpc.amf.data.ByteArray;
-import org.seasar.flex2.rpc.amf.io.external.Externalizable;
 import org.seasar.flex2.rpc.amf.io.writer.data.Amf3DataWriter;
 import org.seasar.flex2.rpc.amf.io.writer.data.AmfDataWriter;
 import org.seasar.flex2.rpc.amf.io.writer.data.factory.Amf3DataWriterFactory;
