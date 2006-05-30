@@ -19,7 +19,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.seasar.flex2.io.DataOutput;
-import org.seasar.flex2.io.external.Externalizable;
+import org.seasar.flex2.io.Externalizable;
 import org.seasar.flex2.io.factory.DataOutputFactory;
 import org.seasar.flex2.rpc.amf.data.Amf3Constants;
 import org.seasar.framework.beans.BeanDesc;

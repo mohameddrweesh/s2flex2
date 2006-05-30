@@ -18,7 +18,7 @@ package org.seasar.flex2.io.factory.impl;
 import java.io.DataInputStream;
 
 import org.seasar.flex2.io.DataInput;
-import org.seasar.flex2.io.external.ExternalizeDataInput;
+import org.seasar.flex2.io.ExternalizeDataInput;
 import org.seasar.flex2.io.factory.DataInputFactory;
 import org.seasar.framework.container.S2Container;
 

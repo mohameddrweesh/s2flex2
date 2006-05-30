@@ -17,7 +17,7 @@
 	<!--
 		special data factory components
 	-->
-	<component class="org.seasar.flex2.rpc.amf.data.factory.impl.ByteArrayFactoryImpl" />
+	<component class="org.seasar.flex2.io.factory.impl.ByteArrayFactoryImpl" />
 
 	<!-- 
 		reader components
@@ -122,8 +122,8 @@
 	
 	<component class="org.seasar.flex2.rpc.amf.io.reader.data.factory.impl.Amf3DataReaderFactoryImpl" />
 
-	<component class="org.seasar.flex2.rpc.amf.io.external.impl.ExternalizeDataInputImpl" instance="request" />
-	<component class="org.seasar.flex2.rpc.amf.io.external.factory.impl.ExternalizeDataInputFactoryImpl" />
+	<component class="org.seasar.flex2.io.impl.ExternalizeDataInputImpl" instance="request" />
+	<component class="org.seasar.flex2.io.factory.impl.ExternalizeDataInputFactoryImpl" />
 	
 	<!-- 
 		writer components
@@ -218,7 +218,7 @@
 	        <arg>amf3XmlWriterImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>"org.seasar.flex2.rpc.amf.io.external.Externalizable"</arg>
+	        <arg>"org.seasar.flex2.io.Externalizable"</arg>
 	        <arg>amf3ExternalizableObjectWriterImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
@@ -245,8 +245,8 @@
 	
 	<component class="org.seasar.flex2.rpc.amf.io.writer.data.factory.impl.Amf3DataWriterFactoryImpl" />
 	
-	<component class="org.seasar.flex2.rpc.amf.io.external.impl.ExternalizeDataOutputImpl" instance="request" />
-	<component class="org.seasar.flex2.rpc.amf.io.external.factory.impl.ExternalizeDataOutputFactoryImpl" />
+	<component class="org.seasar.flex2.io.impl.ExternalizeDataOutputImpl" instance="request" />
+	<component class="org.seasar.flex2.io.factory.impl.ExternalizeDataOutputFactoryImpl" />
 	
 	<!--
 		amf data factory
@@ -259,5 +259,5 @@
 	<!-- 
 		special data components
 	-->
-	<component class="org.seasar.flex2.rpc.amf.data.impl.ByteArrayImpl" instance="prototype" />
+	<component class="org.seasar.flex2.io.impl.ByteArrayImpl" instance="prototype" />
 </components>

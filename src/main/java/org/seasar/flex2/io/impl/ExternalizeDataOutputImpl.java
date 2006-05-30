@@ -18,7 +18,7 @@ package org.seasar.flex2.io.impl;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.seasar.flex2.io.external.ExternalizeDataOutput;
+import org.seasar.flex2.io.ExternalizeDataOutput;
 import org.seasar.flex2.rpc.amf.io.writer.data.Amf3DataWriter;
 import org.seasar.flex2.rpc.amf.io.writer.data.factory.Amf3DataWriterFactory;
 

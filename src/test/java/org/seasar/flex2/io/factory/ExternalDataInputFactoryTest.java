@@ -19,7 +19,7 @@ import java.io.DataInputStream;
 
 import org.seasar.extension.unit.S2TestCase;
 import org.seasar.flex2.io.DataInput;
-import org.seasar.flex2.io.external.ExternalizeDataInput;
+import org.seasar.flex2.io.ExternalizeDataInput;
 import org.seasar.flex2.io.factory.DataInputFactory;
 import org.seasar.flex2.io.factory.impl.ExternalizeDataInputFactoryImpl;
 import org.seasar.framework.container.S2Container;
