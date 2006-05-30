@@ -13,14 +13,11 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.io.external;
+package org.seasar.flex2.io;
 
-import org.seasar.flex2.io.DataInput;
-import org.seasar.flex2.io.DataOutput;
+import java.io.DataOutputStream;
 
-public interface Externalizable {
 
-    void readExternal(DataInput input);
-
-    void writeExternal(DataOutput output);
+public interface ExternalizeDataOutput extends DataOutput {
+    void setOutputStream(DataOutputStream outputStream);
 }

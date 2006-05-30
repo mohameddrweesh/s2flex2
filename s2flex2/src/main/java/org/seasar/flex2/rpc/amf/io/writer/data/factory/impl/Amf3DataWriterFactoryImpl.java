@@ -23,7 +23,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.seasar.flex2.io.ByteArray;
-import org.seasar.flex2.io.external.Externalizable;
+import org.seasar.flex2.io.Externalizable;
 import org.seasar.flex2.rpc.amf.data.Amf3Constants;
 import org.seasar.flex2.rpc.amf.data.Amf3DataType;
 import org.seasar.flex2.rpc.amf.data.AmfDataType;
