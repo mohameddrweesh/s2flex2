@@ -13,15 +13,15 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.amf.data;
+package org.seasar.flex2.io;
 
 import java.io.IOException;
 import java.util.Date;
 
 import org.seasar.extension.unit.S2TestCase;
 import org.seasar.flex2.io.ByteArray;
-import org.seasar.flex2.io.external.factory.ByteArrayFactory;
-import org.seasar.flex2.io.external.impl.ByteArrayImpl;
+import org.seasar.flex2.io.factory.ByteArrayFactory;
+import org.seasar.flex2.io.impl.ByteArrayImpl;
 import org.seasar.flex2.rpc.amf.data.factory.impl.ByteArrayFactoryImpl;
 import org.seasar.framework.container.S2Container;
 

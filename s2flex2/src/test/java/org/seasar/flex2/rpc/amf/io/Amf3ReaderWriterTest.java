@@ -37,7 +37,7 @@ import javax.xml.parsers.DocumentBuilder;
 import org.seasar.extension.unit.S2TestCase;
 import org.seasar.flex2.io.ByteArray;
 import org.seasar.flex2.io.charset.CharsetType;
-import org.seasar.flex2.io.external.factory.ByteArrayFactory;
+import org.seasar.flex2.io.factory.ByteArrayFactory;
 import org.seasar.flex2.rpc.amf.data.AmfBody;
 import org.seasar.flex2.rpc.amf.data.AmfMessage;
 import org.seasar.flex2.rpc.amf.data.factory.AmfBodyFactory;
