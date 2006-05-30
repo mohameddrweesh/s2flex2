@@ -1,11 +1,11 @@
-package examples.flex2.service.impl;
+package examples.flex2.check.service.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import examples.flex2.dto.CheckDto;
-import examples.flex2.service.CheckDtoService;
+import examples.flex2.check.dto.CheckDto;
+import examples.flex2.check.service.CheckDtoService;
 
 public class CheckDtoServiceImpl implements CheckDtoService {
 

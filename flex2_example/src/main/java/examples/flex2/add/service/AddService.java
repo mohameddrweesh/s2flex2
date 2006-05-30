@@ -1,6 +1,6 @@
-package examples.flex2.service;
+package examples.flex2.add.service;
 
-import examples.flex2.dto.AddDto;
+import examples.flex2.add.dto.AddDto;
 
 public interface AddService {
 

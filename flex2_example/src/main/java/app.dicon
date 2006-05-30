@@ -3,22 +3,23 @@
 	"http://www.seasar.org/dtd/components23.dtd">
 <components>
 	<include path="s2flex2.dicon"/>
-	<component name="addService" class="examples.flex2.service.impl.AddServiceImpl">
-    	<meta name="AmfRemotingService"/> 
-    </component>
-	<component name="checkDtoService" class="examples.flex2.service.impl.CheckDtoServiceImpl">
-    	<meta name="AmfRemotingService"/> 
-    </component>
-    <component name="exceptionService" class="examples.flex2.service.impl.ExceptionServiceImpl">
-    	<meta name="AmfRemotingService"/> 
-    </component>
-    <!--
+	
 	<component
       class="org.seasar.framework.container.autoregister.FileSystemComponentAutoRegister">
         <initMethod name="addClassPattern">
-            <arg>"examples.flex2.service.impl"</arg>
-            <arg>".*Impl"</arg>
+            <arg>"examples.flex2"</arg>
+            <arg>".*ServiceImpl"</arg>
         </initMethod>
     </component>
--->
+    
+    <component
+	  class="org.seasar.framework.container.autoregister.MetaAutoRegister">
+	    <meta name="autoRegister">
+	        <meta name="AmfRemotingService"/>
+	    </meta>
+	    <initMethod name="addClassPattern">
+	        <arg>"examples.flex2"</arg>
+	        <arg>".*ServiceImpl"</arg>
+	    </initMethod>
+	</component>
 </components>

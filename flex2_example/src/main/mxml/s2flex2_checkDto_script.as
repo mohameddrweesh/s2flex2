@@ -1,8 +1,9 @@
 // ActionScript file
-import mx.rpc.events.ResultEvent;
-import mx.rpc.events.FaultEvent;
+import examples.flex2.check.dto.CheckDto;
+
 import mx.controls.Alert;
-import examples.flex2.dto.CheckDto;
+import mx.rpc.events.FaultEvent;
+import mx.rpc.events.ResultEvent;
 import mx.utils.ObjectUtil;
 
 [Bindable]

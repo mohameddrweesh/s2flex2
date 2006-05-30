@@ -1,4 +1,4 @@
-package examples.flex2.dto;
+package examples.flex2.add.dto;
 
 public class AddDto {
 

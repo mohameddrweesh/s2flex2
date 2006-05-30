@@ -1,6 +1,6 @@
-package examples.flex2.service.impl;
+package examples.flex2.check.service.impl;
 
-import examples.flex2.service.ExceptionService;
+import examples.flex2.check.service.ExceptionService;
 
 public class ExceptionServiceImpl implements ExceptionService {
 

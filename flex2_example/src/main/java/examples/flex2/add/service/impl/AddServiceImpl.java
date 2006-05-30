@@ -1,7 +1,7 @@
-package examples.flex2.service.impl;
+package examples.flex2.add.service.impl;
 
-import examples.flex2.dto.AddDto;
-import examples.flex2.service.AddService;
+import examples.flex2.add.dto.AddDto;
+import examples.flex2.add.service.AddService;
 
 public class AddServiceImpl implements AddService {
 

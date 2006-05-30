@@ -1,8 +1,8 @@
-package examples.flex2.service;
+package examples.flex2.check.service;
 
 import java.util.List;
 
-import examples.flex2.dto.CheckDto;
+import examples.flex2.check.dto.CheckDto;
 
 public interface CheckDtoService {
 	public CheckDto getCheckDto();

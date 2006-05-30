@@ -3,7 +3,7 @@ import flash.net.NetConnection;
 import flash.net.ObjectEncoding;
 import flash.net.Responder;
 import mx.rpc.events.ResultEvent;
-import examples.flex2.dto.AddDto;
+import examples.flex2.add.dto.AddDto;
 
 public var gatewayURL:String = "http://localhost:8080/flex2_example/gateway";
 

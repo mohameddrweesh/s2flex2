@@ -1,10 +1,12 @@
 // ActionScript file
-import mx.utils.ObjectUtil;
+import examples.flex2.add.dto.AddDto;
+
 import flash.events.Event;
-import examples.flex2.dto.AddDto;
+
 import mx.controls.Text;
-import mx.rpc.events.ResultEvent;
 import mx.rpc.events.FaultEvent;
+import mx.rpc.events.ResultEvent;
+import mx.utils.ObjectUtil;
 
 public function calculate():void{
 	var addDto:AddDto = new AddDto();

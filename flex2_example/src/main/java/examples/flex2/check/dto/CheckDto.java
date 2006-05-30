@@ -1,4 +1,4 @@
-package examples.flex2.dto;
+package examples.flex2.check.dto;
 
 import java.util.Date;
 import java.util.List;

@@ -1,5 +1,5 @@
-package examples.flex2.dto {
-	[RemoteClass(alias="examples.flex2.dto.CheckDto")]
+package examples.flex2.check.dto {
+	[RemoteClass(alias="examples.flex2.check.dto.CheckDto")]
 	public dynamic class CheckDto {
 		[Bindable]
 		public var id:int;
