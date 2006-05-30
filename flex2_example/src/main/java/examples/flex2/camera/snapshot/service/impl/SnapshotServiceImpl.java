@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import org.seasar.flex2.rpc.amf.data.ByteArray;
+import org.seasar.flex2.io.ByteArray;
 import org.seasar.framework.util.FileOutputStreamUtil;
 
 import examples.flex2.camera.snapshot.Snapshot;
@@ -12,10 +12,11 @@ import examples.flex2.camera.snapshot.service.SnapshotService;
 import examples.flex2.camera.snapshot.service.SnapshotServiceConfig;
 import examples.flex2.camera.util.naming.FileNameResolver;
 
+
 public class SnapshotServiceImpl implements SnapshotService {
 
     private FileNameResolver fileNameResolver;
-    
+
     private SnapshotServiceConfig serviceConfig;
 
     public FileNameResolver getFileNameResolver() {
@@ -54,20 +55,18 @@ public class SnapshotServiceImpl implements SnapshotService {
         this.fileNameResolver = fileNameResolver;
     }
 
-
     public void setServiceConfig(SnapshotServiceConfig serviceConfig) {
         this.serviceConfig = serviceConfig;
     }
 
-
     private final String createFileName() {
-        return serviceConfig.getPrefix() + fileNameResolver.getFileName(null) + serviceConfig.getSuffix();
+        return serviceConfig.getPrefix() + fileNameResolver.getFileName(null)
+                + serviceConfig.getSuffix();
     }
-
 
     private final File createSnapshotFile() {
         File saveDir = new File(serviceConfig.getRootPath());
-        if( !saveDir.exists()){
+        if (!saveDir.exists()) {
             saveDir.mkdir();
         }
         return new File(serviceConfig.getRootPath() + createFileName());
