@@ -35,13 +35,13 @@ import java.util.Map;
 import javax.xml.parsers.DocumentBuilder;
 
 import org.seasar.extension.unit.S2TestCase;
+import org.seasar.flex2.io.ByteArray;
 import org.seasar.flex2.io.charset.CharsetType;
+import org.seasar.flex2.io.external.factory.ByteArrayFactory;
 import org.seasar.flex2.rpc.amf.data.AmfBody;
 import org.seasar.flex2.rpc.amf.data.AmfMessage;
-import org.seasar.flex2.rpc.amf.data.ByteArray;
 import org.seasar.flex2.rpc.amf.data.factory.AmfBodyFactory;
 import org.seasar.flex2.rpc.amf.data.factory.AmfMessageFactory;
-import org.seasar.flex2.rpc.amf.data.factory.ByteArrayFactory;
 import org.seasar.flex2.rpc.amf.data.impl.AmfBodyImpl;
 import org.seasar.flex2.rpc.amf.data.impl.AmfMessageImpl;
 import org.seasar.flex2.rpc.amf.io.reader.AmfReader;

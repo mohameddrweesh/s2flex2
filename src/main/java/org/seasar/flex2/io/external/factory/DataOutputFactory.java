@@ -13,11 +13,12 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.amf.data.factory;
+package org.seasar.flex2.io.external.factory;
 
-import org.seasar.flex2.rpc.amf.data.ByteArray;
+import java.io.DataOutputStream;
 
-public interface ByteArrayFactory {
+import org.seasar.flex2.io.DataOutput;
 
-    ByteArray createByteArray( byte[] bytes);
+public interface DataOutputFactory {
+    DataOutput createDataOutput(DataOutputStream outputStream);
 }

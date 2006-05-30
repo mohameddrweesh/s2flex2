@@ -13,15 +13,24 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.amf.data.factory.impl;
+package org.seasar.flex2.io.external.factory.impl;
 
-import org.seasar.flex2.io.ByteArray;
-import org.seasar.flex2.io.external.factory.ByteArrayFactory;
+import java.io.DataOutputStream;
+
+import org.seasar.flex2.io.DataOutput;
+import org.seasar.flex2.io.external.ExternalizeDataOutput;
+import org.seasar.flex2.io.external.factory.DataOutputFactory;
 import org.seasar.framework.container.S2Container;
 
-public class ByteArrayFactoryImpl implements ByteArrayFactory {
+public class ExternalizeDataOutputFactoryImpl implements DataOutputFactory {
 
     private S2Container container;
+    
+    public DataOutput createDataOutput(DataOutputStream outputStream) {
+        ExternalizeDataOutput output = (ExternalizeDataOutput)container.getComponent(ExternalizeDataOutput.class);
+        output.setOutputStream(outputStream);
+        return output;
+    }
 
     public S2Container getContainer() {
         return container;
@@ -29,12 +38,5 @@ public class ByteArrayFactoryImpl implements ByteArrayFactory {
 
     public void setContainer(S2Container container) {
         this.container = container;
-    }
-
-    public ByteArray createByteArray(byte[] bytes) {
-        ByteArray bytearray = (ByteArray) container.getComponent(
-                ByteArray.class);
-        bytearray.initBuffer(bytes);
-        return bytearray;
     }
 }
