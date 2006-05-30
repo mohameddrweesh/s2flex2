@@ -24,12 +24,12 @@ import org.seasar.flex2.rpc.amf.io.util.Amf3DataUtil;
 
 public class Amf3IntegerWriterImpl extends AbstractAmf3IntWriterImpl {
 
-    public final void write(final Object value,
+    public void write(final Object value,
             final DataOutputStream outputStream) throws IOException {
         writeInteger((Integer) value, outputStream);
     }
 
-    public final void writeData(final Object value,
+    public void writeData(final Object value,
             final DataOutputStream outputStream) throws IOException {
         outputStream.writeByte(Amf3DataType.INTEGER);
         writeInteger((Integer) value, outputStream);

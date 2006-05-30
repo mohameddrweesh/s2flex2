@@ -29,7 +29,7 @@ public class Amf3DataReaderImpl implements AmfDataReader {
         this.readerFactory = readerFactory;
     }
 
-    public final Object read(final DataInputStream inputStream)
+    public Object read(final DataInputStream inputStream)
             throws IOException {
         byte dataType = inputStream.readByte();
         AmfDataReader reader = readerFactory.createAmf3DataReader(dataType);

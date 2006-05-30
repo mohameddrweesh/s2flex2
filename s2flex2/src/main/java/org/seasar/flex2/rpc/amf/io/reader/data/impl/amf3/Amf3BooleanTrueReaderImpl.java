@@ -21,7 +21,7 @@ import java.io.IOException;
 import org.seasar.flex2.rpc.amf.io.reader.data.AmfDataReader;
 
 public class Amf3BooleanTrueReaderImpl implements AmfDataReader {
-    public final Object read(final DataInputStream inputStream)
+    public Object read(final DataInputStream inputStream)
             throws IOException {
         return Boolean.TRUE;
     }
