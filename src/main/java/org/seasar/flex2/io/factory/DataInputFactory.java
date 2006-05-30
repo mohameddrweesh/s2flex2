@@ -13,11 +13,12 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.io.external.factory;
+package org.seasar.flex2.io.factory;
 
-import org.seasar.flex2.io.ByteArray;
+import java.io.DataInputStream;
 
-public interface ByteArrayFactory {
+import org.seasar.flex2.io.DataInput;
 
-    ByteArray createByteArray( byte[] bytes);
+public interface DataInputFactory {
+    DataInput createDataIpput( DataInputStream inputStream );
 }

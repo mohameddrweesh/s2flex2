@@ -16,7 +16,7 @@
 package org.seasar.flex2.rpc.amf.data.factory.impl;
 
 import org.seasar.flex2.io.ByteArray;
-import org.seasar.flex2.io.external.factory.ByteArrayFactory;
+import org.seasar.flex2.io.factory.ByteArrayFactory;
 import org.seasar.framework.container.S2Container;
 
 public class ByteArrayFactoryImpl implements ByteArrayFactory {
