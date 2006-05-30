@@ -1,6 +1,6 @@
 <project name="flex2-example" default="dist" basedir=".">
 
-	<property name="ver" value="B6"/>
+	<property name="ver" value="B7"/>
 
 	<target name="dist">
 		<delete includeemptydirs="true" failonerror="false">
@@ -8,20 +8,18 @@
 		</delete>
 		<mkdir dir="target"/>
 		<zip zipfile="target/flex2-example-${ver}.zip">
-			<zipfileset prefix="flex2_example" dir=".">
-				<exclude name="target/**"/>
-				<exclude name="bin/WEB-INF/**"/>
-				<exclude name="**/target/**"/>
-				<exclude name="bin/work/**"/>
-				<exclude name="bin/build.xml"/>
-				<exclude name="bin/lib/**"/>
-				<exclude name="bin/.classpath"/>
-				<exclude name="bin/.cvsignore"/>
-				<exclude name="bin/.tomcatplugin"/>
-				<exclude name="bin/build.xml"/>				
-				<exclude name="**/.settings/**"/>
-				<exclude name="build.xml"/>
-				<exclude name="**/.DS_Store"/>
+			<zipfileset prefix="flex2_example" dir=".">				
+				<include name="WEB-INF"/>
+				<include name="WEB-INF/**"/>
+				<include name="work"/>
+				<include name="src"/>
+				<include name="src/**"/>
+				<include name="html-template"/>
+				<include name="html-template/**"/>
+				<include name="bin"/>
+				<include name="bin/**"/>
+				<include name=".*"/>
+				<exclude name=".settings"/>
 			</zipfileset>
 		</zip>
 	</target>
