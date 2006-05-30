@@ -23,7 +23,7 @@ public class TomcatSessionDecoratorImpl implements SessionDecorator{
     
     private static final String SESSIONID_SUFFIX = "?";   
     
-    public final String formatSessionId(String sessionId) {
+    public String formatSessionId(String sessionId) {
         return SESSIONID_PREFIX + sessionId + SESSIONID_SUFFIX;
     }
 }
