@@ -20,6 +20,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.zip.Deflater;
+import java.util.zip.Inflater;
 
 import org.seasar.flex2.io.charset.CharsetType;
 import org.seasar.flex2.rpc.amf.data.ByteArray;
@@ -31,6 +33,8 @@ import org.seasar.flex2.rpc.amf.io.writer.data.factory.Amf3DataWriterFactory;
 public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
 
     private static final byte[] EMPTY_BYTES = new byte[0];
+
+    private static final int FLATEING_BUFFER_SIZE = 1024*8;
 
     private DataInputStream dataInputStream;
 
@@ -45,6 +49,30 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
     public ByteArrayImpl() {
         super(EMPTY_BYTES);
         initializeSreams();
+    }
+
+    public void compress() {
+        Deflater deflater = new Deflater(Deflater.DEFAULT_COMPRESSION);
+        deflater.setStrategy(Deflater.DEFAULT_STRATEGY);
+        deflater.setInput(this.buf);
+        deflater.finish();
+        
+        byte[] deflatingBuffer = new byte[FLATEING_BUFFER_SIZE];
+        outputStream.reset();
+        try {
+            while( !deflater.needsInput() ){
+                deflater.deflate(deflatingBuffer);
+                outputStream.write(deflatingBuffer);
+            }
+        } catch (Exception e) {
+        } finally{
+            if( outputStream.size() > 0 ){
+                byte[] inflatedBytes = new byte[deflater.getTotalOut()];
+                System.arraycopy(outputStream.toByteArray(), 0, inflatedBytes, 0, inflatedBytes.length);
+                initBuffer(inflatedBytes);
+            }
+            deflater.end();
+        }
     }
 
     public void flush() {
@@ -132,6 +160,27 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
 
     public void setDataWriterFactory(Amf3DataWriterFactory dataWriterFactory) {
         this.dataWriterFactory = dataWriterFactory;
+    }
+
+    public void uncompress() {
+        Inflater inflater = new Inflater(false);
+        inflater.setInput(this.buf);
+        byte[] inflatingBuffer = new byte[FLATEING_BUFFER_SIZE];
+        outputStream.reset();
+        try {
+            while( !inflater.needsInput() ){
+                inflater.inflate(inflatingBuffer);
+                outputStream.write(inflatingBuffer);
+            }
+        } catch (Exception e) {
+        } finally{
+            if( outputStream.size() > 0 ){
+                byte[] inflatedBytes = new byte[inflater.getTotalOut()];
+                System.arraycopy(outputStream.toByteArray(), 0, inflatedBytes, 0, inflatedBytes.length);
+                initBuffer(inflatedBytes);
+            }
+            inflater.end();
+        }
     }
 
     public void writeBoolean(boolean value) throws IOException {
