@@ -34,7 +34,6 @@ import org.seasar.flex2.rpc.amf.io.reader.AmfReader;
 import org.seasar.flex2.rpc.amf.io.reader.factory.AmfReaderFactory;
 import org.seasar.flex2.rpc.amf.io.writer.AmfWriter;
 import org.seasar.flex2.rpc.amf.io.writer.factory.AmfWriterFactory;
-import org.seasar.framework.log.Logger;
 
 public class AmfProcessorImpl implements AmfProcessor {
 
@@ -77,7 +76,6 @@ public class AmfProcessorImpl implements AmfProcessor {
 
             writeMessage(response, responseMessage);
         } catch (Throwable throwable) {
-            Logger.getLogger(AmfProcessorImpl.class).log(throwable);
             if (throwable instanceof RuntimeException) {
                 throw (RuntimeException) throwable;
             } else if (throwable instanceof Error) {
