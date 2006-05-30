@@ -29,18 +29,18 @@ public abstract class AbstractAmf3ObjectWriterImpl extends
 
     public abstract int getObjectType();
 
-    public final void setReferencesFactory(
+    public void setReferencesFactory(
             Amf3ReferencesFactory referencesFactory) {
         this.referencesFactory = referencesFactory;
     }
 
-    public final void write(final Object value,
+    public void write(final Object value,
             final DataOutputStream outputStream) throws IOException {
         writeAMF3DataMaker(outputStream);
         writeData(value, outputStream);
     }
 
-    public final void writeData(final Object value,
+    public void writeData(final Object value,
             final DataOutputStream outputStream) throws IOException {
         outputStream.writeByte(getObjectType());
         writeObjectData(value, outputStream);
