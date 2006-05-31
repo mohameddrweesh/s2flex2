@@ -24,9 +24,9 @@ public class AnnotationHandlerFactory {
 
     private static AnnotationHandler annotationHandler;
     
-    private static final String BACKPORT175_ANNOTATION_HANDLER_CLASS_NAME = "org.seasar.flex2.rpc.amf.gateway.service.annotation.handler.Backport175ActionAnnotationHandler";
+    private static final String BACKPORT175_ANNOTATION_HANDLER_CLASS_NAME = "org.seasar.flex2.rpc.remoting.service.annotation.handler.Backport175ActionAnnotationHandler";
 
-    private static final String TIGER_ANNOTATION_HANDLER_CLASS_NAME = "org.seasar.flex2.rpc.amf.gateway.service.annotation.handler.TigerAnnotationHandler";
+    private static final String TIGER_ANNOTATION_HANDLER_CLASS_NAME = "org.seasar.flex2.rpc.remoting.service.annotation.handler.TigerAnnotationHandler";
     
     static {
         Class clazz = BasicAnnotationHandlerImpl.class;

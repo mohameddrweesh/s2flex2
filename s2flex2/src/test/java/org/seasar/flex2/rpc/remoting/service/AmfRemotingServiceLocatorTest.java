@@ -18,8 +18,8 @@ package org.seasar.flex2.rpc.remoting.service;
 import org.seasar.extension.unit.S2TestCase;
 import org.seasar.flex2.rpc.gateway.service.ServiceLocator;
 import org.seasar.flex2.rpc.gateway.service.impl.ServiceLocatorImpl;
-import org.seasar.flex2.rpc.remoting.service.AmfRemotingServiceLocator;
-import org.seasar.flex2.rpc.remoting.service.impl.AmfRemotingServiceLocatorImpl;
+import org.seasar.flex2.rpc.remoting.service.RemotingServiceLocator;
+import org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceLocatorImpl;
 import org.seasar.framework.container.S2Container;
 
 public class AmfRemotingServiceLocatorTest extends S2TestCase {
@@ -29,8 +29,8 @@ public class AmfRemotingServiceLocatorTest extends S2TestCase {
     public void testCreate() throws Exception {
         S2Container container = getContainer();
         Object locator = container
-                .getComponent(AmfRemotingServiceLocator.class);
-        assertTrue("1", locator instanceof AmfRemotingServiceLocatorImpl);
+                .getComponent(RemotingServiceLocator.class);
+        assertTrue("1", locator instanceof RemotingServiceLocatorImpl);
 
         locator = container.getComponent(ServiceLocator.class);
         assertTrue("2", locator instanceof ServiceLocatorImpl);

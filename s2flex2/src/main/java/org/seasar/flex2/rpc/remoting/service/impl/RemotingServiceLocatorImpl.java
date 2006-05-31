@@ -17,27 +17,27 @@ package org.seasar.flex2.rpc.remoting.service.impl;
 
 import org.seasar.flex2.rpc.gateway.service.exception.InvalidServiceRuntimeException;
 import org.seasar.flex2.rpc.gateway.service.impl.ServiceLocatorImpl;
-import org.seasar.flex2.rpc.remoting.service.AmfRemotingServiceConstants;
-import org.seasar.flex2.rpc.remoting.service.AmfRemotingServiceLocator;
-import org.seasar.flex2.rpc.remoting.service.AmfRemotingServiceRepository;
+import org.seasar.flex2.rpc.remoting.service.RemotingServiceConstants;
+import org.seasar.flex2.rpc.remoting.service.RemotingServiceLocator;
+import org.seasar.flex2.rpc.remoting.service.RemotingServiceRepository;
 import org.seasar.flex2.rpc.remoting.service.annotation.factory.AnnotationHandlerFactory;
 import org.seasar.flex2.rpc.remoting.service.annotation.handler.AnnotationHandler;
 import org.seasar.framework.container.ComponentDef;
 import org.seasar.framework.container.S2Container;
 
-public class AmfRemotingServiceLocatorImpl extends ServiceLocatorImpl implements
-        AmfRemotingServiceLocator {
+public class RemotingServiceLocatorImpl extends ServiceLocatorImpl implements
+        RemotingServiceLocator {
 
     private final AnnotationHandler annotationHandler = AnnotationHandlerFactory
             .getAnnotationHandler();
 
-    private AmfRemotingServiceRepository repository;
+    private RemotingServiceRepository repository;
 
     public void cleanServiceOf(Class serviceClass) {
         repository.removeService(serviceClass);
     }
 
-    public AmfRemotingServiceRepository getRepository() {
+    public RemotingServiceRepository getRepository() {
         return repository;
     }
 
@@ -58,7 +58,7 @@ public class AmfRemotingServiceLocatorImpl extends ServiceLocatorImpl implements
         return service;
     }
 
-    public void setRepository(AmfRemotingServiceRepository repository) {
+    public void setRepository(RemotingServiceRepository repository) {
         this.repository = repository;
     }
 
@@ -83,6 +83,6 @@ public class AmfRemotingServiceLocatorImpl extends ServiceLocatorImpl implements
             final ComponentDef componentDef) {
 
         return componentDef
-                .getMetaDef(AmfRemotingServiceConstants.AMF_REMOTING_SERVICE) != null;
+                .getMetaDef(RemotingServiceConstants.REMOTING_SERVICE) != null;
     }
 }

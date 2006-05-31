@@ -18,22 +18,36 @@ package org.seasar.flex2.rpc.remoting;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.seasar.flex2.rpc.remoting.processor.AmfProcessor;
+import org.seasar.framework.container.S2Container;
+import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
 
-public class Amf3Gateway extends AmfGateway {
+public class RemotingGateway extends HttpServlet {
 
-    public Amf3Gateway() {
+    private final static String CONTENT_TYPE = "application/x-amf";
+
+    protected AmfProcessor processor;
+
+    public RemotingGateway() {
+    }
+
+    public void init() throws ServletException {
+        S2Container container = SingletonS2ContainerFactory.getContainer();
+        processor = (AmfProcessor) container.getComponent(AmfProcessor.class);
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
-        response.getWriter().write("Amf3Gateway is running on http ...");
+        response.getWriter().write("RemotingGateway is running on http ...");
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
-        super.doPost(request, response);
+        response.setContentType(CONTENT_TYPE);
+        processor.process(request, response);
     }
 }

@@ -7,7 +7,7 @@
     <component
 	  class="org.seasar.framework.container.autoregister.MetaAutoRegister">
 	    <meta name="autoRegister">
-	        <meta name="AmfRemotingService"/>
+	        <meta name="RemotingService"/>
 	    </meta>
 	    <initMethod name="addClassPattern">
 	        <arg>"examples.flex2.service.impl"</arg>

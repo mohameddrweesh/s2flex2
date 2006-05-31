@@ -15,6 +15,7 @@
  */
 package org.seasar.flex2.rpc.remoting.service;
 
-public interface AmfRemotingServiceConstants {
-    String AMF_REMOTING_SERVICE = "AmfRemotingService";
+import org.seasar.flex2.rpc.gateway.service.ServiceLocator;
+
+public interface RemotingServiceLocator extends ServiceLocator {
 }

@@ -7,7 +7,7 @@
 
 		<initMethod name="addCreator">
 			<arg>
-				<component class="org.seasar.flex2.rpc.remoting.service.hotdeploy.creator.AmfRemotingServiceCreator" />
+				<component class="org.seasar.flex2.rpc.remoting.service.hotdeploy.creator.RemotingServiceCreator" />
 			</arg>
 		</initMethod>
 	</component>

@@ -21,9 +21,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.seasar.flex2.rpc.remoting.AmfGateway;
+import org.seasar.flex2.rpc.remoting.RemotingGateway;
 
-public class MessagingGateway extends AmfGateway {
+public class MessagingGateway extends RemotingGateway {
 
     public MessagingGateway() {
     }

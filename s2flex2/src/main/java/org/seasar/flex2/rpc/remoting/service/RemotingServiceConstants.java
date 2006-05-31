@@ -15,8 +15,6 @@
  */
 package org.seasar.flex2.rpc.remoting.service;
 
-import org.seasar.flex2.rpc.gateway.service.ServiceRepository;
-
-public interface AmfRemotingServiceRepository extends ServiceRepository {
-    void removeService(Class serviceClass);
+public interface RemotingServiceConstants {
+    String REMOTING_SERVICE = "RemotingService";
 }
