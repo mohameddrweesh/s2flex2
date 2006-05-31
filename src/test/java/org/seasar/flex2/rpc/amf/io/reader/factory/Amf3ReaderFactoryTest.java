@@ -16,11 +16,12 @@
 package org.seasar.flex2.rpc.amf.io.reader.factory;
 
 import org.seasar.extension.unit.S2TestCase;
-import org.seasar.flex2.rpc.amf.io.reader.data.factory.AmfDataReaderFactory;
-import org.seasar.flex2.rpc.amf.io.reader.data.factory.impl.AmfDataReaderFactoryImpl;
-import org.seasar.flex2.rpc.amf.io.reader.factory.impl.Amf3ReaderFactoryImpl;
-import org.seasar.flex2.rpc.amf.io.reader.impl.Amf3ReaderImpl;
-import org.seasar.flex2.rpc.amf.io.reader.impl.AmfReaderImpl;
+import org.seasar.flex2.message.format.amf.io.reader.factory.AmfDataReaderFactory;
+import org.seasar.flex2.message.format.amf.io.reader.factory.AmfReaderFactory;
+import org.seasar.flex2.message.format.amf.io.reader.factory.impl.Amf3ReaderFactoryImpl;
+import org.seasar.flex2.message.format.amf.io.reader.factory.impl.AmfDataReaderFactoryImpl;
+import org.seasar.flex2.message.format.amf.io.reader.impl.amf.AmfReaderImpl;
+import org.seasar.flex2.message.format.amf.io.reader.impl.amf3.Amf3ReaderImpl;
 import org.seasar.framework.container.S2Container;
 
 public class Amf3ReaderFactoryTest extends S2TestCase {

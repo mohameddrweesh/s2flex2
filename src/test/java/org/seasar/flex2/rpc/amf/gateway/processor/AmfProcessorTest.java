@@ -16,11 +16,12 @@
 package org.seasar.flex2.rpc.amf.gateway.processor;
 
 import org.seasar.extension.unit.S2TestCase;
-import org.seasar.flex2.rpc.amf.gateway.processor.impl.AmfBodyProcessorImpl;
-import org.seasar.flex2.rpc.amf.gateway.processor.impl.AmfHeaderProcessorImpl;
-import org.seasar.flex2.rpc.amf.gateway.processor.impl.AmfProcessorImpl;
-import org.seasar.flex2.rpc.amf.io.reader.factory.impl.AmfReaderFactoryImpl;
-import org.seasar.flex2.rpc.amf.io.writer.factory.impl.AmfWriterFactoryImpl;
+import org.seasar.flex2.message.format.amf.io.reader.factory.impl.AmfReaderFactoryImpl;
+import org.seasar.flex2.message.format.amf.io.writer.factory.impl.AmfWriterFactoryImpl;
+import org.seasar.flex2.rpc.remoting.processor.AmfProcessor;
+import org.seasar.flex2.rpc.remoting.processor.impl.AmfBodyProcessorImpl;
+import org.seasar.flex2.rpc.remoting.processor.impl.AmfHeaderProcessorImpl;
+import org.seasar.flex2.rpc.remoting.processor.impl.AmfProcessorImpl;
 import org.seasar.framework.container.S2Container;
 
 public class AmfProcessorTest extends S2TestCase {

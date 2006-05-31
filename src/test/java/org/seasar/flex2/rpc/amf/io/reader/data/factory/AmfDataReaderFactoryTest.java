@@ -16,21 +16,22 @@
 package org.seasar.flex2.rpc.amf.io.reader.data.factory;
 
 import org.seasar.extension.unit.S2TestCase;
-import org.seasar.flex2.rpc.amf.data.AmfDataType;
-import org.seasar.flex2.rpc.amf.io.reader.data.AmfDataReader;
-import org.seasar.flex2.rpc.amf.io.reader.data.factory.impl.AmfDataReaderFactoryImpl;
-import org.seasar.flex2.rpc.amf.io.reader.data.impl.amf.AmfASObjectReaderImpl;
-import org.seasar.flex2.rpc.amf.io.reader.data.impl.amf.AmfArrayReaderImpl;
-import org.seasar.flex2.rpc.amf.io.reader.data.impl.amf.AmfArraySharedObjectReaderImpl;
-import org.seasar.flex2.rpc.amf.io.reader.data.impl.amf.AmfBooleanReaderImpl;
-import org.seasar.flex2.rpc.amf.io.reader.data.impl.amf.AmfCustomClassReaderImpl;
-import org.seasar.flex2.rpc.amf.io.reader.data.impl.amf.AmfDateReaderImpl;
-import org.seasar.flex2.rpc.amf.io.reader.data.impl.amf.AmfFlushedSharedObjectReaderImpl;
-import org.seasar.flex2.rpc.amf.io.reader.data.impl.amf.AmfNullReaderImpl;
-import org.seasar.flex2.rpc.amf.io.reader.data.impl.amf.AmfNumberReaderImpl;
-import org.seasar.flex2.rpc.amf.io.reader.data.impl.amf.AmfObjectReaderImpl;
-import org.seasar.flex2.rpc.amf.io.reader.data.impl.amf.AmfStringReaderImpl;
-import org.seasar.flex2.rpc.amf.io.reader.data.impl.amf.AmfXmlReaderImpl;
+import org.seasar.flex2.message.format.amf.io.reader.AmfDataReader;
+import org.seasar.flex2.message.format.amf.io.reader.factory.AmfDataReaderFactory;
+import org.seasar.flex2.message.format.amf.io.reader.factory.impl.AmfDataReaderFactoryImpl;
+import org.seasar.flex2.message.format.amf.io.reader.impl.amf.AmfASObjectReaderImpl;
+import org.seasar.flex2.message.format.amf.io.reader.impl.amf.AmfArrayReaderImpl;
+import org.seasar.flex2.message.format.amf.io.reader.impl.amf.AmfArraySharedObjectReaderImpl;
+import org.seasar.flex2.message.format.amf.io.reader.impl.amf.AmfBooleanReaderImpl;
+import org.seasar.flex2.message.format.amf.io.reader.impl.amf.AmfCustomClassReaderImpl;
+import org.seasar.flex2.message.format.amf.io.reader.impl.amf.AmfDateReaderImpl;
+import org.seasar.flex2.message.format.amf.io.reader.impl.amf.AmfFlushedSharedObjectReaderImpl;
+import org.seasar.flex2.message.format.amf.io.reader.impl.amf.AmfNullReaderImpl;
+import org.seasar.flex2.message.format.amf.io.reader.impl.amf.AmfNumberReaderImpl;
+import org.seasar.flex2.message.format.amf.io.reader.impl.amf.AmfObjectReaderImpl;
+import org.seasar.flex2.message.format.amf.io.reader.impl.amf.AmfStringReaderImpl;
+import org.seasar.flex2.message.format.amf.io.reader.impl.amf.AmfXmlReaderImpl;
+import org.seasar.flex2.message.format.amf.type.AmfDataType;
 import org.seasar.framework.container.S2Container;
 
 public class AmfDataReaderFactoryTest extends S2TestCase {

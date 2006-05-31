@@ -18,10 +18,10 @@ package org.seasar.flex2.io.factory;
 import java.io.DataOutputStream;
 
 import org.seasar.extension.unit.S2TestCase;
-import org.seasar.flex2.io.DataOutput;
-import org.seasar.flex2.io.ExternalizeDataOutput;
-import org.seasar.flex2.io.factory.DataOutputFactory;
-import org.seasar.flex2.io.factory.impl.ExternalizeDataOutputFactoryImpl;
+import org.seasar.flex2.message.io.DataOutput;
+import org.seasar.flex2.message.io.ExternalizeDataOutput;
+import org.seasar.flex2.message.io.factory.DataOutputFactory;
+import org.seasar.flex2.message.io.factory.impl.ExternalizeDataOutputFactoryImpl;
 import org.seasar.framework.container.S2Container;
 
 public class ExternalDataOutputFactoryTest extends S2TestCase {

@@ -15,52 +15,12 @@
  */
 package flashgateway.io;
 
-import java.util.HashMap;
+import org.seasar.flex2.message.format.amf.type.AmfObject;
 
-public class ASObject extends HashMap {
+public class ASObject extends AmfObject {
 
-	private String type_;
-
-	public ASObject() {
-	}
-
-	public ASObject(String type) {
-		type_ = type;
-	}
-
-	public String getType() {
-		return type_;
-	}
-
-	public void setType(String type) {
-		type_ = type;
-	}
-
-	public boolean containsKey(Object key) {
-		return super.containsKey(toLowerCase(key));
-	}
-
-	public Object get(Object key) {
-		return super.get(toLowerCase(key));
-	}
-
-	public Object put(Object key, Object value) {
-		return super.put(toLowerCase(key), value);
-	}
-
-	public Object remove(Object key) {
-		return super.remove(toLowerCase(key));
-	}
-
-	private Object toLowerCase(Object key) {
-		if (key != null && key instanceof String) {
-			key = ((String) key).toLowerCase();
-		}
-		return key;
-	}
-
-	public String toString() {
-		return "ASObject[type=" + getType() + "," + super.toString() + "]";
-	}
+    public String toString() {
+        return "ASObject[type=" + getType() + "," + super.toString() + "]";
+    }
 
 }
