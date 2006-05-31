@@ -13,16 +13,16 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.amf.gateway.service.annotation.handler;
+package org.seasar.flex2.rpc.remoting.service.annotation.handler;
 
 import org.codehaus.backport175.reader.Annotations;
-import org.seasar.flex2.rpc.amf.gateway.service.annotation.AmfRemotingService;
+import org.seasar.flex2.rpc.remoting.service.annotation.RemotingService;
 import org.seasar.framework.container.ComponentDef;
 
 public class Backport175ActionAnnotationHandler implements AnnotationHandler {
 
 	public boolean hasAmfRemotingService(ComponentDef componentDef) {
 		Class clazz = componentDef.getComponentClass();
-		return Annotations.getAnnotation(AmfRemotingService.class,clazz)!=null;	
+		return Annotations.getAnnotation(RemotingService.class,clazz)!=null;	
 	}
 }
