@@ -66,16 +66,16 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
     private final Object readASObjectData(final DataInputStream inputStream)
             throws IOException {
 
-        AmfObject asobject = new AmfObject();
-        addObjectReference(asobject);
+        AmfObject object = new AmfObject();
+        addObjectReference(object);
         while (true) {
             String propertyName = (String) stringReader.read(inputStream);
             if (propertyName.length() <= 0) {
                 break;
             }
-            asobject.put(propertyName, readPropertyValue(inputStream));
+            object.put(propertyName, readPropertyValue(inputStream));
         }
-        return asobject;
+        return object;
     }
 
     private final Class readClassDef(final int objectDef,
