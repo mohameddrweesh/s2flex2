@@ -31,7 +31,7 @@ import org.seasar.flex2.message.format.amf.io.reader.impl.amf.AmfNumberReaderImp
 import org.seasar.flex2.message.format.amf.io.reader.impl.amf.AmfObjectReaderImpl;
 import org.seasar.flex2.message.format.amf.io.reader.impl.amf.AmfStringReaderImpl;
 import org.seasar.flex2.message.format.amf.io.reader.impl.amf.AmfXmlReaderImpl;
-import org.seasar.flex2.message.format.amf.type.AmfDataType;
+import org.seasar.flex2.message.format.amf.type.AmfTypeDef;
 import org.seasar.framework.container.S2Container;
 
 public class AmfDataReaderFactoryTest extends S2TestCase {
@@ -52,40 +52,40 @@ public class AmfDataReaderFactoryTest extends S2TestCase {
 
         AmfDataReader reader;
 
-        reader = factory.createDataReader(AmfDataType.NUMBER);
+        reader = factory.createDataReader(AmfTypeDef.NUMBER);
         assertTrue("1", reader instanceof AmfNumberReaderImpl);
 
-        reader = factory.createDataReader(AmfDataType.BOOLEAN);
+        reader = factory.createDataReader(AmfTypeDef.BOOLEAN);
         assertTrue("2", reader instanceof AmfBooleanReaderImpl);
 
-        reader = factory.createDataReader(AmfDataType.STRING);
+        reader = factory.createDataReader(AmfTypeDef.STRING);
         assertTrue("3", reader instanceof AmfStringReaderImpl);
 
-        reader = factory.createDataReader(AmfDataType.OBJECT);
+        reader = factory.createDataReader(AmfTypeDef.OBJECT);
         assertTrue("4", reader instanceof AmfObjectReaderImpl);
 
-        reader = factory.createDataReader(AmfDataType.NULL);
+        reader = factory.createDataReader(AmfTypeDef.NULL);
         assertTrue("5", reader instanceof AmfNullReaderImpl);
 
-        reader = factory.createDataReader(AmfDataType.FLUSHED_SHARED_OBJECT);
+        reader = factory.createDataReader(AmfTypeDef.FLUSHED_SHARED_OBJECT);
         assertTrue("6", reader instanceof AmfFlushedSharedObjectReaderImpl);
 
-        reader = factory.createDataReader(AmfDataType.ARRAY_SHARED_OBJECT);
+        reader = factory.createDataReader(AmfTypeDef.ARRAY_SHARED_OBJECT);
         assertTrue("7", reader instanceof AmfArraySharedObjectReaderImpl);
 
-        reader = factory.createDataReader(AmfDataType.ARRAY);
+        reader = factory.createDataReader(AmfTypeDef.ARRAY);
         assertTrue("8", reader instanceof AmfArrayReaderImpl);
 
-        reader = factory.createDataReader(AmfDataType.DATE);
+        reader = factory.createDataReader(AmfTypeDef.DATE);
         assertTrue("9", reader instanceof AmfDateReaderImpl);
 
-        reader = factory.createDataReader(AmfDataType.AS_OBJECT);
+        reader = factory.createDataReader(AmfTypeDef.AS_OBJECT);
         assertTrue("10", reader instanceof AmfASObjectReaderImpl);
 
-        reader = factory.createDataReader(AmfDataType.XML);
+        reader = factory.createDataReader(AmfTypeDef.XML);
         assertTrue("11", reader instanceof AmfXmlReaderImpl);
 
-        reader = factory.createDataReader(AmfDataType.CUSTOM_CLASS);
+        reader = factory.createDataReader(AmfTypeDef.CUSTOM_CLASS);
         assertTrue("12", reader instanceof AmfCustomClassReaderImpl);
     }
 

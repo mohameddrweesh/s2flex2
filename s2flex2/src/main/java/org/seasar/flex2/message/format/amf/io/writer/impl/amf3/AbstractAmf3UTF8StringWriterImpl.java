@@ -17,9 +17,10 @@ package org.seasar.flex2.message.format.amf.io.writer.impl.amf3;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 import org.seasar.flex2.message.format.amf.Amf3Constants;
-import org.seasar.flex2.message.format.amf.io.Amf3DataUtil;
+import org.seasar.flex2.message.io.charset.CharsetType;
 
 public abstract class AbstractAmf3UTF8StringWriterImpl extends
         AbstractAmf3IntWriterImpl {
@@ -27,12 +28,20 @@ public abstract class AbstractAmf3UTF8StringWriterImpl extends
     protected final void writeUTF8String(final String value,
             final DataOutputStream outputStream) throws IOException {
 
-        byte[] bytearr = Amf3DataUtil.toUTF8StringBytes(value);
+        byte[] bytearr = getUTF8StringBytes(value);
         int stringDef = (bytearr.length << 1) | Amf3Constants.OBJECT_INLINE;
         writeIntData(stringDef, outputStream);
 
         if (bytearr.length > 0) {
             outputStream.write(bytearr, 0, bytearr.length);
+        }
+    }
+    
+    private final byte[] getUTF8StringBytes( final String str) {
+        try {
+            return str.getBytes(CharsetType.UTF8);
+        } catch (UnsupportedEncodingException e) {
+            return new byte[0];
         }
     }
 }

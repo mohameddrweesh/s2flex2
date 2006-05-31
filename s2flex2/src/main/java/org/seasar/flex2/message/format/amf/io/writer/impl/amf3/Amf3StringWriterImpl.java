@@ -18,12 +18,12 @@ package org.seasar.flex2.message.format.amf.io.writer.impl.amf3;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.seasar.flex2.message.format.amf.type.Amf3DataType;
+import org.seasar.flex2.message.format.amf.type.Amf3TypeDef;
 
 public class Amf3StringWriterImpl extends AbstractAmf3ObjectWriterImpl {
 
     public int getObjectType() {
-        return Amf3DataType.STRING;
+        return Amf3TypeDef.STRING;
     }
 
     protected void processWriteObjectData(Object object,

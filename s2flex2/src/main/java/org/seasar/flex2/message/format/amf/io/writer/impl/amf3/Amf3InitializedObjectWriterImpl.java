@@ -21,13 +21,13 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.seasar.flex2.message.format.amf.Amf3Constants;
-import org.seasar.flex2.message.format.amf.type.Amf3DataType;
+import org.seasar.flex2.message.format.amf.type.Amf3TypeDef;
 
 public class Amf3InitializedObjectWriterImpl extends
         AbstractAmf3ClassObjectWriterImpl {
 
     public int getObjectType() {
-        return Amf3DataType.OBJECT;
+        return Amf3TypeDef.OBJECT;
     }
 
     protected void processWriteObjectData(Object object,

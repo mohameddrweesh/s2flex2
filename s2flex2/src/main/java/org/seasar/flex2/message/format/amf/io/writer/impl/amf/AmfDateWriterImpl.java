@@ -22,7 +22,7 @@ import java.util.TimeZone;
 
 import org.seasar.flex2.message.format.amf.AmfConstants;
 import org.seasar.flex2.message.format.amf.io.writer.AmfDataWriter;
-import org.seasar.flex2.message.format.amf.type.AmfDataType;
+import org.seasar.flex2.message.format.amf.type.AmfTypeDef;
 
 public class AmfDateWriterImpl implements AmfDataWriter {
 
@@ -33,7 +33,7 @@ public class AmfDateWriterImpl implements AmfDataWriter {
 
     private void write(Date value, DataOutputStream outputStream)
             throws IOException {
-        outputStream.writeByte(AmfDataType.DATE);
+        outputStream.writeByte(AmfTypeDef.DATE);
         outputStream.writeDouble(((Date) value).getTime());
         int offset = TimeZone.getDefault().getRawOffset();
         outputStream.writeShort(offset / AmfConstants.MILLS_PER_HOUR);

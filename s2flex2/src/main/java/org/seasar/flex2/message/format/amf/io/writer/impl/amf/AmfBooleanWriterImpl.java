@@ -19,7 +19,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.seasar.flex2.message.format.amf.io.writer.AmfDataWriter;
-import org.seasar.flex2.message.format.amf.type.AmfDataType;
+import org.seasar.flex2.message.format.amf.type.AmfTypeDef;
 
 public class AmfBooleanWriterImpl implements AmfDataWriter {
 
@@ -30,7 +30,7 @@ public class AmfBooleanWriterImpl implements AmfDataWriter {
 
     private final void write(Boolean value, DataOutputStream outputStream)
             throws IOException {
-        outputStream.writeByte(AmfDataType.BOOLEAN);
+        outputStream.writeByte(AmfTypeDef.BOOLEAN);
         outputStream.writeBoolean(value.booleanValue());
     }
 }

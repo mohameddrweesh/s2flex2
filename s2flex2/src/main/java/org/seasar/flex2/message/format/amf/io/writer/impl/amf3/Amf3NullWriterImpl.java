@@ -19,13 +19,13 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.seasar.flex2.message.format.amf.io.writer.Amf3DataWriter;
-import org.seasar.flex2.message.format.amf.type.Amf3DataType;
+import org.seasar.flex2.message.format.amf.type.Amf3TypeDef;
 
 public class Amf3NullWriterImpl implements Amf3DataWriter {
 
     public void write( final Object value, final DataOutputStream outputStream)
             throws IOException {
-        outputStream.writeByte(Amf3DataType.NULL);
+        outputStream.writeByte(Amf3TypeDef.NULL);
     }
 
     public void writeData( final Object value, final DataOutputStream outputStream)

@@ -17,9 +17,10 @@ package org.seasar.flex2.message.format.amf.io.reader.impl.amf3;
 
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 import org.seasar.flex2.message.format.amf.Amf3Constants;
-import org.seasar.flex2.message.format.amf.io.Amf3DataUtil;
+import org.seasar.flex2.message.io.charset.CharsetType;
 
 public abstract class AbstractAmf3UTF8StringReaderImpl extends
         AbstractAmf3ObjectReaderImpl {
@@ -31,11 +32,19 @@ public abstract class AbstractAmf3UTF8StringReaderImpl extends
         if (stringLength > 0) {
             byte[] charArray = new byte[stringLength * 2];
             inputStream.readFully(charArray, 0, stringLength);
-            str = Amf3DataUtil.toUTF8String(charArray, stringLength);
+            str = getUTF8String(charArray, stringLength);
         } else {
             str = Amf3Constants.EMPTY_STRING;
         }
 
         return str;
+    }
+    
+    private final String getUTF8String( final byte[] bytearr, final int utflen) {
+        try {
+            return new String(bytearr, 0, utflen, CharsetType.UTF8);
+        } catch (UnsupportedEncodingException e) {
+            return null;
+        }
     }
 }

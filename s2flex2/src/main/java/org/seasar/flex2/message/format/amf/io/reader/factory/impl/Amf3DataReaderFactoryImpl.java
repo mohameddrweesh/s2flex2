@@ -19,8 +19,8 @@ import java.util.HashMap;
 
 import org.seasar.flex2.message.format.amf.io.reader.AmfDataReader;
 import org.seasar.flex2.message.format.amf.io.reader.factory.Amf3DataReaderFactory;
-import org.seasar.flex2.message.format.amf.type.Amf3DataType;
-import org.seasar.flex2.message.format.amf.type.AmfDataType;
+import org.seasar.flex2.message.format.amf.type.Amf3TypeDef;
+import org.seasar.flex2.message.format.amf.type.AmfTypeDef;
 
 public class Amf3DataReaderFactoryImpl extends AmfDataReaderFactoryImpl implements Amf3DataReaderFactory {
 
@@ -32,17 +32,17 @@ public class Amf3DataReaderFactoryImpl extends AmfDataReaderFactoryImpl implemen
     public AmfDataReader createDataReader(byte dataType){
         String key;
         
-        if( dataType != Amf3DataType.AMF3_DATA_MARKER){
-            key = AmfDataType.toString(dataType);
+        if( dataType != Amf3TypeDef.AMF3_DATA_MARKER){
+            key = AmfTypeDef.toString(dataType);
         } else {
-            key = Amf3DataType.toString(dataType);
+            key = Amf3TypeDef.toString(dataType);
         }
 
         return (AmfDataReader) readerMap.get(key);
     }
     
     public AmfDataReader createAmf3DataReader(byte dataType) {
-        String key = Amf3DataType.toString(dataType);
+        String key = Amf3TypeDef.toString(dataType);
         AmfDataReader reader = (AmfDataReader) amf3DataReaderMap.get(key);
         return reader;
     }

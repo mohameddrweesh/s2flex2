@@ -15,10 +15,17 @@
  */
 package org.seasar.flex2.message.format.amf.io.reader.impl.amf3;
 
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
-import org.seasar.flex2.message.format.amf.io.Amf3DataUtil;
+import javax.xml.parsers.DocumentBuilder;
+
+import org.seasar.flex2.message.io.charset.CharsetType;
+import org.seasar.framework.util.DocumentBuilderFactoryUtil;
+import org.seasar.framework.util.DocumentBuilderUtil;
 import org.w3c.dom.Document;
 
 public class Amf3XmlReaderImpl extends AbstractAmf3UTF8StringReaderImpl {
@@ -40,9 +47,23 @@ public class Amf3XmlReaderImpl extends AbstractAmf3UTF8StringReaderImpl {
     private final Document readXmlData(int xmlDef,
             final DataInputStream inputStream) throws IOException {
         String xmlStringData = readStringData(xmlDef, inputStream);
-        Document xml = Amf3DataUtil.toXmlDocument(xmlStringData);
+        Document xml = getXmlDocument(xmlStringData);
         addObjectReference(xml);
 
         return xml;
+    }
+    
+    private final Document getXmlDocument(String xml) {
+        ByteArrayInputStream bain;
+        try {
+            bain = new ByteArrayInputStream(xml.getBytes(CharsetType.UTF8));
+        } catch (UnsupportedEncodingException e) {
+            return null;
+        }
+
+        BufferedInputStream bis = new BufferedInputStream(bain);
+        DocumentBuilder builder = DocumentBuilderFactoryUtil
+                .newDocumentBuilder();
+        return DocumentBuilderUtil.parse(builder, bis);
     }
 }

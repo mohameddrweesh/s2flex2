@@ -19,7 +19,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.seasar.flex2.message.format.amf.io.writer.Amf3DataWriter;
-import org.seasar.flex2.message.format.amf.type.Amf3DataType;
+import org.seasar.flex2.message.format.amf.type.Amf3TypeDef;
 
 public class Amf3NumberWriterImpl implements Amf3DataWriter {
 
@@ -30,7 +30,7 @@ public class Amf3NumberWriterImpl implements Amf3DataWriter {
 
     public void writeData(Object value, DataOutputStream outputStream)
             throws IOException {
-        outputStream.writeByte(Amf3DataType.NUMBER);
+        outputStream.writeByte(Amf3TypeDef.NUMBER);
         writeNumber((Number) value, outputStream);
     }
 

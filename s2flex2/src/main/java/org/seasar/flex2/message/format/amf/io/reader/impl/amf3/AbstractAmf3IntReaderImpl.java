@@ -19,7 +19,6 @@ import java.io.DataInputStream;
 import java.io.IOException;
 
 import org.seasar.flex2.message.format.amf.Amf3Constants;
-import org.seasar.flex2.message.format.amf.io.Amf3DataUtil;
 import org.seasar.flex2.message.format.amf.io.reader.AmfDataReader;
 
 public abstract class AbstractAmf3IntReaderImpl implements AmfDataReader {
@@ -32,7 +31,7 @@ public abstract class AbstractAmf3IntReaderImpl implements AmfDataReader {
         if (integerData >= 0x00) {
 
             if ((integerData >>> 7) == 0x00) {
-                integerData = Amf3DataUtil.toInt(new int[] { integerData & 0x7F }, 1);
+                integerData = toInt(new int[] { integerData & 0x7F }, 1);
             } else {
 
                 integerData = readIntData(integerData, inputStream);
@@ -42,6 +41,10 @@ public abstract class AbstractAmf3IntReaderImpl implements AmfDataReader {
         return integerData;
     }
 
+    private final int getNegativeInt( final int[] list, final int bytes) {
+        return toInt(list, bytes) | 0xF0000000;
+    }
+    
     private final int readIntData(final int intData,
             final DataInputStream inputStream) throws IOException {
         int[] intBytes = new int[Amf3Constants.INTEGER_DATA_MAX_BYTES];
@@ -62,16 +65,16 @@ public abstract class AbstractAmf3IntReaderImpl implements AmfDataReader {
 
         int result = 0;        
         if (intByteLength < Amf3Constants.INTEGER_DATA_MAX_BYTES) {
-            return Amf3DataUtil.toInt(intBytes, intByteLength);
+            return toInt(intBytes, intByteLength);
         } else {
             switch (intData >>> 6) {
                 
                 case 0x02:
-                    result = Amf3DataUtil.toInt(intBytes, intByteLength);
+                    result = toInt(intBytes, intByteLength);
                     break;
                     
                 case 0x03:
-                    result = Amf3DataUtil.toNegativeInt(intBytes,
+                    result = getNegativeInt(intBytes,
                             intByteLength);
                     break;
                     
@@ -80,5 +83,23 @@ public abstract class AbstractAmf3IntReaderImpl implements AmfDataReader {
         }
 
         return result;
+    }
+
+    private final int toInt( final int[] list, final int bytes) {
+        int intValue = list[bytes - 1];
+        int offset = 0;
+
+        if (bytes < Amf3Constants.INTEGER_DATA_MAX_BYTES) {
+            offset = 7;
+        } else {
+            offset = 8;
+        }
+
+        for (int i = bytes - 1; i > 0; i--) {
+            intValue |= (list[i - 1] << offset);
+            offset += 7;
+        }
+
+        return intValue;
     }
 }

@@ -19,7 +19,7 @@ import java.util.HashMap;
 
 import org.seasar.flex2.message.format.amf.io.reader.AmfDataReader;
 import org.seasar.flex2.message.format.amf.io.reader.factory.AmfDataReaderFactory;
-import org.seasar.flex2.message.format.amf.type.AmfDataType;
+import org.seasar.flex2.message.format.amf.type.AmfTypeDef;
 
 public class AmfDataReaderFactoryImpl implements AmfDataReaderFactory {
 
@@ -34,7 +34,7 @@ public class AmfDataReaderFactoryImpl implements AmfDataReaderFactory {
 
     public AmfDataReader createDataReader(byte dataType) {
         AmfDataReader reader = null;
-        String key = AmfDataType.toString(dataType);
+        String key = AmfTypeDef.toString(dataType);
         reader = (AmfDataReader) readerMap.get(key);
         return reader;
     }

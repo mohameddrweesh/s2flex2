@@ -36,51 +36,51 @@
 
     <component name="readerMap" class="java.util.HashMap">
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.message.format.amf.type.AmfDataType@TYPE_NUMBER</arg>
+	        <arg>@org.seasar.flex2.message.format.amf.type.AmfTypeDef@TYPE_NUMBER</arg>
 	        <arg>amfNumberReaderImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.message.format.amf.type.AmfDataType@TYPE_BOOLEAN</arg>
+	        <arg>@org.seasar.flex2.message.format.amf.type.AmfTypeDef@TYPE_BOOLEAN</arg>
 	        <arg>amfBooleanReaderImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.message.format.amf.type.AmfDataType@TYPE_STRING</arg>
+	        <arg>@org.seasar.flex2.message.format.amf.type.AmfTypeDef@TYPE_STRING</arg>
 	        <arg>amfStringReaderImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.message.format.amf.type.AmfDataType@TYPE_OBJECT</arg>
+	        <arg>@org.seasar.flex2.message.format.amf.type.AmfTypeDef@TYPE_OBJECT</arg>
 	        <arg>amfObjectReaderImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.message.format.amf.type.AmfDataType@TYPE_NULL</arg>
+	        <arg>@org.seasar.flex2.message.format.amf.type.AmfTypeDef@TYPE_NULL</arg>
 	        <arg>amfNullReaderImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.message.format.amf.type.AmfDataType@TYPE_FLUSHED_SHARED_OBJECT</arg>
+	        <arg>@org.seasar.flex2.message.format.amf.type.AmfTypeDef@TYPE_FLUSHED_SHARED_OBJECT</arg>
 	        <arg>amfFlushedSharedObjectReaderImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.message.format.amf.type.AmfDataType@TYPE_ARRAY_SHARED_OBJECT</arg>
+	        <arg>@org.seasar.flex2.message.format.amf.type.AmfTypeDef@TYPE_ARRAY_SHARED_OBJECT</arg>
 	        <arg>amfArraySharedObjectReaderImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.message.format.amf.type.AmfDataType@TYPE_ARRAY</arg>
+	        <arg>@org.seasar.flex2.message.format.amf.type.AmfTypeDef@TYPE_ARRAY</arg>
 	        <arg>amfArrayReaderImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.message.format.amf.type.AmfDataType@TYPE_DATE</arg>
+	        <arg>@org.seasar.flex2.message.format.amf.type.AmfTypeDef@TYPE_DATE</arg>
 	        <arg>amfDateImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.message.format.amf.type.AmfDataType@TYPE_AS_OBJECT</arg>
+	        <arg>@org.seasar.flex2.message.format.amf.type.AmfTypeDef@TYPE_AS_OBJECT</arg>
 	        <arg>amfASObjectReaderImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.message.format.amf.type.AmfDataType@TYPE_XML</arg>
+	        <arg>@org.seasar.flex2.message.format.amf.type.AmfTypeDef@TYPE_XML</arg>
 	        <arg>amfXmlReaderImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.message.format.amf.type.AmfDataType@TYPE_CUSTOM_CLASS</arg>
+	        <arg>@org.seasar.flex2.message.format.amf.type.AmfTypeDef@TYPE_CUSTOM_CLASS</arg>
 	        <arg>amfCustomClassReaderImpl</arg>
 	    </initMethod>
 	</component>

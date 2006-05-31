@@ -19,14 +19,15 @@ import java.io.DataInputStream;
 import java.io.IOException;
 
 import org.seasar.flex2.message.format.amf.Amf3Constants;
-import org.seasar.flex2.message.format.amf.io.Amf3DataUtil;
 import org.seasar.flex2.message.format.amf.io.reader.AmfDataReader;
+import org.seasar.flex2.message.format.amf.type.AmfObject;
 import org.seasar.flex2.message.io.DataInput;
 import org.seasar.flex2.message.io.Externalizable;
 import org.seasar.flex2.message.io.factory.DataInputFactory;
+import org.seasar.framework.beans.BeanDesc;
+import org.seasar.framework.beans.PropertyDesc;
+import org.seasar.framework.beans.factory.BeanDescFactory;
 import org.seasar.framework.util.ClassUtil;
-
-import flashgateway.io.ASObject;
 
 public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
 
@@ -65,7 +66,7 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
     private final Object readASObjectData(final DataInputStream inputStream)
             throws IOException {
 
-        ASObject asobject = new ASObject();
+        AmfObject asobject = new AmfObject();
         addObjectReference(asobject);
         while (true) {
             String propertyName = (String) stringReader.read(inputStream);
@@ -80,7 +81,7 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
     private final Class readClassDef(final int objectDef,
             final DataInputStream inputStream) throws IOException {
 
-        Class clazz = ASObject.class;
+        Class clazz = AmfObject.class;
 
         switch (objectDef & Amf3Constants.CLASS_DEF_INLINE) {
 
@@ -112,7 +113,7 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
         final Object[] propertyValues = readPropertyValues(propertyNames,
                 inputStream);
 
-        Amf3DataUtil.setProperties(object, propertyNames, propertyValues);
+        setupObjectProperties(object, propertyNames, propertyValues);
 
         return object;
     }
@@ -151,16 +152,16 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
 
         Object object = null;
         do {
-            
+
             if (clazz == null) {
                 break;
             }
-            
-            if (clazz == ASObject.class) {
+
+            if (clazz == AmfObject.class) {
                 object = readASObjectData(inputStream);
                 break;
             }
-            
+
             if (Externalizable.class.isAssignableFrom(clazz)) {
                 object = readExternalizableObjectData(objectDef, clazz,
                         inputStream);
@@ -201,4 +202,18 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
         return propertyValues;
     }
 
+    private final void setupObjectProperties(final Object object,
+            final String[] propertyNames, final Object[] propertyValues) {
+        int propertiesNumber = propertyNames.length;
+        BeanDesc beanDesc = BeanDescFactory.getBeanDesc(object.getClass());
+        PropertyDesc propertyDef;
+        for (int i = 0; i < propertiesNumber; i++) {
+            if (beanDesc.hasPropertyDesc(propertyNames[i])) {
+                propertyDef = beanDesc.getPropertyDesc(propertyNames[i]);
+                if (propertyDef.hasWriteMethod()) {
+                    propertyDef.setValue(object, propertyValues[i]);
+                }
+            }
+        }
+    }
 }

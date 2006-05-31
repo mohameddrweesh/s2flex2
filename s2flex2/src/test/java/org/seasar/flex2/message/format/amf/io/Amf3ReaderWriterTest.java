@@ -41,7 +41,6 @@ import org.seasar.flex2.message.format.amf.data.factory.AmfBodyFactory;
 import org.seasar.flex2.message.format.amf.data.factory.AmfMessageFactory;
 import org.seasar.flex2.message.format.amf.data.impl.AmfBodyImpl;
 import org.seasar.flex2.message.format.amf.data.impl.AmfMessageImpl;
-import org.seasar.flex2.message.format.amf.io.Amf3DataUtil;
 import org.seasar.flex2.message.format.amf.io.reader.AmfReader;
 import org.seasar.flex2.message.format.amf.io.reader.factory.AmfReaderFactory;
 import org.seasar.flex2.message.format.amf.io.writer.AmfWriter;
@@ -52,143 +51,135 @@ import org.seasar.flex2.message.io.factory.ByteArrayFactory;
 import org.seasar.framework.container.S2Container;
 import org.seasar.framework.util.DocumentBuilderFactoryUtil;
 import org.seasar.framework.util.DocumentBuilderUtil;
+import org.seasar.framework.util.DomUtil;
 import org.seasar.framework.util.ResourceUtil;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 public class Amf3ReaderWriterTest extends S2TestCase {
 
-    private final static String PATH = "amf3.dicon";
+    public static class MyBean {
 
-    protected void setUp() throws Exception {
-        include(PATH);
+        private int aaa;
+
+        private long bbb;
+
+        private ByteArray byteArray;
+
+        private double ccc;
+
+        private String ddd;
+
+        private Document doc;
+
+        private boolean eee;
+
+        private Date fff;
+
+        private List ggg = new ArrayList();
+
+        private MyBean hhh;
+
+        private BigDecimal iii;
+
+        public int getAaa() {
+            return aaa;
+        }
+
+        public long getBbb() {
+            return bbb;
+        }
+
+        public ByteArray getByteArray() {
+            return byteArray;
+        }
+
+        public double getCcc() {
+            return ccc;
+        }
+
+        public String getDdd() {
+            return ddd;
+        }
+
+        public Document getDoc() {
+            return doc;
+        }
+
+        public Date getFff() {
+            return fff;
+        }
+
+        public List getGgg() {
+            return ggg;
+        }
+
+        public MyBean getHhh() {
+            return hhh;
+        }
+
+        public BigDecimal getIii() {
+            return iii;
+        }
+
+        public boolean isEee() {
+            return eee;
+        }
+
+        public void setAaa(int aaa) {
+            this.aaa = aaa;
+        }
+
+        public void setBbb(long bbb) {
+            this.bbb = bbb;
+        }
+
+        public void setByteArray(ByteArray byteArray) {
+            this.byteArray = byteArray;
+        }
+
+        public void setCcc(double ccc) {
+            this.ccc = ccc;
+        }
+
+        public void setDdd(String ddd) {
+            this.ddd = ddd;
+        }
+
+        public void setDoc(Document doc) {
+            this.doc = doc;
+        }
+
+        public void setEee(boolean eee) {
+            this.eee = eee;
+        }
+
+        public void setFff(Date fff) {
+            this.fff = fff;
+        }
+
+        public void setGgg(List ggg) {
+            this.ggg = ggg;
+        }
+
+        public void setHhh(MyBean hhh) {
+            this.hhh = hhh;
+        }
+
+        public void setIii(BigDecimal iii) {
+            this.iii = iii;
+        }
     }
 
-    public AmfMessageFactory amfMessageFactory;
+    private final static String PATH = "amf3.dicon";
 
     public AmfBodyFactory amfBodyFactory;
 
-    public AmfWriterFactory amfWriterFactory;
+    public AmfMessageFactory amfMessageFactory;
 
     public AmfReaderFactory amfReaderFactory;
 
-    public void testNumber() throws Exception {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        DataOutputStream dos = new DataOutputStream(baos);
-        AmfMessage message = new AmfMessageImpl();
-        AmfBody body = new AmfBodyImpl("aaa.Hoge.foo", "response",
-                new Double(1));
-        message.addBody(body);
-        AmfWriter writer = amfWriterFactory.createWriter(dos, message);
-        writer.write();
-
-        ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
-        DataInputStream dis = new DataInputStream(bais);
-        AmfReader reader = amfReaderFactory.createReader(dis);
-        AmfMessage message2 = reader.read();
-        assertEquals("1", 1, message2.getBodySize());
-        AmfBody body2 = message2.getBody(0);
-        assertEquals("2", "aaa.Hoge.foo", body2.getTarget());
-        assertEquals("3", "response", body2.getResponse());
-        assertEquals("4", new Double(1), body2.getData());
-    }
-
-    public void testBoolean() throws Exception {
-        AmfReader reader = amfReaderFactory
-                .createReader(convertDataInputStream(Boolean.TRUE));
-        AmfMessage message2 = reader.read();
-        AmfBody body2 = message2.getBody(0);
-        assertEquals("1", Boolean.TRUE, body2.getData());
-    }
-
-    public void testString() throws Exception {
-        assertEquals("1", "abc", convertData("abc"));
-    }
-
-    public void testObject() throws Exception {
-        Map value = new HashMap();
-        value.put("aaa", "111");
-        value.put("bbb", "222");
-        Map value2 = (Map) convertData(value);
-        assertEquals("1", 2, value2.size());
-        assertEquals("2", "111", value2.get("aaa"));
-        assertEquals("3", "222", value2.get("bbb"));
-    }
-
-    public void testObjectForRemoteClass() throws Exception {
-        Map value = new HashMap();
-        value.put("_remoteClass", MyBean.class.getName());
-        value.put("Aaa", new Double(1));
-        value.put("Bbb", new Double(2));
-        value.put("Ccc", new Double(3));
-        value.put("Ddd", "4");
-        value.put("Eee", Boolean.TRUE);
-        value.put("Fff", new Date(5));
-        List ggg = new ArrayList();
-        Map b1 = new HashMap();
-        b1.put("_remoteClass", MyBean.class.getName());
-        b1.put("Aaa", new Double(2));
-        ggg.add(b1);
-        Map b2 = new HashMap();
-        b2.put("_remoteClass", MyBean.class.getName());
-        b2.put("Aaa", new Double(3));
-        ggg.add(b2);
-        value.put("Ggg", ggg);
-        Map hhh = new HashMap();
-        hhh.put("_remoteClass", MyBean.class.getName());
-        hhh.put("Aaa", new Double(4));
-        value.put("Hhh", hhh);
-        BigDecimal iii = new BigDecimal("1234567890123456789");
-        value.put("Iii", iii);
-
-        Map value2 = (Map) convertData(value);
-        assertEquals("1", new Double(1), value2.get("Aaa"));
-        assertEquals("2", new Double(2), value2.get("Bbb"));
-        assertEquals("3", new Double(3), value2.get("Ccc"));
-        assertEquals("4", "4", value2.get("Ddd"));
-        assertEquals("5", Boolean.TRUE, value2.get("Eee"));
-        assertEquals("6", new Date(5), value2.get("Fff"));
-        List ggg2 = (List) value2.get("Ggg");
-        assertEquals("7", 2, ggg2.size());
-        Map b4 = (Map) ggg2.get(0);
-        Map b5 = (Map) ggg2.get(1);
-        assertEquals("8", new Double(2), b4.get("Aaa"));
-        assertEquals("9", new Double(3), b5.get("Aaa"));
-        Map hhh2 = (Map) value2.get("Hhh");
-        assertEquals("10", new Double(4), hhh2.get("Aaa"));
-        String iii2 = (String) value2.get("Iii");
-        assertEquals("11", iii, new BigDecimal(iii2));
-    }
-
-    public void testMapElementNumberLimitTest() throws Exception {
-        Map value = new HashMap();
-        for (int i = 0; i < 100; i++) {
-            value.put("Ccc" + i, new Double(i));
-        }
-
-        Map value2 = (Map) convertData(value);
-        for (int i = 0; i < 100; i++) {
-            assertEquals("3", new Double(i), value2.get("Ccc" + i));
-        }
-    }
-
-    public void testListElementNumberLimitTest() throws Exception {
-        List value = new ArrayList();
-
-        for (int i = 0; i < 100; i++) {
-            value.add("" + i);
-        }
-
-        List value2 = (List) convertData(value);
-        assertEquals("1", 100, value2.size());
-
-        for (int i = 0; i < 100; i++) {
-            assertEquals("2", "" + i, value2.get(i));
-        }
-    }
-
-    public void testNull() throws Exception {
-        assertEquals("1", null, convertData(null));
-    }
+    public AmfWriterFactory amfWriterFactory;
 
     public void testArrayForArray() throws Exception {
         Object[] value = new Object[] { "111", "222" };
@@ -218,14 +209,12 @@ public class Amf3ReaderWriterTest extends S2TestCase {
         assertEquals("3", "222", value2.get(1));
     }
 
-    public void testXml() throws Exception {
-        Document xml1 = createXmlDocument();
-
-        Document xml2 = (Document) convertData(xml1);
-
-        assertEquals("1", Amf3DataUtil.toXmlString(xml1), Amf3DataUtil
-                .toXmlString(xml2));
-
+    public void testBoolean() throws Exception {
+        AmfReader reader = amfReaderFactory
+                .createReader(convertDataInputStream(Boolean.TRUE));
+        AmfMessage message2 = reader.read();
+        AmfBody body2 = message2.getBody(0);
+        assertEquals("1", Boolean.TRUE, body2.getData());
     }
 
     public void testByteArray() throws Exception {
@@ -294,8 +283,7 @@ public class Amf3ReaderWriterTest extends S2TestCase {
         assertNull("12", value2.getHhh().getDdd());
 
         Document xml2 = value2.getDoc();
-        assertEquals("13", Amf3DataUtil.toXmlString(xml1), Amf3DataUtil
-                .toXmlString(xml2));
+        assertEquals("13", getXmlString(xml1), getXmlString(xml2));
 
         ByteArray bytearray1 = value2.getByteArray();
         assertEquals("14", false, bytearray1.readBoolean());
@@ -359,6 +347,126 @@ public class Amf3ReaderWriterTest extends S2TestCase {
 
     }
 
+    public void testListElementNumberLimitTest() throws Exception {
+        List value = new ArrayList();
+
+        for (int i = 0; i < 100; i++) {
+            value.add("" + i);
+        }
+
+        List value2 = (List) convertData(value);
+        assertEquals("1", 100, value2.size());
+
+        for (int i = 0; i < 100; i++) {
+            assertEquals("2", "" + i, value2.get(i));
+        }
+    }
+
+    public void testMapElementNumberLimitTest() throws Exception {
+        Map value = new HashMap();
+        for (int i = 0; i < 100; i++) {
+            value.put("Ccc" + i, new Double(i));
+        }
+
+        Map value2 = (Map) convertData(value);
+        for (int i = 0; i < 100; i++) {
+            assertEquals("3", new Double(i), value2.get("Ccc" + i));
+        }
+    }
+
+    public void testNull() throws Exception {
+        assertEquals("1", null, convertData(null));
+    }
+
+    public void testNumber() throws Exception {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        DataOutputStream dos = new DataOutputStream(baos);
+        AmfMessage message = new AmfMessageImpl();
+        AmfBody body = new AmfBodyImpl("aaa.Hoge.foo", "response",
+                new Double(1));
+        message.addBody(body);
+        AmfWriter writer = amfWriterFactory.createWriter(dos, message);
+        writer.write();
+
+        ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+        DataInputStream dis = new DataInputStream(bais);
+        AmfReader reader = amfReaderFactory.createReader(dis);
+        AmfMessage message2 = reader.read();
+        assertEquals("1", 1, message2.getBodySize());
+        AmfBody body2 = message2.getBody(0);
+        assertEquals("2", "aaa.Hoge.foo", body2.getTarget());
+        assertEquals("3", "response", body2.getResponse());
+        assertEquals("4", new Double(1), body2.getData());
+    }
+
+    public void testObject() throws Exception {
+        Map value = new HashMap();
+        value.put("aaa", "111");
+        value.put("bbb", "222");
+        Map value2 = (Map) convertData(value);
+        assertEquals("1", 2, value2.size());
+        assertEquals("2", "111", value2.get("aaa"));
+        assertEquals("3", "222", value2.get("bbb"));
+    }
+
+    public void testObjectForRemoteClass() throws Exception {
+        Map value = new HashMap();
+        value.put("_remoteClass", MyBean.class.getName());
+        value.put("Aaa", new Double(1));
+        value.put("Bbb", new Double(2));
+        value.put("Ccc", new Double(3));
+        value.put("Ddd", "4");
+        value.put("Eee", Boolean.TRUE);
+        value.put("Fff", new Date(5));
+        List ggg = new ArrayList();
+        Map b1 = new HashMap();
+        b1.put("_remoteClass", MyBean.class.getName());
+        b1.put("Aaa", new Double(2));
+        ggg.add(b1);
+        Map b2 = new HashMap();
+        b2.put("_remoteClass", MyBean.class.getName());
+        b2.put("Aaa", new Double(3));
+        ggg.add(b2);
+        value.put("Ggg", ggg);
+        Map hhh = new HashMap();
+        hhh.put("_remoteClass", MyBean.class.getName());
+        hhh.put("Aaa", new Double(4));
+        value.put("Hhh", hhh);
+        BigDecimal iii = new BigDecimal("1234567890123456789");
+        value.put("Iii", iii);
+
+        Map value2 = (Map) convertData(value);
+        assertEquals("1", new Double(1), value2.get("Aaa"));
+        assertEquals("2", new Double(2), value2.get("Bbb"));
+        assertEquals("3", new Double(3), value2.get("Ccc"));
+        assertEquals("4", "4", value2.get("Ddd"));
+        assertEquals("5", Boolean.TRUE, value2.get("Eee"));
+        assertEquals("6", new Date(5), value2.get("Fff"));
+        List ggg2 = (List) value2.get("Ggg");
+        assertEquals("7", 2, ggg2.size());
+        Map b4 = (Map) ggg2.get(0);
+        Map b5 = (Map) ggg2.get(1);
+        assertEquals("8", new Double(2), b4.get("Aaa"));
+        assertEquals("9", new Double(3), b5.get("Aaa"));
+        Map hhh2 = (Map) value2.get("Hhh");
+        assertEquals("10", new Double(4), hhh2.get("Aaa"));
+        String iii2 = (String) value2.get("Iii");
+        assertEquals("11", iii, new BigDecimal(iii2));
+    }
+
+    public void testString() throws Exception {
+        assertEquals("1", "abc", convertData("abc"));
+    }
+
+    public void testXml() throws Exception {
+        Document xml1 = createXmlDocument();
+
+        Document xml2 = (Document) convertData(xml1);
+
+        assertEquals("1", getXmlString(xml1), getXmlString(xml2));
+
+    }
+
     protected Object convertData(Object data) throws Exception {
         DataInputStream dis = convertDataInputStream(data);
         AmfReader reader = amfReaderFactory.createReader(dis);
@@ -381,15 +489,8 @@ public class Amf3ReaderWriterTest extends S2TestCase {
         return new DataInputStream(bais);
     }
 
-    private final Document createXmlDocument() throws FileNotFoundException {
-        URL url = ResourceUtil
-                .getResource("testXml.xml");
-        File testXml = new File(url.getPath());
-        DocumentBuilder builder = DocumentBuilderFactoryUtil
-                .newDocumentBuilder();
-        Document xml1 = DocumentBuilderUtil.parse(builder,
-                new BufferedInputStream(new FileInputStream(testXml)));
-        return xml1;
+    protected void setUp() throws Exception {
+        include(PATH);
     }
 
     private final ByteArray createByteArrayOf(final byte[] bs) {
@@ -400,117 +501,19 @@ public class Amf3ReaderWriterTest extends S2TestCase {
         ByteArray bytearray = bafactory.createByteArray(bs);
         return bytearray;
     }
-
-    public static class MyBean {
-
-        private int aaa;
-
-        private long bbb;
-
-        private double ccc;
-
-        private String ddd;
-
-        private boolean eee;
-
-        private Date fff;
-
-        private List ggg = new ArrayList();
-
-        private MyBean hhh;
-
-        private BigDecimal iii;
-
-        private Document doc;
-
-        private ByteArray byteArray;
-
-        public int getAaa() {
-            return aaa;
-        }
-
-        public void setAaa(int aaa) {
-            this.aaa = aaa;
-        }
-
-        public long getBbb() {
-            return bbb;
-        }
-
-        public void setBbb(long bbb) {
-            this.bbb = bbb;
-        }
-
-        public double getCcc() {
-            return ccc;
-        }
-
-        public void setCcc(double ccc) {
-            this.ccc = ccc;
-        }
-
-        public String getDdd() {
-            return ddd;
-        }
-
-        public void setDdd(String ddd) {
-            this.ddd = ddd;
-        }
-
-        public boolean isEee() {
-            return eee;
-        }
-
-        public void setEee(boolean eee) {
-            this.eee = eee;
-        }
-
-        public Date getFff() {
-            return fff;
-        }
-
-        public void setFff(Date fff) {
-            this.fff = fff;
-        }
-
-        public List getGgg() {
-            return ggg;
-        }
-
-        public void setGgg(List ggg) {
-            this.ggg = ggg;
-        }
-
-        public MyBean getHhh() {
-            return hhh;
-        }
-
-        public void setHhh(MyBean hhh) {
-            this.hhh = hhh;
-        }
-
-        public BigDecimal getIii() {
-            return iii;
-        }
-
-        public void setIii(BigDecimal iii) {
-            this.iii = iii;
-        }
-
-        public ByteArray getByteArray() {
-            return byteArray;
-        }
-
-        public void setByteArray(ByteArray byteArray) {
-            this.byteArray = byteArray;
-        }
-
-        public Document getDoc() {
-            return doc;
-        }
-
-        public void setDoc(Document doc) {
-            this.doc = doc;
-        }
+    private final Document createXmlDocument() throws FileNotFoundException {
+        URL url = ResourceUtil
+                .getResource("testXml.xml");
+        File testXml = new File(url.getPath());
+        DocumentBuilder builder = DocumentBuilderFactoryUtil
+                .newDocumentBuilder();
+        Document xml1 = DocumentBuilderUtil.parse(builder,
+                new BufferedInputStream(new FileInputStream(testXml)));
+        return xml1;
+    }
+    
+    private final String getXmlString( final Document document) {
+        Element element = document.getDocumentElement();
+        return DomUtil.toString(element);
     }
 }

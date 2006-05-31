@@ -19,7 +19,7 @@ import java.io.DataInputStream;
 import java.io.IOException;
 
 import org.seasar.flex2.message.format.amf.AmfConstants;
-import org.seasar.flex2.message.format.amf.type.AmfDataType;
+import org.seasar.flex2.message.format.amf.type.AmfTypeDef;
 
 import flashgateway.io.ASObject;
 
@@ -51,7 +51,7 @@ public class AmfObjectReaderImpl extends AbstractAmfClassObjectReaderImpl {
         while (true) {
             String key = inputStream.readUTF();
             byte dataType = inputStream.readByte();
-            if (dataType == AmfDataType.EOM) {
+            if (dataType == AmfTypeDef.EOM) {
                 break;
             }
             asObject.put(key, readData(dataType, inputStream));

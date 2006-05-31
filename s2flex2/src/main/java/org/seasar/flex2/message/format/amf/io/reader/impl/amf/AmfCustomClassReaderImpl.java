@@ -18,7 +18,7 @@ package org.seasar.flex2.message.format.amf.io.reader.impl.amf;
 import java.io.DataInputStream;
 import java.io.IOException;
 
-import org.seasar.flex2.message.format.amf.type.AmfDataType;
+import org.seasar.flex2.message.format.amf.type.AmfTypeDef;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
 import org.seasar.framework.beans.factory.BeanDescFactory;
@@ -46,7 +46,7 @@ public class AmfCustomClassReaderImpl extends AbstractAmfClassObjectReaderImpl {
         while (true) {
             String key = inputStream.readUTF();
             byte dataType = inputStream.readByte();
-            if (dataType == AmfDataType.EOM) {
+            if (dataType == AmfTypeDef.EOM) {
                 break;
             }
             Object value = readData(dataType, inputStream);

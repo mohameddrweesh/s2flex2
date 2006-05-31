@@ -34,8 +34,8 @@ import org.seasar.flex2.message.format.amf.io.reader.impl.amf3.Amf3IntegerReader
 import org.seasar.flex2.message.format.amf.io.reader.impl.amf3.Amf3ObjectReaderImpl;
 import org.seasar.flex2.message.format.amf.io.reader.impl.amf3.Amf3StringReaderImpl;
 import org.seasar.flex2.message.format.amf.io.reader.impl.amf3.Amf3XmlReaderImpl;
-import org.seasar.flex2.message.format.amf.type.Amf3DataType;
-import org.seasar.flex2.message.format.amf.type.AmfDataType;
+import org.seasar.flex2.message.format.amf.type.Amf3TypeDef;
+import org.seasar.flex2.message.format.amf.type.AmfTypeDef;
 import org.seasar.framework.container.S2Container;
 
 public class Amf3DataReaderFactoryTest extends S2TestCase {
@@ -56,22 +56,22 @@ public class Amf3DataReaderFactoryTest extends S2TestCase {
 
         AmfDataReader reader;
 
-        reader = factory.createDataReader(AmfDataType.NUMBER);
+        reader = factory.createDataReader(AmfTypeDef.NUMBER);
         assertTrue("1", reader instanceof AmfNumberReaderImpl);
 
-        reader = factory.createDataReader(AmfDataType.BOOLEAN);
+        reader = factory.createDataReader(AmfTypeDef.BOOLEAN);
         assertTrue("2", reader instanceof AmfBooleanReaderImpl);
 
-        reader = factory.createDataReader(AmfDataType.STRING);
+        reader = factory.createDataReader(AmfTypeDef.STRING);
         assertTrue("3", reader instanceof AmfStringReaderImpl);
 
-        reader = factory.createDataReader(AmfDataType.NULL);
+        reader = factory.createDataReader(AmfTypeDef.NULL);
         assertTrue("5", reader instanceof AmfNullReaderImpl);
 
-        reader = factory.createDataReader(AmfDataType.ARRAY);
+        reader = factory.createDataReader(AmfTypeDef.ARRAY);
         assertTrue("6", reader instanceof AmfArrayReaderImpl);
 
-        reader = factory.createDataReader(Amf3DataType.AMF3_DATA_MARKER);
+        reader = factory.createDataReader(Amf3TypeDef.AMF3_DATA_MARKER);
         assertTrue("8", reader instanceof Amf3DataReaderImpl);
 
     }
@@ -83,34 +83,34 @@ public class Amf3DataReaderFactoryTest extends S2TestCase {
 
         AmfDataReader reader;
 
-        reader = factory.createAmf3DataReader(Amf3DataType.NUMBER);
+        reader = factory.createAmf3DataReader(Amf3TypeDef.NUMBER);
         assertTrue("1", reader instanceof AmfNumberReaderImpl);
         
-        reader = factory.createAmf3DataReader(Amf3DataType.INTEGER);
+        reader = factory.createAmf3DataReader(Amf3TypeDef.INTEGER);
         assertTrue("2", reader instanceof Amf3IntegerReaderImpl);
         
-        reader = factory.createAmf3DataReader(Amf3DataType.BOOLEAN_FALSE);
+        reader = factory.createAmf3DataReader(Amf3TypeDef.BOOLEAN_FALSE);
         assertTrue("3", reader instanceof Amf3BooleanFalseReaderImpl);
 
-        reader = factory.createAmf3DataReader(Amf3DataType.BOOLEAN_TRUE);
+        reader = factory.createAmf3DataReader(Amf3TypeDef.BOOLEAN_TRUE);
         assertTrue("4", reader instanceof Amf3BooleanTrueReaderImpl);
 
-        reader = factory.createAmf3DataReader(Amf3DataType.STRING);
+        reader = factory.createAmf3DataReader(Amf3TypeDef.STRING);
         assertTrue("5", reader instanceof Amf3StringReaderImpl);
 
-        reader = factory.createAmf3DataReader(Amf3DataType.OBJECT);
+        reader = factory.createAmf3DataReader(Amf3TypeDef.OBJECT);
         assertTrue("6", reader instanceof Amf3ObjectReaderImpl);
 
-        reader = factory.createAmf3DataReader(Amf3DataType.NULL);
+        reader = factory.createAmf3DataReader(Amf3TypeDef.NULL);
         assertTrue("7", reader instanceof AmfNullReaderImpl);
 
-        reader = factory.createAmf3DataReader(Amf3DataType.ARRAY);
+        reader = factory.createAmf3DataReader(Amf3TypeDef.ARRAY);
         assertTrue("8", reader instanceof Amf3ArrayReaderImpl);
 
-        reader = factory.createAmf3DataReader(Amf3DataType.DATE);
+        reader = factory.createAmf3DataReader(Amf3TypeDef.DATE);
         assertTrue("9", reader instanceof Amf3DateReaderImpl);
 
-        reader = factory.createAmf3DataReader(Amf3DataType.XML);
+        reader = factory.createAmf3DataReader(Amf3TypeDef.XML);
         assertTrue("10", reader instanceof Amf3XmlReaderImpl);
     }
 

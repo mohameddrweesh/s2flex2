@@ -15,7 +15,7 @@
  */
 package org.seasar.flex2.message.format.amf.type;
 
-public final class Amf3DataType {
+public final class Amf3TypeDef {
 
     public static final byte AMF3_DATA_MARKER = 0x11;
 
@@ -69,7 +69,7 @@ public final class Amf3DataType {
 
     public static final String TYPE_AMF3_DATA_MARKER = "AMF3_DATA_MARKER";
 
-    private Amf3DataType() {
+    private Amf3TypeDef() {
     }
 
     public static final String toString(byte dataType) {

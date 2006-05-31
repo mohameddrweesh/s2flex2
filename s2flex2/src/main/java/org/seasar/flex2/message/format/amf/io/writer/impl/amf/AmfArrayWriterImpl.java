@@ -19,7 +19,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.seasar.flex2.message.format.amf.io.writer.AmfDataWriter;
-import org.seasar.flex2.message.format.amf.type.AmfDataType;
+import org.seasar.flex2.message.format.amf.type.AmfTypeDef;
 
 public class AmfArrayWriterImpl extends AbstractAmfObjectWriterImpl implements
         AmfDataWriter {
@@ -39,7 +39,7 @@ public class AmfArrayWriterImpl extends AbstractAmfObjectWriterImpl implements
 
         getSharedObject().addSharedObject(value);
 
-        outputStream.writeByte(AmfDataType.ARRAY);
+        outputStream.writeByte(AmfTypeDef.ARRAY);
         outputStream.writeInt(value.length);
 
         for (int i = 0; i < value.length; i++) {

@@ -20,7 +20,7 @@ import java.io.IOException;
 
 import org.seasar.flex2.message.format.amf.io.Amf3References;
 import org.seasar.flex2.message.format.amf.io.factory.Amf3ReferencesFactory;
-import org.seasar.flex2.message.format.amf.type.Amf3DataType;
+import org.seasar.flex2.message.format.amf.type.Amf3TypeDef;
 
 public abstract class AbstractAmf3ObjectWriterImpl extends
         AbstractAmf3UTF8StringWriterImpl {
@@ -107,6 +107,6 @@ public abstract class AbstractAmf3ObjectWriterImpl extends
 
     private final void writeAMF3DataMaker(final DataOutputStream outputStream)
             throws IOException {
-        outputStream.writeByte(Amf3DataType.AMF3_DATA_MARKER);
+        outputStream.writeByte(Amf3TypeDef.AMF3_DATA_MARKER);
     }
 }
