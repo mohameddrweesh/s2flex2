@@ -15,15 +15,15 @@
  */
 package org.seasar.flex2.rpc.remoting.service.hotdeploy.creator;
 
-import org.seasar.flex2.rpc.remoting.service.AmfRemotingServiceRepository;
+import org.seasar.flex2.rpc.remoting.service.RemotingServiceRepository;
 import org.seasar.framework.container.S2Container;
 import org.seasar.framework.container.deployer.InstanceDefFactory;
 import org.seasar.framework.container.hotdeploy.creator.InterfaceCentricSinglePackageCreator;
 
-public class AmfRemotingServiceCreator extends
+public class RemotingServiceCreator extends
         InterfaceCentricSinglePackageCreator {
 
-    public AmfRemotingServiceCreator() {
+    public RemotingServiceCreator() {
         setMiddlePackageName("service");
         setNameSuffix("Service");
         setInstanceDef(InstanceDefFactory.REQUEST);
@@ -33,8 +33,8 @@ public class AmfRemotingServiceCreator extends
         boolean loadedComponentDef = super.loadComponentDef(container, clazz);
         if (loadedComponentDef && isTarget(clazz)) {
             S2Container root = container.getRoot();
-            AmfRemotingServiceRepository repository = (AmfRemotingServiceRepository) root
-                    .getComponent(AmfRemotingServiceRepository.class);
+            RemotingServiceRepository repository = (RemotingServiceRepository) root
+                    .getComponent(RemotingServiceRepository.class);
             repository.removeService(clazz);
         }
 

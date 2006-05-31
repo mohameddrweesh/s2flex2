@@ -16,11 +16,11 @@
 package org.seasar.flex2.rpc.remoting.service.impl;
 
 import org.seasar.flex2.rpc.gateway.service.impl.ServiceRepositoryImpl;
-import org.seasar.flex2.rpc.remoting.service.AmfRemotingServiceRepository;
+import org.seasar.flex2.rpc.remoting.service.RemotingServiceRepository;
 import org.seasar.framework.util.StringUtil;
 
-public class AmfRemotingServiceRepositoryImpl extends ServiceRepositoryImpl
-        implements AmfRemotingServiceRepository {
+public class RemotingServiceRepositoryImpl extends ServiceRepositoryImpl
+        implements RemotingServiceRepository {
 
     public void removeService(Class serviceClass) {
         if (serviceClass.isInterface()) {

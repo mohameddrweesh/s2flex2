@@ -3,8 +3,8 @@
 	"http://www.seasar.org/dtd/components23.dtd">
 <components>
 	<!-- service -->
-	<component class="org.seasar.flex2.rpc.remoting.service.impl.AmfRemotingServiceRepositoryImpl" />
-	<component class="org.seasar.flex2.rpc.remoting.service.impl.AmfRemotingServiceLocatorImpl" />
+	<component class="org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceRepositoryImpl" />
+	<component class="org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceLocatorImpl" />
 	<component name="serviceInvoker" class="org.seasar.flex2.rpc.messaging.invoker.impl.MessagingServiceInvoker" />
 	
 	<component

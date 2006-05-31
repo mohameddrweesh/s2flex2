@@ -11,8 +11,8 @@
 	<component name="serviceDataStorage" class="org.seasar.flex2.util.data.storage.impl.HttpSessionDataStorage" instance="session" />
 	
 	<!-- service -->
-	<component class="org.seasar.flex2.rpc.remoting.service.impl.AmfRemotingServiceRepositoryImpl" />
-	<component class="org.seasar.flex2.rpc.remoting.service.impl.AmfRemotingServiceLocatorImpl" />
+	<component class="org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceRepositoryImpl" />
+	<component class="org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceLocatorImpl" />
 	<component name="serviceInvoker" class="org.seasar.flex2.rpc.gateway.invoker.impl.ServiceInvokerImpl" />
 	
 	<!-- amf processor -->
