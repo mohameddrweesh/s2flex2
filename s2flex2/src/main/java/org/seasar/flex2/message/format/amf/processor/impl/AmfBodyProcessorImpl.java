@@ -15,17 +15,14 @@
  */
 package org.seasar.flex2.message.format.amf.processor.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.seasar.flex2.message.format.amf.data.AmfBody;
 import org.seasar.flex2.message.format.amf.data.AmfMessage;
 import org.seasar.flex2.message.format.amf.data.factory.AmfBodyFactory;
 import org.seasar.flex2.message.format.amf.data.factory.AmfErrorFactory;
 import org.seasar.flex2.message.format.amf.data.factory.AmfMessageFactory;
 import org.seasar.flex2.message.format.amf.processor.AmfBodyProcessor;
+import org.seasar.flex2.message.format.amf.processor.ServiceInvokerChooser;
 import org.seasar.flex2.rpc.gateway.invoker.ServiceInvoker;
-import org.seasar.flex2.rpc.gateway.invoker.exception.InvokerNotFoundRuntimeException;
 
 public class AmfBodyProcessorImpl implements AmfBodyProcessor {
 
@@ -37,13 +34,9 @@ public class AmfBodyProcessorImpl implements AmfBodyProcessor {
 
     private AmfErrorFactory errorFactory;
 
-    private List invokers = new ArrayList();
-
     private AmfMessageFactory messageFactory;
 
-    public void addInvoker(ServiceInvoker invoker) {
-        invokers.add(invoker);
-    }
+    private ServiceInvokerChooser serviceInvokerChooser;
 
     public AmfBodyFactory getBodyFactory() {
         return bodyFactory;
@@ -81,32 +74,32 @@ public class AmfBodyProcessorImpl implements AmfBodyProcessor {
         this.messageFactory = messageFactory;
     }
 
-    protected AmfBody processBody(AmfBody requestBody) {
+    public void setServiceInvokerChooser(
+            ServiceInvokerChooser serviceInvokerChooser) {
+        this.serviceInvokerChooser = serviceInvokerChooser;
+    }
 
+    protected final AmfBody processBody(final AmfBody requestBody) {
+        Object result;
+        String responseTarget;
         try {
-            ServiceInvoker invoker = chooseInvoker(requestBody);
-            Object result = invoker.invoke(requestBody.getServiceName(),
-                    requestBody.getServiceMethodName(), requestBody.getArgs());
-            return createResponseBody(requestBody.getResponse()
-                    + RESPONSE_RESULT, result);
+            final ServiceInvoker invoker = serviceInvokerChooser
+                    .chooseInvoker(requestBody);
+
+            result = invoker.invoke(requestBody.getServiceName(), requestBody
+                    .getServiceMethodName(), requestBody.getArgs());
+
+            responseTarget = requestBody.getResponse() + RESPONSE_RESULT;
         } catch (Throwable throwable) {
-            return createResponseBody(requestBody.getResponse()
-                    + RESPONSE_STATUS, errorFactory.createError(throwable));
+            result = errorFactory.createError(throwable);
+            responseTarget = requestBody.getResponse() + RESPONSE_STATUS;
         }
+
+        return createResponseBody(responseTarget, result);
     }
 
-    private final ServiceInvoker chooseInvoker(AmfBody requestBody) {
-        for (int i = 0; i < invokers.size(); ++i) {
-            ServiceInvoker invoker = (ServiceInvoker) invokers.get(i);
-            if (invoker.supports(requestBody.getServiceName(), requestBody
-                    .getServiceMethodName(), requestBody.getArgs())) {
-                return invoker;
-            }
-        }
-        throw new InvokerNotFoundRuntimeException(requestBody.getServiceName());
-    }
-
-    private AmfBody createResponseBody(String target, Object result) {
+    private final AmfBody createResponseBody(final String target,
+            final Object result) {
         return bodyFactory.createBody(target, null, result);
     }
 }

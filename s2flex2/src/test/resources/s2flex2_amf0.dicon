@@ -1,25 +1,35 @@
 <?xml version="1.0" encoding="Shift_JIS"?>
 <!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.3//EN" 
 	"http://www.seasar.org/dtd/components23.dtd">
-<components namespace="amf-gateway">
-	<!-- amf io -->
+<components namespace="s2flex2">
+	<!--
+		amf3 framework
+	-->
 	<include path="amf.dicon" />
-
-	<!-- util -->
+	
+	<!--
+		data util
+	-->
 	<component class="org.seasar.flex2.util.data.transfer.impl.TransferImpl" />
 	<component class="org.seasar.flex2.util.data.storage.impl.StorageLocatorImpl"/>
 	<component name="serviceDataStorage" class="org.seasar.flex2.util.data.storage.impl.HttpSessionDataStorage" instance="session" />
 	
-	<!-- service -->
+	<!--
+		remoting service 
+	-->
 	<component class="org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceRepositoryImpl" />
 	<component class="org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceLocatorImpl" />
-	<component name="serviceInvoker" class="org.seasar.flex2.rpc.gateway.invoker.impl.ServiceInvokerImpl" />
-	
-	<!-- amf processor -->
-	<component class="org.seasar.flex2.rpc.gateway.session.impl.TomcatSessionDecoratorImpl" />
-	<component class="org.seasar.flex2.rpc.remoting.processor.impl.AmfHeaderProcessorImpl" />
-	<component class="org.seasar.flex2.rpc.remoting.processor.impl.AmfBodyProcessorImpl">
-		<initMethod>#self.addInvoker(serviceInvoker)</initMethod>
+	<component class="org.seasar.flex2.rpc.gateway.invoker.impl.ServiceInvokerImpl">
+		<initMethod>s2flex2_amf.serviceInvokerChooser.addInvoker(#self)</initMethod>
 	</component>
-	<component class="org.seasar.flex2.rpc.remoting.processor.impl.AmfProcessorImpl" />
+		
+	<!--
+		session decorator 
+	-->
+	<component class="org.seasar.flex2.rpc.gateway.session.impl.TomcatSessionDecoratorImpl" />
+	
+	<!--
+		remoting message processor
+	-->
+	<component class="org.seasar.flex2.rpc.remoting.processor.impl.AmfMessageRequestProcessorImpl" />
 </components>

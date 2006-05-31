@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Shift_JIS"?>
 <!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.3//EN" 
 	"http://www.seasar.org/dtd/components23.dtd">
-<components namespace="s2flex2-amf3-debug" >
+<components namespace="s2flex2_amf" >
 	<include path="aop.dicon"/>
 	<component class="org.seasar.framework.container.autoregister.AspectAutoRegister">
 		<property name="interceptor">aop.traceInterceptor</property>
@@ -10,11 +10,11 @@
 			<arg>".*Impl"</arg>
 		</initMethod>
 	</component>
-
+	
 	<!--
 		reader/writer share data components
 	-->
-	<component class="org.seasar.flex2.message.format.amfio.impl.AmfSharedObjectImpl" instance="request" />
+	<component class="org.seasar.flex2.message.format.amf.io.impl.AmfSharedObjectImpl" instance="request" />
 	<component class="org.seasar.flex2.message.format.amf.io.impl.Amf3ReferencesImpl" instance="request" />
 
 	<!--
@@ -270,4 +270,10 @@
 	-->
 	<component class="org.seasar.flex2.message.io.impl.ByteArrayImpl" instance="prototype" />
 
+	<!-- amf processor -->
+	<component name="serviceInvokerChooser" class="org.seasar.flex2.message.format.amf.processor.impl.ServiceInvokerChooserImpl"/>
+	<component class="org.seasar.flex2.message.format.amf.processor.impl.AmfHeaderProcessorImpl" />
+	<component class="org.seasar.flex2.message.format.amf.processor.impl.AmfBodyProcessorImpl" />
+	<component class="org.seasar.flex2.message.format.amf.processor.impl.AmfMessageProcessorImpl"/>
+	
 </components>

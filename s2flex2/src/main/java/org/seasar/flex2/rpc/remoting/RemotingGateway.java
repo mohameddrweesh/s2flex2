@@ -22,13 +22,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.seasar.flex2.message.format.amf.AmfConstants;
 import org.seasar.flex2.rpc.remoting.processor.RemotingMessageProcessor;
 import org.seasar.framework.container.S2Container;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
 
 public class RemotingGateway extends HttpServlet {
-
-    private final static String CONTENT_TYPE = "application/x-amf";
 
     protected RemotingMessageProcessor processor;
 
@@ -48,7 +47,7 @@ public class RemotingGateway extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
-        response.setContentType(CONTENT_TYPE);
+        response.setContentType(AmfConstants.CONTENT_TYPE);
         processor.process(request, response);
     }
 }

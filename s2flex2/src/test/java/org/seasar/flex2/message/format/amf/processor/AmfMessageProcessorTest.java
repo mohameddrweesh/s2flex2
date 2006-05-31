@@ -13,20 +13,19 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.remoting.processor;
+package org.seasar.flex2.message.format.amf.processor;
 
 import org.seasar.extension.unit.S2TestCase;
-import org.seasar.flex2.message.format.amf.io.reader.factory.impl.Amf3ReaderFactoryImpl;
-import org.seasar.flex2.message.format.amf.io.writer.factory.impl.Amf3WriterFactoryImpl;
-import org.seasar.flex2.message.format.amf.processor.AmfMessageProcessor;
+import org.seasar.flex2.message.format.amf.io.reader.factory.impl.AmfReaderFactoryImpl;
+import org.seasar.flex2.message.format.amf.io.writer.factory.impl.AmfWriterFactoryImpl;
 import org.seasar.flex2.message.format.amf.processor.impl.AmfBodyProcessorImpl;
 import org.seasar.flex2.message.format.amf.processor.impl.AmfHeaderProcessorImpl;
 import org.seasar.flex2.message.format.amf.processor.impl.AmfMessageProcessorImpl;
 import org.seasar.framework.container.S2Container;
 
-public class Amf3ProcessorTest extends S2TestCase {
+public class AmfMessageProcessorTest extends S2TestCase {
 
-    private static String PATH = "Amf3ProcessorTest.dicon";
+    private static String PATH = "s2flex2_amf0.dicon";
 
     public void testCreateProcessor() throws Exception {
         S2Container container = getContainer();
@@ -42,10 +41,10 @@ public class Amf3ProcessorTest extends S2TestCase {
                 processorImpl.getHeaderProcessor() instanceof AmfHeaderProcessorImpl);
         assertTrue(
                 "4",
-                processorImpl.getReaderFactory() instanceof Amf3ReaderFactoryImpl);
+                processorImpl.getReaderFactory() instanceof AmfReaderFactoryImpl);
         assertTrue(
                 "5",
-                processorImpl.getWriterFactory() instanceof Amf3WriterFactoryImpl);
+                processorImpl.getWriterFactory() instanceof AmfWriterFactoryImpl);
 
     }
 
