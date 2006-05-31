@@ -2,7 +2,7 @@
 <!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.3//EN" 
 	"http://www.seasar.org/dtd/components23.dtd">
 <components>
-	<include path="s2flex2.dicon"/>
+	<include path="remoting_amf3.dicon"/>
 	
 	<component class="examples.flex2.camera.snapshot.service.impl.SnapshotServiceConfigImpl">
         <property name="rootPath">application.getRealPath(".") + "\\snapshot\\"</property>
@@ -26,7 +26,7 @@
     <component
 	  class="org.seasar.framework.container.autoregister.MetaAutoRegister">
 	    <meta name="autoRegister">
-	        <meta name="AmfRemotingService"/>
+	        <meta name="RemotingService"/>
 	    </meta>
 	    <initMethod name="addClassPattern">
 	        <arg>"examples.flex2"</arg>

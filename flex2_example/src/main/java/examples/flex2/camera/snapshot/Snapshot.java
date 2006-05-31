@@ -1,6 +1,6 @@
 package examples.flex2.camera.snapshot;
 
-import org.seasar.flex2.io.ByteArray;
+import org.seasar.flex2.message.io.ByteArray;
 
 public class Snapshot {
     private ByteArray source;

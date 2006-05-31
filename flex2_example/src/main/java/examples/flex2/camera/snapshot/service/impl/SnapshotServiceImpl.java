@@ -4,14 +4,13 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import org.seasar.flex2.io.ByteArray;
+import org.seasar.flex2.message.io.ByteArray;
 import org.seasar.framework.util.FileOutputStreamUtil;
 
 import examples.flex2.camera.snapshot.Snapshot;
 import examples.flex2.camera.snapshot.service.SnapshotService;
 import examples.flex2.camera.snapshot.service.SnapshotServiceConfig;
 import examples.flex2.camera.util.naming.FileNameResolver;
-
 
 public class SnapshotServiceImpl implements SnapshotService {
 

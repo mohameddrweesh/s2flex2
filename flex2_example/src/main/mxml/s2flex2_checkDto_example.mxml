@@ -31,6 +31,9 @@
 				<mx:Button x="625" y="10" label="back to the base state" click="currentState=''"/>
 			</mx:AddChild>
 			<mx:RemoveChild target="{button2}"/>
+			<mx:AddChild position="lastChild">
+				<mx:TextArea x="20" y="319" width="253" height="42" id="debug"/>
+			</mx:AddChild>
 		</mx:State>
 	</mx:states>
 <mx:Script source="s2flex2_checkDto_script.as" />
