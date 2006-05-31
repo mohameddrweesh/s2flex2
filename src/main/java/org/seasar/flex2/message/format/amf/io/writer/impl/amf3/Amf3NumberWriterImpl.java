@@ -34,7 +34,7 @@ public class Amf3NumberWriterImpl implements Amf3DataWriter {
         writeNumber((Number) value, outputStream);
     }
 
-    private final void writeNumber(Number value, DataOutputStream outputStream)
+    private final void writeNumber( final Number value, final DataOutputStream outputStream)
             throws IOException {
         outputStream.writeDouble(value.doubleValue());
     }
