@@ -31,5 +31,5 @@
 	<!--
 		remoting message processor
 	-->
-	<component class="org.seasar.flex2.rpc.remoting.processor.impl.AmfMessageRequestProcessorImpl" />
+	<component class="org.seasar.flex2.rpc.remoting.processor.impl.RemotingMessageProcessorImpl" />
 </components>
