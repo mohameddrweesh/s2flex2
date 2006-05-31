@@ -2,6 +2,15 @@
 <!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.3//EN" 
 	"http://www.seasar.org/dtd/components23.dtd">
 <components>
+
+	<!--
+		data util
+	-->
+	<component class="org.seasar.flex2.util.data.transfer.impl.TransferImpl" />
+	<component class="org.seasar.flex2.util.data.storage.impl.StorageLocatorImpl"/>
+	<component name="serviceDataStorage" class="org.seasar.flex2.util.data.storage.impl.HttpSessionDataStorage" instance="session" />
+	
+	
 	<!-- service -->
 	<component class="org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceRepositoryImpl" />
 	<component class="org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceLocatorImpl" />
