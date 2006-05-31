@@ -13,7 +13,7 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.remoting.processor;
+package org.seasar.flex2.message.format.amf.processor;
 
 import org.seasar.extension.unit.S2TestCase;
 import org.seasar.flex2.message.format.amf.data.factory.AmfMessageFactory;
@@ -23,9 +23,9 @@ import org.seasar.flex2.message.format.amf.processor.AmfBodyProcessor;
 import org.seasar.flex2.message.format.amf.processor.impl.AmfBodyProcessorImpl;
 import org.seasar.framework.container.S2Container;
 
-public class AmfBodyProcessorTest extends S2TestCase {
+public class Amf3BodyProcessorTest extends S2TestCase {
 
-    private static String PATH = "Amf3ProcessorTest.dicon";
+    private static String PATH = "s2flex2_amf3.dicon";
 
     public void testCreateProcessor() throws Exception {
         S2Container container = getContainer();

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Shift_JIS"?>
 <!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.3//EN" 
 	"http://www.seasar.org/dtd/components23.dtd">
-<components namespace="s2flex2-amf">
+<components namespace="s2flex2_amf">
 	<!--
 		reader/writer share data components
 	-->
@@ -164,4 +164,11 @@
 	<component class="org.seasar.flex2.message.format.amf.data.factory.impl.AmfErrorFactoryImpl" />
 	<component class="org.seasar.flex2.message.format.amf.data.factory.impl.AmfHeaderFactoryImpl" />
 	<component class="org.seasar.flex2.message.format.amf.data.factory.impl.AmfMessageFactoryImpl" />
+
+	<!-- amf processor -->
+	<component name="serviceInvokerChooser" class="org.seasar.flex2.message.format.amf.processor.impl.ServiceInvokerChooserImpl"/>
+	<component class="org.seasar.flex2.message.format.amf.processor.impl.AmfHeaderProcessorImpl" />
+	<component class="org.seasar.flex2.message.format.amf.processor.impl.AmfBodyProcessorImpl" />
+	<component class="org.seasar.flex2.message.format.amf.processor.impl.AmfMessageProcessorImpl"/>
+	
 </components>

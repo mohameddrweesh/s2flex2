@@ -16,28 +16,21 @@
 package org.seasar.flex2.rpc.remoting.processor;
 
 import org.seasar.extension.unit.S2TestCase;
-import org.seasar.flex2.message.format.amf.io.reader.factory.impl.AmfReaderFactoryImpl;
-import org.seasar.flex2.message.format.amf.io.writer.factory.impl.AmfWriterFactoryImpl;
 import org.seasar.flex2.message.format.amf.processor.AmfMessageProcessor;
-import org.seasar.flex2.message.format.amf.processor.impl.AmfBodyProcessorImpl;
-import org.seasar.flex2.message.format.amf.processor.impl.AmfHeaderProcessorImpl;
-import org.seasar.flex2.message.format.amf.processor.impl.AmfMessageProcessorImpl;
+import org.seasar.flex2.rpc.remoting.processor.impl.AmfMessageRequestProcessorImpl;
 import org.seasar.framework.container.S2Container;
 
-public class AmfProcessorTest extends S2TestCase {
+public class RemotingMessageProcessorTest extends S2TestCase {
     
-    private static String PATH = "AmfProcessorTest.dicon";
+    private static String PATH = "remoting_amf3.dicon";
 
     public void testCreateProcessor() throws Exception {
         S2Container container = getContainer();
-        Object processor = container.getComponent( AmfMessageProcessor.class );
-        assertTrue("1", processor instanceof AmfMessageProcessorImpl);
+        Object processor = container.getComponent( RemotingMessageProcessor.class );
+        assertTrue("1", processor instanceof AmfMessageRequestProcessorImpl);
         
-        AmfMessageProcessorImpl processorImpl = (AmfMessageProcessorImpl)processor;
-        assertTrue("2", processorImpl.getBodyProcessor() instanceof AmfBodyProcessorImpl);
-        assertTrue("3", processorImpl.getHeaderProcessor() instanceof AmfHeaderProcessorImpl);
-        assertTrue("4", processorImpl.getReaderFactory() instanceof AmfReaderFactoryImpl);
-        assertTrue("5", processorImpl.getWriterFactory() instanceof AmfWriterFactoryImpl);
+        AmfMessageRequestProcessorImpl processorImpl = (AmfMessageRequestProcessorImpl)processor;
+        assertTrue("2", processorImpl.getProcessor() instanceof AmfMessageProcessor);
         
     }
     
