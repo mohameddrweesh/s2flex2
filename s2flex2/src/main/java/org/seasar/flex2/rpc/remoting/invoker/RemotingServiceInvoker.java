@@ -19,8 +19,4 @@ import org.seasar.flex2.rpc.gateway.invoker.impl.ServiceInvokerImpl;
 
 public class RemotingServiceInvoker extends ServiceInvokerImpl {
 
-    protected Object findComponent(String serviceName) {
-        return null;
-
-    }
 }

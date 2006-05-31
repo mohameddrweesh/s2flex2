@@ -35,29 +35,30 @@ import org.seasar.flex2.rpc.gateway.session.SessionDecorator;
 import org.seasar.flex2.rpc.gateway.session.util.HttpSessionUtil;
 import org.seasar.flex2.rpc.remoting.processor.RemotingMessageProcessor;
 
-public class AmfMessageRequestProcessorImpl implements RemotingMessageProcessor {
+public class RemotingMessageProcessorImpl implements RemotingMessageProcessor {
 
     private AmfMessageProcessor processor;
-    
+
     private SessionDecorator sessionDecorator;
 
     public AmfMessageProcessor getProcessor() {
         return processor;
     }
 
-    public void process(HttpServletRequest request, HttpServletResponse response)
-            throws IOException, ServletException {
+    public final void process(final HttpServletRequest request,
+            final HttpServletResponse response) throws IOException,
+            ServletException {
 
         try {
-            DataInputStream inputStream = getRequestInputStream(request);
-            DataOutputStream outputStream = getRequestOutputStream(response);
+            final DataInputStream inputStream = getRequestInputStream(request);
+            final DataOutputStream outputStream = getRequestOutputStream(response);
 
-            Map headers = createMessageHeaders(request);
-            processor.process(inputStream,outputStream,headers);
-            
-            response.setContentLength(outputStream.size());           
+            final Map headers = createMessageHeaders(request);
+            processor.process(inputStream, outputStream, headers);
+
+            response.setContentLength(outputStream.size());
             outputStream.flush();
-            
+
         } catch (Throwable throwable) {
             if (throwable instanceof RuntimeException) {
                 throw (RuntimeException) throwable;
@@ -76,35 +77,37 @@ public class AmfMessageRequestProcessorImpl implements RemotingMessageProcessor 
     public void setProcessor(AmfMessageProcessor processor) {
         this.processor = processor;
     }
-    
+
     public void setSessionDecorator(SessionDecorator sessionDecorator) {
         this.sessionDecorator = sessionDecorator;
     }
 
     private final Map createMessageHeaders(HttpServletRequest request) {
-      Map headers = new HashMap();
-      if (!request.isRequestedSessionIdValid()) {
-          String sessionId = HttpSessionUtil.getSessionId(request,true);
-          sessionId = sessionDecorator.formatSessionId(sessionId);
-          headers.put(AmfHeaderConstants.APPEND_TO_GATEWAYURL, sessionId);
-      }
-      
-      return headers;
+        Map headers = new HashMap();
+        if (!request.isRequestedSessionIdValid()) {
+            String sessionId = HttpSessionUtil.getSessionId(request, true);
+            sessionId = sessionDecorator.formatSessionId(sessionId);
+            headers.put(AmfHeaderConstants.APPEND_TO_GATEWAYURL, sessionId);
+        }
+
+        return headers;
     }
 
-    private final DataInputStream getRequestInputStream( final HttpServletRequest request) throws IOException {
+    private final DataInputStream getRequestInputStream(
+            final HttpServletRequest request) throws IOException {
         InputStream inputStream = request.getInputStream();
         if (!(inputStream instanceof BufferedInputStream)) {
             inputStream = new BufferedInputStream(inputStream);
         }
         return new DataInputStream(inputStream);
     }
-    
-    private final DataOutputStream getRequestOutputStream( final HttpServletResponse response) throws IOException {
+
+    private final DataOutputStream getRequestOutputStream(
+            final HttpServletResponse response) throws IOException {
         OutputStream outputStream = response.getOutputStream();
         if (!(outputStream instanceof BufferedOutputStream)) {
             outputStream = new BufferedOutputStream(outputStream);
         }
-        return new DataOutputStream(outputStream );
+        return new DataOutputStream(outputStream);
     }
 }

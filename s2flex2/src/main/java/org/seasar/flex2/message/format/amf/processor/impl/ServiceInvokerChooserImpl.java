@@ -25,7 +25,7 @@ import org.seasar.flex2.rpc.gateway.invoker.exception.InvokerNotFoundRuntimeExce
 
 public class ServiceInvokerChooserImpl implements ServiceInvokerChooser {
 
-    private List invokers;
+    private final List invokers;
 
     public ServiceInvokerChooserImpl() {
         invokers = new ArrayList();
@@ -35,7 +35,7 @@ public class ServiceInvokerChooserImpl implements ServiceInvokerChooser {
         invokers.add(invoker);
     }
 
-    public ServiceInvoker chooseInvoker(AmfBody requestBody) {
+    public final ServiceInvoker chooseInvoker( final AmfBody requestBody) {
         for (int i = 0; i < invokers.size(); ++i) {
             ServiceInvoker invoker = (ServiceInvoker) invokers.get(i);
             if (invoker.supports(requestBody.getServiceName(), requestBody

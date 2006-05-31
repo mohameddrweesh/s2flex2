@@ -35,11 +35,15 @@ public class MessagingServiceInvoker extends ServiceInvokerImpl {
         return storageLocator;
     }
 
+    public Transfer getTransfer() {
+        return transfer;
+    }
+
     public Object invoke(String serviceName, String methodName, Object[] args)
             throws Throwable {
 
-        Object service = serviceLocator.getService(serviceName);
-        Storage storage = storageLocator.getStorage( SERVICE_DATA_STORAGE );
+        final Object service = serviceLocator.getService(serviceName);
+        final Storage storage = storageLocator.getStorage( SERVICE_DATA_STORAGE );
         transfer.importToComponent(storage, service);
         try {
             return super.invokeServiceMethod(service, methodName, args);

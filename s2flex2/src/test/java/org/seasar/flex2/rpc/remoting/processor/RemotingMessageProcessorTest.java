@@ -17,7 +17,7 @@ package org.seasar.flex2.rpc.remoting.processor;
 
 import org.seasar.extension.unit.S2TestCase;
 import org.seasar.flex2.message.format.amf.processor.AmfMessageProcessor;
-import org.seasar.flex2.rpc.remoting.processor.impl.AmfMessageRequestProcessorImpl;
+import org.seasar.flex2.rpc.remoting.processor.impl.RemotingMessageProcessorImpl;
 import org.seasar.framework.container.S2Container;
 
 public class RemotingMessageProcessorTest extends S2TestCase {
@@ -27,9 +27,9 @@ public class RemotingMessageProcessorTest extends S2TestCase {
     public void testCreateProcessor() throws Exception {
         S2Container container = getContainer();
         Object processor = container.getComponent( RemotingMessageProcessor.class );
-        assertTrue("1", processor instanceof AmfMessageRequestProcessorImpl);
+        assertTrue("1", processor instanceof RemotingMessageProcessorImpl);
         
-        AmfMessageRequestProcessorImpl processorImpl = (AmfMessageRequestProcessorImpl)processor;
+        RemotingMessageProcessorImpl processorImpl = (RemotingMessageProcessorImpl)processor;
         assertTrue("2", processorImpl.getProcessor() instanceof AmfMessageProcessor);
         
     }
