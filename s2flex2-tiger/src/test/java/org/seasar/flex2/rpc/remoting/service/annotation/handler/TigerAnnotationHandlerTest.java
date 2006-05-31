@@ -1,10 +1,11 @@
-package org.seasar.flex2.rpc.amf.gateway.service.annotation.handler;
+package org.seasar.flex2.rpc.remoting.service.annotation.handler;
 
 import org.seasar.extension.unit.S2TestCase;
-import org.seasar.flex2.rpc.amf.gateway.service.annotation.TestAmfRemotingService;
-import org.seasar.flex2.rpc.amf.gateway.service.annotation.TestAmfRemotingServiceFull;
-import org.seasar.flex2.rpc.amf.gateway.service.annotation.TestServiceClass;
-import org.seasar.flex2.rpc.amf.gateway.service.annotation.factory.AnnotationHandlerFactory;
+import org.seasar.flex2.rpc.remoting.service.annotation.TestRemotingService;
+import org.seasar.flex2.rpc.remoting.service.annotation.TestRemotingServiceFull;
+import org.seasar.flex2.rpc.remoting.service.annotation.TestServiceClass;
+import org.seasar.flex2.rpc.remoting.service.annotation.factory.AnnotationHandlerFactory;
+import org.seasar.flex2.rpc.remoting.service.annotation.handler.AnnotationHandler;
 import org.seasar.framework.container.ComponentDef;
 import org.seasar.framework.container.S2Container;
 
@@ -34,13 +35,13 @@ public class TigerAnnotationHandlerTest extends S2TestCase {
     
     public void testCheckAnnotation(){
     	
-    	ComponentDef componentDef= container.getComponentDef(TestAmfRemotingService.class);
+    	ComponentDef componentDef= container.getComponentDef(TestRemotingService.class);
     	AnnotationHandler annHandler = AnnotationHandlerFactory.getAnnotationHandler();
     	
     	assertNotNull("1",componentDef);
     	assertTrue("2",annHandler.hasAmfRemotingService(componentDef));
     	
-    	componentDef= container.getComponentDef(TestAmfRemotingServiceFull.class);
+    	componentDef= container.getComponentDef(TestRemotingServiceFull.class);
     	annHandler = AnnotationHandlerFactory.getAnnotationHandler();
     	
     	assertNotNull("3",componentDef);

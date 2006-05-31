@@ -2,7 +2,7 @@
 <!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.3//EN" 
 	"http://www.seasar.org/dtd/components23.dtd">
 <components>
-	<component class="org.seasar.flex2.rpc.amf.gateway.service.annotation.TestAmfRemotingService" />
-	<component class="org.seasar.flex2.rpc.amf.gateway.service.annotation.TestAmfRemotingServiceFull" />
-	<component class="org.seasar.flex2.rpc.amf.gateway.service.annotation.TestServiceClass" />
+	<component class="org.seasar.flex2.rpc.remoting.service.annotation.TestRemotingService" />
+	<component class="org.seasar.flex2.rpc.remoting.service.annotation.TestRemotingServiceFull" />
+	<component class="org.seasar.flex2.rpc.remoting.service.annotation.TestServiceClass" />
 </components>
