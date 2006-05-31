@@ -90,7 +90,7 @@ public class AmfMessageProcessorImpl implements AmfMessageProcessor {
 
     private final ByteArrayOutputStream writeMessage( final AmfMessage responseMessage) throws IOException {
 
-        ByteArrayOutputStream amfMessageByteArray = new ByteArrayOutputStream(1024);
+        ByteArrayOutputStream amfMessageByteArray = new ByteArrayOutputStream(1024*2);
         DataOutputStream outputStream = new DataOutputStream(amfMessageByteArray);
         AmfWriter writer = writerFactory.createWriter( outputStream, responseMessage);
         writer.write();

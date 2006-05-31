@@ -20,6 +20,6 @@ import org.seasar.framework.exception.SRuntimeException;
 public class InvokerNotFoundRuntimeException extends SRuntimeException {
 	
 	public InvokerNotFoundRuntimeException(String serviceName) {
-		super("EFLX0001", new Object[]{serviceName});
+		super("EFLX1001", new Object[]{serviceName});
 	}
 }

@@ -36,12 +36,14 @@ public class AmfHeaderProcessorImpl implements AmfHeaderProcessor {
     }
 
     public void processResponse(AmfMessage responseMessage, Map addHeaders) {
-        Iterator headerIt = addHeaders.entrySet().iterator();
-        Map.Entry header;
-        while (headerIt.hasNext()) {
-            header = (Map.Entry) headerIt.next();
-            addHeader(responseMessage, (String) header.getKey(),
-                    (String) header.getValue());
+        if(addHeaders.size() > 0){
+            Iterator headerIt = addHeaders.entrySet().iterator();
+            Map.Entry header;
+            while (headerIt.hasNext()) {
+                header = (Map.Entry) headerIt.next();
+                addHeader(responseMessage, (String) header.getKey(),
+                        (String) header.getValue());
+            }
         }
     }
 
@@ -49,8 +51,8 @@ public class AmfHeaderProcessorImpl implements AmfHeaderProcessor {
         this.headerFactory = headerFactory;
     }
 
-    private final void addHeader(AmfMessage responseMessage, String headerName,
-            String data) {
+    private final void addHeader( final AmfMessage responseMessage, final String headerName,
+            final String data) {
         AmfHeader header = headerFactory.createHeader(headerName, data);
         responseMessage.addHeader(header);
     }

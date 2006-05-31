@@ -50,6 +50,10 @@ public class AmfBodyProcessorImpl implements AmfBodyProcessor {
         return messageFactory;
     }
 
+    public ServiceInvokerChooser getServiceInvokerChooser() {
+        return serviceInvokerChooser;
+    }
+
     public AmfMessage process(AmfMessage requestMessage) {
         AmfMessage responseMessage = messageFactory
                 .createMessage(requestMessage.getVersion());

@@ -35,7 +35,7 @@ public class ServiceInvokerImpl implements ServiceInvoker {
     public Object invoke(String serviceName, String methodName, Object[] args)
             throws Throwable {
 
-        Object service = serviceLocator.getService(serviceName);
+        final Object service = serviceLocator.getService(serviceName);
         return invokeServiceMethod(service, methodName, args);
     }
 
@@ -43,12 +43,13 @@ public class ServiceInvokerImpl implements ServiceInvoker {
         this.serviceLocator = serviceLocator;
     }
 
-    public boolean supports(String serviceName, String methodName, Object[] args) {
+    public boolean supports(final String serviceName, final String methodName,
+            final Object[] args) {
         return serviceLocator.isSupportService(serviceName, methodName);
     }
 
-    protected final Object invokeServiceMethod(Object service, String methodName,
-            Object[] args) throws Throwable {
+    protected final Object invokeServiceMethod(final Object service,
+            final String methodName, final Object[] args) throws Throwable {
         BeanDesc beanDesc = BeanDescFactory.getBeanDesc(service.getClass());
         try {
             return beanDesc.invoke(service, methodName, args);

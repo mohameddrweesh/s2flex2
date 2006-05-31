@@ -20,6 +20,6 @@ import org.seasar.framework.exception.SRuntimeException;
 public class InvalidServiceRuntimeException extends SRuntimeException {
 
     public InvalidServiceRuntimeException(String serviceName) {
-        super("EFLX0002", new Object[] { serviceName });
+        super("EFLX2002", new Object[] { serviceName });
     }
 }

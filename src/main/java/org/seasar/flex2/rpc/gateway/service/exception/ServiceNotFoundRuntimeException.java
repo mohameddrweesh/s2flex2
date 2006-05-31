@@ -20,6 +20,6 @@ import org.seasar.framework.exception.SRuntimeException;
 public class ServiceNotFoundRuntimeException extends SRuntimeException {
 	
 	public ServiceNotFoundRuntimeException(String serviceName) {
-		super("EFLX0001", new Object[]{serviceName});
+		super("EFLX2001", new Object[]{serviceName});
 	}
 }
