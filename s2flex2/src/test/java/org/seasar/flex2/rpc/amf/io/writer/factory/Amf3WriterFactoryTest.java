@@ -16,10 +16,11 @@
 package org.seasar.flex2.rpc.amf.io.writer.factory;
 
 import org.seasar.extension.unit.S2TestCase;
-import org.seasar.flex2.rpc.amf.io.writer.data.factory.Amf3DataWriterFactory;
-import org.seasar.flex2.rpc.amf.io.writer.data.factory.AmfDataWriterFactory;
-import org.seasar.flex2.rpc.amf.io.writer.factory.impl.Amf3WriterFactoryImpl;
-import org.seasar.flex2.rpc.amf.io.writer.impl.Amf3WriterImpl;
+import org.seasar.flex2.message.format.amf.io.writer.factory.Amf3DataWriterFactory;
+import org.seasar.flex2.message.format.amf.io.writer.factory.AmfDataWriterFactory;
+import org.seasar.flex2.message.format.amf.io.writer.factory.AmfWriterFactory;
+import org.seasar.flex2.message.format.amf.io.writer.factory.impl.Amf3WriterFactoryImpl;
+import org.seasar.flex2.message.format.amf.io.writer.impl.amf3.Amf3WriterImpl;
 import org.seasar.framework.container.S2Container;
 
 public class Amf3WriterFactoryTest extends S2TestCase {

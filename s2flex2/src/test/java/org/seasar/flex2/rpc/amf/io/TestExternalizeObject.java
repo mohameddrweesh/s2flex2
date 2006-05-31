@@ -2,9 +2,9 @@ package org.seasar.flex2.rpc.amf.io;
 
 import java.io.IOException;
 
-import org.seasar.flex2.io.DataInput;
-import org.seasar.flex2.io.DataOutput;
-import org.seasar.flex2.io.Externalizable;
+import org.seasar.flex2.message.io.DataInput;
+import org.seasar.flex2.message.io.DataOutput;
+import org.seasar.flex2.message.io.Externalizable;
 import org.seasar.flex2.rpc.amf.io.Amf3ReaderWriterTest.MyBean;
 
 public class TestExternalizeObject implements Externalizable {

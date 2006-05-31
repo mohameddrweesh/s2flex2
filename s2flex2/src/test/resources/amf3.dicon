@@ -5,173 +5,173 @@
 	<!--
 		reader/writer share data components
 	-->
-	<component class="org.seasar.flex2.rpc.amf.io.impl.AmfSharedObjectImpl" instance="request" />
-	<component class="org.seasar.flex2.rpc.amf.io.impl.Amf3ReferencesImpl" instance="request" />
+	<component class="org.seasar.flex2.message.format.amf.io.impl.AmfSharedObjectImpl" instance="request" />
+	<component class="org.seasar.flex2.message.format.amf.io.impl.Amf3ReferencesImpl" instance="request" />
 
 	<!--
 		reader/writer share data factory components
 	-->
-	<component class="org.seasar.flex2.rpc.amf.io.factory.impl.AmfSharedObjectFactoryImpl" />
-	<component class="org.seasar.flex2.rpc.amf.io.factory.impl.Amf3ReferencesFactoryImpl"  />
+	<component class="org.seasar.flex2.message.format.amf.io.factory.impl.AmfSharedObjectFactoryImpl" />
+	<component class="org.seasar.flex2.message.format.amf.io.factory.impl.Amf3ReferencesFactoryImpl"  />
 
 	<!--
 		special data factory components
 	-->
-	<component class="org.seasar.flex2.io.factory.impl.ByteArrayFactoryImpl" />
+	<component class="org.seasar.flex2.message.io.factory.impl.ByteArrayFactoryImpl" />
 
 	<!-- 
 		reader components
 	-->
-	<component class="org.seasar.flex2.rpc.amf.io.reader.impl.Amf3ReaderImpl" instance="request" />
-	<component class="org.seasar.flex2.rpc.amf.io.reader.factory.impl.Amf3ReaderFactoryImpl" />
+	<component class="org.seasar.flex2.message.format.amf.io.reader.impl.amf3.Amf3ReaderImpl" instance="request" />
+	<component class="org.seasar.flex2.message.format.amf.io.reader.factory.impl.Amf3ReaderFactoryImpl" />
 
 	<!-- 
 		data reader components
 	-->
-	<component name="amfNullReaderImpl" class="org.seasar.flex2.rpc.amf.io.reader.data.impl.amf.AmfNullReaderImpl" />
-	<component name="amfNumberReaderImpl" class="org.seasar.flex2.rpc.amf.io.reader.data.impl.amf.AmfNumberReaderImpl" />
-	<component name="amfBooleanReaderImpl" class="org.seasar.flex2.rpc.amf.io.reader.data.impl.amf.AmfBooleanReaderImpl" />
-	<component name="amfStringReaderImpl" class="org.seasar.flex2.rpc.amf.io.reader.data.impl.amf.AmfStringReaderImpl" />
-	<component name="amfArrayReaderImpl" class="org.seasar.flex2.rpc.amf.io.reader.data.impl.amf.AmfArrayReaderImpl" />
-	<component name="amf3DataReaderImpl" class="org.seasar.flex2.rpc.amf.io.reader.data.impl.amf3.Amf3DataReaderImpl" />
-	<component name="amf3BooleanFalseReaderImpl" class="org.seasar.flex2.rpc.amf.io.reader.data.impl.amf3.Amf3BooleanFalseReaderImpl" />
-	<component name="amf3BooleanTrueReaderImpl" class="org.seasar.flex2.rpc.amf.io.reader.data.impl.amf3.Amf3BooleanTrueReaderImpl" />
-	<component name="amf3IntegerReaderImpl" class="org.seasar.flex2.rpc.amf.io.reader.data.impl.amf3.Amf3IntegerReaderImpl" />
-	<component name="amf3StringReaderImpl" class="org.seasar.flex2.rpc.amf.io.reader.data.impl.amf3.Amf3StringReaderImpl" />
-	<component name="amf3DateReaderImpl" class="org.seasar.flex2.rpc.amf.io.reader.data.impl.amf3.Amf3DateReaderImpl" />
-	<component name="amf3ArrayReaderImpl" class="org.seasar.flex2.rpc.amf.io.reader.data.impl.amf3.Amf3ArrayReaderImpl" />
-	<component name="amf3ObjectReaderImpl" class="org.seasar.flex2.rpc.amf.io.reader.data.impl.amf3.Amf3ObjectReaderImpl">
+	<component name="amfNullReaderImpl" class="org.seasar.flex2.message.format.amf.io.reader.impl.amf.AmfNullReaderImpl" />
+	<component name="amfNumberReaderImpl" class="org.seasar.flex2.message.format.amf.io.reader.impl.amf.AmfNumberReaderImpl" />
+	<component name="amfBooleanReaderImpl" class="org.seasar.flex2.message.format.amf.io.reader.impl.amf.AmfBooleanReaderImpl" />
+	<component name="amfStringReaderImpl" class="org.seasar.flex2.message.format.amf.io.reader.impl.amf.AmfStringReaderImpl" />
+	<component name="amfArrayReaderImpl" class="org.seasar.flex2.message.format.amf.io.reader.impl.amf.AmfArrayReaderImpl" />
+	<component name="amf3DataReaderImpl" class="org.seasar.flex2.message.format.amf.io.reader.impl.amf3.Amf3DataReaderImpl" />
+	<component name="amf3BooleanFalseReaderImpl" class="org.seasar.flex2.message.format.amf.io.reader.impl.amf3.Amf3BooleanFalseReaderImpl" />
+	<component name="amf3BooleanTrueReaderImpl" class="org.seasar.flex2.message.format.amf.io.reader.impl.amf3.Amf3BooleanTrueReaderImpl" />
+	<component name="amf3IntegerReaderImpl" class="org.seasar.flex2.message.format.amf.io.reader.impl.amf3.Amf3IntegerReaderImpl" />
+	<component name="amf3StringReaderImpl" class="org.seasar.flex2.message.format.amf.io.reader.impl.amf3.Amf3StringReaderImpl" />
+	<component name="amf3DateReaderImpl" class="org.seasar.flex2.message.format.amf.io.reader.impl.amf3.Amf3DateReaderImpl" />
+	<component name="amf3ArrayReaderImpl" class="org.seasar.flex2.message.format.amf.io.reader.impl.amf3.Amf3ArrayReaderImpl" />
+	<component name="amf3ObjectReaderImpl" class="org.seasar.flex2.message.format.amf.io.reader.impl.amf3.Amf3ObjectReaderImpl">
 		<property name="stringReader">amf3StringReaderImpl</property>
 	</component>
-	<component name="amf3XmlReaderImpl" class="org.seasar.flex2.rpc.amf.io.reader.data.impl.amf3.Amf3XmlReaderImpl" />
-	<component name="amf3ByteArrayReaderImpl" class="org.seasar.flex2.rpc.amf.io.reader.data.impl.amf3.Amf3ByteArrayReaderImpl" />
+	<component name="amf3XmlReaderImpl" class="org.seasar.flex2.message.format.amf.io.reader.impl.amf3.Amf3XmlReaderImpl" />
+	<component name="amf3ByteArrayReaderImpl" class="org.seasar.flex2.message.format.amf.io.reader.impl.amf3.Amf3ByteArrayReaderImpl" />
 
     <component name="readerMap" class="java.util.HashMap">
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.rpc.amf.data.AmfDataType@TYPE_NULL</arg>
+	        <arg>@org.seasar.flex2.message.format.amf.type.AmfDataType@TYPE_NULL</arg>
 	        <arg>amfNullReaderImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.rpc.amf.data.AmfDataType@TYPE_NUMBER</arg>
+	        <arg>@org.seasar.flex2.message.format.amf.type.AmfDataType@TYPE_NUMBER</arg>
 	        <arg>amfNumberReaderImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.rpc.amf.data.AmfDataType@TYPE_BOOLEAN</arg>
+	        <arg>@org.seasar.flex2.message.format.amf.type.AmfDataType@TYPE_BOOLEAN</arg>
 	        <arg>amfBooleanReaderImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.rpc.amf.data.AmfDataType@TYPE_STRING</arg>
+	        <arg>@org.seasar.flex2.message.format.amf.type.AmfDataType@TYPE_STRING</arg>
 	        <arg>amfStringReaderImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.rpc.amf.data.AmfDataType@TYPE_ARRAY</arg>
+	        <arg>@org.seasar.flex2.message.format.amf.type.AmfDataType@TYPE_ARRAY</arg>
 	        <arg>amfArrayReaderImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.rpc.amf.data.Amf3DataType@TYPE_AMF3_DATA_MARKER</arg>
+	        <arg>@org.seasar.flex2.message.format.amf.type.Amf3DataType@TYPE_AMF3_DATA_MARKER</arg>
 	        <arg>amf3DataReaderImpl</arg>
 	    </initMethod>	    
 	</component>
 	
 	<component name="amf3DataReaderMap" class="java.util.HashMap">
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.rpc.amf.data.Amf3DataType@TYPE_NULL</arg>
+	        <arg>@org.seasar.flex2.message.format.amf.type.Amf3DataType@TYPE_NULL</arg>
 	        <arg>amfNullReaderImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.rpc.amf.data.Amf3DataType@TYPE_BOOLEAN_FALSE</arg>
+	        <arg>@org.seasar.flex2.message.format.amf.type.Amf3DataType@TYPE_BOOLEAN_FALSE</arg>
 	        <arg>amf3BooleanFalseReaderImpl</arg>
 	    </initMethod>
    	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.rpc.amf.data.Amf3DataType@TYPE_BOOLEAN_TRUE</arg>
+	        <arg>@org.seasar.flex2.message.format.amf.type.Amf3DataType@TYPE_BOOLEAN_TRUE</arg>
 	        <arg>amf3BooleanTrueReaderImpl</arg>
 	    </initMethod>
    	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.rpc.amf.data.Amf3DataType@TYPE_INTEGER</arg>
+	        <arg>@org.seasar.flex2.message.format.amf.type.Amf3DataType@TYPE_INTEGER</arg>
 	        <arg>amf3IntegerReaderImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.rpc.amf.data.Amf3DataType@TYPE_NUMBER</arg>
+	        <arg>@org.seasar.flex2.message.format.amf.type.Amf3DataType@TYPE_NUMBER</arg>
 	        <arg>amfNumberReaderImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.rpc.amf.data.Amf3DataType@TYPE_STRING</arg>
+	        <arg>@org.seasar.flex2.message.format.amf.type.Amf3DataType@TYPE_STRING</arg>
 	        <arg>amf3StringReaderImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.rpc.amf.data.Amf3DataType@TYPE_DATE</arg>
+	        <arg>@org.seasar.flex2.message.format.amf.type.Amf3DataType@TYPE_DATE</arg>
 	        <arg>amf3DateReaderImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.rpc.amf.data.Amf3DataType@TYPE_ARRAY</arg>
+	        <arg>@org.seasar.flex2.message.format.amf.type.Amf3DataType@TYPE_ARRAY</arg>
 	        <arg>amf3ArrayReaderImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.rpc.amf.data.Amf3DataType@TYPE_OBJECT</arg>
+	        <arg>@org.seasar.flex2.message.format.amf.type.Amf3DataType@TYPE_OBJECT</arg>
 	        <arg>amf3ObjectReaderImpl</arg>
 	    </initMethod>
    	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.rpc.amf.data.Amf3DataType@TYPE_XML</arg>
+	        <arg>@org.seasar.flex2.message.format.amf.type.Amf3DataType@TYPE_XML</arg>
 	        <arg>amf3XmlReaderImpl</arg>
 	    </initMethod>
    	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.rpc.amf.data.Amf3DataType@TYPE_BYTEARRAY</arg>
+	        <arg>@org.seasar.flex2.message.format.amf.type.Amf3DataType@TYPE_BYTEARRAY</arg>
 	        <arg>amf3ByteArrayReaderImpl</arg>
 	    </initMethod>
 	</component>
 	
-	<component class="org.seasar.flex2.rpc.amf.io.reader.data.factory.impl.Amf3DataReaderFactoryImpl" />
+	<component class="org.seasar.flex2.message.format.amf.io.reader.factory.impl.Amf3DataReaderFactoryImpl" />
 
-	<component class="org.seasar.flex2.io.impl.ExternalizeDataInputImpl" instance="request" />
-	<component class="org.seasar.flex2.io.factory.impl.ExternalizeDataInputFactoryImpl" />
+	<component class="org.seasar.flex2.message.io.impl.ExternalizeDataInputImpl" instance="request" />
+	<component class="org.seasar.flex2.message.io.factory.impl.ExternalizeDataInputFactoryImpl" />
 	
 	<!-- 
 		writer components
 	-->
-	<component class="org.seasar.flex2.rpc.amf.io.writer.factory.impl.Amf3WriterFactoryImpl" />
-	<component class="org.seasar.flex2.rpc.amf.io.writer.impl.Amf3WriterImpl" instance="request" />
+	<component class="org.seasar.flex2.message.format.amf.io.writer.factory.impl.Amf3WriterFactoryImpl" />
+	<component class="org.seasar.flex2.message.format.amf.io.writer.impl.amf3.Amf3WriterImpl" instance="request" />
 
 	<!-- 
 		data writer components
 	-->
-	<component name="amfNullWriterImpl" class="org.seasar.flex2.rpc.amf.io.writer.data.impl.amf.AmfNullWriterImpl" autoBinding="none" />	
-	<component name="amfStringWriterImpl" class="org.seasar.flex2.rpc.amf.io.writer.data.impl.amf.AmfStringWriterImpl" autoBinding="none" />
-	<component name="amfBigDecimalWriterImpl" class="org.seasar.flex2.rpc.amf.io.writer.data.impl.amf.AmfBigDecimalWriterImpl" autoBinding="none" />
-	<component name="amfNumberWriterImpl" class="org.seasar.flex2.rpc.amf.io.writer.data.impl.amf.AmfNumberWriterImpl" autoBinding="none" />
-	<component name="amfBooleanWriterImpl" class="org.seasar.flex2.rpc.amf.io.writer.data.impl.amf.AmfBooleanWriterImpl" autoBinding="none" />
+	<component name="amfNullWriterImpl" class="org.seasar.flex2.message.format.amf.io.writer.impl.amf.AmfNullWriterImpl" autoBinding="none" />	
+	<component name="amfStringWriterImpl" class="org.seasar.flex2.message.format.amf.io.writer.impl.amf.AmfStringWriterImpl" autoBinding="none" />
+	<component name="amfBigDecimalWriterImpl" class="org.seasar.flex2.message.format.amf.io.writer.impl.amf.AmfBigDecimalWriterImpl" autoBinding="none" />
+	<component name="amfNumberWriterImpl" class="org.seasar.flex2.message.format.amf.io.writer.impl.amf.AmfNumberWriterImpl" autoBinding="none" />
+	<component name="amfBooleanWriterImpl" class="org.seasar.flex2.message.format.amf.io.writer.impl.amf.AmfBooleanWriterImpl" autoBinding="none" />
 
-	<component name="amf3NullWriterImpl" class="org.seasar.flex2.rpc.amf.io.writer.data.impl.amf3.Amf3NullWriterImpl" />
-	<component name="amf3StringWriterImpl" class="org.seasar.flex2.rpc.amf.io.writer.data.impl.amf3.Amf3StringWriterImpl" />
-	<component name="amf3BigDecimalWriterImpl" class="org.seasar.flex2.rpc.amf.io.writer.data.impl.amf3.Amf3BigDecimalWriterImpl" />
-	<component name="amf3IntegerWriterImpl" class="org.seasar.flex2.rpc.amf.io.writer.data.impl.amf3.Amf3IntegerWriterImpl" />
-	<component name="amf3NumberWriterImpl" class="org.seasar.flex2.rpc.amf.io.writer.data.impl.amf3.Amf3NumberWriterImpl" />
-	<component name="amf3BooleanWriterImpl" class="org.seasar.flex2.rpc.amf.io.writer.data.impl.amf3.Amf3BooleanWriterImpl" />
+	<component name="amf3NullWriterImpl" class="org.seasar.flex2.message.format.amf.io.writer.impl.amf3.Amf3NullWriterImpl" />
+	<component name="amf3StringWriterImpl" class="org.seasar.flex2.message.format.amf.io.writer.impl.amf3.Amf3StringWriterImpl" />
+	<component name="amf3BigDecimalWriterImpl" class="org.seasar.flex2.message.format.amf.io.writer.impl.amf3.Amf3BigDecimalWriterImpl" />
+	<component name="amf3IntegerWriterImpl" class="org.seasar.flex2.message.format.amf.io.writer.impl.amf3.Amf3IntegerWriterImpl" />
+	<component name="amf3NumberWriterImpl" class="org.seasar.flex2.message.format.amf.io.writer.impl.amf3.Amf3NumberWriterImpl" />
+	<component name="amf3BooleanWriterImpl" class="org.seasar.flex2.message.format.amf.io.writer.impl.amf3.Amf3BooleanWriterImpl" />
 		
-	<component name="amf3DateWriterImpl" class="org.seasar.flex2.rpc.amf.io.writer.data.impl.amf3.Amf3DateWriterImpl" />
-	<component name="amf3ArrayWriterImpl" class="org.seasar.flex2.rpc.amf.io.writer.data.impl.amf3.Amf3ArrayWriterImpl" />
-	<component name="amf3IteratorWriterImpl" class="org.seasar.flex2.rpc.amf.io.writer.data.impl.amf3.Amf3IteratorWriterImpl" />
-	<component name="amf3CollectionWriterImpl" class="org.seasar.flex2.rpc.amf.io.writer.data.impl.amf3.Amf3CollectionWriterImpl" />
-	<component name="amf3XmlWriterImpl" class="org.seasar.flex2.rpc.amf.io.writer.data.impl.amf3.Amf3XmlWriterImpl" />
-	<component name="amf3InitializedObjectWriterImpl" class="org.seasar.flex2.rpc.amf.io.writer.data.impl.amf3.Amf3InitializedObjectWriterImpl" />
-	<component name="amf3TypedClassObjectWriterImpl" class="org.seasar.flex2.rpc.amf.io.writer.data.impl.amf3.Amf3TypedClassObjectWriterImpl" />
-	<component name="amf3ExternalizableObjectWriterImpl" class="org.seasar.flex2.rpc.amf.io.writer.data.impl.amf3.Amf3ExternalizableObjectWriterImpl" />
-	<component name="amf3ByteArrayWriterImpl" class="org.seasar.flex2.rpc.amf.io.writer.data.impl.amf3.Amf3ByteArrayWriterImpl" />
+	<component name="amf3DateWriterImpl" class="org.seasar.flex2.message.format.amf.io.writer.impl.amf3.Amf3DateWriterImpl" />
+	<component name="amf3ArrayWriterImpl" class="org.seasar.flex2.message.format.amf.io.writer.impl.amf3.Amf3ArrayWriterImpl" />
+	<component name="amf3IteratorWriterImpl" class="org.seasar.flex2.message.format.amf.io.writer.impl.amf3.Amf3IteratorWriterImpl" />
+	<component name="amf3CollectionWriterImpl" class="org.seasar.flex2.message.format.amf.io.writer.impl.amf3.Amf3CollectionWriterImpl" />
+	<component name="amf3XmlWriterImpl" class="org.seasar.flex2.message.format.amf.io.writer.impl.amf3.Amf3XmlWriterImpl" />
+	<component name="amf3InitializedObjectWriterImpl" class="org.seasar.flex2.message.format.amf.io.writer.impl.amf3.Amf3InitializedObjectWriterImpl" />
+	<component name="amf3TypedClassObjectWriterImpl" class="org.seasar.flex2.message.format.amf.io.writer.impl.amf3.Amf3TypedClassObjectWriterImpl" />
+	<component name="amf3ExternalizableObjectWriterImpl" class="org.seasar.flex2.message.format.amf.io.writer.impl.amf3.Amf3ExternalizableObjectWriterImpl" />
+	<component name="amf3ByteArrayWriterImpl" class="org.seasar.flex2.message.format.amf.io.writer.impl.amf3.Amf3ByteArrayWriterImpl" />
 
     <component name="writerMap" class="java.util.HashMap">
  	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.rpc.amf.data.AmfDataType@TYPE_NULL</arg>
+	        <arg>@org.seasar.flex2.message.format.amf.type.AmfDataType@TYPE_NULL</arg>
 	        <arg>amfNullWriterImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.rpc.amf.data.AmfDataType@TYPE_STRING</arg>
+	        <arg>@org.seasar.flex2.message.format.amf.type.AmfDataType@TYPE_STRING</arg>
 	        <arg>amfStringWriterImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.rpc.amf.data.AmfDataType@TYPE_NUMBER</arg>
+	        <arg>@org.seasar.flex2.message.format.amf.type.AmfDataType@TYPE_NUMBER</arg>
 	        <arg>amfNumberWriterImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.rpc.amf.data.AmfDataType@TYPE_BOOLEAN</arg>
+	        <arg>@org.seasar.flex2.message.format.amf.type.AmfDataType@TYPE_BOOLEAN</arg>
 	        <arg>amfBooleanWriterImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
@@ -182,43 +182,43 @@
 	
 	<component name="amf3DataWriterMap" class="java.util.HashMap">
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.rpc.amf.data.Amf3DataType@TYPE_NULL</arg>
+	        <arg>@org.seasar.flex2.message.format.amf.type.Amf3DataType@TYPE_NULL</arg>
 	        <arg>amf3NullWriterImpl</arg>
 	    </initMethod>	
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.rpc.amf.data.Amf3DataType@TYPE_STRING</arg>
+	        <arg>@org.seasar.flex2.message.format.amf.type.Amf3DataType@TYPE_STRING</arg>
 	        <arg>amf3StringWriterImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.rpc.amf.data.Amf3DataType@TYPE_INTEGER</arg>
+	        <arg>@org.seasar.flex2.message.format.amf.type.Amf3DataType@TYPE_INTEGER</arg>
 	        <arg>amf3IntegerWriterImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.rpc.amf.data.Amf3DataType@TYPE_NUMBER</arg>
+	        <arg>@org.seasar.flex2.message.format.amf.type.Amf3DataType@TYPE_NUMBER</arg>
 	        <arg>amf3NumberWriterImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.rpc.amf.data.Amf3DataType@TYPE_BOOLEAN</arg>
+	        <arg>@org.seasar.flex2.message.format.amf.type.Amf3DataType@TYPE_BOOLEAN</arg>
 	        <arg>amf3BooleanWriterImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.rpc.amf.data.Amf3DataType@TYPE_DATE</arg>
+	        <arg>@org.seasar.flex2.message.format.amf.type.Amf3DataType@TYPE_DATE</arg>
 	        <arg>amf3DateWriterImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.rpc.amf.data.Amf3DataType@TYPE_ARRAY</arg>
+	        <arg>@org.seasar.flex2.message.format.amf.type.Amf3DataType@TYPE_ARRAY</arg>
 	        <arg>amf3ArrayWriterImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.rpc.amf.data.Amf3DataType@TYPE_OBJECT</arg>
+	        <arg>@org.seasar.flex2.message.format.amf.type.Amf3DataType@TYPE_OBJECT</arg>
 	        <arg>amf3TypedClassObjectWriterImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.rpc.amf.data.Amf3DataType@TYPE_XML</arg>
+	        <arg>@org.seasar.flex2.message.format.amf.type.Amf3DataType@TYPE_XML</arg>
 	        <arg>amf3XmlWriterImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>"org.seasar.flex2.io.Externalizable"</arg>
+	        <arg>"org.seasar.flex2.message.io.Externalizable"</arg>
 	        <arg>amf3ExternalizableObjectWriterImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
@@ -238,26 +238,26 @@
 	        <arg>amf3BigDecimalWriterImpl</arg>
 	    </initMethod>
 	    <initMethod name="put">
-	        <arg>@org.seasar.flex2.rpc.amf.data.Amf3DataType@TYPE_BYTEARRAY</arg>
+	        <arg>@org.seasar.flex2.message.format.amf.type.Amf3DataType@TYPE_BYTEARRAY</arg>
 	        <arg>amf3ByteArrayWriterImpl</arg>
 	    </initMethod>
 	</component>
 	
-	<component class="org.seasar.flex2.rpc.amf.io.writer.data.factory.impl.Amf3DataWriterFactoryImpl" />
+	<component class="org.seasar.flex2.message.format.amf.io.writer.factory.impl.Amf3DataWriterFactoryImpl" />
 	
-	<component class="org.seasar.flex2.io.impl.ExternalizeDataOutputImpl" instance="request" />
-	<component class="org.seasar.flex2.io.factory.impl.ExternalizeDataOutputFactoryImpl" />
+	<component class="org.seasar.flex2.message.io.impl.ExternalizeDataOutputImpl" instance="request" />
+	<component class="org.seasar.flex2.message.io.factory.impl.ExternalizeDataOutputFactoryImpl" />
 	
 	<!--
 		amf data factory
 	-->
-	<component class="org.seasar.flex2.rpc.amf.data.factory.impl.Amf3BodyFactoryImpl" />
-	<component class="org.seasar.flex2.rpc.amf.data.factory.impl.AmfErrorFactoryImpl" />
-	<component class="org.seasar.flex2.rpc.amf.data.factory.impl.AmfHeaderFactoryImpl" />
-	<component class="org.seasar.flex2.rpc.amf.data.factory.impl.AmfMessageFactoryImpl" />
+	<component class="org.seasar.flex2.message.format.amf.data.factory.impl.Amf3BodyFactoryImpl" />
+	<component class="org.seasar.flex2.message.format.amf.data.factory.impl.AmfErrorFactoryImpl" />
+	<component class="org.seasar.flex2.message.format.amf.data.factory.impl.AmfHeaderFactoryImpl" />
+	<component class="org.seasar.flex2.message.format.amf.data.factory.impl.AmfMessageFactoryImpl" />
 	
 	<!-- 
 		special data components
 	-->
-	<component class="org.seasar.flex2.io.impl.ByteArrayImpl" instance="prototype" />
+	<component class="org.seasar.flex2.message.io.impl.ByteArrayImpl" instance="prototype" />
 </components>

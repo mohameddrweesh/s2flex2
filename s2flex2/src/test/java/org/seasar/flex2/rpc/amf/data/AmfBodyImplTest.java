@@ -19,8 +19,8 @@ import java.util.ArrayList;
 
 import junit.framework.TestCase;
 
-import org.seasar.flex2.rpc.amf.data.AmfBody;
-import org.seasar.flex2.rpc.amf.data.impl.AmfBodyImpl;
+import org.seasar.flex2.message.format.amf.data.AmfBody;
+import org.seasar.flex2.message.format.amf.data.impl.AmfBodyImpl;
 ;
 
 public class AmfBodyImplTest extends TestCase {

@@ -27,14 +27,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.seasar.extension.unit.S2TestCase;
-import org.seasar.flex2.rpc.amf.data.AmfBody;
-import org.seasar.flex2.rpc.amf.data.AmfMessage;
-import org.seasar.flex2.rpc.amf.data.factory.AmfBodyFactory;
-import org.seasar.flex2.rpc.amf.data.factory.AmfMessageFactory;
-import org.seasar.flex2.rpc.amf.io.reader.AmfReader;
-import org.seasar.flex2.rpc.amf.io.reader.factory.AmfReaderFactory;
-import org.seasar.flex2.rpc.amf.io.writer.AmfWriter;
-import org.seasar.flex2.rpc.amf.io.writer.factory.AmfWriterFactory;
+import org.seasar.flex2.message.format.amf.data.AmfBody;
+import org.seasar.flex2.message.format.amf.data.AmfMessage;
+import org.seasar.flex2.message.format.amf.data.factory.AmfBodyFactory;
+import org.seasar.flex2.message.format.amf.data.factory.AmfMessageFactory;
+import org.seasar.flex2.message.format.amf.io.reader.AmfReader;
+import org.seasar.flex2.message.format.amf.io.reader.factory.AmfReaderFactory;
+import org.seasar.flex2.message.format.amf.io.writer.AmfWriter;
+import org.seasar.flex2.message.format.amf.io.writer.factory.AmfWriterFactory;
 
 public class AmfReaderWriterTest extends S2TestCase {
 
