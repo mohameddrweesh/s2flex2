@@ -13,16 +13,13 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.gateway.processor;
+package org.seasar.flex2.message.format.amf.processor;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-public interface RequestProcessor {
+import org.seasar.flex2.message.format.amf.data.AmfMessage;
 
-	public void process(HttpServletRequest request, HttpServletResponse response)
-			throws IOException, ServletException;
+public interface AmfBodyProcessor {
+
+    AmfMessage process(AmfMessage responseMessage);
 }

@@ -13,21 +13,19 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.remoting.processor.impl;
+package org.seasar.flex2.message.format.amf.processor.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.seasar.flex2.message.format.amf.data.AmfBody;
 import org.seasar.flex2.message.format.amf.data.AmfMessage;
 import org.seasar.flex2.message.format.amf.data.factory.AmfBodyFactory;
 import org.seasar.flex2.message.format.amf.data.factory.AmfErrorFactory;
 import org.seasar.flex2.message.format.amf.data.factory.AmfMessageFactory;
+import org.seasar.flex2.message.format.amf.processor.AmfBodyProcessor;
 import org.seasar.flex2.rpc.gateway.invoker.ServiceInvoker;
 import org.seasar.flex2.rpc.gateway.invoker.exception.InvokerNotFoundRuntimeException;
-import org.seasar.flex2.rpc.remoting.processor.AmfBodyProcessor;
 
 public class AmfBodyProcessorImpl implements AmfBodyProcessor {
 
@@ -38,11 +36,11 @@ public class AmfBodyProcessorImpl implements AmfBodyProcessor {
     private AmfBodyFactory bodyFactory;
 
     private AmfErrorFactory errorFactory;
-    
+
     private List invokers = new ArrayList();
-    
+
     private AmfMessageFactory messageFactory;
-    
+
     public void addInvoker(ServiceInvoker invoker) {
         invokers.add(invoker);
     }
@@ -59,13 +57,13 @@ public class AmfBodyProcessorImpl implements AmfBodyProcessor {
         return messageFactory;
     }
 
-    public AmfMessage process(HttpServletRequest request,
-            AmfMessage requestMessage) {
-        AmfMessage responseMessage = messageFactory.createMessage(requestMessage.getVersion());
+    public AmfMessage process(AmfMessage requestMessage) {
+        AmfMessage responseMessage = messageFactory
+                .createMessage(requestMessage.getVersion());
 
         for (int i = 0; i < requestMessage.getBodySize(); ++i) {
             AmfBody requestBody = requestMessage.getBody(i);
-            AmfBody responseBody = processBody(request, requestBody);
+            AmfBody responseBody = processBody(requestBody);
             responseMessage.addBody(responseBody);
         }
         return responseMessage;
@@ -83,8 +81,7 @@ public class AmfBodyProcessorImpl implements AmfBodyProcessor {
         this.messageFactory = messageFactory;
     }
 
-    protected AmfBody processBody(HttpServletRequest request,
-            AmfBody requestBody) {
+    protected AmfBody processBody(AmfBody requestBody) {
 
         try {
             ServiceInvoker invoker = chooseInvoker(requestBody);

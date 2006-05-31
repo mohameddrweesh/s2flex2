@@ -18,10 +18,10 @@ package org.seasar.flex2.rpc.remoting.processor;
 import org.seasar.extension.unit.S2TestCase;
 import org.seasar.flex2.message.format.amf.io.reader.factory.impl.Amf3ReaderFactoryImpl;
 import org.seasar.flex2.message.format.amf.io.writer.factory.impl.Amf3WriterFactoryImpl;
-import org.seasar.flex2.rpc.remoting.processor.AmfProcessor;
-import org.seasar.flex2.rpc.remoting.processor.impl.AmfBodyProcessorImpl;
-import org.seasar.flex2.rpc.remoting.processor.impl.AmfHeaderProcessorImpl;
-import org.seasar.flex2.rpc.remoting.processor.impl.AmfProcessorImpl;
+import org.seasar.flex2.message.format.amf.processor.AmfMessageProcessor;
+import org.seasar.flex2.message.format.amf.processor.impl.AmfBodyProcessorImpl;
+import org.seasar.flex2.message.format.amf.processor.impl.AmfHeaderProcessorImpl;
+import org.seasar.flex2.message.format.amf.processor.impl.AmfMessageProcessorImpl;
 import org.seasar.framework.container.S2Container;
 
 public class Amf3ProcessorTest extends S2TestCase {
@@ -30,10 +30,10 @@ public class Amf3ProcessorTest extends S2TestCase {
 
     public void testCreateProcessor() throws Exception {
         S2Container container = getContainer();
-        Object processor = container.getComponent(AmfProcessor.class);
-        assertTrue("1", processor instanceof AmfProcessorImpl);
+        Object processor = container.getComponent(AmfMessageProcessor.class);
+        assertTrue("1", processor instanceof AmfMessageProcessorImpl);
 
-        AmfProcessorImpl processorImpl = (AmfProcessorImpl) processor;
+        AmfMessageProcessorImpl processorImpl = (AmfMessageProcessorImpl) processor;
         assertTrue(
                 "2",
                 processorImpl.getBodyProcessor() instanceof AmfBodyProcessorImpl);

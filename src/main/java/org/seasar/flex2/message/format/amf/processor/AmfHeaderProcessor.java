@@ -13,9 +13,15 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.remoting.processor;
+package org.seasar.flex2.message.format.amf.processor;
 
-import org.seasar.flex2.rpc.gateway.processor.RequestProcessor;
+import java.util.Map;
 
-public interface AmfProcessor extends RequestProcessor {
+import org.seasar.flex2.message.format.amf.data.AmfMessage;
+
+public interface AmfHeaderProcessor {
+
+    void processRequest(AmfMessage requestMessage, Map addHeaders);
+
+    void processResponse(AmfMessage responseMessage, Map addHeaders);
 }

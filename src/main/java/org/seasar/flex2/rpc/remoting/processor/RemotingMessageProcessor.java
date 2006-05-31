@@ -15,11 +15,14 @@
  */
 package org.seasar.flex2.rpc.remoting.processor;
 
+import java.io.IOException;
+
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-import org.seasar.flex2.message.format.amf.data.AmfMessage;
+public interface RemotingMessageProcessor {
 
-public interface AmfBodyProcessor {
-
-    AmfMessage process(HttpServletRequest request, AmfMessage responseMessage);
+	public void process(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException;
 }
