@@ -22,7 +22,7 @@
 	<!-- service -->
 	<component class="org.seasar.flex2.rpc.remoting.service.impl.AmfRemotingServiceRepositoryImpl" />
 	<component class="org.seasar.flex2.rpc.remoting.service.impl.AmfRemotingServiceLocatorImpl" />
-	<component name="serviceInvoker" class="org.seasar.flex2.messaging.gateway.invoker.impl.MessagingServiceInvoker" />
+	<component name="serviceInvoker" class="org.seasar.flex2.rpc.messaging.invoker.impl.MessagingServiceInvoker" />
 	
 	<!-- amf processor -->
 	<component class="org.seasar.flex2.rpc.gateway.session.impl.TomcatSessionDecoratorImpl" />
