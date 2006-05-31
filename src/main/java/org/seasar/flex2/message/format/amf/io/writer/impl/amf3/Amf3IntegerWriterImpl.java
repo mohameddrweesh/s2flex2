@@ -19,8 +19,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.seasar.flex2.message.format.amf.Amf3Constants;
-import org.seasar.flex2.message.format.amf.io.Amf3DataUtil;
-import org.seasar.flex2.message.format.amf.type.Amf3DataType;
+import org.seasar.flex2.message.format.amf.type.Amf3TypeDef;
 
 public class Amf3IntegerWriterImpl extends AbstractAmf3IntWriterImpl {
 
@@ -31,7 +30,7 @@ public class Amf3IntegerWriterImpl extends AbstractAmf3IntWriterImpl {
 
     public void writeData(final Object value,
             final DataOutputStream outputStream) throws IOException {
-        outputStream.writeByte(Amf3DataType.INTEGER);
+        outputStream.writeByte(Amf3TypeDef.INTEGER);
         writeInteger((Integer) value, outputStream);
     }
 
@@ -46,7 +45,7 @@ public class Amf3IntegerWriterImpl extends AbstractAmf3IntWriterImpl {
 
     private final void writeNegativeIntData(final int value,
             final DataOutputStream outputStream) throws IOException {
-        int[] list = Amf3DataUtil.toNegativeIntBytes(value);
+        int[] list = getNegativeIntBytes(value);
         if (list.length == 4) {
             outputStream.writeByte(Amf3Constants.INTEGER_INCLUDE_NEXT_BYTE
                     | Amf3Constants.INTEGER_NEGATIVE_SING | list[3]);
@@ -57,5 +56,9 @@ public class Amf3IntegerWriterImpl extends AbstractAmf3IntWriterImpl {
             }
             outputStream.writeByte(list[0]);
         }
+    }
+    
+    private final int[] getNegativeIntBytes( final int value) {
+        return getVariableIntBytes(value);
     }
 }

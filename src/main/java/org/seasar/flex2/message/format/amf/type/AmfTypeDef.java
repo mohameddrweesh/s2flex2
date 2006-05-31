@@ -15,7 +15,7 @@
  */
 package org.seasar.flex2.message.format.amf.type;
 
-public final class AmfDataType {
+public final class AmfTypeDef {
 
     public static final byte UNKNOWN = -1;
 
@@ -75,7 +75,7 @@ public final class AmfDataType {
 
     public static final String TYPE_UNKNOWN = "AMF_UNKNOWN";
 
-    private AmfDataType() {
+    private AmfTypeDef() {
     }
 
     public static final String toString(byte dataType) {

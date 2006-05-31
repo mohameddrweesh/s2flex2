@@ -19,7 +19,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.seasar.flex2.message.format.amf.io.writer.Amf3DataWriter;
-import org.seasar.flex2.message.format.amf.type.Amf3DataType;
+import org.seasar.flex2.message.format.amf.type.Amf3TypeDef;
 
 public class Amf3BooleanWriterImpl implements Amf3DataWriter {
 
@@ -36,9 +36,9 @@ public class Amf3BooleanWriterImpl implements Amf3DataWriter {
     private final void writeBoolean(final Boolean value,
             final DataOutputStream outputStream) throws IOException {
         if (value.booleanValue()) {
-            outputStream.writeByte(Amf3DataType.BOOLEAN_TRUE);
+            outputStream.writeByte(Amf3TypeDef.BOOLEAN_TRUE);
         } else {
-            outputStream.writeByte(Amf3DataType.BOOLEAN_FALSE);
+            outputStream.writeByte(Amf3TypeDef.BOOLEAN_FALSE);
         }
     }
 }

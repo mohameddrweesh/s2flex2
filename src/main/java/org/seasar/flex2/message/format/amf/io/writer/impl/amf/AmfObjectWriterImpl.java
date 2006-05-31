@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.seasar.flex2.message.format.amf.type.AmfDataType;
+import org.seasar.flex2.message.format.amf.type.AmfTypeDef;
 
 public class AmfObjectWriterImpl extends AbstractAmfObjectWriterImpl {
 
@@ -37,7 +37,7 @@ public class AmfObjectWriterImpl extends AbstractAmfObjectWriterImpl {
             return;
         }
         getSharedObject().addSharedObject(value);
-        outputStream.writeByte(AmfDataType.OBJECT);
+        outputStream.writeByte(AmfTypeDef.OBJECT);
         for (Iterator i = value.entrySet().iterator(); i.hasNext();) {
             Map.Entry e = (Map.Entry) i.next();
             String propertyName = String.valueOf(e.getKey());

@@ -20,12 +20,12 @@ import java.io.IOException;
 import java.util.Date;
 
 import org.seasar.flex2.message.format.amf.Amf3Constants;
-import org.seasar.flex2.message.format.amf.type.Amf3DataType;
+import org.seasar.flex2.message.format.amf.type.Amf3TypeDef;
 
 public class Amf3DateWriterImpl extends AbstractAmf3ObjectWriterImpl {
 
     public int getObjectType() {
-        return Amf3DataType.DATE;
+        return Amf3TypeDef.DATE;
     }
 
     protected void processWriteObjectData(Object object,

@@ -19,7 +19,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.seasar.flex2.message.format.amf.io.writer.AmfDataWriter;
-import org.seasar.flex2.message.format.amf.type.AmfDataType;
+import org.seasar.flex2.message.format.amf.type.AmfTypeDef;
 
 public class AmfStringWriterImpl implements AmfDataWriter {
 
@@ -30,7 +30,7 @@ public class AmfStringWriterImpl implements AmfDataWriter {
 
     protected void write(String value, DataOutputStream outputStream)
             throws IOException {
-        outputStream.writeByte(AmfDataType.STRING);
+        outputStream.writeByte(AmfTypeDef.STRING);
         outputStream.writeUTF(value);
     }
 }

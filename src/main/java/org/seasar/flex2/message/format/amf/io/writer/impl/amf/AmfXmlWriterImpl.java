@@ -20,7 +20,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.seasar.flex2.message.format.amf.io.writer.AmfDataWriter;
-import org.seasar.flex2.message.format.amf.type.AmfDataType;
+import org.seasar.flex2.message.format.amf.type.AmfTypeDef;
 import org.seasar.framework.util.DomUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -34,7 +34,7 @@ public class AmfXmlWriterImpl implements AmfDataWriter {
 
     protected void write(Document document, DataOutputStream outputStream)
             throws IOException {
-        outputStream.writeByte(AmfDataType.XML);
+        outputStream.writeByte(AmfTypeDef.XML);
         Element element = document.getDocumentElement();
         String xmlData = DomUtil.toString(element);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();

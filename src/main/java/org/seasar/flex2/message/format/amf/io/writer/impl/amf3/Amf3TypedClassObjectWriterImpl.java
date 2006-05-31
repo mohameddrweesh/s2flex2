@@ -19,7 +19,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.seasar.flex2.message.format.amf.Amf3Constants;
-import org.seasar.flex2.message.format.amf.type.Amf3DataType;
+import org.seasar.flex2.message.format.amf.type.Amf3TypeDef;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
 import org.seasar.framework.beans.factory.BeanDescFactory;
@@ -28,7 +28,7 @@ public class Amf3TypedClassObjectWriterImpl extends
         AbstractAmf3ClassObjectWriterImpl {
 
     public int getObjectType() {
-        return Amf3DataType.OBJECT;
+        return Amf3TypeDef.OBJECT;
     }
 
     protected void processWriteObjectData(Object object,

@@ -19,8 +19,6 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.Date;
 
-import org.seasar.flex2.message.format.amf.io.Amf3DataUtil;
-
 public class Amf3DateReaderImpl extends AbstractAmf3ObjectReaderImpl {
 
     public Object read(final DataInputStream inputStream) throws IOException {
@@ -39,8 +37,13 @@ public class Amf3DateReaderImpl extends AbstractAmf3ObjectReaderImpl {
 
     private final Date readDateData(final DataInputStream inputStream)
             throws IOException {
-        Date date = Amf3DataUtil.toDate(inputStream.readDouble());
+        Date date = getDate(inputStream.readDouble());
         addObjectReference(date);
+        return date;
+    }
+    
+    private final Date getDate( final double ms) {
+        Date date = new Date((long) ms);
         return date;
     }
 }

@@ -18,14 +18,15 @@ package org.seasar.flex2.message.format.amf.io.writer.impl.amf3;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.seasar.flex2.message.format.amf.io.Amf3DataUtil;
-import org.seasar.flex2.message.format.amf.type.Amf3DataType;
+import org.seasar.flex2.message.format.amf.type.Amf3TypeDef;
+import org.seasar.framework.util.DomUtil;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 public class Amf3XmlWriterImpl extends AbstractAmf3ObjectWriterImpl {
 
     public int getObjectType() {
-        return Amf3DataType.XML;
+        return Amf3TypeDef.XML;
     }
 
     protected void processWriteObjectData(Object object,
@@ -36,6 +37,11 @@ public class Amf3XmlWriterImpl extends AbstractAmf3ObjectWriterImpl {
     private final void writeXml(final Document document,
             final DataOutputStream outputStream) throws IOException {
         addObjectReference(document);
-        writeUTF8String(Amf3DataUtil.toXmlString(document), outputStream);
+        writeUTF8String(getXmlString(document), outputStream);
+    }
+    
+    private final String getXmlString( final Document document) {
+        Element element = document.getDocumentElement();
+        return DomUtil.toString(element);
     }
 }

@@ -18,7 +18,6 @@ package org.seasar.flex2.message.format.amf.io.reader.impl.amf3;
 import java.io.DataInputStream;
 import java.io.IOException;
 
-
 public class Amf3StringReaderImpl extends AbstractAmf3UTF8StringReaderImpl {
 
     public Object read(final DataInputStream inputStream) throws IOException {

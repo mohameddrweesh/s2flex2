@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Amf3ArrayReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
 
     public Object read(final DataInputStream inputStream) throws IOException {

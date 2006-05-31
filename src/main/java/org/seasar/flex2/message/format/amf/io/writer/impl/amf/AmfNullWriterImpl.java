@@ -19,12 +19,12 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.seasar.flex2.message.format.amf.io.writer.AmfDataWriter;
-import org.seasar.flex2.message.format.amf.type.AmfDataType;
+import org.seasar.flex2.message.format.amf.type.AmfTypeDef;
 
 public class AmfNullWriterImpl implements AmfDataWriter {
 
     public void write(Object value, DataOutputStream outputStream)
             throws IOException {
-        outputStream.writeByte(AmfDataType.NULL);
+        outputStream.writeByte(AmfTypeDef.NULL);
     }
 }

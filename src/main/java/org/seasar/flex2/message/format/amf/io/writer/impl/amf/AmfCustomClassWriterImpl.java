@@ -19,7 +19,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.seasar.flex2.message.format.amf.io.writer.AmfDataWriter;
-import org.seasar.flex2.message.format.amf.type.AmfDataType;
+import org.seasar.flex2.message.format.amf.type.AmfTypeDef;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
 import org.seasar.framework.beans.factory.BeanDescFactory;
@@ -36,7 +36,7 @@ public class AmfCustomClassWriterImpl extends AbstractAmfObjectWriterImpl
         }
         getSharedObject().addSharedObject(value);
         String type = value.getClass().getName();
-        outputStream.writeByte(AmfDataType.CUSTOM_CLASS);
+        outputStream.writeByte(AmfTypeDef.CUSTOM_CLASS);
         outputStream.writeUTF(type);
         BeanDesc beanDesc = BeanDescFactory.getBeanDesc(value.getClass());
         for (int i = 0; i < beanDesc.getPropertyDescSize(); ++i) {

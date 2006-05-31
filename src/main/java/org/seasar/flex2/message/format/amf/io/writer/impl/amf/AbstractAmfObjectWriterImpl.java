@@ -22,7 +22,7 @@ import org.seasar.flex2.message.format.amf.io.AmfSharedObject;
 import org.seasar.flex2.message.format.amf.io.factory.AmfSharedObjectFactory;
 import org.seasar.flex2.message.format.amf.io.writer.AmfDataWriter;
 import org.seasar.flex2.message.format.amf.io.writer.factory.AmfDataWriterFactory;
-import org.seasar.flex2.message.format.amf.type.AmfDataType;
+import org.seasar.flex2.message.format.amf.type.AmfTypeDef;
 
 public abstract class AbstractAmfObjectWriterImpl implements AmfDataWriter {
 
@@ -51,7 +51,7 @@ public abstract class AbstractAmfObjectWriterImpl implements AmfDataWriter {
 
     protected final void writeSharedIndex(int index,
             DataOutputStream outputStream) throws IOException {
-        outputStream.writeByte(AmfDataType.FLUSHED_SHARED_OBJECT);
+        outputStream.writeByte(AmfTypeDef.FLUSHED_SHARED_OBJECT);
         outputStream.writeShort(index);
     }
 }

@@ -26,8 +26,8 @@ import org.seasar.flex2.message.format.amf.Amf3Constants;
 import org.seasar.flex2.message.format.amf.io.writer.Amf3DataWriter;
 import org.seasar.flex2.message.format.amf.io.writer.AmfDataWriter;
 import org.seasar.flex2.message.format.amf.io.writer.factory.Amf3DataWriterFactory;
-import org.seasar.flex2.message.format.amf.type.Amf3DataType;
-import org.seasar.flex2.message.format.amf.type.AmfDataType;
+import org.seasar.flex2.message.format.amf.type.Amf3TypeDef;
+import org.seasar.flex2.message.format.amf.type.AmfTypeDef;
 import org.seasar.flex2.message.io.ByteArray;
 import org.seasar.flex2.message.io.Externalizable;
 import org.w3c.dom.Document;
@@ -66,11 +66,11 @@ public class Amf3DataWriterFactoryImpl implements Amf3DataWriterFactory {
         String dataType = null;
         do {
             if (value == null) {
-                dataType = AmfDataType.TYPE_NULL;
+                dataType = AmfTypeDef.TYPE_NULL;
                 break;
             }
             if (value instanceof String ) {
-                dataType = AmfDataType.TYPE_STRING;
+                dataType = AmfTypeDef.TYPE_STRING;
                 break;
             }
             if (value instanceof BigDecimal) {
@@ -78,11 +78,11 @@ public class Amf3DataWriterFactoryImpl implements Amf3DataWriterFactory {
                 break;
             }
             if (value instanceof Number) {
-                dataType = AmfDataType.TYPE_NUMBER;
+                dataType = AmfTypeDef.TYPE_NUMBER;
                 break;
             }
             if (value instanceof Boolean) {
-                dataType = AmfDataType.TYPE_BOOLEAN;
+                dataType = AmfTypeDef.TYPE_BOOLEAN;
                 break;
             }
             
@@ -92,7 +92,7 @@ public class Amf3DataWriterFactoryImpl implements Amf3DataWriterFactory {
     }
 
     private final String getAmf3DataType( final Object value) {
-        String dataType = Amf3DataType.TYPE_NULL;
+        String dataType = Amf3TypeDef.TYPE_NULL;
         do {
             if (value == null) {
                 break;
@@ -103,20 +103,20 @@ public class Amf3DataWriterFactoryImpl implements Amf3DataWriterFactory {
                         data <= Amf3Constants.INTEGRR_MAX &&
                         data >= Amf3Constants.INTEGRR_MIN
                 ) {
-                    dataType = Amf3DataType.TYPE_INTEGER;
+                    dataType = Amf3TypeDef.TYPE_INTEGER;
                     break;
                 }
             }
             if (value instanceof String) {
-                dataType = Amf3DataType.TYPE_STRING;
+                dataType = Amf3TypeDef.TYPE_STRING;
                 break;
             }
             if (value instanceof Boolean) {
-                dataType = Amf3DataType.TYPE_BOOLEAN;
+                dataType = Amf3TypeDef.TYPE_BOOLEAN;
                 break;
             }
             if (value instanceof Date) {
-                dataType = Amf3DataType.TYPE_DATE;
+                dataType = Amf3TypeDef.TYPE_DATE;
                 break;
             }
             if (value instanceof BigDecimal) {
@@ -124,11 +124,11 @@ public class Amf3DataWriterFactoryImpl implements Amf3DataWriterFactory {
                 break;
             }
             if (value instanceof Number) {
-                dataType = Amf3DataType.TYPE_NUMBER;
+                dataType = Amf3TypeDef.TYPE_NUMBER;
                 break;
             }
             if (value instanceof Object[]) {
-                dataType = Amf3DataType.TYPE_ARRAY;
+                dataType = Amf3TypeDef.TYPE_ARRAY;
                 break;
             }
             if (value instanceof Externalizable) {
@@ -148,21 +148,21 @@ public class Amf3DataWriterFactoryImpl implements Amf3DataWriterFactory {
                 break;
             }
             if (value instanceof Document) {
-                dataType = Amf3DataType.TYPE_XML;
+                dataType = Amf3TypeDef.TYPE_XML;
                 break;
             }
             if (value instanceof ByteArray) {
-                dataType = Amf3DataType.TYPE_BYTEARRAY;
+                dataType = Amf3TypeDef.TYPE_BYTEARRAY;
                 break;
             }
             if (
                     value.getClass() == Byte.class ||
                     value.getClass() == Short.class
             ) {
-                dataType = Amf3DataType.TYPE_INTEGER;
+                dataType = Amf3TypeDef.TYPE_INTEGER;
                 break;
             }
-            dataType = Amf3DataType.TYPE_OBJECT;
+            dataType = Amf3TypeDef.TYPE_OBJECT;
         } while (false);
         
         return dataType;
