@@ -15,7 +15,7 @@
  */
 package org.seasar.flex2.rpc.remoting.service;
 
-import org.seasar.flex2.rpc.gateway.service.ServiceRepository;
+import org.seasar.flex2.message.format.amf.service.ServiceRepository;
 
 public interface RemotingServiceRepository extends ServiceRepository {
     void removeService(Class serviceClass);

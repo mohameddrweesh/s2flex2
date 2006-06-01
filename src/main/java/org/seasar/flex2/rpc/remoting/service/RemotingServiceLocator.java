@@ -15,7 +15,7 @@
  */
 package org.seasar.flex2.rpc.remoting.service;
 
-import org.seasar.flex2.rpc.gateway.service.ServiceLocator;
+import org.seasar.flex2.message.format.amf.service.ServiceLocator;
 
 public interface RemotingServiceLocator extends ServiceLocator {
 }

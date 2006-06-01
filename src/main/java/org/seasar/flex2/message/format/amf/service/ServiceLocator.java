@@ -13,13 +13,11 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.gateway.service.exception;
+package org.seasar.flex2.message.format.amf.service;
 
-import org.seasar.framework.exception.SRuntimeException;
+public interface ServiceLocator {
 
-public class ServiceNotFoundRuntimeException extends SRuntimeException {
-	
-	public ServiceNotFoundRuntimeException(String serviceName) {
-		super("EFLX2001", new Object[]{serviceName});
-	}
+	Object getService( String serviceName );
+    
+    boolean isSupportService(String serviceName, String methodName);
 }

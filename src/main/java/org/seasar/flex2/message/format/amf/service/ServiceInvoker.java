@@ -13,11 +13,12 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.gateway.service;
+package org.seasar.flex2.message.format.amf.service;
 
-public interface ServiceLocator {
+public interface ServiceInvoker {
 
-	Object getService( String serviceName );
-    
-    boolean isSupportService(String serviceName, String methodName);
+	public boolean supports(String serviceName, String methodName, Object[] args);
+
+	public Object invoke(String serviceName, String methodName, Object[] args)
+			throws Throwable;
 }

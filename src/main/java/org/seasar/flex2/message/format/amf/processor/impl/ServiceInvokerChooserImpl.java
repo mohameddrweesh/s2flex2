@@ -20,8 +20,8 @@ import java.util.List;
 
 import org.seasar.flex2.message.format.amf.data.AmfBody;
 import org.seasar.flex2.message.format.amf.processor.ServiceInvokerChooser;
-import org.seasar.flex2.rpc.gateway.invoker.ServiceInvoker;
-import org.seasar.flex2.rpc.gateway.invoker.exception.InvokerNotFoundRuntimeException;
+import org.seasar.flex2.message.format.amf.service.ServiceInvoker;
+import org.seasar.flex2.message.format.amf.service.exception.InvokerNotFoundRuntimeException;
 
 public class ServiceInvokerChooserImpl implements ServiceInvokerChooser {
 

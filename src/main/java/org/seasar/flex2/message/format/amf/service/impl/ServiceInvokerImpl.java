@@ -13,10 +13,10 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.gateway.invoker.impl;
+package org.seasar.flex2.message.format.amf.service.impl;
 
-import org.seasar.flex2.rpc.gateway.invoker.ServiceInvoker;
-import org.seasar.flex2.rpc.gateway.service.ServiceLocator;
+import org.seasar.flex2.message.format.amf.service.ServiceInvoker;
+import org.seasar.flex2.message.format.amf.service.ServiceLocator;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.factory.BeanDescFactory;
 import org.seasar.framework.exception.InvocationTargetRuntimeException;

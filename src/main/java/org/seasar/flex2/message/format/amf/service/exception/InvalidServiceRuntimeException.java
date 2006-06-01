@@ -13,17 +13,13 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.gateway.session.impl;
+package org.seasar.flex2.message.format.amf.service.exception;
 
-import org.seasar.flex2.rpc.gateway.session.SessionDecorator;
+import org.seasar.framework.exception.SRuntimeException;
 
-public class TomcatSessionDecoratorImpl implements SessionDecorator{
+public class InvalidServiceRuntimeException extends SRuntimeException {
 
-    private static final String SESSIONID_PREFIX = ";jsessionid=";
-    
-    private static final String SESSIONID_SUFFIX = "?";   
-    
-    public String formatSessionId(String sessionId) {
-        return SESSIONID_PREFIX + sessionId + SESSIONID_SUFFIX;
+    public InvalidServiceRuntimeException(String serviceName) {
+        super("EFLX2002", new Object[] { serviceName });
     }
 }

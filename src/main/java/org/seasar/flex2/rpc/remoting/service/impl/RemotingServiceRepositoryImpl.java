@@ -15,7 +15,7 @@
  */
 package org.seasar.flex2.rpc.remoting.service.impl;
 
-import org.seasar.flex2.rpc.gateway.service.impl.ServiceRepositoryImpl;
+import org.seasar.flex2.message.format.amf.service.impl.ServiceRepositoryImpl;
 import org.seasar.flex2.rpc.remoting.service.RemotingServiceRepository;
 import org.seasar.framework.util.StringUtil;
 

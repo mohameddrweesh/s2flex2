@@ -13,10 +13,10 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.gateway.service.impl;
+package org.seasar.flex2.message.format.amf.service.impl;
 
-import org.seasar.flex2.rpc.gateway.service.ServiceLocator;
-import org.seasar.flex2.rpc.gateway.service.exception.ServiceNotFoundRuntimeException;
+import org.seasar.flex2.message.format.amf.service.ServiceLocator;
+import org.seasar.flex2.message.format.amf.service.exception.ServiceNotFoundRuntimeException;
 import org.seasar.framework.container.S2Container;
 import org.seasar.framework.util.ClassUtil;
 

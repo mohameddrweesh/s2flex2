@@ -13,12 +13,17 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.gateway.invoker;
+package org.seasar.flex2.util.session.impl;
 
-public interface ServiceInvoker {
+import org.seasar.flex2.util.session.SessionDecorator;
 
-	public boolean supports(String serviceName, String methodName, Object[] args);
+public class TomcatSessionDecoratorImpl implements SessionDecorator{
 
-	public Object invoke(String serviceName, String methodName, Object[] args)
-			throws Throwable;
+    private static final String SESSIONID_PREFIX = ";jsessionid=";
+    
+    private static final String SESSIONID_SUFFIX = "?";   
+    
+    public String formatSessionId(String sessionId) {
+        return SESSIONID_PREFIX + sessionId + SESSIONID_SUFFIX;
+    }
 }
