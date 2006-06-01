@@ -13,14 +13,14 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.message.format.amf.processor.impl;
+package org.seasar.flex2.message.format.amf.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.seasar.flex2.message.format.amf.data.AmfBody;
-import org.seasar.flex2.message.format.amf.processor.ServiceInvokerChooser;
 import org.seasar.flex2.message.format.amf.service.ServiceInvoker;
+import org.seasar.flex2.message.format.amf.service.ServiceInvokerChooser;
 import org.seasar.flex2.message.format.amf.service.exception.InvokerNotFoundRuntimeException;
 
 public class ServiceInvokerChooserImpl implements ServiceInvokerChooser {

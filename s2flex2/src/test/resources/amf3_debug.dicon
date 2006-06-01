@@ -271,7 +271,7 @@
 	<component class="org.seasar.flex2.message.io.impl.ByteArrayImpl" instance="prototype" />
 
 	<!-- amf processor -->
-	<component name="serviceInvokerChooser" class="org.seasar.flex2.message.format.amf.processor.impl.ServiceInvokerChooserImpl"/>
+	<component name="serviceInvokerChooser" class="org.seasar.flex2.message.format.amf.service.impl.ServiceInvokerChooserImpl"/>
 	<component class="org.seasar.flex2.message.format.amf.processor.impl.AmfHeaderProcessorImpl" />
 	<component class="org.seasar.flex2.message.format.amf.processor.impl.AmfBodyProcessorImpl" />
 	<component class="org.seasar.flex2.message.format.amf.processor.impl.AmfMessageProcessorImpl"/>
