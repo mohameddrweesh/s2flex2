@@ -21,8 +21,8 @@ import org.seasar.flex2.message.format.amf.data.factory.AmfBodyFactory;
 import org.seasar.flex2.message.format.amf.data.factory.AmfErrorFactory;
 import org.seasar.flex2.message.format.amf.data.factory.AmfMessageFactory;
 import org.seasar.flex2.message.format.amf.processor.AmfBodyProcessor;
-import org.seasar.flex2.message.format.amf.processor.ServiceInvokerChooser;
 import org.seasar.flex2.message.format.amf.service.ServiceInvoker;
+import org.seasar.flex2.message.format.amf.service.ServiceInvokerChooser;
 
 public class AmfBodyProcessorImpl implements AmfBodyProcessor {
 
