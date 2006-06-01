@@ -37,8 +37,7 @@ public abstract class ServiceRepositoryImpl implements ServiceRepository {
     }
 
     public Object getService(final String serviceName) {
-        Object service = serviceCache.get(serviceName);
-        return service;
+        return serviceCache.get(serviceName);
     }
 
     public boolean hasService(String serviceName) {
