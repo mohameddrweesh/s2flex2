@@ -15,7 +15,7 @@
  */
 package org.seasar.flex2.rpc.messaging.invoker.impl;
 
-import org.seasar.flex2.rpc.gateway.invoker.impl.ServiceInvokerImpl;
+import org.seasar.flex2.message.format.amf.service.impl.ServiceInvokerImpl;
 import org.seasar.flex2.util.data.storage.Storage;
 import org.seasar.flex2.util.data.storage.StorageLocator;
 import org.seasar.flex2.util.data.transfer.Transfer;

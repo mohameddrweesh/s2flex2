@@ -26,7 +26,7 @@
 	<!--
 		session decorator 
 	-->
-	<component class="org.seasar.flex2.rpc.gateway.session.impl.TomcatSessionDecoratorImpl" />
+	<component class="org.seasar.flex2.util.session.impl.TomcatSessionDecoratorImpl" />
 	
 	<!--
 		remoting message processor

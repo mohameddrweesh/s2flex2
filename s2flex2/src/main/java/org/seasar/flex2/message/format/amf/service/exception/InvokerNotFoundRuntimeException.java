@@ -13,7 +13,7 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.gateway.invoker.exception;
+package org.seasar.flex2.message.format.amf.service.exception;
 
 import org.seasar.framework.exception.SRuntimeException;
 

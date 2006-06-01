@@ -15,8 +15,8 @@
  */
 package org.seasar.flex2.rpc.remoting.service.impl;
 
-import org.seasar.flex2.rpc.gateway.service.exception.InvalidServiceRuntimeException;
-import org.seasar.flex2.rpc.gateway.service.impl.ServiceLocatorImpl;
+import org.seasar.flex2.message.format.amf.service.exception.InvalidServiceRuntimeException;
+import org.seasar.flex2.message.format.amf.service.impl.ServiceLocatorImpl;
 import org.seasar.flex2.rpc.remoting.service.RemotingServiceConstants;
 import org.seasar.flex2.rpc.remoting.service.RemotingServiceLocator;
 import org.seasar.flex2.rpc.remoting.service.RemotingServiceRepository;

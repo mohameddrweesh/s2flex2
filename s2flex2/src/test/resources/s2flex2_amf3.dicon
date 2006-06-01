@@ -19,14 +19,14 @@
 	-->
 	<component class="org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceRepositoryImpl" />
 	<component class="org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceLocatorImpl" />
-	<component class="org.seasar.flex2.rpc.gateway.invoker.impl.ServiceInvokerImpl">
+	<component class="org.seasar.flex2.message.format.amf.service.impl.ServiceInvokerImpl">
 		<initMethod>s2flex2_amf.serviceInvokerChooser.addInvoker(#self)</initMethod>
 	</component>
 		
 	<!--
 		session decorator 
 	-->
-	<component class="org.seasar.flex2.rpc.gateway.session.impl.TomcatSessionDecoratorImpl" />
+	<component class="org.seasar.flex2.util.session.impl.TomcatSessionDecoratorImpl" />
 	
 	<!--
 		remoting message processor

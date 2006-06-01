@@ -15,7 +15,7 @@
  */
 package org.seasar.flex2.rpc.remoting.invoker;
 
-import org.seasar.flex2.rpc.gateway.invoker.impl.ServiceInvokerImpl;
+import org.seasar.flex2.message.format.amf.service.impl.ServiceInvokerImpl;
 
 public class RemotingServiceInvoker extends ServiceInvokerImpl {
 

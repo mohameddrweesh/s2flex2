@@ -31,9 +31,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.seasar.flex2.message.format.amf.AmfHeaderConstants;
 import org.seasar.flex2.message.format.amf.processor.AmfMessageProcessor;
-import org.seasar.flex2.rpc.gateway.session.SessionDecorator;
-import org.seasar.flex2.rpc.gateway.session.util.HttpSessionUtil;
 import org.seasar.flex2.rpc.remoting.processor.RemotingMessageProcessor;
+import org.seasar.flex2.util.session.HttpSessionUtil;
+import org.seasar.flex2.util.session.SessionDecorator;
 
 public class RemotingMessageProcessorImpl implements RemotingMessageProcessor {
 
