@@ -19,7 +19,6 @@
 				<include name="bin"/>
 				<include name="bin/**"/>
 				<include name=".*"/>
-				<exclude name=".settings"/>
 			</zipfileset>
 		</zip>
 	</target>
