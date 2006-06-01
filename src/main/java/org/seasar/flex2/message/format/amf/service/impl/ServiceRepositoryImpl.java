@@ -27,7 +27,9 @@ public abstract class ServiceRepositoryImpl implements ServiceRepository {
             .synchronizedMap(new WeakHashMap(64));
 
     public void addService(String serviceName, Object service) {
-        serviceCache.put(serviceName, service);
+        if(!serviceCache.containsKey(serviceName)){
+            serviceCache.put(serviceName, service);
+        }
     }
 
     public void clearService() {

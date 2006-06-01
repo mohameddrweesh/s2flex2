@@ -24,14 +24,15 @@ import org.seasar.flex2.rpc.remoting.service.annotation.factory.AnnotationHandle
 import org.seasar.flex2.rpc.remoting.service.annotation.handler.AnnotationHandler;
 import org.seasar.framework.container.ComponentDef;
 import org.seasar.framework.container.S2Container;
+import org.seasar.framework.util.ClassUtil;
 
 public class RemotingServiceLocatorImpl extends ServiceLocatorImpl implements
         RemotingServiceLocator {
 
+    protected RemotingServiceRepository repository;
+
     private final AnnotationHandler annotationHandler = AnnotationHandlerFactory
             .getAnnotationHandler();
-
-    private RemotingServiceRepository repository;
 
     public void cleanServiceOf(Class serviceClass) {
         repository.removeService(serviceClass);
@@ -58,11 +59,29 @@ public class RemotingServiceLocatorImpl extends ServiceLocatorImpl implements
         return service;
     }
 
+    public boolean isSupportService(final String serviceName,
+            final String methodName) {
+        boolean isSupport = repository.hasService(serviceName);
+
+        if (!isSupport) {
+            if (super.isSupportService(serviceName, methodName)) {
+                isSupport = checkSupportService(serviceName);
+            }
+        }
+
+        return isSupport;
+    }
+
     public void setRepository(RemotingServiceRepository repository) {
         this.repository = repository;
     }
 
-    private final boolean canRegisterService(final Class clazz) {
+    private final boolean checkSupportService(final String serviceName) {
+        Class serviceClass = getServiceClass(serviceName);
+        return canRegisterService(serviceClass);
+    }
+
+    protected final boolean canRegisterService(final Class clazz) {
 
         S2Container root = container.getRoot();
         ComponentDef componentDef = root.getComponentDef(clazz);
@@ -72,6 +91,26 @@ public class RemotingServiceLocatorImpl extends ServiceLocatorImpl implements
             }
         }
         return true;
+    }
+
+    private final Class getServiceClass(final String serviceName) {
+        S2Container root = container.getRoot();
+        ComponentDef serviceClassDef = null;
+        Class serviceClass = null;
+        if (root.hasComponentDef(serviceName)) {
+            serviceClassDef = root.getComponentDef(serviceName);
+        }
+        try {
+            Class clazz = ClassUtil.forName(serviceName);
+            if (root.hasComponentDef(clazz)) {
+                serviceClassDef = root.getComponentDef(clazz);
+            }
+        } catch (Throwable ignore) {
+        }
+        if (serviceClassDef != null) {
+            serviceClass = serviceClassDef.getComponentClass();
+        }
+        return serviceClass;
     }
 
     private final boolean hasAmfRemotingServiceAnnotation(
