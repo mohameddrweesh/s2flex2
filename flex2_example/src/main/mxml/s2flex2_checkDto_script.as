@@ -15,7 +15,7 @@ public function getCheckDto():void{
 	checkDtoService.getCheckDto();
 }
 public function getCheckList():void{
-    debug.text = "開始タイマー：" + getTimer() + "\n";
+    debug.text = "stat：" + getTimer() + "\n";
 	checkDtoServiceList.getCheckDtoList();
 }
 private function initApp():void
@@ -24,7 +24,7 @@ private function initApp():void
 	checkDtoList = new Array();
 }
 public function onListResult(event:ResultEvent):void{
-    debug.text += "終了タイマー：" + getTimer() + "\n";
+    debug.text += "end：" + getTimer() + "\n";
 	this.checkDtoList=event.result as Array;
 }
 public function onResult(event:ResultEvent):void{
