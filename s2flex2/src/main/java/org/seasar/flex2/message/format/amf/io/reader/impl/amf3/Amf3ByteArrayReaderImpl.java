@@ -54,19 +54,17 @@ public class Amf3ByteArrayReaderImpl extends AbstractAmf3ObjectReaderImpl {
         
         int bytearrayLength = bytearrayDef >> 1;
         int totalReadByteLength = 0;
-        int remainByteLength = bytearrayLength;
         
         byte[] bytearrayData = new byte[bytearrayLength];
         byte[] readBuffer = new byte[READ_BUFFER_SIZE];
         
         int readByteLength = 0;
         while( totalReadByteLength < bytearrayLength ){
-            if( remainByteLength > READ_BUFFER_SIZE ){
+            if( (bytearrayLength - totalReadByteLength) > READ_BUFFER_SIZE ){
                 readByteLength = inputStream.read(readBuffer);
             } else {
-                readByteLength = inputStream.read(readBuffer,0,remainByteLength);
+                readByteLength = inputStream.read(readBuffer,0,(bytearrayLength - totalReadByteLength));
             }
-            remainByteLength -= readByteLength;
             System.arraycopy(readBuffer, 0, bytearrayData, totalReadByteLength, readByteLength);
             totalReadByteLength += readByteLength;
         }
