@@ -48,17 +48,7 @@ public class RemotingServiceLocatorWithHotDeployImpl extends
     }
 
     private final Object createService( final String serviceName) {
-        S2Container root = container.getRoot();
-        ComponentDef componentDef;
-        
-        //get componentDef before hotdeploy
-        if (root.hasComponentDef(serviceName)) { 
-            componentDef = root.getComponentDef(serviceName);
-        } else {
-            Class clazz = ClassUtil.forName(serviceName);
-            componentDef = root.getComponentDef(clazz);
-        }
-
+        ComponentDef componentDef = getComponentDef(serviceName);
         if (componentDef == null) {
             throw new ServiceNotFoundRuntimeException(serviceName);
         }
@@ -68,15 +58,21 @@ public class RemotingServiceLocatorWithHotDeployImpl extends
         for (int i = 0; i < interfaces.length; i++) {
             ClassUtil.forName(interfaces[i].getCanonicalName());
         }
+
+        componentDef = getComponentDef(serviceName);
         
-        //get componentDef after hotdeploy
+        return componentDef.getComponent();
+    }
+
+    private final ComponentDef getComponentDef(String serviceName) {
+        S2Container root = container.getRoot();
+        ComponentDef componentDef;
         if (root.hasComponentDef(serviceName)) { 
             componentDef = root.getComponentDef(serviceName);
         } else {
             Class clazz = ClassUtil.forName(serviceName);
             componentDef = root.getComponentDef(clazz);
         }
-        
-        return componentDef.getComponent();
+        return componentDef;
     }
 }
