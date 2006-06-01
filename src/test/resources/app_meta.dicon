@@ -2,7 +2,7 @@
 <!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.3//EN" 
 	"http://www.seasar.org/dtd/components23.dtd">
 <components>
-	<include path="s2flex2.dicon"/>
+	<include path="s2flex2_amf3.dicon"/>
     <!--
     <component
 	  class="org.seasar.framework.container.autoregister.MetaAutoRegister">
