@@ -25,9 +25,7 @@ public class RemotingServiceLocatorWithHotDeployImpl extends
 
     public Object getService(final String serviceName) {
         ComponentDef serviceComponentDef = getServiceComponentDefOnHotdeploy(serviceName);
-        if (canRegisterService(serviceComponentDef)) {
-            repository.addService(serviceName, serviceComponentDef);
-        } else {
+        if (!canRegisterService(serviceComponentDef)) {
             throw new InvalidServiceRuntimeException(serviceName);
         }
         return serviceComponentDef.getComponent();
