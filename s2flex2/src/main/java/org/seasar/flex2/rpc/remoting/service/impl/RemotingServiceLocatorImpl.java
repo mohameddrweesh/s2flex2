@@ -43,20 +43,20 @@ public class RemotingServiceLocatorImpl extends ServiceLocatorImpl implements
     }
 
     public Object getService(final String serviceName) {
-        Object service = null;
+        ComponentDef serviceComponentDef = null;
 
         if (repository.hasService(serviceName)) {
-            service = repository.getService(serviceName);
+            serviceComponentDef = (ComponentDef)repository.getService(serviceName);
         } else {
-            service = super.getService(serviceName);
-            if (canRegisterService(service.getClass())) {
-                repository.addService(serviceName, service);
+            serviceComponentDef = getServiceComponentDef(serviceName);
+            if (canRegisterService(serviceComponentDef)) {
+                repository.addService(serviceName, serviceComponentDef);
             } else {
                 throw new InvalidServiceRuntimeException(serviceName);
             }
         }
 
-        return service;
+        return serviceComponentDef.getComponent();
     }
 
     public boolean isSupportService(final String serviceName,
@@ -65,7 +65,8 @@ public class RemotingServiceLocatorImpl extends ServiceLocatorImpl implements
 
         if (!isSupport) {
             if (super.isSupportService(serviceName, methodName)) {
-                isSupport = checkSupportService(serviceName);
+                ComponentDef componentDef = getServiceComponentDef(serviceName);
+                isSupport = canRegisterService( componentDef );
             }
         }
 
@@ -76,9 +77,7 @@ public class RemotingServiceLocatorImpl extends ServiceLocatorImpl implements
         this.repository = repository;
     }
 
-    protected final boolean canRegisterService(final Class clazz) {
-        S2Container root = container.getRoot();
-        ComponentDef componentDef = root.getComponentDef(clazz);
+    protected final boolean canRegisterService(final ComponentDef componentDef) {
         if (!hasAmfRemotingServiceMetadata(componentDef)) {
             if (!hasAmfRemotingServiceAnnotation(componentDef)) {
                 return false;
@@ -87,30 +86,16 @@ public class RemotingServiceLocatorImpl extends ServiceLocatorImpl implements
         return true;
     }
 
-    private final boolean checkSupportService(final String serviceName) {
-        Class serviceClass = getServiceClass(serviceName);
-        return canRegisterService(serviceClass);
-    }
-
-    private final Class getServiceClass(final String serviceName) {
+    protected ComponentDef getServiceComponentDef(String serviceName) {
         S2Container root = container.getRoot();
-        ComponentDef serviceClassDef = null;
-        Class serviceClass = null;
+        ComponentDef componentDef;
         if (root.hasComponentDef(serviceName)) {
-            serviceClassDef = root.getComponentDef(serviceName);
+            componentDef = root.getComponentDef(serviceName);
         } else {
-            try {
-                Class clazz = ClassUtil.forName(serviceName);
-                if (root.hasComponentDef(clazz)) {
-                    serviceClassDef = root.getComponentDef(clazz);
-                }
-            } catch (Throwable ignore) {
-            }
+            Class clazz = ClassUtil.forName(serviceName);
+            componentDef = root.getComponentDef(clazz);
         }
-        if (serviceClassDef != null) {
-            serviceClass = serviceClassDef.getComponentClass();
-        }
-        return serviceClass;
+        return componentDef;
     }
 
     private final boolean hasAmfRemotingServiceAnnotation(
