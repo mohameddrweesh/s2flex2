@@ -1,8 +1,7 @@
-package examples.flex2.camera.snapshot.service.impl;
+package examples.flex2.camera.snapshot;
 
-import examples.flex2.camera.snapshot.service.SnapshotServiceConfig;
 
-public class SnapshotServiceConfigImpl implements SnapshotServiceConfig{
+public class SnapshotServiceConfig {
 
     private String prefix;
 

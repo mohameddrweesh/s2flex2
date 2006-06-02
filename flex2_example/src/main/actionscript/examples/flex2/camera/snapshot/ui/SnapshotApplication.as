@@ -2,7 +2,7 @@ package examples.flex2.camera.snapshot.ui
 {
     import com.adobe.images.PNGEncoder;
     
-    import examples.flex2.camera.snapshot.Snapshot;
+    import examples.flex2.camera.snapshot.dto.SnapshotDto;
     
     import flash.display.Bitmap;
     import flash.display.BitmapData;
@@ -58,7 +58,7 @@ package examples.flex2.camera.snapshot.ui
             public function saveSnapshot():void{
                 viewLinkButton.enabled = false;
                 
-                var snapshot:Snapshot = createSnapshot();
+                var snapshot:SnapshotDto = createSnapshot();
                 sendSnapshotService( snapshot );
 
             	saveSnapshotButton.enabled = false;
@@ -68,14 +68,14 @@ package examples.flex2.camera.snapshot.ui
                 navigateToURL(new URLRequest(lastlySavedSnapshotUri));
             }
             
-            private function createSnapshot():Snapshot{
-                var snapshot:Snapshot = new Snapshot();
+            private function createSnapshot():SnapshotDto{
+                var snapshot:SnapshotDto = new SnapshotDto();
                 snapshot.source = PNGEncoder.encode(snapshotbitmap.bitmapData);
                 snapshot.source.compress();
                 return snapshot;
             }
             
-            private function sendSnapshotService( snapshot:Snapshot ):void{
+            private function sendSnapshotService( snapshot:SnapshotDto ):void{
                 snapshotService.addEventListener("result", resultSnapshotService);
                 snapshotService.addEventListener("fault", faultSnapshotService);
                 snapshotService.save( snapshot );

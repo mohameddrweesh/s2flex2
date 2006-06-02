@@ -1,8 +1,8 @@
-package examples.flex2.camera.snapshot;
+package examples.flex2.camera.snapshot.dto;
 
 import org.seasar.flex2.message.io.ByteArray;
 
-public class Snapshot {
+public class SnapshotDto {
     private ByteArray source;
 
     public ByteArray getSource() {

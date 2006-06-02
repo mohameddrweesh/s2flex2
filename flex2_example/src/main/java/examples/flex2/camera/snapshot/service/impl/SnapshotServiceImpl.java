@@ -7,26 +7,26 @@ import java.io.IOException;
 import org.seasar.flex2.message.io.ByteArray;
 import org.seasar.framework.util.FileOutputStreamUtil;
 
-import examples.flex2.camera.snapshot.Snapshot;
+import examples.flex2.camera.snapshot.SnapshotServiceConfig;
+import examples.flex2.camera.snapshot.dto.SnapshotDto;
 import examples.flex2.camera.snapshot.service.SnapshotService;
-import examples.flex2.camera.snapshot.service.SnapshotServiceConfig;
 import examples.flex2.camera.util.naming.FileNameResolver;
 
 public class SnapshotServiceImpl implements SnapshotService {
 
     private FileNameResolver fileNameResolver;
 
-    private SnapshotServiceConfig serviceConfig;
+    private SnapshotServiceConfig snapshotServiceConfig;
 
     public FileNameResolver getFileNameResolver() {
         return fileNameResolver;
     }
 
-    public SnapshotServiceConfig getServiceConfig() {
-        return serviceConfig;
+    public SnapshotServiceConfig getSnapshotServiceConfig() {
+        return snapshotServiceConfig;
     }
 
-    public String save(Snapshot snapshot) {
+    public String save(SnapshotDto snapshot) {
         ByteArray bytearray = snapshot.getSource();
         bytearray.uncompress();
         byte[] buffer = bytearray.getBufferBytes();
@@ -47,27 +47,27 @@ public class SnapshotServiceImpl implements SnapshotService {
             }
         }
 
-        return serviceConfig.getRootUri() + file.getName();
+        return snapshotServiceConfig.getRootUri() + file.getName();
     }
 
     public void setFileNameResolver(FileNameResolver fileNameResolver) {
         this.fileNameResolver = fileNameResolver;
     }
 
-    public void setServiceConfig(SnapshotServiceConfig serviceConfig) {
-        this.serviceConfig = serviceConfig;
+    public void setSnapshotServiceConfig(SnapshotServiceConfig serviceConfig) {
+        this.snapshotServiceConfig = serviceConfig;
     }
 
     private final String createFileName() {
-        return serviceConfig.getPrefix() + fileNameResolver.getFileName(null)
-                + serviceConfig.getSuffix();
+        return snapshotServiceConfig.getPrefix() + fileNameResolver.getFileName(null)
+                + snapshotServiceConfig.getSuffix();
     }
 
     private final File createSnapshotFile() {
-        File saveDir = new File(serviceConfig.getRootPath());
+        File saveDir = new File(snapshotServiceConfig.getRootPath());
         if (!saveDir.exists()) {
             saveDir.mkdir();
         }
-        return new File(serviceConfig.getRootPath() + createFileName());
+        return new File(snapshotServiceConfig.getRootPath() + createFileName());
     }
 }
