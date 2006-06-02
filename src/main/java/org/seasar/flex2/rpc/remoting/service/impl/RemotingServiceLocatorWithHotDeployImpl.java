@@ -17,62 +17,35 @@ package org.seasar.flex2.rpc.remoting.service.impl;
 
 import org.seasar.flex2.message.format.amf.service.exception.InvalidServiceRuntimeException;
 import org.seasar.flex2.message.format.amf.service.exception.ServiceNotFoundRuntimeException;
-import org.seasar.flex2.message.format.amf.service.impl.ServiceLocatorImpl;
-import org.seasar.flex2.rpc.remoting.service.RemotingServiceConstants;
-import org.seasar.flex2.rpc.remoting.service.RemotingServiceLocator;
-import org.seasar.flex2.rpc.remoting.service.RemotingServiceRepository;
-import org.seasar.flex2.rpc.remoting.service.annotation.factory.AnnotationHandlerFactory;
-import org.seasar.flex2.rpc.remoting.service.annotation.handler.AnnotationHandler;
 import org.seasar.framework.container.ComponentDef;
-import org.seasar.framework.container.S2Container;
 import org.seasar.framework.util.ClassUtil;
 
 public class RemotingServiceLocatorWithHotDeployImpl extends
         RemotingServiceLocatorImpl {
 
     public Object getService(final String serviceName) {
-        Object service = null;
-
-        if (repository.hasService(serviceName)) {
-            service = createService(serviceName);
+        ComponentDef serviceComponentDef = getServiceComponentDefOnHotdeploy(serviceName);
+        if (canRegisterService(serviceComponentDef)) {
+            repository.addService(serviceName, serviceComponentDef);
         } else {
-            service = createService(serviceName);
-            if (canRegisterService(service.getClass())) {
-                repository.addService(serviceName, service);
-            } else {
-                throw new InvalidServiceRuntimeException(serviceName);
-            }
+            throw new InvalidServiceRuntimeException(serviceName);
         }
-
-        return service;
+        return serviceComponentDef.getComponent();
     }
 
-    private final Object createService( final String serviceName) {
-        ComponentDef componentDef = getComponentDef(serviceName);
+    private final ComponentDef getServiceComponentDefOnHotdeploy(
+            final String serviceName) {
+        ComponentDef componentDef = getServiceComponentDef(serviceName);
         if (componentDef == null) {
             throw new ServiceNotFoundRuntimeException(serviceName);
         }
-        
-        //attach interfaces
+
+        // attach interfaces
         Class[] interfaces = componentDef.getComponentClass().getInterfaces();
         for (int i = 0; i < interfaces.length; i++) {
             ClassUtil.forName(interfaces[i].getCanonicalName());
         }
 
-        componentDef = getComponentDef(serviceName);
-        
-        return componentDef.getComponent();
-    }
-
-    private final ComponentDef getComponentDef(String serviceName) {
-        S2Container root = container.getRoot();
-        ComponentDef componentDef;
-        if (root.hasComponentDef(serviceName)) { 
-            componentDef = root.getComponentDef(serviceName);
-        } else {
-            Class clazz = ClassUtil.forName(serviceName);
-            componentDef = root.getComponentDef(clazz);
-        }
-        return componentDef;
+        return getServiceComponentDef(serviceName);
     }
 }
