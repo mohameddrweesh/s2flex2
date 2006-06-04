@@ -1,6 +1,6 @@
 <project name="s2flex2-components" default="build" basedir=".">
 	<property file="build.properties"/>
-	<property name="ver" value="B3"/>
+	<property name="ver" value="B4"/>
     <!-- ================================= 
           target: build              
          ================================= -->
@@ -31,6 +31,9 @@
 		<arg value="org.seasar.flex2.rpc.remoting.S2Flex2Service"/>   	
 	  </java>
   </target>
+    <!-- ================================= 
+          target: dist              
+         ================================= -->	
 	<target name="dist">
 		<zip zipfile="target/S2Flex2-components-${ver}.zip">
 			<zipfileset prefix="s2flex2_components" dir=".">
