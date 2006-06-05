@@ -20,7 +20,7 @@ import org.seasar.flex2.message.format.amf.service.exception.ServiceNotFoundRunt
 import org.seasar.framework.container.ComponentDef;
 import org.seasar.framework.util.ClassUtil;
 
-public class RemotingServiceLocatorWithHotDeployImpl extends
+public class RemotingServiceLocatorOnHotDeployImpl extends
         RemotingServiceLocatorImpl {
 
     public Object getService(final String serviceName) {
@@ -31,19 +31,30 @@ public class RemotingServiceLocatorWithHotDeployImpl extends
         return serviceComponentDef.getComponent();
     }
 
+    private final void copyMetadata(ComponentDef sourceComponentDef, ComponentDef distComponentDef) {
+        for (int i = 0; i < sourceComponentDef.getMetaDefSize(); i++) {
+            distComponentDef.addMetaDef(sourceComponentDef.getMetaDef(i));
+        }
+    }
+
     private final ComponentDef getServiceComponentDefOnHotdeploy(
             final String serviceName) {
         ComponentDef componentDef = getServiceComponentDef(serviceName);
         if (componentDef == null) {
             throw new ServiceNotFoundRuntimeException(serviceName);
         }
+        reloadComponentDef(componentDef);
 
-        // attach interfaces
+        ComponentDef reloadedComponentDef = getServiceComponentDef(serviceName);
+        copyMetadata(componentDef, reloadedComponentDef);
+
+        return reloadedComponentDef;
+    }
+
+    private final void reloadComponentDef(ComponentDef componentDef) {
         Class[] interfaces = componentDef.getComponentClass().getInterfaces();
         for (int i = 0; i < interfaces.length; i++) {
-            ClassUtil.forName(interfaces[i].getCanonicalName());
+            ClassUtil.forName(interfaces[i].getName());
         }
-
-        return getServiceComponentDef(serviceName);
     }
 }

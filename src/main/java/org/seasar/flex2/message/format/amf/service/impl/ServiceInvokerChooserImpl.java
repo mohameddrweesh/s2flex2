@@ -35,9 +35,10 @@ public class ServiceInvokerChooserImpl implements ServiceInvokerChooser {
         invokers.add(invoker);
     }
 
-    public final ServiceInvoker chooseInvoker( final AmfBody requestBody) {
+    public ServiceInvoker chooseInvoker( final AmfBody requestBody) {
+        ServiceInvoker invoker;
         for (int i = 0; i < invokers.size(); ++i) {
-            ServiceInvoker invoker = (ServiceInvoker) invokers.get(i);
+            invoker = (ServiceInvoker) invokers.get(i);
             if (invoker.supports(requestBody.getServiceName(), requestBody
                     .getServiceMethodName(), requestBody.getArgs())) {
                 return invoker;
