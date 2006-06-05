@@ -45,7 +45,7 @@ public class RemotingMessageProcessorImpl implements RemotingMessageProcessor {
         return processor;
     }
 
-    public final void process(final HttpServletRequest request,
+    public void process(final HttpServletRequest request,
             final HttpServletResponse response) throws IOException,
             ServletException {
 
