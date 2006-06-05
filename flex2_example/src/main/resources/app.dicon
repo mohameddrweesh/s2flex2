@@ -3,14 +3,6 @@
 	"http://www.seasar.org/dtd/components23.dtd">
 <components>
 	<include path="remoting_amf3.dicon"/>
-	<include path="aop.dicon"/>
-	<component class="org.seasar.framework.container.autoregister.AspectAutoRegister">
-		<property name="interceptor">aop.traceThrowsInterceptor</property>
-		<initMethod name="addClassPattern">
-			<arg>"examples.flex2"</arg>
-			<arg>".*Impl"</arg>
-		</initMethod>
-	</component>
 	
 	<component name="snapshotServiceConfig" class="examples.flex2.camera.config.SnapshotServiceConfig">
         <property name="rootPath">application.getRealPath(".") + "\\snapshot\\"</property>
