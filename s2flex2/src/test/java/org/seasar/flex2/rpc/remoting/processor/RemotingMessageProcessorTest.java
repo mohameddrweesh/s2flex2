@@ -22,7 +22,7 @@ import org.seasar.framework.container.S2Container;
 
 public class RemotingMessageProcessorTest extends S2TestCase {
     
-    private static String PATH = "remoting_amf3.dicon";
+    private static String PATH = "org/seasar/flex2/rpc/remoting/remoting_amf3.dicon";
 
     public void testCreateProcessor() throws Exception {
         S2Container container = getContainer();
