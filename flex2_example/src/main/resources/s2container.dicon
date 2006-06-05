@@ -3,12 +3,15 @@
 	"http://www.seasar.org/dtd/components21.dtd">
 <components>
 	<component class="org.seasar.framework.container.hotdeploy.OndemandBehavior">
-		<property name="rootPackageName">"examples.flex2.camera"</property>
-		
-		
+		<property name="rootPackageName">"examples.flex2.camera.snapshot"</property>
 		<initMethod name="addCreator">
 			<arg>
 				<component class="org.seasar.framework.container.hotdeploy.creator.DtoCreator" />
+			</arg>
+		</initMethod>
+		<initMethod name="addCreator">
+			<arg>
+				<component class="org.seasar.framework.container.hotdeploy.creator.LogicCreator" />
 			</arg>
 		</initMethod>
 		<initMethod name="addCreator">

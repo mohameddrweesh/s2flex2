@@ -6,6 +6,14 @@
 		amf3 framework
 	-->
 	<include path="amf3.dicon" />
+	<include path="aop.dicon"/>
+	<component class="org.seasar.framework.container.autoregister.AspectAutoRegister">
+		<property name="interceptor">aop.traceThrowsInterceptor</property>
+		<initMethod name="addClassPattern">
+			<arg>"org.seasar.flex2"</arg>
+			<arg>".*Impl"</arg>
+		</initMethod>
+	</component>
 	
 	<!--
 		data util
@@ -18,7 +26,7 @@
 		remoting service 
 	-->
 	<component class="org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceRepositoryImpl" />
-	<component class="org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceLocatorImpl" />
+	<component class="org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceLocatorOnHotDeployImpl" />
 	<component class="org.seasar.flex2.rpc.remoting.invoker.RemotingServiceInvoker">
 		<initMethod>s2flex2_amf.serviceInvokerChooser.addInvoker(#self)</initMethod>
 	</component>

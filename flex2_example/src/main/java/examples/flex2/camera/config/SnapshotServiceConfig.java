@@ -1,4 +1,4 @@
-package examples.flex2.camera.snapshot;
+package examples.flex2.camera.config;
 
 
 public class SnapshotServiceConfig {
