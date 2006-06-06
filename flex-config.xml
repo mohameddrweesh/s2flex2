@@ -71,10 +71,10 @@
    -->
    <use-network>true</use-network>
    <metadata>
-      <title>Adobe Flex 2.0b Application</title>
-      <description>http://www.macromedia.com/flex</description>
-      <publisher>unknown</publisher>
-      <creator>unknown</creator>
-      <language>EN</language>
+      <title>S2Flex2-components</title>
+      <description>http://s2flex2.sandbox.seasar.org/</description>
+      <publisher>Seasar Foundation</publisher>
+      <creator>e1arkw,nod</creator>
+      <language>JA</language>
    </metadata>
 </flex-config>
