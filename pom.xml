@@ -12,8 +12,8 @@
   <description></description>
   <url>http://s2flex2.sandbox.seasar.org/</url>
   <issueManagement>
-    <system>sourceforge.jp</system>
-    <url><![CDATA[http://sourceforge.jp/tracker/?atid=6582&group_id=689&func=browse]]></url>
+    <system>The Seasar Foundation Issues</system>
+    <url><![CDATA[https://www.seasar.org/issues/browse/FLEX]]></url>
   </issueManagement>
   <inceptionYear>2006</inceptionYear>
   <mailingLists>
