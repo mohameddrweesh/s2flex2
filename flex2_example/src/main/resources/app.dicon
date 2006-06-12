@@ -3,7 +3,7 @@
 	"http://www.seasar.org/dtd/components23.dtd">
 <components>
 	<include path="aop.dicon"/>
-	<include path="remoting_amf3.dicon"/>
+	<include path="remoting.dicon"/>
 	
 	<component name="snapshotServiceConfig" class="examples.flex2.camera.config.SnapshotServiceConfig">
         <property name="rootPath">application.getRealPath(".") + "\\snapshot\\"</property>

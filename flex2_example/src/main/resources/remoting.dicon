@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Shift_JIS"?>
 <!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.3//EN" 
 	"http://www.seasar.org/dtd/components23.dtd">
-<components namespace="s2flex2">
+<components namespace="remoting">
 	<!--
 		amf3 framework
 	-->
@@ -20,7 +20,7 @@
 	<component class="org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceRepositoryImpl" />
 	<component class="org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceLocatorImpl" />
 	<component class="org.seasar.flex2.rpc.remoting.invoker.RemotingServiceInvoker">
-		<initMethod>s2flex2_amf.serviceInvokerChooser.addInvoker(#self)</initMethod>
+		<initMethod>amf3.serviceInvokerChooser.addInvoker(#self)</initMethod>
 	</component>
 		
 	<!--
