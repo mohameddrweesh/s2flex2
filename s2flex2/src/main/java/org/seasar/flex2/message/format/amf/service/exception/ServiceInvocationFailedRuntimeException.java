@@ -17,9 +17,9 @@ package org.seasar.flex2.message.format.amf.service.exception;
 
 import org.seasar.framework.exception.SRuntimeException;
 
-public class InvokerNotFoundRuntimeException extends SRuntimeException {
-	
-	public InvokerNotFoundRuntimeException(String serviceName) {
-		super("EFLX0001", new Object[]{serviceName});
-	}
+public class ServiceInvocationFailedRuntimeException extends SRuntimeException {
+
+    public ServiceInvocationFailedRuntimeException(String serviceClassName, String methodName, Throwable cause) {
+        super("EFLX0004", new Object[] { serviceClassName, methodName }, cause);
+    }
 }

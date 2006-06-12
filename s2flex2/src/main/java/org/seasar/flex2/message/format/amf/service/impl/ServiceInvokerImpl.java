@@ -17,6 +17,7 @@ package org.seasar.flex2.message.format.amf.service.impl;
 
 import org.seasar.flex2.message.format.amf.service.ServiceInvoker;
 import org.seasar.flex2.message.format.amf.service.ServiceLocator;
+import org.seasar.flex2.message.format.amf.service.exception.ServiceInvocationFailedRuntimeException;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.factory.BeanDescFactory;
 import org.seasar.framework.exception.InvocationTargetRuntimeException;
@@ -53,8 +54,8 @@ public class ServiceInvokerImpl implements ServiceInvoker {
         BeanDesc beanDesc = BeanDescFactory.getBeanDesc(service.getClass());
         try {
             return beanDesc.invoke(service, methodName, args);
-        } catch (InvocationTargetRuntimeException e) {
-            throw e.getCause();
+        } catch (RuntimeException e) {
+            throw new ServiceInvocationFailedRuntimeException(service.getClass().getName(), methodName, e.getCause());
         }
     }
 }
