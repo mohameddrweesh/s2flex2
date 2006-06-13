@@ -25,6 +25,8 @@ import org.seasar.flex2.rpc.remoting.RemotingGateway;
 
 public class MessagingGateway extends RemotingGateway {
 
+    private static final long serialVersionUID = -1116484534736665708L;
+
     public MessagingGateway() {
     }
 

@@ -29,6 +29,8 @@ import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
 
 public class RemotingGateway extends HttpServlet {
 
+    private static final long serialVersionUID = -5871115000558595292L;
+    
     protected RemotingMessageProcessor processor;
 
     public RemotingGateway() {

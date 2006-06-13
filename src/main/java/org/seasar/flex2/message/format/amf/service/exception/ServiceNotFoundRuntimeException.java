@@ -19,7 +19,9 @@ import org.seasar.framework.exception.SRuntimeException;
 
 public class ServiceNotFoundRuntimeException extends SRuntimeException {
 	
-	public ServiceNotFoundRuntimeException(String serviceName) {
+    private static final long serialVersionUID = 6617890371395913125L;
+
+    public ServiceNotFoundRuntimeException(String serviceName) {
 		super("EFLX0002", new Object[]{serviceName});
 	}
 }
