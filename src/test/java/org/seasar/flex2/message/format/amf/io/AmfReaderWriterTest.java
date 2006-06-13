@@ -38,7 +38,7 @@ import org.seasar.flex2.message.format.amf.io.writer.factory.AmfWriterFactory;
 
 public class AmfReaderWriterTest extends S2TestCase {
 
-    private final static String PATH = "amf.dicon";
+    private final static String PATH = "amf0.dicon";
 
     protected void setUp() throws Exception {
         include(PATH);
