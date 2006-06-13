@@ -5,7 +5,7 @@
 	<!--
 		amf3 framework
 	-->
-	<include path="amf.dicon" />
+	<include path="amf0.dicon" />
 	
 	<!--
 		data util

@@ -24,7 +24,7 @@ import org.seasar.framework.container.S2Container;
 
 public class AmfWriterFactoryTest extends S2TestCase {
 
-    private static String PATH = "amf.dicon";
+    private static String PATH = "amf0.dicon";
 
     public void testCreateWriterFactory() throws Exception {
         S2Container container = getContainer();
