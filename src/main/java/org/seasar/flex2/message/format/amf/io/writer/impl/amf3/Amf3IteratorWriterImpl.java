@@ -23,7 +23,7 @@ import java.util.Iterator;
 
 public class Amf3IteratorWriterImpl extends Amf3ArrayWriterImpl {
 
-    protected final void processWriteObjectData(Object object,
+    protected final void writeInlineObjectData(Object object,
             DataOutputStream outputStream) throws IOException {
         writeIterator((Iterator) object, outputStream);
     }
@@ -34,7 +34,7 @@ public class Amf3IteratorWriterImpl extends Amf3ArrayWriterImpl {
         while (value.hasNext()) {
             list.add(value.next());
         }
-        super.processWriteObjectData(list.toArray(new Object[list.size()]),
+        super.writeInlineObjectData(list.toArray(new Object[list.size()]),
                 outputStream);
     }
 }

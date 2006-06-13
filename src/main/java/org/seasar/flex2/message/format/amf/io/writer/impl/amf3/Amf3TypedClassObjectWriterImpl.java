@@ -31,7 +31,7 @@ public class Amf3TypedClassObjectWriterImpl extends
         return Amf3TypeDef.OBJECT;
     }
 
-    protected void processWriteObjectData(Object object,
+    protected void writeInlineObjectData(Object object,
             DataOutputStream outputStream) throws IOException {
         writeClassObject(object, outputStream);
     }

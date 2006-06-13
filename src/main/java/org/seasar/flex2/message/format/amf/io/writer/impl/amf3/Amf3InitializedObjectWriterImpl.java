@@ -30,7 +30,7 @@ public class Amf3InitializedObjectWriterImpl extends
         return Amf3TypeDef.OBJECT;
     }
 
-    protected void processWriteObjectData(Object object,
+    protected void writeInlineObjectData(Object object,
             DataOutputStream outputStream) throws IOException {
         writeObjectData((Map) object, outputStream);
     }

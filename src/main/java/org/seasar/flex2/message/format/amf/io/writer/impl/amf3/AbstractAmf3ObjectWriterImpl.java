@@ -48,41 +48,34 @@ public abstract class AbstractAmf3ObjectWriterImpl extends
 
     protected final void addClassProperties(final Class clazz,
             final String[] properties) {
-        Amf3References references = getReferences();
-        references.addClassProperties(clazz, properties);
+        getReferences().addClassProperties(clazz, properties);
     }
 
     protected final void addClassReference(final Class clazz) {
-        Amf3References references = getReferences();
-        references.addClassReference(clazz);
+        getReferences().addClassReference(clazz);
     }
 
     protected final void addObjectReference(final Object object) {
-        Amf3References references = getReferences();
-        references.addObjectReference(object);
+        getReferences().addObjectReference(object);
     }
 
     protected final void addStringReference(final String object) {
-        Amf3References references = getReferences();
-        references.addStringReference(object);
+        getReferences().addStringReference(object);
     }
 
     protected final int getClassReferenceIndex(final Class clazz) {
-        Amf3References references = getReferences();
-        return references.getClassReferenceIndex(clazz);
+        return getReferences().getClassReferenceIndex(clazz);
     }
 
     protected final int getObjectReferenceIndex(final Object object) {
-        Amf3References references = getReferences();
-        return references.getObjectReferenceIndex(object);
+        return getReferences().getObjectReferenceIndex(object);
     }
 
-    protected final int getStringReferenceIndex(String object) {
-        Amf3References references = getReferences();
-        return references.getStringReferenceIndex(object);
+    protected final int getStringReferenceIndex(final String object) {
+        return getReferences().getStringReferenceIndex(object);
     }
 
-    protected abstract void processWriteObjectData(final Object object,
+    protected abstract void writeInlineObjectData(final Object object,
             final DataOutputStream outputStream) throws IOException;
 
     protected final void writeObjectData(final Object object,
@@ -91,7 +84,7 @@ public abstract class AbstractAmf3ObjectWriterImpl extends
         if (referenceIndex >= 0) {
             writeReferenceIndex(referenceIndex, outputStream);
         } else {
-            processWriteObjectData(object, outputStream);
+            writeInlineObjectData(object, outputStream);
         }
     }
 
@@ -101,8 +94,7 @@ public abstract class AbstractAmf3ObjectWriterImpl extends
     }
 
     private final Amf3References getReferences() {
-        Amf3References references = referencesFactory.createReferences();
-        return references;
+        return referencesFactory.createReferences();
     }
 
     private final void writeAMF3DataMaker(final DataOutputStream outputStream)
