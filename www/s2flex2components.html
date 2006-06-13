@@ -1,0 +1,66 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Untitled Document</title>
+</head>
+
+<body>
+S2Flex2Service
+<p>S2Flex2Serviceは、Flex2アプリケーションからS2Flex2のコンポーネントを呼び出すタグコンポーネントクラスです。<br>
+</p>
+<p>properties<br>
+  Events<br>
+  Methods</p>
+<p>タグ<br>
+  使用例)</p>
+<p>namespaceの宣言<br>
+&amp;lt;mx:Application <br>
+  xmlns:mx=&amp;quot;http://www.adobe.com/2006/mxml&amp;quot;<br>
+  xmlns:s2=&amp;quot;http://www.seasar.org/s2flex2/mxml&amp;quot;<br>
+  xmlns=&amp;quot;*&amp;quot; <br>
+  creationComplete=&amp;quot;initApp()&amp;quot; <br>
+  layout=&amp;quot;absolute&amp;quot; &amp;gt;</p>
+<p>:<br>
+  : <br>
+  :<br>
+</p>
+<p>実際のタグ<br>
+&amp;lt;s2:S2Flex2Service &amp;gt;</p>
+<p>&lt;s2:S2Flex2Service id=&quot;amf&quot; <br>
+  destination=&quot;exceptionService&quot; <br>
+  result=&quot;onResult(event)&quot;<br>
+  fault=&quot;onFault(event)&quot;<br>
+  showBusyCursor=&quot;true&quot;<br>
+  netStatus=&quot;onNetStatus(event)&quot;<br>
+  gatewayUrl<br>
+  concurrency<br>
+  ioError<br>
+  securityError<br>
+  /&gt;</p>
+<p>使い方</p>
+<p>id<br>
+  result<br>
+  fault<br>
+  destination<br>
+  or<br>
+  gatewayUrl</p>
+<p>コンパイル時の指定</p>
+<p>&nbsp;</p>
+
+<p>flex2_exampleの変更点</p>
+<p>・checkDtoのリストを3000件から5000件に変更しました。<br>
+  ・フォルダ構成を整理しました。<br>
+  ・カメラのサンプルを追加しました。<br>
+  　　 compress/uncompress<br>
+  byteArrayデータ送受信<br>
+  ・S2Containerを2.4系に移行しました。<br>
+  ・s2flex2_example2について、sessionを利用するように変更しました。<br>
+  　 計算後、リロードして下のボタンをクリックすると最後のデータが表示されます。<br>
+  ・S2Container 2.4からのhotdeployに対応したweb.xmlをweb_for_hotdeploy.xmlとして添付しました。<br>
+  ・<br>
+</p>
+
+</body>
+</html>
