@@ -22,9 +22,9 @@ import java.math.BigDecimal;
 
 public class Amf3BigDecimalWriterImpl extends Amf3StringWriterImpl {
 
-    protected final void writeInlineObjectData(Object object,
+    protected final void writeInlineObject(Object object,
             DataOutputStream outputStream) throws IOException {
-        super.writeInlineObjectData(((BigDecimal) object).toString(),
+        super.writeInlineObject(((BigDecimal) object).toString(),
                 outputStream);
     }
 }

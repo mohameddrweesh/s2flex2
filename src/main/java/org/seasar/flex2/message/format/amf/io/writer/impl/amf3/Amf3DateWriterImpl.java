@@ -28,7 +28,7 @@ public class Amf3DateWriterImpl extends AbstractAmf3ObjectWriterImpl {
         return Amf3TypeDef.DATE;
     }
 
-    protected void writeInlineObjectData(Object object,
+    protected void writeInlineObject(Object object,
             DataOutputStream outputStream) throws IOException {
         writeDateData((Date) object, outputStream);
     }

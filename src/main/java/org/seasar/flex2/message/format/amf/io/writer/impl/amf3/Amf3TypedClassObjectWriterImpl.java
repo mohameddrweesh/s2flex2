@@ -31,7 +31,7 @@ public class Amf3TypedClassObjectWriterImpl extends
         return Amf3TypeDef.OBJECT;
     }
 
-    protected void writeInlineObjectData(Object object,
+    protected void writeInlineObject(Object object,
             DataOutputStream outputStream) throws IOException {
         writeClassObject(object, outputStream);
     }
@@ -64,7 +64,7 @@ public class Amf3TypedClassObjectWriterImpl extends
         for (int i = 0; i < beanDesc.getPropertyDescSize(); ++i) {
             propertyDef = (PropertyDesc) beanDesc.getPropertyDesc(i);
             if (propertyDef.hasReadMethod()) {
-                writeElementData(propertyDef.getValue(value), outputStream);
+                writeObjectElement(propertyDef.getValue(value), outputStream);
             }
         }
     }

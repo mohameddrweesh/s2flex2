@@ -27,14 +27,14 @@ public class Amf3ArrayWriterImpl extends AbstractAmf3TypedObjectWriterImpl {
         return Amf3TypeDef.ARRAY;
     }
 
-    protected void writeInlineObjectData(Object object,
+    protected void writeInlineObject(Object object,
             DataOutputStream outputStream) throws IOException {
         writeArrayElements((Object[]) object, outputStream);
     }
 
     private final void writeArrayElement(final DataOutputStream outputStream,
             Object element) throws IOException {
-        writeElementData(element, outputStream);
+        writeObjectElement(element, outputStream);
     }
 
     private final void writeArrayElements(final Object[] array,
