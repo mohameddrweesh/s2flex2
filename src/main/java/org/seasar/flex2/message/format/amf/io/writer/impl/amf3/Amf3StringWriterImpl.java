@@ -22,7 +22,7 @@ import org.seasar.flex2.message.format.amf.type.Amf3TypeDef;
 
 public class Amf3StringWriterImpl extends AbstractAmf3ObjectWriterImpl {
 
-    public int getObjectType() {
+    public int getDataTypeValue() {
         return Amf3TypeDef.STRING;
     }
 

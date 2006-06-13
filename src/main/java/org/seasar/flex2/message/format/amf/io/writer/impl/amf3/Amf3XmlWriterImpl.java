@@ -25,7 +25,7 @@ import org.w3c.dom.Element;
 
 public class Amf3XmlWriterImpl extends AbstractAmf3ObjectWriterImpl {
 
-    public int getObjectType() {
+    public int getDataTypeValue() {
         return Amf3TypeDef.XML;
     }
 

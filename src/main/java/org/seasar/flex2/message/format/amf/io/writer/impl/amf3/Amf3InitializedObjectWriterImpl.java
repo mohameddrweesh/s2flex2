@@ -26,7 +26,7 @@ import org.seasar.flex2.message.format.amf.type.Amf3TypeDef;
 public class Amf3InitializedObjectWriterImpl extends
         AbstractAmf3ClassObjectWriterImpl {
 
-    public int getObjectType() {
+    public int getDataTypeValue() {
         return Amf3TypeDef.OBJECT;
     }
 
