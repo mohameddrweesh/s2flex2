@@ -24,7 +24,7 @@ import org.seasar.flex2.message.io.ByteArray;
 
 public class Amf3ByteArrayWriterImpl extends AbstractAmf3ObjectWriterImpl {
 
-    public int getObjectType() {
+    public int getDataTypeValue() {
         return Amf3TypeDef.BYTEARRAY;
     }
 

@@ -27,7 +27,7 @@ public abstract class AbstractAmf3ObjectWriterImpl extends
 
     protected Amf3ReferencesFactory referencesFactory;
 
-    public abstract int getObjectType();
+    public abstract int getDataTypeValue();
 
     public void setReferencesFactory(
             Amf3ReferencesFactory referencesFactory) {
@@ -42,7 +42,7 @@ public abstract class AbstractAmf3ObjectWriterImpl extends
 
     public void writeData(final Object value,
             final DataOutputStream outputStream) throws IOException {
-        outputStream.writeByte(getObjectType());
+        outputStream.writeByte(getDataTypeValue());
         writeObjectData(value, outputStream);
     }
 
