@@ -29,7 +29,7 @@ public class Amf3XmlWriterImpl extends AbstractAmf3ObjectWriterImpl {
         return Amf3TypeDef.XML;
     }
 
-    protected void processWriteObjectData(Object object,
+    protected void writeInlineObjectData(Object object,
             DataOutputStream outputStream) throws IOException {
         writeXml((Document) object, outputStream);
     }

@@ -27,7 +27,7 @@ public class Amf3ArrayWriterImpl extends AbstractAmf3TypedObjectWriterImpl {
         return Amf3TypeDef.ARRAY;
     }
 
-    protected void processWriteObjectData(Object object,
+    protected void writeInlineObjectData(Object object,
             DataOutputStream outputStream) throws IOException {
         writeArrayElements((Object[]) object, outputStream);
     }

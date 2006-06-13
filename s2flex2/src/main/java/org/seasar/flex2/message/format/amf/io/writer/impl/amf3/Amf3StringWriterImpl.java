@@ -26,7 +26,7 @@ public class Amf3StringWriterImpl extends AbstractAmf3ObjectWriterImpl {
         return Amf3TypeDef.STRING;
     }
 
-    protected void processWriteObjectData(Object object,
+    protected void writeInlineObjectData(Object object,
             DataOutputStream outputStream) throws IOException {
         writeStringData((String) object, outputStream);
     }

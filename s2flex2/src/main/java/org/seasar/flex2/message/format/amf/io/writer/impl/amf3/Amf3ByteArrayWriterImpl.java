@@ -28,7 +28,7 @@ public class Amf3ByteArrayWriterImpl extends AbstractAmf3ObjectWriterImpl {
         return Amf3TypeDef.BYTEARRAY;
     }
 
-    protected void processWriteObjectData(Object object,
+    protected void writeInlineObjectData(Object object,
             DataOutputStream outputStream) throws IOException {
         writeByteArrayData((ByteArray) object, outputStream);
     }
