@@ -20,7 +20,6 @@ import org.seasar.flex2.message.format.amf.service.ServiceLocator;
 import org.seasar.flex2.message.format.amf.service.exception.ServiceInvocationFailedRuntimeException;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.factory.BeanDescFactory;
-import org.seasar.framework.exception.InvocationTargetRuntimeException;
 import org.seasar.framework.exception.SRuntimeException;
 
 public class ServiceInvokerImpl implements ServiceInvoker {
@@ -56,7 +55,8 @@ public class ServiceInvokerImpl implements ServiceInvoker {
         try {
             return beanDesc.invoke(service, methodName, args);
         } catch (SRuntimeException e) {
-            throw new ServiceInvocationFailedRuntimeException(service.getClass().getName(), methodName, e.getCause());
+            throw new ServiceInvocationFailedRuntimeException(service
+                    .getClass().getName(), methodName, e.getCause());
         }
     }
 }

@@ -19,6 +19,8 @@ import org.seasar.flex2.message.format.amf.type.AmfObject;
 
 public class ASObject extends AmfObject {
 
+    private static final long serialVersionUID = 2510428597083792338L;
+
     public String toString() {
         return "ASObject[type=" + getType() + "," + super.toString() + "]";
     }

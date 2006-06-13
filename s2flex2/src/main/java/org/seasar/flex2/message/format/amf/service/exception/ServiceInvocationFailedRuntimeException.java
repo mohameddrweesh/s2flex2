@@ -19,6 +19,8 @@ import org.seasar.framework.exception.SRuntimeException;
 
 public class ServiceInvocationFailedRuntimeException extends SRuntimeException {
 
+    private static final long serialVersionUID = 8950882483828312835L;
+
     public ServiceInvocationFailedRuntimeException(String serviceClassName, String methodName, Throwable cause) {
         super("EFLX0004", new Object[] { serviceClassName, methodName }, cause);
     }

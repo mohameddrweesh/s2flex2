@@ -19,7 +19,9 @@ import org.seasar.framework.exception.SRuntimeException;
 
 public class InvokerNotFoundRuntimeException extends SRuntimeException {
 	
-	public InvokerNotFoundRuntimeException(String serviceName) {
+    private static final long serialVersionUID = 3501672643450033310L;
+
+    public InvokerNotFoundRuntimeException(String serviceName) {
 		super("EFLX0001", new Object[]{serviceName});
 	}
 }
