@@ -30,7 +30,7 @@ public class Amf3InitializedObjectWriterImpl extends
         return Amf3TypeDef.OBJECT;
     }
 
-    protected void writeInlineObjectData(Object object,
+    protected void writeInlineObject(Object object,
             DataOutputStream outputStream) throws IOException {
         writeObjectData((Map) object, outputStream);
     }
@@ -61,6 +61,6 @@ public class Amf3InitializedObjectWriterImpl extends
             final Map.Entry entry) throws IOException {
         String propertyName = (String) entry.getKey();
         writeTypeString(propertyName, outputStream);
-        writeElementData(entry.getValue(), outputStream);
+        writeObjectElement(entry.getValue(), outputStream);
     }
 }

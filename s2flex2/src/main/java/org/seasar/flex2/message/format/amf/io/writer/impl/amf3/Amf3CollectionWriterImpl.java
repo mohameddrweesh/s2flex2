@@ -23,7 +23,7 @@ import java.util.Collection;
 
 public class Amf3CollectionWriterImpl extends Amf3ArrayWriterImpl {
 
-    protected final void writeInlineObjectData(Object object,
+    protected final void writeInlineObject(Object object,
             DataOutputStream outputStream) throws IOException {
         writeCollection((Collection) object, outputStream);
     }
@@ -32,7 +32,7 @@ public class Amf3CollectionWriterImpl extends Amf3ArrayWriterImpl {
             final DataOutputStream outputStream) throws IOException {
         ArrayList list = new ArrayList();
         list.addAll(value);
-        super.writeInlineObjectData(list.toArray(new Object[list.size()]),
+        super.writeInlineObject(list.toArray(new Object[list.size()]),
                 outputStream);
     }
 }

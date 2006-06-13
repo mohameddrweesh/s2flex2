@@ -43,7 +43,7 @@ public abstract class AbstractAmf3ObjectWriterImpl extends
     public void writeData(final Object value,
             final DataOutputStream outputStream) throws IOException {
         outputStream.writeByte(getDataTypeValue());
-        writeObjectData(value, outputStream);
+        writeObject(value, outputStream);
     }
 
     protected final void addClassProperties(final Class clazz,
@@ -75,16 +75,16 @@ public abstract class AbstractAmf3ObjectWriterImpl extends
         return getReferences().getStringReferenceIndex(object);
     }
 
-    protected abstract void writeInlineObjectData(final Object object,
+    protected abstract void writeInlineObject(final Object object,
             final DataOutputStream outputStream) throws IOException;
 
-    protected final void writeObjectData(final Object object,
+    protected final void writeObject(final Object object,
             final DataOutputStream outputStream) throws IOException {
         int referenceIndex = getObjectReferenceIndex(object);
         if (referenceIndex >= 0) {
             writeReferenceIndex(referenceIndex, outputStream);
         } else {
-            writeInlineObjectData(object, outputStream);
+            writeInlineObject(object, outputStream);
         }
     }
 
