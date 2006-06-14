@@ -46,8 +46,10 @@ public class RemotingServiceLocatorOnHotDeployImpl extends
         reloadComponentDef(componentDef);
 
         ComponentDef reloadedComponentDef = getServiceComponentDef(serviceName);
-        copyMetadata(componentDef, reloadedComponentDef);
-
+        if( componentDef != reloadedComponentDef){
+            copyMetadata(componentDef, reloadedComponentDef);
+        }
+        
         return reloadedComponentDef;
     }
 
