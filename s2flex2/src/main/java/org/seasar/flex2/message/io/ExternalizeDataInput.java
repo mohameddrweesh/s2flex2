@@ -17,8 +17,6 @@ package org.seasar.flex2.message.io;
 
 import java.io.DataInputStream;
 
-
-
 public interface ExternalizeDataInput extends DataInput {
     void setInputStream(DataInputStream inputStream);
 }

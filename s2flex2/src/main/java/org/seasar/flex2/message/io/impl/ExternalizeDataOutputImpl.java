@@ -52,8 +52,6 @@ public class ExternalizeDataOutputImpl implements ExternalizeDataOutput {
     }
 
     public void writeFloat(float value) throws IOException {
-        // TODO Auto-generated method stub
-        
     }
 
     public void writeInt(int value) throws IOException {
@@ -71,8 +69,6 @@ public class ExternalizeDataOutputImpl implements ExternalizeDataOutput {
     }
 
     public void writeUnsignedInt(int value) throws IOException {
-        // TODO Auto-generated method stub
-        
     }
 
     public void writeUTF(String value) throws IOException {
