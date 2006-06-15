@@ -15,8 +15,6 @@
  */
 package org.seasar.flex2.message.io;
 
-
-
 public interface Externalizable {
 
     void readExternal(DataInput input);

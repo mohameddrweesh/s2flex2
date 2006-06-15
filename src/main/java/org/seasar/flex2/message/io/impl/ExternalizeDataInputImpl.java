@@ -48,7 +48,6 @@ public class ExternalizeDataInputImpl implements ExternalizeDataInput {
     }
 
     public float readFloat() throws IOException {
-        // TODO Auto-generated method stub
         return 0;
     }
 
@@ -71,12 +70,10 @@ public class ExternalizeDataInputImpl implements ExternalizeDataInput {
     }
 
     public int readUnsignedByte() throws IOException {
-        // TODO Auto-generated method stub
         return 0;
     }
 
     public int readUnsignedShort() throws IOException {
-        // TODO Auto-generated method stub
         return 0;
     }
 
