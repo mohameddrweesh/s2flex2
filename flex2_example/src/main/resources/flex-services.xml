@@ -54,6 +54,15 @@
 					<channel ref="s2-amf"/>
 				</channels>
 			</destination>
+			<destination id="paramCheckService">
+				<properties>
+					<source>paramCheckService</source>
+					<service-name>paramCheckService</service-name>
+				</properties>
+				<channels>
+					<channel ref="s2-amf"/>
+				</channels>
+			</destination>
         </service>
     </services>
     <security />
