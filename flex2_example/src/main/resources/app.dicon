@@ -3,7 +3,7 @@
 	"http://www.seasar.org/dtd/components23.dtd">
 <components>
 	<include path="aop.dicon"/>
-	<include path="remoting.dicon"/>
+	<include path="messaging.dicon"/>
 	
 	<component name="snapshotServiceConfig" class="examples.flex2.camera.config.SnapshotServiceConfig">
         <property name="rootPath">application.getRealPath(".") + "\\snapshot\\"</property>
@@ -14,13 +14,13 @@
 
 	<component
       class="org.seasar.framework.container.autoregister.FileSystemComponentAutoRegister">
-		<property name="instanceDef">@org.seasar.framework.container.deployer.InstanceDefFactory@REQUEST</property>
+		<property name="instanceDef">@org.seasar.framework.container.deployer.InstanceDefFactory@SESSION</property>
 		<initMethod name="addClassPattern">
             <arg>"examples.flex2"</arg>
             <arg>".*Impl"</arg>
         </initMethod>
     </component>
-    
+    <!--
 	<component
 	  class="org.seasar.framework.container.autoregister.AspectAutoRegister">
 	  	<property name="interceptor">aop.traceThrowsInterceptor</property>
@@ -29,6 +29,7 @@
 	        <arg>".*ServiceImpl"</arg>
 	    </initMethod>
 	</component>
+	-->
 		    
     <component
 	  class="org.seasar.framework.container.autoregister.MetaAutoRegister">
