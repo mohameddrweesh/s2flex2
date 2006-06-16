@@ -51,13 +51,13 @@ public class Amf3WriterImpl extends AmfWriterImpl {
         outputStream.writeUTF(header.getName());
         outputStream.writeBoolean(header.isRequired());
         outputStream.writeInt(header.getLength());
-        writeData( header.getData() );
+        writeData( header.getValue() );
     }
 
     protected void writeHeaders() throws IOException {
-        int header_size = message.getHeaderSize();
-        outputStream.writeShort(header_size);
-        for (int i = 0; i < header_size; ++i) {
+        int headerNumber = message.getHeaderSize();
+        outputStream.writeShort(headerNumber);
+        for (int i = 0; i < headerNumber; ++i) {
             writeHeader(message.getHeader(i));
         }
     }
