@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.3//EN" 
+	"http://www.seasar.org/dtd/components23.dtd">
+<components namespace="messaging">
+	<!--
+		amf3 framework
+	-->
+	<include path="amf3.dicon" />
+	
+	<!--
+		data util
+	-->
+	<component class="org.seasar.flex2.util.data.transfer.impl.TransferImpl" />
+	<component class="org.seasar.flex2.util.data.storage.impl.StorageLocatorImpl"/>
+	<component name="serviceDataStorage" class="org.seasar.flex2.util.data.storage.impl.HttpSessionDataStorage" instance="session" />
+	
+	<!--
+		remoting service 
+	-->
+	<component class="org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceRepositoryImpl" />
+	<component class="org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceLocatorOnHotDeployImpl" />
+	<component class="org.seasar.flex2.rpc.messaging.invoker.impl.MessagingServiceInvoker">
+		<initMethod>amf3.serviceInvokerChooser.addInvoker(#self)</initMethod>
+	</component>
+		
+	<!--
+		appendToGatewayUrl header creator 
+	-->
+	<component name="appendToGatewayUrlHeaderCreator" class="org.seasar.flex2.rpc.remoting.processor.impl.AppendToGatewayUrlHeaderCreatorImpl">
+		<property name="sessionDecorator">
+			<component class="org.seasar.flex2.util.session.impl.TomcatSessionDecoratorImpl" />
+		</property>
+	</component>
+	
+	<!--
+		remoting message processor
+	-->
+	<component class="org.seasar.flex2.rpc.remoting.processor.impl.RemotingMessageProcessorImpl" >
+		<initMethod name="addHeaderCreator">appendToGatewayUrlHeaderCreator</initMethod>
+	</component>
+</components>

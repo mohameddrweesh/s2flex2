@@ -13,14 +13,26 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.message.format.amf.processor;
+package org.seasar.flex2.util.io;
 
+import java.io.BufferedInputStream;
 import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.util.List;
+import java.io.InputStream;
 
-public interface AmfMessageProcessor {
-    void process(DataInputStream inputStream, DataOutputStream outputStream,
-            List headers) throws IOException;
+public class InputStreamUtil {
+
+    public static final InputStream toBufferedInputStream(
+            InputStream outputStream) throws IOException {
+        if (!(outputStream instanceof BufferedInputStream)) {
+            outputStream = new BufferedInputStream(outputStream);
+        }
+
+        return outputStream;
+    }
+
+    public static final InputStream toBufferedDataInputStream(
+            InputStream outputStream) throws IOException {
+        return new DataInputStream(toBufferedInputStream(outputStream));
+    }
 }

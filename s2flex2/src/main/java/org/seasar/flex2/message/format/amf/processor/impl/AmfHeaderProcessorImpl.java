@@ -16,7 +16,7 @@
 package org.seasar.flex2.message.format.amf.processor.impl;
 
 import java.util.Iterator;
-import java.util.Map;
+import java.util.List;
 
 import org.seasar.flex2.message.format.amf.data.AmfHeader;
 import org.seasar.flex2.message.format.amf.data.AmfMessage;
@@ -31,18 +31,14 @@ public class AmfHeaderProcessorImpl implements AmfHeaderProcessor {
         return headerFactory;
     }
 
-    public void processRequest(AmfMessage requestMessage, Map addHeaders) {
+    public void processRequest(AmfMessage requestMessage, List addHeaders) {
 
     }
 
-    public void processResponse(AmfMessage responseMessage, Map addHeaders) {
+    public void processResponse(AmfMessage responseMessage, List addHeaders) {
         if(addHeaders.size() > 0){
-            Iterator headerIt = addHeaders.entrySet().iterator();
-            Map.Entry header;
-            while (headerIt.hasNext()) {
-                header = (Map.Entry) headerIt.next();
-                addHeader(responseMessage, (String) header.getKey(),
-                        (String) header.getValue());
+            for (Iterator headerIt = addHeaders.iterator(); headerIt.hasNext();) {
+                responseMessage.addHeader((AmfHeader)headerIt.next());
             }
         }
     }
@@ -50,11 +46,4 @@ public class AmfHeaderProcessorImpl implements AmfHeaderProcessor {
     public void setHeaderFactory(AmfHeaderFactory headerFactory) {
         this.headerFactory = headerFactory;
     }
-
-    private final void addHeader( final AmfMessage responseMessage, final String headerName,
-            final String data) {
-        AmfHeader header = headerFactory.createHeader(headerName, data);
-        responseMessage.addHeader(header);
-    }
-
 }

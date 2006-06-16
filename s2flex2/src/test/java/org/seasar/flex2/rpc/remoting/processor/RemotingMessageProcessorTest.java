@@ -30,7 +30,7 @@ public class RemotingMessageProcessorTest extends S2TestCase {
         assertTrue("1", processor instanceof RemotingMessageProcessorImpl);
         
         RemotingMessageProcessorImpl processorImpl = (RemotingMessageProcessorImpl)processor;
-        assertTrue("2", processorImpl.getProcessor() instanceof AmfMessageProcessor);
+        assertTrue("2", processorImpl.getMessageProcessor() instanceof AmfMessageProcessor);
         
     }
     

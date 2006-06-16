@@ -15,34 +15,39 @@
  */
 package org.seasar.flex2.rpc.remoting.processor.impl;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.seasar.flex2.message.format.amf.AmfHeaderConstants;
 import org.seasar.flex2.message.format.amf.processor.AmfMessageProcessor;
+import org.seasar.flex2.rpc.remoting.processor.RemotingMessageHeaderCreator;
 import org.seasar.flex2.rpc.remoting.processor.RemotingMessageProcessor;
-import org.seasar.flex2.util.session.HttpSessionUtil;
-import org.seasar.flex2.util.session.SessionDecorator;
+import org.seasar.flex2.util.io.InputStreamUtil;
+import org.seasar.flex2.util.io.OutputStreamUtil;
 
 public class RemotingMessageProcessorImpl implements RemotingMessageProcessor {
 
-    private AmfMessageProcessor processor;
+    private AmfMessageProcessor messageProcessor;
 
-    private SessionDecorator sessionDecorator;
+    private final List headerCreators;
+    
+    public RemotingMessageProcessorImpl(){
+        headerCreators = new ArrayList();
+    }
 
-    public AmfMessageProcessor getProcessor() {
-        return processor;
+    public void addHeaderCreator( RemotingMessageHeaderCreator creator ){
+        headerCreators.add(creator);
+    }
+
+    public AmfMessageProcessor getMessageProcessor() {
+        return messageProcessor;
     }
 
     public void process(final HttpServletRequest request,
@@ -50,11 +55,13 @@ public class RemotingMessageProcessorImpl implements RemotingMessageProcessor {
             ServletException {
 
         try {
-            final DataInputStream inputStream = getRequestInputStream(request);
-            final DataOutputStream outputStream = getRequestOutputStream(response);
+            final DataInputStream inputStream = (DataInputStream) InputStreamUtil
+                    .toBufferedDataInputStream(request.getInputStream());
+            final DataOutputStream outputStream = (DataOutputStream) OutputStreamUtil
+                    .toBufferedDataOutputStream(response.getOutputStream());
 
-            final Map headers = createMessageHeaders(request);
-            processor.process(inputStream, outputStream, headers);
+            final List headers = createMessageHeaders(request);
+            messageProcessor.process(inputStream, outputStream, headers);
 
             response.setContentLength(outputStream.size());
             outputStream.flush();
@@ -74,40 +81,22 @@ public class RemotingMessageProcessorImpl implements RemotingMessageProcessor {
         }
     }
 
-    public void setProcessor(AmfMessageProcessor processor) {
-        this.processor = processor;
+    public void setMessageProcessor(AmfMessageProcessor processor) {
+        this.messageProcessor = processor;
     }
-
-    public void setSessionDecorator(SessionDecorator sessionDecorator) {
-        this.sessionDecorator = sessionDecorator;
-    }
-
-    private final Map createMessageHeaders(HttpServletRequest request) {
-        Map headers = new HashMap();
-        if (!request.isRequestedSessionIdValid()) {
-            String sessionId = HttpSessionUtil.getSessionId(request, true);
-            sessionId = sessionDecorator.formatSessionId(sessionId);
-            headers.put(AmfHeaderConstants.APPEND_TO_GATEWAYURL, sessionId);
+    
+    private final List createMessageHeaders(final HttpServletRequest request) {
+        List headers = new ArrayList();
+        if (headerCreators.size() > 0) {
+            RemotingMessageHeaderCreator processor;
+            for (Iterator creatorIt = headerCreators.iterator(); creatorIt.hasNext();) {
+                processor = (RemotingMessageHeaderCreator) creatorIt.next();
+                Object header = processor.createHeader(request);
+                if( header != null ){
+                    headers.add( header );
+                }
+            }
         }
-
         return headers;
-    }
-
-    private final DataInputStream getRequestInputStream(
-            final HttpServletRequest request) throws IOException {
-        InputStream inputStream = request.getInputStream();
-        if (!(inputStream instanceof BufferedInputStream)) {
-            inputStream = new BufferedInputStream(inputStream);
-        }
-        return new DataInputStream(inputStream);
-    }
-
-    private final DataOutputStream getRequestOutputStream(
-            final HttpServletResponse response) throws IOException {
-        OutputStream outputStream = response.getOutputStream();
-        if (!(outputStream instanceof BufferedOutputStream)) {
-            outputStream = new BufferedOutputStream(outputStream);
-        }
-        return new DataOutputStream(outputStream);
     }
 }

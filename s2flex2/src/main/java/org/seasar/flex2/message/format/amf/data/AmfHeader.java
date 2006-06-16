@@ -7,5 +7,5 @@ public interface AmfHeader {
 
     int getLength();
 
-    Object getData();
+    Object getValue();
 }

@@ -4,7 +4,7 @@ import org.seasar.flex2.message.format.amf.data.AmfHeader;
 
 public class AmfHeaderImpl implements AmfHeader {
 
-    private final Object data;
+    private final Object value;
 
     private int length = -1;
 
@@ -14,11 +14,11 @@ public class AmfHeaderImpl implements AmfHeader {
 
     public AmfHeaderImpl(String name, Object data) {
         this.name = name;
-        this.data = data;
+        this.value = data;
     }
 
-    public Object getData() {
-        return data;
+    public Object getValue() {
+        return value;
     }
 
     public int getLength() {

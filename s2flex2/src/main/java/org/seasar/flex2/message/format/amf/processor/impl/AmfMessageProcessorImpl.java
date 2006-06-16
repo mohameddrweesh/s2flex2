@@ -19,7 +19,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.util.Map;
+import java.util.List;
 
 import org.seasar.flex2.message.format.amf.data.AmfMessage;
 import org.seasar.flex2.message.format.amf.io.reader.AmfReader;
@@ -56,7 +56,7 @@ public class AmfMessageProcessorImpl implements AmfMessageProcessor {
         return writerFactory;
     }
 
-    public void process( final DataInputStream inputStream, final DataOutputStream outputStream, Map headers) throws IOException{       
+    public void process( final DataInputStream inputStream, final DataOutputStream outputStream, List headers) throws IOException{       
         final AmfMessage requestMessage = readMessage(inputStream);
         headerProcessor.processRequest(requestMessage, headers);
         

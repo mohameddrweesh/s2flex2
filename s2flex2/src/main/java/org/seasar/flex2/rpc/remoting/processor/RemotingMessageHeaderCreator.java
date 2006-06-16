@@ -13,15 +13,12 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.message.format.amf.processor;
+package org.seasar.flex2.rpc.remoting.processor;
 
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 
-import org.seasar.flex2.message.format.amf.data.AmfMessage;
+import org.seasar.flex2.message.format.amf.data.AmfHeader;
 
-public interface AmfHeaderProcessor {
-
-    void processRequest(AmfMessage requestMessage, List addHeaders);
-
-    void processResponse(AmfMessage responseMessage, List addHeaders);
+public interface RemotingMessageHeaderCreator {
+    public AmfHeader createHeader(HttpServletRequest request);
 }
