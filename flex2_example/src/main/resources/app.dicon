@@ -23,7 +23,7 @@
     
 	<component
 	  class="org.seasar.framework.container.autoregister.AspectAutoRegister">
-	  	<property name="interceptor">aop.traceInterceptor</property>
+	  	<property name="interceptor">aop.traceThrowsInterceptor</property>
 	    <initMethod name="addClassPattern">
 	        <arg>"examples.flex2"</arg>
 	        <arg>".*ServiceImpl"</arg>

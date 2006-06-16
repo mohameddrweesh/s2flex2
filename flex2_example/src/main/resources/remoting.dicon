@@ -6,30 +6,29 @@
 		amf3 framework
 	-->
 	<include path="amf3.dicon" />
-	
-	<!--
-		data util
-	-->
-	<component class="org.seasar.flex2.util.data.transfer.impl.TransferImpl" />
-	<component class="org.seasar.flex2.util.data.storage.impl.StorageLocatorImpl"/>
-	<component name="serviceDataStorage" class="org.seasar.flex2.util.data.storage.impl.HttpSessionDataStorage" instance="session" />
-	
+
 	<!--
 		remoting service 
 	-->
 	<component class="org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceRepositoryImpl" />
-	<component class="org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceLocatorImpl" />
+	<component class="org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceLocatorOnHotDeployImpl" />
 	<component class="org.seasar.flex2.rpc.remoting.invoker.RemotingServiceInvoker">
 		<initMethod>amf3.serviceInvokerChooser.addInvoker(#self)</initMethod>
 	</component>
 		
 	<!--
-		session decorator 
+		appendToGatewayUrl header creator 
 	-->
-	<component class="org.seasar.flex2.util.session.impl.TomcatSessionDecoratorImpl" />
+	<component name="appendToGatewayUrlHeaderCreator" class="org.seasar.flex2.rpc.remoting.processor.impl.AppendToGatewayUrlHeaderCreatorImpl">
+		<property name="sessionDecorator">
+			<component class="org.seasar.flex2.util.session.impl.TomcatSessionDecoratorImpl" />
+		</property>
+	</component>
 	
 	<!--
 		remoting message processor
 	-->
-	<component class="org.seasar.flex2.rpc.remoting.processor.impl.RemotingMessageProcessorImpl" />
+	<component class="org.seasar.flex2.rpc.remoting.processor.impl.RemotingMessageProcessorImpl" >
+		<initMethod name="addHeaderCreator">appendToGatewayUrlHeaderCreator</initMethod>
+	</component>
 </components>
