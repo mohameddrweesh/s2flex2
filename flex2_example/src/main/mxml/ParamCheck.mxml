@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute"
+	xmlns:s2="http://www.seasar.org/s2flex2/mxml">
+	<mx:Script>
+
+		<![CDATA[
+			import examples.flex2.param.TypeCDto;
+			import examples.flex2.param.TypeBDto;
+			import examples.flex2.param.TypeADto;
+			import mx.utils.ObjectUtil;
+			import mx.utils.XMLUtil;
+			import mx.rpc.events.ResultEvent;
+			import mx.rpc.events.FaultEvent;
+			private function onResult(resultEvent:ResultEvent):void{
+				var typeC:TypeCDto = resultEvent.result as TypeCDto; 
+				ret_text.text=ObjectUtil.toString(
+				typeC);
+			}
+			private function onFault(faultEvent:FaultEvent):void{
+				ret_text.text=ObjectUtil.toString(faultEvent.fault);
+			}
+			private function doService():void{
+				var typeA:TypeADto = new TypeADto();
+				var typeB:TypeBDto = new TypeBDto();
+				var typeC:TypeCDto = new TypeCDto();
+				typeA.age=100;
+				typeA.firstName="Jun";
+				typeA.lastName="ふなくら";
+				
+				typeB.dept="儀術";
+				typeB.deptCd="1";
+				typeB.type=3;
+				paramCheckService.getTypeCDto(6,typeA,typeB);	
+			}
+		]]>
+	</mx:Script>
+	<s2:S2Flex2Service id="paramCheckService" destination="paramCheckService" result="onResult(event)" fault="onFault(event)" >
+		
+	</s2:S2Flex2Service>
+	<mx:TextArea x="52" y="47" height="188" width="356" id="ret_text"/>
+	<mx:Button x="52" y="258" label="paramCheckService" click="doService()"/>
+	
+</mx:Application>
