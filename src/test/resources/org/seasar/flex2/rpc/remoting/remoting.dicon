@@ -15,20 +15,19 @@
 	<component class="org.seasar.flex2.rpc.remoting.invoker.RemotingServiceInvoker">
 		<initMethod>amf3.serviceInvokerChooser.addInvoker(#self)</initMethod>
 	</component>
-		
-	<!--
-		appendToGatewayUrl header creator 
-	-->
-	<component name="appendToGatewayUrlHeaderCreator" class="org.seasar.flex2.rpc.remoting.processor.impl.AppendToGatewayUrlHeaderCreatorImpl">
-		<property name="sessionDecorator">
-			<component class="org.seasar.flex2.util.session.impl.TomcatSessionDecoratorImpl" />
-		</property>
-	</component>
 	
 	<!--
 		remoting message processor
 	-->
 	<component class="org.seasar.flex2.rpc.remoting.processor.impl.RemotingMessageProcessorImpl" >
-		<initMethod name="addHeaderCreator">appendToGatewayUrlHeaderCreator</initMethod>
+		<initMethod name="addHeaderCreator">
+			<arg>
+				<component name="appendToGatewayUrlHeaderCreator" class="org.seasar.flex2.rpc.remoting.processor.impl.AppendToGatewayUrlHeaderCreatorImpl">
+					<property name="sessionDecorator">
+						<component class="org.seasar.flex2.util.session.impl.TomcatSessionDecoratorImpl" />
+					</property>
+				</component>
+			</arg>
+		</initMethod>
 	</component>
 </components>
