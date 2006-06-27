@@ -22,7 +22,7 @@
 	<component class="org.seasar.flex2.rpc.remoting.processor.impl.RemotingMessageProcessorImpl" >
 		<initMethod name="addHeaderCreator">
 			<arg>
-				<component name="appendToGatewayUrlHeaderCreator" class="org.seasar.flex2.rpc.remoting.processor.impl.AppendToGatewayUrlHeaderCreatorImpl">
+				<component class="org.seasar.flex2.rpc.remoting.processor.impl.AppendToGatewayUrlHeaderCreatorImpl">
 					<property name="sessionDecorator">
 						<component class="org.seasar.flex2.util.session.impl.TomcatSessionDecoratorImpl" />
 					</property>
