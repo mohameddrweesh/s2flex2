@@ -19,25 +19,26 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 
 import org.seasar.flex2.rpc.remoting.message.data.Message;
 import org.seasar.flex2.rpc.remoting.message.data.processor.MessageBodyProcessor;
 import org.seasar.flex2.rpc.remoting.message.data.processor.MessageHeaderProcessor;
 import org.seasar.flex2.rpc.remoting.message.data.processor.MessageProcessor;
-import org.seasar.flex2.rpc.remoting.message.io.reader.MessageReader;
 import org.seasar.flex2.rpc.remoting.message.io.reader.factory.MessageReaderFactory;
-import org.seasar.flex2.rpc.remoting.message.io.writer.MessageWriter;
 import org.seasar.flex2.rpc.remoting.message.io.writer.factory.MessageWriterFactory;
 
 public class MessageProcessorImpl implements MessageProcessor {
 
+    private static final int MESSAGE_WRITING_BUFFER_SIZE = 1024 * 2;
+
     private MessageBodyProcessor bodyProcessor;
 
     private MessageHeaderProcessor headerProcessor;
-    
+
     private MessageReaderFactory readerFactory;
-    
+
     private MessageWriterFactory writerFactory;
 
     public MessageBodyProcessor getBodyProcessor() {
@@ -56,15 +57,16 @@ public class MessageProcessorImpl implements MessageProcessor {
         return writerFactory;
     }
 
-    public void process( final DataInputStream inputStream, final DataOutputStream outputStream, List headers) throws IOException{       
+    public void process(final DataInputStream inputStream,
+            final DataOutputStream outputStream, List headers)
+            throws IOException {
         final Message requestMessage = readMessage(inputStream);
         headerProcessor.processRequest(requestMessage, headers);
-        
+
         final Message responseMessage = bodyProcessor.process(requestMessage);
-        headerProcessor.processResponse(responseMessage, headers );
-        
-        ByteArrayOutputStream writedOutputSteam = writeMessage( responseMessage);
-        writedOutputSteam.writeTo(outputStream);
+        headerProcessor.processResponse(responseMessage, headers);
+
+        writeMessage(responseMessage, outputStream);
     }
 
     public void setBodyProcessor(MessageBodyProcessor bodyProcessor) {
@@ -83,18 +85,22 @@ public class MessageProcessorImpl implements MessageProcessor {
         this.writerFactory = writerFactory;
     }
 
-    private final Message readMessage( final DataInputStream requestDataInputStream) throws IOException {
-        MessageReader reader = readerFactory.createMessageReader(requestDataInputStream);
-        return reader.read();
+    private final Message readMessage(
+            final DataInputStream requestDataInputStream) throws IOException {
+        return readerFactory.createMessageReader(requestDataInputStream).read();
     }
 
-    private final ByteArrayOutputStream writeMessage( final Message responseMessage) throws IOException {
+    private final void writeMessage(final Message responseMessage,
+            final OutputStream responceOutputStream) throws IOException {
 
-        ByteArrayOutputStream amfMessageByteArray = new ByteArrayOutputStream(1024*2);
-        DataOutputStream outputStream = new DataOutputStream(amfMessageByteArray);
-        MessageWriter writer = writerFactory.createMessageWriter( outputStream, responseMessage);
-        writer.write();
-        
-        return amfMessageByteArray;
+        ByteArrayOutputStream messageOutputStream = new ByteArrayOutputStream(
+                MESSAGE_WRITING_BUFFER_SIZE);
+
+        writerFactory.createMessageWriter(
+                new DataOutputStream(messageOutputStream), responseMessage)
+                .write();
+
+        messageOutputStream.writeTo(responceOutputStream);
+        responceOutputStream.flush();
     }
 }
