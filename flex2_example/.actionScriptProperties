@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<actionScriptProperties mainApplicationPath="src/main/mxml/flex2_example.mxml" version="4">
-<compiler additionalCompilerArguments="-locale ja_JP --services=..\resources\flex-services.xml" coach="true" copyDependentFiles="true" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="true" htmlHistoryManagement="true" htmlPlayerVersion="9.0.0" htmlPlayerVersionCheck="true" outputFolderPath="bin" sourceFolderPath="src\main\mxml" strict="true">
-<classPath>
-<classPathEntry kind="1" path="${DOCUMENTS}\flex2_example\src\main\actionscript"/>
-</classPath>
+<actionScriptProperties mainApplicationPath="src/main/mxml/flex2_example.mxml" version="1">
+<compiler additionalCompilerArguments="-locale ja_JP --services=..\resources\flex-services.xml" copyDependentFiles="true" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="true" htmlHistoryManagement="true" htmlPlayerVersion="9.0.0" htmlPlayerVersionCheck="true" outputFolderPath="bin" sourceFolderPath="src\main\mxml" strict="true" warn="true">
+<compilerSourcePath>
+<compilerSourcePathEntry kind="1" path="${DOCUMENTS}\flex2_example\src\main\actionscript"/>
+</compilerSourcePath>
 <libraryPath>
 <libraryPathEntry kind="3" linkType="2" path="${FRAMEWORKS}/libs/playerglobal.swc"/>
 <libraryPathEntry kind="3" linkType="1" path="${FRAMEWORKS}/libs/utilities.swc"/>
@@ -13,9 +13,7 @@
 <libraryPathEntry kind="1" linkType="1" path="${FRAMEWORKS}/locale/{locale}"/>
 <libraryPathEntry kind="3" linkType="1" path="${DOCUMENTS}\flex2_example\src\lib\swc\s2flex2-components.swc"/>
 </libraryPath>
-<sourcePath>
-<sourcePathEntry kind="3" path="${FRAMEWORKS}/libs/framework.swc" sourcepath="${FRAMEWORKS}/source"/>
-</sourcePath>
+<sourceAttachmentPath/>
 </compiler>
 <applications>
 <application path="flex2_example\bin\s2flex2_checkDto_example.swf"/>

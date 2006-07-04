@@ -1,6 +1,6 @@
 package examples.flex2.camera.snapshot.dto;
 
-import org.seasar.flex2.message.io.ByteArray;
+import org.seasar.flex2.core.format.amf3.type.ByteArray;
 
 public class SnapshotDto {
     private ByteArray source;

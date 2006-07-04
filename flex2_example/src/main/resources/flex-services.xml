@@ -71,7 +71,7 @@
     	s2flex2 gateway
     	-->
         <channel-definition id="s2-amf" class="mx.messaging.channels.AMFChannel">
-            <endpoint uri="http://localhost:8080/flex2_example/gateway"  class="flex.messaging.endpoints.AMFEndpoint"/>
+            <endpoint uri="http://localhost/flex2_example/gateway"  class="flex.messaging.endpoints.AMFEndpoint"/>
             <properties>
                 <polling-enabled>false</polling-enabled>
             </properties>
