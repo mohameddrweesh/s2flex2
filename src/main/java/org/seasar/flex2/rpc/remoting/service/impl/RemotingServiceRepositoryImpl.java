@@ -15,12 +15,38 @@
  */
 package org.seasar.flex2.rpc.remoting.service.impl;
 
-import org.seasar.flex2.message.format.amf.service.impl.ServiceRepositoryImpl;
+import java.util.Collections;
+import java.util.Map;
+import java.util.WeakHashMap;
+
 import org.seasar.flex2.rpc.remoting.service.RemotingServiceRepository;
 import org.seasar.framework.util.StringUtil;
 
-public class RemotingServiceRepositoryImpl extends ServiceRepositoryImpl
-        implements RemotingServiceRepository {
+public class RemotingServiceRepositoryImpl implements RemotingServiceRepository {
+    protected final Map serviceCache = Collections
+            .synchronizedMap(new WeakHashMap(64));
+
+    public void addService(String serviceName, Object service) {
+        if (!serviceCache.containsKey(serviceName)) {
+            serviceCache.put(serviceName, service);
+        }
+    }
+
+    public void clearService() {
+        serviceCache.clear();
+    }
+
+    public Object getService(final String serviceName) {
+        return serviceCache.get(serviceName);
+    }
+
+    public boolean hasService(String serviceName) {
+        return serviceCache.containsKey(serviceName);
+    }
+
+    public void removeService(String serviceName) {
+        serviceCache.remove(serviceName);
+    }
 
     public void removeService(Class serviceClass) {
         if (serviceClass.isInterface()) {

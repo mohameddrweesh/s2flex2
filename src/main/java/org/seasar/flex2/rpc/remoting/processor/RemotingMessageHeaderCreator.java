@@ -17,8 +17,8 @@ package org.seasar.flex2.rpc.remoting.processor;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.seasar.flex2.message.format.amf.data.AmfHeader;
+import org.seasar.flex2.rpc.remoting.message.data.MessageHeader;
 
 public interface RemotingMessageHeaderCreator {
-    public AmfHeader createHeader(HttpServletRequest request);
+    public MessageHeader createHeader(HttpServletRequest request);
 }

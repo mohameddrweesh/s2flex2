@@ -15,27 +15,31 @@
  */
 package org.seasar.flex2.rpc.remoting.service.impl;
 
-import org.seasar.flex2.message.format.amf.service.exception.InvalidServiceRuntimeException;
-import org.seasar.flex2.message.format.amf.service.impl.ServiceLocatorImpl;
 import org.seasar.flex2.rpc.remoting.service.RemotingServiceConstants;
 import org.seasar.flex2.rpc.remoting.service.RemotingServiceLocator;
 import org.seasar.flex2.rpc.remoting.service.RemotingServiceRepository;
 import org.seasar.flex2.rpc.remoting.service.annotation.factory.AnnotationHandlerFactory;
 import org.seasar.flex2.rpc.remoting.service.annotation.handler.AnnotationHandler;
+import org.seasar.flex2.rpc.remoting.service.exception.InvalidServiceRuntimeException;
 import org.seasar.framework.container.ComponentDef;
 import org.seasar.framework.container.S2Container;
 import org.seasar.framework.util.ClassUtil;
 
-public class RemotingServiceLocatorImpl extends ServiceLocatorImpl implements
-        RemotingServiceLocator {
-
-    protected RemotingServiceRepository repository;
+public class RemotingServiceLocatorImpl implements RemotingServiceLocator {
 
     private final AnnotationHandler annotationHandler = AnnotationHandlerFactory
             .getAnnotationHandler();
 
+    protected S2Container container;
+
+    protected RemotingServiceRepository repository;
+
     public void cleanServiceOf(Class serviceClass) {
         repository.removeService(serviceClass);
+    }
+
+    public S2Container getContainer() {
+        return this.container;
     }
 
     public RemotingServiceRepository getRepository() {
@@ -46,7 +50,8 @@ public class RemotingServiceLocatorImpl extends ServiceLocatorImpl implements
         ComponentDef serviceComponentDef = null;
 
         if (repository.hasService(serviceName)) {
-            serviceComponentDef = (ComponentDef)repository.getService(serviceName);
+            serviceComponentDef = (ComponentDef) repository
+                    .getService(serviceName);
         } else {
             serviceComponentDef = getServiceComponentDef(serviceName);
             if (canRegisterService(serviceComponentDef)) {
@@ -64,17 +69,49 @@ public class RemotingServiceLocatorImpl extends ServiceLocatorImpl implements
         boolean isSupport = repository.hasService(serviceName);
 
         if (!isSupport) {
-            if (super.isSupportService(serviceName, methodName)) {
+            if (checkSupportService(serviceName, methodName)) {
                 ComponentDef componentDef = getServiceComponentDef(serviceName);
-                isSupport = canRegisterService( componentDef );
+                isSupport = canRegisterService(componentDef);
             }
         }
 
         return isSupport;
     }
 
+    public void setContainer(S2Container container) {
+        this.container = container;
+    }
+
     public void setRepository(RemotingServiceRepository repository) {
         this.repository = repository;
+    }
+
+    private boolean checkSupportService(final String serviceName,
+            final String methodName) {
+        S2Container root = container.getRoot();
+        if (root.hasComponentDef(serviceName)) {
+            return true;
+        }
+        try {
+            Class clazz = ClassUtil.forName(serviceName);
+            if (root.hasComponentDef(clazz)) {
+                return true;
+            }
+        } catch (Throwable ignore) {
+        }
+        return false;
+    }
+
+    private final boolean hasAmfRemotingServiceAnnotation(
+            final ComponentDef componentDef) {
+        return annotationHandler.hasAmfRemotingService(componentDef);
+    }
+
+    private final boolean hasAmfRemotingServiceMetadata(
+            final ComponentDef componentDef) {
+
+        return componentDef
+                .getMetaDef(RemotingServiceConstants.REMOTING_SERVICE) != null;
     }
 
     protected final boolean canRegisterService(final ComponentDef componentDef) {
@@ -96,17 +133,5 @@ public class RemotingServiceLocatorImpl extends ServiceLocatorImpl implements
             componentDef = root.getComponentDef(clazz);
         }
         return componentDef;
-    }
-
-    private final boolean hasAmfRemotingServiceAnnotation(
-            final ComponentDef componentDef) {
-        return annotationHandler.hasAmfRemotingService(componentDef);
-    }
-
-    private final boolean hasAmfRemotingServiceMetadata(
-            final ComponentDef componentDef) {
-
-        return componentDef
-                .getMetaDef(RemotingServiceConstants.REMOTING_SERVICE) != null;
     }
 }

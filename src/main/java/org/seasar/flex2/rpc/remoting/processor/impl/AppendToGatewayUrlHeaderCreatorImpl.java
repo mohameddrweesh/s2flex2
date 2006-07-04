@@ -17,9 +17,9 @@ package org.seasar.flex2.rpc.remoting.processor.impl;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.seasar.flex2.message.format.amf.AmfHeaderConstants;
-import org.seasar.flex2.message.format.amf.data.AmfHeader;
-import org.seasar.flex2.message.format.amf.data.factory.AmfHeaderFactory;
+import org.seasar.flex2.rpc.remoting.message.RemotingMessageConstants;
+import org.seasar.flex2.rpc.remoting.message.data.MessageHeader;
+import org.seasar.flex2.rpc.remoting.message.data.factory.MessageHeaderFactory;
 import org.seasar.flex2.rpc.remoting.processor.RemotingMessageHeaderCreator;
 import org.seasar.flex2.util.session.HttpSessionUtil;
 import org.seasar.flex2.util.session.SessionDecorator;
@@ -27,24 +27,24 @@ import org.seasar.flex2.util.session.SessionDecorator;
 public class AppendToGatewayUrlHeaderCreatorImpl implements
         RemotingMessageHeaderCreator {
 
-    private AmfHeaderFactory amfHeaderFactory;
+    private MessageHeaderFactory amfHeaderFactory;
 
     private SessionDecorator sessionDecorator;
 
-    public AmfHeader createHeader(HttpServletRequest request) {
-        AmfHeader header = null;
+    public MessageHeader createHeader(HttpServletRequest request) {
+        MessageHeader header = null;
 
         if (!request.isRequestedSessionIdValid()) {
             String sessionId = HttpSessionUtil.getSessionId(request, true);
             sessionId = sessionDecorator.formatSessionId(sessionId);
             header = amfHeaderFactory.createHeader(
-                    AmfHeaderConstants.APPEND_TO_GATEWAYURL, sessionId);
+                    RemotingMessageConstants.APPEND_TO_GATEWAYURL, sessionId);
         }
 
         return header;
     }
 
-    public AmfHeaderFactory getAmfHeaderFactory() {
+    public MessageHeaderFactory getAmfHeaderFactory() {
         return amfHeaderFactory;
     }
 
@@ -52,7 +52,7 @@ public class AppendToGatewayUrlHeaderCreatorImpl implements
         return sessionDecorator;
     }
 
-    public void setAmfHeaderFactory(AmfHeaderFactory amfHeaderFactory) {
+    public void setAmfHeaderFactory(MessageHeaderFactory amfHeaderFactory) {
         this.amfHeaderFactory = amfHeaderFactory;
     }
 

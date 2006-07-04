@@ -16,25 +16,33 @@
 package org.seasar.flex2.rpc.remoting.service.hotdeploy.creator;
 
 import org.seasar.flex2.rpc.remoting.service.RemotingServiceRepository;
-import org.seasar.framework.container.S2Container;
+import org.seasar.framework.container.ComponentDef;
 import org.seasar.framework.container.deployer.InstanceDefFactory;
-import org.seasar.framework.container.hotdeploy.creator.InterfaceCentricSinglePackageCreator;
+import org.seasar.framework.container.hotdeploy.OndemandS2Container;
+import org.seasar.framework.container.hotdeploy.creator.MultiPackageCreator;
+import org.seasar.framework.convention.NamingConvention;
 
-public class RemotingServiceCreator extends
-        InterfaceCentricSinglePackageCreator {
+public class RemotingServiceCreator extends MultiPackageCreator {
 
-    public RemotingServiceCreator() {
-        setMiddlePackageName("service");
+    public RemotingServiceCreator(NamingConvention namingConvention) {
+        super(namingConvention);
+        addMiddlePackageName("service");
         setNameSuffix("Service");
         setInstanceDef(InstanceDefFactory.REQUEST);
     }
 
-    public boolean loadComponentDef(S2Container container, Class clazz) {
-        boolean loadedComponentDef = super.loadComponentDef(container, clazz);
-        if (loadedComponentDef && isTarget(clazz)) {
-            S2Container root = container.getRoot();
-            RemotingServiceRepository repository = (RemotingServiceRepository) root
-                    .getComponent(RemotingServiceRepository.class);
+    public boolean loadComponentDef(OndemandS2Container container,
+            String subsystemPackageName, Class clazz) {
+        boolean loadedComponentDef = super.loadComponentDef(container,
+                subsystemPackageName, clazz);
+        if (loadedComponentDef && isTarget(subsystemPackageName, clazz)) {
+
+            ComponentDef componentDef = container
+                    .getComponentDef(RemotingServiceRepository.class);
+
+            RemotingServiceRepository repository = (RemotingServiceRepository) componentDef
+                    .getComponent();
+
             repository.removeService(clazz);
         }
 

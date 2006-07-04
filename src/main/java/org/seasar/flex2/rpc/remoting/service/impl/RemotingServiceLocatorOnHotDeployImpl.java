@@ -15,8 +15,8 @@
  */
 package org.seasar.flex2.rpc.remoting.service.impl;
 
-import org.seasar.flex2.message.format.amf.service.exception.InvalidServiceRuntimeException;
-import org.seasar.flex2.message.format.amf.service.exception.ServiceNotFoundRuntimeException;
+import org.seasar.flex2.rpc.remoting.service.exception.InvalidServiceRuntimeException;
+import org.seasar.flex2.rpc.remoting.service.exception.ServiceNotFoundRuntimeException;
 import org.seasar.framework.container.ComponentDef;
 import org.seasar.framework.util.ClassUtil;
 

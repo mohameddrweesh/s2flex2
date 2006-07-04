@@ -16,13 +16,13 @@
 package org.seasar.flex2.rpc.remoting.processor;
 
 import org.seasar.extension.unit.S2TestCase;
-import org.seasar.flex2.message.format.amf.processor.AmfMessageProcessor;
+import org.seasar.flex2.rpc.remoting.message.data.processor.MessageProcessor;
 import org.seasar.flex2.rpc.remoting.processor.impl.RemotingMessageProcessorImpl;
 import org.seasar.framework.container.S2Container;
 
 public class RemotingMessageProcessorTest extends S2TestCase {
     
-    private static String PATH = "org/seasar/flex2/rpc/remoting/remoting_amf3.dicon";
+    private static String PATH = "remoting_amf3.dicon";
 
     public void testCreateProcessor() throws Exception {
         S2Container container = getContainer();
@@ -30,7 +30,7 @@ public class RemotingMessageProcessorTest extends S2TestCase {
         assertTrue("1", processor instanceof RemotingMessageProcessorImpl);
         
         RemotingMessageProcessorImpl processorImpl = (RemotingMessageProcessorImpl)processor;
-        assertTrue("2", processorImpl.getMessageProcessor() instanceof AmfMessageProcessor);
+        assertTrue("2", processorImpl.getMessageProcessor() instanceof MessageProcessor);
         
     }
     
