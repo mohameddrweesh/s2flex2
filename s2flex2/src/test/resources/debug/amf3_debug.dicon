@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Shift_JIS"?>
 <!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.3//EN" 
 	"http://www.seasar.org/dtd/components23.dtd">
-<components namespace="s2flex2_amf" >
+<components namespace="amf3">
 	<include path="aop.dicon"/>
 	<component class="org.seasar.framework.container.autoregister.AspectAutoRegister">
 		<property name="interceptor">aop.traceInterceptor</property>
@@ -28,6 +28,16 @@
 		instance="request" />
 	<component
 		class="org.seasar.flex2.core.format.amf3.type.factory.impl.Amf3ReferencesFactoryImpl"  />
+
+	<!-- 
+		amf3 special type factory components
+	-->
+	<component
+		class="org.seasar.flex2.core.format.amf3.io.factory.impl.ExternalizeDataInputFactoryImpl" />
+	<component
+		class="org.seasar.flex2.core.format.amf3.io.factory.impl.ExternalizeDataOutputFactoryImpl" />
+	<component
+		class="org.seasar.flex2.core.format.amf3.type.factory.impl.ByteArrayFactoryImpl" />
 
 	<!-- 
 		data reader components
@@ -85,10 +95,6 @@
 		class="org.seasar.flex2.core.format.amf3.io.reader.impl.Amf3ObjectReaderImpl"
 	    autoBinding="property">
 		<property name="stringReader">amf3StringReaderImpl</property>
-		<property name="dataInputFactory">
-			<component
-				class="org.seasar.flex2.core.format.amf3.io.factory.impl.ExternalizeDataInputFactoryImpl" />
-		</property>
 	</component>
 	<component
 		name="amf3XmlReaderImpl"
@@ -97,13 +103,7 @@
 	<component
 		name="amf3ByteArrayReaderImpl"
 		class="org.seasar.flex2.core.format.amf3.io.reader.impl.Amf3ByteArrayReaderImpl"
-	    autoBinding="property">
-		<property name="byteArrayFactory">
-			<component
-				class="org.seasar.flex2.core.format.amf3.type.factory.impl.ByteArrayFactoryImpl" />
-		</property>
-	</component>
-	
+	    autoBinding="property"/>	
 	<!-- 
 		data reader factory components
 	-->
@@ -112,23 +112,23 @@
 		<property name="readerMap">
 			<component class="java.util.HashMap">
 			    <initMethod name="put">
-			        <arg>@org.seasar.flex2.core.format.amf3.type.AmfTypeDef@TYPE_NULL</arg>
+			        <arg>@org.seasar.flex2.core.format.amf.type.AmfTypeDef@TYPE_NULL</arg>
 			        <arg>amfNullReaderImpl</arg>
 			    </initMethod>
 			    <initMethod name="put">
-			        <arg>@org.seasar.flex2.core.format.amf3.type.AmfTypeDef@TYPE_NUMBER</arg>
+			        <arg>@org.seasar.flex2.core.format.amf.type.AmfTypeDef@TYPE_NUMBER</arg>
 			        <arg>amfNumberReaderImpl</arg>
 			    </initMethod>
 			    <initMethod name="put">
-			        <arg>@org.seasar.flex2.core.format.amf3.type.AmfTypeDef@TYPE_BOOLEAN</arg>
+			        <arg>@org.seasar.flex2.core.format.amf.type.AmfTypeDef@TYPE_BOOLEAN</arg>
 			        <arg>amfBooleanReaderImpl</arg>
 			    </initMethod>
 			    <initMethod name="put">
-			        <arg>@org.seasar.flex2.core.format.amf3.type.AmfTypeDef@TYPE_STRING</arg>
+			        <arg>@org.seasar.flex2.core.format.amf.type.AmfTypeDef@TYPE_STRING</arg>
 			        <arg>amfStringReaderImpl</arg>
 			    </initMethod>
 			    <initMethod name="put">
-			        <arg>@org.seasar.flex2.core.format.amf3.type.AmfTypeDef@TYPE_ARRAY</arg>
+			        <arg>@org.seasar.flex2.core.format.amf.type.AmfTypeDef@TYPE_ARRAY</arg>
 			        <arg>amfArrayReaderImpl</arg>
 			    </initMethod>
 			    <initMethod name="put">
@@ -266,12 +266,7 @@
 	<component
 		name="amf3ExternalizableObjectWriterImpl"
 		class="org.seasar.flex2.core.format.amf3.io.writer.impl.Amf3ExternalizableObjectWriterImpl" 
-	    autoBinding="property">
-		<property name="dataOutputFactory">
-			<component
-				class="org.seasar.flex2.core.format.amf3.io.factory.impl.ExternalizeDataOutputFactoryImpl" />
-		</property>
-	</component>
+	    autoBinding="property" />
 	<component
 		name="amf3ByteArrayWriterImpl"
 		class="org.seasar.flex2.core.format.amf3.io.writer.impl.Amf3ByteArrayWriterImpl" 
@@ -285,19 +280,19 @@
 		<property name="writerMap">
 		    <component class="java.util.HashMap">
 		 	    <initMethod name="put">
-			        <arg>@org.seasar.flex2.core.format.amf3.type.AmfTypeDef@TYPE_NULL</arg>
+			        <arg>@org.seasar.flex2.core.format.amf.type.AmfTypeDef@TYPE_NULL</arg>
 			        <arg>amfNullWriterImpl</arg>
 			    </initMethod>
 			    <initMethod name="put">
-			        <arg>@org.seasar.flex2.core.format.amf3.type.AmfTypeDef@TYPE_STRING</arg>
+			        <arg>@org.seasar.flex2.core.format.amf.type.AmfTypeDef@TYPE_STRING</arg>
 			        <arg>amfStringWriterImpl</arg>
 			    </initMethod>
 			    <initMethod name="put">
-			        <arg>@org.seasar.flex2.core.format.amf3.type.AmfTypeDef@TYPE_NUMBER</arg>
+			        <arg>@org.seasar.flex2.core.format.amf.type.AmfTypeDef@TYPE_NUMBER</arg>
 			        <arg>amfNumberWriterImpl</arg>
 			    </initMethod>
 			    <initMethod name="put">
-			        <arg>@org.seasar.flex2.core.format.amf3.type.AmfTypeDef@TYPE_BOOLEAN</arg>
+			        <arg>@org.seasar.flex2.core.format.amf.type.AmfTypeDef@TYPE_BOOLEAN</arg>
 			        <arg>amfBooleanWriterImpl</arg>
 			    </initMethod>
 			    <initMethod name="put">
@@ -345,7 +340,7 @@
 			        <arg>amf3XmlWriterImpl</arg>
 			    </initMethod>
 			    <initMethod name="put">
-			        <arg>"org.seasar.flex2.message.io.Externalizable"</arg>
+			        <arg>@org.seasar.flex2.core.format.amf3.io.Externalizable@class.getName()</arg>
 			        <arg>amf3ExternalizableObjectWriterImpl</arg>
 			    </initMethod>
 			    <initMethod name="put">
@@ -384,4 +379,5 @@
 	<component 
 		class="org.seasar.flex2.core.format.amf3.type.impl.ByteArrayImpl"
 		instance="prototype" />
+
 </components>
