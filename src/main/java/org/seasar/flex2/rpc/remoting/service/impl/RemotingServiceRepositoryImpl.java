@@ -20,7 +20,6 @@ import java.util.Map;
 import java.util.WeakHashMap;
 
 import org.seasar.flex2.rpc.remoting.service.RemotingServiceRepository;
-import org.seasar.framework.util.StringUtil;
 
 public class RemotingServiceRepositoryImpl implements RemotingServiceRepository {
     protected final Map serviceCache = Collections
@@ -46,15 +45,5 @@ public class RemotingServiceRepositoryImpl implements RemotingServiceRepository 
 
     public void removeService(String serviceName) {
         serviceCache.remove(serviceName);
-    }
-
-    public void removeService(Class serviceClass) {
-        if (serviceClass.isInterface()) {
-            String serviceInterfaceName = serviceClass.getName();
-            int lashDotPosition = serviceInterfaceName.lastIndexOf('.');
-            String serviceName = StringUtil.decapitalize(serviceInterfaceName
-                    .substring(lashDotPosition + 1));
-            this.removeService(serviceName);
-        }
     }
 }

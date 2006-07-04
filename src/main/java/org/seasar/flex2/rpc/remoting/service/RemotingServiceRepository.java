@@ -25,6 +25,4 @@ public interface RemotingServiceRepository {
     boolean hasService(String serviceName);
 
     void removeService(String serviceName);
-
-    void removeService(Class serviceClass);
 }

@@ -15,7 +15,7 @@
  */
 package org.seasar.flex2.rpc.remoting.message;
 
-public interface RemotingMessageConstants {
+public interface MessageConstants {
 
     static final String APPEND_TO_GATEWAYURL = "AppendToGatewayUrl";
 
