@@ -15,20 +15,23 @@
  */
 package org.seasar.flex2.core.format.amf3.io.reader.impl;
 
-import java.io.BufferedInputStream;
-import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.io.InputStream;
 
 import javax.xml.parsers.DocumentBuilder;
 
 import org.seasar.flex2.core.format.amf3.io.CharsetType;
 import org.seasar.framework.util.DocumentBuilderFactoryUtil;
 import org.seasar.framework.util.DocumentBuilderUtil;
+import org.seasar.framework.util.DomUtil;
 import org.w3c.dom.Document;
 
 public class Amf3XmlReaderImpl extends AbstractAmf3UTF8StringReaderImpl {
+
+    private static final String DEFAULT_TAG_PREFIX = "<xml>";
+
+    private static final String DEFAULT_TAG_SUFFIX = "</xml>";
 
     public Object read(final DataInputStream inputStream) throws IOException {
         return readObject(inputStream);
@@ -47,21 +50,17 @@ public class Amf3XmlReaderImpl extends AbstractAmf3UTF8StringReaderImpl {
     private final Document readXmlData(int xmlDef,
             final DataInputStream inputStream) throws IOException {
         String xmlStringData = readStringData(xmlDef, inputStream);
+        if (xmlStringData.indexOf('<') < 0 || xmlStringData.indexOf('<') > 1) {
+            xmlStringData = DEFAULT_TAG_PREFIX + xmlStringData + DEFAULT_TAG_SUFFIX;
+        }
         Document xml = getXmlDocument(xmlStringData);
         addObjectReference(xml);
 
         return xml;
     }
-    
-    private final Document getXmlDocument(String xml) {
-        ByteArrayInputStream bain;
-        try {
-            bain = new ByteArrayInputStream(xml.getBytes(CharsetType.UTF8));
-        } catch (UnsupportedEncodingException e) {
-            return null;
-        }
 
-        BufferedInputStream bis = new BufferedInputStream(bain);
+    private final Document getXmlDocument(String xml) {
+        InputStream bis = DomUtil.getContentsAsStream(xml, CharsetType.UTF8);
         DocumentBuilder builder = DocumentBuilderFactoryUtil
                 .newDocumentBuilder();
         return DocumentBuilderUtil.parse(builder, bis);
