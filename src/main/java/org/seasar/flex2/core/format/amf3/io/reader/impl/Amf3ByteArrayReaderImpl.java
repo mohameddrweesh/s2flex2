@@ -41,7 +41,9 @@ public class Amf3ByteArrayReaderImpl extends AbstractAmf3ObjectReaderImpl {
 
     protected final Object readInlinedObject(final int reference,
             final DataInputStream inputStream) throws IOException {
-        return readByteArrayData(reference, inputStream);
+        ByteArray byteArray = readByteArrayData(reference, inputStream);
+        addObjectReference(byteArray);
+        return byteArray;
     }
 
     protected final Object readReferencedObject(final int reference,
