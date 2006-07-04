@@ -34,10 +34,6 @@ public class RemotingServiceLocatorImpl implements RemotingServiceLocator {
 
     protected RemotingServiceRepository repository;
 
-    public void cleanServiceOf(Class serviceClass) {
-        repository.removeService(serviceClass);
-    }
-
     public S2Container getContainer() {
         return this.container;
     }

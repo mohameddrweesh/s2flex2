@@ -68,7 +68,7 @@
 		remoting service 
 	-->
 	<component class="org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceRepositoryImpl" />
-	<component class="org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceLocatorOnHotDeployImpl" />
+	<component class="org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceLocatorImpl" />
 	<component
 		class="org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceInvokerChooserImpl">
 		<initMethod name="addInvoker">

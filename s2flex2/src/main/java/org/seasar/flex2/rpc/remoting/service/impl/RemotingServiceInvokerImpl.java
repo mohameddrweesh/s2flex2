@@ -15,76 +15,17 @@
  */
 package org.seasar.flex2.rpc.remoting.service.impl;
 
-import org.seasar.flex2.rpc.remoting.service.RemotingServiceInvoker;
-import org.seasar.flex2.rpc.remoting.service.RemotingServiceLocator;
-import org.seasar.flex2.rpc.remoting.service.exception.ServiceInvocationFailedRuntimeException;
-import org.seasar.flex2.util.data.storage.Storage;
-import org.seasar.flex2.util.data.storage.StorageLocator;
-import org.seasar.flex2.util.data.transfer.Transfer;
-import org.seasar.framework.beans.BeanDesc;
-import org.seasar.framework.beans.factory.BeanDescFactory;
-
-public class RemotingServiceInvokerImpl implements RemotingServiceInvoker {
-
-    private final static String SERVICE_DATA_STORAGE = "serviceDataStorage";
-
-    private StorageLocator storageLocator;
-
-    private Transfer transfer;
-
-    protected RemotingServiceLocator remotingServiceLocator;
-
-    public RemotingServiceLocator getServiceLocator() {
-        return remotingServiceLocator;
-    }
-
-    public StorageLocator getStorageLocator() {
-        return storageLocator;
-    }
-
-    public Transfer getTransfer() {
-        return transfer;
-    }
+public class RemotingServiceInvokerImpl extends
+        AbstractRemotingServiceInvokerImpl {
 
     public Object invoke(String serviceName, String methodName, Object[] args)
             throws Throwable {
-
         final Object service = remotingServiceLocator.getService(serviceName);
-        final Storage storage = storageLocator.getStorage(SERVICE_DATA_STORAGE);
-        transfer.importToComponent(storage, service);
-        try {
-            return invokeServiceMethod(service, methodName, args);
-
-        } finally {
-            transfer.exportToStorage(service, storage);
-        }
-    }
-
-    public void setServiceLocator(RemotingServiceLocator serviceLocator) {
-        this.remotingServiceLocator = serviceLocator;
-    }
-
-    public void setStorageLocator(StorageLocator storageLocator) {
-        this.storageLocator = storageLocator;
-    }
-
-    public void setTransfer(Transfer transfer) {
-        this.transfer = transfer;
+        return invokeServiceMethod(service, methodName, args);
     }
 
     public boolean supports(final String serviceName, final String methodName,
             final Object[] args) {
         return remotingServiceLocator.isSupportService(serviceName, methodName);
-    }
-
-    protected final Object invokeServiceMethod(final Object service,
-            final String methodName, final Object[] args) throws Throwable {
-        BeanDesc beanDesc = BeanDescFactory.getBeanDesc(service.getClass());
-        try {
-            return beanDesc.invoke(service, methodName, args);
-        } catch (Throwable e) {
-            throw new ServiceInvocationFailedRuntimeException(service
-                    .getClass().getName(), methodName, e.getCause());
-        }
     }
 }

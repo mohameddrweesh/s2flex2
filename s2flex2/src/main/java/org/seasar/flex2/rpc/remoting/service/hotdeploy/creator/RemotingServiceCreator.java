@@ -21,6 +21,7 @@ import org.seasar.framework.container.deployer.InstanceDefFactory;
 import org.seasar.framework.container.hotdeploy.OndemandS2Container;
 import org.seasar.framework.container.hotdeploy.creator.MultiPackageCreator;
 import org.seasar.framework.convention.NamingConvention;
+import org.seasar.framework.util.StringUtil;
 
 public class RemotingServiceCreator extends MultiPackageCreator {
 
@@ -43,10 +44,20 @@ public class RemotingServiceCreator extends MultiPackageCreator {
             RemotingServiceRepository repository = (RemotingServiceRepository) componentDef
                     .getComponent();
 
-            repository.removeService(clazz);
+            removeService(repository, clazz);
         }
 
         return loadedComponentDef;
     }
 
+    private final void removeService(RemotingServiceRepository repository,
+            Class serviceClass) {
+        if (serviceClass.isInterface()) {
+            String serviceInterfaceName = serviceClass.getName();
+            int lashDotPosition = serviceInterfaceName.lastIndexOf('.');
+            String serviceName = StringUtil.decapitalize(serviceInterfaceName
+                    .substring(lashDotPosition + 1));
+            repository.removeService(serviceName);
+        }
+    }
 }
