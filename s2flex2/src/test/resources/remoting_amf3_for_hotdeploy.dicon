@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.3//EN" 
+	"http://www.seasar.org/dtd/components23.dtd">
+<components namespace="amfmessage">
+	<include path="amf3.dicon"/>
+	
+	<!-- 
+		remoting message reader components
+	-->
+	<component
+		class="org.seasar.flex2.rpc.remoting.message.io.reader.factory.impl.MessageReaderFactoryImpl">
+		<property name="messageReaderClass">
+		@org.seasar.flex2.rpc.remoting.message.io.reader.impl.Amf3MessageReaderImpl@class
+		</property>
+	</component>
+	<component
+		class="org.seasar.flex2.rpc.remoting.message.io.reader.impl.Amf3MessageReaderImpl"
+		instance="request" />
+	
+	<!-- 
+		remoting message writer components
+	-->
+	<component
+		class="org.seasar.flex2.rpc.remoting.message.io.writer.factory.impl.MessageWriterFactoryImpl">
+		<property name="messageWriterClass">
+		@org.seasar.flex2.rpc.remoting.message.io.writer.impl.Amf3MessageWriterImpl@class
+		</property>
+	</component>
+	<component
+		class="org.seasar.flex2.rpc.remoting.message.io.writer.impl.Amf3MessageWriterImpl"
+		instance="request" />
+	
+	<!--
+		remoting message data factory
+	-->
+	<component
+		class="org.seasar.flex2.rpc.remoting.message.data.factory.impl.MessageBodyFactoryImpl" />
+	<component
+		class="org.seasar.flex2.rpc.remoting.message.data.factory.impl.ErrorInfoFactoryImpl" />
+	<component
+		class="org.seasar.flex2.rpc.remoting.message.data.factory.impl.MessageHeaderFactoryImpl" />
+	<component
+		class="org.seasar.flex2.rpc.remoting.message.data.factory.impl.MessageFactoryImpl" />
+
+	<!--
+		remoting message processor
+	-->
+	<component
+		class="org.seasar.flex2.rpc.remoting.message.data.processor.impl.MessageHeaderProcessorImpl" />
+	<component
+		class="org.seasar.flex2.rpc.remoting.message.data.processor.impl.MessageBodyProcessorImpl" />
+	<component
+		class="org.seasar.flex2.rpc.remoting.message.data.processor.impl.MessageProcessorImpl"/>
+
+	<!--
+		remoting util
+	-->
+	<component
+		class="org.seasar.flex2.util.data.transfer.impl.TransferImpl" />
+	<component
+		class="org.seasar.flex2.util.data.storage.impl.StorageLocatorImpl"/>
+	<component
+		name="serviceDataStorage"
+		class="org.seasar.flex2.util.data.storage.impl.HttpSessionDataStorage"
+		instance="session" />
+		
+	<!--
+		remoting service 
+	-->
+	<component class="org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceRepositoryImpl" />
+	<component class="org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceLocatorOnHotDeployImpl" />
+	<component
+		class="org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceInvokerChooserImpl">
+		<initMethod name="addInvoker">
+			<arg>
+				<component
+					class="org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceInvokerImpl" />		
+			</arg>
+		</initMethod>
+	</component>
+	
+	<!--
+		remoting processor
+	-->
+	<component
+		class="org.seasar.flex2.rpc.remoting.processor.impl.RemotingMessageProcessorImpl" >
+		<initMethod name="addHeaderCreator">
+			<arg>
+				<component class="org.seasar.flex2.rpc.remoting.processor.impl.AppendToGatewayUrlHeaderCreatorImpl">
+					<property name="sessionDecorator">
+						<component class="org.seasar.flex2.util.session.impl.TomcatSessionDecoratorImpl" />
+					</property>
+				</component>
+			</arg>
+		</initMethod>
+	</component>
+</components>

@@ -26,7 +26,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.seasar.flex2.message.format.amf.processor.AmfMessageProcessor;
+import org.seasar.flex2.rpc.remoting.message.data.processor.MessageProcessor;
 import org.seasar.flex2.rpc.remoting.processor.RemotingMessageHeaderCreator;
 import org.seasar.flex2.rpc.remoting.processor.RemotingMessageProcessor;
 import org.seasar.flex2.util.io.InputStreamUtil;
@@ -34,7 +34,7 @@ import org.seasar.flex2.util.io.OutputStreamUtil;
 
 public class RemotingMessageProcessorImpl implements RemotingMessageProcessor {
 
-    private AmfMessageProcessor messageProcessor;
+    private MessageProcessor messageProcessor;
 
     private final List headerCreators;
     
@@ -46,7 +46,7 @@ public class RemotingMessageProcessorImpl implements RemotingMessageProcessor {
         headerCreators.add(creator);
     }
 
-    public AmfMessageProcessor getMessageProcessor() {
+    public MessageProcessor getMessageProcessor() {
         return messageProcessor;
     }
 
@@ -81,7 +81,7 @@ public class RemotingMessageProcessorImpl implements RemotingMessageProcessor {
         }
     }
 
-    public void setMessageProcessor(AmfMessageProcessor processor) {
+    public void setMessageProcessor(MessageProcessor processor) {
         this.messageProcessor = processor;
     }
     

@@ -15,7 +15,9 @@
  */
 package org.seasar.flex2.rpc.remoting.service;
 
-import org.seasar.flex2.message.format.amf.service.ServiceLocator;
 
-public interface RemotingServiceLocator extends ServiceLocator {
+public interface RemotingServiceLocator {
+    Object getService(String serviceName);
+
+    boolean isSupportService(String serviceName, String methodName);
 }
