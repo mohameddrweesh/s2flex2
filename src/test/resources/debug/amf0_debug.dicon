@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="Shift_JIS"?>
 <!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.3//EN" 
-	"http://www.seasar.org/dtd/components23.dtd">
+    "http://www.seasar.org/dtd/components23.dtd">
 <components namespace="amf0">
 	<include path="aop.dicon"/>
 	<component class="org.seasar.framework.container.autoregister.AspectAutoRegister">
@@ -215,4 +215,4 @@
             </component>
         </property>
     </component>
- </components>
+</components>
