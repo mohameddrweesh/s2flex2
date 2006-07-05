@@ -13,10 +13,12 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.remoting.message;
+package org.seasar.flex2.rpc.remoting;
 
-public interface MessageConstants {
+public interface RemotingMessageConstants {
 
     static final String APPEND_TO_GATEWAYURL = "AppendToGatewayUrl";
+
+    String CONTENT_TYPE = "application/x-amf";
 
 }
