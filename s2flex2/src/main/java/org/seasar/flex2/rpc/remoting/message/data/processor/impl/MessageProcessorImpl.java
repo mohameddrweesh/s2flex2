@@ -93,7 +93,7 @@ public class MessageProcessorImpl implements MessageProcessor {
     private final void writeMessage(final Message responseMessage,
             final OutputStream responceOutputStream) throws IOException {
 
-        ByteArrayOutputStream messageOutputStream = new ByteArrayOutputStream(
+        final ByteArrayOutputStream messageOutputStream = new ByteArrayOutputStream(
                 MESSAGE_WRITING_BUFFER_SIZE);
 
         writerFactory.createMessageWriter(

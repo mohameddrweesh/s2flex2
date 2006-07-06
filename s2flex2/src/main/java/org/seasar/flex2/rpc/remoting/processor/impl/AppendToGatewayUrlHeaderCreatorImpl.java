@@ -35,11 +35,10 @@ public class AppendToGatewayUrlHeaderCreatorImpl implements
         MessageHeader header = null;
 
         if (!request.isRequestedSessionIdValid()) {
-            String sessionId = HttpSessionUtil.getSessionId(request, true);
-            sessionId = sessionDecorator.formatSessionId(sessionId);
+            final String sessionId = HttpSessionUtil.getSessionId(request, true);
             header = amfHeaderFactory.createHeader(
                     RemotingMessageConstants.HEADER_APPEND_TO_GATEWAYURL,
-                    sessionId);
+                    sessionDecorator.formatSessionId(sessionId));
         }
 
         return header;
