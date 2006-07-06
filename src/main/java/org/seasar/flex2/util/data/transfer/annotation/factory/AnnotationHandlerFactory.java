@@ -22,11 +22,11 @@ import org.seasar.framework.util.ClassUtil;
 
 public class AnnotationHandlerFactory {
 
-    private static final String TIGER_ANNOTATION_HANDLER_CLASS_NAME = "org.seasar.flex2.util.data.transfer.annotation.handler.TigerAnnotationHandler";
+    private static AnnotationHandler annotationHandler;
     
     private static final String BACKPORT175_ANNOTATION_HANDLER_CLASS_NAME = "org.seasar.flex2.util.data.transfer.annotation.handler.Backport175ActionAnnotationHandler";
 
-    private static AnnotationHandler annotationHandler;
+    private static final String TIGER_ANNOTATION_HANDLER_CLASS_NAME = "org.seasar.flex2.util.data.transfer.annotation.handler.TigerAnnotationHandler";
     
     static {
         Class clazz = BasicAnnotationHandlerImpl.class;
@@ -41,15 +41,15 @@ public class AnnotationHandlerFactory {
         annotationHandler = (AnnotationHandler) ClassUtil.newInstance(clazz);
     }
 
-    protected AnnotationHandlerFactory() {
-    }
-    
     public static AnnotationHandler getAnnotationHandler() {
         return annotationHandler;
     }
     
     public static void setAnnotationHandler(AnnotationHandler handler) {
         annotationHandler = handler;
+    }
+    
+    protected AnnotationHandlerFactory() {
     }
 
 }

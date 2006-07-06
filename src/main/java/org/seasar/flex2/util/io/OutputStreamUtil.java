@@ -22,6 +22,11 @@ import java.io.OutputStream;
 
 public class OutputStreamUtil {
 
+    public static final OutputStream toBufferedDataOutputStream(
+            OutputStream outputStream) throws IOException {
+        return new DataOutputStream(toBufferedOutputStream(outputStream));
+    }
+
     public static final OutputStream toBufferedOutputStream(
             OutputStream outputStream) throws IOException {
         if (!(outputStream instanceof BufferedOutputStream)) {
@@ -29,10 +34,5 @@ public class OutputStreamUtil {
         }
 
         return outputStream;
-    }
-
-    public static final OutputStream toBufferedDataOutputStream(
-            OutputStream outputStream) throws IOException {
-        return new DataOutputStream(toBufferedOutputStream(outputStream));
     }
 }

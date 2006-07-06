@@ -25,14 +25,13 @@ public class Amf3DataReaderImpl implements AmfDataReader {
 
     protected Amf3DataReaderFactory readerFactory;
 
-    public void setReaderFactory(Amf3DataReaderFactory readerFactory) {
-        this.readerFactory = readerFactory;
+    public Object read(final DataInputStream inputStream) throws IOException {
+        final byte dataType = inputStream.readByte();
+        final AmfDataReader reader = readerFactory.createAmf3DataReader(dataType);
+        return reader.read(inputStream);
     }
 
-    public Object read(final DataInputStream inputStream)
-            throws IOException {
-        byte dataType = inputStream.readByte();
-        AmfDataReader reader = readerFactory.createAmf3DataReader(dataType);
-        return reader.read(inputStream);
+    public void setReaderFactory(Amf3DataReaderFactory readerFactory) {
+        this.readerFactory = readerFactory;
     }
 }

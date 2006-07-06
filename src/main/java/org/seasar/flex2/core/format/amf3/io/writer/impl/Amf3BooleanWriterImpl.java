@@ -23,13 +23,13 @@ import org.seasar.flex2.core.format.amf3.type.Amf3TypeDef;
 
 public class Amf3BooleanWriterImpl implements Amf3DataWriter {
 
-    public void write(Object value, DataOutputStream outputStream)
+    public void write(final Object value, final DataOutputStream outputStream)
             throws IOException {
         writeBoolean((Boolean) value, outputStream);
     }
 
-    public void writeData(Object value, DataOutputStream outputStream)
-            throws IOException {
+    public void writeData(final Object value,
+            final DataOutputStream outputStream) throws IOException {
         writeBoolean((Boolean) value, outputStream);
     }
 

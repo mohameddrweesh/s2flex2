@@ -38,17 +38,18 @@ public class Amf3DataWriterFactoryImpl implements Amf3DataWriterFactory {
 
     private HashMap writerMap;
 
-    public Amf3DataWriter createDataValueWriter( final Object value) {
+    public Amf3DataWriter createDataValueWriter(final Object value) {
         return (Amf3DataWriter) amf3DataWriterMap.get(getAmf3DataType(value));
     }
 
-    public AmfDataWriter createDataWriter( final Object value) {
-        AmfDataWriter writer;
-        String dataType = getAmf0DataType(value);
-        if( dataType != null ){
+    public AmfDataWriter createDataWriter(final Object value) {
+        final String dataType = getAmf0DataType(value);
+        
+        final AmfDataWriter writer;
+        if (dataType != null) {
             writer = (AmfDataWriter) writerMap.get(dataType);
         } else {
-            writer = createDataValueWriter( value );
+            writer = createDataValueWriter(value);
         }
 
         return writer;
@@ -69,7 +70,7 @@ public class Amf3DataWriterFactoryImpl implements Amf3DataWriterFactory {
                 dataType = AmfTypeDef.TYPE_NULL;
                 break;
             }
-            if (value instanceof String ) {
+            if (value instanceof String) {
                 dataType = AmfTypeDef.TYPE_STRING;
                 break;
             }
@@ -85,13 +86,13 @@ public class Amf3DataWriterFactoryImpl implements Amf3DataWriterFactory {
                 dataType = AmfTypeDef.TYPE_BOOLEAN;
                 break;
             }
-            
+
         } while (false);
-        
+
         return dataType;
     }
 
-    private final String getAmf3DataType( final Object value) {
+    private final String getAmf3DataType(final Object value) {
         String dataType = Amf3TypeDef.TYPE_NULL;
         do {
             if (value == null) {
@@ -99,10 +100,8 @@ public class Amf3DataWriterFactoryImpl implements Amf3DataWriterFactory {
             }
             if (value instanceof Integer) {
                 int data = ((Integer) value).intValue();
-                if (
-                        data <= Amf3Constants.INTEGRR_MAX &&
-                        data >= Amf3Constants.INTEGRR_MIN
-                ) {
+                if (data <= Amf3Constants.INTEGRR_MAX
+                        && data >= Amf3Constants.INTEGRR_MIN) {
                     dataType = Amf3TypeDef.TYPE_INTEGER;
                     break;
                 }
@@ -155,16 +154,14 @@ public class Amf3DataWriterFactoryImpl implements Amf3DataWriterFactory {
                 dataType = Amf3TypeDef.TYPE_BYTEARRAY;
                 break;
             }
-            if (
-                    value.getClass() == Byte.class ||
-                    value.getClass() == Short.class
-            ) {
+            if (value.getClass() == Byte.class
+                    || value.getClass() == Short.class) {
                 dataType = Amf3TypeDef.TYPE_INTEGER;
                 break;
             }
             dataType = Amf3TypeDef.TYPE_OBJECT;
         } while (false);
-        
+
         return dataType;
     }
 }

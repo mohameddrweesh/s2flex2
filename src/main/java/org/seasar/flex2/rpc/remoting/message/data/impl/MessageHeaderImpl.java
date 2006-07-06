@@ -4,21 +4,17 @@ import org.seasar.flex2.rpc.remoting.message.data.MessageHeader;
 
 public class MessageHeaderImpl implements MessageHeader {
 
-    private final Object value;
-
     private int length = -1;
 
     private final String name;
 
     private boolean required = false;
 
+    private final Object value;
+
     public MessageHeaderImpl(String name, Object data) {
         this.name = name;
         this.value = data;
-    }
-
-    public Object getValue() {
-        return value;
     }
 
     public int getLength() {
@@ -27,6 +23,10 @@ public class MessageHeaderImpl implements MessageHeader {
 
     public String getName() {
         return name;
+    }
+
+    public Object getValue() {
+        return value;
     }
 
     public boolean isRequired() {

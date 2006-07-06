@@ -15,7 +15,6 @@
  */
 package org.seasar.flex2.core.format.amf3.io;
 
-
 public interface Externalizable {
 
     void readExternal(DataInput input);

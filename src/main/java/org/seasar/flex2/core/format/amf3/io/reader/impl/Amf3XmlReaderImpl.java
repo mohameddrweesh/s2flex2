@@ -37,32 +37,39 @@ public class Amf3XmlReaderImpl extends AbstractAmf3UTF8StringReaderImpl {
         return readObject(inputStream);
     }
 
-    protected final Object readInlinedObject(final int reference,
-            final DataInputStream inputStream) throws IOException {
-        return readXmlData(reference, inputStream);
+    private final Document getXmlDocument(final String xml) {
+        final InputStream bis = DomUtil.getContentsAsStream(xml, CharsetType.UTF8);
+        final DocumentBuilder builder = DocumentBuilderFactoryUtil
+                .newDocumentBuilder();
+        return DocumentBuilderUtil.parse(builder, bis);
     }
 
-    protected final Object readReferencedObject(int reference,
+    private final Document readXmlData(final int xmlDef,
             final DataInputStream inputStream) throws IOException {
-        return getObjectAt(reference >>> 1);
-    }
-
-    private final Document readXmlData(int xmlDef,
-            final DataInputStream inputStream) throws IOException {
-        String xmlStringData = readStringData(xmlDef, inputStream);
-        if (xmlStringData.indexOf('<') < 0 || xmlStringData.indexOf('<') > 1) {
-            xmlStringData = DEFAULT_TAG_PREFIX + xmlStringData + DEFAULT_TAG_SUFFIX;
-        }
-        Document xml = getXmlDocument(xmlStringData);
+        final String xmlStringData = readXmlStringData(xmlDef, inputStream);
+        final Document xml = getXmlDocument(xmlStringData);
         addObjectReference(xml);
 
         return xml;
     }
 
-    private final Document getXmlDocument(String xml) {
-        InputStream bis = DomUtil.getContentsAsStream(xml, CharsetType.UTF8);
-        DocumentBuilder builder = DocumentBuilderFactoryUtil
-                .newDocumentBuilder();
-        return DocumentBuilderUtil.parse(builder, bis);
+    private final String readXmlStringData(final int xmlDef,
+            final DataInputStream inputStream) throws IOException {
+        String xmlStringData = readStringData(xmlDef, inputStream);
+        if (xmlStringData.indexOf('<') < 0 || xmlStringData.indexOf('<') > 1) {
+            xmlStringData = DEFAULT_TAG_PREFIX + xmlStringData
+                    + DEFAULT_TAG_SUFFIX;
+        }
+        return xmlStringData;
+    }
+
+    protected final Object readInlinedObject(final int reference,
+            final DataInputStream inputStream) throws IOException {
+        return readXmlData(reference, inputStream);
+    }
+
+    protected final Object readReferencedObject(final int reference,
+            final DataInputStream inputStream) throws IOException {
+        return getObjectAt(reference >>> 1);
     }
 }

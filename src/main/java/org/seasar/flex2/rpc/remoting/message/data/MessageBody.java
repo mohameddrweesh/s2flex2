@@ -17,15 +17,15 @@ package org.seasar.flex2.rpc.remoting.message.data;
 
 public interface MessageBody {
 
-    String getTarget();
-
-    String getResponse();
+    Object[] getArgs();
 
     Object getData();
 
-    String getServiceName();
+    String getResponse();
 
     String getServiceMethodName();
 
-    Object[] getArgs();
+    String getServiceName();
+
+    String getTarget();
 }

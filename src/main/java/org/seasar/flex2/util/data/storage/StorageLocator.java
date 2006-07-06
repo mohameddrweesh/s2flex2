@@ -15,8 +15,6 @@
  */
 package org.seasar.flex2.util.data.storage;
 
-
-
 public interface StorageLocator {
 
     Storage getStorage( String storageName );

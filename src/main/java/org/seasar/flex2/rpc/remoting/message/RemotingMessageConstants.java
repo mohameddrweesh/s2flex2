@@ -13,12 +13,9 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.core.format.amf3.io.factory;
+package org.seasar.flex2.rpc.remoting.message;
 
-import java.io.DataOutputStream;
+public interface RemotingMessageConstants {
 
-import org.seasar.flex2.core.format.amf3.io.DataOutput;
-
-public interface DataOutputFactory {
-    DataOutput createDataOutput(DataOutputStream outputStream);
+    String HEADER_APPEND_TO_GATEWAYURL = "AppendToGatewayUrl";
 }

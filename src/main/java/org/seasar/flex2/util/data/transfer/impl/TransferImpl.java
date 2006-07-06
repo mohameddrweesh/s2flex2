@@ -30,25 +30,6 @@ public class TransferImpl implements Transfer {
     private final AnnotationHandler annotationHandler = AnnotationHandlerFactory
             .getAnnotationHandler();
 
-    public void importToComponent(Storage storage, Object target) {
-        BeanDesc beanDesc = BeanDescFactory.getBeanDesc(target.getClass());
-
-        Enumeration prop_names = storage.getPropertyNames();
-        while (prop_names.hasMoreElements()) {
-            String prop_name = (String) prop_names.nextElement();
-            if (beanDesc.hasPropertyDesc(prop_name)) {
-                PropertyDesc propertyDesc = beanDesc.getPropertyDesc(prop_name);
-                String type = annotationHandler.getImportStorageType(propertyDesc);
-                if (isTransfer(type, storage)) {
-                    if (propertyDesc.hasWriteMethod()) {
-                        propertyDesc.setValue(target, storage
-                                .getProperty(prop_name));
-                    }
-                }
-            }
-        }
-    }
-
     public void exportToStorage(Object target, Storage storage) {
         BeanDesc beanDesc = BeanDescFactory.getBeanDesc(target.getClass());
 
@@ -62,6 +43,26 @@ public class TransferImpl implements Transfer {
                 String propertyName = propertyDesc.getPropertyName();
                 Object propertyValue = propertyDesc.getValue(target);
                 storage.setProperty(propertyName, propertyValue);
+            }
+        }
+    }
+
+    public void importToComponent(Storage storage, Object target) {
+        BeanDesc beanDesc = BeanDescFactory.getBeanDesc(target.getClass());
+
+        Enumeration prop_names = storage.getPropertyNames();
+        while (prop_names.hasMoreElements()) {
+            String prop_name = (String) prop_names.nextElement();
+            if (beanDesc.hasPropertyDesc(prop_name)) {
+                PropertyDesc propertyDesc = beanDesc.getPropertyDesc(prop_name);
+                String type = annotationHandler
+                        .getImportStorageType(propertyDesc);
+                if (isTransfer(type, storage)) {
+                    if (propertyDesc.hasWriteMethod()) {
+                        propertyDesc.setValue(target, storage
+                                .getProperty(prop_name));
+                    }
+                }
             }
         }
     }

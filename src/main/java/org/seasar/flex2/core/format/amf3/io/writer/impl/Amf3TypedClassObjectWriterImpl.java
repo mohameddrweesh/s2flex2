@@ -31,9 +31,12 @@ public class Amf3TypedClassObjectWriterImpl extends
         return Amf3TypeDef.OBJECT;
     }
 
-    protected void writeInlineObject(Object object,
-            DataOutputStream outputStream) throws IOException {
-        writeClassObject(object, outputStream);
+    private final void writeClassPropertyName(
+            final DataOutputStream outputStream, final PropertyDesc propertyDef)
+            throws IOException {
+        if (propertyDef.hasReadMethod()) {
+            writeTypeString(propertyDef.getPropertyName(), outputStream);
+        }
     }
 
     protected void writeClassDefine(final BeanDesc beanDesc,
@@ -46,7 +49,7 @@ public class Amf3TypedClassObjectWriterImpl extends
 
     protected final void writeClassName(final Object object,
             final DataOutputStream outputStream) throws IOException {
-        String type = object.getClass().getName();
+        final String type = object.getClass().getName();
         writeTypeString(type, outputStream);
     }
 
@@ -59,7 +62,7 @@ public class Amf3TypedClassObjectWriterImpl extends
 
     protected void writeClassObjectData(final Object value,
             final DataOutputStream outputStream) throws IOException {
-        BeanDesc beanDesc = BeanDescFactory.getBeanDesc(value.getClass());
+        final BeanDesc beanDesc = BeanDescFactory.getBeanDesc(value.getClass());
         PropertyDesc propertyDef;
         for (int i = 0; i < beanDesc.getPropertyDescSize(); ++i) {
             propertyDef = (PropertyDesc) beanDesc.getPropertyDesc(i);
@@ -87,11 +90,8 @@ public class Amf3TypedClassObjectWriterImpl extends
         writeClassProperties(beanDesc, outputStream);
     }
 
-    private final void writeClassPropertyName(
-            final DataOutputStream outputStream, final PropertyDesc propertyDef)
-            throws IOException {
-        if (propertyDef.hasReadMethod()) {
-            writeTypeString(propertyDef.getPropertyName(), outputStream);
-        }
+    protected void writeInlineObject(Object object,
+            DataOutputStream outputStream) throws IOException {
+        writeClassObject(object, outputStream);
     }
 }

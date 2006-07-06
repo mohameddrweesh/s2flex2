@@ -21,15 +21,15 @@ import org.seasar.flex2.core.format.amf3.io.DataOutput;
 
 
 public interface ByteArray extends DataInput, DataOutput {
+    void compress();
+
     void flush();
 
-    void initBuffer(byte[] bytes);
-
-    void reset();
-    
     byte[] getBufferBytes();
     
-    void compress();
+    void initBuffer(byte[] bytes);
+    
+    void reset();
     
     void uncompress();
 }

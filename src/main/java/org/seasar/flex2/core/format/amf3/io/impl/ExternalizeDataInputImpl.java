@@ -60,8 +60,8 @@ public class ExternalizeDataInputImpl implements ExternalizeDataInput {
     }
 
     public Object readObject() throws IOException {
-        byte dataType = inputStream.readByte();
-        AmfDataReader dataReader = readerFactory.createAmf3DataReader(dataType);
+        final byte dataType = inputStream.readByte();
+        final AmfDataReader dataReader = readerFactory.createAmf3DataReader(dataType);
         return dataReader.read(inputStream);
     }
 

@@ -29,12 +29,14 @@ import org.seasar.flex2.core.format.amf3.io.reader.factory.Amf3DataReaderFactory
 import org.seasar.flex2.core.format.amf3.io.writer.Amf3DataWriter;
 import org.seasar.flex2.core.format.amf3.io.writer.factory.Amf3DataWriterFactory;
 import org.seasar.flex2.core.format.amf3.type.ByteArray;
+import org.seasar.flex2.core.format.amf3.type.exception.FailedCompressRuntimeException;
+import org.seasar.flex2.core.format.amf3.type.exception.FailedUnCompressRuntimeException;
 
 public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
 
     private static final byte[] EMPTY_BYTES = new byte[0];
 
-    private static final int FLATEING_BUFFER_SIZE = 1024*8;
+    private static final int FLATEING_BUFFER_SIZE = 1024 * 8;
 
     private DataInputStream dataInputStream;
 
@@ -52,23 +54,25 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
     }
 
     public void compress() {
-        Deflater deflater = new Deflater(Deflater.DEFAULT_COMPRESSION);
+        final Deflater deflater = new Deflater(Deflater.DEFAULT_COMPRESSION);
         deflater.setStrategy(Deflater.DEFAULT_STRATEGY);
         deflater.setInput(this.buf);
         deflater.finish();
-        
-        byte[] deflatingBuffer = new byte[FLATEING_BUFFER_SIZE];
+
+        final byte[] deflatingBuffer = new byte[FLATEING_BUFFER_SIZE];
         outputStream.reset();
         try {
-            while( !deflater.needsInput() ){
+            while (!deflater.needsInput()) {
                 deflater.deflate(deflatingBuffer);
                 outputStream.write(deflatingBuffer);
             }
-        } catch (Exception e) {
-        } finally{
-            if( outputStream.size() > 0 ){
-                byte[] inflatedBytes = new byte[deflater.getTotalOut()];
-                System.arraycopy(outputStream.toByteArray(), 0, inflatedBytes, 0, inflatedBytes.length);
+        } catch (Throwable t) {
+            throw new FailedCompressRuntimeException(t);
+        } finally {
+            if (outputStream.size() > 0) {
+                final byte[] inflatedBytes = new byte[deflater.getTotalOut()];
+                System.arraycopy(outputStream.toByteArray(), 0, inflatedBytes,
+                        0, inflatedBytes.length);
                 initBuffer(inflatedBytes);
             }
             deflater.end();
@@ -82,7 +86,7 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
     }
 
     public byte[] getBufferBytes() {
-        byte[] buffer = new byte[count];
+        final byte[] buffer = new byte[count];
         System.arraycopy(buf, 0, buffer, 0, count);
         return buffer;
     }
@@ -122,13 +126,13 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
     }
 
     public String readMultiByte(int length, String charSet) throws IOException {
-        byte[] charBytes = new byte[length];
+        final byte[] charBytes = new byte[length];
         read(charBytes, 0, length);
-        return new String(charBytes,charSet);
+        return new String(charBytes, charSet);
     }
 
     public Object readObject() throws IOException {
-        byte dataType = dataInputStream.readByte();
+        final byte dataType = dataInputStream.readByte();
         final AmfDataReader reader = dataReaderFactory
                 .createAmf3DataReader(dataType);
         return reader.read(dataInputStream);
@@ -163,20 +167,22 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
     }
 
     public void uncompress() {
-        Inflater inflater = new Inflater(false);
+        final Inflater inflater = new Inflater(false);
         inflater.setInput(this.buf);
-        byte[] inflatingBuffer = new byte[FLATEING_BUFFER_SIZE];
+        final byte[] inflatingBuffer = new byte[FLATEING_BUFFER_SIZE];
         outputStream.reset();
         try {
-            while( !inflater.needsInput() ){
+            while (!inflater.needsInput()) {
                 inflater.inflate(inflatingBuffer);
                 outputStream.write(inflatingBuffer);
             }
-        } catch (Exception e) {
-        } finally{
-            if( outputStream.size() > 0 ){
-                byte[] inflatedBytes = new byte[inflater.getTotalOut()];
-                System.arraycopy(outputStream.toByteArray(), 0, inflatedBytes, 0, inflatedBytes.length);
+        } catch (Throwable t) {
+            throw new FailedUnCompressRuntimeException(t);
+        } finally {
+            if (outputStream.size() > 0) {
+                final byte[] inflatedBytes = new byte[inflater.getTotalOut()];
+                System.arraycopy(outputStream.toByteArray(), 0, inflatedBytes,
+                        0, inflatedBytes.length);
                 initBuffer(inflatedBytes);
             }
             inflater.end();
@@ -210,7 +216,7 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
     }
 
     public void writeMultiByte(String value, String charSet) throws IOException {
-        byte[] charBytes = value.getBytes(charSet);
+        final byte[] charBytes = value.getBytes(charSet);
         writeBytes(charBytes, 0, charBytes.length);
     }
 
@@ -243,8 +249,8 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
     }
 
     private byte[] mergaBuffers() {
-        byte[] writeBytes = outputStream.toByteArray();
-        byte[] newInitBytes = new byte[this.pos + writeBytes.length];
+        final byte[] writeBytes = outputStream.toByteArray();
+        final byte[] newInitBytes = new byte[this.pos + writeBytes.length];
         System.arraycopy(this.buf, 0, newInitBytes, 0, this.pos);
         System.arraycopy(writeBytes, 0, newInitBytes, this.pos,
                 writeBytes.length);

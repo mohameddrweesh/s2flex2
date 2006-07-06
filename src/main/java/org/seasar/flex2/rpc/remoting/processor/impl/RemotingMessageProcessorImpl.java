@@ -34,9 +34,9 @@ import org.seasar.flex2.util.io.OutputStreamUtil;
 
 public class RemotingMessageProcessorImpl implements RemotingMessageProcessor {
 
-    private MessageProcessor messageProcessor;
-
     private final List headerCreators;
+
+    private MessageProcessor messageProcessor;
     
     public RemotingMessageProcessorImpl(){
         headerCreators = new ArrayList();
@@ -60,8 +60,7 @@ public class RemotingMessageProcessorImpl implements RemotingMessageProcessor {
             final DataOutputStream outputStream = (DataOutputStream) OutputStreamUtil
                     .toBufferedDataOutputStream(response.getOutputStream());
 
-            final List headers = createMessageHeaders(request);
-            messageProcessor.process(inputStream, outputStream, headers);
+            messageProcessor.process(inputStream, outputStream, createMessageHeaders(request));
 
             response.setContentLength(outputStream.size());
             outputStream.flush();

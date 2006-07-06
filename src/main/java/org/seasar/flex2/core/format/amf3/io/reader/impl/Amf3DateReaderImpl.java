@@ -19,11 +19,22 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.Date;
 
-
 public class Amf3DateReaderImpl extends AbstractAmf3ObjectReaderImpl {
 
     public Object read(final DataInputStream inputStream) throws IOException {
         return readObject(inputStream);
+    }
+
+    private final Date getDate(final double ms) {
+        final Date date = new Date((long) ms);
+        return date;
+    }
+
+    private final Date readDateData(final DataInputStream inputStream)
+            throws IOException {
+        final Date date = getDate(inputStream.readDouble());
+        addObjectReference(date);
+        return date;
     }
 
     protected final Object readInlinedObject(final int reference,
@@ -34,17 +45,5 @@ public class Amf3DateReaderImpl extends AbstractAmf3ObjectReaderImpl {
     protected final Object readReferencedObject(final int reference,
             final DataInputStream inputStream) throws IOException {
         return getObjectAt(reference >>> 1);
-    }
-
-    private final Date readDateData(final DataInputStream inputStream)
-            throws IOException {
-        Date date = getDate(inputStream.readDouble());
-        addObjectReference(date);
-        return date;
-    }
-    
-    private final Date getDate( final double ms) {
-        Date date = new Date((long) ms);
-        return date;
     }
 }

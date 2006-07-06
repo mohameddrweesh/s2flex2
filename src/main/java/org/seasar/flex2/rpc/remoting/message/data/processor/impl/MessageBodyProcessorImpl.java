@@ -15,10 +15,10 @@
  */
 package org.seasar.flex2.rpc.remoting.message.data.processor.impl;
 
-import org.seasar.flex2.rpc.remoting.message.data.MessageBody;
 import org.seasar.flex2.rpc.remoting.message.data.Message;
-import org.seasar.flex2.rpc.remoting.message.data.factory.MessageBodyFactory;
+import org.seasar.flex2.rpc.remoting.message.data.MessageBody;
 import org.seasar.flex2.rpc.remoting.message.data.factory.ErrorInfoFactory;
+import org.seasar.flex2.rpc.remoting.message.data.factory.MessageBodyFactory;
 import org.seasar.flex2.rpc.remoting.message.data.factory.MessageFactory;
 import org.seasar.flex2.rpc.remoting.message.data.processor.MessageBodyProcessor;
 import org.seasar.flex2.rpc.remoting.service.RemotingServiceInvoker;
@@ -55,8 +55,8 @@ public class MessageBodyProcessorImpl implements MessageBodyProcessor {
     }
 
     public Message process(Message requestMessage) {
-        Message responseMessage = messageFactory
-                .createMessage(requestMessage.getVersion());
+        Message responseMessage = messageFactory.createMessage(requestMessage
+                .getVersion());
 
         for (int i = 0; i < requestMessage.getBodySize(); ++i) {
             MessageBody requestBody = requestMessage.getBody(i);
@@ -83,6 +83,11 @@ public class MessageBodyProcessorImpl implements MessageBodyProcessor {
         this.serviceInvokerChooser = serviceInvokerChooser;
     }
 
+    private final MessageBody createResponseBody(final String target,
+            final Object result) {
+        return bodyFactory.createBody(target, null, result);
+    }
+
     protected final MessageBody processBody(final MessageBody requestBody) {
         Object result;
         String responseTarget;
@@ -100,10 +105,5 @@ public class MessageBodyProcessorImpl implements MessageBodyProcessor {
         }
 
         return createResponseBody(responseTarget, result);
-    }
-
-    private final MessageBody createResponseBody(final String target,
-            final Object result) {
-        return bodyFactory.createBody(target, null, result);
     }
 }

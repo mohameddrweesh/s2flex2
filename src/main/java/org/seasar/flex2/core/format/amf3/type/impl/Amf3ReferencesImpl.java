@@ -47,37 +47,37 @@ public class Amf3ReferencesImpl implements Amf3References {
         stringReferences.addReference(object);
     }
     
-    public void initialize() {
-        objectReferences.initialize();
-        stringReferences.initialize();
-        classReferences.initialize();
+    public Class getClassAt( final int index) {
+        return classReferences.getClassAt(index);
     }
 
     public int getClassReferenceIndex( final Class clazz) {
         return classReferences.getReferenceIndex(clazz);
     }
 
+    public Object getObjectAt( final int index) {
+        return objectReferences.getAt(index);
+    }
+    
     public int getObjectReferenceIndex( final Object object) {
         return objectReferences.getReferenceIndex(object);
     }
-    
-    public int getStringReferenceIndex( final String object) {
-        return stringReferences.getReferenceIndex(object);
-    }
 
-    public Class getClassAt( final int index) {
-        return classReferences.getClassAt(index);
-    }
-
-    public Object getObjectAt( final int index) {
-        return objectReferences.getAt(index);
+    public String[] getPropertiesAt( final Class clazz ){
+        return classReferences.getPropertiesAt( clazz );
     }
 
     public String getStringAt( final int index) {
         return (String)stringReferences.getAt(index);
     }
+
+    public int getStringReferenceIndex( final String object) {
+        return stringReferences.getReferenceIndex(object);
+    }
     
-    public String[] getPropertiesAt( final Class clazz ){
-        return classReferences.getPropertiesAt( clazz );
+    public void initialize() {
+        objectReferences.initialize();
+        stringReferences.initialize();
+        classReferences.initialize();
     }
 }

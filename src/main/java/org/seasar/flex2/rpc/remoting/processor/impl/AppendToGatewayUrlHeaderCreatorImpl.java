@@ -17,7 +17,7 @@ package org.seasar.flex2.rpc.remoting.processor.impl;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.seasar.flex2.rpc.remoting.RemotingMessageConstants;
+import org.seasar.flex2.rpc.remoting.message.RemotingMessageConstants;
 import org.seasar.flex2.rpc.remoting.message.data.MessageHeader;
 import org.seasar.flex2.rpc.remoting.message.data.factory.MessageHeaderFactory;
 import org.seasar.flex2.rpc.remoting.processor.RemotingMessageHeaderCreator;
@@ -38,7 +38,8 @@ public class AppendToGatewayUrlHeaderCreatorImpl implements
             String sessionId = HttpSessionUtil.getSessionId(request, true);
             sessionId = sessionDecorator.formatSessionId(sessionId);
             header = amfHeaderFactory.createHeader(
-                    RemotingMessageConstants.APPEND_TO_GATEWAYURL, sessionId);
+                    RemotingMessageConstants.HEADER_APPEND_TO_GATEWAYURL,
+                    sessionId);
         }
 
         return header;

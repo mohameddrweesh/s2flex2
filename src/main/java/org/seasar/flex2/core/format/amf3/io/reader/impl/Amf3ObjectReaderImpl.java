@@ -23,7 +23,7 @@ import org.seasar.flex2.core.format.amf.type.AmfObject;
 import org.seasar.flex2.core.format.amf3.Amf3Constants;
 import org.seasar.flex2.core.format.amf3.io.DataInput;
 import org.seasar.flex2.core.format.amf3.io.Externalizable;
-import org.seasar.flex2.core.format.amf3.io.factory.DataInputFactory;
+import org.seasar.flex2.core.format.amf3.io.factory.ExternalizeDataInputFactory;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
 import org.seasar.framework.beans.factory.BeanDescFactory;
@@ -31,7 +31,7 @@ import org.seasar.framework.util.ClassUtil;
 
 public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
 
-    private DataInputFactory dataInputFactory;
+    private ExternalizeDataInputFactory externalizeDataInputFactory;
 
     private AmfDataReader stringReader;
 
@@ -39,26 +39,17 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
         return readObject(inputStream);
     }
 
-    public void setDataInputFactory(DataInputFactory dataInputFactory) {
-        this.dataInputFactory = dataInputFactory;
+    public void setExternalizeDataInputFactory(
+            ExternalizeDataInputFactory dataInputFactory) {
+        this.externalizeDataInputFactory = dataInputFactory;
     }
 
     public void setStringReader(AmfDataReader stringReader) {
         this.stringReader = stringReader;
     }
 
-    protected final Object readInlinedObject(final int reference,
-            final DataInputStream inputStream) throws IOException {
-        return readObjectData(reference, inputStream);
-    }
-
-    protected final Object readReferencedObject(final int reference,
-            final DataInputStream inputStream) throws IOException {
-        return getObjectAt(reference >>> 1);
-    }
-
     private Object createClassInstance(final Class clazz) {
-        Object object = ClassUtil.newInstance(clazz);
+        final Object object = ClassUtil.newInstance(clazz);
         addObjectReference(object);
         return object;
     }
@@ -66,7 +57,7 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
     private final Object readASObjectData(final DataInputStream inputStream)
             throws IOException {
 
-        AmfObject object = new AmfObject();
+        final AmfObject object = new AmfObject();
         addObjectReference(object);
         while (true) {
             String propertyName = (String) stringReader.read(inputStream);
@@ -122,7 +113,7 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
             final Class clazz, final DataInputStream inputStream)
             throws IOException {
 
-        String[] propertyNames;
+        final String[] propertyNames;
         switch (objectDef & Amf3Constants.CLASS_DEF_INLINE) {
 
             case Amf3Constants.CLASS_DEF_INLINE:
@@ -138,8 +129,9 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
 
     private final Object readExternalizableObjectData(int objectDef,
             Class clazz, DataInputStream inputStream) throws IOException {
-        Externalizable externalizable = (Externalizable) createClassInstance(clazz);
-        DataInput input = dataInputFactory.createDataIpput(inputStream);
+        final Externalizable externalizable = (Externalizable) createClassInstance(clazz);
+        final DataInput input = externalizeDataInputFactory
+                .createDataIpput(inputStream);
         externalizable.readExternal(input);
 
         return externalizable;
@@ -148,7 +140,7 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
     private final Object readObjectData(final int objectDef,
             final DataInputStream inputStream) throws IOException {
 
-        Class clazz = readClassDef(objectDef, inputStream);
+        final Class clazz = readClassDef(objectDef, inputStream);
 
         Object object = null;
         do {
@@ -177,8 +169,8 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
     private final String[] readProperties(final int objectDef,
             final Class clazz, final DataInputStream inputStream)
             throws IOException {
-        int propertyNumber = objectDef >>> 4;
-        String[] propertyNames = new String[propertyNumber];
+        final int propertyNumber = objectDef >>> 4;
+        final String[] propertyNames = new String[propertyNumber];
         for (int i = 0; i < propertyNumber; i++) {
             propertyNames[i] = (String) stringReader.read(inputStream);
         }
@@ -189,13 +181,13 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
 
     private final Object readPropertyValue(final DataInputStream inputStream)
             throws IOException {
-        byte dataType = inputStream.readByte();
+        final byte dataType = inputStream.readByte();
         return writeElementData(dataType, inputStream);
     }
 
     private final Object[] readPropertyValues(final String[] propertyNames,
             final DataInputStream inputStream) throws IOException {
-        Object[] propertyValues = new Object[propertyNames.length];
+        final Object[] propertyValues = new Object[propertyNames.length];
         for (int i = 0; i < propertyNames.length; i++) {
             propertyValues[i] = readPropertyValue(inputStream);
         }
@@ -204,8 +196,9 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
 
     private final void setupObjectProperties(final Object object,
             final String[] propertyNames, final Object[] propertyValues) {
-        int propertiesNumber = propertyNames.length;
-        BeanDesc beanDesc = BeanDescFactory.getBeanDesc(object.getClass());
+        final int propertiesNumber = propertyNames.length;
+        final BeanDesc beanDesc = BeanDescFactory.getBeanDesc(object.getClass());
+        
         PropertyDesc propertyDef;
         for (int i = 0; i < propertiesNumber; i++) {
             if (beanDesc.hasPropertyDesc(propertyNames[i])) {
@@ -215,5 +208,15 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
                 }
             }
         }
+    }
+
+    protected final Object readInlinedObject(final int reference,
+            final DataInputStream inputStream) throws IOException {
+        return readObjectData(reference, inputStream);
+    }
+
+    protected final Object readReferencedObject(final int reference,
+            final DataInputStream inputStream) throws IOException {
+        return getObjectAt(reference >>> 1);
     }
 }

@@ -19,15 +19,26 @@ import org.seasar.flex2.rpc.remoting.message.data.ErrorInfo;
 
 public class ErrorInfoImpl implements ErrorInfo {
 
+    private static String getStackTraceString(Throwable t) {
+        StackTraceElement[] elements = t.getStackTrace();
+        StringBuffer buf = new StringBuffer(t.toString());
+        buf.append('\n');
+        for (int i = 0; i < elements.length; ++i) {
+            buf.append(elements[i].toString());
+            buf.append('\n');
+        }
+        return buf.toString();
+    }
+
     private final String code = "SERVER.PROCESSING";
 
-    private final String type;
-
-    private final String level = "error";
+    private final String description;
 
     private final String details;
 
-    private final String description;
+    private final String level = "error";
+
+    private final String type;
 
     public ErrorInfoImpl(Throwable t) {
         type = t.getClass().getName();
@@ -39,30 +50,19 @@ public class ErrorInfoImpl implements ErrorInfo {
         return code;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public String getLevel() {
-        return level;
+    public String getDescription() {
+        return description;
     }
 
     public String getDetails() {
         return details;
     }
 
-    public String getDescription() {
-        return description;
+    public String getLevel() {
+        return level;
     }
 
-    private static String getStackTraceString(Throwable t) {
-        StackTraceElement[] elements = t.getStackTrace();
-        StringBuffer buf = new StringBuffer(t.toString());
-        buf.append('\n');
-        for (int i = 0; i < elements.length; ++i) {
-            buf.append(elements[i].toString());
-            buf.append('\n');
-        }
-        return buf.toString();
+    public String getType() {
+        return type;
     }
 }

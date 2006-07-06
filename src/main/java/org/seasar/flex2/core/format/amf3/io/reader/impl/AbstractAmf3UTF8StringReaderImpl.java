@@ -25,26 +25,26 @@ import org.seasar.flex2.core.format.amf3.io.CharsetType;
 public abstract class AbstractAmf3UTF8StringReaderImpl extends
         AbstractAmf3ObjectReaderImpl {
 
-    protected final String readStringData(final int stringDef,
-            final DataInputStream inputStream) throws IOException {
-        int stringLength = stringDef >> 1;
-        String str = null;
-        if (stringLength > 0) {
-            byte[] charArray = new byte[stringLength * 2];
-            inputStream.readFully(charArray, 0, stringLength);
-            str = getUTF8String(charArray, stringLength);
-        } else {
-            str = Amf3Constants.EMPTY_STRING;
-        }
-
-        return str;
-    }
-    
-    private final String getUTF8String( final byte[] bytearr, final int utflen) {
+    private final String getUTF8String(final byte[] bytearr, final int utflen) {
         try {
             return new String(bytearr, 0, utflen, CharsetType.UTF8);
         } catch (UnsupportedEncodingException e) {
             return null;
         }
+    }
+
+    protected final String readStringData(final int stringDef,
+            final DataInputStream inputStream) throws IOException {
+        final int stringLength = stringDef >> 1;
+        final String string;
+        if (stringLength > 0) {
+            byte[] charArray = new byte[stringLength * 2];
+            inputStream.readFully(charArray, 0, stringLength);
+            string = getUTF8String(charArray, stringLength);
+        } else {
+            string = Amf3Constants.EMPTY_STRING;
+        }
+
+        return string;
     }
 }

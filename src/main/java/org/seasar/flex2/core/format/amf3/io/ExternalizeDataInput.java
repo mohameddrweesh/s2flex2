@@ -17,7 +17,6 @@ package org.seasar.flex2.core.format.amf3.io;
 
 import java.io.DataInputStream;
 
-
 public interface ExternalizeDataInput extends DataInput {
     void setInputStream(DataInputStream inputStream);
 }

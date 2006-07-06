@@ -61,7 +61,7 @@ public class ExternalizeDataOutputImpl implements ExternalizeDataOutput {
     }
 
     public void writeObject(Object object) throws IOException {
-        Amf3DataWriter dataWriter = writerFactory.createDataValueWriter(object);
+        final Amf3DataWriter dataWriter = writerFactory.createDataValueWriter(object);
         dataWriter.writeData(object, outputStream);
     }
 

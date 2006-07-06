@@ -22,11 +22,11 @@ import org.seasar.flex2.core.format.amf3.type.ByteArray;
 import org.seasar.flex2.core.format.amf3.type.factory.ByteArrayFactory;
 
 public class Amf3ByteArrayReaderImpl extends AbstractAmf3ObjectReaderImpl {
-    
-    private static final int READ_BUFFER_SIZE = 1024 * 8;
 
     private ByteArrayFactory byteArrayFactory;
-    
+
+    private final int READ_BUFFER_SIZE = 1024 * 8;
+
     public ByteArrayFactory getByteArrayFactory() {
         return byteArrayFactory;
     }
@@ -39,9 +39,33 @@ public class Amf3ByteArrayReaderImpl extends AbstractAmf3ObjectReaderImpl {
         this.byteArrayFactory = byteArrayFactory;
     }
 
+    private final ByteArray readByteArrayData(final int bytearrayDef,
+            final DataInputStream inputStream) throws IOException {
+
+        final int bytearrayLength = bytearrayDef >> 1;
+        final byte[] bytearrayData = new byte[bytearrayLength];
+        final byte[] readBuffer = new byte[READ_BUFFER_SIZE];
+
+        int totalReadByteLength = 0;
+        int readByteLength = 0;
+        while (totalReadByteLength < bytearrayLength) {
+            if ((bytearrayLength - totalReadByteLength) > READ_BUFFER_SIZE) {
+                readByteLength = inputStream.read(readBuffer);
+            } else {
+                readByteLength = inputStream.read(readBuffer, 0,
+                        (bytearrayLength - totalReadByteLength));
+            }
+            System.arraycopy(readBuffer, 0, bytearrayData, totalReadByteLength,
+                    readByteLength);
+            totalReadByteLength += readByteLength;
+        }
+
+        return byteArrayFactory.createByteArray(bytearrayData);
+    }
+
     protected final Object readInlinedObject(final int reference,
             final DataInputStream inputStream) throws IOException {
-        ByteArray byteArray = readByteArrayData(reference, inputStream);
+        final ByteArray byteArray = readByteArrayData(reference, inputStream);
         addObjectReference(byteArray);
         return byteArray;
     }
@@ -49,27 +73,5 @@ public class Amf3ByteArrayReaderImpl extends AbstractAmf3ObjectReaderImpl {
     protected final Object readReferencedObject(final int reference,
             final DataInputStream inputStream) throws IOException {
         return getObjectAt(reference >>> 1);
-    }
-
-    private final ByteArray readByteArrayData(final int bytearrayDef,
-            final DataInputStream inputStream) throws IOException {
-        
-        final int bytearrayLength = bytearrayDef >> 1;
-        final byte[] bytearrayData = new byte[bytearrayLength];
-        final byte[] readBuffer = new byte[READ_BUFFER_SIZE];
-        
-        int totalReadByteLength = 0;
-        int readByteLength = 0;
-        while( totalReadByteLength < bytearrayLength ){
-            if( (bytearrayLength - totalReadByteLength) > READ_BUFFER_SIZE ){
-                readByteLength = inputStream.read(readBuffer);
-            } else {
-                readByteLength = inputStream.read(readBuffer,0,(bytearrayLength - totalReadByteLength));
-            }
-            System.arraycopy(readBuffer, 0, bytearrayData, totalReadByteLength, readByteLength);
-            totalReadByteLength += readByteLength;
-        }
-        
-        return byteArrayFactory.createByteArray(bytearrayData);
     }
 }
