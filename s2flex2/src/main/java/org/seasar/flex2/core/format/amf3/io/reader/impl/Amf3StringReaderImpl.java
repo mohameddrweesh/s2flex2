@@ -18,24 +18,23 @@ package org.seasar.flex2.core.format.amf3.io.reader.impl;
 import java.io.DataInputStream;
 import java.io.IOException;
 
-
 public class Amf3StringReaderImpl extends AbstractAmf3UTF8StringReaderImpl {
 
     public Object read(final DataInputStream inputStream) throws IOException {
         return readObject(inputStream);
     }
 
-    protected Object readInlinedObject(int reference,
-            DataInputStream inputStream) throws IOException {
-        String result = readStringData(reference, inputStream);
-        if (result.length() > 0) {
-            addStringReference(result);
+    protected Object readInlinedObject(final int reference,
+            final DataInputStream inputStream) throws IOException {
+        final String string = readStringData(reference, inputStream);
+        if (string.length() > 0) {
+            addStringReference(string);
         }
-        return result;
+        return string;
     }
 
-    protected Object readReferencedObject(int reference,
-            DataInputStream inputStream) throws IOException {
+    protected Object readReferencedObject(final int reference,
+            final DataInputStream inputStream) throws IOException {
         return getStringAt(reference >>> 1);
     }
 }

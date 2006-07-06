@@ -19,11 +19,11 @@ public interface ErrorInfo {
 
     String getCode();
 
-    String getType();
-
-    String getLevel();
+    String getDescription();
 
     String getDetails();
 
-    String getDescription();
+    String getLevel();
+
+    String getType();
 }

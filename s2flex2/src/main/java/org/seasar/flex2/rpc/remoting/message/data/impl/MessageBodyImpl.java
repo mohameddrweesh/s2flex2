@@ -23,17 +23,17 @@ public class MessageBodyImpl implements MessageBody {
 
     private final static Object[] EMPTY_ARGS = new Object[0];
 
-    private final String target;
-
-    private final String response;
+    private Object[] args;
 
     private Object data;
 
-    private String serviceName;
+    private final String response;
 
     private String serviceMethodName;
 
-    private Object[] args;
+    private String serviceName;
+
+    private final String target;
 
     public MessageBodyImpl(String target, String response, Object data) {
         this.target = target;
@@ -41,23 +41,19 @@ public class MessageBodyImpl implements MessageBody {
         this.data = data;
     }
 
-    public String getTarget() {
-        return target;
-    }
-
-    public String getResponse() {
-        return response;
+    public Object[] getArgs() {
+        if (args == null) {
+            setupData();
+        }
+        return args;
     }
 
     public Object getData() {
         return data;
     }
 
-    public String getServiceName() {
-        if (serviceName == null) {
-            setupTarget();
-        }
-        return serviceName;
+    public String getResponse() {
+        return response;
     }
 
     public String getServiceMethodName() {
@@ -67,11 +63,15 @@ public class MessageBodyImpl implements MessageBody {
         return serviceMethodName;
     }
 
-    public Object[] getArgs() {
-        if (args == null) {
-            setupData();
+    public String getServiceName() {
+        if (serviceName == null) {
+            setupTarget();
         }
-        return args;
+        return serviceName;
+    }
+
+    public String getTarget() {
+        return target;
     }
 
     public final String toString() {
@@ -85,19 +85,19 @@ public class MessageBodyImpl implements MessageBody {
         return buf.toString();
     }
 
-    protected void setupTarget() {
-        int dotIndex = target.lastIndexOf('.');
-        if (dotIndex > 0) {
-            serviceName = target.substring(0, dotIndex);
-            serviceMethodName = target.substring(dotIndex + 1);
-        }
-    }
-
     protected void setupData() {
         if (data != null && data instanceof List) {
             args = ((List) data).toArray();
         } else {
             args = EMPTY_ARGS;
+        }
+    }
+
+    protected void setupTarget() {
+        int dotIndex = target.lastIndexOf('.');
+        if (dotIndex > 0) {
+            serviceName = target.substring(0, dotIndex);
+            serviceMethodName = target.substring(dotIndex + 1);
         }
     }
 }

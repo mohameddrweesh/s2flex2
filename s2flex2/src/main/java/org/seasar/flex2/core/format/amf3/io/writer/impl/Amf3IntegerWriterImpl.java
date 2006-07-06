@@ -23,8 +23,8 @@ import org.seasar.flex2.core.format.amf3.type.Amf3TypeDef;
 
 public class Amf3IntegerWriterImpl extends AbstractAmf3IntWriterImpl {
 
-    public void write(final Object value,
-            final DataOutputStream outputStream) throws IOException {
+    public void write(final Object value, final DataOutputStream outputStream)
+            throws IOException {
         writeInteger((Integer) value, outputStream);
     }
 
@@ -32,6 +32,10 @@ public class Amf3IntegerWriterImpl extends AbstractAmf3IntWriterImpl {
             final DataOutputStream outputStream) throws IOException {
         outputStream.writeByte(Amf3TypeDef.INTEGER);
         writeInteger((Integer) value, outputStream);
+    }
+
+    private final int[] getNegativeIntBytes(final int value) {
+        return getVariableIntBytes(value);
     }
 
     private final void writeInteger(final Integer value,
@@ -45,7 +49,7 @@ public class Amf3IntegerWriterImpl extends AbstractAmf3IntWriterImpl {
 
     private final void writeNegativeIntData(final int value,
             final DataOutputStream outputStream) throws IOException {
-        int[] list = getNegativeIntBytes(value);
+        final int[] list = getNegativeIntBytes(value);
         if (list.length == 4) {
             outputStream.writeByte(Amf3Constants.INTEGER_INCLUDE_NEXT_BYTE
                     | Amf3Constants.INTEGER_NEGATIVE_SING | list[3]);
@@ -56,9 +60,5 @@ public class Amf3IntegerWriterImpl extends AbstractAmf3IntWriterImpl {
             }
             outputStream.writeByte(list[0]);
         }
-    }
-    
-    private final int[] getNegativeIntBytes( final int value) {
-        return getVariableIntBytes(value);
     }
 }

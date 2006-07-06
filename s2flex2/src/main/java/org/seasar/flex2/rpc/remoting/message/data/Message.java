@@ -17,19 +17,19 @@ package org.seasar.flex2.rpc.remoting.message.data;
 
 public interface Message {
 
-    int getBodySize();
+    void addBody(MessageBody body);
+
+    void addHeader(MessageHeader body);
 
     MessageBody getBody(int index);
 
-    void addBody(MessageBody body);
+    int getBodySize();
+
+    MessageHeader getHeader(int index);
+
+    int getHeaderSize();
 
     int getVersion();
 
     void setVersion(int amf_version);
-
-    int getHeaderSize();
-
-    MessageHeader getHeader(int index);
-
-    void addHeader(MessageHeader body);
 }

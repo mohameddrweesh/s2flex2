@@ -21,7 +21,6 @@ import java.io.IOException;
 import org.seasar.flex2.core.format.amf3.type.Amf3TypeDef;
 import org.seasar.framework.util.DomUtil;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 
 public class Amf3XmlWriterImpl extends AbstractAmf3ObjectWriterImpl {
 
@@ -29,9 +28,8 @@ public class Amf3XmlWriterImpl extends AbstractAmf3ObjectWriterImpl {
         return Amf3TypeDef.XML;
     }
 
-    protected void writeInlineObject(Object object,
-            DataOutputStream outputStream) throws IOException {
-        writeXml((Document) object, outputStream);
+    private final String getXmlString(final Document document) {
+        return DomUtil.toString(document.getDocumentElement());
     }
 
     private final void writeXml(final Document document,
@@ -39,9 +37,9 @@ public class Amf3XmlWriterImpl extends AbstractAmf3ObjectWriterImpl {
         addObjectReference(document);
         writeUTF8String(getXmlString(document), outputStream);
     }
-    
-    private final String getXmlString( final Document document) {
-        Element element = document.getDocumentElement();
-        return DomUtil.toString(element);
+
+    protected void writeInlineObject(final Object object,
+            final DataOutputStream outputStream) throws IOException {
+        writeXml((Document) object, outputStream);
     }
 }

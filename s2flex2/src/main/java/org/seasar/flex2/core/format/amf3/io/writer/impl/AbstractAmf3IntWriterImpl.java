@@ -23,23 +23,13 @@ import org.seasar.flex2.core.format.amf3.io.writer.Amf3DataWriter;
 
 public abstract class AbstractAmf3IntWriterImpl implements Amf3DataWriter {
 
-    protected final void writeIntData(final int value,
-            final DataOutputStream outputStream) throws IOException {
-        int[] list = getVariableIntBytes(value);
-        for (int i = list.length - 1; i >= 1; i--) {
-            outputStream.writeByte(list[i]
-                    | Amf3Constants.INTEGER_INCLUDE_NEXT_BYTE);
-        }
-        outputStream.writeByte(list[0]);
-    }
-
     protected final int[] getVariableIntBytes(final int value) {
-        int intByteLength = getIntByteLength(value);
+        final int intByteLength = getIntByteLength(value);
         if (intByteLength < 0) {
             return new int[0];
         }
 
-        int[] list = new int[intByteLength];
+        final int[] list = new int[intByteLength];
         int intValue = value;
 
         if (intByteLength < 4) {
@@ -77,5 +67,15 @@ public abstract class AbstractAmf3IntWriterImpl implements Amf3DataWriter {
             return 1;
         }
         return -1;
+    }
+
+    protected final void writeIntData(final int value,
+            final DataOutputStream outputStream) throws IOException {
+        final int[] list = getVariableIntBytes(value);
+        for (int i = list.length - 1; i >= 1; i--) {
+            outputStream.writeByte(list[i]
+                    | Amf3Constants.INTEGER_INCLUDE_NEXT_BYTE);
+        }
+        outputStream.writeByte(list[0]);
     }
 }

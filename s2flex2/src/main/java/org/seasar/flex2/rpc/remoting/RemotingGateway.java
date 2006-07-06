@@ -48,7 +48,7 @@ public class RemotingGateway extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
-        response.setContentType(RemotingMessageConstants.CONTENT_TYPE);
+        response.setContentType(RemotingConstants.CONTENT_TYPE);
         processor.process(request, response);
     }
 }

@@ -18,7 +18,6 @@ package org.seasar.flex2.core.format.amf3.io.reader.impl;
 import java.io.DataInputStream;
 import java.io.IOException;
 
-
 public class Amf3IntegerReaderImpl extends AbstractAmf3IntReaderImpl {
 
     public Object read(final DataInputStream inputStream) throws IOException {

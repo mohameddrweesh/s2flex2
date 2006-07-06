@@ -29,13 +29,12 @@ public abstract class AbstractAmf3ObjectWriterImpl extends
 
     public abstract int getDataTypeValue();
 
-    public void setReferencesFactory(
-            Amf3ReferencesFactory referencesFactory) {
+    public void setReferencesFactory(Amf3ReferencesFactory referencesFactory) {
         this.referencesFactory = referencesFactory;
     }
 
-    public void write(final Object value,
-            final DataOutputStream outputStream) throws IOException {
+    public void write(final Object value, final DataOutputStream outputStream)
+            throws IOException {
         writeAMF3DataMaker(outputStream);
         writeData(value, outputStream);
     }
@@ -44,6 +43,15 @@ public abstract class AbstractAmf3ObjectWriterImpl extends
             final DataOutputStream outputStream) throws IOException {
         outputStream.writeByte(getDataTypeValue());
         writeObject(value, outputStream);
+    }
+
+    private final Amf3References getReferences() {
+        return referencesFactory.createReferences();
+    }
+
+    private final void writeAMF3DataMaker(final DataOutputStream outputStream)
+            throws IOException {
+        outputStream.writeByte(Amf3TypeDef.AMF3_DATA_MARKER);
     }
 
     protected final void addClassProperties(final Class clazz,
@@ -80,7 +88,7 @@ public abstract class AbstractAmf3ObjectWriterImpl extends
 
     protected final void writeObject(final Object object,
             final DataOutputStream outputStream) throws IOException {
-        int referenceIndex = getObjectReferenceIndex(object);
+        final int referenceIndex = getObjectReferenceIndex(object);
         if (referenceIndex >= 0) {
             writeReferenceIndex(referenceIndex, outputStream);
         } else {
@@ -91,14 +99,5 @@ public abstract class AbstractAmf3ObjectWriterImpl extends
     protected final void writeReferenceIndex(final int index,
             final DataOutputStream outputStream) throws IOException {
         writeIntData(index << 1, outputStream);
-    }
-
-    private final Amf3References getReferences() {
-        return referencesFactory.createReferences();
-    }
-
-    private final void writeAMF3DataMaker(final DataOutputStream outputStream)
-            throws IOException {
-        outputStream.writeByte(Amf3TypeDef.AMF3_DATA_MARKER);
     }
 }

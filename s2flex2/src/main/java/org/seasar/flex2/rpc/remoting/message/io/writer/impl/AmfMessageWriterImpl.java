@@ -21,35 +21,39 @@ import java.io.IOException;
 import org.seasar.flex2.core.format.amf.io.writer.AmfDataWriter;
 import org.seasar.flex2.core.format.amf.io.writer.factory.AmfDataWriterFactory;
 import org.seasar.flex2.core.format.amf.type.AmfSharedObject;
-import org.seasar.flex2.rpc.remoting.message.data.MessageBody;
 import org.seasar.flex2.rpc.remoting.message.data.Message;
+import org.seasar.flex2.rpc.remoting.message.data.MessageBody;
 import org.seasar.flex2.rpc.remoting.message.io.writer.MessageWriter;
 
 public class AmfMessageWriterImpl implements MessageWriter {
+
+    private AmfDataWriterFactory dataWriterFactory;
+
+    private AmfSharedObject sharedObject;
 
     protected Message message;
 
     protected DataOutputStream outputStream;
 
-    private AmfSharedObject sharedObject;
-
-    private AmfDataWriterFactory dataWriterFactory;
-
     public void config(Message message, DataOutputStream outputStream) {
         this.message = message;
         this.outputStream = outputStream;
     }
-    
+
     public AmfDataWriterFactory getDataWriterFactory() {
         return dataWriterFactory;
     }
 
-    public void setSharedObject(AmfSharedObject sharedObject) {
-        this.sharedObject = sharedObject;
+    public AmfSharedObject getSharedObject() {
+        return sharedObject;
     }
 
     public void setDataWriterFactory(AmfDataWriterFactory writerFactory) {
         this.dataWriterFactory = writerFactory;
+    }
+
+    public void setSharedObject(AmfSharedObject sharedObject) {
+        this.sharedObject = sharedObject;
     }
 
     public void write() throws IOException {
@@ -81,9 +85,5 @@ public class AmfMessageWriterImpl implements MessageWriter {
     protected final void writeData(final Object value) throws IOException {
         AmfDataWriter writer = dataWriterFactory.createDataWriter(value);
         writer.write(value, outputStream);
-    }
-
-    public AmfSharedObject getSharedObject() {
-        return sharedObject;
     }
 }

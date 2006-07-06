@@ -23,18 +23,18 @@ public class ByteArrayFactoryImpl implements ByteArrayFactory {
 
     private S2Container container;
 
+    public ByteArray createByteArray(byte[] bytes) {
+        final ByteArray bytearray = (ByteArray) container.getComponent(
+                ByteArray.class);
+        bytearray.initBuffer(bytes);
+        return bytearray;
+    }
+
     public S2Container getContainer() {
         return container;
     }
 
     public void setContainer(S2Container container) {
         this.container = container;
-    }
-
-    public ByteArray createByteArray(byte[] bytes) {
-        ByteArray bytearray = (ByteArray) container.getComponent(
-                ByteArray.class);
-        bytearray.initBuffer(bytes);
-        return bytearray;
     }
 }

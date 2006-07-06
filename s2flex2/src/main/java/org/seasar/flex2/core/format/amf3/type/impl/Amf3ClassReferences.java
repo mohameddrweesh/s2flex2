@@ -31,16 +31,16 @@ public class Amf3ClassReferences {
         propertiesReferences = new HashMap(64);
     }
 
-    public void addClassReference(Class o) {
-        classReferences.add(o);
+    public void addClassReference(final Class clazz) {
+        classReferences.add(clazz);
     }
 
-    public void addProperties(Class clazz, String[] properties) {
+    public void addProperties(final Class clazz, final String[] properties) {
         propertiesReferences.put(clazz, properties);
     }
 
-    public Class getClassAt(int index) {
-        Object reference = classReferences.get(index);
+    public Class getClassAt(final int index) {
+        final Object reference = classReferences.get(index);
         if (reference != null) {
             return (Class) reference;
         } else {
@@ -48,7 +48,7 @@ public class Amf3ClassReferences {
         }
     }
 
-    public String[] getPropertiesAt(Class clazz ) {
+    public String[] getPropertiesAt(final Class clazz ) {
         String[] reference = null;
         if( propertiesReferences.containsKey(clazz)){
             reference = (String[])propertiesReferences.get(clazz);
@@ -56,8 +56,8 @@ public class Amf3ClassReferences {
         return reference;
     }
 
-    public int getReferenceIndex(Class o) {
-        return classReferences.indexOf(o);
+    public int getReferenceIndex(Class clazz) {
+        return classReferences.indexOf(clazz);
     }
 
 	public void initialize() {

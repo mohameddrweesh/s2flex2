@@ -30,21 +30,6 @@ public class Amf3InitializedObjectWriterImpl extends
         return Amf3TypeDef.OBJECT;
     }
 
-    protected void writeInlineObject(Object object,
-            DataOutputStream outputStream) throws IOException {
-        writeObjectData((Map) object, outputStream);
-    }
-
-    protected final void writeClassReferenceDefine(final Object object,
-            final DataOutputStream outputStream) throws IOException {
-        addClassReference(object.getClass());
-        int classDef = Amf3Constants.OBJECT_INLINE;
-        classDef |= Amf3Constants.CLASS_DEF_INLINE;
-        classDef |= Amf3Constants.PROPERTY_DEF_WITH_VALUE;
-        writeIntData(classDef, outputStream);
-        outputStream.writeByte(Amf3Constants.EMPTY_STRING_DATA);
-    }
-
     private final void writeObjectData(final Map value,
             final DataOutputStream outputStream) throws IOException {
         addObjectReference(value);
@@ -59,8 +44,23 @@ public class Amf3InitializedObjectWriterImpl extends
 
     private final void writeObjectEntry(final DataOutputStream outputStream,
             final Map.Entry entry) throws IOException {
-        String propertyName = (String) entry.getKey();
+        final String propertyName = (String) entry.getKey();
         writeTypeString(propertyName, outputStream);
         writeObjectElement(entry.getValue(), outputStream);
+    }
+
+    protected final void writeClassReferenceDefine(final Object object,
+            final DataOutputStream outputStream) throws IOException {
+        addClassReference(object.getClass());
+        int classDef = Amf3Constants.OBJECT_INLINE;
+        classDef |= Amf3Constants.CLASS_DEF_INLINE;
+        classDef |= Amf3Constants.PROPERTY_DEF_WITH_VALUE;
+        writeIntData(classDef, outputStream);
+        outputStream.writeByte(Amf3Constants.EMPTY_STRING_DATA);
+    }
+
+    protected void writeInlineObject(final Object object,
+            final DataOutputStream outputStream) throws IOException {
+        writeObjectData((Map) object, outputStream);
     }
 }

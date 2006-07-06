@@ -18,8 +18,8 @@ package org.seasar.flex2.rpc.remoting.message.data.processor.impl;
 import java.util.Iterator;
 import java.util.List;
 
-import org.seasar.flex2.rpc.remoting.message.data.MessageHeader;
 import org.seasar.flex2.rpc.remoting.message.data.Message;
+import org.seasar.flex2.rpc.remoting.message.data.MessageHeader;
 import org.seasar.flex2.rpc.remoting.message.data.factory.MessageHeaderFactory;
 import org.seasar.flex2.rpc.remoting.message.data.processor.MessageHeaderProcessor;
 
@@ -36,9 +36,9 @@ public class MessageHeaderProcessorImpl implements MessageHeaderProcessor {
     }
 
     public void processResponse(Message responseMessage, List addHeaders) {
-        if(addHeaders.size() > 0){
+        if (addHeaders.size() > 0) {
             for (Iterator headerIt = addHeaders.iterator(); headerIt.hasNext();) {
-                responseMessage.addHeader((MessageHeader)headerIt.next());
+                responseMessage.addHeader((MessageHeader) headerIt.next());
             }
         }
     }

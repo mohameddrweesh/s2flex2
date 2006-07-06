@@ -23,26 +23,26 @@ import org.w3c.dom.Document;
 
 public class Amf3ObjectReferences {
 
-    private Map referenceMap;
-    
     private ArrayList referenceList;
+    
+    private Map referenceMap;
 
     public Amf3ObjectReferences() {
     	referenceMap = new HashMap(256);
     	referenceList = new ArrayList(256);
     }
 
-    public void addReference(Object value) {
+    public void addReference(final Object value) {
     	referenceList.add(value);
     	referenceMap.put(value,new Integer( referenceList.size() -1 ));
     }
 
-    public Object getAt(int index) {
+    public Object getAt(final int index) {
         return referenceList.get(index);
     }
     
-    public int getReferenceIndex(Object value) {
-    	Integer index = (Integer)referenceMap.get(value);
+    public int getReferenceIndex(final Object value) {
+        final Integer index = (Integer)referenceMap.get(value);
     	if( index != null ){
     		return index.intValue();
     	} else {
@@ -50,8 +50,8 @@ public class Amf3ObjectReferences {
     	}
     }
 
-    public Document getXmlDocumentAt(int index) {
-        Object reference = referenceList.get(index);
+    public Document getXmlDocumentAt(final int index) {
+        final Object reference = referenceList.get(index);
         if (reference instanceof Document) {
             return (Document) reference;
         } else {

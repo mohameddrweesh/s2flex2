@@ -21,11 +21,16 @@ import org.seasar.flex2.core.format.amf3.type.Amf3References;
 import org.seasar.flex2.rpc.remoting.message.data.Message;
 import org.seasar.flex2.rpc.remoting.message.io.reader.MessageReader;
 
-public class Amf3MessageReaderImpl extends AmfMessageReaderImpl implements MessageReader {
+public class Amf3MessageReaderImpl extends AmfMessageReaderImpl implements
+        MessageReader {
 
     private Amf3References references;
 
     public Amf3MessageReaderImpl() {
+    }
+
+    public Amf3References getReferences() {
+        return references;
     }
 
     public Message read() throws IOException {
@@ -33,6 +38,10 @@ public class Amf3MessageReaderImpl extends AmfMessageReaderImpl implements Messa
         readHeader();
         readBodies();
         return message;
+    }
+
+    public void setReferences(Amf3References references) {
+        this.references = references;
     }
 
     protected void clean() {
@@ -53,13 +62,5 @@ public class Amf3MessageReaderImpl extends AmfMessageReaderImpl implements Messa
 
     protected void readVersion() throws IOException {
         message.setVersion(inputStream.readUnsignedShort());
-    }
-
-    public Amf3References getReferences() {
-        return references;
-    }
-
-    public void setReferences(Amf3References references) {
-        this.references = references;
     }
 }

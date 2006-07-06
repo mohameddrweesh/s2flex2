@@ -31,81 +31,78 @@ public abstract class AbstractAmf3ObjectReaderImpl extends
         this.referencesFactory = referencesFactory;
     }
 
-    protected final void addClassProperties(Class clazz, String[] properties) {
-        getReferences().addClassProperties(clazz,
-                properties);
+    private final Amf3References getReferences() {
+        return referencesFactory.createReferences();
     }
 
-    protected final void addClassReference(Class clazz) {
+    protected final void addClassProperties(final Class clazz,
+            final String[] properties) {
+        getReferences().addClassProperties(clazz, properties);
+    }
+
+    protected final void addClassReference(final Class clazz) {
         getReferences().addClassReference(clazz);
     }
 
-    protected final void addObjectReference(Object object) {
+    protected final void addObjectReference(final Object object) {
         getReferences().addObjectReference(object);
     }
 
-    protected final void addStringReference(String object) {
+    protected final void addStringReference(final String object) {
         getReferences().addStringReference(object);
     }
 
-    protected final Class getClassAt(int index) {
+    protected final Class getClassAt(final int index) {
         return getReferences().getClassAt(index);
     }
 
-    protected final int getClassReferenceIndex(Class clazz) {
-        return getReferences().getClassReferenceIndex(
-                clazz);
+    protected final int getClassReferenceIndex(final Class clazz) {
+        return getReferences().getClassReferenceIndex(clazz);
     }
 
-    protected final Object getObjectAt(int index) {
+    protected final Object getObjectAt(final int index) {
         return getReferences().getObjectAt(index);
     }
 
-    protected final int getObjectReferenceIndex(Object object) {
-        return getReferences().getObjectReferenceIndex(
-                object);
+    protected final int getObjectReferenceIndex(final Object object) {
+        return getReferences().getObjectReferenceIndex(object);
     }
 
-    protected final String[] getPropertiesOf(Class clazz) {
+    protected final String[] getPropertiesOf(final Class clazz) {
         return getReferences().getPropertiesAt(clazz);
     }
 
-    protected final String getStringAt(int index) {
+    protected final String getStringAt(final int index) {
         return getReferences().getStringAt(index);
     }
 
-    protected final int getStringReferenceIndex(String object) {
-        return getReferences().getStringReferenceIndex(
-                object);
+    protected final int getStringReferenceIndex(final String object) {
+        return getReferences().getStringReferenceIndex(object);
     }
 
-    abstract protected Object readInlinedObject(int reference,
-            DataInputStream inputStream) throws IOException;
+    protected abstract Object readInlinedObject(final int reference,
+            final DataInputStream inputStream) throws IOException;
 
     protected final Object readObject(final DataInputStream inputStream)
             throws IOException {
         Object result = null;
 
-        int reference = readInt(inputStream);
+        final int reference = readInt(inputStream);
         switch (reference & Amf3Constants.OBJECT_INLINE) {
 
-            case Amf3Constants.OBJECT_REFERENCE:
-                result = readReferencedObject(reference, inputStream);
-                break;
+        case Amf3Constants.OBJECT_REFERENCE:
+            result = readReferencedObject(reference, inputStream);
+            break;
 
-            case Amf3Constants.OBJECT_INLINE:
-                result = readInlinedObject(reference, inputStream);
-                break;
+        case Amf3Constants.OBJECT_INLINE:
+            result = readInlinedObject(reference, inputStream);
+            break;
 
-            default:
+        default:
         }
         return result;
     }
 
-    abstract protected Object readReferencedObject(int reference,
-            DataInputStream inputStream) throws IOException;
-
-    private final Amf3References getReferences() {
-        return referencesFactory.createReferences();
-    }
+    protected abstract Object readReferencedObject(final int reference,
+            final DataInputStream inputStream) throws IOException;
 }

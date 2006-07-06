@@ -13,16 +13,12 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.core.format.amf3.io.writer.impl;
+package org.seasar.flex2.core.format.amf3.io.factory;
 
 import java.io.DataOutputStream;
-import java.io.IOException;
-import java.math.BigDecimal;
 
-public class Amf3BigDecimalWriterImpl extends Amf3StringWriterImpl {
+import org.seasar.flex2.core.format.amf3.io.DataOutput;
 
-    protected final void writeInlineObject(final Object object,
-            final DataOutputStream outputStream) throws IOException {
-        super.writeInlineObject(((BigDecimal) object).toString(), outputStream);
-    }
+public interface ExternalizeDataOutputFactory {
+    DataOutput createDataOutput(DataOutputStream outputStream);
 }

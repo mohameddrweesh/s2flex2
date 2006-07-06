@@ -25,23 +25,23 @@ import org.seasar.flex2.core.format.amf3.io.CharsetType;
 public abstract class AbstractAmf3UTF8StringWriterImpl extends
         AbstractAmf3IntWriterImpl {
 
-    protected final void writeUTF8String(final String value,
-            final DataOutputStream outputStream) throws IOException {
-
-        byte[] bytearr = getUTF8StringBytes(value);
-        int stringDef = (bytearr.length << 1) | Amf3Constants.OBJECT_INLINE;
-        writeIntData(stringDef, outputStream);
-
-        if (bytearr.length > 0) {
-            outputStream.write(bytearr, 0, bytearr.length);
-        }
-    }
-    
-    private final byte[] getUTF8StringBytes( final String str) {
+    private final byte[] getUTF8StringBytes(final String str) {
         try {
             return str.getBytes(CharsetType.UTF8);
         } catch (UnsupportedEncodingException e) {
             return new byte[0];
+        }
+    }
+
+    protected final void writeUTF8String(final String value,
+            final DataOutputStream outputStream) throws IOException {
+
+        final byte[] bytearr = getUTF8StringBytes(value);
+        final int stringDef = (bytearr.length << 1) | Amf3Constants.OBJECT_INLINE;
+        writeIntData(stringDef, outputStream);
+
+        if (bytearr.length > 0) {
+            outputStream.write(bytearr, 0, bytearr.length);
         }
     }
 }

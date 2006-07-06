@@ -22,13 +22,17 @@ import javax.servlet.http.HttpServletRequest;
 import org.seasar.flex2.util.data.storage.Storage;
 
 public class HttpRequestParameterStorage implements Storage {
-    
+
     private final static String REQUEST = "request";
 
     private final HttpServletRequest request;
 
     public HttpRequestParameterStorage(HttpServletRequest request) {
         this.request = request;
+    }
+
+    public String getName() {
+        return REQUEST;
     }
 
     public Object getProperty(String name) {
@@ -41,9 +45,5 @@ public class HttpRequestParameterStorage implements Storage {
     }
 
     public void setProperty(String name, Object value) {
-    }
-
-    public String getName() {
-        return REQUEST;
     }
 }

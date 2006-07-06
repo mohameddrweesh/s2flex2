@@ -21,17 +21,13 @@ import java.io.IOException;
 import org.seasar.flex2.core.format.amf.io.reader.AmfDataReader;
 import org.seasar.flex2.core.format.amf.io.reader.factory.AmfDataReaderFactory;
 import org.seasar.flex2.core.format.amf.type.AmfSharedObject;
-import org.seasar.flex2.rpc.remoting.message.data.MessageBody;
 import org.seasar.flex2.rpc.remoting.message.data.Message;
+import org.seasar.flex2.rpc.remoting.message.data.MessageBody;
 import org.seasar.flex2.rpc.remoting.message.data.factory.MessageBodyFactory;
 import org.seasar.flex2.rpc.remoting.message.data.factory.MessageFactory;
 import org.seasar.flex2.rpc.remoting.message.io.reader.MessageReader;
 
 public class AmfMessageReaderImpl implements MessageReader {
-
-    protected DataInputStream inputStream;
-
-    protected Message message;
 
     private MessageBodyFactory bodyFactory;
 
@@ -40,6 +36,10 @@ public class AmfMessageReaderImpl implements MessageReader {
     private MessageFactory messageFactory;
 
     private AmfSharedObject sharedObject;
+
+    protected DataInputStream inputStream;
+
+    protected Message message;
 
     public AmfMessageReaderImpl() {
     }
@@ -83,6 +83,17 @@ public class AmfMessageReaderImpl implements MessageReader {
         this.sharedObject = sharedObject;
     }
 
+    private final void skipHeaders() throws IOException {
+        inputStream.readUnsignedShort();
+        int headerCount = inputStream.readUnsignedShort();
+        for (int i = 0; i < headerCount; ++i) {
+            inputStream.readUTF();
+            inputStream.readByte();
+            inputStream.readInt();
+            readData();
+        }
+    }
+
     protected void clean() {
         sharedObject.initialize();
     }
@@ -112,16 +123,5 @@ public class AmfMessageReaderImpl implements MessageReader {
 
         AmfDataReader reader = dataReaderFactory.createDataReader(dataType);
         return reader.read(inputStream);
-    }
-
-    private final void skipHeaders() throws IOException {
-        inputStream.readUnsignedShort();
-        int headerCount = inputStream.readUnsignedShort();
-        for (int i = 0; i < headerCount; ++i) {
-            inputStream.readUTF();
-            inputStream.readByte();
-            inputStream.readInt();
-            readData();
-        }
     }
 }

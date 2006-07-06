@@ -19,7 +19,7 @@ import org.seasar.flex2.util.data.storage.Storage;
 
 public interface Transfer {
 
-    void importToComponent(Storage storage, Object target);
-
     void exportToStorage(Object target, Storage storage);
+
+    void importToComponent(Storage storage, Object target);
 }

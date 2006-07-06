@@ -28,20 +28,21 @@ public class Amf3ByteArrayWriterImpl extends AbstractAmf3ObjectWriterImpl {
         return Amf3TypeDef.BYTEARRAY;
     }
 
-    protected void writeInlineObject(Object object,
-            DataOutputStream outputStream) throws IOException {
-        writeByteArrayData((ByteArray) object, outputStream);
-    }
-
     private final void writeByteArrayData(final ByteArray bytearray,
             final DataOutputStream outputStream) throws IOException {
         addObjectReference(bytearray);
-        byte[] buffer = bytearray.getBufferBytes();
-        int bytearrayDef = (buffer.length << 1) | Amf3Constants.OBJECT_INLINE;
+        final byte[] buffer = bytearray.getBufferBytes();
+        final int bytearrayDef = (buffer.length << 1)
+                | Amf3Constants.OBJECT_INLINE;
         writeIntData(bytearrayDef, outputStream);
 
         if (buffer.length > 0) {
             outputStream.write(buffer, 0, buffer.length);
         }
+    }
+
+    protected void writeInlineObject(final Object object,
+            final DataOutputStream outputStream) throws IOException {
+        writeByteArrayData((ByteArray) object, outputStream);
     }
 }

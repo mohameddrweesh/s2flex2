@@ -28,15 +28,15 @@ public class Amf3DateWriterImpl extends AbstractAmf3ObjectWriterImpl {
         return Amf3TypeDef.DATE;
     }
 
-    protected void writeInlineObject(Object object,
-            DataOutputStream outputStream) throws IOException {
-        writeDateData((Date) object, outputStream);
-    }
-
     private final void writeDateData(final Date date,
-            DataOutputStream outputStream) throws IOException {
+            final DataOutputStream outputStream) throws IOException {
         addObjectReference(date);
         outputStream.writeByte(Amf3Constants.OBJECT_INLINE);
         outputStream.writeDouble(((Date) date).getTime());
+    }
+
+    protected void writeInlineObject(final Object object,
+            final DataOutputStream outputStream) throws IOException {
+        writeDateData((Date) object, outputStream);
     }
 }

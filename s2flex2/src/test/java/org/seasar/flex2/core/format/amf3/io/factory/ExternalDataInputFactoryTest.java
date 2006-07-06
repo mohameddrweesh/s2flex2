@@ -20,7 +20,7 @@ import java.io.DataInputStream;
 import org.seasar.extension.unit.S2TestCase;
 import org.seasar.flex2.core.format.amf3.io.DataInput;
 import org.seasar.flex2.core.format.amf3.io.ExternalizeDataInput;
-import org.seasar.flex2.core.format.amf3.io.factory.DataInputFactory;
+import org.seasar.flex2.core.format.amf3.io.factory.ExternalizeDataInputFactory;
 import org.seasar.flex2.core.format.amf3.io.factory.impl.ExternalizeDataInputFactoryImpl;
 import org.seasar.framework.container.S2Container;
 
@@ -30,14 +30,14 @@ public class ExternalDataInputFactoryTest extends S2TestCase {
 
     public void testCreateReaderFactory() throws Exception {
         S2Container container = getContainer();
-        Object factory = container.getComponent(DataInputFactory.class);
+        Object factory = container.getComponent(ExternalizeDataInputFactory.class);
         assertNotNull("1", factory);
         assertTrue("2", factory instanceof ExternalizeDataInputFactoryImpl);
     }
 
     public void testCreateDataInput() throws Exception {
         S2Container container = getContainer();
-        DataInputFactory factory = (DataInputFactory)container.getComponent(DataInputFactory.class);
+        ExternalizeDataInputFactory factory = (ExternalizeDataInputFactory)container.getComponent(ExternalizeDataInputFactory.class);
         DataInput input = factory.createDataIpput(new DataInputStream(System.in));
         assertNotNull("1", input);
         assertTrue("2", input instanceof ExternalizeDataInput);

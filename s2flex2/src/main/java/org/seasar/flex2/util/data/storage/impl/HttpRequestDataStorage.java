@@ -31,6 +31,10 @@ public class HttpRequestDataStorage implements Storage {
         this.request = request;
     }
 
+    public String getName() {
+        return REQUEST;
+    }
+
     public Object getProperty(String name) {
         return request.getAttribute(name);
     }
@@ -42,9 +46,5 @@ public class HttpRequestDataStorage implements Storage {
 
     public void setProperty(String name, Object value) {
         request.setAttribute(name, value);
-    }
-
-    public String getName() {
-        return REQUEST;
     }
 }

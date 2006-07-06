@@ -19,15 +19,15 @@ import java.io.DataOutputStream;
 
 import org.seasar.flex2.core.format.amf3.io.DataOutput;
 import org.seasar.flex2.core.format.amf3.io.ExternalizeDataOutput;
-import org.seasar.flex2.core.format.amf3.io.factory.DataOutputFactory;
+import org.seasar.flex2.core.format.amf3.io.factory.ExternalizeDataOutputFactory;
 import org.seasar.framework.container.S2Container;
 
-public class ExternalizeDataOutputFactoryImpl implements DataOutputFactory {
+public class ExternalizeDataOutputFactoryImpl implements ExternalizeDataOutputFactory {
 
     private S2Container container;
     
     public DataOutput createDataOutput(DataOutputStream outputStream) {
-        ExternalizeDataOutput output = (ExternalizeDataOutput)container.getComponent(ExternalizeDataOutput.class);
+        final ExternalizeDataOutput output = (ExternalizeDataOutput)container.getComponent(ExternalizeDataOutput.class);
         output.setOutputStream(outputStream);
         return output;
     }

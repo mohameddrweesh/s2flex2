@@ -13,12 +13,12 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.remoting;
+package org.seasar.flex2.core.format.amf3.type.exception;
 
-public interface RemotingMessageConstants {
+import org.seasar.framework.exception.SRuntimeException;
 
-    static final String APPEND_TO_GATEWAYURL = "AppendToGatewayUrl";
-
-    String CONTENT_TYPE = "application/x-amf";
-
+public class FailedUnCompressRuntimeException extends SRuntimeException {
+    public FailedUnCompressRuntimeException(Throwable cause) {
+        super("EFLX1001",null,cause);
+    }
 }

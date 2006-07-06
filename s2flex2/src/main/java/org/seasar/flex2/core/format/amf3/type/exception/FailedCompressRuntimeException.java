@@ -13,12 +13,12 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.core.format.amf3.io.factory;
+package org.seasar.flex2.core.format.amf3.type.exception;
 
-import java.io.DataInputStream;
+import org.seasar.framework.exception.SRuntimeException;
 
-import org.seasar.flex2.core.format.amf3.io.DataInput;
-
-public interface DataInputFactory {
-    DataInput createDataIpput( DataInputStream inputStream );
+public class FailedCompressRuntimeException extends SRuntimeException {
+    public FailedCompressRuntimeException(Throwable cause) {
+        super("EFLX1000",null,cause);
+    }
 }

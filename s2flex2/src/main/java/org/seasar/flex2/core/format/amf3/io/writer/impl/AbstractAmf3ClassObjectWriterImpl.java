@@ -26,7 +26,7 @@ public abstract class AbstractAmf3ClassObjectWriterImpl extends
     protected final void writeClassReference(final Object object,
             final DataOutputStream outputStream) throws IOException {
 
-        int classIndex = getClassReferenceIndex(object.getClass());
+        final int classIndex = getClassReferenceIndex(object.getClass());
         if (classIndex >= 0) {
             writeClassReferenceIndex(classIndex, outputStream);
         } else {
@@ -34,8 +34,8 @@ public abstract class AbstractAmf3ClassObjectWriterImpl extends
         }
     }
 
-    protected abstract void writeClassReferenceDefine(Object object,
-            DataOutputStream outputStream) throws IOException;
+    protected abstract void writeClassReferenceDefine(final Object object,
+            final DataOutputStream outputStream) throws IOException;
 
     protected final void writeClassReferenceIndex(final int referenceIndex,
             final DataOutputStream outputStream) throws IOException {
