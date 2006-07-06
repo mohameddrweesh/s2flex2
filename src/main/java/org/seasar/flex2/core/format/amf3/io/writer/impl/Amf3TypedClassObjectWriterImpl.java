@@ -63,7 +63,7 @@ public class Amf3TypedClassObjectWriterImpl extends
     protected void writeClassObjectData(final Object value,
             final DataOutputStream outputStream) throws IOException {
         final BeanDesc beanDesc = BeanDescFactory.getBeanDesc(value.getClass());
-        PropertyDesc propertyDef;
+        PropertyDesc propertyDef = null;
         for (int i = 0; i < beanDesc.getPropertyDescSize(); ++i) {
             propertyDef = (PropertyDesc) beanDesc.getPropertyDesc(i);
             if (propertyDef.hasReadMethod()) {
