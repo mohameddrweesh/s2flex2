@@ -17,13 +17,16 @@ package org.seasar.flex2.rpc.remoting.service.impl;
 
 import java.util.Collections;
 import java.util.Map;
-import java.util.WeakHashMap;
 
 import org.seasar.flex2.rpc.remoting.service.RemotingServiceRepository;
+import org.seasar.framework.util.ArrayMap;
 
 public class RemotingServiceRepositoryImpl implements RemotingServiceRepository {
-    protected final Map serviceCache = Collections
-            .synchronizedMap(new WeakHashMap(64));
+    protected final Map serviceCache;
+
+    public RemotingServiceRepositoryImpl() {
+        serviceCache = Collections.synchronizedMap(new ArrayMap(32));
+    }
 
     public void addService(String serviceName, Object service) {
         if (!serviceCache.containsKey(serviceName)) {

@@ -54,7 +54,7 @@
     <component
         class="org.seasar.flex2.core.format.amf.io.reader.factory.impl.AmfDataReaderFactoryImpl">
         <property name="readerMap">
-            <component class="java.util.HashMap">
+            <component class="org.seasar.framework.util.ArrayMap">
                 <initMethod name="put">
                     <arg>@org.seasar.flex2.core.format.amf.type.AmfTypeDef@TYPE_NUMBER</arg>
                     <arg>amfNumberReaderImpl</arg>
@@ -158,7 +158,7 @@
     <component
         class="org.seasar.flex2.core.format.amf.io.writer.factory.impl.AmfDataWriterFactoryImpl">
         <property name="writerMap" >
-            <component class="java.util.HashMap">
+            <component class="org.seasar.framework.util.ArrayMap">
                 <initMethod name="put">
                     <arg>@java.lang.String@class</arg>
                     <arg>amfStringWriterImpl</arg>
