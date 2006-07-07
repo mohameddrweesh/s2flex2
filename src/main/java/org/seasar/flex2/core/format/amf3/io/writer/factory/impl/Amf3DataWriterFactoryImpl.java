@@ -18,7 +18,6 @@ package org.seasar.flex2.core.format.amf3.io.writer.factory.impl;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -34,9 +33,9 @@ import org.w3c.dom.Document;
 
 public class Amf3DataWriterFactoryImpl implements Amf3DataWriterFactory {
 
-    private HashMap amf3DataWriterMap;
+    private Map amf3DataWriterMap;
 
-    private HashMap writerMap;
+    private Map writerMap;
 
     public Amf3DataWriter createDataValueWriter(final Object value) {
         return (Amf3DataWriter) amf3DataWriterMap.get(getAmf3DataType(value));
@@ -44,7 +43,7 @@ public class Amf3DataWriterFactoryImpl implements Amf3DataWriterFactory {
 
     public AmfDataWriter createDataWriter(final Object value) {
         final String dataType = getAmf0DataType(value);
-        
+
         final AmfDataWriter writer;
         if (dataType != null) {
             writer = (AmfDataWriter) writerMap.get(dataType);
@@ -55,11 +54,11 @@ public class Amf3DataWriterFactoryImpl implements Amf3DataWriterFactory {
         return writer;
     }
 
-    public void setAmf3DataWriterMap(HashMap dataWriterMap) {
+    public void setAmf3DataWriterMap(Map dataWriterMap) {
         this.amf3DataWriterMap = dataWriterMap;
     }
 
-    public void setWriterMap(HashMap writerMap) {
+    public void setWriterMap(Map writerMap) {
         this.writerMap = writerMap;
     }
 

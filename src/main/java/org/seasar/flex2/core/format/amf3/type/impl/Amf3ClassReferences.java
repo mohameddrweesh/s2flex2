@@ -16,9 +16,10 @@
 package org.seasar.flex2.core.format.amf3.type.impl;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.seasar.framework.util.ArrayMap;
 
 public class Amf3ClassReferences {
 
@@ -28,7 +29,7 @@ public class Amf3ClassReferences {
 
     public Amf3ClassReferences() {
         classReferences = new ArrayList(64);
-        propertiesReferences = new HashMap(64);
+        propertiesReferences = new ArrayMap(64);
     }
 
     public void addClassReference(final Class clazz) {
@@ -48,10 +49,10 @@ public class Amf3ClassReferences {
         }
     }
 
-    public String[] getPropertiesAt(final Class clazz ) {
+    public String[] getPropertiesAt(final Class clazz) {
         String[] reference = null;
-        if( propertiesReferences.containsKey(clazz)){
-            reference = (String[])propertiesReferences.get(clazz);
+        if (propertiesReferences.containsKey(clazz)) {
+            reference = (String[]) propertiesReferences.get(clazz);
         }
         return reference;
     }
@@ -60,8 +61,8 @@ public class Amf3ClassReferences {
         return classReferences.indexOf(clazz);
     }
 
-	public void initialize() {
-		classReferences.clear();
-		propertiesReferences.clear();
-	}
+    public void initialize() {
+        classReferences.clear();
+        propertiesReferences.clear();
+    }
 }

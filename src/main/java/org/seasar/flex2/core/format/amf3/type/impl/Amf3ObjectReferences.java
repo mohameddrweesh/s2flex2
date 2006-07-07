@@ -16,38 +16,38 @@
 package org.seasar.flex2.core.format.amf3.type.impl;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
+import org.seasar.framework.util.ArrayMap;
 import org.w3c.dom.Document;
 
 public class Amf3ObjectReferences {
 
     private ArrayList referenceList;
-    
+
     private Map referenceMap;
 
     public Amf3ObjectReferences() {
-    	referenceMap = new HashMap(256);
-    	referenceList = new ArrayList(256);
+        referenceMap = new ArrayMap(256);
+        referenceList = new ArrayList(256);
     }
 
     public void addReference(final Object value) {
-    	referenceList.add(value);
-    	referenceMap.put(value,new Integer( referenceList.size() -1 ));
+        referenceList.add(value);
+        referenceMap.put(value, new Integer(referenceList.size() - 1));
     }
 
     public Object getAt(final int index) {
         return referenceList.get(index);
     }
-    
+
     public int getReferenceIndex(final Object value) {
-        final Integer index = (Integer)referenceMap.get(value);
-    	if( index != null ){
-    		return index.intValue();
-    	} else {
-    		return -1;
-    	}
+        final Integer index = (Integer) referenceMap.get(value);
+        if (index != null) {
+            return index.intValue();
+        } else {
+            return -1;
+        }
     }
 
     public Document getXmlDocumentAt(final int index) {
@@ -59,8 +59,8 @@ public class Amf3ObjectReferences {
         }
     }
 
-	public void initialize() {
-    	referenceMap.clear();
-    	referenceList.clear();
-	}
+    public void initialize() {
+        referenceMap.clear();
+        referenceList.clear();
+    }
 }
