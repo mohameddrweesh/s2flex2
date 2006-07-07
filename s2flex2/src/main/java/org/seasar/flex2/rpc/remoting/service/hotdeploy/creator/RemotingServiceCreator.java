@@ -15,13 +15,9 @@
  */
 package org.seasar.flex2.rpc.remoting.service.hotdeploy.creator;
 
-import org.seasar.flex2.rpc.remoting.service.RemotingServiceRepository;
-import org.seasar.framework.container.ComponentDef;
 import org.seasar.framework.container.deployer.InstanceDefFactory;
-import org.seasar.framework.container.hotdeploy.OndemandS2Container;
 import org.seasar.framework.container.hotdeploy.creator.MultiPackageCreator;
 import org.seasar.framework.convention.NamingConvention;
-import org.seasar.framework.util.StringUtil;
 
 public class RemotingServiceCreator extends MultiPackageCreator {
 
@@ -30,34 +26,5 @@ public class RemotingServiceCreator extends MultiPackageCreator {
         addMiddlePackageName("service");
         setNameSuffix("Service");
         setInstanceDef(InstanceDefFactory.REQUEST);
-    }
-
-    public boolean loadComponentDef(OndemandS2Container container,
-            String subsystemPackageName, Class clazz) {
-        boolean loadedComponentDef = super.loadComponentDef(container,
-                subsystemPackageName, clazz);
-        if (loadedComponentDef && isTarget(subsystemPackageName, clazz)) {
-
-            ComponentDef componentDef = container
-                    .getComponentDef(RemotingServiceRepository.class);
-
-            RemotingServiceRepository repository = (RemotingServiceRepository) componentDef
-                    .getComponent();
-
-            removeService(repository, clazz);
-        }
-
-        return loadedComponentDef;
-    }
-
-    private final void removeService(RemotingServiceRepository repository,
-            Class serviceClass) {
-        if (serviceClass.isInterface()) {
-            String serviceInterfaceName = serviceClass.getName();
-            int lashDotPosition = serviceInterfaceName.lastIndexOf('.');
-            String serviceName = StringUtil.decapitalize(serviceInterfaceName
-                    .substring(lashDotPosition + 1));
-            repository.removeService(serviceName);
-        }
     }
 }
