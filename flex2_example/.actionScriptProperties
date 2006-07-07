@@ -16,16 +16,11 @@
 <sourceAttachmentPath/>
 </compiler>
 <applications>
-<application path="flex2_example\bin\s2flex2_checkDto_example.swf"/>
 <application path="flex2_example.mxml"/>
 <application path="s2flex2_example2.mxml"/>
-<application path="src\main\mxml\s2flex2_checkDto_example.mxml"/>
-<application path="src\main\mxml\s2flex2_example2.mxml"/>
 <application path="s2flex2_checkDto_example.mxml"/>
-<application path="flex2_example\bin\s2flex2_example2.html"/>
+<application path="ParamCheck.mxml"/>
 <application path="CameraSnapShotMain.mxml"/>
-<application path="src\main\mxml\flex2_example.mxml"/>
-<application path="src\main\mxml\exception_example.mxml"/>
 <application path="exception_example.mxml"/>
 </applications>
 </actionScriptProperties>
