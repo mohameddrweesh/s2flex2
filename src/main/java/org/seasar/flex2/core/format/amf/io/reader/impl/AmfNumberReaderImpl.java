@@ -28,7 +28,6 @@ public class AmfNumberReaderImpl implements AmfDataReader {
 
     private final Double readNumber(final DataInputStream inputStream)
             throws IOException {
-        double d = inputStream.readDouble();
-        return new Double(d);
+        return new Double(inputStream.readDouble());
     }
 }

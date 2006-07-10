@@ -39,18 +39,30 @@ public abstract class AbstractAmfObjectWriterImpl implements AmfDataWriter {
         this.writerFactory = writerFactory;
     }
 
+    public void write(final Object value, final DataOutputStream outputStream)
+            throws IOException {
+        int index = getSharedObject().getSharedIndex(value);
+        if (index >= 0) {
+            writeSharedIndex(index, outputStream);
+        } else {
+            writeObjectData(value, outputStream);
+        }
+    }
+
     protected final AmfSharedObject getSharedObject() {
         return sharedObjectFactory.createSharedObject();
     }
 
-    protected void writeData(Object value, DataOutputStream outputStream)
-            throws IOException {
-        AmfDataWriter dataWriter = writerFactory.createDataWriter(value);
-        dataWriter.write(value, outputStream);
+    protected final void writeData(final Object value,
+            final DataOutputStream outputStream) throws IOException {
+        writerFactory.createDataWriter(value).write(value, outputStream);
     }
 
-    protected final void writeSharedIndex(int index,
-            DataOutputStream outputStream) throws IOException {
+    protected abstract void writeObjectData(Object value,
+            DataOutputStream outputStream) throws IOException;
+
+    protected final void writeSharedIndex(final int index,
+            final DataOutputStream outputStream) throws IOException {
         outputStream.writeByte(AmfTypeDef.FLUSHED_SHARED_OBJECT);
         outputStream.writeShort(index);
     }

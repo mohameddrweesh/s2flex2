@@ -18,7 +18,6 @@ package org.seasar.flex2.core.format.amf3.io.reader.impl;
 import java.io.DataInputStream;
 import java.io.IOException;
 
-import org.seasar.flex2.core.format.amf.io.reader.AmfDataReader;
 import org.seasar.flex2.core.format.amf3.io.reader.factory.Amf3DataReaderFactory;
 
 public abstract class AbstractAmf3TypedObjectReaderImpl extends
@@ -32,7 +31,6 @@ public abstract class AbstractAmf3TypedObjectReaderImpl extends
 
     protected final Object writeElementData(final byte dataType,
             final DataInputStream inputStream) throws IOException {
-        AmfDataReader dataReader = readerFactory.createAmf3DataReader(dataType);
-        return dataReader.read(inputStream);
+        return readerFactory.createAmf3DataReader(dataType).read(inputStream);
     }
 }

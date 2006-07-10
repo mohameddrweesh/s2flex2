@@ -19,63 +19,54 @@ import java.io.DataInputStream;
 import java.io.IOException;
 
 import org.seasar.flex2.core.format.amf.io.reader.AmfDataReader;
-import org.seasar.flex2.core.format.amf3.Amf3Constants;
 
 public abstract class AbstractAmf3IntReaderImpl implements AmfDataReader {
+    
+    private static final int INTEGER_DATA_MASK = 0x7F;
 
-    private final int getNegativeInt(final int[] list, final int bytes) {
-        return toInt(list, bytes) | 0xF0000000;
+    private static final int INTEGER_MAX_DATA_BYTES = 0x04;
+
+    private static final int readIntData(final int firstByte,
+            final DataInputStream inputStream) throws IOException {
+        final int[] intBytes = new int[INTEGER_MAX_DATA_BYTES];
+        int intByteLength = readIntDataBytes(firstByte, inputStream, intBytes);
+
+        int intData = toInt(intBytes, intByteLength);
+        if ((firstByte >>> 6) == 0x03) {
+            intData |= 0xF0000000;
+        }
+
+        return intData;
     }
 
-    private final int readIntData(final int intData,
-            final DataInputStream inputStream) throws IOException {
-        final int[] intBytes = new int[Amf3Constants.INTEGER_DATA_MAX_BYTES];
+    private static final int readIntDataBytes(final int firstByte,
+            final DataInputStream inputStream, final int[] intBytes)
+            throws IOException {
         int intByteLength = 1;
 
-        intBytes[0] = intData & 0x7F;
+        intBytes[0] = firstByte & INTEGER_DATA_MASK;
 
-        for (int i = 1; i < Amf3Constants.INTEGER_DATA_MAX_BYTES; i++) {
+        for (int i = 1; i < INTEGER_MAX_DATA_BYTES; i++) {
             intBytes[i] = inputStream.readUnsignedByte();
             intByteLength++;
             if ((intBytes[i] >>> 7) == 0x00) {
                 break;
             }
-            if (intByteLength < Amf3Constants.INTEGER_DATA_MAX_BYTES) {
-                intBytes[i] &= 0x7F;
+            if (intByteLength < INTEGER_MAX_DATA_BYTES) {
+                intBytes[i] &= INTEGER_DATA_MASK;
             }
         }
-
-        int result = 0;
-        if (intByteLength < Amf3Constants.INTEGER_DATA_MAX_BYTES) {
-            return toInt(intBytes, intByteLength);
-        } else {
-            switch (intData >>> 6) {
-
-            case 0x02:
-                result = toInt(intBytes, intByteLength);
-                break;
-
-            case 0x03:
-                result = getNegativeInt(intBytes, intByteLength);
-                break;
-
-            default:
-            }
-        }
-
-        return result;
+        return intByteLength;
     }
 
-    private final int toInt(final int[] list, final int bytes) {
+    private static final int toInt(final int[] list, final int bytes) {
         int intValue = list[bytes - 1];
-        int offset = 0;
+        int offset = 7;
 
-        if (bytes < Amf3Constants.INTEGER_DATA_MAX_BYTES) {
-            offset = 7;
-        } else {
+        if (bytes >= INTEGER_MAX_DATA_BYTES) {
             offset = 8;
         }
-
+        
         for (int i = bytes - 1; i > 0; i--) {
             intValue |= (list[i - 1] << offset);
             offset += 7;
@@ -84,21 +75,18 @@ public abstract class AbstractAmf3IntReaderImpl implements AmfDataReader {
         return intValue;
     }
 
-    protected final int readInt(final DataInputStream inputStream)
+    protected static final int readInt(final DataInputStream inputStream)
             throws IOException {
 
-        int integerData = inputStream.readUnsignedByte();
+        final int firstByte = inputStream.readUnsignedByte();
 
-        if (integerData >= 0x00) {
-
-            if ((integerData >>> 7) == 0x00) {
-                integerData = toInt(new int[] { integerData & 0x7F }, 1);
-            } else {
-
-                integerData = readIntData(integerData, inputStream);
-            }
+        int result;
+        if ((firstByte >>> 7) == 0x00) {
+            result = firstByte & INTEGER_DATA_MASK;
+        } else {
+            result = readIntData(firstByte, inputStream);
         }
 
-        return integerData;
+        return result;
     }
 }

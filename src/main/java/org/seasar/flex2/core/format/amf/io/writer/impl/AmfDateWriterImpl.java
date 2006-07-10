@@ -31,7 +31,7 @@ public class AmfDateWriterImpl implements AmfDataWriter {
         write((Date) value, outputStream);
     }
 
-    private void write(Date value, DataOutputStream outputStream)
+    private static final void write(Date value, DataOutputStream outputStream)
             throws IOException {
         outputStream.writeByte(AmfTypeDef.DATE);
         outputStream.writeDouble(((Date) value).getTime());

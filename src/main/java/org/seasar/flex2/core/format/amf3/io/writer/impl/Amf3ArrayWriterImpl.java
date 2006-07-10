@@ -27,11 +27,6 @@ public class Amf3ArrayWriterImpl extends AbstractAmf3TypedObjectWriterImpl {
         return Amf3TypeDef.ARRAY;
     }
 
-    private final void writeArrayElement(final DataOutputStream outputStream,
-            final Object element) throws IOException {
-        writeObjectElement(element, outputStream);
-    }
-
     private final void writeArrayElements(final Object[] array,
             final DataOutputStream outputStream) throws IOException {
         addObjectReference(array);
@@ -41,7 +36,7 @@ public class Amf3ArrayWriterImpl extends AbstractAmf3TypedObjectWriterImpl {
         outputStream.writeByte(Amf3Constants.EMPTY_STRING_DATA);
 
         for (int i = 0; i < array.length; i++) {
-            writeArrayElement(outputStream, array[i]);
+            writeObjectElement(array[i], outputStream);
         }
     }
 

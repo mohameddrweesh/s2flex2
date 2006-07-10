@@ -37,16 +37,17 @@ public abstract class AbstractAmfObjectReaderImpl implements AmfDataReader {
         return sharedObjectFactory;
     }
 
-    public void setDataReaderFactory(AmfDataReaderFactory dataReaderFactory) {
+    public void setDataReaderFactory(
+            final AmfDataReaderFactory dataReaderFactory) {
         this.dataReaderFactory = dataReaderFactory;
     }
 
     public void setSharedObjectFactory(
-            AmfSharedObjectFactory sharedObjectFactory) {
+            final AmfSharedObjectFactory sharedObjectFactory) {
         this.sharedObjectFactory = sharedObjectFactory;
     }
 
-    protected final void addSharedObject(Object value) {
+    protected final void addSharedObject(final Object value) {
         getSharedObject().addSharedObject(value);
     }
 
@@ -56,7 +57,6 @@ public abstract class AbstractAmfObjectReaderImpl implements AmfDataReader {
 
     protected final Object readData(final byte dataType,
             final DataInputStream inputStream) throws IOException {
-        AmfDataReader dataReader = dataReaderFactory.createDataReader(dataType);
-        return dataReader.read(inputStream);
+        return dataReaderFactory.createDataReader(dataType).read(inputStream);
     }
 }

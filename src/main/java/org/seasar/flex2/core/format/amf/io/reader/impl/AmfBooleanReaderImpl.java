@@ -26,12 +26,11 @@ public class AmfBooleanReaderImpl implements AmfDataReader {
         return readBoolean(inputStream);
     }
 
-    private final Boolean readBoolean(final DataInputStream inputStream)
+    private static final Boolean readBoolean(final DataInputStream inputStream)
             throws IOException {
         Boolean result = Boolean.FALSE;
 
-        byte value = inputStream.readByte();
-        if (value == 1) {
+        if (inputStream.readByte() == 1) {
             result = Boolean.TRUE;
         }
 

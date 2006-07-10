@@ -27,18 +27,22 @@ import org.seasar.framework.beans.factory.BeanDescFactory;
 public class AmfCustomClassWriterImpl extends AbstractAmfObjectWriterImpl
         implements AmfDataWriter {
 
-    public void write(Object value, DataOutputStream outputStream)
-            throws IOException {
-        int index = getSharedObject().getSharedIndex(value);
-        if (index >= 0) {
-            writeSharedIndex(index, outputStream);
-            return;
-        }
-        getSharedObject().addSharedObject(value);
-        String type = value.getClass().getName();
+    private final void writeCustomClassData(final Object value,
+            final DataOutputStream outputStream) throws IOException {
+
+        final String type = value.getClass().getName();
         outputStream.writeByte(AmfTypeDef.CUSTOM_CLASS);
         outputStream.writeUTF(type);
-        BeanDesc beanDesc = BeanDescFactory.getBeanDesc(value.getClass());
+
+        writeCustomClassProperties(value, outputStream);
+
+        outputStream.writeShort(0);
+        outputStream.writeByte(AmfTypeDef.EOM);
+    }
+
+    private final void writeCustomClassProperties(final Object value,
+            final DataOutputStream outputStream) throws IOException {
+        final BeanDesc beanDesc = BeanDescFactory.getBeanDesc(value.getClass());
         for (int i = 0; i < beanDesc.getPropertyDescSize(); ++i) {
             PropertyDesc pd = (PropertyDesc) beanDesc.getPropertyDesc(i);
             if (pd.hasReadMethod()) {
@@ -46,7 +50,11 @@ public class AmfCustomClassWriterImpl extends AbstractAmfObjectWriterImpl
                 writeData(pd.getValue(value), outputStream);
             }
         }
-        outputStream.writeShort(0);
-        outputStream.writeByte(9);
+    }
+
+    protected void writeObjectData(final Object value,
+            final DataOutputStream outputStream) throws IOException {
+        getSharedObject().addSharedObject(value);
+        writeCustomClassData(value, outputStream);
     }
 }

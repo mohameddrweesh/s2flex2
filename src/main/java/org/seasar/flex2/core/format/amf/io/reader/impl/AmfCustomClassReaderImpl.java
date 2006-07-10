@@ -26,34 +26,37 @@ import org.seasar.framework.util.ClassUtil;
 
 public class AmfCustomClassReaderImpl extends AbstractAmfClassObjectReaderImpl {
 
+    private static final Object createCustomObject(
+            final DataInputStream inputStream) throws IOException {
+        final Class clazz = ClassUtil.forName(inputStream.readUTF());
+        return ClassUtil.newInstance(clazz);
+    }
+
     public Object read(final DataInputStream inputStream) throws IOException {
         return readCustomClass(inputStream);
     }
 
     private final Object readCustomClass(final DataInputStream inputStream)
             throws IOException {
-        String type = inputStream.readUTF();
-        Class clazz = ClassUtil.forName(type);
-        Object bean = ClassUtil.newInstance(clazz);
+        final Object bean = createCustomObject(inputStream);
         addSharedObject(bean);
         readProperties(inputStream, bean);
         return bean;
     }
 
     private final void readProperties(final DataInputStream inputStream,
-            Object bean) throws IOException {
-        BeanDesc beanDesc = BeanDescFactory.getBeanDesc(bean.getClass());
+            final Object bean) throws IOException {
+        final BeanDesc beanDesc = BeanDescFactory.getBeanDesc(bean.getClass());
         while (true) {
             String key = inputStream.readUTF();
             byte dataType = inputStream.readByte();
             if (dataType == AmfTypeDef.EOM) {
                 break;
             }
-            Object value = readData(dataType, inputStream);
             if (beanDesc.hasPropertyDesc(key)) {
                 PropertyDesc pd = beanDesc.getPropertyDesc(key);
                 if (pd.hasWriteMethod()) {
-                    pd.setValue(bean, value);
+                    pd.setValue(bean, readData(dataType, inputStream));
                 }
             }
         }

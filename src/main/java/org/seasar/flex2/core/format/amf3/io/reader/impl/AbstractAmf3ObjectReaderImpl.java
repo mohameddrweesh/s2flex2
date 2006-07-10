@@ -90,15 +90,15 @@ public abstract class AbstractAmf3ObjectReaderImpl extends
         final int reference = readInt(inputStream);
         switch (reference & Amf3Constants.OBJECT_INLINE) {
 
-        case Amf3Constants.OBJECT_REFERENCE:
-            result = readReferencedObject(reference, inputStream);
-            break;
+            case Amf3Constants.OBJECT_REFERENCE:
+                result = readReferencedObject(reference, inputStream);
+                break;
 
-        case Amf3Constants.OBJECT_INLINE:
-            result = readInlinedObject(reference, inputStream);
-            break;
+            case Amf3Constants.OBJECT_INLINE:
+                result = readInlinedObject(reference, inputStream);
+                break;
 
-        default:
+            default:
         }
         return result;
     }

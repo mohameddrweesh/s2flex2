@@ -27,7 +27,6 @@ public class AmfStringReaderImpl implements AmfDataReader {
 
     private final String readString(final DataInputStream inputStream)
             throws IOException {
-        String s = inputStream.readUTF();
-        return s;
+        return inputStream.readUTF();
     }
 }

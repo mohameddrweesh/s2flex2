@@ -27,8 +27,7 @@ public class Amf3DataReaderImpl implements AmfDataReader {
 
     public Object read(final DataInputStream inputStream) throws IOException {
         final byte dataType = inputStream.readByte();
-        final AmfDataReader reader = readerFactory.createAmf3DataReader(dataType);
-        return reader.read(inputStream);
+        return readerFactory.createAmf3DataReader(dataType).read(inputStream);
     }
 
     public void setReaderFactory(Amf3DataReaderFactory readerFactory) {

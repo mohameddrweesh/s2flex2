@@ -24,26 +24,19 @@ import org.seasar.flex2.core.format.amf.type.AmfTypeDef;
 public class AmfArrayWriterImpl extends AbstractAmfObjectWriterImpl implements
         AmfDataWriter {
 
-    public void write(Object value, DataOutputStream outputStream)
-            throws IOException {
-        write((Object[]) value, outputStream);
-    }
-
-    protected void write(Object[] value, DataOutputStream outputStream)
-            throws IOException {
-        int index = getSharedObject().getSharedIndex(value);
-        if (index >= 0) {
-            writeSharedIndex(index, outputStream);
-            return;
-        }
-
-        getSharedObject().addSharedObject(value);
-
+    private final void writeArrayData(final Object[] value,
+            final DataOutputStream outputStream) throws IOException {
         outputStream.writeByte(AmfTypeDef.ARRAY);
         outputStream.writeInt(value.length);
 
         for (int i = 0; i < value.length; i++) {
             writeData(value[i], outputStream);
         }
+    }
+
+    protected void writeObjectData(final Object value,
+            final DataOutputStream outputStream) throws IOException {
+        getSharedObject().addSharedObject(value);
+        writeArrayData((Object[]) value, outputStream);
     }
 }

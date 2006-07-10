@@ -18,10 +18,28 @@ package org.seasar.flex2.core.format.amf3.io.writer.impl;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.seasar.flex2.core.format.amf3.Amf3Constants;
 import org.seasar.flex2.core.format.amf3.type.Amf3TypeDef;
 
 public class Amf3IntegerWriterImpl extends AbstractAmf3IntWriterImpl {
+    private static final int INTEGER_INCLUDE_NEXT_BYTE = 0x80;
+
+    private static final int INTEGER_NEGATIVE_SING = 0x40;
+
+    private static final int[] getNegativeIntBytes(final int value) {
+        return getVariableIntBytes(value);
+    }
+
+    private static final void writeNegativeIntData(final int value,
+            final DataOutputStream outputStream) throws IOException {
+        final int[] list = getNegativeIntBytes(value);
+        outputStream.writeByte(INTEGER_INCLUDE_NEXT_BYTE
+                | INTEGER_NEGATIVE_SING | list[3]);
+
+        for (int i = list.length - 2; i >= 1; i--) {
+            outputStream.writeByte( list[i] | INTEGER_INCLUDE_NEXT_BYTE );
+        }
+        outputStream.writeByte(list[0]);
+    }
 
     public void write(final Object value, final DataOutputStream outputStream)
             throws IOException {
@@ -34,31 +52,12 @@ public class Amf3IntegerWriterImpl extends AbstractAmf3IntWriterImpl {
         writeInteger((Integer) value, outputStream);
     }
 
-    private final int[] getNegativeIntBytes(final int value) {
-        return getVariableIntBytes(value);
-    }
-
     private final void writeInteger(final Integer value,
             final DataOutputStream outputStream) throws IOException {
         if (value.intValue() >= 0) {
             writeIntData(value.intValue(), outputStream);
         } else {
             writeNegativeIntData(value.intValue(), outputStream);
-        }
-    }
-
-    private final void writeNegativeIntData(final int value,
-            final DataOutputStream outputStream) throws IOException {
-        final int[] list = getNegativeIntBytes(value);
-        if (list.length == 4) {
-            outputStream.writeByte(Amf3Constants.INTEGER_INCLUDE_NEXT_BYTE
-                    | Amf3Constants.INTEGER_NEGATIVE_SING | list[3]);
-
-            for (int i = list.length - 2; i >= 1; i--) {
-                outputStream.writeByte(Amf3Constants.INTEGER_INCLUDE_NEXT_BYTE
-                        | list[i]);
-            }
-            outputStream.writeByte(list[0]);
         }
     }
 }

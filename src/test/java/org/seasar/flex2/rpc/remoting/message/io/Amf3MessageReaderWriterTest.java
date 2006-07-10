@@ -343,6 +343,8 @@ public class Amf3MessageReaderWriterTest extends S2TestCase {
 
     public void testString() throws Exception {
         assertEquals("1", "abc", convertData("abc"));
+        assertEquals("2", "あいうえお", convertData("あいうえお"));
+        assertEquals("3", "一二三四五", convertData("一二三四五"));
     }
 
     public void testXml() throws Exception {

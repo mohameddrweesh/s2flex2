@@ -20,22 +20,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-
-
-
 public class AmfIteratorWriterImpl extends AmfArrayWriterImpl {
 
-    public void write(Object value, DataOutputStream outputStream)
-            throws IOException {
-        write((Iterator) value, outputStream);
-    }
-
-    protected void write(Iterator value, DataOutputStream outputStream)
-            throws IOException {
-        ArrayList list = new ArrayList();
-        while (value.hasNext()) {
-            list.add(value.next());
+    protected void writeObjectData(final Object value,
+            final DataOutputStream outputStream) throws IOException {
+        final ArrayList list = new ArrayList();
+        for (Iterator iter = (Iterator) value; iter.hasNext();) {
+            list.add(iter.next());
         }
-        write(list.toArray(new Object[list.size()]), outputStream);
+        super.writeObjectData(list.toArray(new Object[list.size()]),
+                outputStream);
     }
 }

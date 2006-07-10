@@ -21,13 +21,12 @@ import java.util.Date;
 
 public class Amf3DateReaderImpl extends AbstractAmf3ObjectReaderImpl {
 
-    public Object read(final DataInputStream inputStream) throws IOException {
-        return readObject(inputStream);
+    private static final Date getDate(final double ms) {
+        return new Date((long) ms);
     }
 
-    private final Date getDate(final double ms) {
-        final Date date = new Date((long) ms);
-        return date;
+    public Object read(final DataInputStream inputStream) throws IOException {
+        return readObject(inputStream);
     }
 
     private final Date readDateData(final DataInputStream inputStream)

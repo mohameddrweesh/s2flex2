@@ -17,34 +17,27 @@ package org.seasar.flex2.core.format.amf3;
 
 public interface Amf3Constants {
 
-    static final byte CLASS_DEF_INLINE = 0x02;
+    byte CLASS_DEF_INLINE = 0x02;
 
-    static final byte CLASS_DEF_REFERENCE = 0x00;
+    byte CLASS_DEF_REFERENCE = 0x00;
 
-    static final String EMPTY_STRING = "";
+    String EMPTY_STRING = "";
 
-    static final byte EMPTY_STRING_DATA = 0x01;
+    byte EMPTY_STRING_DATA = 0x01;
 
-    static final byte INTEGER_DATA_MAX_BYTES = 4;
+    int INTEGER_MAX = 0xFFFFFFF;
 
-    static final int INTEGER_INCLUDE_NEXT_BYTE = 0x80;
+    int INTEGER_MIN = -0xFFFFFFF;
 
-    static final int INTEGER_NEGATIVE_SING = 0x40;
+    byte OBJECT_INLINE = 0x01;
 
-    static final int INTEGRR_MAX = 0xFFFFFFF;
+    byte OBJECT_REFERENCE = 0x00;
 
-    static final int INTEGRR_MIN = -0xFFFFFFF;
+    byte PROPERTY_DEF = 0x0C;
 
-    static final byte OBJECT_INLINE = 0x01;
+    byte PROPERTY_DEF_LIST = 0x00;
 
-    static final byte OBJECT_REFERENCE = 0x00;
+    byte PROPERTY_DEF_SINGLE = 0x04;
 
-    static final byte PROPERTY_DEF = 0x0C;
-
-    static final byte PROPERTY_DEF_LIST = 0x00;
-
-    static final byte PROPERTY_DEF_SINGLE = 0x04;
-
-    static final byte PROPERTY_DEF_WITH_VALUE = 0x08;
-
+    byte PROPERTY_DEF_WITH_VALUE = 0x08;
 }
