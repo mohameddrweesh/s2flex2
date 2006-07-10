@@ -99,8 +99,8 @@ public class Amf3DataWriterFactoryImpl implements Amf3DataWriterFactory {
             }
             if (value instanceof Integer) {
                 int data = ((Integer) value).intValue();
-                if (data <= Amf3Constants.INTEGRR_MAX
-                        && data >= Amf3Constants.INTEGRR_MIN) {
+                if (data <= Amf3Constants.INTEGER_MAX
+                        && data >= Amf3Constants.INTEGER_MIN) {
                     dataType = Amf3TypeDef.TYPE_INTEGER;
                     break;
                 }

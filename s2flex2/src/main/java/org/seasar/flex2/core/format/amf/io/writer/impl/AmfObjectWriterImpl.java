@@ -24,27 +24,28 @@ import org.seasar.flex2.core.format.amf.type.AmfTypeDef;
 
 public class AmfObjectWriterImpl extends AbstractAmfObjectWriterImpl {
 
-    public void write(Object value, DataOutputStream outputStream)
-            throws IOException {
-        write((Map) value, outputStream);
+    private final void writeObjectData(final Map value,
+            final DataOutputStream outputStream) throws IOException {
+        outputStream.writeByte(AmfTypeDef.OBJECT);
+
+        writeObjectProperties(value, outputStream);
+
+        outputStream.writeShort(0);
+        outputStream.writeByte(AmfTypeDef.EOM);
     }
 
-    protected void write(Map value, DataOutputStream outputStream)
-            throws IOException {
-        int index = getSharedObject().getSharedIndex(value);
-        if (index >= 0) {
-            writeSharedIndex(index, outputStream);
-            return;
-        }
-        getSharedObject().addSharedObject(value);
-        outputStream.writeByte(AmfTypeDef.OBJECT);
+    private final void writeObjectProperties(final Map value,
+            final DataOutputStream outputStream) throws IOException {
         for (Iterator i = value.entrySet().iterator(); i.hasNext();) {
             Map.Entry e = (Map.Entry) i.next();
-            String propertyName = String.valueOf(e.getKey());
-            outputStream.writeUTF(propertyName);
+            outputStream.writeUTF(String.valueOf(e.getKey()));
             writeData(e.getValue(), outputStream);
         }
-        outputStream.writeShort(0);
-        outputStream.writeByte(9);
+    }
+
+    protected void writeObjectData(final Object value,
+            final DataOutputStream outputStream) throws IOException {
+        getSharedObject().addSharedObject(value);
+        writeObjectData((Map) value, outputStream);
     }
 }

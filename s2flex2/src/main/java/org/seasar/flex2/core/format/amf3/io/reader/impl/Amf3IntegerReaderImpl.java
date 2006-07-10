@@ -20,12 +20,12 @@ import java.io.IOException;
 
 public class Amf3IntegerReaderImpl extends AbstractAmf3IntReaderImpl {
 
-    public Object read(final DataInputStream inputStream) throws IOException {
-        return readInteger(inputStream);
-    }
-
-    private final Integer readInteger(final DataInputStream inputStream)
+    private static final Integer readInteger(final DataInputStream inputStream)
             throws IOException {
         return new Integer(readInt(inputStream));
+    }
+
+    public Object read(final DataInputStream inputStream) throws IOException {
+        return readInteger(inputStream);
     }
 }

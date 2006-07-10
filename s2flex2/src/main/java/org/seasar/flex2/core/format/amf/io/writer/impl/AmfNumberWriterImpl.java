@@ -22,12 +22,12 @@ import org.seasar.flex2.core.format.amf.io.writer.AmfDataWriter;
 import org.seasar.flex2.core.format.amf.type.AmfTypeDef;
 
 public class AmfNumberWriterImpl implements AmfDataWriter {
-    public void write(Object value, DataOutputStream outputStream)
+    public void write(final Object value, final DataOutputStream outputStream)
             throws IOException {
         write((Number) value, outputStream);
     }
 
-    protected void write(Number value, DataOutputStream outputStream)
+    protected void write(final Number value, final DataOutputStream outputStream)
             throws IOException {
         outputStream.writeByte(AmfTypeDef.NUMBER);
         outputStream.writeDouble(value.doubleValue());

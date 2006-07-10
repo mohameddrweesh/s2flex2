@@ -23,23 +23,26 @@ import org.seasar.flex2.core.format.amf.io.writer.AmfDataWriter;
 import org.seasar.flex2.core.format.amf.type.AmfTypeDef;
 import org.seasar.framework.util.DomUtil;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 
 public class AmfXmlWriterImpl implements AmfDataWriter {
 
-    public void write(Object value, DataOutputStream outputStream)
+    private static final void writeXmlData(String xmlData,
+            final DataOutputStream outputStream) throws IOException {
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        baos.write(xmlData.getBytes());
+        outputStream.writeInt(baos.size());
+        baos.writeTo(outputStream);
+    }
+
+    public void write(final Object value, final DataOutputStream outputStream)
             throws IOException {
         write((Document) value, outputStream);
     }
 
-    protected void write(Document document, DataOutputStream outputStream)
-            throws IOException {
+    protected final void write(final Document document,
+            final DataOutputStream outputStream) throws IOException {
         outputStream.writeByte(AmfTypeDef.XML);
-        Element element = document.getDocumentElement();
-        String xmlData = DomUtil.toString(element);
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        baos.write(xmlData.getBytes());
-        outputStream.writeInt(baos.size());
-        baos.writeTo(outputStream);
+        String xmlData = DomUtil.toString(document.getDocumentElement());
+        writeXmlData(xmlData, outputStream);
     }
 }

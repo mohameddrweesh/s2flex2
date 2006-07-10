@@ -24,12 +24,12 @@ import org.w3c.dom.Document;
 
 public class Amf3XmlWriterImpl extends AbstractAmf3ObjectWriterImpl {
 
-    public int getDataTypeValue() {
-        return Amf3TypeDef.XML;
+    private static final String getXmlString(final Document document) {
+        return DomUtil.toString(document.getDocumentElement());
     }
 
-    private final String getXmlString(final Document document) {
-        return DomUtil.toString(document.getDocumentElement());
+    public int getDataTypeValue() {
+        return Amf3TypeDef.XML;
     }
 
     private final void writeXml(final Document document,

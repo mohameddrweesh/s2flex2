@@ -23,6 +23,11 @@ import org.seasar.flex2.core.format.amf3.type.Amf3TypeDef;
 
 public class Amf3NumberWriterImpl implements Amf3DataWriter {
 
+    private static final void writeNumber(final Number value,
+            final DataOutputStream outputStream) throws IOException {
+        outputStream.writeDouble(value.doubleValue());
+    }
+
     public void write(final Object value, final DataOutputStream outputStream)
             throws IOException {
         writeNumber((Number) value, outputStream);
@@ -32,10 +37,5 @@ public class Amf3NumberWriterImpl implements Amf3DataWriter {
             final DataOutputStream outputStream) throws IOException {
         outputStream.writeByte(Amf3TypeDef.NUMBER);
         writeNumber((Number) value, outputStream);
-    }
-
-    private final void writeNumber(final Number value,
-            final DataOutputStream outputStream) throws IOException {
-        outputStream.writeDouble(value.doubleValue());
     }
 }

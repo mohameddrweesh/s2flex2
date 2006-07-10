@@ -27,20 +27,27 @@ import org.seasar.framework.util.ClassUtil;
 public abstract class AbstractAmfClassObjectReaderImpl extends
         AbstractAmfObjectReaderImpl {
 
-    protected final Object translateBean(AmfObject amfObject) {
-        String type = (String) amfObject.get(AmfConstants.REMOTE_CLASS);
-        Class clazz = ClassUtil.forName(type);
-        Object bean = ClassUtil.newInstance(clazz);
-        BeanDesc beanDesc = BeanDescFactory.getBeanDesc(clazz);
-        for (Iterator i = amfObject.keySet().iterator(); i.hasNext();) {
-            String key = (String) i.next();
-            if (beanDesc.hasPropertyDesc(key)) {
-                Object value = amfObject.get(key);
-                PropertyDesc pd = beanDesc.getPropertyDesc(key);
-                if (pd.hasWriteMethod()) {
-                    pd.setValue(bean, value);
-                }
+    private static final Object createBeanObject(final AmfObject amfObject) {
+        Class clazz = ClassUtil.forName((String) amfObject
+                .get(AmfConstants.REMOTE_CLASS));
+        return ClassUtil.newInstance(clazz);
+    }
+
+    private void translateBeanProperty(final BeanDesc beanDesc,
+            final Object bean, final String key, final AmfObject amfObject) {
+        if (beanDesc.hasPropertyDesc(key)) {
+            PropertyDesc pd = beanDesc.getPropertyDesc(key);
+            if (pd.hasWriteMethod()) {
+                pd.setValue(bean, amfObject.get(key));
             }
+        }
+    }
+
+    protected final Object translateBean(final AmfObject amfObject) {
+        final Object bean = createBeanObject(amfObject);
+        final BeanDesc beanDesc = BeanDescFactory.getBeanDesc(bean.getClass());
+        for (Iterator i = amfObject.keySet().iterator(); i.hasNext();) {
+            translateBeanProperty(beanDesc, bean, (String) i.next(), amfObject);
         }
         return bean;
     }

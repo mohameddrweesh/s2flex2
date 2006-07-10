@@ -20,20 +20,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
-
-
-
 public class AmfCollectionWriterImpl extends AmfArrayWriterImpl {
 
-    public void write(Object value, DataOutputStream outputStream)
-            throws IOException {
-        write((Collection) value, outputStream);
-    }
-
-    protected void write(Collection value, DataOutputStream outputStream)
-            throws IOException {
-        ArrayList list = new ArrayList();
-        list.addAll(value);
-        write(list.toArray(new Object[list.size()]), outputStream);
+    protected void writeObjectData(final Object value,
+            final DataOutputStream outputStream) throws IOException {
+        final ArrayList list = new ArrayList();
+        list.addAll((Collection) value);
+        super.writeObjectData(list.toArray(new Object[list.size()]),
+                outputStream);
     }
 }

@@ -23,7 +23,7 @@ import org.seasar.flex2.core.format.amf.type.AmfTypeDef;
 
 public class AmfNullWriterImpl implements AmfDataWriter {
 
-    public void write(Object value, DataOutputStream outputStream)
+    public void write(final Object value, final DataOutputStream outputStream)
             throws IOException {
         outputStream.writeByte(AmfTypeDef.NULL);
     }

@@ -23,7 +23,7 @@ import org.seasar.flex2.core.format.amf.io.writer.AmfDataWriter;
 public class AmfBigDecimalWriterImpl extends AmfStringWriterImpl implements
         AmfDataWriter {
 
-    public void write(Object value, DataOutputStream outputStream)
+    public void write(final Object value, final DataOutputStream outputStream)
             throws IOException {
         write((String) value.toString(), outputStream);
     }

@@ -18,7 +18,6 @@ package org.seasar.flex2.rpc.remoting.message.io.reader.impl;
 import java.io.DataInputStream;
 import java.io.IOException;
 
-import org.seasar.flex2.core.format.amf.io.reader.AmfDataReader;
 import org.seasar.flex2.core.format.amf.io.reader.factory.AmfDataReaderFactory;
 import org.seasar.flex2.core.format.amf.type.AmfSharedObject;
 import org.seasar.flex2.rpc.remoting.message.data.Message;
@@ -113,15 +112,12 @@ public class AmfMessageReaderImpl implements MessageReader {
             String target = inputStream.readUTF();
             String response = inputStream.readUTF();
             inputStream.readInt();
-            Object data = readData();
-            message.addBody(createBody(target, response, data));
+            message.addBody(createBody(target, response, readData()));
         }
     }
 
     protected final Object readData() throws IOException {
         byte dataType = inputStream.readByte();
-
-        AmfDataReader reader = dataReaderFactory.createDataReader(dataType);
-        return reader.read(inputStream);
+        return dataReaderFactory.createDataReader(dataType).read(inputStream);
     }
 }

@@ -18,13 +18,11 @@ package org.seasar.flex2.core.format.amf.io.reader.impl;
 import java.io.DataInputStream;
 import java.io.IOException;
 
-
-
 public class AmfFlushedSharedObjectReaderImpl extends
         AbstractAmfObjectReaderImpl {
 
     public Object read(final DataInputStream inputStream) throws IOException {
-        int index = inputStream.readUnsignedShort();
+        final int index = inputStream.readUnsignedShort();
         return getSharedObject().getSharedObject(index);
     }
 }

@@ -17,7 +17,6 @@ package org.seasar.flex2.core.format.amf3.io.reader.impl;
 
 import java.io.DataInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
 import javax.xml.parsers.DocumentBuilder;
 
@@ -33,27 +32,14 @@ public class Amf3XmlReaderImpl extends AbstractAmf3UTF8StringReaderImpl {
 
     private static final String DEFAULT_TAG_SUFFIX = "</xml>";
 
-    public Object read(final DataInputStream inputStream) throws IOException {
-        return readObject(inputStream);
-    }
-
-    private final Document getXmlDocument(final String xml) {
-        final InputStream bis = DomUtil.getContentsAsStream(xml, CharsetType.UTF8);
+    private static final Document getXmlDocument(final String xml) {
         final DocumentBuilder builder = DocumentBuilderFactoryUtil
                 .newDocumentBuilder();
-        return DocumentBuilderUtil.parse(builder, bis);
+        return DocumentBuilderUtil.parse(builder, DomUtil.getContentsAsStream(
+                xml, CharsetType.UTF8));
     }
 
-    private final Document readXmlData(final int xmlDef,
-            final DataInputStream inputStream) throws IOException {
-        final String xmlStringData = readXmlStringData(xmlDef, inputStream);
-        final Document xml = getXmlDocument(xmlStringData);
-        addObjectReference(xml);
-
-        return xml;
-    }
-
-    private final String readXmlStringData(final int xmlDef,
+    private static final String readXmlStringData(final int xmlDef,
             final DataInputStream inputStream) throws IOException {
         String xmlStringData = readStringData(xmlDef, inputStream);
         if (xmlStringData.indexOf('<') < 0 || xmlStringData.indexOf('<') > 1) {
@@ -61,6 +47,19 @@ public class Amf3XmlReaderImpl extends AbstractAmf3UTF8StringReaderImpl {
                     + DEFAULT_TAG_SUFFIX;
         }
         return xmlStringData;
+    }
+
+    public Object read(final DataInputStream inputStream) throws IOException {
+        return readObject(inputStream);
+    }
+
+    private final Document readXmlData(final int xmlDef,
+            final DataInputStream inputStream) throws IOException {
+        final Document xml = getXmlDocument(readXmlStringData(xmlDef,
+                inputStream));
+        addObjectReference(xml);
+
+        return xml;
     }
 
     protected final Object readInlinedObject(final int reference,

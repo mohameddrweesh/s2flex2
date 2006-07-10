@@ -18,12 +18,14 @@ package org.seasar.flex2.core.format.amf3.io.writer.impl;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.seasar.flex2.core.format.amf3.Amf3Constants;
 import org.seasar.flex2.core.format.amf3.io.writer.Amf3DataWriter;
 
 public abstract class AbstractAmf3IntWriterImpl implements Amf3DataWriter {
+    private static final int INTEGER_INCLUDE_NEXT_BYTE = 0x80;
 
-    protected final int[] getVariableIntBytes(final int value) {
+    private static final int INTEGER_DATA_MASK = 0x7F;
+    
+    protected static final int[] getVariableIntBytes(final int value) {
         final int intByteLength = getIntByteLength(value);
         if (intByteLength < 0) {
             return new int[0];
@@ -31,23 +33,23 @@ public abstract class AbstractAmf3IntWriterImpl implements Amf3DataWriter {
 
         final int[] list = new int[intByteLength];
         int intValue = value;
-
+        int offset = 8;
+        int mask = 0xFF;
         if (intByteLength < 4) {
-            list[0] = intValue & 0x7F;
-            intValue = intValue >>> 7;
-        } else {
-            list[0] = intValue & 0xFF;
-            intValue = intValue >>> 8;
+            mask = INTEGER_DATA_MASK;
+            offset = 7;
         }
+        list[0] = intValue & mask;
+        intValue = intValue >>> offset;
 
         for (int i = 1; i < intByteLength; i++) {
-            list[i] = intValue & 0x7F;
+            list[i] = intValue & INTEGER_DATA_MASK;
             intValue = intValue >>> 7;
         }
         return list;
     }
 
-    private final int getIntByteLength(final int value) {
+    private static final int getIntByteLength(final int value) {
         if (value < 0) {
             return 4;
         }
@@ -69,12 +71,11 @@ public abstract class AbstractAmf3IntWriterImpl implements Amf3DataWriter {
         return -1;
     }
 
-    protected final void writeIntData(final int value,
+    protected static final void writeIntData(final int value,
             final DataOutputStream outputStream) throws IOException {
         final int[] list = getVariableIntBytes(value);
         for (int i = list.length - 1; i >= 1; i--) {
-            outputStream.writeByte(list[i]
-                    | Amf3Constants.INTEGER_INCLUDE_NEXT_BYTE);
+            outputStream.writeByte(list[i] | INTEGER_INCLUDE_NEXT_BYTE);
         }
         outputStream.writeByte(list[0]);
     }

@@ -24,19 +24,19 @@ import org.seasar.flex2.core.format.amf3.type.Amf3TypeDef;
 
 public class Amf3DateWriterImpl extends AbstractAmf3ObjectWriterImpl {
 
-    public int getDataTypeValue() {
-        return Amf3TypeDef.DATE;
-    }
-
-    private final void writeDateData(final Date date,
+    private static final void writeDateData(final Date date,
             final DataOutputStream outputStream) throws IOException {
-        addObjectReference(date);
         outputStream.writeByte(Amf3Constants.OBJECT_INLINE);
         outputStream.writeDouble(((Date) date).getTime());
     }
 
+    public int getDataTypeValue() {
+        return Amf3TypeDef.DATE;
+    }
+
     protected void writeInlineObject(final Object object,
             final DataOutputStream outputStream) throws IOException {
+        addObjectReference(object);
         writeDateData((Date) object, outputStream);
     }
 }

@@ -27,15 +27,15 @@ import org.w3c.dom.Document;
 
 public class AmfXmlReaderImpl implements AmfDataReader {
 
+    public Object read(final DataInputStream inputStream) throws IOException {
+        return readXML(inputStream);
+    }
+
     protected Document readXML(final DataInputStream inputStream)
             throws IOException {
         inputStream.skip(4);
-        DocumentBuilder builder = DocumentBuilderFactoryUtil
+        final DocumentBuilder builder = DocumentBuilderFactoryUtil
                 .newDocumentBuilder();
         return DocumentBuilderUtil.parse(builder, inputStream);
-    }
-
-    public Object read(final DataInputStream inputStream) throws IOException {
-        return readXML(inputStream);
     }
 }

@@ -20,22 +20,25 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 public class AmfArrayReaderImpl extends AbstractAmfObjectReaderImpl {
 
     public Object read(final DataInputStream inputStream) throws IOException {
         return readArray(inputStream);
     }
 
-    protected List readArray(final DataInputStream inputStream)
+    private final void readArrayElements(final DataInputStream inputStream,
+            final ArrayList array) throws IOException {
+        byte dataType = inputStream.readByte();
+        array.add(readData(dataType, inputStream));
+    }
+
+    protected final List readArray(final DataInputStream inputStream)
             throws IOException {
-        ArrayList array = new ArrayList();
+        final ArrayList array = new ArrayList();
         addSharedObject(array);
         int length = inputStream.readInt();
         for (int i = 0; i < length; i++) {
-            byte dataType = inputStream.readByte();
-            array.add(readData(dataType, inputStream));
+            readArrayElements(inputStream, array);
         }
         return array;
     }

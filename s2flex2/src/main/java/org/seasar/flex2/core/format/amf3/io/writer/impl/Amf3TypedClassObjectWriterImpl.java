@@ -31,6 +31,14 @@ public class Amf3TypedClassObjectWriterImpl extends
         return Amf3TypeDef.OBJECT;
     }
 
+    private final void writeClassObjectProperty(PropertyDesc propertyDef,
+            final Object value, final DataOutputStream outputStream)
+            throws IOException {
+        if (propertyDef.hasReadMethod()) {
+            writeObjectElement(propertyDef.getValue(value), outputStream);
+        }
+    }
+
     private final void writeClassPropertyName(
             final DataOutputStream outputStream, final PropertyDesc propertyDef)
             throws IOException {
@@ -57,18 +65,15 @@ public class Amf3TypedClassObjectWriterImpl extends
             final DataOutputStream outputStream) throws IOException {
         addObjectReference(value);
         writeClassReference(value, outputStream);
-        writeClassObjectData(value, outputStream);
+        writeClassObjectProperties(value, outputStream);
     }
 
-    protected void writeClassObjectData(final Object value,
+    protected void writeClassObjectProperties(final Object value,
             final DataOutputStream outputStream) throws IOException {
         final BeanDesc beanDesc = BeanDescFactory.getBeanDesc(value.getClass());
-        PropertyDesc propertyDef = null;
         for (int i = 0; i < beanDesc.getPropertyDescSize(); ++i) {
-            propertyDef = (PropertyDesc) beanDesc.getPropertyDesc(i);
-            if (propertyDef.hasReadMethod()) {
-                writeObjectElement(propertyDef.getValue(value), outputStream);
-            }
+            writeClassObjectProperty(beanDesc.getPropertyDesc(i), value,
+                    outputStream);
         }
     }
 

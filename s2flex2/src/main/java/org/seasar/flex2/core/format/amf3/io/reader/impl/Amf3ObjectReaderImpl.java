@@ -21,8 +21,8 @@ import java.io.IOException;
 import org.seasar.flex2.core.format.amf.io.reader.AmfDataReader;
 import org.seasar.flex2.core.format.amf.type.AmfObject;
 import org.seasar.flex2.core.format.amf3.Amf3Constants;
-import org.seasar.flex2.core.format.amf3.io.DataInput;
 import org.seasar.flex2.core.format.amf3.io.Externalizable;
+import org.seasar.flex2.core.format.amf3.io.ExternalizeDataInput;
 import org.seasar.flex2.core.format.amf3.io.factory.ExternalizeDataInputFactory;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
@@ -30,6 +30,23 @@ import org.seasar.framework.beans.factory.BeanDescFactory;
 import org.seasar.framework.util.ClassUtil;
 
 public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
+
+    private static final void setupObjectProperties(final Object object,
+            final String[] propertyNames, final Object[] propertyValues) {
+        final int propertiesNumber = propertyNames.length;
+        final BeanDesc beanDesc = BeanDescFactory
+                .getBeanDesc(object.getClass());
+
+        PropertyDesc propertyDef;
+        for (int i = 0; i < propertiesNumber; i++) {
+            if (beanDesc.hasPropertyDesc(propertyNames[i])) {
+                propertyDef = beanDesc.getPropertyDesc(propertyNames[i]);
+                if (propertyDef.hasWriteMethod()) {
+                    propertyDef.setValue(object, propertyValues[i]);
+                }
+            }
+        }
+    }
 
     private ExternalizeDataInputFactory externalizeDataInputFactory;
 
@@ -46,12 +63,6 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
 
     public void setStringReader(AmfDataReader stringReader) {
         this.stringReader = stringReader;
-    }
-
-    private Object createClassInstance(final Class clazz) {
-        final Object object = ClassUtil.newInstance(clazz);
-        addObjectReference(object);
-        return object;
     }
 
     private final Object readASObjectData(final DataInputStream inputStream)
@@ -96,7 +107,8 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
             final Class clazz, final DataInputStream inputStream)
             throws IOException {
 
-        final Object object = createClassInstance(clazz);
+        final Object object = ClassUtil.newInstance(clazz);
+        addObjectReference(object);
 
         final String[] propertyNames = readClassProperties(objectDef, clazz,
                 inputStream);
@@ -129,8 +141,11 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
 
     private final Object readExternalizableObjectData(int objectDef,
             Class clazz, DataInputStream inputStream) throws IOException {
-        final Externalizable externalizable = (Externalizable) createClassInstance(clazz);
-        final DataInput input = externalizeDataInputFactory
+        final Externalizable externalizable = (Externalizable) ClassUtil
+                .newInstance(clazz);
+        addObjectReference(externalizable);
+
+        final ExternalizeDataInput input = externalizeDataInputFactory
                 .createDataIpput(inputStream);
         externalizable.readExternal(input);
 
@@ -192,22 +207,6 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
             propertyValues[i] = readPropertyValue(inputStream);
         }
         return propertyValues;
-    }
-
-    private final void setupObjectProperties(final Object object,
-            final String[] propertyNames, final Object[] propertyValues) {
-        final int propertiesNumber = propertyNames.length;
-        final BeanDesc beanDesc = BeanDescFactory.getBeanDesc(object.getClass());
-        
-        PropertyDesc propertyDef;
-        for (int i = 0; i < propertiesNumber; i++) {
-            if (beanDesc.hasPropertyDesc(propertyNames[i])) {
-                propertyDef = beanDesc.getPropertyDesc(propertyNames[i]);
-                if (propertyDef.hasWriteMethod()) {
-                    propertyDef.setValue(object, propertyValues[i]);
-                }
-            }
-        }
     }
 
     protected final Object readInlinedObject(final int reference,

@@ -17,8 +17,8 @@ package org.seasar.flex2.core.format.amf3.io.factory;
 
 import java.io.DataOutputStream;
 
-import org.seasar.flex2.core.format.amf3.io.DataOutput;
+import org.seasar.flex2.core.format.amf3.io.ExternalizeDataOutput;
 
 public interface ExternalizeDataOutputFactory {
-    DataOutput createDataOutput(DataOutputStream outputStream);
+    ExternalizeDataOutput createDataOutput(DataOutputStream outputStream);
 }

@@ -18,7 +18,6 @@ package org.seasar.flex2.rpc.remoting.message.io.writer.impl;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.seasar.flex2.core.format.amf.io.writer.AmfDataWriter;
 import org.seasar.flex2.core.format.amf.io.writer.factory.AmfDataWriterFactory;
 import org.seasar.flex2.core.format.amf.type.AmfSharedObject;
 import org.seasar.flex2.rpc.remoting.message.data.Message;
@@ -83,7 +82,6 @@ public class AmfMessageWriterImpl implements MessageWriter {
     }
 
     protected final void writeData(final Object value) throws IOException {
-        AmfDataWriter writer = dataWriterFactory.createDataWriter(value);
-        writer.write(value, outputStream);
+        dataWriterFactory.createDataWriter(value).write(value, outputStream);
     }
 }

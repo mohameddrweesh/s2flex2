@@ -28,21 +28,22 @@ public class AmfObjectReaderImpl extends AbstractAmfClassObjectReaderImpl {
         return readObject(inputStream);
     }
 
+    private final Object readCustomClass(final AmfObject amfObject) {
+        Object result = amfObject;
+        if (amfObject.containsKey(AmfConstants.REMOTE_CLASS)) {
+            result = translateBean(amfObject);
+        }
+        return result;
+    }
+
     private final Object readObject(final DataInputStream inputStream)
             throws IOException {
-        AmfObject amfObject = new AmfObject();
+        final AmfObject amfObject = new AmfObject();
         addSharedObject(amfObject);
 
         readProperties(inputStream, amfObject);
 
-        Object result = null;
-        if (amfObject.containsKey(AmfConstants.REMOTE_CLASS)) {
-            result = translateBean(amfObject);
-        } else {
-            result = amfObject;
-        }
-
-        return result;
+        return readCustomClass(amfObject);
     }
 
     private final void readProperties(final DataInputStream inputStream,
