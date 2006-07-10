@@ -24,7 +24,7 @@ public class RemotingServiceLocatorOnHotDeployImpl extends
         RemotingServiceLocatorImpl {
 
     public Object getService(final String serviceName) {
-        ComponentDef serviceComponentDef = getServiceComponentDefOnHotdeploy(serviceName);
+        final ComponentDef serviceComponentDef = getServiceComponentDefOnHotdeploy(serviceName);
         if (!canRegisterService(serviceComponentDef)) {
             throw new InvalidServiceRuntimeException(serviceName);
         }
@@ -39,13 +39,13 @@ public class RemotingServiceLocatorOnHotDeployImpl extends
 
     private final ComponentDef getServiceComponentDefOnHotdeploy(
             final String serviceName) {
-        ComponentDef componentDef = getServiceComponentDef(serviceName);
+        final ComponentDef componentDef = getServiceComponentDef(serviceName);
         if (componentDef == null) {
             throw new ServiceNotFoundRuntimeException(serviceName);
         }
         reloadComponentDef(componentDef);
 
-        ComponentDef reloadedComponentDef = getServiceComponentDef(serviceName);
+        final ComponentDef reloadedComponentDef = getServiceComponentDef(serviceName);
         if( componentDef != reloadedComponentDef){
             copyMetadata(componentDef, reloadedComponentDef);
         }
@@ -54,7 +54,7 @@ public class RemotingServiceLocatorOnHotDeployImpl extends
     }
 
     private final void reloadComponentDef(ComponentDef componentDef) {
-        Class[] interfaces = componentDef.getComponentClass().getInterfaces();
+        final Class[] interfaces = componentDef.getComponentClass().getInterfaces();
         for (int i = 0; i < interfaces.length; i++) {
             ClassUtil.forName(interfaces[i].getName());
         }
