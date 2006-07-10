@@ -27,7 +27,7 @@ import org.seasar.flex2.util.session.SessionDecorator;
 public class AppendToGatewayUrlHeaderCreatorImpl implements
         RemotingMessageHeaderCreator {
 
-    private MessageHeaderFactory amfHeaderFactory;
+    private MessageHeaderFactory messageHeaderFactory;
 
     private SessionDecorator sessionDecorator;
 
@@ -36,7 +36,7 @@ public class AppendToGatewayUrlHeaderCreatorImpl implements
 
         if (!request.isRequestedSessionIdValid()) {
             final String sessionId = HttpSessionUtil.getSessionId(request, true);
-            header = amfHeaderFactory.createHeader(
+            header = messageHeaderFactory.createHeader(
                     RemotingMessageConstants.HEADER_APPEND_TO_GATEWAYURL,
                     sessionDecorator.formatSessionId(sessionId));
         }
@@ -44,16 +44,16 @@ public class AppendToGatewayUrlHeaderCreatorImpl implements
         return header;
     }
 
-    public MessageHeaderFactory getAmfHeaderFactory() {
-        return amfHeaderFactory;
+    public MessageHeaderFactory getMessageHeaderFactory() {
+        return messageHeaderFactory;
     }
 
     public SessionDecorator getSessionDecorator() {
         return sessionDecorator;
     }
 
-    public void setAmfHeaderFactory(MessageHeaderFactory amfHeaderFactory) {
-        this.amfHeaderFactory = amfHeaderFactory;
+    public void setMessageHeaderFactory(MessageHeaderFactory amfHeaderFactory) {
+        this.messageHeaderFactory = amfHeaderFactory;
     }
 
     public void setSessionDecorator(SessionDecorator sessionDecorator) {

@@ -85,7 +85,7 @@ public class RemotingMessageProcessorImpl implements RemotingMessageProcessor {
     }
     
     private final List createMessageHeaders(final HttpServletRequest request) {
-        List headers = new ArrayList();
+        final List headers = new ArrayList();
         if (headerCreators.size() > 0) {
             RemotingMessageHeaderCreator processor;
             for (Iterator creatorIt = headerCreators.iterator(); creatorIt.hasNext();) {

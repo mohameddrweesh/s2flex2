@@ -27,6 +27,13 @@ import org.seasar.framework.util.ClassUtil;
 
 public class RemotingServiceLocatorImpl implements RemotingServiceLocator {
 
+    private static final boolean hasAmfRemotingServiceMetadata(
+            final ComponentDef componentDef) {
+
+        return componentDef
+                .getMetaDef(RemotingServiceConstants.REMOTING_SERVICE) != null;
+    }
+
     private final AnnotationHandler annotationHandler = AnnotationHandlerFactory
             .getAnnotationHandler();
 
@@ -43,7 +50,7 @@ public class RemotingServiceLocatorImpl implements RemotingServiceLocator {
     }
 
     public Object getService(final String serviceName) {
-        ComponentDef serviceComponentDef = null;
+        final ComponentDef serviceComponentDef;
 
         if (repository.hasService(serviceName)) {
             serviceComponentDef = (ComponentDef) repository
@@ -66,8 +73,7 @@ public class RemotingServiceLocatorImpl implements RemotingServiceLocator {
 
         if (!isSupport) {
             if (checkSupportService(serviceName, methodName)) {
-                ComponentDef componentDef = getServiceComponentDef(serviceName);
-                isSupport = canRegisterService(componentDef);
+                isSupport = canRegisterService(getServiceComponentDef(serviceName));
             }
         }
 
@@ -103,13 +109,6 @@ public class RemotingServiceLocatorImpl implements RemotingServiceLocator {
         return annotationHandler.hasAmfRemotingService(componentDef);
     }
 
-    private final boolean hasAmfRemotingServiceMetadata(
-            final ComponentDef componentDef) {
-
-        return componentDef
-                .getMetaDef(RemotingServiceConstants.REMOTING_SERVICE) != null;
-    }
-
     protected final boolean canRegisterService(final ComponentDef componentDef) {
         if (!hasAmfRemotingServiceMetadata(componentDef)) {
             if (!hasAmfRemotingServiceAnnotation(componentDef)) {
@@ -119,7 +118,7 @@ public class RemotingServiceLocatorImpl implements RemotingServiceLocator {
         return true;
     }
 
-    protected ComponentDef getServiceComponentDef(String serviceName) {
+    protected final ComponentDef getServiceComponentDef(String serviceName) {
         S2Container root = container.getRoot();
         ComponentDef componentDef;
         if (root.hasComponentDef(serviceName)) {
