@@ -19,13 +19,14 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
-import org.seasar.flex2.core.format.amf3.Amf3Constants;
 import org.seasar.flex2.core.format.amf3.io.CharsetType;
 
 public abstract class AbstractAmf3UTF8StringReaderImpl extends
         AbstractAmf3ObjectReaderImpl {
+    private static final String EMPTY_STRING = "";
 
-    private static final String getUTF8String(final byte[] bytearr, final int utflen) {
+    private static final String getUTF8String(final byte[] bytearr,
+            final int utflen) {
         try {
             return new String(bytearr, 0, utflen, CharsetType.UTF8);
         } catch (UnsupportedEncodingException e) {
@@ -42,7 +43,7 @@ public abstract class AbstractAmf3UTF8StringReaderImpl extends
             inputStream.readFully(charArray, 0, stringBytes);
             string = getUTF8String(charArray, stringBytes);
         } else {
-            string = Amf3Constants.EMPTY_STRING;
+            string = EMPTY_STRING;
         }
 
         return string;
