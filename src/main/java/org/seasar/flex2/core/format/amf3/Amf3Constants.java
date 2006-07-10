@@ -21,8 +21,6 @@ public interface Amf3Constants {
 
     byte CLASS_DEF_REFERENCE = 0x00;
 
-    String EMPTY_STRING = "";
-
     byte EMPTY_STRING_DATA = 0x01;
 
     int INTEGER_MAX = 0xFFFFFFF;
