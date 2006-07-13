@@ -1,11 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.3//EN" 
-	"http://www.seasar.org/dtd/components23.dtd">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN" 
+	"http://www.seasar.org/dtd/components24.dtd">
 <components>
 	<include path="remoting_amf3.dicon"/>
 	<component class="org.seasar.framework.convention.impl.NamingConventionImpl"/>
 	<component
       class="org.seasar.framework.container.autoregister.FileSystemComponentAutoRegister">
+      	<property name="instanceDef">@org.seasar.framework.container.deployer.InstanceDefFactory@PROTOTYPE</property>
         <initMethod name="addClassPattern">
             <arg>"org.seasar.flex2.rpc.remoting.service.impl"</arg>
             <arg>".*Impl"</arg>
