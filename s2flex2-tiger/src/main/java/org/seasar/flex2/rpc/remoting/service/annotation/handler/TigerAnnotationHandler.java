@@ -21,7 +21,7 @@ import org.seasar.framework.container.ComponentDef;
 
 public class TigerAnnotationHandler implements AnnotationHandler {
 
-    public boolean hasAmfRemotingService(ComponentDef componentDef) {
+    public boolean hasRemotingService(ComponentDef componentDef) {
         Class<Object> clazz = componentDef.getComponentClass();
 
         return clazz.getAnnotation(RemotingService.class) != null;
