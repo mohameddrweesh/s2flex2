@@ -23,8 +23,12 @@ import org.seasar.flex2.rpc.remoting.message.data.factory.MessageFactory;
 import org.seasar.flex2.rpc.remoting.message.data.processor.MessageBodyProcessor;
 import org.seasar.flex2.rpc.remoting.service.RemotingServiceInvoker;
 import org.seasar.flex2.rpc.remoting.service.RemotingServiceInvokerChooser;
+import org.seasar.framework.log.Logger;
 
 public class MessageBodyProcessorImpl implements MessageBodyProcessor {
+
+    private static final Logger logger = Logger
+            .getLogger(MessageBodyProcessor.class);
 
     private static final String RESPONSE_RESULT = "/onResult";
 
@@ -102,6 +106,7 @@ public class MessageBodyProcessorImpl implements MessageBodyProcessor {
         } catch (Throwable throwable) {
             result = errorFactory.createErrorInfo(throwable);
             responseTarget = requestBody.getResponse() + RESPONSE_STATUS;
+            logger.log(throwable);
         }
 
         return createResponseBody(responseTarget, result);
