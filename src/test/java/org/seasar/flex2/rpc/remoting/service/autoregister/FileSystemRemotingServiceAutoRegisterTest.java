@@ -25,15 +25,23 @@ public class FileSystemRemotingServiceAutoRegisterTest extends
 
     private S2Container child;
     
-    private RemotingServiceRepository repository;
-
     private NamingConvention namingConvention;
+
+    private RemotingServiceRepository repository;
     
-    public void setUpRegisterAll() throws Exception {
+    public RemotingServiceRepository getRepository() {
+        return repository;
+    }
+
+    public void setRepository(RemotingServiceRepository repository) {
+        this.repository = repository;
+    }
+
+    public void setUpServiceRegisterNoMetadata() throws Exception {
         include("autoRegister.dicon");
     }
 
-    public void testRegisterAll() throws Exception {
+    public void testServiceRegisterNoMetadata() throws Exception {
         TestService1 testService = (TestService1) child
                 .getComponent(TestService1.class);
         
@@ -41,14 +49,6 @@ public class FileSystemRemotingServiceAutoRegisterTest extends
         
         boolean hasComponent = repository.hasService(namingConvention.fromClassNameToComponentName(TestService1.class.getName()));
         
-        assertTrue("2", hasComponent);        
-    }
-
-    public RemotingServiceRepository getRepository() {
-        return repository;
-    }
-
-    public void setRepository(RemotingServiceRepository repository) {
-        this.repository = repository;
+        assertFalse("2", hasComponent);
     }
 }
