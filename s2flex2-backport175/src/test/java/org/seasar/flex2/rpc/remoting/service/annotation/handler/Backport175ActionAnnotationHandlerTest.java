@@ -46,19 +46,19 @@ public class Backport175ActionAnnotationHandlerTest extends S2TestCase {
                 .getAnnotationHandler();
 
         assertNotNull("1", componentDef);
-        assertTrue("2", annHandler.hasAmfRemotingService(componentDef));
+        assertTrue("2", annHandler.hasRemotingService(componentDef));
 
         componentDef = container.getComponentDef(TestRemotingServiceFull.class);
         annHandler = AnnotationHandlerFactory.getAnnotationHandler();
 
         assertNotNull("3", componentDef);
-        assertTrue("4", annHandler.hasAmfRemotingService(componentDef));
+        assertTrue("4", annHandler.hasRemotingService(componentDef));
 
         componentDef = container.getComponentDef(TestServiceClass.class);
         annHandler = AnnotationHandlerFactory.getAnnotationHandler();
 
         assertNotNull("5", componentDef);
-        assertFalse("6", annHandler.hasAmfRemotingService(componentDef));
+        assertFalse("6", annHandler.hasRemotingService(componentDef));
 
     }
 }

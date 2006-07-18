@@ -21,7 +21,7 @@ import org.seasar.framework.container.ComponentDef;
 
 public class Backport175ActionAnnotationHandler implements AnnotationHandler {
 
-	public boolean hasAmfRemotingService(ComponentDef componentDef) {
+	public boolean hasRemotingService(ComponentDef componentDef) {
 		Class clazz = componentDef.getComponentClass();
 		return Annotations.getAnnotation(RemotingService.class,clazz)!=null;	
 	}
