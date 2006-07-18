@@ -20,7 +20,7 @@ import org.seasar.framework.container.ComponentDef;
 
 public class BasicAnnotationHandlerImpl implements AnnotationHandler {
 
-    public boolean hasAmfRemotingService(ComponentDef componentDef) {
+    public boolean hasRemotingService(ComponentDef componentDef) {
         return false;
     }
 }

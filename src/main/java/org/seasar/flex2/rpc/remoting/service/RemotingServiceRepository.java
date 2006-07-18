@@ -15,12 +15,18 @@
  */
 package org.seasar.flex2.rpc.remoting.service;
 
+import java.util.Set;
+
+import org.seasar.framework.container.ComponentDef;
+
 public interface RemotingServiceRepository {
-    void addService(String serviceName, Object service);
+    void addService(String serviceName, ComponentDef service);
 
     void clearService();
 
-    Object getService(final String serviceName);
+    ComponentDef getService(final String serviceName);
+
+    Set getServiceNames();
 
     boolean hasService(String serviceName);
 

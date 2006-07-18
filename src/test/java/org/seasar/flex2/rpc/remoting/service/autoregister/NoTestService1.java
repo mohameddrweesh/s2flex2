@@ -13,11 +13,8 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.remoting.service;
+package org.seasar.flex2.rpc.remoting.service.autoregister;
 
-
-public interface RemotingServiceLocator {
-    Object getService(String serviceName);
-
-    boolean isSupportService(String serviceName);
+public interface NoTestService1 {
+    void test();
 }

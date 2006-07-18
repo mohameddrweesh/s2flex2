@@ -26,6 +26,6 @@ public class RemotingServiceInvokerImpl extends
 
     public boolean supports(final String serviceName, final String methodName,
             final Object[] args) {
-        return remotingServiceLocator.isSupportService(serviceName, methodName);
+        return remotingServiceLocator.isSupportService(serviceName);
     }
 }
