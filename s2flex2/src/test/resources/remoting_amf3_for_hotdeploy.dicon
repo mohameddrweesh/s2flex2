@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN"
 	"http://www.seasar.org/dtd/components24.dtd">
-<components namespace="amfmessage">
+<components namespace="remoting_amf3">
 	<include path="amf3.dicon"/>
 	
 	<!-- 

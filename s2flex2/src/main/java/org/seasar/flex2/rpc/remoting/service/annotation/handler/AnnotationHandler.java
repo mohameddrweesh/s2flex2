@@ -19,6 +19,6 @@ import org.seasar.framework.container.ComponentDef;
 
 public interface AnnotationHandler {
 
-    boolean hasAmfRemotingService(ComponentDef componentDef);
+    boolean hasRemotingService(ComponentDef componentDef);
 
 }

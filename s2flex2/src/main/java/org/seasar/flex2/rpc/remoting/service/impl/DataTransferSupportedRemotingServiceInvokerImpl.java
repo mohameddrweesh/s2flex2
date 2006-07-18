@@ -19,7 +19,7 @@ import org.seasar.flex2.util.data.storage.Storage;
 import org.seasar.flex2.util.data.storage.StorageLocator;
 import org.seasar.flex2.util.data.transfer.Transfer;
 
-public class SessionRemotingServiceInvokerImpl extends
+public class DataTransferSupportedRemotingServiceInvokerImpl extends
         AbstractRemotingServiceInvokerImpl {
 
     private final static String SERVICE_DATA_STORAGE = "serviceDataStorage";
@@ -59,6 +59,6 @@ public class SessionRemotingServiceInvokerImpl extends
 
     public boolean supports(final String serviceName, final String methodName,
             final Object[] args) {
-        return remotingServiceLocator.isSupportService(serviceName, methodName);
+        return remotingServiceLocator.isSupportService(serviceName);
     }
 }

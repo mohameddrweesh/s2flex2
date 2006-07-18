@@ -17,8 +17,10 @@ package org.seasar.flex2.rpc.remoting.service.impl;
 
 import java.util.Collections;
 import java.util.Map;
+import java.util.Set;
 
 import org.seasar.flex2.rpc.remoting.service.RemotingServiceRepository;
+import org.seasar.framework.container.ComponentDef;
 import org.seasar.framework.util.ArrayMap;
 
 public class RemotingServiceRepositoryImpl implements RemotingServiceRepository {
@@ -28,7 +30,7 @@ public class RemotingServiceRepositoryImpl implements RemotingServiceRepository 
         serviceCache = Collections.synchronizedMap(new ArrayMap(32));
     }
 
-    public void addService(String serviceName, Object service) {
+    public void addService(final String serviceName, final ComponentDef service) {
         if (!serviceCache.containsKey(serviceName)) {
             serviceCache.put(serviceName, service);
         }
@@ -38,15 +40,19 @@ public class RemotingServiceRepositoryImpl implements RemotingServiceRepository 
         serviceCache.clear();
     }
 
-    public Object getService(final String serviceName) {
-        return serviceCache.get(serviceName);
+    public ComponentDef getService(final String serviceName) {
+        return (ComponentDef) serviceCache.get(serviceName);
     }
 
-    public boolean hasService(String serviceName) {
+    public Set getServiceNames() {
+        return serviceCache.keySet();
+    }
+
+    public boolean hasService(final String serviceName) {
         return serviceCache.containsKey(serviceName);
     }
 
-    public void removeService(String serviceName) {
+    public void removeService(final String serviceName) {
         serviceCache.remove(serviceName);
     }
 }

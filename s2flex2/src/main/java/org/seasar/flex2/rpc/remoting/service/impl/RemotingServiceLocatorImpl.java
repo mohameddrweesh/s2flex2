@@ -27,15 +27,30 @@ import org.seasar.framework.util.ClassUtil;
 
 public class RemotingServiceLocatorImpl implements RemotingServiceLocator {
 
-    private static final boolean hasAmfRemotingServiceMetadata(
+    private static final AnnotationHandler annotationHandler = AnnotationHandlerFactory
+            .getAnnotationHandler();
+
+    private static final boolean hasRemotingServiceAnnotation(
+            final ComponentDef componentDef) {
+        return annotationHandler.hasRemotingService(componentDef);
+    }
+
+    private static final boolean hasRemotingServiceMetadata(
             final ComponentDef componentDef) {
 
         return componentDef
                 .getMetaDef(RemotingServiceConstants.REMOTING_SERVICE) != null;
     }
 
-    private final AnnotationHandler annotationHandler = AnnotationHandlerFactory
-            .getAnnotationHandler();
+    protected static final boolean canRegisterService(
+            final ComponentDef componentDef) {
+        if (!hasRemotingServiceMetadata(componentDef)) {
+            if (!hasRemotingServiceAnnotation(componentDef)) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     protected S2Container container;
 
@@ -53,8 +68,7 @@ public class RemotingServiceLocatorImpl implements RemotingServiceLocator {
         final ComponentDef serviceComponentDef;
 
         if (repository.hasService(serviceName)) {
-            serviceComponentDef = (ComponentDef) repository
-                    .getService(serviceName);
+            serviceComponentDef = repository.getService(serviceName);
         } else {
             serviceComponentDef = getServiceComponentDef(serviceName);
             if (canRegisterService(serviceComponentDef)) {
@@ -67,12 +81,11 @@ public class RemotingServiceLocatorImpl implements RemotingServiceLocator {
         return serviceComponentDef.getComponent();
     }
 
-    public boolean isSupportService(final String serviceName,
-            final String methodName) {
+    public boolean isSupportService(final String serviceName) {
         boolean isSupport = repository.hasService(serviceName);
 
         if (!isSupport) {
-            if (checkSupportService(serviceName, methodName)) {
+            if (checkSupportService(serviceName)) {
                 isSupport = canRegisterService(getServiceComponentDef(serviceName));
             }
         }
@@ -88,34 +101,18 @@ public class RemotingServiceLocatorImpl implements RemotingServiceLocator {
         this.repository = repository;
     }
 
-    private boolean checkSupportService(final String serviceName,
-            final String methodName) {
+    private boolean checkSupportService(final String serviceName) {
         S2Container root = container.getRoot();
-        if (root.hasComponentDef(serviceName)) {
-            return true;
-        }
-        try {
-            Class clazz = ClassUtil.forName(serviceName);
-            if (root.hasComponentDef(clazz)) {
-                return true;
-            }
-        } catch (Throwable ignore) {
-        }
-        return false;
-    }
-
-    private final boolean hasAmfRemotingServiceAnnotation(
-            final ComponentDef componentDef) {
-        return annotationHandler.hasAmfRemotingService(componentDef);
-    }
-
-    protected final boolean canRegisterService(final ComponentDef componentDef) {
-        if (!hasAmfRemotingServiceMetadata(componentDef)) {
-            if (!hasAmfRemotingServiceAnnotation(componentDef)) {
-                return false;
+        boolean isSupport = root.hasComponentDef(serviceName);
+        if (!isSupport) {
+            try {
+                Class clazz = ClassUtil.forName(serviceName);
+                isSupport = root.hasComponentDef(clazz);
+            } catch (Throwable ignore) {
             }
         }
-        return true;
+
+        return isSupport;
     }
 
     protected final ComponentDef getServiceComponentDef(String serviceName) {
