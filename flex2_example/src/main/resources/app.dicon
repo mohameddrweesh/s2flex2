@@ -31,7 +31,6 @@
 	    </initMethod>
 	</component>
 	-->
-		    
     <component
 	  class="org.seasar.framework.container.autoregister.MetaAutoRegister">
 	    <meta name="autoRegister">
