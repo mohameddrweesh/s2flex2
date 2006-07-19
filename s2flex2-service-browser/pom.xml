@@ -7,7 +7,7 @@
   <groupId>org.seasar.flex2</groupId>
   <artifactId>s2-flex2-service-browser</artifactId>
   <packaging>jar</packaging>
-  <name>S2Flex2-service-browser</name>
+  <name>s2flex2-service-browser</name>
   <version>A1</version>
   <description></description>
   <url>http://s2flex2.sandbox.seasar.org/</url>
