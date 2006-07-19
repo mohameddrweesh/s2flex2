@@ -7,7 +7,7 @@
     backgroundColor="#FFFFFF"
 >
 
-    <mx:TextInput x="109" y="22" width="456" id="gatewayUri" text="http://127.0.0.1/service/gateway"/>
+    <mx:TextInput x="109" y="22" width="456" id="gatewayUri" text="http://"/>
     <mx:Label x="29" y="24" text="gateway uri" fontWeight="bold"/>
     <mx:Button x="573" y="22" label="browse" id="browseBtn"/>
 
