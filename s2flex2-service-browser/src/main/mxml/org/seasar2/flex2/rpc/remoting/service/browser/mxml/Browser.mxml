@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<service_browser:BrowserBase
+    xmlns:mx="http://www.adobe.com/2006/mxml"
+    xmlns:service_browser="org.seasar2.flex2.rpc.remoting.service.browser.ui.*"    
+    width="761"
+    height="452"
+>
+    <mx:Label x="10" y="29" text="Service Name List" fontFamily="Verdana" fontWeight="bold" width="153" textAlign="center" fontSize="11"/>
+    <mx:VRule x="180" y="29" width="2" height="400"/>
+    <mx:Label x="190" y="30" text="Service Detail"/>
+    <mx:List x="10" y="56" id="serviceNamesList" height="334" width="162" showDataTips="true"></mx:List>
+    <mx:Button x="95" y="398" label="refresh" id="refreshBtn"/>
+    
+    <mx:Canvas x="190" y="56" width="561" height="364" verticalScrollPolicy="off" horizontalScrollPolicy="off">
+        <mx:VRule x="144" y="-5" height="360"/>
+        <mx:Label x="58" y="10" text="Service Name"/>
+        <mx:Label x="154" y="10" width="367" id="serviceNameLabel"/>
+        <mx:HRule x="0" y="41" width="580"/>
+        <mx:Label x="62" y="51" text="Service class"/>
+        <mx:Label x="154" y="51" width="397" id="classNameLabel"/>
+        <mx:Label x="34" y="77" text="Service interfaces"/>
+        <mx:List x="154" y="77" height="72" width="397" id="interfacesList" showDataTips="true"></mx:List>
+        <mx:HRule x="0" y="157" width="580"/>
+        <mx:Label x="47" y="167" text="Service Method"/>
+        <mx:DataGrid x="154" y="166" width="397" height="172" id="methodsGrid" showDataTips="true">
+            <mx:columns>
+                <mx:DataGridColumn headerText="name" dataField="name"/>
+                <mx:DataGridColumn headerText="arguments" dataField="arguments"/>
+                <mx:DataGridColumn headerText="return" dataField="returnType"/>
+            </mx:columns>
+        </mx:DataGrid>
+    </mx:Canvas>
+</service_browser:BrowserBase>

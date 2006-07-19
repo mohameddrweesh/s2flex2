@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tomcatProjectProperties>
+    <rootDir>/</rootDir>
+    <exportSource>false</exportSource>
+    <reloadable>true</reloadable>
+    <redirectLogger>false</redirectLogger>
+    <updateXml>true</updateXml>
+    <warLocation></warLocation>
+    <extraInfo></extraInfo>
+    <webPath>/services</webPath>
+    <webClassPathEntries>
+        <webClassPathEntry>/s2flex2-tiger/target/classes</webClassPathEntry>
+        <webClassPathEntry>/s2flex2/target/classes</webClassPathEntry>
+        <webClassPathEntry>/seasar2/build/classes</webClassPathEntry>
+    </webClassPathEntries>
+</tomcatProjectProperties>
