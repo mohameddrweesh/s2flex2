@@ -49,6 +49,6 @@ public class FileSystemRemotingServiceAutoRegisterTest extends
         
         boolean hasComponent = repository.hasService(namingConvention.fromClassNameToComponentName(TestService1.class.getName()));
         
-        assertFalse("2", hasComponent);
+        assertTrue("2", hasComponent);
     }
 }
