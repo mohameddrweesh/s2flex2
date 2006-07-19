@@ -75,7 +75,40 @@
 		<initMethod name="addInvoker">
 			<arg>
 				<component
-					class="org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceInvokerImpl" />		
+					class="org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceInvokerImpl">
+					<property name="forbiddenMethodMap">
+						<component class="java.util.HashMap">
+						    <initMethod name="put">
+						        <arg>"equals"</arg>
+						        <arg>null</arg>
+						    </initMethod>
+						    <initMethod name="put">
+						        <arg>"getClass"</arg>
+						        <arg>null</arg>
+						    </initMethod>
+						    <initMethod name="put">
+						        <arg>"hashCode"</arg>
+						        <arg>null</arg>
+						    </initMethod>
+						    <initMethod name="put">
+						        <arg>"notify"</arg>
+						        <arg>null</arg>
+						    </initMethod>
+						    <initMethod name="put">
+						        <arg>"notifyAll"</arg>
+						        <arg>null</arg>
+						    </initMethod>
+						    <initMethod name="put">
+						        <arg>"toString"</arg>
+						        <arg>null</arg>
+						    </initMethod>
+						    <initMethod name="put">
+						        <arg>"wait"</arg>
+						        <arg>null</arg>
+						    </initMethod>  
+						</component>
+					</property>
+				</component>	
 			</arg>
 		</initMethod>
 	</component>

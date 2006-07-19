@@ -23,9 +23,4 @@ public class RemotingServiceInvokerImpl extends
         final Object service = remotingServiceLocator.getService(serviceName);
         return invokeServiceMethod(service, methodName, args);
     }
-
-    public boolean supports(final String serviceName, final String methodName,
-            final Object[] args) {
-        return remotingServiceLocator.isSupportService(serviceName);
-    }
 }

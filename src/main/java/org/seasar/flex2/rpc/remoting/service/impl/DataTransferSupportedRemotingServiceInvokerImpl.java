@@ -56,9 +56,4 @@ public class DataTransferSupportedRemotingServiceInvokerImpl extends
     public void setTransfer(Transfer transfer) {
         this.transfer = transfer;
     }
-
-    public boolean supports(final String serviceName, final String methodName,
-            final Object[] args) {
-        return remotingServiceLocator.isSupportService(serviceName);
-    }
 }
