@@ -134,11 +134,11 @@
 	    	dispatchEvent(faultEvent);	
 	    }
 	    
-	    private function configureListeners(dispatcher:EventDispatcher):void {
+	    protected function configureListeners(dispatcher:EventDispatcher):void {
             dispatcher.addEventListener(NetStatusEvent.NET_STATUS, netStatusHandler);
             dispatcher.addEventListener(SecurityErrorEvent.SECURITY_ERROR, securityErrorHandler);
             dispatcher.addEventListener(flash.events.IOErrorEvent.IO_ERROR , ioErrorHandler);
-      }
+        }
         
 	    private function netStatusHandler(event:NetStatusEvent):void {
 	    	if (this.showBusyCursor)
