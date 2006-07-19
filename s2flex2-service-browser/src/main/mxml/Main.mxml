@@ -14,5 +14,4 @@
     <mx:Panel x="29" y="66" width="800" height="494.42" layout="absolute" title="Service Browser" verticalScrollPolicy="off" horizontalScrollPolicy="off" enabled="false" id="browserPanel">
         <service_browser_view:Browser id="browser"/>
     </mx:Panel>
-        
 </service_browser:BrowserApplication>
