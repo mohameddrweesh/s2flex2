@@ -20,7 +20,7 @@ import org.seasar.framework.container.S2Container;
 import org.seasar.framework.convention.NamingConvention;
 import org.seasar.framework.unit.S2FrameworkTestCase;
 
-public class FileSystemRemotingServiceAutoRegisterTest extends
+public class FileSystemRemotingServiceComponentAutoRegisterTest extends
         S2FrameworkTestCase {
 
     private S2Container child;
@@ -38,7 +38,7 @@ public class FileSystemRemotingServiceAutoRegisterTest extends
     }
 
     public void setUpServiceRegisterNoMetadata() throws Exception {
-        include("autoRemotingServiceRegister.dicon");
+        include("autoRemotingServiceComponentRegister.dicon");
     }
 
     public void testServiceRegisterNoMetadata() throws Exception {
@@ -49,6 +49,6 @@ public class FileSystemRemotingServiceAutoRegisterTest extends
         
         boolean hasComponent = repository.hasService(namingConvention.fromClassNameToComponentName(TestService1.class.getName()));
         
-        assertTrue("2", hasComponent);
+        assertFalse("2", hasComponent);
     }
 }
