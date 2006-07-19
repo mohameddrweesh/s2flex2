@@ -101,7 +101,7 @@
 	<component
 		class="org.seasar.flex2.core.format.amf3.io.reader.factory.impl.Amf3DataReaderFactoryImpl">
 		<property name="readerMap">
-			<component class="org.seasar.framework.util.ArrayMap">
+			<component class="java.util.HashMap">
 			    <initMethod name="put">
 			        <arg>@org.seasar.flex2.core.format.amf.type.AmfTypeDef@TYPE_NULL</arg>
 			        <arg>amfNullReaderImpl</arg>
@@ -129,7 +129,7 @@
 			</component>
 		</property>
 		<property name="amf3DataReaderMap">
-			<component class="org.seasar.framework.util.ArrayMap">
+			<component class="java.util.HashMap">
 			    <initMethod name="put">
 			        <arg>@org.seasar.flex2.core.format.amf3.type.Amf3TypeDef@TYPE_NULL</arg>
 			        <arg>amfNullReaderImpl</arg>
@@ -269,7 +269,7 @@
 	<component
 		class="org.seasar.flex2.core.format.amf3.io.writer.factory.impl.Amf3DataWriterFactoryImpl">
 		<property name="writerMap">
-		    <component class="org.seasar.framework.util.ArrayMap">
+		    <component class="java.util.HashMap">
 		 	    <initMethod name="put">
 			        <arg>@org.seasar.flex2.core.format.amf.type.AmfTypeDef@TYPE_NULL</arg>
 			        <arg>amfNullWriterImpl</arg>
@@ -293,7 +293,7 @@
 			</component>
 		</property>
 		<property name="amf3DataWriterMap">
-			<component class="org.seasar.framework.util.ArrayMap">
+			<component class="java.util.HashMap">
 			    <initMethod name="put">
 			        <arg>@org.seasar.flex2.core.format.amf3.type.Amf3TypeDef@TYPE_NULL</arg>
 			        <arg>amf3NullWriterImpl</arg>
