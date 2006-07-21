@@ -16,10 +16,10 @@
 package examples.flex2.hotdeploy.creator;
 
 import org.seasar.framework.container.deployer.InstanceDefFactory;
-import org.seasar.framework.container.hotdeploy.creator.MultiPackageCreator;
+import org.seasar.framework.container.hotdeploy.creator.MultiPackageOndemandCreator;
 import org.seasar.framework.convention.NamingConvention;
 
-public class ResolverCreator extends MultiPackageCreator {
+public class ResolverCreator extends MultiPackageOndemandCreator {
 
     public ResolverCreator(NamingConvention namingConvention) {
         super(namingConvention);
