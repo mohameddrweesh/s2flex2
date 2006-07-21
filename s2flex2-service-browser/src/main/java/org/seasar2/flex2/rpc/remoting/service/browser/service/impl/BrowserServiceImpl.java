@@ -29,7 +29,9 @@ import org.seasar2.flex2.rpc.remoting.service.browser.service.BrowserService;
 
 public class BrowserServiceImpl implements BrowserService {
 
-    private static final String[] createClassNames(final Class[] classes) {
+    private static final String BROWSE_SERVICE = "browserService";
+
+    private static final String[] convertClassToString(final Class[] classes) {
         String[] classNames = new String[classes.length];
 
         for (int i = 0; i < classes.length; i++) {
@@ -43,7 +45,7 @@ public class BrowserServiceImpl implements BrowserService {
             final Method method) {
         ServiceMethodDetail methodDetail = new ServiceMethodDetail();
         methodDetail.setName(method.getName());
-        methodDetail.setArguments(createClassNames(method.getParameterTypes()));
+        methodDetail.setArguments(convertClassToString(method.getParameterTypes()));
         methodDetail.setReturnType(method.getReturnType().getName());
 
         return methodDetail;
@@ -53,14 +55,25 @@ public class BrowserServiceImpl implements BrowserService {
         ArrayList list = new ArrayList();
 
         for (int i = 0; i < interfaces.length; i++) {
-            Class interface_ = interfaces[i];
-            Method[] methods = interface_.getDeclaredMethods();
-            for (int j = 0; j < methods.length; j++) {
-                list.add(createMethodDetail(methods[j]));
-            }
+            createMethodDetailsBy(interfaces[i], list);
         }
 
         return list;
+    }
+
+    private static final void createMethodDetailsBy(Class interfaceClass,
+            ArrayList list) {
+        Method[] methods = interfaceClass.getDeclaredMethods();
+        for (int j = 0; j < methods.length; j++) {
+            list.add(createMethodDetail(methods[j]));
+        }
+    }
+
+    private static final void createServiceClassDetail(final Class clazz,
+            ServiceDetail detail) {
+        detail.setClassName(clazz.getName());
+        detail.setInterfaces(convertClassToString(clazz.getInterfaces()));
+        detail.setMethodDetails(createMethodDetails(clazz.getInterfaces()));
     }
 
     private static final ServiceDetail createServiceDetail(final String name,
@@ -68,11 +81,7 @@ public class BrowserServiceImpl implements BrowserService {
         ServiceDetail detail = new ServiceDetail();
         detail.setName(name);
 
-        Class clazz = def.getComponentClass();
-        detail.setClassName(clazz.getName());
-        detail.setInterfaces(createClassNames(clazz.getInterfaces()));
-
-        detail.setMethodDetails(createMethodDetails(clazz.getInterfaces()));
+        createServiceClassDetail(def.getComponentClass(), detail);
 
         return detail;
     }
@@ -84,24 +93,14 @@ public class BrowserServiceImpl implements BrowserService {
                 .getService(serviceName));
     }
 
-    private static final String BROWSE_SERVICE = "browserService";
-
     public String[] getServiceNames() {
         Set serviceNames = repository.getServiceNames();
         int serviceNumber = serviceNames.size() > 0 ? serviceNames.size() - 1
                 : 0;
         String[] serviceNameArray = new String[serviceNumber];
 
-        if (serviceNumber > 0) {
-            int i = 0;
-            for (Iterator serviceNameIter = serviceNames.iterator(); serviceNameIter
-                    .hasNext();) {
-                String serviceName = (String) serviceNameIter.next();
-                if (BROWSE_SERVICE.equals(serviceName)) {
-                    continue;
-                }
-                serviceNameArray[i++] = serviceName;
-            }
+        if (serviceNameArray.length > 0) {
+            createServiceNames(serviceNames, serviceNameArray);
         }
 
         return serviceNameArray;
@@ -109,5 +108,17 @@ public class BrowserServiceImpl implements BrowserService {
 
     public void setRepository(RemotingServiceRepository repository) {
         this.repository = repository;
+    }
+
+    private final void createServiceNames(Set serviceNames, String[] serviceNameArray) {
+        int i = 0;
+        for (Iterator serviceNameIter = serviceNames.iterator(); serviceNameIter
+                .hasNext();) {
+            String serviceName = (String) serviceNameIter.next();
+            if (BROWSE_SERVICE.equals(serviceName)) {
+                continue;
+            }
+            serviceNameArray[i++] = serviceName;
+        }
     }
 }
