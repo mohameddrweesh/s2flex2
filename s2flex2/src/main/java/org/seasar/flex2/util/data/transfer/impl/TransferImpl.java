@@ -27,47 +27,46 @@ import org.seasar.framework.beans.factory.BeanDescFactory;
 
 public class TransferImpl implements Transfer {
 
-    private final AnnotationHandler annotationHandler = AnnotationHandlerFactory
+    private static final boolean isTransferTarget(Storage storage, String type) {
+        return (type != null && storage.getName().equalsIgnoreCase(type));
+    }
+
+    private static final AnnotationHandler annotationHandler = AnnotationHandlerFactory
             .getAnnotationHandler();
 
     public void exportToStorage(Object target, Storage storage) {
-        BeanDesc beanDesc = BeanDescFactory.getBeanDesc(target.getClass());
+        final BeanDesc beanDesc = BeanDescFactory.getBeanDesc(target.getClass());
 
         for (int i = 0; i < beanDesc.getPropertyDescSize(); ++i) {
-            PropertyDesc propertyDesc = beanDesc.getPropertyDesc(i);
-            if (!propertyDesc.hasReadMethod()) {
-                break;
-            }
-            String type = annotationHandler.getExportStorageType(propertyDesc);
-            if (isTransfer(type, storage)) {
-                String propertyName = propertyDesc.getPropertyName();
-                Object propertyValue = propertyDesc.getValue(target);
-                storage.setProperty(propertyName, propertyValue);
+            final PropertyDesc propertyDesc = beanDesc.getPropertyDesc(i);
+            if (propertyDesc.hasReadMethod()) {
+                final String type = annotationHandler.getExportStorageType(propertyDesc);
+                if (isTransferTarget(storage, type)) {
+                    storage.setProperty(propertyDesc.getPropertyName(),
+                            propertyDesc.getValue(target));
+                }                
             }
         }
     }
 
-    public void importToComponent(Storage storage, Object target) {
-        BeanDesc beanDesc = BeanDescFactory.getBeanDesc(target.getClass());
+    public void importToComponent( final Storage storage, final Object target) {
+        final BeanDesc beanDesc = BeanDescFactory.getBeanDesc(target.getClass());
 
-        Enumeration prop_names = storage.getPropertyNames();
-        while (prop_names.hasMoreElements()) {
-            String prop_name = (String) prop_names.nextElement();
-            if (beanDesc.hasPropertyDesc(prop_name)) {
-                PropertyDesc propertyDesc = beanDesc.getPropertyDesc(prop_name);
-                String type = annotationHandler
+        final Enumeration propertyNames = storage.getPropertyNames();
+        while (propertyNames.hasMoreElements()) {
+            final String propertyName = (String) propertyNames.nextElement();
+            if (beanDesc.hasPropertyDesc(propertyName)) {
+                final PropertyDesc propertyDesc = beanDesc
+                        .getPropertyDesc(propertyName);
+                final String type = annotationHandler
                         .getImportStorageType(propertyDesc);
-                if (isTransfer(type, storage)) {
+                if (isTransferTarget(storage, type)) {
                     if (propertyDesc.hasWriteMethod()) {
                         propertyDesc.setValue(target, storage
-                                .getProperty(prop_name));
+                                .getProperty(propertyName));
                     }
                 }
             }
         }
-    }
-
-    private final boolean isTransfer(String type, Storage storage) {
-        return (type != null && storage.getName().equalsIgnoreCase(type));
     }
 }

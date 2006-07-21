@@ -20,22 +20,25 @@ import javax.servlet.http.HttpSession;
 
 public class HttpSessionUtil {
 
-    public static String getSessionId( HttpServletRequest request, boolean create ){    
+    public static final String getSessionId(final HttpServletRequest request,
+            final boolean isNewSessionCreate) {
+        final String sessionId;
 
-        if( request.isRequestedSessionIdValid()){
-            return request.getRequestedSessionId();
+        if (request.isRequestedSessionIdValid()) {
+            sessionId = request.getRequestedSessionId();
         } else {
-            HttpSession session = request.getSession(create);
-            if( session == null ){
-                return null;
+            final HttpSession session = request.getSession(isNewSessionCreate);
+            if (session != null) {
+                sessionId = session.getId();
             } else {
-                return session.getId();
+                sessionId = null;
             }
         }
+
+        return sessionId;
     }
 
-    public static String newSessionId(HttpServletRequest request) {
-        HttpSession session = request.getSession(true);
-        return session.getId();
+    public static final String newSessionId(final HttpServletRequest request) {
+        return request.getSession(true).getId();
     }
 }
