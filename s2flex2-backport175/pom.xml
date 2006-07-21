@@ -76,7 +76,7 @@
             <configuration>
               <verbose>true</verbose>
               <properties>
-              	<property>annotations.properties</property>
+              	<property>src/main/resources/annotations.properties</property>
               </properties>
             </configuration>
           </execution>
