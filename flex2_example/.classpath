@@ -10,6 +10,6 @@
 	<classpathentry sourcepath="/s2flex2" kind="lib" path="WEB-INF/lib/s2-flex2-B7.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/s2-framework-2.4.0-beta-4-SNAPSHOT.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/s2-flex2-backport175-B3.jar"/>
-	<classpathentry kind="lib" path="WEB-INF/lib/s2-flex2-service-browser-A1.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/s2-flex2-service-browser-A2.jar"/>
 	<classpathentry kind="output" path="WEB-INF/classes"/>
 </classpath>
