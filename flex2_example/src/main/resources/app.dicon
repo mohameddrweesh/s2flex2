@@ -22,16 +22,6 @@
         </initMethod>
     </component>
 
-	<component
-      class="org.seasar.framework.container.autoregister.JarComponentAutoRegister">
-		<property name="instanceDef">@org.seasar.framework.container.deployer.InstanceDefFactory@SESSION</property>
-	    <property name="jarFileNames">"s2-flex2-service-browser-A1"</property>
-	    <initMethod name="addClassPattern">
-	        <arg>"org.seasar2.flex2.rpc.remoting.service.browser"</arg>
-	        <arg>".*ServiceImpl"</arg>
-	    </initMethod>
-    </component>
-
     <!--
 	<component
 	  class="org.seasar.framework.container.autoregister.AspectAutoRegister">
@@ -51,10 +41,6 @@
 	        <arg>"examples.flex2"</arg>
 	        <arg>".*ServiceImpl"</arg>
 	    </initMethod>
-	    <initMethod name="addClassPattern">
-	        <arg>"org.seasar2.flex2.rpc.remoting.service.browser"</arg>
-	        <arg>".*ServiceImpl"</arg>
-	    </initMethod>
 	</component>
 	
     <component
@@ -66,10 +52,5 @@
 	        <arg>"examples.flex2"</arg>
 	        <arg>".*ServiceImpl"</arg>
 	    </initMethod>
-	    <initMethod name="addClassPattern">
-	        <arg>"org.seasar2.flex2.rpc.remoting.service.browser"</arg>
-	        <arg>".*ServiceImpl"</arg>
-	    </initMethod>
 	</component>
-	
 </components>

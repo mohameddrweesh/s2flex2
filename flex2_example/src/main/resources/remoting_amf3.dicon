@@ -64,10 +64,25 @@
 		instance="session" />
 		
 	<!--
-		remoting service 
+		remoting service browse service 
 	-->
-	<component class="org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceRepositoryImpl" />
-	<component class="org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceLocatorImpl" />
+	<component
+		name="browserService"
+        class="org.seasar2.flex2.rpc.remoting.service.browser.service.impl.BrowserServiceImpl">
+        <meta name="RemotingService"/>
+    </component>
+	<!--
+		remoting service
+	-->
+	<component
+	    class="org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceRepositoryImpl">
+		<initMethod name="addService">
+			<arg>"browserService"</arg>
+			<arg>container.getComponentDef("browserService")</arg>
+		</initMethod>
+	</component>
+	<component
+		class="org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceLocatorImpl" />
 	<component
 		class="org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceInvokerChooserImpl">
 		<initMethod name="addInvoker">
