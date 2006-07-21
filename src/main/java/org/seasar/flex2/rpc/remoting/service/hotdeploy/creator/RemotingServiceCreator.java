@@ -16,15 +16,15 @@
 package org.seasar.flex2.rpc.remoting.service.hotdeploy.creator;
 
 import org.seasar.framework.container.deployer.InstanceDefFactory;
-import org.seasar.framework.container.hotdeploy.creator.MultiPackageCreator;
+import org.seasar.framework.container.hotdeploy.creator.MultiPackageOndemandCreator;
 import org.seasar.framework.convention.NamingConvention;
 
-public class RemotingServiceCreator extends MultiPackageCreator {
+public class RemotingServiceCreator extends MultiPackageOndemandCreator {
 
     public RemotingServiceCreator(NamingConvention namingConvention) {
         super(namingConvention);
         addMiddlePackageName("service");
         setNameSuffix("Service");
-        setInstanceDef(InstanceDefFactory.REQUEST);
+        setInstanceDef(InstanceDefFactory.SESSION);
     }
 }
