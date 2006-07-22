@@ -24,10 +24,10 @@
 				var typeB:TypeBDto = new TypeBDto();
 				var typeC:TypeCDto = new TypeCDto();
 				typeA.age=100;
-				typeA.firstName="Jun";
-				typeA.lastName="ふなくら";
+				typeA.firstName="michell";
+				typeA.lastName="dommy";
 				
-				typeB.dept="儀術";
+				typeB.dept="tech";
 				typeB.deptCd="1";
 				typeB.type=3;
 				paramCheckService.getTypeCDto(6,typeA,typeB);	
