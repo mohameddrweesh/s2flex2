@@ -9,10 +9,10 @@ import examples.flex2.param.dto.TypeCDto;
 public class ParamCheckServiceImpl {
 	public TypeCDto getTypeCDto(int index,TypeADto aDto,TypeBDto b){
 		TypeCDto typeCDto = new TypeCDto();
-		aDto.setAge(33);
+		aDto.setAge(20);
 		Calendar cal = Calendar.getInstance();
-		cal.set(Calendar.YEAR,1973);
-		cal.set(Calendar.MONTH,3);
+		cal.set(Calendar.YEAR,1983);
+		cal.set(Calendar.MONTH,10);
 		cal.set(Calendar.DATE,1);
 		cal.getTime();
 		aDto.setBirthDay(cal.getTime());
