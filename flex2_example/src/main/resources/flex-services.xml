@@ -26,6 +26,15 @@
 					<channel ref="s2-amf"/>
 				</channels>
 			</destination>
+			<destination id="addFacade">
+				<properties>
+					<source>addFacade</source>
+					<service-name>addFacade</service-name>
+				</properties>
+				<channels>
+					<channel ref="s2-amf"/>
+				</channels>
+			</destination>
 			<destination id="exceptionService">
 				<properties>
 					<source>exceptionService</source>
@@ -86,7 +95,7 @@
     	s2flex2 gateway
     	-->
         <channel-definition id="s2-amf" class="mx.messaging.channels.AMFChannel">
-            <endpoint uri="http://localhost/flex2_example/gateway"  class="flex.messaging.endpoints.AMFEndpoint"/>
+            <endpoint uri="http://localhost:8080/flex2_example/gateway"  class="flex.messaging.endpoints.AMFEndpoint"/>
             <properties>
                 <polling-enabled>false</polling-enabled>
             </properties>

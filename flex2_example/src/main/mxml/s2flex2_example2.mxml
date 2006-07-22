@@ -3,7 +3,7 @@
 <mx:Script source="s2flex2_example2_script.as" />
 <s2:S2Flex2Service id="amf" destination="addService" 
 	result="onResult(event)" fault="onFault(event)" showBusyCursor="true" />
-<s2:S2Flex2Service id="amf2" destination="addService" 
+<s2:S2Flex2Service id="amf2" destination="addFacade" 
 	result="onResultData(event)" fault="onFaultData(event)" showBusyCursor="true" />	
 	<mx:Label x="122" y="48" text="+" height="20"/>
 	<mx:Label x="215" y="48" text="=" height="20"/>
