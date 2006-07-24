@@ -37,7 +37,6 @@ package org.seasar2.flex2.ui
         }
         
         public function save():void{
-            trace("ou");
             if( isTyping ){
                 saveToHistory(input.text);
                 isTyping = false;
