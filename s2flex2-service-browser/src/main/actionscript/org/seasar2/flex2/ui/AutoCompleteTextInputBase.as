@@ -17,6 +17,7 @@ package org.seasar2.flex2.ui
     import mx.events.FlexEvent;
     import flash.events.MouseEvent;
     import mx.events.DropdownEvent;
+    import flash.system.IMEConversionMode;
     
     public class AutoCompleteTextInputBase extends Canvas {
         
@@ -51,6 +52,10 @@ package org.seasar2.flex2.ui
         [Inspectable(defaultValue="")]
         public function get text():String{
             return this.input.text;
+        }
+        
+        public function set text( text:String):void{
+            this.text_ = text;
         }
         
         private function initHistory():void{
@@ -89,15 +94,11 @@ package org.seasar2.flex2.ui
         private function recoveryToTextInput( text:String ):void {
             input.text = text;
         }
-
-        public function set text( text:String):void{
-            this.text_ = text;
-        }
         
         private function flushSharedObject():void{
             var flushStatus:String = null;
             try {
-                flushStatus = historySo.flush(10000);
+                flushStatus = historySo.flush(1000);
             } catch (error:Error) {
                 trace("Error...Could not write SharedObject to disk");
             }
@@ -136,8 +137,9 @@ package org.seasar2.flex2.ui
         }
         
         protected override function commitProperties():void{
-            input.text = this.text_;
             history.dataProvider = historyArray;
+            input.text = this.text_;
+            input.imeMode = IMEConversionMode.ALPHANUMERIC_HALF;
         }    
     }
 }
