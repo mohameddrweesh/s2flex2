@@ -17,11 +17,14 @@ package org.seasar2.flex2.rpc.remoting.service.browser.service.impl;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
 import org.seasar.flex2.rpc.remoting.service.RemotingServiceRepository;
+import org.seasar.framework.beans.BeanDesc;
+import org.seasar.framework.beans.factory.BeanDescFactory;
 import org.seasar.framework.container.ComponentDef;
 import org.seasar2.flex2.rpc.remoting.service.browser.ServiceDetail;
 import org.seasar2.flex2.rpc.remoting.service.browser.ServiceMethodDetail;
@@ -29,10 +32,12 @@ import org.seasar2.flex2.rpc.remoting.service.browser.service.BrowserService;
 
 public class BrowserServiceImpl implements BrowserService {
 
+    private static final String ARGUMENTS_DELIMITER = " ";
+
     private static final String BROWSE_SERVICE = "browserService";
 
     private static final String[] convertClassToString(final Class[] classes) {
-        String[] classNames = new String[classes.length];
+        final String[] classNames = new String[classes.length];
 
         for (int i = 0; i < classes.length; i++) {
             classNames[i] = classes[i].getName();
@@ -41,18 +46,50 @@ public class BrowserServiceImpl implements BrowserService {
         return classNames;
     }
 
+    private static final List createMethodArgumentDetails(
+            final String[] argumentTyes, final String[] paramNames) {
+        List arguments = null;
+        if (paramNames != null && paramNames.length == argumentTyes.length) {
+            arguments = new ArrayList();
+            for (int i = 0; i < argumentTyes.length; i++) {
+                arguments.add(formatArgumentDetail(argumentTyes[i], paramNames[i]));
+            }
+        } else {
+            arguments = Arrays.asList(argumentTyes);
+        }
+
+        return arguments;
+    }
+
+    /**
+     * @param type
+     * @param name
+     * @return
+     */
+    private static String formatArgumentDetail(String type, String name) {
+        return type + ARGUMENTS_DELIMITER
+                + name;
+    }
+
     private static final ServiceMethodDetail createMethodDetail(
-            final Method method) {
-        ServiceMethodDetail methodDetail = new ServiceMethodDetail();
+            final Method method, final String[] paramNames) {
+        final ServiceMethodDetail methodDetail = new ServiceMethodDetail();
         methodDetail.setName(method.getName());
-        methodDetail.setArguments(convertClassToString(method.getParameterTypes()));
+
+        final String[] argumentTyes = convertClassToString(method
+                .getParameterTypes());
+
+        if (argumentTyes.length > 0) {
+            methodDetail.setArguments(createMethodArgumentDetails(argumentTyes,
+                    paramNames));
+        }
         methodDetail.setReturnType(method.getReturnType().getName());
 
         return methodDetail;
     }
 
     private static final List createMethodDetails(final Class[] interfaces) {
-        ArrayList list = new ArrayList();
+        final ArrayList list = new ArrayList();
 
         for (int i = 0; i < interfaces.length; i++) {
             createMethodDetailsBy(interfaces[i], list);
@@ -61,16 +98,19 @@ public class BrowserServiceImpl implements BrowserService {
         return list;
     }
 
-    private static final void createMethodDetailsBy(Class interfaceClass,
-            ArrayList list) {
-        Method[] methods = interfaceClass.getDeclaredMethods();
+    private static final void createMethodDetailsBy(final Class interfaceClass,
+            final ArrayList list) {
+        final BeanDesc deanDesc = BeanDescFactory.getBeanDesc(interfaceClass);
+        final Method[] methods = interfaceClass.getDeclaredMethods();
+
         for (int j = 0; j < methods.length; j++) {
-            list.add(createMethodDetail(methods[j]));
+            list.add(createMethodDetail(methods[j], deanDesc
+                    .getMethodParameterNames(methods[j])));
         }
     }
 
     private static final void createServiceClassDetail(final Class clazz,
-            ServiceDetail detail) {
+            final ServiceDetail detail) {
         detail.setClassName(clazz.getName());
         detail.setInterfaces(convertClassToString(clazz.getInterfaces()));
         detail.setMethodDetails(createMethodDetails(clazz.getInterfaces()));
@@ -78,9 +118,9 @@ public class BrowserServiceImpl implements BrowserService {
 
     private static final ServiceDetail createServiceDetail(final String name,
             final ComponentDef def) {
-        ServiceDetail detail = new ServiceDetail();
-        detail.setName(name);
+        final ServiceDetail detail = new ServiceDetail();
 
+        detail.setName(name);
         createServiceClassDetail(def.getComponentClass(), detail);
 
         return detail;
@@ -110,7 +150,8 @@ public class BrowserServiceImpl implements BrowserService {
         this.repository = repository;
     }
 
-    private final void createServiceNames(Set serviceNames, String[] serviceNameArray) {
+    private final void createServiceNames(Set serviceNames,
+            String[] serviceNameArray) {
         int i = 0;
         for (Iterator serviceNameIter = serviceNames.iterator(); serviceNameIter
                 .hasNext();) {

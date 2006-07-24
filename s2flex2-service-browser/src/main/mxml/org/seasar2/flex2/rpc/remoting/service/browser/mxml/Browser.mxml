@@ -14,17 +14,17 @@
     <mx:Canvas x="190" y="56" width="561" height="364" verticalScrollPolicy="off" horizontalScrollPolicy="off">
         <mx:VRule x="144" y="-5" height="360"/>
         <mx:Label x="58" y="10" text="Service Name"/>
-        <mx:Label x="154" y="10" width="367" id="serviceNameLabel"/>
+        <mx:Label x="154" y="10" width="367" id="serviceNameLabel" selectable="true"/>
         <mx:HRule x="0" y="41" width="580"/>
         <mx:Label x="62" y="51" text="Service class"/>
-        <mx:Label x="154" y="51" width="397" id="classNameLabel"/>
+        <mx:Label x="154" y="51" width="397" id="classNameLabel" selectable="true"/>
         <mx:Label x="34" y="77" text="Service interfaces"/>
-        <mx:List x="154" y="77" height="72" width="397" id="interfacesList" showDataTips="true"></mx:List>
+        <mx:List x="154" y="77" height="72" width="397" id="interfacesList" showDataTips="true" editable="true"></mx:List>
         <mx:HRule x="0" y="157" width="580"/>
         <mx:Label x="47" y="167" text="Service Method"/>
-        <mx:DataGrid x="154" y="166" width="397" height="172" id="methodsGrid" showDataTips="true">
+        <mx:DataGrid x="154" y="166" width="397" height="172" id="methodsGrid" showDataTips="true" editable="true">
             <mx:columns>
-                <mx:DataGridColumn headerText="name" dataField="name"/>
+                <mx:DataGridColumn headerText="name" dataField="name" />
                 <mx:DataGridColumn headerText="arguments" dataField="arguments"/>
                 <mx:DataGridColumn headerText="return" dataField="returnType"/>
             </mx:columns>

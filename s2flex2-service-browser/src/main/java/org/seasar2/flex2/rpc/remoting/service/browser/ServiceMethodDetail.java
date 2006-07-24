@@ -15,31 +15,33 @@
  */
 package org.seasar2.flex2.rpc.remoting.service.browser;
 
-public class ServiceMethodDetail {
-    private String name;
+import java.util.List;
 
-    private String[] arguments;
+public class ServiceMethodDetail {
+    private List arguments;
+
+    private String name;
 
     private String returnType;
 
-    public String[] getArguments() {
+    public List getArguments() {
         return arguments;
-    }
-
-    public void setArguments(String[] arguments) {
-        this.arguments = arguments;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getReturnType() {
         return returnType;
+    }
+    
+    public void setArguments(List arguments) {
+        this.arguments = arguments;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setReturnType(String returnType) {
