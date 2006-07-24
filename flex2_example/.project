@@ -30,6 +30,11 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
+		<buildCommand>
+			<name>org.seasar.diigu.eclipse.diiguBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.codehaus.backport175.ide.eclipse.core.project.BpProjectNature</nature>
@@ -38,6 +43,7 @@
 		<nature>com.adobe.flexbuilder.project.flexnature</nature>
 		<nature>com.adobe.flexbuilder.project.actionscriptnature</nature>
 		<nature>org.seasar.kijimuna.core.nature</nature>
+		<nature>org.seasar.diigu.eclipse.diiguNature</nature>
 	</natures>
 	<linkedResources>
 		<link>
