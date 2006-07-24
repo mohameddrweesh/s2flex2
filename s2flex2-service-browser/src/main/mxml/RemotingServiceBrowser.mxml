@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <service_browser:BrowserApplication
     xmlns:mx="http://www.adobe.com/2006/mxml"
+    xmlns:service_browser="org.seasar2.flex2.rpc.remoting.service.browser.application.*"
     xmlns:service_browser_view="org.seasar2.flex2.rpc.remoting.service.browser.mxml.*"
-    xmlns:service_browser="org.seasar2.flex2.rpc.remoting.service.browser.ui.*"
+    xmlns:s2flex2_ui="org.seasar2.flex2.ui.mxml.*"
     layout="absolute"
     backgroundColor="#FFFFFF"
 >
-
-    <mx:TextInput x="109" y="22" width="456" id="gatewayUri" text="http://"/>
+    <s2flex2_ui:AutoCompleteTextInput x="110" y="22" width="461" id="gatewayUri" text="http://"  height="24"/>
+       
     <mx:Label x="29" y="24" text="gateway uri" fontWeight="bold"/>
     <mx:Button x="573" y="22" label="browse" id="browseBtn"/>
+    <mx:Button x="732" y="22" label="clear history" id="clearHistory"/>
 
-    <mx:Panel x="29" y="66" width="800" height="494.42" layout="absolute" title="Service Browser" verticalScrollPolicy="off" horizontalScrollPolicy="off" enabled="false" id="browserPanel">
+    <mx:Panel x="29" y="67" width="800" height="494.42" layout="absolute" title="Service Browser" verticalScrollPolicy="off" horizontalScrollPolicy="off" enabled="false" id="browserPanel">
         <service_browser_view:Browser id="browser"/>
     </mx:Panel>
 </service_browser:BrowserApplication>
