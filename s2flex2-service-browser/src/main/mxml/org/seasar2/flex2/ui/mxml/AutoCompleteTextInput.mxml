@@ -3,5 +3,5 @@
     xmlns:mx="http://www.adobe.com/2006/mxml"
     xmlns:s2flex2_ui="org.seasar2.flex2.ui.*" width="400" height="20" autoLayout="true">
     <mx:ComboBox id="history" left="1" right="1" top="1" bottom="1" />
-    <mx:TextInput id="input" left="1" right="21" top="1" bottom="1"/>
+    <mx:TextInput id="input" left="1" right="21" top="1" bottom="1" />
 </s2flex2_ui:AutoCompleteTextInputBase>
