@@ -54,13 +54,6 @@ package org.seasar2.flex2.ui
             return this.input.text;
         }
         
-        protected override function initializationComplete():void{
-            super.initializationComplete();
-            initHistory();
-            initEventHandler();
-            initProperties();
-        }
-        
         private function initHistory():void{
             historySo = SharedObject.getLocal("input_history_of_" + this.id, null, false);
             if( historySo.data["history"] == null ){
@@ -73,11 +66,6 @@ package org.seasar2.flex2.ui
         private function initEventHandler():void{
             input.addEventListener(TextEvent.TEXT_INPUT,textInputHandler);
             history.addEventListener(Event.CHANGE,hitoryChangeHandler);
-        }
-
-        private function initProperties():void{
-            input.text = this.text_;
-            history.dataProvider = historyArray;
         }
         
         private function textInputHandler( event:TextEvent ):void{
@@ -140,5 +128,17 @@ package org.seasar2.flex2.ui
 
             historySo.removeEventListener(NetStatusEvent.NET_STATUS, flushStatusHandler);
         }
+        
+        
+        protected override function initializationComplete():void{
+            super.initializationComplete();
+            initHistory();
+            initEventHandler();
+        }
+        
+        protected override function commitProperties():void{
+            input.text = this.text_;
+            history.dataProvider = historyArray;
+        }    
     }
 }
