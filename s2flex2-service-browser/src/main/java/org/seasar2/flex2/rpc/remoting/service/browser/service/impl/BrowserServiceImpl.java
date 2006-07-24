@@ -52,7 +52,8 @@ public class BrowserServiceImpl implements BrowserService {
         if (paramNames != null && paramNames.length == argumentTyes.length) {
             arguments = new ArrayList();
             for (int i = 0; i < argumentTyes.length; i++) {
-                arguments.add(formatArgumentDetail(argumentTyes[i], paramNames[i]));
+                arguments.add(formatArgumentDetail(argumentTyes[i],
+                        paramNames[i]));
             }
         } else {
             arguments = Arrays.asList(argumentTyes);
@@ -61,14 +62,8 @@ public class BrowserServiceImpl implements BrowserService {
         return arguments;
     }
 
-    /**
-     * @param type
-     * @param name
-     * @return
-     */
     private static String formatArgumentDetail(String type, String name) {
-        return type + ARGUMENTS_DELIMITER
-                + name;
+        return type + ARGUMENTS_DELIMITER + name;
     }
 
     private static final ServiceMethodDetail createMethodDetail(
