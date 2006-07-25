@@ -28,9 +28,9 @@ import org.w3c.dom.Document;
 
 public class Amf3XmlReaderImpl extends AbstractAmf3UTF8StringReaderImpl {
 
-    private static final String DEFAULT_TAG_PREFIX = "<xml>";
+    private static final String DEFAULT_TAG_PREFIX = "<root>";
 
-    private static final String DEFAULT_TAG_SUFFIX = "</xml>";
+    private static final String DEFAULT_TAG_SUFFIX = "</root>";
 
     private static final Document getXmlDocument(final String xml) {
         final DocumentBuilder builder = DocumentBuilderFactoryUtil
