@@ -18,8 +18,7 @@ package org.seasar2.flex2.ui
         
         public var history:ComboBox;
         
-        [Inspectable(defaultValue="")]
-        public var text:String;
+        private var text_:String;
         
         private var historyArray:ArrayCollection;
         
@@ -91,7 +90,19 @@ package org.seasar2.flex2.ui
         
         protected override function commitProperties():void{
             history.dataProvider = historyArray;
-            input.text = this.text;
-        }    
+            input.text = this.text_;
+        }
+        
+        [Inspectable(defaultValue="")]
+        public function set text( text:String ):void{
+            this.text_ = text;
+            if( input != null){
+                input.text = text;
+            }
+        }
+        
+        public function get text():String{
+            return input.text;
+        }
     }
 }

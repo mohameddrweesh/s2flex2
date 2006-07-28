@@ -85,8 +85,9 @@ package org.seasar2.flex2.rpc.remoting.service.browser.ui {
         }
         
         private function refreshServiceName():void{
-            service.addEventListener(ResultEvent.RESULT,processRefreshServiceName);
-            service.getServiceNames();
+            var service_:RemoteService = service;
+            service_.addEventListener(ResultEvent.RESULT,processRefreshServiceName);
+            service_.getServiceNames();
         }
         
         private function processRefreshServiceName( e:ResultEvent ):void{
