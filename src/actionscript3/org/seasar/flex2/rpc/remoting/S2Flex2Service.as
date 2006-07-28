@@ -43,7 +43,7 @@
 	[Event(name="ioError", type="flash.events.IOErrorEvent")]
 	[Event(name="netStatus",type="flash.events.NetStatusEvent")]
 	[Event(name="securityError",type="flash.events.SecurityErrorEvent")]
-	
+	[IconFile("S2Component.png")]
 	public dynamic class S2Flex2Service extends AbstractService implements IMXMLObject
 	{
 		/** @private
@@ -68,6 +68,8 @@
 		public function S2Flex2Service(){
 			super(null);
 		}
+		
+		[Inspectable(type="String")]
 		public var id:String;
 		
 		private var document:Object;
@@ -112,7 +114,7 @@
 			}else{
 				_con.call(callMethod,responder);
 			}			
-	  }
+	  	}
 		
 	    public function onResult(result:*):void{
 			if (this.showBusyCursor)
@@ -162,7 +164,7 @@
 			{
 				CursorManager.removeBusyCursor();
 			}
-		dispatchEvent(event);
-      } 
+			dispatchEvent(event);
+      	} 
 	}
 }
