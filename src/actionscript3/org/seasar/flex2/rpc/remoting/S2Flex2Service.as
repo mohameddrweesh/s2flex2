@@ -40,18 +40,16 @@
 
 	use namespace flash_proxy;
 
+	/** @private*/
+	[Event(name="fault", type="mx.rpc.events.FaultEvent")]	
+	/** @private*/
+	[Event(name="result", type="mx.rpc.events.ResultEvent")]
 	[Event(name="ioError", type="flash.events.IOErrorEvent")]
 	[Event(name="netStatus",type="flash.events.NetStatusEvent")]
 	[Event(name="securityError",type="flash.events.SecurityErrorEvent")]
 	[IconFile("S2Component.png")]
 	public dynamic class S2Flex2Service extends AbstractService implements IMXMLObject
 	{
-		/** @private
-		*/
-		[Event(name="fault", type="mx.rpc.events.FaultEvent")]
-		/** @private
-		*/
-		[Event(name="result", type="mx.rpc.events.ResultEvent")]
 		
     	protected var _con:org.seasar.flex2.net.NetConnection;
 	    
