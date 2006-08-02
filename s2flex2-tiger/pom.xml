@@ -89,7 +89,7 @@
     <dependency>
       <groupId>org.seasar.container</groupId>
       <artifactId>s2-extension</artifactId>
-      <version>2.3.6</version>
+      <version>2.4.0-beta-4</version>
       <type>jar</type>
     </dependency>
     <dependency>
@@ -111,7 +111,7 @@
       <uniqueVersion>false</uniqueVersion>
       <id>maven.seasar.org</id>
       <name>The Seasar Foundation Maven2 Repository</name>
-     <url>scp://www.seasar.org/home/groups/sandbox/s2flex2/maven/maven2</url>
+     <url>scp://maven.seasar.org/home/groups/maven/public_html/maven2</url>
     </repository>
   </distributionManagement>
 </project>
