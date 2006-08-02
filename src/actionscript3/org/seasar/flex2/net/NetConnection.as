@@ -34,7 +34,7 @@
 				connect(this._originalUrl + append);
 			}
 			
-			public function AddHeader(operation:String,mustUnderstand:Boolean=false,param:Object=null):void{
+			public override function addHeader(operation:String,mustUnderstand:Boolean=false,param:Object=null):void{
 				super.addHeader(operation,mustUnderstand,param);
 			}
 			
