@@ -27,9 +27,8 @@ public class RemotingServiceCustomizer implements ComponentCustomizer {
     private RemotingServiceRepository repository;
 
     public void customize(ComponentDef componentDef) {
-        final String serviceName = componentDef.getComponentName();
-        if (locator.isSupportService(serviceName)) {
-            repository.addService(serviceName, componentDef);
+        if (locator.isSupportService(componentDef)) {
+            repository.addService(componentDef.getComponentName(), componentDef);
         }
     }
 

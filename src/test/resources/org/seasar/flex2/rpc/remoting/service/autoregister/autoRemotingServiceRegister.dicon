@@ -3,9 +3,15 @@
 	"http://www.seasar.org/dtd/components21.dtd">
 <components namespace="child" >
 	<include path="remoting_amf3.dicon"/>
+
 	<component
 	  class="org.seasar.framework.convention.impl.NamingConventionImpl"/>
-	
+
+	<component
+		name="remotingServiceCustomizer"
+		class="org.seasar.flex2.rpc.remoting.service.autoregister.RemotingServiceCustomizer">
+	</component>
+		
 	<component
 	  class="org.seasar.framework.container.autoregister.FileSystemComponentAutoRegister">
 		<initMethod name="addClassPattern">
