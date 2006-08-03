@@ -1,4 +1,4 @@
-package examples.flex2.performance;
+package examples.flex2.performance.service;
 
 import java.util.ArrayList;
 

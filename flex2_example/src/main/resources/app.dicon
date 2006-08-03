@@ -2,59 +2,8 @@
 <!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.3//EN" 
 	"http://www.seasar.org/dtd/components23.dtd">
 <components>
-	<include path="remoting_amf3.dicon"/>
+	<include path="convention.dicon"/>
+	<include path="aop.dicon"/>
 	
-	<component class="org.seasar.framework.convention.impl.NamingConventionImpl"/>
-	
-	<component name="snapshotServiceConfig" class="examples.flex2.camera.config.SnapshotServiceConfig">
-        <property name="rootPath">application.getRealPath(".") + "\\snapshot\\"</property>
-        <property name="rootUri">"http://localhost:8080/flex2_example/snapshot/"</property>
-        <property name="prefix">"snapshot_"</property>
-        <property name="suffix">".png"</property>
-    </component>
-
-	<component
-      class="org.seasar.framework.container.autoregister.FileSystemComponentAutoRegister">
-		<property name="instanceDef">@org.seasar.framework.container.deployer.InstanceDefFactory@SESSION</property>
-		<initMethod name="addClassPattern">
-            <arg>"examples.flex2"</arg>
-            <arg>".*Impl"</arg>
-        </initMethod>
-    </component>
-
-    <!--
-	<component
-	  class="org.seasar.framework.container.autoregister.AspectAutoRegister">
-	  	<property name="interceptor">aop.traceThrowsInterceptor</property>
-	    <initMethod name="addClassPattern">
-	        <arg>"examples.flex2"</arg>
-	        <arg>".*ServiceImpl"</arg>
-	    </initMethod>
-	</component>
-	-->
-    <component
-	  class="org.seasar.framework.container.autoregister.MetaAutoRegister">
-	    <meta name="autoRegister">
-	        <meta name="RemotingService"/>
-	    </meta>
-	    <initMethod name="addClassPattern">
-	        <arg>"examples.flex2"</arg>
-	        <arg>".*ServiceImpl"</arg>
-	    </initMethod>
-	    <initMethod name="addClassPattern">
-	        <arg>"examples.flex2"</arg>
-	        <arg>".*FacadeImpl"</arg>
-	    </initMethod>
-	</component>
-	<component
-	  class="org.seasar.flex2.rpc.remoting.service.autoregister.FileSystemRemotingServiceAutoRegister">
-	    <initMethod name="addClassPattern">
-	        <arg>"examples.flex2"</arg>
-	        <arg>".*ServiceImpl"</arg>
-	    </initMethod>
-	    <initMethod name="addClassPattern">
-	        <arg>"examples.flex2"</arg>
-	        <arg>".*FacadeImpl"</arg>
-	    </initMethod>
-	</component>
+	<include condition="#ENV != 'ut'" path="flex2_example-cooldeploy.dicon"/>
 </components>

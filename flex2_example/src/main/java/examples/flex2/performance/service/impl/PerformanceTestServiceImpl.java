@@ -1,10 +1,10 @@
-package examples.flex2.performance.impl;
+package examples.flex2.performance.service.impl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import examples.flex2.performance.PerformanceTestService;
+import examples.flex2.performance.service.PerformanceTestService;
 
 public class PerformanceTestServiceImpl implements PerformanceTestService {
 
