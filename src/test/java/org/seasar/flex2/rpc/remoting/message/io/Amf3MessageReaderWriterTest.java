@@ -207,12 +207,12 @@ public class Amf3MessageReaderWriterTest extends S2TestCase {
         BigDecimal iii = new BigDecimal("1234567890123456789");
         value.setIii(iii);
 
-        TestExternalizeObject externalizableObject = new TestExternalizeObject();
-        externalizableObject.setMyBean(value);
+        TestExternalizeObject externalObject = new TestExternalizeObject();
+        externalObject.setMyBean(value);
 
-        TestExternalizeObject externalizeObject2 = (TestExternalizeObject) convertData(externalizableObject);
+        TestExternalizeObject externalObject2 = (TestExternalizeObject) convertData(externalObject);
 
-        MyBean value2 = externalizeObject2.getMyBean();
+        MyBean value2 = externalObject2.getMyBean();
         assertEquals("1", -1, value2.getAaa());
         assertEquals("2", 0xFFFFFFF, value2.getBbb());
         assertEquals("3", -0xFFFFFFF, value2.getCcc(), 0);

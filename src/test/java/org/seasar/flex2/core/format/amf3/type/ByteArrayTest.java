@@ -99,7 +99,7 @@ public class ByteArrayTest extends S2TestCase {
         assertEquals("4", 99999.99999, bytearray.readDouble(), 0.0);
     }
 
-    public void testReadWrite1() throws IOException {
+    public void testReadWrite1() throws IOException, ClassNotFoundException {
         ByteArray bytearray = createByteArrayOf(null);
 
         Date nowDate = new Date();
@@ -127,7 +127,7 @@ public class ByteArrayTest extends S2TestCase {
         assertTrue("7", nowDate.equals(bytearray.readObject()));
     }
     
-    public void testReadWrite2() throws IOException {
+    public void testReadWrite2() throws IOException, ClassNotFoundException {
         ByteArray bytearray = createByteArrayOf(null);
 
         Date nowDate = new Date();
@@ -158,7 +158,7 @@ public class ByteArrayTest extends S2TestCase {
         
     }
 
-    public void testCompress() throws IOException {
+    public void testCompress() throws IOException, ClassNotFoundException {
         ByteArray bytearray = createByteArrayOf(null);
 
         Date nowDate = new Date();

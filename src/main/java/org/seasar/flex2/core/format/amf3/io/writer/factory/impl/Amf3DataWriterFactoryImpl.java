@@ -15,6 +15,7 @@
  */
 package org.seasar.flex2.core.format.amf3.io.writer.factory.impl;
 
+import java.io.Externalizable;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
@@ -24,7 +25,6 @@ import java.util.Map;
 import org.seasar.flex2.core.format.amf.io.writer.AmfDataWriter;
 import org.seasar.flex2.core.format.amf.type.AmfTypeDef;
 import org.seasar.flex2.core.format.amf3.Amf3Constants;
-import org.seasar.flex2.core.format.amf3.io.Externalizable;
 import org.seasar.flex2.core.format.amf3.io.writer.Amf3DataWriter;
 import org.seasar.flex2.core.format.amf3.io.writer.factory.Amf3DataWriterFactory;
 import org.seasar.flex2.core.format.amf3.type.Amf3TypeDef;

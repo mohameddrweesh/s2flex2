@@ -33,9 +33,9 @@
 		amf3 special type factory components
 	-->
 	<component
-		class="org.seasar.flex2.core.format.amf3.io.factory.impl.ExternalizeDataInputFactoryImpl" />
+		class="org.seasar.flex2.core.format.amf3.io.factory.impl.ExternalObjectInputFactoryImpl" />
 	<component
-		class="org.seasar.flex2.core.format.amf3.io.factory.impl.ExternalizeDataOutputFactoryImpl" />
+		class="org.seasar.flex2.core.format.amf3.io.factory.impl.ExternalObjectOutputFactoryImpl" />
 	<component
 		class="org.seasar.flex2.core.format.amf3.type.factory.impl.ByteArrayFactoryImpl" />
 
@@ -265,7 +265,7 @@
 	    autoBinding="property" />
 	<component
 		name="amf3ExternalizableObjectWriterImpl"
-		class="org.seasar.flex2.core.format.amf3.io.writer.impl.Amf3ExternalizableObjectWriterImpl" 
+		class="org.seasar.flex2.core.format.amf3.io.writer.impl.Amf3ExternalObjectWriterImpl" 
 	    autoBinding="property" />
 	<component
 		name="amf3ByteArrayWriterImpl"
@@ -371,10 +371,10 @@
 		amf3 special type components
 	-->
 	<component
-		class="org.seasar.flex2.core.format.amf3.io.impl.ExternalizeDataInputImpl"
+		class="org.seasar.flex2.core.format.amf3.io.impl.ExternalObjectInputImpl"
 		instance="prototype" />
 	<component
-		class="org.seasar.flex2.core.format.amf3.io.impl.ExternalizeDataOutputImpl"
+		class="org.seasar.flex2.core.format.amf3.io.impl.ExternalObjectOutputImpl"
 		instance="prototype" />
 	<component 
 		class="org.seasar.flex2.core.format.amf3.type.impl.ByteArrayImpl"

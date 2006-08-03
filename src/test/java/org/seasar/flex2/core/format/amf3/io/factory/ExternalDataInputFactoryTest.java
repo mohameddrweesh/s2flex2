@@ -16,12 +16,11 @@
 package org.seasar.flex2.core.format.amf3.io.factory;
 
 import java.io.DataInputStream;
+import java.io.ObjectInput;
 
 import org.seasar.extension.unit.S2TestCase;
-import org.seasar.flex2.core.format.amf3.io.DataInput;
-import org.seasar.flex2.core.format.amf3.io.ExternalizeDataInput;
-import org.seasar.flex2.core.format.amf3.io.factory.ExternalizeDataInputFactory;
-import org.seasar.flex2.core.format.amf3.io.factory.impl.ExternalizeDataInputFactoryImpl;
+import org.seasar.flex2.core.format.amf3.io.ExternalObjectInput;
+import org.seasar.flex2.core.format.amf3.io.factory.impl.ExternalObjectInputFactoryImpl;
 import org.seasar.framework.container.S2Container;
 
 public class ExternalDataInputFactoryTest extends S2TestCase {
@@ -30,19 +29,22 @@ public class ExternalDataInputFactoryTest extends S2TestCase {
 
     public void testCreateReaderFactory() throws Exception {
         S2Container container = getContainer();
-        Object factory = container.getComponent(ExternalizeDataInputFactory.class);
+        Object factory = container
+                .getComponent(ExternalObjectInputFactory.class);
         assertNotNull("1", factory);
-        assertTrue("2", factory instanceof ExternalizeDataInputFactoryImpl);
+        assertTrue("2", factory instanceof ExternalObjectInputFactoryImpl);
     }
 
-    public void testCreateDataInput() throws Exception {
+    public void testCreateObejctInput() throws Exception {
         S2Container container = getContainer();
-        ExternalizeDataInputFactory factory = (ExternalizeDataInputFactory)container.getComponent(ExternalizeDataInputFactory.class);
-        DataInput input = factory.createDataIpput(new DataInputStream(System.in));
+        ExternalObjectInputFactory factory = (ExternalObjectInputFactory) container
+                .getComponent(ExternalObjectInputFactory.class);
+        ObjectInput input = factory.createObjectInput(new DataInputStream(
+                System.in));
         assertNotNull("1", input);
-        assertTrue("2", input instanceof ExternalizeDataInput);
+        assertTrue("2", input instanceof ExternalObjectInput);
     }
-    
+
     protected void setUp() throws Exception {
         include(PATH);
     }

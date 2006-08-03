@@ -15,21 +15,34 @@
  */
 package org.seasar.flex2.core.format.amf3.type;
 
-import org.seasar.flex2.core.format.amf3.io.DataInput;
-import org.seasar.flex2.core.format.amf3.io.DataOutput;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 
-
-
-public interface ByteArray extends DataInput, DataOutput {
+public interface ByteArray extends ObjectInput, ObjectOutput {
     void compress();
 
     void flush();
 
     byte[] getBufferBytes();
-    
+
     void initBuffer(byte[] bytes);
-    
+
+    void readBytes(byte[] bytes, int offset, int length) throws IOException;
+
+    String readMultiByte(int length, String charSet) throws IOException;
+
+    String readUTFBytes(int length) throws IOException;
+
     void reset();
-    
+
     void uncompress();
+    
+    void writeBytes(byte[] bytes, int offset, int length) throws IOException;
+    
+    void writeMultiByte(String value, String charSet) throws IOException;
+    
+    void writeUnsignedInt(int value) throws IOException;
+    
+    void writeUTFBytes(String value) throws IOException;
 }

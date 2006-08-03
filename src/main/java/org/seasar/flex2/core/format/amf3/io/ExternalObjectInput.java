@@ -15,9 +15,7 @@
  */
 package org.seasar.flex2.core.format.amf3.io;
 
-public interface Externalizable {
+import java.io.ObjectInput;
 
-    void readExternal(DataInput input);
-
-    void writeExternal(DataOutput output);
+public interface ExternalObjectInput extends ObjectInput {
 }
