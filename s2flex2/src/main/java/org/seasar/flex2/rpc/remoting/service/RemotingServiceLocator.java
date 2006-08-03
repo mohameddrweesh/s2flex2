@@ -15,9 +15,12 @@
  */
 package org.seasar.flex2.rpc.remoting.service;
 
+import org.seasar.framework.container.ComponentDef;
 
 public interface RemotingServiceLocator {
     Object getService(String serviceName);
+
+    boolean isSupportService(ComponentDef componentDef);
 
     boolean isSupportService(String serviceName);
 }
