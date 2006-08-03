@@ -10,6 +10,9 @@
 	-->
 	<include path="snap-shot-config.dicon"/>
 
+	<!--
+	cool deploy
+	-->
 	<component
 		class="examples.flex2.cooldeploy.creator.ResolverCoolCreator"/>	
 	<component
@@ -54,7 +57,7 @@
 	</component>
 
 	<!--
-	register in metatag
+	service register
 	-->
     <component
 	  class="org.seasar.framework.container.autoregister.MetaAutoRegister">
