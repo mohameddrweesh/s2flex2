@@ -1,10 +1,11 @@
 package org.seasar.flex2.rpc.remoting.message.io;
 
+import java.io.DataInput;
+import java.io.DataOutput;
+import java.io.Externalizable;
 import java.io.IOException;
-
-import org.seasar.flex2.core.format.amf3.io.DataInput;
-import org.seasar.flex2.core.format.amf3.io.DataOutput;
-import org.seasar.flex2.core.format.amf3.io.Externalizable;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 
 public class TestExternalizeObject implements Externalizable {
 
@@ -13,15 +14,17 @@ public class TestExternalizeObject implements Externalizable {
     public TestExternalizeObject() {
     }
 
-    public void readExternal(DataInput input) {
+    public void readExternal(ObjectInput input) {
         try {
             myBean = (MyBean) input.readObject();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void writeExternal(DataOutput output) {
+    public void writeExternal(ObjectOutput output) {
         try {
             output.writeObject(myBean);
         } catch (IOException e) {

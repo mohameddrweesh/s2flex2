@@ -15,10 +15,10 @@
  */
 package org.seasar.flex2.core.format.amf3.io.factory;
 
-import java.io.DataInputStream;
+import java.io.DataOutputStream;
 
-import org.seasar.flex2.core.format.amf3.io.ExternalizeDataInput;
+import org.seasar.flex2.core.format.amf3.io.ExternalObjectOutput;
 
-public interface ExternalizeDataInputFactory {
-    ExternalizeDataInput createDataIpput(DataInputStream inputStream);
+public interface ExternalObjectOutputFactory {
+    ExternalObjectOutput createObjectOutput(DataOutputStream outputStream);
 }

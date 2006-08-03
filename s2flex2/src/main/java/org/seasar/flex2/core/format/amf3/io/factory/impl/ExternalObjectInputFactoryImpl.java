@@ -17,18 +17,19 @@ package org.seasar.flex2.core.format.amf3.io.factory.impl;
 
 import java.io.DataInputStream;
 
-import org.seasar.flex2.core.format.amf3.io.ExternalizeDataInput;
-import org.seasar.flex2.core.format.amf3.io.factory.ExternalizeDataInputFactory;
+import org.seasar.flex2.core.format.amf3.io.ExternalObjectInput;
+import org.seasar.flex2.core.format.amf3.io.factory.ExternalObjectInputFactory;
+import org.seasar.flex2.core.format.amf3.io.impl.ExternalObjectInputImpl;
 import org.seasar.framework.container.S2Container;
 
-public class ExternalizeDataInputFactoryImpl implements
-        ExternalizeDataInputFactory {
+public class ExternalObjectInputFactoryImpl implements
+        ExternalObjectInputFactory {
 
     private S2Container container;
 
-    public ExternalizeDataInput createDataIpput(DataInputStream inputStream) {
-        final ExternalizeDataInput input = (ExternalizeDataInput) container
-                .getComponent(ExternalizeDataInput.class);
+    public ExternalObjectInput createObjectInput(DataInputStream inputStream) {
+        final ExternalObjectInputImpl input = (ExternalObjectInputImpl) container
+                .getComponent(ExternalObjectInput.class);
         input.setInputStream(inputStream);
         return input;
     }

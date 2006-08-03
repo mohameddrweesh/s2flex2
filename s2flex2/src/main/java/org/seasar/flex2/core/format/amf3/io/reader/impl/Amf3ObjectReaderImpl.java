@@ -16,17 +16,18 @@
 package org.seasar.flex2.core.format.amf3.io.reader.impl;
 
 import java.io.DataInputStream;
+import java.io.Externalizable;
 import java.io.IOException;
 
 import org.seasar.flex2.core.format.amf.io.reader.AmfDataReader;
 import org.seasar.flex2.core.format.amf.type.AmfObject;
 import org.seasar.flex2.core.format.amf3.Amf3Constants;
-import org.seasar.flex2.core.format.amf3.io.Externalizable;
-import org.seasar.flex2.core.format.amf3.io.ExternalizeDataInput;
-import org.seasar.flex2.core.format.amf3.io.factory.ExternalizeDataInputFactory;
+import org.seasar.flex2.core.format.amf3.io.ExternalObjectInput;
+import org.seasar.flex2.core.format.amf3.io.factory.ExternalObjectInputFactory;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
 import org.seasar.framework.beans.factory.BeanDescFactory;
+import org.seasar.framework.exception.ClassNotFoundRuntimeException;
 import org.seasar.framework.util.ClassUtil;
 
 public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
@@ -48,7 +49,7 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
         }
     }
 
-    private ExternalizeDataInputFactory externalizeDataInputFactory;
+    private ExternalObjectInputFactory externalizeDataInputFactory;
 
     private AmfDataReader stringReader;
 
@@ -57,7 +58,7 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
     }
 
     public void setExternalizeDataInputFactory(
-            ExternalizeDataInputFactory dataInputFactory) {
+            ExternalObjectInputFactory dataInputFactory) {
         this.externalizeDataInputFactory = dataInputFactory;
     }
 
@@ -141,15 +142,19 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
 
     private final Object readExternalizableObjectData(int objectDef,
             Class clazz, DataInputStream inputStream) throws IOException {
-        final Externalizable externalizable = (Externalizable) ClassUtil
+        final Externalizable externalObject = (Externalizable) ClassUtil
                 .newInstance(clazz);
-        addObjectReference(externalizable);
+        addObjectReference(externalObject);
 
-        final ExternalizeDataInput input = externalizeDataInputFactory
-                .createDataIpput(inputStream);
-        externalizable.readExternal(input);
+        final ExternalObjectInput input = externalizeDataInputFactory
+                .createObjectInput(inputStream);
+        try {
+            externalObject.readExternal(input);
+        } catch (ClassNotFoundException e) {
+            throw new ClassNotFoundRuntimeException(e);
+        }
 
-        return externalizable;
+        return externalObject;
     }
 
     private final Object readObjectData(final int objectDef,

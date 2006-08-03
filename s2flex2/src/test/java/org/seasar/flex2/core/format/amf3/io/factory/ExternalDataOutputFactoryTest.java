@@ -16,12 +16,11 @@
 package org.seasar.flex2.core.format.amf3.io.factory;
 
 import java.io.DataOutputStream;
+import java.io.ObjectOutput;
 
 import org.seasar.extension.unit.S2TestCase;
-import org.seasar.flex2.core.format.amf3.io.DataOutput;
-import org.seasar.flex2.core.format.amf3.io.ExternalizeDataOutput;
-import org.seasar.flex2.core.format.amf3.io.factory.ExternalizeDataOutputFactory;
-import org.seasar.flex2.core.format.amf3.io.factory.impl.ExternalizeDataOutputFactoryImpl;
+import org.seasar.flex2.core.format.amf3.io.ExternalObjectOutput;
+import org.seasar.flex2.core.format.amf3.io.factory.impl.ExternalObjectOutputFactoryImpl;
 import org.seasar.framework.container.S2Container;
 
 public class ExternalDataOutputFactoryTest extends S2TestCase {
@@ -30,19 +29,20 @@ public class ExternalDataOutputFactoryTest extends S2TestCase {
 
     public void testCreateReaderFactory() throws Exception {
         S2Container container = getContainer();
-        Object factory = container.getComponent(ExternalizeDataOutputFactory.class);
+        Object factory = container
+                .getComponent(ExternalObjectOutputFactory.class);
         assertNotNull("1", factory);
-        assertTrue("2", factory instanceof ExternalizeDataOutputFactoryImpl);
+        assertTrue("2", factory instanceof ExternalObjectOutputFactoryImpl);
     }
 
-    public void testCreateDataOutput() throws Exception {
+    public void testCreateObejctOutput() throws Exception {
         S2Container container = getContainer();
-        ExternalizeDataOutputFactory factory = (ExternalizeDataOutputFactory) container
-                .getComponent(ExternalizeDataOutputFactory.class);
-        DataOutput output = factory.createDataOutput(new DataOutputStream(
+        ExternalObjectOutputFactory factory = (ExternalObjectOutputFactory) container
+                .getComponent(ExternalObjectOutputFactory.class);
+        ObjectOutput output = factory.createObjectOutput(new DataOutputStream(
                 System.out));
         assertNotNull("1", output);
-        assertTrue("2", output instanceof ExternalizeDataOutput);
+        assertTrue("2", output instanceof ExternalObjectOutput);
     }
 
     protected void setUp() throws Exception {

@@ -16,21 +16,21 @@
 package org.seasar.flex2.core.format.amf3.io.writer.impl;
 
 import java.io.DataOutputStream;
+import java.io.Externalizable;
 import java.io.IOException;
 
 import org.seasar.flex2.core.format.amf3.Amf3Constants;
-import org.seasar.flex2.core.format.amf3.io.Externalizable;
-import org.seasar.flex2.core.format.amf3.io.ExternalizeDataOutput;
-import org.seasar.flex2.core.format.amf3.io.factory.ExternalizeDataOutputFactory;
+import org.seasar.flex2.core.format.amf3.io.ExternalObjectOutput;
+import org.seasar.flex2.core.format.amf3.io.factory.ExternalObjectOutputFactory;
 import org.seasar.framework.beans.BeanDesc;
 
-public class Amf3ExternalizableObjectWriterImpl extends
+public class Amf3ExternalObjectWriterImpl extends
         Amf3TypedClassObjectWriterImpl {
 
-    private ExternalizeDataOutputFactory externalizeDataOutputFactory;
+    private ExternalObjectOutputFactory externalizeDataOutputFactory;
 
     public void setExternalizeDataOutputFactory(
-            ExternalizeDataOutputFactory dataOutputFactory) {
+            ExternalObjectOutputFactory dataOutputFactory) {
         this.externalizeDataOutputFactory = dataOutputFactory;
     }
 
@@ -45,10 +45,10 @@ public class Amf3ExternalizableObjectWriterImpl extends
     protected final void writeClassObjectProperties(final Object value,
             final DataOutputStream outputStream) throws IOException {
         if (value instanceof Externalizable) {
-            final Externalizable externalizable = (Externalizable) value;
-            final ExternalizeDataOutput externalizeDataOutput = externalizeDataOutputFactory
-                    .createDataOutput(outputStream);
-            externalizable.writeExternal(externalizeDataOutput);
+            final Externalizable externalObject = (Externalizable) value;
+            final ExternalObjectOutput externalizeDataOutput = externalizeDataOutputFactory
+                    .createObjectOutput(outputStream);
+            externalObject.writeExternal(externalizeDataOutput);
         }
     }
 

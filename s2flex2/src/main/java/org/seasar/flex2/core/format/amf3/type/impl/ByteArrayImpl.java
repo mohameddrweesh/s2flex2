@@ -104,13 +104,17 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
         return dataInputStream.readBoolean();
     }
 
-    public int readByte() throws IOException {
+    public byte readByte() throws IOException {
         return dataInputStream.readByte();
     }
 
     public void readBytes(byte[] bytes, int offset, int length)
             throws IOException {
         dataInputStream.readFully(bytes, offset, length);
+    }
+
+    public char readChar() throws IOException {
+        return dataInputStream.readChar();
     }
 
     public double readDouble() throws IOException {
@@ -121,8 +125,24 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
         return dataInputStream.readFloat();
     }
 
+    public void readFully(byte[] b) throws IOException {
+        dataInputStream.readFully(b);
+    }
+
+    public void readFully(byte[] b, int off, int len) throws IOException {
+        dataInputStream.readFully(b, off, len);
+    }
+
     public int readInt() throws IOException {
         return dataInputStream.readInt();
+    }
+
+    public String readLine() throws IOException {
+        return null;
+    }
+
+    public long readLong() throws IOException {
+        return dataInputStream.readLong();
     }
 
     public String readMultiByte(int length, String charSet) throws IOException {
@@ -131,7 +151,7 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
         return new String(charBytes, charSet);
     }
 
-    public Object readObject() throws IOException {
+    public Object readObject() throws IOException, ClassNotFoundException {
         final byte dataType = dataInputStream.readByte();
         final AmfDataReader reader = dataReaderFactory
                 .createAmf3DataReader(dataType);
@@ -166,6 +186,10 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
         this.dataWriterFactory = dataWriterFactory;
     }
 
+    public int skipBytes(int n) throws IOException {
+        return dataInputStream.skipBytes(n);
+    }
+
     public void uncompress() {
         final Inflater inflater = new Inflater(false);
         inflater.setInput(this.buf);
@@ -189,6 +213,18 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
         }
     }
 
+    public void write(byte[] b) throws IOException {
+        dataOutputStream.write(b);
+    }
+
+    public void write(byte[] b, int off, int len) throws IOException {
+        dataOutputStream.write(b, off, len);
+    }
+    
+    public void write(int b) throws IOException {
+        dataOutputStream.write(b);
+    }
+
     public void writeBoolean(boolean value) throws IOException {
         dataOutputStream.writeBoolean(value);
     }
@@ -202,6 +238,18 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
         dataOutputStream.write(bytes, offset, length);
     }
 
+    public void writeBytes(String s) throws IOException {
+        dataOutputStream.writeBytes(s);
+    }
+
+    public void writeChar(int v) throws IOException {
+        dataOutputStream.writeChar(v);
+    }
+
+    public void writeChars(String s) throws IOException {
+        dataOutputStream.writeChars(s);
+    }
+
     public void writeDouble(double value) throws IOException {
         dataOutputStream.writeDouble(value);
     }
@@ -213,6 +261,10 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
 
     public void writeInt(int value) throws IOException {
         dataOutputStream.writeInt(value);
+    }
+
+    public void writeLong(long v) throws IOException {
+        dataOutputStream.writeLong(v);
     }
 
     public void writeMultiByte(String value, String charSet) throws IOException {
@@ -248,7 +300,7 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
         dataOutputStream = new DataOutputStream(outputStream);
     }
 
-    private byte[] mergaBuffers() {
+    private final byte[] mergaBuffers() {
         final byte[] writeBytes = outputStream.toByteArray();
         final byte[] newInitBytes = new byte[this.pos + writeBytes.length];
         System.arraycopy(this.buf, 0, newInitBytes, 0, this.pos);

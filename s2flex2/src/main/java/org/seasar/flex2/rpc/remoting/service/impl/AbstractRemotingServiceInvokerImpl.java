@@ -22,10 +22,13 @@ import org.seasar.flex2.rpc.remoting.service.RemotingServiceLocator;
 import org.seasar.flex2.rpc.remoting.service.exception.ServiceInvocationFailedRuntimeException;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.factory.BeanDescFactory;
+import org.seasar.framework.log.Logger;
 
 public abstract class AbstractRemotingServiceInvokerImpl implements
         RemotingServiceInvoker {
 
+    private static final Logger logger = Logger.getLogger(RemotingServiceInvoker.class);
+    
     private Map forbiddenMethodMap;
     
     protected RemotingServiceLocator remotingServiceLocator;
@@ -64,6 +67,7 @@ public abstract class AbstractRemotingServiceInvokerImpl implements
         try {
             return beanDesc.invoke(service, methodName, args);
         } catch (Throwable e) {
+            logger.debug("invokeServiceMethod", e);
             throw new ServiceInvocationFailedRuntimeException(service
                     .getClass().getName(), methodName, e.getCause());
         }

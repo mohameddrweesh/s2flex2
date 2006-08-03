@@ -13,10 +13,12 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.core.format.amf3.io;
+package org.seasar.flex2.core.format.amf3.io.factory;
 
 import java.io.DataInputStream;
 
-public interface ExternalizeDataInput extends DataInput {
-    void setInputStream(DataInputStream inputStream);
+import org.seasar.flex2.core.format.amf3.io.ExternalObjectInput;
+
+public interface ExternalObjectInputFactory {
+    ExternalObjectInput createObjectInput(DataInputStream inputStream);
 }
