@@ -17,14 +17,21 @@ package org.seasar.flex2.rpc.remoting.service.autoregister;
 
 import org.seasar.flex2.rpc.remoting.service.RemotingServiceLocator;
 import org.seasar.flex2.rpc.remoting.service.RemotingServiceRepository;
-import org.seasar.framework.container.autoregister.FileSystemComponentAutoRegister;
+import org.seasar.framework.container.ComponentDef;
+import org.seasar.framework.container.autoregister.ComponentCustomizer;
 
-public class FileSystemRemotingServiceComponentAutoRegister extends
-        FileSystemComponentAutoRegister {
+public class RemotingServiceCustomizer implements ComponentCustomizer {
 
     private RemotingServiceLocator locator;
 
     private RemotingServiceRepository repository;
+
+    public void customize(ComponentDef componentDef) {
+        final String serviceName = componentDef.getComponentName();
+        if (locator.isSupportService(serviceName)) {
+            repository.addService(serviceName, componentDef);
+        }
+    }
 
     public void setLocator(RemotingServiceLocator locator) {
         this.locator = locator;
@@ -34,13 +41,4 @@ public class FileSystemRemotingServiceComponentAutoRegister extends
         this.repository = repository;
     }
 
-    protected void register(final String className) {
-        super.register(className);
-        if (locator.isSupportService(className)) {
-            final String componentName = getNamingConvention()
-                    .fromClassNameToComponentName(className);
-            repository.addService(componentName, getContainer()
-                    .getComponentDef(componentName));
-        }
-    }
 }
