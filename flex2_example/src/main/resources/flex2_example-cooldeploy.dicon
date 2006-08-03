@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
+	"http://www.seasar.org/dtd/components21.dtd">
+<components>
+	<include path="convention.dicon"/>
+	<include path="flex2_example-customizer.dicon"/>
+
+	<!--
+	include config dicon
+	-->
+	<include path="snap-shot-config.dicon"/>
+
+	<component
+		class="examples.flex2.cooldeploy.creator.ResolverCoolCreator"/>	
+	<component
+		class="org.seasar.framework.container.cooldeploy.creator.DtoCoolCreator"/>
+	<component
+		class="org.seasar.framework.container.cooldeploy.creator.LogicCoolCreator"/>
+	<component
+		class="org.seasar.framework.container.cooldeploy.creator.ServiceCoolCreator"/>
+
+	<component name="snapshotProject" class="org.seasar.framework.container.cooldeploy.impl.CoolProjectImpl">
+		<property name="rootPackageName">"examples.flex2.camera.snapshot"</property>
+	</component>
+	<component name="addProject" class="org.seasar.framework.container.cooldeploy.impl.CoolProjectImpl">
+		<property name="rootPackageName">"examples.flex2.add"</property>
+	</component>
+	<component name="checkProject" class="org.seasar.framework.container.cooldeploy.impl.CoolProjectImpl">
+		<property name="rootPackageName">"examples.flex2.check"</property>
+	</component>
+	<component name="paramProject" class="org.seasar.framework.container.cooldeploy.impl.CoolProjectImpl">
+		<property name="rootPackageName">"examples.flex2.param"</property>
+	</component>
+	<component name="performanceProject" class="org.seasar.framework.container.cooldeploy.impl.CoolProjectImpl">
+		<property name="rootPackageName">"examples.flex2.performance"</property>
+	</component>
+
+	<component class="org.seasar.framework.container.cooldeploy.CoolComponentAutoRegister">
+		<initMethod name="addProject">
+			<arg>addProject</arg>
+		</initMethod>
+		<initMethod name="addProject">
+			<arg>snapshotProject</arg>
+		</initMethod>
+		<initMethod name="addProject">
+			<arg>checkProject</arg>
+		</initMethod>
+		<initMethod name="addProject">
+			<arg>paramProject</arg>
+		</initMethod>
+		<initMethod name="addProject">
+			<arg>performanceProject</arg>
+		</initMethod>
+	</component>
+
+	<!--
+	register in metatag
+	-->
+    <component
+	  class="org.seasar.framework.container.autoregister.MetaAutoRegister">
+	    <meta name="autoRegister">
+	        <meta name="RemotingService"/>
+	    </meta>
+	    <initMethod name="addClassPattern">
+	        <arg>"examples.flex2"</arg>
+	        <arg>".*ServiceImpl"</arg>
+	    </initMethod>
+	    <initMethod name="addClassPattern">
+	        <arg>"examples.flex2"</arg>
+	        <arg>".*FacadeImpl"</arg>
+	    </initMethod>
+	    <initMethod name="addIgnoreClassPattern">
+	        <arg>"examples.flex2.camera.snapshot"</arg>
+	        <arg>".*ServiceImpl"</arg>
+	    </initMethod>
+	</component>
+	<component
+	  class="org.seasar.flex2.rpc.remoting.service.autoregister.FileSystemRemotingServiceAutoRegister">
+	    <initMethod name="addClassPattern">
+	        <arg>"examples.flex2"</arg>
+	        <arg>".*ServiceImpl"</arg>
+	    </initMethod>
+	    <initMethod name="addClassPattern">
+	        <arg>"examples.flex2"</arg>
+	        <arg>".*FacadeImpl"</arg>
+	    </initMethod>
+	    <initMethod name="addIgnoreClassPattern">
+	        <arg>"examples.flex2.camera.snapshot"</arg>
+	        <arg>".*ServiceImpl"</arg>
+	    </initMethod>
+	</component>
+</components>
