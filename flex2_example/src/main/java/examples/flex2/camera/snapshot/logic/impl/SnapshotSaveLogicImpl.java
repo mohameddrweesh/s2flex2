@@ -7,10 +7,10 @@ import java.io.IOException;
 import org.seasar.flex2.core.format.amf3.type.ByteArray;
 import org.seasar.framework.util.FileOutputStreamUtil;
 
-import examples.flex2.camera.config.SnapshotServiceConfig;
+import examples.flex2.camera.snapshot.config.SnapshotServiceConfig;
 import examples.flex2.camera.snapshot.dto.SnapshotDto;
 import examples.flex2.camera.snapshot.logic.SnapshotSaveLogic;
-import examples.flex2.camera.util.naming.FileNameResolver;
+import examples.flex2.camera.snapshot.naming.FileNameResolver;
 
 public class SnapshotSaveLogicImpl implements SnapshotSaveLogic {
 
