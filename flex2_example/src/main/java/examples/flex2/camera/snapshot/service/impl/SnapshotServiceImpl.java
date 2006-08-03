@@ -6,6 +6,9 @@ import examples.flex2.camera.snapshot.dto.SnapshotDto;
 import examples.flex2.camera.snapshot.logic.SnapshotSaveLogic;
 import examples.flex2.camera.snapshot.service.SnapshotService;
 
+/**
+ * @RemotingService
+ */
 public class SnapshotServiceImpl implements SnapshotService {
 
     private SnapshotSaveLogic snapshotSaveLogic;
