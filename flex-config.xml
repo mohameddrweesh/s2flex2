@@ -1,10 +1,10 @@
 <flex-config>
    <compiler>
       <accessible>false</accessible>
-      <show-coach-warnings>true</show-coach-warnings>
+      <show-actionscript-warnings>true</show-actionscript-warnings>
       <debug>false</debug>
       <external-library-path>
-         <path-element>C:/Program Files/Adobe/Flex Builder 2.0 Beta 3/Flex SDK 2.0/frameworks/libs/playerglobal.swc</path-element>
+         <path-element>C:/Program Files/Adobe/Flex Builder 2/Flex SDK 2/frameworks/libs/playerglobal.swc</path-element>
       </external-library-path>
       <keep-generated-actionscript>false</keep-generated-actionscript>
       <!--
@@ -13,13 +13,13 @@
       </include-libraries>
       -->
       <library-path>
-         <path-element>C:/Program Files/Adobe/Flex Builder 2.0 Beta 3/Flex SDK 2.0/frameworks/libs</path-element>
-         <path-element>C:/Program Files/Adobe/Flex Builder 2.0 Beta 3/Flex SDK 2.0/frameworks/locale/{locale}</path-element>
+         <path-element>C:/Program Files/Adobe/Flex Builder 2/Flex SDK 2/frameworks/libs</path-element>
+         <path-element>C:/Program Files/Adobe/Flex Builder 2/Flex SDK 2/frameworks/locale/{locale}</path-element>
       </library-path>
       <namespaces>
          <namespace>
             <uri>http://www.adobe.com/2006/mxml</uri>
-            <manifest>C:/Program Files/Adobe/Flex Builder 2.0 Beta 3/Flex SDK 2.0/frameworks/mxml-manifest.xml</manifest>
+            <manifest>C:/Program Files/Adobe/Flex Builder 2/Flex SDK 2/frameworks/mxml-manifest.xml</manifest>
          </namespace>
       </namespaces>
       <optimize>true</optimize>
@@ -28,39 +28,92 @@
       <show-deprecation-warnings>true</show-deprecation-warnings>
       <strict>true</strict>
       <as3>true</as3>
-      <es3>false</es3>
+      
+      <es>false</es>
       <!--
       <theme>
          <filename>string</filename>
          <filename>string</filename>
       </theme>
       -->
+      <fonts>
+      <local-fonts-snapshot>C:/Program Files/Adobe/Flex Builder 2/Flex SDK 2/frameworks/WinFonts.ser</local-fonts-snapshot>
+      </fonts>
       <verbose-stacktraces>false</verbose-stacktraces>
-      <warn-undefined-reference>false</warn-undefined-reference>
-      <warn-undefined-function>true</warn-undefined-function>
-      <warn-wrong-number-of-args>true</warn-wrong-number-of-args>
-      <warn-assigning-undefined-to-non-object-type>true</warn-assigning-undefined-to-non-object-type>
-      <warn-no-type-decl>true</warn-no-type-decl>
-      <warn-bad-undefined-comparision>true</warn-bad-undefined-comparision>
-      <warn-wrong-arg-type>true</warn-wrong-arg-type>
-      <warn-var-hidden-by-function>true</warn-var-hidden-by-function>
-      <warn-duplicate-func-def>true</warn-duplicate-func-def>
-      <warn-constructor-returns-value>true</warn-constructor-returns-value>
-      <warn-bad-type-cast>true</warn-bad-type-cast>
-      <warn-boolean-constructor-with-no-args>true</warn-boolean-constructor-with-no-args>
-      <warn-math-expressions-treat-null-like-zero>true</warn-math-expressions-treat-null-like-zero>
       <warn-array-tostring-changes>false</warn-array-tostring-changes>
-      <warn-deprecated-property-error>true</warn-deprecated-property-error>
-      <warn-deprecated-function-error>true</warn-deprecated-function-error>
-      <warn-super-only-works-for-class-objects>true</warn-super-only-works-for-class-objects>
-      <warn-class-is-sealed>true</warn-class-is-sealed>
-      <warn-scoping-change-in-this>false</warn-scoping-change-in-this>
-      <warn-missing-namespace-decl>true</warn-missing-namespace-decl>
+      <warn-assignment-within-conditional>true</warn-assignment-within-conditional>
+      <!-- Possibly invalid Array cast operation. -->
+      <warn-bad-array-cast>true</warn-bad-array-cast>
+      <!-- Non-Boolean value used where a Boolean value was expected. -->
+      <warn-bad-bool-assignment>true</warn-bad-bool-assignment>
+      <!-- Invalid Date cast operation. -->
+      <warn-bad-date-cast>true</warn-bad-date-cast>
+      <!-- Unknown method. -->
+      <warn-bad-es3-type-method>true</warn-bad-es3-type-method>
+      <!-- Unknown property. -->
+      <warn-bad-es3-type-prop>true</warn-bad-es3-type-prop>
+      <!-- Illogical comparison with NaN. Any comparison operation involving NaN will evaluate to false because NaN != NaN. -->
+      <warn-bad-nan-comparison>true</warn-bad-nan-comparison>
+      <!-- Impossible assignment to null. -->
+      <warn-bad-null-assignment>true</warn-bad-null-assignment>
+      <!-- Illogical comparison with null. -->
+      <warn-bad-null-comparison>true</warn-bad-null-comparison>
+      <!-- Illogical comparison with undefined.  Only untyped variables (or variables of type *) can be undefined. -->
+      <warn-bad-undefined-comparison>true</warn-bad-undefined-comparison>
+      <!-- Boolean() with no arguments returns false in ActionScript 3.0.  Boolean() returned undefined in ActionScript 2.0. -->
+      <warn-boolean-constructor-with-no-args>false</warn-boolean-constructor-with-no-args>
+      <!-- __resolve is no longer supported. -->
+      <warn-changes-in-resolve>false</warn-changes-in-resolve>
+      <!-- Class is sealed.  It cannot have members added to it dynamically. -->
+      <warn-class-is-sealed>false</warn-class-is-sealed>
+      <!-- Constant not initialized. -->
+      <warn-const-not-initialized>true</warn-const-not-initialized>
+      <!-- Function used in new expression returns a value.  Result will be what the -->
+      <!-- function returns, rather than a new instance of that function.            -->
+      <warn-constructor-returns-value>false</warn-constructor-returns-value>
+      <!-- EventHandler was not added as a listener. -->
+      <warn-deprecated-event-handler-error>false</warn-deprecated-event-handler-error>
+      <!-- Unsupported ActionScript 2.0 function. -->
+      <warn-deprecated-function-error>false</warn-deprecated-function-error>
+      <!-- Unsupported ActionScript 2.0 property. -->
+      <warn-deprecated-property-error>false</warn-deprecated-property-error>
+      <!-- More than one argument by the same name. -->
+      <warn-duplicate-argument-names>true</warn-duplicate-argument-names>
+      <!-- Duplicate variable definition -->
+      <warn-duplicate-variable-def>true</warn-duplicate-variable-def>
+      <!-- ActionScript 3.0 iterates over an object's properties within a "for x in target" statement in random order. -->
       <warn-for-var-in-changes>false</warn-for-var-in-changes>
-      <warn-deprecated-event-handler-error>true</warn-deprecated-event-handler-error>
-      <warn-no-constructor>true</warn-no-constructor>
-      <warn-function-parameter-declared-as-void>true</warn-function-parameter-declared-as-void>
+      <!-- Importing a package by the same name as the current class will hide that class identifier in this scope. -->
+      <warn-import-hides-class>true</warn-import-hides-class>
+      <!-- Use of the instanceof operator. -->
+      <warn-instance-of-changes>true</warn-instance-of-changes>
+      <!-- Internal error in compiler. -->
+      <warn-internal-error>true</warn-internal-error>
+      <!-- _level is no longer supported. For more information, see the flash.display package. -->
+      <warn-level-not-supported>false</warn-level-not-supported>
+      <!-- Missing namespace declaration (e.g. variable is not defined to be public, private, etc.). -->
+      <warn-missing-namespace-decl>true</warn-missing-namespace-decl>
+      <!-- Negative value will become a large positive value when assigned to a uint data type. -->
+      <warn-negative-uint-literal>true</warn-negative-uint-literal>
+      <!-- Missing constructor. -->
+      <warn-no-constructor>false</warn-no-constructor>
+      <!-- The super() statement was not called within the constructor. -->
       <warn-no-explicit-super-call-in-constructor>false</warn-no-explicit-super-call-in-constructor>
+      <!-- Missing type declaration. -->
+      <warn-no-type-decl>true</warn-no-type-decl>
+      <!-- In ActionScript 3.0, white space is ignored and '' returns 0. Number() returns -->
+      <!-- NaN in ActionScript 2.0 when the parameter is '' or contains white space.      -->
+      <warn-number-from-string-changes>false</warn-number-from-string-changes>
+      <!-- Change in scoping for the this keyword.  Class methods extracted from an -->
+      <!-- instance of a class will always resolve this back to that instance.  In  -->
+      <!-- ActionScript 2.0 this is looked up dynamically based on where the method -->
+      <!-- is invoked from.                                                         -->
+      <warn-scoping-change-in-this>false</warn-scoping-change-in-this>
+      <!-- Inefficient use of += on a TextField.-->
+      <warn-slow-text-field-addition>true</warn-slow-text-field-addition>
+      <!-- Possible missing parentheses. -->
+      <warn-unlikely-function-value>true</warn-unlikely-function-value>
+      <!-- Possible usage of the ActionScript 2.0 XML class. -->
       <warn-xml-class-has-changed>false</warn-xml-class-has-changed>
    </compiler>
    <!--
