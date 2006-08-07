@@ -28,7 +28,8 @@
     	<arg value="http://www.seasar.org/s2flex2/mxml" />
 		<arg value="-include-classes"/>		
 		<arg value="org.seasar.flex2.rpc.remoting.S2Component"/>    	
-		<arg value="org.seasar.flex2.rpc.remoting.S2Flex2Service"/>   	
+		<arg value="org.seasar.flex2.rpc.remoting.S2Flex2Service"/>
+		<arg value="org.seasar.flex2.rpc.remoting.RemoteService"/> 
 	  </java>
   </target>
     <!-- ================================= 
@@ -36,14 +37,23 @@
          ================================= -->	
 	<target name="dist">
 		<zip zipfile="target/S2Flex2-components-${ver}.zip">
-			<zipfileset prefix="s2flex2_components" dir=".">
+			<zipfileset prefix="s2flex2-components" dir=".">
 				<exclude name="**/bin/**"/>
 				<exclude name="**/target/**"/>
 				<exclude name="**/generated/**"/>
 				<exclude name="**/AMF0Connection.as"/>
-				<exclude name="**/RemoteService.as"/>
 				<exclude name="**/*old.as"/>
 			</zipfileset>
 		</zip>
 	</target>
+    <!-- ================================= 
+          target: clean             
+         ================================= -->	
+     <target name="clean">
+     	<delete>
+     		<fileset dir="target">
+     			<include name="*" />
+     		</fileset>
+     	</delete>
+     </target>	
 </project>
