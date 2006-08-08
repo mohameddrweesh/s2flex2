@@ -44,6 +44,7 @@
             <h3><a name="abstraction">概要</a></h3>
             <p>S2Flex2は、現在英語版としてリリースされている<a href="http://labs.macromedia.com/" target="_blank">Flex2</a>と<a href="http://s2container.seasar.org/ja/index.html">Seasar2</a>を連携させるものです。 S2Flex2を使うとFlex2で作成されたFlashアプリケーションからSeasar2に登録されているコンポーネントを簡単に呼び出すことができるようになります。</p>
             <p>S2Flex2は現在のところ以下のプロジェクトで構成されています。</p>
+            <p align="center"><img height="162" src="images/s2flex2.jpg" width="565"></p>
             <ul>
               <li><strong>S2Flex2</strong>
                 <ul>
@@ -70,53 +71,36 @@
             </ul>
             <h3><a name="news">お知らせ</a></h3>
             <h4>[2006/08/7]S2Flex2 Beta7リリース </h4>
+            <p>※S2Flex2 Beta7よりS2Containerは2.4のみ対応となっています。</p>
             <h5>S2Flex2 Beta7をリリースしました。</h5>
             <ul>
-              <li> S2Container 2.4-Beta4に対応しました。</li>
+              <li> Flex2 リリース版での動作を確認いたしました。</li>
+              <li>S2Container 2.4-Beta4に対応しました。</li>
+              <li>パッケージを見直してリファクタリングしました。</li>
+              <li> サービスクラスに対してaspectが効かないのを修正しました。</li>
+              <li>Sessionに登録したコンポーネントが、Servletや別のswfなどで共有されない不具合を修正しました。</li>
               <li>HotDeploy/CoolDeployに対応しました。</li>
-              <li>Flex2 リリース版での動作を確認いたしました。</li>
-              <li>・ByteArray型への対応を追加しました。<br>
-                ・Externalizableを実装したクラスへの対応<br>
-                ・上記にともなうdiconファイルの変更<br>
-                ・サンプルの追加(snapshot)<br>
-                ・flex2_exampleの整理<br>
-                ・Metaタグの変更(AmfRemotingService -&gt;RemotingService) <br>
-                ・上記に伴うアノテーションの変更</li>
-              <li></li>
+              <li>AMF3のByteArray型への対応を追加しました。</li>
+               <li>AMF3のExternalizableを実装したクラスへの対応</li>
+                <li>上記にともなうdiconファイルの変更</li>
+                <li>Metaタグの変更(AmfRemotingService -&gt;RemotingService) </li>
             </ul>
             <h5>S2Flex2 Backport175 Beta3をリリースしました。</h5>
             <ul>
-              <li>・S2Flex2のBeta7にあわせてMetaタグの変更(AmfRemotingService -&gt;RemotingService) <br>
-                ・上記に伴うアノテーションの変更</li>
+              <li>S2Flex2のBeta7にあわせてMetaタグの変更(AmfRemotingService -&gt;RemotingService) </li>
+               <li>上記に伴うアノテーションの変更をしました。</li>
             </ul>
             <h5>S2Flex2 Tiger Beta3をリリースしました。</h5>
             <ul>
-              <li>・S2Flex2のBeta7にあわせてMetaタグの変更(AmfRemotingService -&gt;RemotingService) <br>
-                ・上記に伴うアノテーションの変更</li>
+              <li>S2Flex2のBeta7にあわせてMetaタグの変更(AmfRemotingService -&gt;RemotingService) </li>
+              <li>上記に伴うアノテーションの変更をしました。</li>
             </ul>
-            <h4>[2006/06/6]S2Flex2Components Beta4リリース </h4>
-            <h5>S2Flex2Components　Beta4をリリースしました。</h5>
+            <h4><strong>S2Flex2-components</strong> Beta5をリリースしました</h4>
             <ul>
-              <li> サーバ側ロジック呼び出し時、初回にFlashのエラーが表示されてしまっていたのを修正しました。</li>
-            </ul>
-            <h4>[2006/05/30]Beta6をリリース</h4>
-            <h5>S2Flex2　Beta6をリリースしました。</h5>
-            <ul>
-              <li> サービス用メタタグおよびアノテーションを追加しFlex2から呼び出せるコンポーネントを制限しました。</li>
-              <li>Sessionデータバインディングを行う為のアノテーションの追加 </li>
-              <li>hotdeployに対応(Seasar2.4を利用しているときのみ)</li>
-            </ul>
-            <h5>S2Flex2 Tiger Beta2をリリースしました。</h5>
-            <ul>
-              <li>Service設定用アノテーションを追加しました。</li>
-              <li>Sessionデータバインディングのアノテーションを追加しました。</li>
-            </ul>
-            <h5>S2Flex2 Backport175 Beta2をリリースしました。 </h5>
-            <ul>
-              <li>Service設定用アノテーションを追加しました。</li>
-              <li>Sessionデータバインディングのアノテーションを追加しました。</li>
-            </ul>
-            </p>
+              <li>Flex2 リリース版(英語版)に対応しました。</li>
+              <li>配布しているファイルではantを利用してswcを生成することができなかったのを修正しました。</li>
+              <li>アイコンファイルを追加しました。(S2Flex2Service)</li>
+            </ul>            </p>
             以前の<a href="news.html">お知らせ</a>
             <h3><a name="document">ドキュメント</a></h3>
             <ul>
@@ -124,11 +108,11 @@
             </ul>
             <h3><a name="download">ダウンロード</a></h3>
             <ul>
-              <li><a href="../download/2006-05-28/S2Flex2-B6.zip">S2Flex2 Beta6</a></li>
-              <li><a href="../download/2006-05-28/S2Flex2-backport175-B1.zip">S2Flex2 Backport175 Beta2</a></li>
-              <li><a href="../download/2006-05-28/S2Flex2-tiger-B2.zip">S2Flex2 Tiger Beta2 </a></li>
+              <li><a href="../download/2006-08-08/S2Flex2-B7.zip">S2Flex2 Beta7</a>(2006/08/08)</li>
+              <li><a href="../download/2006-08-08/S2Flex2-backport175-B3.zip">S2Flex2 Backport175 Beta3</a>(2006/08/08)</li>
+              <li><a href="../download/2006-08-08/S2Flex2-tiger-B3.zip">S2Flex2 Tiger Beta2 </a>(2006/08/08)</li>
+              <li><a href="../download/2006-08-08/S2Flex2-components-B5.zip">S2Flex2 components Beta5(Flex2 リリース版対応)</a>(2006/08/08)</li>
               <li><a href="../download/2006-05-28/flex2-example-B6.zip">S2Flex2 Example Beta6対応 (Flex2 Beta3対応)</a></li>
-              <li><a href="../download/2006-06-05/S2Flex2-components-B4.zip">S2Flex2 components Beta4(Flex2 Beta3対応)</a></li>
             </ul>
             <!-- document end -->
             <!-- don't edit start -->
