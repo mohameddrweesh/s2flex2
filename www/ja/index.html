@@ -2,7 +2,7 @@
 <html>
 <!-- don't edit start -->
 <head>
-<title>S2Flex2 -  AMF3Gateway with DI Container -</title>
+<title>S2Flex2 - AMF3Gateway with DI Container -</title>
 <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <link href="styles/seasar_b.css" type="text/css" rel="stylesheet" media="screen">
@@ -39,12 +39,10 @@
           <td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td>
           <td width="740" class="main"><!-- don't edit end -->
             <!-- document start -->
-            
             <h1>&nbsp;</h1>
             <h1>S2Flex2</h1>
             <h3><a name="abstraction">概要</a></h3>
-            <p>S2Flex2は、現在英語版としてリリースされている<a href="http://labs.macromedia.com/" target="_blank">Flex2</a>と<a href="http://s2container.seasar.org/ja/index.html">Seasar2</a>を連携させるものです。
-              S2Flex2を使うとFlex2で作成されたFlashアプリケーションからSeasar2に登録されているコンポーネントを簡単に呼び出すことができるようになります。</p>
+            <p>S2Flex2は、現在英語版としてリリースされている<a href="http://labs.macromedia.com/" target="_blank">Flex2</a>と<a href="http://s2container.seasar.org/ja/index.html">Seasar2</a>を連携させるものです。 S2Flex2を使うとFlex2で作成されたFlashアプリケーションからSeasar2に登録されているコンポーネントを簡単に呼び出すことができるようになります。</p>
             <p>S2Flex2は現在のところ以下のプロジェクトで構成されています。</p>
             <ul>
               <li><strong>S2Flex2</strong>
@@ -52,34 +50,50 @@
                   <li>AMF3対応のGateway</li>
                 </ul>
               </li>
-              <li><strong>S2Flex2-Backport175
-                </strong>
+              <li><strong>S2Flex2-Backport175 </strong>
                 <ul>
                   <li> Backport175 アノテーションを利用して、メタデータ定義、セッションデータのバインディングをJavaソースに記述する為のアドオン </li>
                   <li>Java実行環境がJ2SDK1.4のときに利用します。Tiger(Java5)でS2Flex2を利用するときには、S2Flex2-Tigerを利用してください。</li>
                 </ul>
               </li>
-              <li><strong>S2Flex2-Tiger
-                </strong>
+              <li><strong>S2Flex2-Tiger </strong>
                 <ul>
                   <li> Tiger (Java5) アノテーションを使用してメタデータ定義、セッションデータのバインディングをJavaソースに記述する為のアドオン </li>
                   <li>Java実行環境がTiger(Java5)の時に利用します。J2SDK1.4でS2Flex2を利用するときには、S2Flex2-Backport175を利用してください。</li>
                 </ul>
               </li>
-              <li><strong>S2Flex2-components
-                </strong>
+              <li><strong>S2Flex2-components </strong>
                 <ul>
                   <li>S2Flex2のGatewayに接続するmxmlタグコンポーネント</li>
                 </ul>
               </li>
-            </ul>            
+            </ul>
             <h3><a name="news">お知らせ</a></h3>
             <h4>[2006/08/7]S2Flex2 Beta7リリース </h4>
             <h5>S2Flex2 Beta7をリリースしました。</h5>
             <ul>
-              <li> サーバ側ロジック呼び出し時、初回にFlashのエラーが表示されてしまっていたのを修正しました。</li>
+              <li> S2Container 2.4-Beta4に対応しました。</li>
+              <li>HotDeploy/CoolDeployに対応しました。</li>
+              <li>Flex2 リリース版での動作を確認いたしました。</li>
+              <li>・ByteArray型への対応を追加しました。<br>
+                ・Externalizableを実装したクラスへの対応<br>
+                ・上記にともなうdiconファイルの変更<br>
+                ・サンプルの追加(snapshot)<br>
+                ・flex2_exampleの整理<br>
+                ・Metaタグの変更(AmfRemotingService -&gt;RemotingService) <br>
+                ・上記に伴うアノテーションの変更</li>
+              <li></li>
             </ul>
-            <p>&nbsp;</p>
+            <h5>S2Flex2 Backport175 Beta3をリリースしました。</h5>
+            <ul>
+              <li>・S2Flex2のBeta7にあわせてMetaタグの変更(AmfRemotingService -&gt;RemotingService) <br>
+                ・上記に伴うアノテーションの変更</li>
+            </ul>
+            <h5>S2Flex2 Tiger Beta3をリリースしました。</h5>
+            <ul>
+              <li>・S2Flex2のBeta7にあわせてMetaタグの変更(AmfRemotingService -&gt;RemotingService) <br>
+                ・上記に伴うアノテーションの変更</li>
+            </ul>
             <h4>[2006/06/6]S2Flex2Components Beta4リリース </h4>
             <h5>S2Flex2Components　Beta4をリリースしました。</h5>
             <ul>
@@ -96,30 +110,29 @@
             <ul>
               <li>Service設定用アノテーションを追加しました。</li>
               <li>Sessionデータバインディングのアノテーションを追加しました。</li>
-            </ul>            
+            </ul>
             <h5>S2Flex2 Backport175 Beta2をリリースしました。 </h5>
             <ul>
               <li>Service設定用アノテーションを追加しました。</li>
               <li>Sessionデータバインディングのアノテーションを追加しました。</li>
-            </ul>            
-            </p>以前の<a href="news.html">お知らせ</a>
-			<h3><a name="document">ドキュメント</a></h3>
-			<ul>
-			<li><a href="s2flex2.html">S2Flex2</a></li>
-			</ul>
-			
-			<h3><a name="download">ダウンロード</a></h3>
-			<ul>
-			
-			<li><a href="../download/2006-05-28/S2Flex2-B6.zip">S2Flex2 Beta6</a></li>
-			<li><a href="../download/2006-05-28/S2Flex2-backport175-B1.zip">S2Flex2 Backport175 Beta2</a></li>
-			<li><a href="../download/2006-05-28/S2Flex2-tiger-B2.zip">S2Flex2 Tiger Beta2 </a></li>
-			<li><a href="../download/2006-05-28/flex2-example-B6.zip">S2Flex2 Example Beta6対応 (Flex2 Beta3対応)</a></li>
-			<li><a href="../download/2006-06-05/S2Flex2-components-B4.zip">S2Flex2 components Beta4(Flex2 Beta3対応)</a></li>
-			</ul>
-
+            </ul>
+            </p>
+            以前の<a href="news.html">お知らせ</a>
+            <h3><a name="document">ドキュメント</a></h3>
+            <ul>
+              <li><a href="s2flex2.html">S2Flex2</a></li>
+            </ul>
+            <h3><a name="download">ダウンロード</a></h3>
+            <ul>
+              <li><a href="../download/2006-05-28/S2Flex2-B6.zip">S2Flex2 Beta6</a></li>
+              <li><a href="../download/2006-05-28/S2Flex2-backport175-B1.zip">S2Flex2 Backport175 Beta2</a></li>
+              <li><a href="../download/2006-05-28/S2Flex2-tiger-B2.zip">S2Flex2 Tiger Beta2 </a></li>
+              <li><a href="../download/2006-05-28/flex2-example-B6.zip">S2Flex2 Example Beta6対応 (Flex2 Beta3対応)</a></li>
+              <li><a href="../download/2006-06-05/S2Flex2-components-B4.zip">S2Flex2 components Beta4(Flex2 Beta3対応)</a></li>
+            </ul>
             <!-- document end -->
-            <!-- don't edit start -->          </td>
+            <!-- don't edit start -->
+          </td>
           <td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td>
         </tr>
         <tr>
