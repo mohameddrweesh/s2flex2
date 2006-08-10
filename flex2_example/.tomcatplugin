@@ -4,7 +4,7 @@
     <exportSource>false</exportSource>
     <reloadable>false</reloadable>
     <redirectLogger>false</redirectLogger>
-    <updateXml>false</updateXml>
+    <updateXml>true</updateXml>
     <warLocation></warLocation>
     <extraInfo></extraInfo>
     <webPath>/flex2_example</webPath>
