@@ -40,6 +40,7 @@
 		class="org.seasar.flex2.rpc.remoting.message.data.impl.MessageImpl" instance="request" />
 
 	<component
+		name="messageFactory"
 		class="org.seasar.flex2.rpc.remoting.message.data.factory.impl.MessageFactoryImpl" />
 	<component
 		class="org.seasar.flex2.rpc.remoting.message.data.factory.impl.MessageBodyFactoryImpl" />
