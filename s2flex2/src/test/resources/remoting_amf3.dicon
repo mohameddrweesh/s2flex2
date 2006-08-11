@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.3//EN" 
+	"http://www.seasar.org/dtd/components23.dtd">
+<components namespace="remoting_amf3">
+	<include path="amf3.dicon"/>
+	<!-- 
+		remoting message reader components
+	-->
+	<component
+		class="org.seasar.flex2.rpc.remoting.message.io.reader.factory.impl.MessageReaderFactoryImpl">
+		<property name="messageReaderClass">
+		@org.seasar.flex2.rpc.remoting.message.io.reader.impl.Amf3MessageReaderImpl@class
+		</property>
+	</component>
+	<component
+		class="org.seasar.flex2.rpc.remoting.message.io.reader.impl.Amf3MessageReaderImpl"
+		instance="request" />
+	
+	<!-- 
+		remoting message writer components
+	-->
+	<component
+		class="org.seasar.flex2.rpc.remoting.message.io.writer.factory.impl.MessageWriterFactoryImpl">
+		<property name="messageWriterClass">
+		@org.seasar.flex2.rpc.remoting.message.io.writer.impl.Amf3MessageWriterImpl@class
+		</property>
+	</component>
+	<component
+		class="org.seasar.flex2.rpc.remoting.message.io.writer.impl.Amf3MessageWriterImpl"
+		instance="request" />
+	
+	<!--
+		remoting message data factory
+	-->
+	<component
+		name="requestMessage"
+		class="org.seasar.flex2.rpc.remoting.message.data.impl.MessageImpl" instance="request" />
+	<component
+		name="responceMessage"
+		class="org.seasar.flex2.rpc.remoting.message.data.impl.MessageImpl" instance="request" />
+
+	<component
+		class="org.seasar.flex2.rpc.remoting.message.data.factory.impl.MessageFactoryImpl" />
+	<component
+		class="org.seasar.flex2.rpc.remoting.message.data.factory.impl.MessageBodyFactoryImpl" />
+	<component
+		class="org.seasar.flex2.rpc.remoting.message.data.factory.impl.MessageHeaderFactoryImpl" />
+	<component
+		class="org.seasar.flex2.rpc.remoting.message.data.factory.impl.FaultFactoryImpl" />
+
+	<!--
+		remoting message processor
+	-->
+	<component
+		class="org.seasar.flex2.rpc.remoting.message.data.processor.impl.MessageHeaderProcessorImpl">
+		<initMethod name="addHeaderCreator">
+			<arg>
+				<component class="org.seasar.flex2.rpc.remoting.processor.impl.AppendToGatewayUrlHeaderCreatorImpl">
+					<property name="sessionDecorator">
+						<component class="org.seasar.flex2.util.session.impl.TomcatSessionDecoratorImpl" />
+					</property>
+				</component>
+			</arg>
+		</initMethod>
+	</component>
+	<component
+		class="org.seasar.flex2.rpc.remoting.message.data.processor.impl.MessageBodyProcessorImpl" />
+	<component
+		class="org.seasar.flex2.rpc.remoting.message.data.processor.impl.MessageProcessorImpl"/>
+
+	<!--
+		remoting util
+	-->
+	<component
+		class="org.seasar.flex2.util.data.transfer.impl.TransferImpl" />
+	<component
+		class="org.seasar.flex2.util.data.storage.impl.StorageLocatorImpl"/>
+	<component
+		name="serviceDataStorage"
+		class="org.seasar.flex2.util.data.storage.impl.HttpSessionDataStorage"
+		instance="session" />
+		
+	<!--
+		remoting service
+	-->
+	<component
+	    class="org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceRepositoryImpl">
+	</component>
+	<component
+		class="org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceLocatorImpl" />
+	<component
+		class="org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceInvokerChooserImpl">
+		<initMethod name="addInvoker">
+			<arg>
+				<component
+					class="org.seasar.flex2.rpc.remoting.service.impl.DataTransferSupportedRemotingServiceInvokerImpl">
+					<property name="forbiddenMethodMap">
+						<component class="java.util.HashMap">
+						    <initMethod name="put">
+						        <arg>"equals"</arg>
+						        <arg>null</arg>
+						    </initMethod>
+						    <initMethod name="put">
+						        <arg>"getClass"</arg>
+						        <arg>null</arg>
+						    </initMethod>
+						    <initMethod name="put">
+						        <arg>"hashCode"</arg>
+						        <arg>null</arg>
+						    </initMethod>
+						    <initMethod name="put">
+						        <arg>"notify"</arg>
+						        <arg>null</arg>
+						    </initMethod>
+						    <initMethod name="put">
+						        <arg>"notifyAll"</arg>
+						        <arg>null</arg>
+						    </initMethod>
+						    <initMethod name="put">
+						        <arg>"toString"</arg>
+						        <arg>null</arg>
+						    </initMethod>
+						    <initMethod name="put">
+						        <arg>"wait"</arg>
+						        <arg>null</arg>
+						    </initMethod>  
+						</component>
+					</property>
+				</component>	
+			</arg>
+		</initMethod>
+	</component>
+	
+	<!--
+		remoting processor
+	-->
+	<component
+		class="org.seasar.flex2.rpc.remoting.processor.impl.RemotingMessageProcessorImpl" />
+</components>
