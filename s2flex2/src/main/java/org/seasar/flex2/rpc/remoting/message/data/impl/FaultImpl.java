@@ -15,13 +15,17 @@
  */
 package org.seasar.flex2.rpc.remoting.message.data.impl;
 
-import org.seasar.flex2.rpc.remoting.message.data.ErrorInfo;
+import org.seasar.flex2.rpc.remoting.message.data.Fault;
 
-public class ErrorInfoImpl implements ErrorInfo {
+public class FaultImpl implements Fault {
 
-    private static String getStackTraceString(Throwable t) {
-        StackTraceElement[] elements = t.getStackTrace();
-        StringBuffer buf = new StringBuffer(t.toString());
+    private static final String code = "SERVER.PROCESSING";
+
+    private static final String level = "error";
+
+    private static final String getStackTraceString(Throwable t) {
+        final StackTraceElement[] elements = t.getStackTrace();
+        final StringBuffer buf = new StringBuffer(t.toString());
         buf.append('\n');
         for (int i = 0; i < elements.length; ++i) {
             buf.append(elements[i].toString());
@@ -30,17 +34,19 @@ public class ErrorInfoImpl implements ErrorInfo {
         return buf.toString();
     }
 
-    private final String code = "SERVER.PROCESSING";
-
     private final String description;
 
     private final String details;
 
-    private final String level = "error";
-
     private final String type;
 
-    public ErrorInfoImpl(Throwable t) {
+    public FaultImpl(String type, String details, String description) {
+        this.type = type;
+        this.details = details;
+        this.description = description;
+    }
+
+    public FaultImpl(Throwable t) {
         type = t.getClass().getName();
         details = getStackTraceString(t);
         description = t.getMessage();

@@ -18,33 +18,19 @@ package org.seasar.flex2.rpc.remoting.processor.impl;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.seasar.flex2.rpc.remoting.message.data.processor.MessageProcessor;
-import org.seasar.flex2.rpc.remoting.processor.RemotingMessageHeaderCreator;
 import org.seasar.flex2.rpc.remoting.processor.RemotingMessageProcessor;
 import org.seasar.flex2.util.io.InputStreamUtil;
 import org.seasar.flex2.util.io.OutputStreamUtil;
 
 public class RemotingMessageProcessorImpl implements RemotingMessageProcessor {
 
-    private final List headerCreators;
-
     private MessageProcessor messageProcessor;
-    
-    public RemotingMessageProcessorImpl(){
-        headerCreators = new ArrayList();
-    }
-
-    public void addHeaderCreator( RemotingMessageHeaderCreator creator ){
-        headerCreators.add(creator);
-    }
 
     public MessageProcessor getMessageProcessor() {
         return messageProcessor;
@@ -60,7 +46,7 @@ public class RemotingMessageProcessorImpl implements RemotingMessageProcessor {
             final DataOutputStream outputStream = (DataOutputStream) OutputStreamUtil
                     .toBufferedDataOutputStream(response.getOutputStream());
 
-            messageProcessor.process(inputStream, outputStream, createMessageHeaders(request));
+            messageProcessor.process(inputStream, outputStream);
 
             response.setContentLength(outputStream.size());
             outputStream.flush();
@@ -82,20 +68,5 @@ public class RemotingMessageProcessorImpl implements RemotingMessageProcessor {
 
     public void setMessageProcessor(MessageProcessor processor) {
         this.messageProcessor = processor;
-    }
-    
-    private final List createMessageHeaders(final HttpServletRequest request) {
-        final List headers = new ArrayList();
-        if (headerCreators.size() > 0) {
-            RemotingMessageHeaderCreator processor;
-            for (Iterator creatorIt = headerCreators.iterator(); creatorIt.hasNext();) {
-                processor = (RemotingMessageHeaderCreator) creatorIt.next();
-                Object header = processor.createHeader(request);
-                if( header != null ){
-                    headers.add( header );
-                }
-            }
-        }
-        return headers;
     }
 }

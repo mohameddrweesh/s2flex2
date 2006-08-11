@@ -16,7 +16,9 @@
 package org.seasar.flex2.rpc.remoting.message.data.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.seasar.flex2.rpc.remoting.message.data.Message;
 import org.seasar.flex2.rpc.remoting.message.data.MessageBody;
@@ -24,21 +26,28 @@ import org.seasar.flex2.rpc.remoting.message.data.MessageHeader;
 
 public class MessageImpl implements Message {
 
-    private List bodies = new ArrayList();
+    private List bodies;
 
-    private List headers = new ArrayList();
+    private Map headerMap;
 
-    private int version = 0x03;
+    private List headers;
+
+    private int version;
 
     public MessageImpl() {
+        bodies = new ArrayList(4);
+        headers = new ArrayList(8);
+        headerMap = new HashMap(8);
+        version = 0x03;
     }
 
     public void addBody(MessageBody body) {
         bodies.add(body);
     }
 
-    public void addHeader(MessageHeader body) {
-        headers.add(body);
+    public void addHeader(MessageHeader header) {
+        headers.add(header);
+        headerMap.put(header.getName(), header.getValue());
     }
 
     public MessageBody getBody(int index) {
@@ -51,6 +60,10 @@ public class MessageImpl implements Message {
 
     public MessageHeader getHeader(int index) {
         return (MessageHeader) headers.get(index);
+    }
+
+    public String getHeader(String headerName) {
+        return (String)headerMap.get(headerName);
     }
 
     public int getHeaderSize() {

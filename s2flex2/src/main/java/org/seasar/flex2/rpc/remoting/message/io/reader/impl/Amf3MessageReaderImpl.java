@@ -53,13 +53,13 @@ public class Amf3MessageReaderImpl extends AmfMessageReaderImpl implements
 
         int headerCount = inputStream.readUnsignedShort();
         for (int i = 0; i < headerCount; ++i) {
-            inputStream.readUTF();
-            inputStream.readByte();
-            inputStream.readInt();
-            readData();
+            String name = inputStream.readUTF();
+            boolean isRequired = inputStream.readBoolean();
+            inputStream.readInt(); //length
+            message.addHeader(messageHeaderFactory.createHeader(name,readData(),isRequired));
         }
     }
-
+    
     protected void readVersion() throws IOException {
         message.setVersion(inputStream.readUnsignedShort());
     }

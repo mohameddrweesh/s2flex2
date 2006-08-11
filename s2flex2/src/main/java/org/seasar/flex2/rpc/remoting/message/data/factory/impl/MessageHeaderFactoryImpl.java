@@ -21,8 +21,8 @@ import org.seasar.flex2.rpc.remoting.message.data.impl.MessageHeaderImpl;
 
 public class MessageHeaderFactoryImpl implements MessageHeaderFactory {
 
-    public MessageHeader createHeader(String name, String value) {
-        return new MessageHeaderImpl(name, value);
+    public MessageHeader createHeader(String name, Object value, boolean required) {
+        return new MessageHeaderImpl(name, value, required);
     }
 
 }

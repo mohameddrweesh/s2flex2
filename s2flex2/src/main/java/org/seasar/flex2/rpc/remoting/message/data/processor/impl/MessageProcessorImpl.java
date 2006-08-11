@@ -20,7 +20,6 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.List;
 
 import org.seasar.flex2.rpc.remoting.message.data.Message;
 import org.seasar.flex2.rpc.remoting.message.data.processor.MessageBodyProcessor;
@@ -58,13 +57,12 @@ public class MessageProcessorImpl implements MessageProcessor {
     }
 
     public void process(final DataInputStream inputStream,
-            final DataOutputStream outputStream, List headers)
-            throws IOException {
+            final DataOutputStream outputStream) throws IOException {
         final Message requestMessage = readMessage(inputStream);
-        headerProcessor.processRequest(requestMessage, headers);
+        headerProcessor.processRequest(requestMessage);
 
         final Message responseMessage = bodyProcessor.process(requestMessage);
-        headerProcessor.processResponse(responseMessage, headers);
+        headerProcessor.processResponse(responseMessage);
 
         writeMessage(responseMessage, outputStream);
     }

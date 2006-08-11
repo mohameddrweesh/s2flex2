@@ -8,13 +8,14 @@ public class MessageHeaderImpl implements MessageHeader {
 
     private final String name;
 
-    private boolean required = false;
+    private boolean required;
 
     private final Object value;
 
-    public MessageHeaderImpl(String name, Object data) {
+    public MessageHeaderImpl(String name, Object data, boolean required) {
         this.name = name;
         this.value = data;
+        this.required = required;
     }
 
     public int getLength() {
@@ -35,9 +36,5 @@ public class MessageHeaderImpl implements MessageHeader {
 
     public void setLength(int length) {
         this.length = length;
-    }
-
-    public void setRequired(boolean required) {
-        this.required = required;
     }
 }

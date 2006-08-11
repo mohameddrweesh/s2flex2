@@ -17,15 +17,38 @@ package org.seasar.flex2.rpc.remoting.message.data.factory.impl;
 
 import org.seasar.flex2.rpc.remoting.message.data.Message;
 import org.seasar.flex2.rpc.remoting.message.data.factory.MessageFactory;
-import org.seasar.flex2.rpc.remoting.message.data.impl.MessageImpl;
+import org.seasar.framework.container.S2Container;
 
 public class MessageFactoryImpl implements MessageFactory {
 
-    public Message createMessage( int version ) {
-        MessageImpl message = new MessageImpl();
-        message.setVersion(version);
+    private S2Container container;
+
+    public static final String REQUEST_MESSAGE = "requestMessage";
+    
+    public static final String RESPONCE_MESSAGE = "responceMessage";
+    
+    private final Message createMessage( String messageComponentName ) {
+        // MessageImpl message = new MessageImpl();
+        Message message = (Message) container.getComponent(messageComponentName);
 
         return message;
+    }
+
+    public S2Container getContainer() {
+        return container;
+    }
+
+    public void setContainer(S2Container container) {
+        this.container = container;
+    }
+
+
+    public Message createRequestMessage() {
+        return createMessage(REQUEST_MESSAGE);
+    }
+
+    public Message createResponceMessage() {
+        return createMessage(RESPONCE_MESSAGE);
     }
 
 }

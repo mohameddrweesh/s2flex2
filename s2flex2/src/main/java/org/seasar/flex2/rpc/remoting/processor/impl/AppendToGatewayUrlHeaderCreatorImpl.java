@@ -18,27 +18,36 @@ package org.seasar.flex2.rpc.remoting.processor.impl;
 import javax.servlet.http.HttpServletRequest;
 
 import org.seasar.flex2.rpc.remoting.message.RemotingMessageConstants;
+import org.seasar.flex2.rpc.remoting.message.data.Message;
 import org.seasar.flex2.rpc.remoting.message.data.MessageHeader;
 import org.seasar.flex2.rpc.remoting.message.data.factory.MessageHeaderFactory;
 import org.seasar.flex2.rpc.remoting.processor.RemotingMessageHeaderCreator;
 import org.seasar.flex2.util.session.HttpSessionUtil;
 import org.seasar.flex2.util.session.SessionDecorator;
+import org.seasar.framework.container.S2Container;
 
 public class AppendToGatewayUrlHeaderCreatorImpl implements
         RemotingMessageHeaderCreator {
+
+    private S2Container container;
 
     private MessageHeaderFactory messageHeaderFactory;
 
     private SessionDecorator sessionDecorator;
 
-    public MessageHeader createHeader(HttpServletRequest request) {
+    public MessageHeader createHeader(final Message requestMessage) {
+
+        final HttpServletRequest request = (HttpServletRequest) container
+                .getComponent(HttpServletRequest.class);
+
         MessageHeader header = null;
 
         if (!request.isRequestedSessionIdValid()) {
-            final String sessionId = HttpSessionUtil.getSessionId(request, true);
+            final String sessionId = HttpSessionUtil.getSessionId(request,
+                    false);
             header = messageHeaderFactory.createHeader(
                     RemotingMessageConstants.HEADER_APPEND_TO_GATEWAYURL,
-                    sessionDecorator.formatSessionId(sessionId));
+                    sessionDecorator.formatSessionId(sessionId), false);
         }
 
         return header;
@@ -58,5 +67,13 @@ public class AppendToGatewayUrlHeaderCreatorImpl implements
 
     public void setSessionDecorator(SessionDecorator sessionDecorator) {
         this.sessionDecorator = sessionDecorator;
+    }
+
+    public S2Container getContainer() {
+        return container;
+    }
+
+    public void setContainer(S2Container container) {
+        this.container = container;
     }
 }

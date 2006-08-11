@@ -27,8 +27,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.seasar.extension.unit.S2TestCase;
-import org.seasar.flex2.rpc.remoting.message.data.MessageBody;
 import org.seasar.flex2.rpc.remoting.message.data.Message;
+import org.seasar.flex2.rpc.remoting.message.data.MessageBody;
 import org.seasar.flex2.rpc.remoting.message.data.factory.MessageBodyFactory;
 import org.seasar.flex2.rpc.remoting.message.data.factory.MessageFactory;
 import org.seasar.flex2.rpc.remoting.message.io.reader.MessageReader;
@@ -55,12 +55,13 @@ public class AmfMessageReaderWriterTest extends S2TestCase {
     public void testNumber() throws Exception {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         DataOutputStream dos = new DataOutputStream(baos);
-        Message message = messageFactory.createMessage(0);
+        Message message = messageFactory.createResponceMessage();
 
-        MessageBody body = messageBodyFactory.createBody("aaa.Hoge.foo", "response",
-                new Double(1));
+        MessageBody body = messageBodyFactory.createBody("aaa.Hoge.foo",
+                "response", new Double(1));
         message.addBody(body);
-        MessageWriter writer = messageWriterFactory.createMessageWriter(dos, message);
+        MessageWriter writer = messageWriterFactory.createMessageWriter(dos,
+                message);
         writer.write();
 
         ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
@@ -227,10 +228,12 @@ public class AmfMessageReaderWriterTest extends S2TestCase {
             throws Exception {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         DataOutputStream dos = new DataOutputStream(baos);
-        Message message = messageFactory.createMessage(0);
-        MessageBody body = messageBodyFactory.createBody("target", "response", data);
+        Message message = messageFactory.createResponceMessage();
+        MessageBody body = messageBodyFactory.createBody("target", "response",
+                data);
         message.addBody(body);
-        MessageWriter writer = messageWriterFactory.createMessageWriter(dos, message);
+        MessageWriter writer = messageWriterFactory.createMessageWriter(dos,
+                message);
         writer.write();
 
         ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());

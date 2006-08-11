@@ -15,6 +15,7 @@
  */
 package org.seasar.flex2.rpc.remoting.message.data.processor.impl;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -22,28 +23,52 @@ import org.seasar.flex2.rpc.remoting.message.data.Message;
 import org.seasar.flex2.rpc.remoting.message.data.MessageHeader;
 import org.seasar.flex2.rpc.remoting.message.data.factory.MessageHeaderFactory;
 import org.seasar.flex2.rpc.remoting.message.data.processor.MessageHeaderProcessor;
+import org.seasar.flex2.rpc.remoting.processor.RemotingMessageHeaderCreator;
 
 public class MessageHeaderProcessorImpl implements MessageHeaderProcessor {
 
+    private final static void addHeader(final Message message,
+            final RemotingMessageHeaderCreator creator) {
+        final MessageHeader header = creator.createHeader(message);
+        if (header != null) {
+            message.addHeader(header);
+        }
+    }
+
+    private final List headerCreators;
+
     private MessageHeaderFactory headerFactory;
+
+    public MessageHeaderProcessorImpl() {
+        headerCreators = new ArrayList();
+    }
+
+    public void addHeaderCreator(RemotingMessageHeaderCreator creator) {
+        headerCreators.add(creator);
+    }
 
     public MessageHeaderFactory getHeaderFactory() {
         return headerFactory;
     }
 
-    public void processRequest(Message requestMessage, List addHeaders) {
-
+    public void processRequest(final Message requestMessage) {
     }
 
-    public void processResponse(Message responseMessage, List addHeaders) {
-        if (addHeaders.size() > 0) {
-            for (Iterator headerIt = addHeaders.iterator(); headerIt.hasNext();) {
-                responseMessage.addHeader((MessageHeader) headerIt.next());
-            }
-        }
+    public void processResponse(final Message responseMessage) {
+        createMessageHeaders(responseMessage);
     }
 
     public void setHeaderFactory(MessageHeaderFactory headerFactory) {
         this.headerFactory = headerFactory;
+    }
+
+    private final void createMessageHeaders(final Message message) {
+        if (headerCreators.size() > 0) {
+            for (Iterator creatorIt = headerCreators.iterator(); creatorIt
+                    .hasNext();) {
+                addHeader(message, (RemotingMessageHeaderCreator) creatorIt
+                        .next());
+            }
+        }
     }
 }

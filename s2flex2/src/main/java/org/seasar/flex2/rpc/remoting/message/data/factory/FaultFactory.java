@@ -13,16 +13,10 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.remoting.message.data.factory.impl;
+package org.seasar.flex2.rpc.remoting.message.data.factory;
 
-import org.seasar.flex2.rpc.remoting.message.data.ErrorInfo;
-import org.seasar.flex2.rpc.remoting.message.data.factory.ErrorInfoFactory;
-import org.seasar.flex2.rpc.remoting.message.data.impl.ErrorInfoImpl;
+import org.seasar.flex2.rpc.remoting.message.data.Fault;
 
-public class ErrorInfoFactoryImpl implements ErrorInfoFactory {
-
-    public ErrorInfo createErrorInfo(Throwable throwable) {
-        return new ErrorInfoImpl(throwable);
-    }
-
+public interface FaultFactory {
+    Fault createFault(Throwable throwable);
 }

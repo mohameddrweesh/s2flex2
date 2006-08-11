@@ -17,7 +17,7 @@ package org.seasar.flex2.rpc.remoting.message.data.processor.impl;
 
 import org.seasar.flex2.rpc.remoting.message.data.Message;
 import org.seasar.flex2.rpc.remoting.message.data.MessageBody;
-import org.seasar.flex2.rpc.remoting.message.data.factory.ErrorInfoFactory;
+import org.seasar.flex2.rpc.remoting.message.data.factory.FaultFactory;
 import org.seasar.flex2.rpc.remoting.message.data.factory.MessageBodyFactory;
 import org.seasar.flex2.rpc.remoting.message.data.factory.MessageFactory;
 import org.seasar.flex2.rpc.remoting.message.data.processor.MessageBodyProcessor;
@@ -36,7 +36,7 @@ public class MessageBodyProcessorImpl implements MessageBodyProcessor {
 
     private MessageBodyFactory bodyFactory;
 
-    private ErrorInfoFactory errorFactory;
+    private FaultFactory faultFactory;
 
     private MessageFactory messageFactory;
 
@@ -46,8 +46,8 @@ public class MessageBodyProcessorImpl implements MessageBodyProcessor {
         return bodyFactory;
     }
 
-    public ErrorInfoFactory getErrorFactory() {
-        return errorFactory;
+    public FaultFactory getFaultFactory() {
+        return faultFactory;
     }
 
     public MessageFactory getMessageFactory() {
@@ -58,14 +58,11 @@ public class MessageBodyProcessorImpl implements MessageBodyProcessor {
         return serviceInvokerChooser;
     }
 
-    public Message process(Message requestMessage) {
-        Message responseMessage = messageFactory.createMessage(requestMessage
-                .getVersion());
-
+    public Message process(final Message requestMessage) {
+        final Message responseMessage = messageFactory.createResponceMessage();
+        requestMessage.setVersion(requestMessage.getVersion());
         for (int i = 0; i < requestMessage.getBodySize(); ++i) {
-            MessageBody requestBody = requestMessage.getBody(i);
-            MessageBody responseBody = processBody(requestBody);
-            responseMessage.addBody(responseBody);
+            responseMessage.addBody(processBody(requestMessage.getBody(i)));
         }
         return responseMessage;
     }
@@ -74,8 +71,8 @@ public class MessageBodyProcessorImpl implements MessageBodyProcessor {
         this.bodyFactory = bodyFactory;
     }
 
-    public void setErrorFactory(ErrorInfoFactory errorFactory) {
-        this.errorFactory = errorFactory;
+    public void setFaultFactory(FaultFactory faultFactory) {
+        this.faultFactory = faultFactory;
     }
 
     public void setMessageFactory(MessageFactory messageFactory) {
@@ -93,8 +90,8 @@ public class MessageBodyProcessorImpl implements MessageBodyProcessor {
     }
 
     protected final MessageBody processBody(final MessageBody requestBody) {
-        Object result;
         String responseTarget;
+        Object result;
         try {
             final RemotingServiceInvoker invoker = serviceInvokerChooser
                     .chooseInvoker(requestBody);
@@ -104,7 +101,7 @@ public class MessageBodyProcessorImpl implements MessageBodyProcessor {
 
             responseTarget = requestBody.getResponse() + RESPONSE_RESULT;
         } catch (Throwable throwable) {
-            result = errorFactory.createErrorInfo(throwable);
+            result = faultFactory.createFault(throwable);
             responseTarget = requestBody.getResponse() + RESPONSE_STATUS;
             logger.log(throwable);
         }
