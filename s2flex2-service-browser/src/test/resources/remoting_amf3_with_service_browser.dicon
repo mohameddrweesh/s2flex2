@@ -33,19 +33,37 @@
 		remoting message data factory
 	-->
 	<component
-		class="org.seasar.flex2.rpc.remoting.message.data.factory.impl.MessageBodyFactoryImpl" />
+		name="requestMessage"
+		class="org.seasar.flex2.rpc.remoting.message.data.impl.MessageImpl" instance="request" />
 	<component
-		class="org.seasar.flex2.rpc.remoting.message.data.factory.impl.ErrorInfoFactoryImpl" />
+		name="responceMessage"
+		class="org.seasar.flex2.rpc.remoting.message.data.impl.MessageImpl" instance="request" />
+
+	<component
+		name="messageFactory"
+		class="org.seasar.flex2.rpc.remoting.message.data.factory.impl.MessageFactoryImpl" />
+	<component
+		class="org.seasar.flex2.rpc.remoting.message.data.factory.impl.MessageBodyFactoryImpl" />
 	<component
 		class="org.seasar.flex2.rpc.remoting.message.data.factory.impl.MessageHeaderFactoryImpl" />
 	<component
-		class="org.seasar.flex2.rpc.remoting.message.data.factory.impl.MessageFactoryImpl" />
+		class="org.seasar.flex2.rpc.remoting.message.data.factory.impl.FaultFactoryImpl" />
 
 	<!--
 		remoting message processor
 	-->
 	<component
-		class="org.seasar.flex2.rpc.remoting.message.data.processor.impl.MessageHeaderProcessorImpl" />
+		class="org.seasar.flex2.rpc.remoting.message.data.processor.impl.MessageHeaderProcessorImpl">
+		<initMethod name="addHeaderCreator">
+			<arg>
+				<component class="org.seasar.flex2.rpc.remoting.processor.impl.AppendToGatewayUrlHeaderCreatorImpl">
+					<property name="sessionDecorator">
+						<component class="org.seasar.flex2.util.session.impl.TomcatSessionDecoratorImpl" />
+					</property>
+				</component>
+			</arg>
+		</initMethod>
+	</component>
 	<component
 		class="org.seasar.flex2.rpc.remoting.message.data.processor.impl.MessageBodyProcessorImpl" />
 	<component
@@ -130,15 +148,5 @@
 		remoting processor
 	-->
 	<component
-		class="org.seasar.flex2.rpc.remoting.processor.impl.RemotingMessageProcessorImpl" >
-		<initMethod name="addHeaderCreator">
-			<arg>
-				<component class="org.seasar.flex2.rpc.remoting.processor.impl.AppendToGatewayUrlHeaderCreatorImpl">
-					<property name="sessionDecorator">
-						<component class="org.seasar.flex2.util.session.impl.TomcatSessionDecoratorImpl" />
-					</property>
-				</component>
-			</arg>
-		</initMethod>
-	</component>
+		class="org.seasar.flex2.rpc.remoting.processor.impl.RemotingMessageProcessorImpl" />
 </components>
