@@ -66,10 +66,9 @@ public abstract class AbstractRemotingServiceInvokerImpl implements
         BeanDesc beanDesc = BeanDescFactory.getBeanDesc(service.getClass());
         try {
             return beanDesc.invoke(service, methodName, args);
-        } catch (Throwable e) {
-            logger.debug("invokeServiceMethod", e);
-            throw new ServiceInvocationFailedRuntimeException(service
-                    .getClass().getName(), methodName, e.getCause());
+        } catch (Throwable throwable) {
+            logger.debug("invoke service method exception", throwable);
+            throw throwable;
         }
     }
 }

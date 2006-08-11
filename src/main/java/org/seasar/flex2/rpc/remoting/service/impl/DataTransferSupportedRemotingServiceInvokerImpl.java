@@ -22,7 +22,7 @@ import org.seasar.flex2.util.data.transfer.Transfer;
 public class DataTransferSupportedRemotingServiceInvokerImpl extends
         AbstractRemotingServiceInvokerImpl {
 
-    private final static String SERVICE_DATA_STORAGE = "serviceDataStorage";
+    public static final String SERVICE_DATA_STORAGE = "serviceDataStorage";
 
     private StorageLocator storageLocator;
 

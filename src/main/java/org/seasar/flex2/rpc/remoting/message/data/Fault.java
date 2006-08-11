@@ -15,7 +15,7 @@
  */
 package org.seasar.flex2.rpc.remoting.message.data;
 
-public interface ErrorInfo {
+public interface Fault {
 
     String getCode();
 

@@ -19,7 +19,7 @@ public interface Message {
 
     void addBody(MessageBody body);
 
-    void addHeader(MessageHeader body);
+    void addHeader(MessageHeader header);
 
     MessageBody getBody(int index);
 
@@ -27,9 +27,12 @@ public interface Message {
 
     MessageHeader getHeader(int index);
 
+    String getHeader(String headerName);
+
     int getHeaderSize();
 
     int getVersion();
 
-    void setVersion(int amf_version);
+    void setVersion(int version);
+
 }

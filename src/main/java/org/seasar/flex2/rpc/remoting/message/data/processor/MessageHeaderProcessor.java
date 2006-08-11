@@ -15,13 +15,11 @@
  */
 package org.seasar.flex2.rpc.remoting.message.data.processor;
 
-import java.util.List;
-
 import org.seasar.flex2.rpc.remoting.message.data.Message;
 
 public interface MessageHeaderProcessor {
 
-    void processRequest(Message requestMessage, List addHeaders);
+    void processRequest(Message requestMessage);
 
-    void processResponse(Message responseMessage, List addHeaders);
+    void processResponse(Message responseMessage);
 }

@@ -38,7 +38,7 @@ public class FileSystemRemotingServiceAutoRegisterTest extends
     }
 
     public void setUpServiceRegisterNoMetadata() throws Exception {
-        include("autoRemotingServiceRegister.dicon");
+        include("FileSystemRemotingServiceAutoRegisterTest.dicon");
     }
 
     public void testServiceRegisterNoMetadata() throws Exception {

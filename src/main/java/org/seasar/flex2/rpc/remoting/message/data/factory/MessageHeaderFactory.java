@@ -18,5 +18,5 @@ package org.seasar.flex2.rpc.remoting.message.data.factory;
 import org.seasar.flex2.rpc.remoting.message.data.MessageHeader;
 
 public interface MessageHeaderFactory {
-    MessageHeader createHeader(String name, String value);
+    MessageHeader createHeader(String name, Object value, boolean required);
 }

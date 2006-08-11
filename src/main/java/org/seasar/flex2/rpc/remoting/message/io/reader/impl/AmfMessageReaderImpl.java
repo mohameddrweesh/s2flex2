@@ -24,21 +24,24 @@ import org.seasar.flex2.rpc.remoting.message.data.Message;
 import org.seasar.flex2.rpc.remoting.message.data.MessageBody;
 import org.seasar.flex2.rpc.remoting.message.data.factory.MessageBodyFactory;
 import org.seasar.flex2.rpc.remoting.message.data.factory.MessageFactory;
+import org.seasar.flex2.rpc.remoting.message.data.factory.MessageHeaderFactory;
 import org.seasar.flex2.rpc.remoting.message.io.reader.MessageReader;
 
 public class AmfMessageReaderImpl implements MessageReader {
 
-    private MessageBodyFactory bodyFactory;
-
-    private AmfDataReaderFactory dataReaderFactory;
-
-    private MessageFactory messageFactory;
-
     private AmfSharedObject sharedObject;
 
-    protected DataInputStream inputStream;
+    protected AmfDataReaderFactory dataReaderFactory;
 
+    protected DataInputStream inputStream;
+    
     protected Message message;
+
+    protected MessageBodyFactory messageBodyFactory;
+
+    protected MessageFactory messageFactory;
+
+    protected MessageHeaderFactory messageHeaderFactory;
 
     public AmfMessageReaderImpl() {
     }
@@ -48,16 +51,20 @@ public class AmfMessageReaderImpl implements MessageReader {
         this.message = createMessage();
     }
 
-    public MessageBodyFactory getBodyFactory() {
-        return bodyFactory;
-    }
-
     public AmfDataReaderFactory getDataReaderFactory() {
         return dataReaderFactory;
     }
 
+    public MessageBodyFactory getMessageBodyFactory() {
+        return messageBodyFactory;
+    }
+
     public MessageFactory getMessageFactory() {
         return messageFactory;
+    }
+
+    public MessageHeaderFactory getMessageHeaderFactory() {
+        return messageHeaderFactory;
     }
 
     public Message read() throws IOException {
@@ -66,16 +73,20 @@ public class AmfMessageReaderImpl implements MessageReader {
         return message;
     }
 
-    public void setBodyFactory(MessageBodyFactory bodyFactory) {
-        this.bodyFactory = bodyFactory;
-    }
-
     public void setDataReaderFactory(AmfDataReaderFactory readerFactory) {
         this.dataReaderFactory = readerFactory;
     }
 
+    public void setMessageBodyFactory(MessageBodyFactory bodyFactory) {
+        this.messageBodyFactory = bodyFactory;
+    }
+
     public void setMessageFactory(MessageFactory messageFactory) {
         this.messageFactory = messageFactory;
+    }
+
+    public void setMessageHeaderFactory(MessageHeaderFactory messageHeaderFactory) {
+        this.messageHeaderFactory = messageHeaderFactory;
     }
 
     public void setSharedObject(AmfSharedObject sharedObject) {
@@ -98,11 +109,11 @@ public class AmfMessageReaderImpl implements MessageReader {
     }
 
     protected MessageBody createBody(String target, String response, Object data) {
-        return bodyFactory.createBody(target, response, data);
+        return messageBodyFactory.createBody(target, response, data);
     }
 
     protected Message createMessage() {
-        return messageFactory.createMessage(0);
+        return messageFactory.createRequestMessage();
     }
 
     protected void readBodies() throws IOException {

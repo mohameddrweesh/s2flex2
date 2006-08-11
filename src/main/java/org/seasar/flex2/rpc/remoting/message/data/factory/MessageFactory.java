@@ -18,5 +18,6 @@ package org.seasar.flex2.rpc.remoting.message.data.factory;
 import org.seasar.flex2.rpc.remoting.message.data.Message;
 
 public interface MessageFactory {
-    Message createMessage(int version);
+    Message createRequestMessage();
+    Message createResponceMessage();
 }

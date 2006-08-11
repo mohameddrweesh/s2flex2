@@ -341,10 +341,11 @@ public class Amf3MessageReaderWriterTest extends S2TestCase {
         assertEquals("11", iii, new BigDecimal(iii2));
     }
 
-    public void testString() throws Exception {
+    public void testStringAscii() throws Exception {
         assertEquals("1", "abc", convertData("abc"));
-        assertEquals("2", "あいうえお", convertData("あいうえお"));
-        assertEquals("3", "一二三四五", convertData("一二三四五"));
+    }
+    public void testStringMultiBytes() throws Exception {
+        assertEquals("1", "あいうえお一二三四五", convertData("あいうえお一二三四五"));
     }
 
     public void testXml() throws Exception {
@@ -368,7 +369,7 @@ public class Amf3MessageReaderWriterTest extends S2TestCase {
             throws Exception {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         DataOutputStream dos = new DataOutputStream(baos);
-        Message message = messageFactory.createMessage(3);
+        Message message = messageFactory.createResponceMessage();
         MessageBody body = messageBodyFactory.createBody("target", "response", data);
         message.addBody(body);
         MessageWriter writer = messageWriterFactory.createMessageWriter(dos, message);

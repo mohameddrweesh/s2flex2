@@ -17,7 +17,7 @@ package org.seasar.flex2.rpc.remoting.message.data.processor;
 
 import org.seasar.extension.unit.S2TestCase;
 import org.seasar.flex2.rpc.remoting.message.data.factory.MessageFactory;
-import org.seasar.flex2.rpc.remoting.message.data.factory.impl.ErrorInfoFactoryImpl;
+import org.seasar.flex2.rpc.remoting.message.data.factory.impl.FaultFactoryImpl;
 import org.seasar.flex2.rpc.remoting.message.data.factory.impl.MessageBodyFactoryImpl;
 import org.seasar.flex2.rpc.remoting.message.data.processor.impl.MessageBodyProcessorImpl;
 import org.seasar.framework.container.S2Container;
@@ -36,7 +36,7 @@ public class MessageBodyProcessorTest extends S2TestCase {
                 "2",
                 processorImpl.getBodyFactory() instanceof MessageBodyFactoryImpl);
         assertTrue("3",
-                processorImpl.getErrorFactory() instanceof ErrorInfoFactoryImpl);
+                processorImpl.getFaultFactory() instanceof FaultFactoryImpl);
         assertTrue("4",
                 processorImpl.getMessageFactory() instanceof MessageFactory);
 

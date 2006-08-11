@@ -18,9 +18,8 @@ package org.seasar.flex2.rpc.remoting.message.data.processor;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.util.List;
 
 public interface MessageProcessor {
-    void process(DataInputStream inputStream, DataOutputStream outputStream,
-            List headers) throws IOException;
+    void process(DataInputStream inputStream, DataOutputStream outputStream)
+            throws IOException;
 }
