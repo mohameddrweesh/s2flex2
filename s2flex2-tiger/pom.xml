@@ -7,8 +7,8 @@
   <groupId>org.seasar.flex2</groupId>
   <artifactId>s2-flex2-tiger</artifactId>
   <packaging>jar</packaging>
-  <name>S2Flex2-tiger</name>
-  <version>B3</version>
+  <name>s2flex2-tiger</name>
+  <version>1.0.0-RC1-SNAPSHOT</version>
   <description></description>
   <url>http://s2flex2.sandbox.seasar.org/</url>
   <issueManagement>
@@ -102,7 +102,7 @@
     <dependency>
       <groupId>org.seasar.flex2</groupId>
       <artifactId>s2-flex2</artifactId>
-      <version>B7</version>
+      <version>1.0.0-RC1-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>
