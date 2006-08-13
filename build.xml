@@ -2,6 +2,84 @@
 	<property file="build.properties"/>
 	<property name="ver" value="1.0.0-RC1-SNAPSHOT"/>
     <!-- ================================= 
+          target: mxmlc              
+         ================================= -->
+    <target name="mxmlc" description="make a test runner">
+	  	<java jar="${mxmlc}"
+	  	    fork="true"
+	  		failonerror="true"
+	  		maxmemory="128m"
+	  	>
+	  		<arg value="-library-path"/>
+			<arg value="${frameworks.dir}"/>
+			<arg value="${frameworks.dir}/playerglobal.swc"/>
+			<arg value="${frameworks.dir}/utilities.swc"/>
+			<arg value="${frameworks.dir}/framework.swc"/>				
+			<arg value="${frameworks.dir}/rpc.swc"/>
+			<arg value="lib/flexunit.swc"/>
+	  		<arg value="lib/FlexUnitOptional.swc"/>
+	  		<arg value="${frameworks.dir}/../locale/ja_JP"/>
+	  		<arg value="-include-libraries" />
+	        <arg value="${frameworks.dir}/../locale/ja_JP/framework_rb.swc"/>
+	  		<arg value="-load-config" />
+	  		<arg value="flex-config.xml"/>
+	  		<arg value="-locale" />
+	  		<arg value="ja_JP"/>
+	  		<arg value="-source-path" />
+	  		<arg value="src/actionscript3" />
+	  		<arg value="src/test/actionscript3" />
+			<arg value="-file-specs" />
+	  		<arg value="src/test/mxml/AntTestRunner.mxml" />
+	  		<arg value="-o" />
+	  		<arg value="bin/AntTestRunner.swf" />
+	  	</java>
+	  	<java jar="${mxmlc}"
+	  	    fork="true"
+	  		failonerror="true"
+	  		maxmemory="128m"
+	  	>
+	  		<arg value="-library-path"/>
+			<arg value="${frameworks.dir}"/>
+			<arg value="${frameworks.dir}/playerglobal.swc"/>
+			<arg value="${frameworks.dir}/utilities.swc"/>
+			<arg value="${frameworks.dir}/framework.swc"/>				
+			<arg value="${frameworks.dir}/rpc.swc"/>
+			<arg value="lib/flexunit.swc"/>
+	  		<arg value="lib/FlexUnitOptional.swc"/>
+	  		<arg value="${frameworks.dir}/../locale/ja_JP"/>
+	  		<arg value="-include-libraries" />
+	        <arg value="${frameworks.dir}/../locale/ja_JP/framework_rb.swc"/>
+	  		<arg value="-locale" />
+	  		<arg value="ja_JP"/>
+	  		<arg value="-load-config" />
+	  		<arg value="flex-config.xml"/>
+	  		<arg value="-source-path" />
+	  		<arg value="src/actionscript3" />
+	  		<arg value="src/test/actionscript3" />
+			<arg value="-file-specs" />
+	  		<arg value="src/test/mxml/TestRunner.mxml" />
+	  		<arg value="-o" />
+	  		<arg value="bin/TestRunner.swf" />
+	  	</java>    	
+    </target>
+
+    <!-- ================================= 
+          target: test              
+         ================================= -->
+	<target name="test" depends="mxmlc"  description="flex unit test with reports">	
+		<property name="report.dir" value="${basedir}/reports" />
+		<flexunit
+			swf="${basedir}/bin/AntTestRunner.swf"
+			toDir="${report.dir}" />
+		
+		<junitreport todir="${report.dir}">
+			<fileset dir="${report.dir}">
+		    	<include name="TEST-*.xml"/>
+		  	</fileset>
+		  	<report format="frames" todir="${report.dir}/html"/>
+		</junitreport>
+	</target>
+    <!-- ================================= 
           target: build              
          ================================= -->
 	<target name="build" depends="" description="creating a swc..">
@@ -35,10 +113,9 @@
     <!-- ================================= 
           target: dist              
          ================================= -->	
-	<target name="dist">
+	<target name="dist" description="dist the project..">
 		<zip zipfile="target/S2Flex2-components-${ver}.zip">
 			<zipfileset prefix="s2flex2-components" dir=".">
-				<exclude name="**/bin/**"/>
 				<exclude name="**/target/**"/>
 				<exclude name="**/generated/**"/>
 				<exclude name="**/AMF0Connection.as"/>
@@ -55,5 +132,5 @@
      			<include name="*" />
      		</fileset>
      	</delete>
-     </target>	
+     </target>
 </project>
