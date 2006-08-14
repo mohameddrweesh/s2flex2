@@ -46,7 +46,7 @@ public class AppendToGatewayUrlHeaderCreatorImpl implements
             final String sessionId = HttpSessionUtil.getSessionId(request,
                     false);
             header = messageHeaderFactory.createHeader(
-                    RemotingMessageConstants.HEADER_APPEND_TO_GATEWAYURL,
+                    RemotingMessageConstants.APPEND_TO_GATEWAYURL,
                     sessionDecorator.formatSessionId(sessionId), false);
         }
 
