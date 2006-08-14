@@ -1,7 +1,5 @@
 package org.seasar.flex2.rpc.remoting.message.io;
 
-import java.io.DataInput;
-import java.io.DataOutput;
 import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;

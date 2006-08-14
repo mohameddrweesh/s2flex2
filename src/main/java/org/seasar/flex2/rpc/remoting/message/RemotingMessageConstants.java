@@ -17,5 +17,9 @@ package org.seasar.flex2.rpc.remoting.message;
 
 public interface RemotingMessageConstants {
 
-    String HEADER_APPEND_TO_GATEWAYURL = "AppendToGatewayUrl";
+    String APPEND_TO_GATEWAYURL = "AppendToGatewayUrl";
+
+    String REMOTE_CREDENTIALS_PASSWORD = "remoteCredentialsPassword";
+
+    String REMOTE_CREDENTIALS_USERNAME = "remoteCredentialsUsername";
 }

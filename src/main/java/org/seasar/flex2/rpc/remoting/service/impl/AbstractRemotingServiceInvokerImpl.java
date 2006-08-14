@@ -19,7 +19,6 @@ import java.util.Map;
 
 import org.seasar.flex2.rpc.remoting.service.RemotingServiceInvoker;
 import org.seasar.flex2.rpc.remoting.service.RemotingServiceLocator;
-import org.seasar.flex2.rpc.remoting.service.exception.ServiceInvocationFailedRuntimeException;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.factory.BeanDescFactory;
 import org.seasar.framework.log.Logger;
@@ -27,10 +26,11 @@ import org.seasar.framework.log.Logger;
 public abstract class AbstractRemotingServiceInvokerImpl implements
         RemotingServiceInvoker {
 
-    private static final Logger logger = Logger.getLogger(RemotingServiceInvoker.class);
-    
+    private static final Logger logger = Logger
+            .getLogger(RemotingServiceInvoker.class);
+
     private Map forbiddenMethodMap;
-    
+
     protected RemotingServiceLocator remotingServiceLocator;
 
     public RemotingServiceLocator getServiceLocator() {
@@ -47,17 +47,17 @@ public abstract class AbstractRemotingServiceInvokerImpl implements
     public void setServiceLocator(RemotingServiceLocator serviceLocator) {
         this.remotingServiceLocator = serviceLocator;
     }
-    
+
     public boolean supports(final String serviceName, final String methodName,
             final Object[] args) {
         boolean isSupport = false;
-        if( !isForbiddenMethod( methodName )){
+        if (!isForbiddenMethod(methodName)) {
             isSupport = remotingServiceLocator.isSupportService(serviceName);
         }
         return isSupport;
     }
 
-    private final boolean isForbiddenMethod( final String methodName) {
+    private final boolean isForbiddenMethod(final String methodName) {
         return forbiddenMethodMap.containsKey(methodName);
     }
 
