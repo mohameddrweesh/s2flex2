@@ -20,7 +20,9 @@
 	<component
 		class="org.seasar.framework.container.cooldeploy.creator.LogicCoolCreator"/>
 	<component
-		class="org.seasar.framework.container.cooldeploy.creator.ServiceCoolCreator"/>
+		class="org.seasar.framework.container.cooldeploy.creator.ServiceCoolCreator">
+		<property name="instanceDef">@org.seasar.framework.container.deployer.InstanceDefFactory@SESSION</property>
+	</component>
 
 	<component name="snapshotProject" class="org.seasar.framework.container.cooldeploy.impl.CoolProjectImpl">
 		<property name="rootPackageName">"examples.flex2.camera.snapshot"</property>
