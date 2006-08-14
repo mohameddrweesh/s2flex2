@@ -74,8 +74,8 @@ package org.seasar.flex2.rpc.remoting {
         }
          
         public override function setRemoteCredentials(remoteUsername:String, remotePassword:String):void{
-            this.remoteUsername = remoteUsername;
-            this.remotePassword = remotePassword;
+            this.remoteCredentialsUsername = remoteUsername;
+            this.remoteCredentialsPassword = remotePassword;
         }
         
         public function onResult(result:*):void{
