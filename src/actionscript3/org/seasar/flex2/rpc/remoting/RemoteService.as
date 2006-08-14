@@ -15,29 +15,24 @@
  */
 package org.seasar.flex2.rpc.remoting {
 	
-	import mx.messaging.config.ServerConfig;
-	import org.seasar.flex2.net.NetConnection;
 	import flash.net.ObjectEncoding;
+	
+	import mx.messaging.config.ServerConfig;
+	
+	import org.seasar.flex2.net.NetConnection;
 	
 	public dynamic class RemoteService extends S2Flex2Service {
 	    
 	    [Inspectable(type="Boolean",defaultValue="false")]
    		public var useAMF0:Boolean;
    		
-   		protected override function initConnection():void{
-			_con = new org.seasar.flex2.net.NetConnection();
-			super.configureListeners(_con);
+   		protected override function createConnection():void{
+            super.createConnection();
 			if(useAMF0){
 				_con.objectEncoding = ObjectEncoding.AMF0;
 			}else{//default is AMF3
 				_con.objectEncoding = ObjectEncoding.AMF3;
 			}
-			//_con.addHeader("DescribeService", false, 0);
-			var config:XML = ServerConfig.xml;
-			if(this.gatewayUrl == null){	
-				this.gatewayUrl=config.channels.channel.(@id==config..destination.(@id==this.destination).channels.channel.@ref).endpoint.@uri.toString();
-			}
-			_con.connect(this.gatewayUrl);	
         }
 	}
 }

@@ -30,18 +30,18 @@
 	import mx.rpc.events.FaultEvent;
 	import mx.rpc.events.ResultEvent;
 	import mx.rpc.remoting.mxml.RemoteObject;
+	
 	/**
-	* 
-	*/
+	 * 
+	 */
 	use namespace flash_proxy;
+	
 	/**
 	 * S2Component Invoker
 	 * @author nod
 	 * @author sato-shi
 	 */
-	public dynamic class S2Component extends AbstractService implements IMXMLObject
-	
-	{
+	public dynamic class S2Component extends AbstractService implements IMXMLObject	{
 
 		/** @private
 		*/
@@ -71,12 +71,11 @@
 		
 		private var document:Object;
 		 
-		public function initialized(document:Object,id:String):void
-		{
+		public function initialized(document:Object,id:String):void {
 			this.document=document;
 		}
 		 
-		 private function initConnection():void{
+		private function initConnection():void{
 			_con = new NetConnection();
 			_con.objectEncoding = ObjectEncoding.AMF3;
 			_con.addHeader("DescribeService", false, 0);
