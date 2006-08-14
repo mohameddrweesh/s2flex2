@@ -55,7 +55,7 @@ public class AmfMessageReaderWriterTest extends S2TestCase {
     public void testNumber() throws Exception {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         DataOutputStream dos = new DataOutputStream(baos);
-        Message message = messageFactory.createResponceMessage();
+        Message message = messageFactory.createResponseMessage();
 
         MessageBody body = messageBodyFactory.createBody("aaa.Hoge.foo",
                 "response", new Double(1));
@@ -228,7 +228,7 @@ public class AmfMessageReaderWriterTest extends S2TestCase {
             throws Exception {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         DataOutputStream dos = new DataOutputStream(baos);
-        Message message = messageFactory.createResponceMessage();
+        Message message = messageFactory.createResponseMessage();
         MessageBody body = messageBodyFactory.createBody("target", "response",
                 data);
         message.addBody(body);

@@ -89,7 +89,7 @@ public class MessageProcessorImpl implements MessageProcessor {
     }
 
     private final void writeMessage(final Message responseMessage,
-            final OutputStream responceOutputStream) throws IOException {
+            final OutputStream responseOutputStream) throws IOException {
 
         final ByteArrayOutputStream messageOutputStream = new ByteArrayOutputStream(
                 MESSAGE_WRITING_BUFFER_SIZE);
@@ -98,7 +98,7 @@ public class MessageProcessorImpl implements MessageProcessor {
                 new DataOutputStream(messageOutputStream), responseMessage)
                 .write();
 
-        messageOutputStream.writeTo(responceOutputStream);
-        responceOutputStream.flush();
+        messageOutputStream.writeTo(responseOutputStream);
+        responseOutputStream.flush();
     }
 }

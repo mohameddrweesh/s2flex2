@@ -369,7 +369,7 @@ public class Amf3MessageReaderWriterTest extends S2TestCase {
             throws Exception {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         DataOutputStream dos = new DataOutputStream(baos);
-        Message message = messageFactory.createResponceMessage();
+        Message message = messageFactory.createResponseMessage();
         MessageBody body = messageBodyFactory.createBody("target", "response", data);
         message.addBody(body);
         MessageWriter writer = messageWriterFactory.createMessageWriter(dos, message);
