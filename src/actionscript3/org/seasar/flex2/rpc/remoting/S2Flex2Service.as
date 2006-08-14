@@ -61,9 +61,9 @@ package org.seasar.flex2.rpc.remoting {
         
         private var document:Object;
 
-        private var remoteUsername:String;
+        private var remoteCredentialsUsername:String;
        
-        private var remotePassword:String;
+        private var remoteCredentialsPassword:String;
                    
         public function S2Flex2Service(){
             super(null);
@@ -166,11 +166,19 @@ package org.seasar.flex2.rpc.remoting {
         }
         
         private function setupCredential():void{
-            if( remoteUsername != null ){
-                _con.addHeader("remoteUsername",false,remoteUsername);
-                _con.addHeader("remotePassword",false,remotePassword);
-                remoteUsername = null;
-                remotePassword = null;
+            if( remoteCredentialsUsername != null ){
+                _con.addHeader(
+                    S2Flex2ServiceConstants.REMOTE_CREDENTIALS_USERNAME,
+                    true,
+                    remoteCredentialsUsername
+                );
+                _con.addHeader(
+                    S2Flex2ServiceConstants.REMOTE_CREDENTIALS_PASSWORD,
+                    true,
+                    remoteCredentialsPassword
+                );
+                remoteCredentialsUsername = null;
+                remoteCredentialsPassword = null;
             }
         }
         
