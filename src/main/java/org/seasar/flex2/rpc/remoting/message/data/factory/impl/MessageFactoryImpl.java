@@ -25,10 +25,9 @@ public class MessageFactoryImpl implements MessageFactory {
 
     public static final String REQUEST_MESSAGE = "requestMessage";
     
-    public static final String RESPONCE_MESSAGE = "responceMessage";
+    public static final String RESPONCE_MESSAGE = "responseMessage";
     
     private final Message createMessage( String messageComponentName ) {
-        // MessageImpl message = new MessageImpl();
         Message message = (Message) container.getComponent(messageComponentName);
 
         return message;
@@ -47,7 +46,7 @@ public class MessageFactoryImpl implements MessageFactory {
         return createMessage(REQUEST_MESSAGE);
     }
 
-    public Message createResponceMessage() {
+    public Message createResponseMessage() {
         return createMessage(RESPONCE_MESSAGE);
     }
 
