@@ -13,42 +13,44 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
- package org.seasar.flex2.net{
-	import flash.net.NetConnection;
+package org.seasar.flex2.net{
+    
+    import flash.net.NetConnection;
 
-		public class NetConnection extends flash.net.NetConnection{
-		
-			private var _originalUrl:String;
-			private var append:String =null;
-			
-			public override function connect(command:String, ...rest):void{
-				_originalUrl = command;
-				super.connect(command,rest);
-			}
-			
-			public function AppendToGatewayUrl(append:String):void{
-				//TODO: experimental code 
-				// delete this Comment outcode
-				//Alert.show("appendToGatewayUrl"+ this._originalUrl + "+" + append);
-				this.append = append;
-				connect(this._originalUrl + append);
-			}
-			
-			public override function addHeader(operation:String,mustUnderstand:Boolean=false,param:Object=null):void{
-				super.addHeader(operation,mustUnderstand,param);
-			}
-			
-			public function ReplaceGatewayUrl(url:String):void{
-				//not implements.	
-				//experimental code
-				super.connect(url);
-			}
-			
-			public function get connectedUrl():String{
-				if(append!= null){
-					return _originalUrl + append;
-				}
-				return _originalUrl;
-			}
-		}
+    public class NetConnection extends flash.net.NetConnection{
+        
+        private var _originalUrl:String;
+        
+        private var append:String =null;
+        
+        public override function connect(command:String, ...rest):void{
+            _originalUrl = command;
+            super.connect(command,rest);
+        }
+        
+        public function AppendToGatewayUrl(append:String):void{
+            //TODO: experimental code 
+            // delete this Comment outcode
+            //Alert.show("appendToGatewayUrl"+ this._originalUrl + "+" + append);
+            this.append = append;
+            connect(this._originalUrl + append);
+        }
+        
+        public override function addHeader(operation:String,mustUnderstand:Boolean=false,param:Object=null):void{
+            super.addHeader(operation,mustUnderstand,param);
+        }
+        
+        public function ReplaceGatewayUrl(url:String):void{
+            //not implements.    
+            //experimental code
+            super.connect(url);
+        }
+        
+        public function get connectedUrl():String{
+            if(append!= null){
+                return _originalUrl + append;
+            }
+            return _originalUrl;
+        }
+    }
 }
