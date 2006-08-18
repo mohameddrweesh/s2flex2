@@ -7,7 +7,6 @@
 	
 	<include condition="#ENV != 'ut'" path="flex2_example-cooldeploy.dicon"/>
 
-
 	<!--
 	service register
 	-->
