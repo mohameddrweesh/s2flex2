@@ -6,12 +6,12 @@
 	<include path="flex2_example-customizer.dicon"/>
 
 	<!--
-	include config dicon
+		include config dicon
 	-->
 	<include path="snap-shot-config.dicon"/>
 
 	<!--
-	cool deploy
+		cool deploy
 	-->
 	<component
 		class="examples.flex2.cooldeploy.creator.ResolverCoolCreator"/>	
@@ -56,42 +56,5 @@
 		<initMethod name="addProject">
 			<arg>performanceProject</arg>
 		</initMethod>
-	</component>
-
-	<!--
-	service register
-	-->
-    <component
-	  class="org.seasar.framework.container.autoregister.MetaAutoRegister">
-	    <meta name="autoRegister">
-	        <meta name="RemotingService"/>
-	    </meta>
-	    <initMethod name="addClassPattern">
-	        <arg>"examples.flex2"</arg>
-	        <arg>".*ServiceImpl"</arg>
-	    </initMethod>
-	    <initMethod name="addClassPattern">
-	        <arg>"examples.flex2"</arg>
-	        <arg>".*FacadeImpl"</arg>
-	    </initMethod>
-	    <initMethod name="addIgnoreClassPattern">
-	        <arg>"examples.flex2.camera.snapshot"</arg>
-	        <arg>".*ServiceImpl"</arg>
-	    </initMethod>
-	</component>
-	<component
-	  class="org.seasar.flex2.rpc.remoting.service.autoregister.FileSystemRemotingServiceAutoRegister">
-	    <initMethod name="addClassPattern">
-	        <arg>"examples.flex2"</arg>
-	        <arg>".*ServiceImpl"</arg>
-	    </initMethod>
-	    <initMethod name="addClassPattern">
-	        <arg>"examples.flex2"</arg>
-	        <arg>".*FacadeImpl"</arg>
-	    </initMethod>
-	    <initMethod name="addIgnoreClassPattern">
-	        <arg>"examples.flex2.camera.snapshot"</arg>
-	        <arg>".*ServiceImpl"</arg>
-	    </initMethod>
 	</component>
 </components>
