@@ -17,18 +17,20 @@ package org.seasar.flex2.rpc.remoting.message.data.factory.impl;
 
 import org.seasar.flex2.rpc.remoting.message.data.MessageBody;
 import org.seasar.flex2.rpc.remoting.message.data.factory.MessageBodyFactory;
-import org.seasar.flex2.rpc.remoting.message.data.impl.MessageBodyImpl;
+import org.seasar.framework.container.S2Container;
 
 public class MessageBodyFactoryImpl implements MessageBodyFactory {
+
+    private S2Container container;
 
     private String defaultResponseTarget = "";
 
     public MessageBody createBody(String target, String response, Object data) {
         MessageBody body;
         if (response != null) {
-            body = new MessageBodyImpl(target, response, data);
+            body = createMessageBody(target, response, data);
         } else {
-            body = new MessageBodyImpl(target, getDefaultResponseTarget(), data);
+            body = createMessageBody(target, getDefaultResponseTarget(), data);
         }
         return body;
     }
@@ -39,5 +41,21 @@ public class MessageBodyFactoryImpl implements MessageBodyFactory {
 
     public void setDefaultResponseTarget(String responseTarget) {
         this.defaultResponseTarget = responseTarget;
+    }
+
+    public void setContainer(S2Container container) {
+        this.container = container;
+    }
+
+    private final MessageBody createMessageBody(final String target,
+            final String response, final Object data) {
+
+        final MessageBody body = (MessageBody) container
+                .getComponent(MessageBody.class);
+        body.setTarget(target);
+        body.setResponse(response);
+        body.setData(data);
+
+        return body;
     }
 }

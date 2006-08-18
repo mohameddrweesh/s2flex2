@@ -15,17 +15,105 @@
  */
 package org.seasar.flex2.rpc.remoting.message.data;
 
-public interface MessageBody {
+import java.util.List;
 
-    Object[] getArgs();
+public class MessageBody {
 
-    Object getData();
+    private final static Object[] EMPTY_ARGS = new Object[0];
 
-    String getResponse();
+    private Object[] args;
 
-    String getServiceMethodName();
+    private Object data;
 
-    String getServiceName();
+    private String response;
 
-    String getTarget();
+    private String serviceMethodName;
+
+    private String serviceName;
+
+    private String target;
+
+    public Object[] getArgs() {
+        if (args == null) {
+            setupData();
+        }
+        return args;
+    }
+
+    public Object getData() {
+        return data;
+    }
+
+    public String getResponse() {
+        return response;
+    }
+
+    public String getServiceMethodName() {
+        if (serviceMethodName == null) {
+            setupTarget();
+        }
+        return serviceMethodName;
+    }
+
+    public String getServiceName() {
+        if (serviceName == null) {
+            setupTarget();
+        }
+        return serviceName;
+    }
+
+    public String getTarget() {
+        return target;
+    }
+
+    public final String toString() {
+        StringBuffer buf = new StringBuffer();
+        buf.append("target=");
+        buf.append(target);
+        buf.append(",response=");
+        buf.append(response);
+        buf.append(",data=");
+        buf.append(data);
+        return buf.toString();
+    }
+
+    protected void setupData() {
+        if (data != null && data instanceof List) {
+            args = ((List) data).toArray();
+        } else {
+            args = EMPTY_ARGS;
+        }
+    }
+
+    protected void setupTarget() {
+        int dotIndex = target.lastIndexOf('.');
+        if (dotIndex > 0) {
+            serviceName = target.substring(0, dotIndex);
+            serviceMethodName = target.substring(dotIndex + 1);
+        }
+    }
+
+    public void setArgs(Object[] args) {
+        this.args = args;
+    }
+
+    public void setData(Object data) {
+        this.data = data;
+    }
+
+    public void setServiceMethodName(String serviceMethodName) {
+        this.serviceMethodName = serviceMethodName;
+    }
+
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
+    }
+
+    public void setResponse(String response) {
+        this.response = response;
+    }
+
+    public void setTarget(String target) {
+        this.target = target;
+    }
 }

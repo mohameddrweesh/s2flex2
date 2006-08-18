@@ -15,24 +15,62 @@
  */
 package org.seasar.flex2.rpc.remoting.message.data;
 
-public interface Message {
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-    void addBody(MessageBody body);
+public class Message {
 
-    void addHeader(MessageHeader header);
+    private List bodies;
 
-    MessageBody getBody(int index);
+    private Map headerMap;
 
-    int getBodySize();
+    private List headers;
 
-    MessageHeader getHeader(int index);
+    private int version;
 
-    String getHeader(String headerName);
+    public Message() {
+        bodies = new ArrayList(4);
+        headers = new ArrayList(8);
+        headerMap = new HashMap(8);
+        version = 0x03;
+    }
 
-    int getHeaderSize();
+    public void addBody(MessageBody body) {
+        bodies.add(body);
+    }
 
-    int getVersion();
+    public void addHeader(MessageHeader header) {
+        headers.add(header);
+        headerMap.put(header.getName(), header.getValue());
+    }
 
-    void setVersion(int version);
+    public MessageBody getBody(int index) {
+        return (MessageBody) bodies.get(index);
+    }
 
+    public int getBodySize() {
+        return bodies.size();
+    }
+
+    public MessageHeader getHeader(int index) {
+        return (MessageHeader) headers.get(index);
+    }
+
+    public String getHeader(String headerName) {
+        return (String) headerMap.get(headerName);
+    }
+
+    public int getHeaderSize() {
+        return headers.size();
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
+    }
 }
