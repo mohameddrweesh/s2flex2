@@ -43,7 +43,9 @@
 		class="org.seasar.flex2.rpc.remoting.message.data.MessageHeader" instance="prototype" />
 	<component
 		class="org.seasar.flex2.rpc.remoting.message.data.MessageBody" instance="prototype" />
-
+	<component
+		class="org.seasar.flex2.rpc.remoting.message.data.Fault" instance="prototype" />
+		
 	<component
 		name="messageFactory"
 		class="org.seasar.flex2.rpc.remoting.message.data.factory.impl.MessageFactoryImpl" />
