@@ -17,12 +17,23 @@ package org.seasar.flex2.rpc.remoting.message.data.factory.impl;
 
 import org.seasar.flex2.rpc.remoting.message.data.MessageHeader;
 import org.seasar.flex2.rpc.remoting.message.data.factory.MessageHeaderFactory;
-import org.seasar.flex2.rpc.remoting.message.data.impl.MessageHeaderImpl;
+import org.seasar.framework.container.S2Container;
 
 public class MessageHeaderFactoryImpl implements MessageHeaderFactory {
 
+    private S2Container container;
+    
     public MessageHeader createHeader(String name, Object value, boolean required) {
-        return new MessageHeaderImpl(name, value, required);
+        final MessageHeader header = (MessageHeader)container.getComponent(MessageHeader.class);
+        header.setName( name );
+        header.setValue( value );
+        header.setRequired( required );
+        
+        return header;
+    }
+
+    public void setContainer(S2Container container) {
+        this.container = container;
     }
 
 }

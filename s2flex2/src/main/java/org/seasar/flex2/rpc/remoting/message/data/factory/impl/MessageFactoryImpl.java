@@ -21,33 +21,33 @@ import org.seasar.framework.container.S2Container;
 
 public class MessageFactoryImpl implements MessageFactory {
 
-    private S2Container container;
-
     public static final String REQUEST_MESSAGE = "requestMessage";
-    
+
     public static final String RESPONCE_MESSAGE = "responseMessage";
     
-    private final Message createMessage( String messageComponentName ) {
-        Message message = (Message) container.getComponent(messageComponentName);
-
-        return message;
-    }
-
-    public S2Container getContainer() {
-        return container;
-    }
-
-    public void setContainer(S2Container container) {
-        this.container = container;
-    }
-
-
+    private S2Container container;
+    
     public Message createRequestMessage() {
         return createMessage(REQUEST_MESSAGE);
     }
 
     public Message createResponseMessage() {
         return createMessage(RESPONCE_MESSAGE);
+    }
+
+    public S2Container getContainer() {
+        return container;
+    }
+
+
+    public void setContainer(S2Container container) {
+        this.container = container;
+    }
+
+    private final Message createMessage( final String messageComponentName ) {
+        final Message message = (Message) container.getComponent(messageComponentName);
+
+        return message;
     }
 
 }

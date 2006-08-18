@@ -15,15 +15,47 @@
  */
 package org.seasar.flex2.rpc.remoting.message.data;
 
-public interface Fault {
+public class Fault {
 
-    String getCode();
+    private final String code = "SERVER.PROCESSING";
 
-    String getDescription();
+    private String description;
 
-    String getDetails();
+    private String details;
 
-    String getLevel();
+    private final String level = "error";
 
-    String getType();
+    private String type;
+
+    public String getCode() {
+        return code;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 }

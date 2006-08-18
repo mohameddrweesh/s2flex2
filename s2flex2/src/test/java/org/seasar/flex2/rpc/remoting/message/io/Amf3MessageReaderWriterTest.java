@@ -38,12 +38,10 @@ import org.seasar.extension.unit.S2TestCase;
 import org.seasar.flex2.core.format.amf3.io.CharsetType;
 import org.seasar.flex2.core.format.amf3.type.ByteArray;
 import org.seasar.flex2.core.format.amf3.type.factory.ByteArrayFactory;
-import org.seasar.flex2.rpc.remoting.message.data.MessageBody;
 import org.seasar.flex2.rpc.remoting.message.data.Message;
+import org.seasar.flex2.rpc.remoting.message.data.MessageBody;
 import org.seasar.flex2.rpc.remoting.message.data.factory.MessageBodyFactory;
 import org.seasar.flex2.rpc.remoting.message.data.factory.MessageFactory;
-import org.seasar.flex2.rpc.remoting.message.data.impl.MessageBodyImpl;
-import org.seasar.flex2.rpc.remoting.message.data.impl.MessageImpl;
 import org.seasar.flex2.rpc.remoting.message.io.reader.MessageReader;
 import org.seasar.flex2.rpc.remoting.message.io.reader.factory.MessageReaderFactory;
 import org.seasar.flex2.rpc.remoting.message.io.writer.MessageWriter;
@@ -268,8 +266,8 @@ public class Amf3MessageReaderWriterTest extends S2TestCase {
     public void testNumber() throws Exception {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         DataOutputStream dos = new DataOutputStream(baos);
-        Message message = new MessageImpl();
-        MessageBody body = new MessageBodyImpl("aaa.Hoge.foo", "response",
+        Message message = new Message();
+        MessageBody body = createMessageBody("aaa.Hoge.foo", "response",
                 new Double(1));
         message.addBody(body);
         MessageWriter writer = messageWriterFactory.createMessageWriter(dos, message);
@@ -295,7 +293,7 @@ public class Amf3MessageReaderWriterTest extends S2TestCase {
         assertEquals("2", "111", value2.get("aaa"));
         assertEquals("3", "222", value2.get("bbb"));
     }
-
+    
     public void testObjectForRemoteClass() throws Exception {
         Map value = new HashMap();
         value.put("_remoteClass", MyBean.class.getName());
@@ -344,10 +342,10 @@ public class Amf3MessageReaderWriterTest extends S2TestCase {
     public void testStringAscii() throws Exception {
         assertEquals("1", "abc", convertData("abc"));
     }
+
     public void testStringMultiBytes() throws Exception {
         assertEquals("1", "あいうえお一二三四五", convertData("あいうえお一二三四五"));
     }
-
     public void testXml() throws Exception {
         Document xml1 = createXmlDocument();
 
@@ -357,6 +355,42 @@ public class Amf3MessageReaderWriterTest extends S2TestCase {
 
     }
 
+    private final ByteArray createByteArrayOf(final byte[] bs) {
+        S2Container container = getContainer();
+        ByteArrayFactory bafactory = (ByteArrayFactory) container
+                .getComponent(ByteArrayFactory.class);
+
+        ByteArray bytearray = bafactory.createByteArray(bs);
+        return bytearray;
+    }
+
+    private final MessageBody createMessageBody(final String target,
+            final String response, final Object data) {
+
+        final MessageBody body = new MessageBody();
+        body.setTarget(target);
+        body.setResponse(response);
+        body.setData(data);
+
+        return body;
+    }
+
+    private final Document createXmlDocument() throws FileNotFoundException {
+        URL url = ResourceUtil
+                .getResource("testXml.xml");
+        File testXml = new File(url.getPath());
+        DocumentBuilder builder = DocumentBuilderFactoryUtil
+                .newDocumentBuilder();
+        Document xml1 = DocumentBuilderUtil.parse(builder,
+                new BufferedInputStream(new FileInputStream(testXml)));
+        return xml1;
+    }
+
+    private final String getXmlString( final Document document) {
+        Element element = document.getDocumentElement();
+        return DomUtil.toString(element);
+    }
+
     protected Object convertData(Object data) throws Exception {
         DataInputStream dis = convertDataInputStream(data);
         MessageReader reader = messageReaderFactory.createMessageReader(dis);
@@ -364,7 +398,6 @@ public class Amf3MessageReaderWriterTest extends S2TestCase {
         MessageBody body = message.getBody(0);
         return body.getData();
     }
-
     protected DataInputStream convertDataInputStream(Object data)
             throws Exception {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -378,32 +411,8 @@ public class Amf3MessageReaderWriterTest extends S2TestCase {
         ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
         return new DataInputStream(bais);
     }
-
+    
     protected void setUp() throws Exception {
         include(PATH);
-    }
-
-    private final ByteArray createByteArrayOf(final byte[] bs) {
-        S2Container container = getContainer();
-        ByteArrayFactory bafactory = (ByteArrayFactory) container
-                .getComponent(ByteArrayFactory.class);
-
-        ByteArray bytearray = bafactory.createByteArray(bs);
-        return bytearray;
-    }
-    private final Document createXmlDocument() throws FileNotFoundException {
-        URL url = ResourceUtil
-                .getResource("testXml.xml");
-        File testXml = new File(url.getPath());
-        DocumentBuilder builder = DocumentBuilderFactoryUtil
-                .newDocumentBuilder();
-        Document xml1 = DocumentBuilderUtil.parse(builder,
-                new BufferedInputStream(new FileInputStream(testXml)));
-        return xml1;
-    }
-    
-    private final String getXmlString( final Document document) {
-        Element element = document.getDocumentElement();
-        return DomUtil.toString(element);
     }
 }

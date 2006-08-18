@@ -17,12 +17,38 @@ package org.seasar.flex2.rpc.remoting.message.data.factory.impl;
 
 import org.seasar.flex2.rpc.remoting.message.data.Fault;
 import org.seasar.flex2.rpc.remoting.message.data.factory.FaultFactory;
-import org.seasar.flex2.rpc.remoting.message.data.impl.FaultImpl;
+import org.seasar.framework.container.S2Container;
 
 public class FaultFactoryImpl implements FaultFactory {
 
-    public Fault createFault(Throwable throwable) {
-        return new FaultImpl(throwable);
+    private static final String getStackTraceString(Throwable t) {
+        final StackTraceElement[] elements = t.getStackTrace();
+        final StringBuffer buf = new StringBuffer(t.toString());
+        buf.append('\n');
+        for (int i = 0; i < elements.length; ++i) {
+            buf.append(elements[i].toString());
+            buf.append('\n');
+        }
+        return buf.toString();
     }
 
+    private S2Container container;
+
+    public Fault createFault(String type, String details, String description) {
+        final Fault fault = (Fault) container.getComponent(Fault.class);
+        fault.setType(type);
+        fault.setDetails(details);
+        fault.setDescription(description);
+
+        return fault;
+    }
+
+    public Fault createFault(Throwable throwable) {
+        return createFault(throwable.getClass().getName(),
+                getStackTraceString(throwable), throwable.getMessage());
+    }
+
+    public void setContainer(S2Container container) {
+        this.container = container;
+    }
 }

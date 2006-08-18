@@ -20,30 +20,39 @@ import java.util.ArrayList;
 import junit.framework.TestCase;
 
 import org.seasar.flex2.rpc.remoting.message.data.MessageBody;
-import org.seasar.flex2.rpc.remoting.message.data.impl.MessageBodyImpl;
+
 ;
 
 public class MessageBodyTest extends TestCase {
 
-	private MessageBody body = new MessageBodyImpl("abc.def.Hoge.foo", "aaa", "111");
+    private MessageBody body;
 
-	public void testGetServiceName() {
-		assertEquals("1", "abc.def.Hoge", body.getServiceName());
-	}
+    public void testGetServiceName() {
+        assertEquals("1", "abc.def.Hoge", body.getServiceName());
+    }
 
-	public void testGetServiceMethodName() {
-		assertEquals("1", "foo", body.getServiceMethodName());
-	}
+    public void testGetServiceMethodName() {
+        assertEquals("1", "foo", body.getServiceMethodName());
+    }
 
-	public void testGetArgs() throws Exception {
-		Object[] args = body.getArgs();
-		assertEquals("1", 1, args.length);
-		assertEquals("2", "111", args[0]);
-	}
+    public void testGetArgs() throws Exception {
+        Object[] args = body.getArgs();
+        assertEquals("1", 1, args.length);
+        assertEquals("2", "111", args[0]);
+    }
 
-	protected void setUp() throws Exception {
-		ArrayList data = new ArrayList();
-		data.add("111");
-		body = new MessageBodyImpl("abc.def.Hoge.foo", "aaa", data);
-	}
+    protected void setUp() throws Exception {
+        body = createMessageBody();
+    }
+
+    private final MessageBody createMessageBody(){
+        MessageBody body = new MessageBody();
+        body.setTarget("abc.def.Hoge.foo");
+        body.setResponse("aaa");
+        ArrayList data = new ArrayList();
+        data.add("111");
+        body.setData(data);
+        
+        return body;
+    }
 }
