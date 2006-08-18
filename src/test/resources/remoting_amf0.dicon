@@ -36,10 +36,15 @@
 	-->
 	<component
 		name="requestMessage"
-		class="org.seasar.flex2.rpc.remoting.message.data.impl.MessageImpl" instance="request" />
+		class="org.seasar.flex2.rpc.remoting.message.data.Message" instance="request" />
 	<component
 		name="responseMessage"
-		class="org.seasar.flex2.rpc.remoting.message.data.impl.MessageImpl" instance="request" />
+		class="org.seasar.flex2.rpc.remoting.message.data.Message" instance="request" />
+
+	<component
+		class="org.seasar.flex2.rpc.remoting.message.data.MessageHeader" instance="prototype" />
+	<component
+		class="org.seasar.flex2.rpc.remoting.message.data.MessageBody" instance="prototype" />
 
 	<component
 		class="org.seasar.flex2.rpc.remoting.message.data.factory.impl.MessageBodyFactoryImpl" />
