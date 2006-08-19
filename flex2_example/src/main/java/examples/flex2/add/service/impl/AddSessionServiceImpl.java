@@ -1,10 +1,10 @@
 package examples.flex2.add.service.impl;
 
 import examples.flex2.add.dto.AddDto;
-import examples.flex2.add.service.AddFacade;
+import examples.flex2.add.service.AddSessionService;
 import examples.flex2.add.service.AddService;
 
-public class AddFacadeImpl implements AddFacade {
+public class AddSessionServiceImpl implements AddSessionService {
 
 	AddService addService;
 	
