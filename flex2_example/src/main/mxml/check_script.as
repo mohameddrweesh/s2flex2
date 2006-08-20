@@ -15,7 +15,7 @@ public function getCheckDto():void{
 	checkDtoService.getCheckDto();
 }
 public function getCheckList():void{
-    debug.text = "stat：" + getTimer() + "\n";
+    debug.text = "start：" + getTimer() + "\n";
 	checkDtoServiceList.getCheckDtoList();
 }
 private function initApp():void
@@ -24,7 +24,7 @@ private function initApp():void
 	checkDtoList = new Array();
 }
 public function onListResult(event:ResultEvent):void{
-    debug.text += "end：" + getTimer() + "\n";
+    debug.text += "end ：" + getTimer() + "\n";
 	this.checkDtoList=event.result as Array;
 }
 public function onResult(event:ResultEvent):void{

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.3//EN" 
-	"http://www.seasar.org/dtd/components23.dtd">
+<!DOCTYPE components PUBLIC "-//SEASAR2.4//DTD S2Container 2.4//EN" 
+	"http://www.seasar.org/dtd/components24.dtd">
 <components>
 	<include path="convention.dicon"/>
 	<include path="aop.dicon"/>
@@ -23,10 +23,12 @@
 	        <arg>"examples.flex2"</arg>
 	        <arg>".*FacadeImpl"</arg>
 	    </initMethod>
+	    <!--
 	    <initMethod name="addIgnoreClassPattern">
 	        <arg>"examples.flex2.camera.snapshot"</arg>
 	        <arg>".*ServiceImpl"</arg>
 	    </initMethod>
+	    -->
 	</component>
 	<component
 	  class="org.seasar.flex2.rpc.remoting.service.autoregister.FileSystemRemotingServiceAutoRegister">
@@ -38,9 +40,11 @@
 	        <arg>"examples.flex2"</arg>
 	        <arg>".*FacadeImpl"</arg>
 	    </initMethod>
+	    <!--
 	    <initMethod name="addIgnoreClassPattern">
 	        <arg>"examples.flex2.camera.snapshot"</arg>
 	        <arg>".*ServiceImpl"</arg>
 	    </initMethod>
+	    -->
 	</component>
 </components>

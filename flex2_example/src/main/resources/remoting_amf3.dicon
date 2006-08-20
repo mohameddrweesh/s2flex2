@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="Shift_JIS"?>
-<!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.3//EN" 
-	"http://www.seasar.org/dtd/components23.dtd">
+<!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN" 
+	"http://www.seasar.org/dtd/components24.dtd">
 <components namespace="remoting_amf3">
 	<include path="amf3.dicon"/>
 	<!-- 
@@ -33,19 +33,44 @@
 		remoting message data factory
 	-->
 	<component
-		class="org.seasar.flex2.rpc.remoting.message.data.factory.impl.MessageBodyFactoryImpl" />
+		name="requestMessage"
+		class="org.seasar.flex2.rpc.remoting.message.data.Message" instance="request" />
 	<component
-		class="org.seasar.flex2.rpc.remoting.message.data.factory.impl.ErrorInfoFactoryImpl" />
+		name="responseMessage"
+		class="org.seasar.flex2.rpc.remoting.message.data.Message" instance="request" />
+
+	<component
+		class="org.seasar.flex2.rpc.remoting.message.data.MessageHeader" instance="prototype" />
+	<component
+		class="org.seasar.flex2.rpc.remoting.message.data.MessageBody" instance="prototype" />
+	<component
+		class="org.seasar.flex2.rpc.remoting.message.data.Fault" instance="prototype" />
+		
+	<component
+		name="messageFactory"
+		class="org.seasar.flex2.rpc.remoting.message.data.factory.impl.MessageFactoryImpl" />
+	<component
+		class="org.seasar.flex2.rpc.remoting.message.data.factory.impl.MessageBodyFactoryImpl" />
 	<component
 		class="org.seasar.flex2.rpc.remoting.message.data.factory.impl.MessageHeaderFactoryImpl" />
 	<component
-		class="org.seasar.flex2.rpc.remoting.message.data.factory.impl.MessageFactoryImpl" />
+		class="org.seasar.flex2.rpc.remoting.message.data.factory.impl.FaultFactoryImpl" />
 
 	<!--
 		remoting message processor
 	-->
 	<component
-		class="org.seasar.flex2.rpc.remoting.message.data.processor.impl.MessageHeaderProcessorImpl" />
+		class="org.seasar.flex2.rpc.remoting.message.data.processor.impl.MessageHeaderProcessorImpl">
+		<initMethod name="addHeaderCreator">
+			<arg>
+				<component class="org.seasar.flex2.rpc.remoting.processor.impl.AppendToGatewayUrlHeaderCreatorImpl">
+					<property name="sessionDecorator">
+						<component class="org.seasar.flex2.util.session.impl.TomcatSessionDecoratorImpl" />
+					</property>
+				</component>
+			</arg>
+		</initMethod>
+	</component>
 	<component
 		class="org.seasar.flex2.rpc.remoting.message.data.processor.impl.MessageBodyProcessorImpl" />
 	<component
@@ -64,22 +89,10 @@
 		instance="session" />
 		
 	<!--
-		remoting service browse service 
-	-->
-	<component
-		name="browserService"
-        class="org.seasar2.flex2.rpc.remoting.service.browser.service.impl.BrowserServiceImpl">
-        <meta name="RemotingService"/>
-    </component>
-	<!--
 		remoting service
 	-->
 	<component
 	    class="org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceRepositoryImpl">
-		<initMethod name="addService">
-			<arg>"browserService"</arg>
-			<arg>container.getComponentDef("browserService")</arg>
-		</initMethod>
 	</component>
 	<component
 		class="org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceLocatorImpl" />
@@ -125,20 +138,19 @@
 			</arg>
 		</initMethod>
 	</component>
-	
+	<!--
+		remoting service browse service 
+	this components is dev only. not for use the production release.
+	-->
+	<component
+		name="browserService"
+        class="org.seasar2.flex2.rpc.remoting.service.browser.service.impl.BrowserServiceImpl">
+        <meta name="RemotingService"/>
+    </component>
+    
 	<!--
 		remoting processor
 	-->
 	<component
-		class="org.seasar.flex2.rpc.remoting.processor.impl.RemotingMessageProcessorImpl" >
-		<initMethod name="addHeaderCreator">
-			<arg>
-				<component class="org.seasar.flex2.rpc.remoting.processor.impl.AppendToGatewayUrlHeaderCreatorImpl">
-					<property name="sessionDecorator">
-						<component class="org.seasar.flex2.util.session.impl.TomcatSessionDecoratorImpl" />
-					</property>
-				</component>
-			</arg>
-		</initMethod>
-	</component>
+		class="org.seasar.flex2.rpc.remoting.processor.impl.RemotingMessageProcessorImpl" />
 </components>

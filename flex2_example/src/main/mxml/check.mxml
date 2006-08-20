@@ -36,7 +36,7 @@
 			</mx:AddChild>
 		</mx:State>
 	</mx:states>
-<mx:Script source="s2flex2_checkDto_script.as" />
+<mx:Script source="check_script.as" />
 <s2:S2Flex2Service id="checkDtoService" destination="checkDtoService"
 	result="onResult(event)" fault="onFault(event)" showBusyCursor="true" />
 <s2:S2Flex2Service id="checkDtoServiceList" destination="checkDtoService"

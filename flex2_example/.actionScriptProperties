@@ -1,27 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<actionScriptProperties mainApplicationPath="src/main/mxml/flex2_example.mxml" version="1">
-<compiler additionalCompilerArguments="-locale ja_JP --services=..\resources\flex-services.xml" copyDependentFiles="true" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="true" htmlHistoryManagement="true" htmlPlayerVersion="9.0.0" htmlPlayerVersionCheck="true" outputFolderPath="bin" sourceFolderPath="src\main\mxml" strict="true" warn="true">
-<compilerSourcePath>
-<compilerSourcePathEntry kind="1" path="${DOCUMENTS}\flex2_example\src\main\actionscript"/>
-</compilerSourcePath>
-<libraryPath>
-<libraryPathEntry kind="3" linkType="2" path="${FRAMEWORKS}/libs/playerglobal.swc"/>
-<libraryPathEntry kind="3" linkType="1" path="${FRAMEWORKS}/libs/utilities.swc"/>
-<libraryPathEntry kind="3" linkType="1" path="${FRAMEWORKS}/libs/framework.swc" sourcepath="${FRAMEWORKS}/source"/>
-<libraryPathEntry kind="3" linkType="1" path="${FRAMEWORKS}/libs/rpc.swc"/>
-<libraryPathEntry kind="3" linkType="1" path="${FRAMEWORKS}/libs/charts.swc"/>
-<libraryPathEntry kind="1" linkType="1" path="${FRAMEWORKS}/locale/{locale}"/>
-<libraryPathEntry kind="3" linkType="1" path="${DOCUMENTS}\flex2_example\src\lib\swc\s2flex2-components.swc"/>
-</libraryPath>
-<sourceAttachmentPath/>
-</compiler>
-<applications>
-<application path="s2flex2_example2.mxml"/>
-<application path="exception_example.mxml"/>
-<application path="ParamCheck.mxml"/>
-<application path="CameraSnapShotMain.mxml"/>
-<application path="flex2_example.mxml"/>
-<application path="s2flex2_checkDto_example.mxml"/>
-<application path="PerformanceTest.mxml"/>
-</applications>
+<actionScriptProperties version="1" mainApplicationPath="add.mxml">
+  <compiler additionalCompilerArguments="-locale ja_JP --services=..\resources\flex-services.xml" copyDependentFiles="true" generateAccessible="false" strict="true" warn="true" htmlGenerate="true" htmlPlayerVersionCheck="true" htmlPlayerVersion="9.0.0" htmlExpressInstall="true" htmlHistoryManagement="true" outputFolderPath="bin" sourceFolderPath="src\main\mxml">
+    <compilerSourcePath>
+      <compilerSourcePathEntry kind="1" path="${DOCUMENTS}\flex2_example\src\main\actionscript"/>
+    </compilerSourcePath>
+    <libraryPath>
+      <libraryPathEntry kind="3" path="${FRAMEWORKS}/libs/playerglobal.swc" linkType="2"/>
+      <libraryPathEntry kind="3" path="${FRAMEWORKS}/libs/utilities.swc" linkType="1"/>
+      <libraryPathEntry kind="3" path="${FRAMEWORKS}/libs/framework.swc" linkType="1" sourcepath="${FRAMEWORKS}/source"/>
+      <libraryPathEntry kind="3" path="${FRAMEWORKS}/libs/rpc.swc" linkType="1"/>
+      <libraryPathEntry kind="3" path="${FRAMEWORKS}/libs/charts.swc" linkType="1"/>
+      <libraryPathEntry kind="1" path="${FRAMEWORKS}/locale/{locale}" linkType="1"/>
+      <libraryPathEntry kind="3" path="${DOCUMENTS}\flex2_example\src\lib\swc\s2flex2-components.swc" linkType="1" sourcepath="${DOCUMENTS}\s2flex2-components\src\actionscript3"/>
+    </libraryPath>
+    <sourceAttachmentPath>
+      <sourceAttachmentPathEntry kind="3" path="${FRAMEWORKS}/libs/framework.swc" sourcepath="${FRAMEWORKS}/source"/>
+      <sourceAttachmentPathEntry kind="3" path="${DOCUMENTS}\flex2_example\src\lib\swc\s2flex2-components.swc" sourcepath="${DOCUMENTS}\s2flex2-components\src\actionscript3"/>
+    </sourceAttachmentPath>
+  </compiler>
+  <applications>
+    <application path="add.mxml"/>
+    <application path="param.mxml"/>
+    <application path="exception_example.mxml"/>
+    <application path="amf0_example.mxml"/>
+    <application path="check.mxml"/>
+    <application path="src\main\mxml\add.mxml"/>
+    <application path="CameraSnapShotMain.mxml"/>
+    <application path="src\main\mxml\check.mxml"/>
+    <application path="PerformanceTest.mxml"/>
+  </applications>
 </actionScriptProperties>
