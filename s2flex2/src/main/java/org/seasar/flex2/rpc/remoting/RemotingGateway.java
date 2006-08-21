@@ -33,7 +33,8 @@ public class RemotingGateway extends HttpServlet {
     protected RemotingMessageProcessor processor;
 
     public void init() throws ServletException {
-        S2Container container = SingletonS2ContainerFactory.getContainer();
+        S2Container container = SingletonS2ContainerFactory.getContainer()
+                .getRoot();
         processor = (RemotingMessageProcessor) container
                 .getComponent(RemotingMessageProcessor.class);
     }

@@ -44,12 +44,13 @@ public class RemotingServiceLocatorImpl implements RemotingServiceLocator {
 
     protected static final boolean canRegisterService(
             final ComponentDef componentDef) {
+        boolean canRegisterService = true;
         if (!hasRemotingServiceMetadata(componentDef)) {
             if (!hasRemotingServiceAnnotation(componentDef)) {
-                return false;
+                canRegisterService = false;
             }
         }
-        return true;
+        return canRegisterService;
     }
 
     protected S2Container container;
@@ -111,12 +112,12 @@ public class RemotingServiceLocatorImpl implements RemotingServiceLocator {
         this.repository = repository;
     }
 
-    private boolean hasServiceComponentByName(final String serviceName) {
-        S2Container root = container.getRoot();
+    private final boolean hasServiceComponentByName(final String serviceName) {
+        final S2Container root = container.getRoot();
         boolean isSupport = root.hasComponentDef(serviceName);
         if (!isSupport) {
             try {
-                Class clazz = ClassUtil.forName(serviceName);
+                final Class clazz = ClassUtil.forName(serviceName);
                 isSupport = root.hasComponentDef(clazz);
             } catch (Throwable ignore) {
             }
@@ -125,13 +126,13 @@ public class RemotingServiceLocatorImpl implements RemotingServiceLocator {
         return isSupport;
     }
 
-    protected final ComponentDef getServiceComponentDef(String serviceName) {
-        S2Container root = container.getRoot();
-        ComponentDef componentDef;
+    protected final ComponentDef getServiceComponentDef( final String serviceName) {
+        final S2Container root = container.getRoot();
+        final ComponentDef componentDef;
         if (root.hasComponentDef(serviceName)) {
             componentDef = root.getComponentDef(serviceName);
         } else {
-            Class clazz = ClassUtil.forName(serviceName);
+            final Class clazz = ClassUtil.forName(serviceName);
             componentDef = root.getComponentDef(clazz);
         }
         return componentDef;

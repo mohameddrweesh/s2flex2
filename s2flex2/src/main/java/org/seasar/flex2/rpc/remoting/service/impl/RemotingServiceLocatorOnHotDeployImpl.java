@@ -23,11 +23,23 @@ import org.seasar.framework.util.ClassUtil;
 public class RemotingServiceLocatorOnHotDeployImpl extends
         RemotingServiceLocatorImpl {
 
+    private static final void reloadComponentDef(ComponentDef componentDef) {
+        final Class[] interfaces = componentDef.getComponentClass().getInterfaces();
+        for (int i = 0; i < interfaces.length; i++) {
+            ClassUtil.forName(interfaces[i].getName());
+        }
+    }
+
     public Object getService(final String serviceName) {
         final ComponentDef serviceComponentDef = getServiceComponentDefOnHotdeploy(serviceName);
-        if (!canRegisterService(serviceComponentDef)) {
+        repository.removeService(serviceName);
+        
+        if (canRegisterService(serviceComponentDef)) {
+            repository.addService(serviceName, serviceComponentDef);
+        } else {
             throw new InvalidServiceRuntimeException(serviceName);
         }
+        
         return serviceComponentDef.getComponent();
     }
 
@@ -51,12 +63,5 @@ public class RemotingServiceLocatorOnHotDeployImpl extends
         }
         
         return reloadedComponentDef;
-    }
-
-    private final void reloadComponentDef(ComponentDef componentDef) {
-        final Class[] interfaces = componentDef.getComponentClass().getInterfaces();
-        for (int i = 0; i < interfaces.length; i++) {
-            ClassUtil.forName(interfaces[i].getName());
-        }
     }
 }
