@@ -18,26 +18,37 @@ package org.seasar.flex2.rpc.remoting.service.autoregister;
 import org.seasar.flex2.rpc.remoting.service.RemotingServiceLocator;
 import org.seasar.flex2.rpc.remoting.service.RemotingServiceRepository;
 import org.seasar.framework.container.ComponentDef;
+import org.seasar.framework.container.S2Container;
 import org.seasar.framework.container.autoregister.ComponentCustomizer;
 
 public class RemotingServiceCustomizer implements ComponentCustomizer {
+
+    private S2Container container;
 
     private RemotingServiceLocator locator;
 
     private RemotingServiceRepository repository;
 
     public void customize(ComponentDef componentDef) {
+        if (locator == null && repository == null) {
+            setupRemotingServiceComponents();
+        }
+        
         if (locator.isSupportService(componentDef)) {
-            repository.addService(componentDef.getComponentName(), componentDef);
+            repository.addService(componentDef.getComponentName(),
+                    componentDef);
         }
     }
 
-    public void setLocator(RemotingServiceLocator locator) {
-        this.locator = locator;
+    public void setContainer(S2Container container) {
+        this.container = container;
     }
 
-    public void setRepository(RemotingServiceRepository repository) {
-        this.repository = repository;
+    private final void setupRemotingServiceComponents() {
+        final S2Container container = this.container.getRoot();
+        locator = (RemotingServiceLocator) container
+                .getComponent(RemotingServiceLocator.class);
+        repository = (RemotingServiceRepository) container
+                .getComponent(RemotingServiceRepository.class);
     }
-
 }
