@@ -15,53 +15,11 @@
  */
 package org.seasar.flex2.rpc.remoting.service.impl;
 
-import org.seasar.flex2.rpc.remoting.service.exception.InvalidServiceRuntimeException;
-import org.seasar.flex2.rpc.remoting.service.exception.ServiceNotFoundRuntimeException;
-import org.seasar.framework.container.ComponentDef;
-import org.seasar.framework.util.ClassUtil;
-
 public class RemotingServiceLocatorOnHotDeployImpl extends
         RemotingServiceLocatorImpl {
 
-    private static final void reloadComponentDef(ComponentDef componentDef) {
-        final Class[] interfaces = componentDef.getComponentClass().getInterfaces();
-        for (int i = 0; i < interfaces.length; i++) {
-            ClassUtil.forName(interfaces[i].getName());
-        }
-    }
-
     public Object getService(final String serviceName) {
-        final ComponentDef serviceComponentDef = getServiceComponentDefOnHotdeploy(serviceName);
         repository.removeService(serviceName);
-        
-        if (canRegisterService(serviceComponentDef)) {
-            repository.addService(serviceName, serviceComponentDef);
-        } else {
-            throw new InvalidServiceRuntimeException(serviceName);
-        }
-        
-        return serviceComponentDef.getComponent();
-    }
-
-    private final void copyMetadata(ComponentDef sourceComponentDef, ComponentDef distComponentDef) {
-        for (int i = 0; i < sourceComponentDef.getMetaDefSize(); i++) {
-            distComponentDef.addMetaDef(sourceComponentDef.getMetaDef(i));
-        }
-    }
-
-    private final ComponentDef getServiceComponentDefOnHotdeploy(
-            final String serviceName) {
-        final ComponentDef componentDef = getServiceComponentDef(serviceName);
-        if (componentDef == null) {
-            throw new ServiceNotFoundRuntimeException(serviceName);
-        }
-        reloadComponentDef(componentDef);
-
-        final ComponentDef reloadedComponentDef = getServiceComponentDef(serviceName);
-        if( componentDef != reloadedComponentDef){
-            copyMetadata(componentDef, reloadedComponentDef);
-        }
-        
-        return reloadedComponentDef;
+        return super.getService(serviceName);
     }
 }
