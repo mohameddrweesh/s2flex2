@@ -15,16 +15,25 @@
  */
 package examples.flex2.hotdeploy.creator;
 
+import org.seasar.framework.container.autoregister.ComponentCustomizer;
 import org.seasar.framework.container.deployer.InstanceDefFactory;
-import org.seasar.framework.container.hotdeploy.creator.MultiPackageOndemandCreator;
+import org.seasar.framework.container.hotdeploy.creator.SinglePackageOndemandCreator;
 import org.seasar.framework.convention.NamingConvention;
 
-public class ResolverCreator extends MultiPackageOndemandCreator {
+public class ResolverOndemandCreator extends SinglePackageOndemandCreator {
 
-    public ResolverCreator(NamingConvention namingConvention) {
+    public ResolverOndemandCreator(NamingConvention namingConvention) {
         super(namingConvention);
-        addMiddlePackageName("naming");
+        setMiddlePackageName("naming");
         setNameSuffix("Resolver");
         setInstanceDef(InstanceDefFactory.REQUEST);
+    }
+
+    public ComponentCustomizer getResolverCustomizer() {
+        return getCustomizer();
+    }
+
+    public void setResolverCustomizer(ComponentCustomizer customizer) {
+        setCustomizer(customizer);
     }
 }

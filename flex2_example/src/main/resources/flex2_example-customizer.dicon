@@ -3,7 +3,6 @@
 	"http://www.seasar.org/dtd/components24.dtd">
 <components>
 	<include path="aop.dicon"/>
-	<include path="remoting_amf3.dicon"/>
 	
 	<component
 		name="defaultCustomizer"

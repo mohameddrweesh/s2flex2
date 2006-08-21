@@ -4,11 +4,12 @@
 <components>
 	<include path="convention.dicon"/>
 	<include path="aop.dicon"/>
+	<include path="remoting_amf3.dicon"/>
 	
 	<include condition="#ENV != 'ut'" path="flex2_example-cooldeploy.dicon"/>
 
 	<!--
-	service register
+		service register
 	-->
     <component
 	  class="org.seasar.framework.container.autoregister.MetaAutoRegister">
@@ -23,12 +24,6 @@
 	        <arg>"examples.flex2"</arg>
 	        <arg>".*FacadeImpl"</arg>
 	    </initMethod>
-	    <!--
-	    <initMethod name="addIgnoreClassPattern">
-	        <arg>"examples.flex2.camera.snapshot"</arg>
-	        <arg>".*ServiceImpl"</arg>
-	    </initMethod>
-	    -->
 	</component>
 	<component
 	  class="org.seasar.flex2.rpc.remoting.service.autoregister.FileSystemRemotingServiceAutoRegister">
@@ -40,11 +35,5 @@
 	        <arg>"examples.flex2"</arg>
 	        <arg>".*FacadeImpl"</arg>
 	    </initMethod>
-	    <!--
-	    <initMethod name="addIgnoreClassPattern">
-	        <arg>"examples.flex2.camera.snapshot"</arg>
-	        <arg>".*ServiceImpl"</arg>
-	    </initMethod>
-	    -->
 	</component>
 </components>

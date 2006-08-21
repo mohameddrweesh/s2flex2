@@ -5,34 +5,55 @@
 	<include path="convention.dicon"/>
 	<include path="flex2_example-customizer.dicon"/>
 
+	<!--
+		hot deploy
+	-->
 	<component
-		class="org.seasar.framework.container.hotdeploy.creator.ActionOndemandCreator"/>
-	<component
-		class="org.seasar.framework.container.hotdeploy.creator.DaoOndemandCreator"/>
+		class="examples.flex2.hotdeploy.creator.ResolverOndemandCreator"/>	
 	<component
 		class="org.seasar.framework.container.hotdeploy.creator.DtoOndemandCreator"/>
 	<component
-		class="org.seasar.framework.container.hotdeploy.creator.DxoOndemandCreator"/>
-	<component
-		class="org.seasar.framework.container.hotdeploy.creator.HelperOndemandCreator"/>
-	<component
 		class="org.seasar.framework.container.hotdeploy.creator.LogicOndemandCreator"/>
 	<component
-		class="org.seasar.framework.container.hotdeploy.creator.PageOndemandCreator"/>
-	<component
-		class="org.seasar.framework.container.hotdeploy.creator.ServiceOndemandCreator"/>
-	<component
-		class="org.seasar.framework.container.hotdeploy.creator.InterceptorOndemandCreator"/>
-	<component
-		class="org.seasar.framework.container.hotdeploy.creator.ValidatorOndemandCreator"/>
+		class="org.seasar.framework.container.hotdeploy.creator.ServiceOndemandCreator">
+		<property name="instanceDef">@org.seasar.framework.container.deployer.InstanceDefFactory@REQUEST</property>
+	</component>
+
+
+	<component name="performanceProject" class="org.seasar.framework.container.hotdeploy.impl.OndemandProjectImpl">
+		<property name="rootPackageName">"examples.flex2.performance"</property>
+	</component>
+	<component name="snapshotProject" class="org.seasar.framework.container.hotdeploy.impl.OndemandProjectImpl">
+		<property name="rootPackageName">"examples.flex2.camera.snapshot"</property>
+	</component>
+	<component name="addProject" class="org.seasar.framework.container.hotdeploy.impl.OndemandProjectImpl">
+		<property name="rootPackageName">"examples.flex2.add"</property>
+	</component>
+	<component name="checkProject" class="org.seasar.framework.container.hotdeploy.impl.OndemandProjectImpl">
+		<property name="rootPackageName">"examples.flex2.check"</property>
+	</component>
+	<component name="paramProject" class="org.seasar.framework.container.hotdeploy.impl.OndemandProjectImpl">
+		<property name="rootPackageName">"examples.flex2.param"</property>
+	</component>
 	
 	<component class="org.seasar.framework.container.hotdeploy.OndemandBehavior">
 		<initMethod name="addProject">
-			<arg>
-				<component class="org.seasar.framework.container.hotdeploy.impl.OndemandProjectImpl">
-					<property name="rootPackageName">"jp.co.asofarmland.member.search"</property>
-				</component>
-			</arg>
+			<arg>performanceProject</arg>
 		</initMethod>
+		<!--
+		<initMethod name="addProject">
+			<arg>addProject</arg>
+		</initMethod>
+		<initMethod name="addProject">
+			<arg>snapshotProject</arg>
+		</initMethod>
+		<initMethod name="addProject">
+			<arg>checkProject</arg>
+		</initMethod>
+		<initMethod name="addProject">
+			<arg>paramProject</arg>
+		</initMethod>
+		-->
 	</component>
+
 </components>

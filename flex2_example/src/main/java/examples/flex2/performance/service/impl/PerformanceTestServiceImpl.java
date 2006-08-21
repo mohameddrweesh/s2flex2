@@ -6,6 +6,10 @@ import java.util.Map;
 
 import examples.flex2.performance.service.PerformanceTestService;
 
+/**
+ * 
+ * @RemotingService
+ */
 public class PerformanceTestServiceImpl implements PerformanceTestService {
 
     public ArrayList getArray(int size) {
