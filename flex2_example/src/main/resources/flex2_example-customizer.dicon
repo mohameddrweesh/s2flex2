@@ -27,23 +27,6 @@
 		class="org.seasar.framework.container.autoregister.CustomizerChain">
 	</component>
 	
-	<!--
-	<component
-		name="dxoCustomizer"
-		class="org.seasar.framework.container.autoregister.CustomizerChain">
-		<initMethod name="addCustomizer">
-			<arg>defaultCustomizer</arg>
-		</initMethod>
-	</component>
-	
-	<component
-		name="helperCustomizer"
-		class="org.seasar.framework.container.autoregister.CustomizerChain">
-		<initMethod name="addCustomizer">
-			<arg>defaultCustomizer</arg>
-		</initMethod>
-	</component>
-	-->
 	<component
 		name="logicCustomizer"
 		class="org.seasar.framework.container.autoregister.CustomizerChain">
@@ -52,24 +35,12 @@
 		</initMethod>
 	</component>
 	
-	<!--
-	<component
-		name="pageCustomizer"
-		class="org.seasar.framework.container.autoregister.CustomizerChain">
-		<initMethod name="addCustomizer">
-			<arg>commandAspectCustomizer</arg>
-		</initMethod>
-	</component>
-	-->
-	
 	<component
 		name="serviceCustomizer"
 		class="org.seasar.framework.container.autoregister.CustomizerChain">
-		<!--
 		<initMethod name="addCustomizer">
 			<arg>defaultCustomizer</arg>
 		</initMethod>
-		-->
 		<initMethod name="addCustomizer">
 			<arg>remotingServiceCustomizer</arg>
 		</initMethod>
