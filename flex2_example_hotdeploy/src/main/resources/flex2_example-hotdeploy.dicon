@@ -25,11 +25,7 @@
 		class="org.seasar.framework.container.hotdeploy.creator.ServiceOndemandCreator">
 		<property name="instanceDef">@org.seasar.framework.container.deployer.InstanceDefFactory@REQUEST</property>
 	</component>
-	<!--
-	<component name="performanceProject" class="org.seasar.framework.container.hotdeploy.impl.OndemandProjectImpl">
-		<property name="rootPackageName">"examples.flex2.performance"</property>
-	</component>
-	-->
+
 	<component name="snapshotProject" class="org.seasar.framework.container.hotdeploy.impl.OndemandProjectImpl">
 		<property name="rootPackageName">"examples.flex2.camera.snapshot"</property>
 	</component>
@@ -38,10 +34,5 @@
 		<initMethod name="addProject">
 			<arg>snapshotProject</arg>
 		</initMethod>
-		<!--
-		<initMethod name="addProject">
-			<arg>performanceProject</arg>
-		</initMethod>
-		-->
 	</component>
 </components>
