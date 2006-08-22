@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>flex2_example_hotdeploy</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>com.adobe.flexbuilder.project.flexbuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.codehaus.backport175.ide.eclipse.core.project.BpAnnotationBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.seasar.kijimuna.core.builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.seasar.kijimuna.core.validator</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.codehaus.backport175.ide.eclipse.core.project.BpProjectNature</nature>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+		<nature>com.sysdeo.eclipse.tomcat.tomcatnature</nature>
+		<nature>com.adobe.flexbuilder.project.flexnature</nature>
+		<nature>com.adobe.flexbuilder.project.actionscriptnature</nature>
+		<nature>org.seasar.kijimuna.core.nature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>[source path] actionscript</name>
+			<type>2</type>
+			<location>E:/profile/s2flex/workspace2/flex2_example_hotdeploy/src/main/actionscript</location>
+		</link>
+	</linkedResources>
+</projectDescription>

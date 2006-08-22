@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actionScriptProperties mainApplicationPath="add.mxml" version="1">
+<compiler additionalCompilerArguments="-locale ja_JP --services=..\resources\flex-services.xml" copyDependentFiles="true" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="true" htmlHistoryManagement="true" htmlPlayerVersion="9.0.0" htmlPlayerVersionCheck="true" outputFolderPath="bin" sourceFolderPath="src\main\mxml" strict="true" warn="true">
+<compilerSourcePath>
+<compilerSourcePathEntry kind="1" path="${DOCUMENTS}\flex2_example_hotdeploy\src\main\actionscript"/>
+</compilerSourcePath>
+<libraryPath>
+<libraryPathEntry kind="3" linkType="2" path="${FRAMEWORKS}/libs/playerglobal.swc"/>
+<libraryPathEntry kind="3" linkType="1" path="${FRAMEWORKS}/libs/utilities.swc"/>
+<libraryPathEntry kind="3" linkType="1" path="${FRAMEWORKS}/libs/flex.swc" sourcepath="${FRAMEWORKS}/source"/>
+<libraryPathEntry kind="3" linkType="1" path="${FRAMEWORKS}/libs/framework.swc" sourcepath="${FRAMEWORKS}/source"/>
+<libraryPathEntry kind="3" linkType="1" path="${FRAMEWORKS}/libs/rpc.swc"/>
+<libraryPathEntry kind="3" linkType="1" path="${FRAMEWORKS}/libs/charts.swc" sourcepath="${FRAMEWORKS}/source"/>
+<libraryPathEntry kind="1" linkType="1" path="${FRAMEWORKS}/locale/{locale}"/>
+<libraryPathEntry kind="3" linkType="1" path="${DOCUMENTS}\flex2_example_hotdeploy\src\lib\swc\s2flex2-components.swc"/>
+</libraryPath>
+<sourceAttachmentPath>
+<sourceAttachmentPathEntry kind="3" path="${FRAMEWORKS}/libs/flex.swc" sourcepath="${FRAMEWORKS}/source"/>
+<sourceAttachmentPathEntry kind="3" path="${FRAMEWORKS}/libs/framework.swc" sourcepath="${FRAMEWORKS}/source"/>
+<sourceAttachmentPathEntry kind="3" path="${FRAMEWORKS}/libs/charts.swc" sourcepath="${FRAMEWORKS}/source"/>
+</sourceAttachmentPath>
+</compiler>
+<applications>
+<application path="CameraSnapShotMain.mxml"/>
+<application path="PerformanceTest.mxml"/>
+</applications>
+</actionScriptProperties>

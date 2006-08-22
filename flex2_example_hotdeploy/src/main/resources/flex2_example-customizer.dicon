@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN" 
+	"http://www.seasar.org/dtd/components24.dtd">
+<components>
+	<include path="aop.dicon"/>
+	
+	<component
+		name="defaultCustomizer"
+		class="org.seasar.framework.container.autoregister.AspectCustomizer">
+		<property name="interceptorName">"aop.traceInterceptor"</property>
+	</component>
+
+	<component
+		name="commandAspectCustomizer"
+		class="org.seasar.framework.container.autoregister.AspectCustomizer">
+		<property name="interceptorName">"aop.traceInterceptor"</property>
+		<property name="pointcut">"do.*, initialize"</property>
+	</component>
+	
+	<component 
+		name="dtoCustomizer"
+		class="org.seasar.framework.container.autoregister.CustomizerChain">
+	</component>
+	
+	<component
+		name="logicCustomizer"
+		class="org.seasar.framework.container.autoregister.CustomizerChain">
+		<initMethod name="addCustomizer">
+			<arg>defaultCustomizer</arg>
+		</initMethod>
+	</component>
+	
+	<component
+		name="serviceCustomizer"
+		class="org.seasar.framework.container.autoregister.CustomizerChain">
+		<initMethod name="addCustomizer">
+			<arg>defaultCustomizer</arg>
+		</initMethod>
+	</component>
+	
+	<component
+		name="resolverCustomizer"
+		class="org.seasar.framework.container.autoregister.CustomizerChain">
+	</component>
+
+	<component
+		name="configCustomizer"
+		class="org.seasar.framework.container.autoregister.CustomizerChain">
+	</component>
+</components>
