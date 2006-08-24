@@ -52,7 +52,7 @@ public class SnapshotSaveLogicImpl implements SnapshotSaveLogic {
 
     private final String createFileName() {
         return snapshotServiceConfig.getPrefix()
-                + fileNameResolver.getFileName(null)
+                + fileNameResolver.getFileName("")
                 + snapshotServiceConfig.getSuffix();
     }
 

@@ -14,16 +14,12 @@
 		class="examples.flex2.hotdeploy.creator.ResolverOndemandCreator"/>
 	<component
 		class="org.seasar.framework.container.hotdeploy.creator.DtoOndemandCreator">
-		<property name="instanceDef">@org.seasar.framework.container.deployer.InstanceDefFactory@REQUEST</property>
 	</component>
 	<component
 		class="org.seasar.framework.container.hotdeploy.creator.LogicOndemandCreator">
-		<property name="instanceDef">@org.seasar.framework.container.deployer.InstanceDefFactory@REQUEST</property>
 	</component>
-			
 	<component
 		class="org.seasar.framework.container.hotdeploy.creator.ServiceOndemandCreator">
-		<property name="instanceDef">@org.seasar.framework.container.deployer.InstanceDefFactory@REQUEST</property>
 	</component>
 
 	<component name="snapshotProject" class="org.seasar.framework.container.hotdeploy.impl.OndemandProjectImpl">
