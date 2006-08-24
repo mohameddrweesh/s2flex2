@@ -7,7 +7,7 @@
 	<include path="remoting_amf3.dicon"/>
 	
 	<include condition="#ENV != 'ut'" path="flex2_example-cooldeploy.dicon"/>
-	<include path="flex2_example_hotdeploy.dicon" />
+
 	<!--
 		service register
 	-->

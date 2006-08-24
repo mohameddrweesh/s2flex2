@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN" 
+    "http://www.seasar.org/dtd/components24.dtd">
+<components namespace="amf0">
+    <!--
+        reader/writer share data components
+    -->
+    <component
+    	class="org.seasar.flex2.core.format.amf.type.impl.AmfSharedObjectImpl"
+    	instance="request" />
+    <component
+    	class="org.seasar.flex2.core.format.amf.type.factory.impl.AmfSharedObjectFactoryImpl" />
+
+    <!-- 
+        data reader components
+    -->
+    <component
+    	name="amfNumberReaderImpl"
+    	class="org.seasar.flex2.core.format.amf.io.reader.impl.AmfNumberReaderImpl" />
+    <component
+    	name="amfBooleanReaderImpl"
+    	class="org.seasar.flex2.core.format.amf.io.reader.impl.AmfBooleanReaderImpl" />
+    <component
+    	name="amfStringReaderImpl" 
+    	class="org.seasar.flex2.core.format.amf.io.reader.impl.AmfStringReaderImpl" />
+    <component
+    	name="amfObjectReaderImpl" 
+    	class="org.seasar.flex2.core.format.amf.io.reader.impl.AmfObjectReaderImpl" />
+    <component
+    	name="amfNullReaderImpl" 
+    	class="org.seasar.flex2.core.format.amf.io.reader.impl.AmfNullReaderImpl" />
+    <component 
+    	name="amfFlushedSharedObjectReaderImpl" 
+    	class="org.seasar.flex2.core.format.amf.io.reader.impl.AmfFlushedSharedObjectReaderImpl" />
+    <component
+    	name="amfArraySharedObjectReaderImpl" 
+    	class="org.seasar.flex2.core.format.amf.io.reader.impl.AmfArraySharedObjectReaderImpl" />
+    <component
+    	name="amfArrayReaderImpl" 
+    	class="org.seasar.flex2.core.format.amf.io.reader.impl.AmfArrayReaderImpl" />
+    <component
+    	name="amfDateImpl" 
+    	class="org.seasar.flex2.core.format.amf.io.reader.impl.AmfDateReaderImpl" />
+    <component
+    	name="amfASObjectReaderImpl" 
+    	class="org.seasar.flex2.core.format.amf.io.reader.impl.AmfASObjectReaderImpl" />
+    <component
+    	name="amfXmlReaderImpl" 
+    	class="org.seasar.flex2.core.format.amf.io.reader.impl.AmfXmlReaderImpl" />
+    <component
+    	name="amfCustomClassReaderImpl" 
+    	class="org.seasar.flex2.core.format.amf.io.reader.impl.AmfCustomClassReaderImpl" />
+
+    <component
+        class="org.seasar.flex2.core.format.amf.io.reader.factory.impl.AmfDataReaderFactoryImpl">
+        <property name="readerMap">
+            <component class="org.seasar.framework.util.ArrayMap">
+                <initMethod name="put">
+                    <arg>@org.seasar.flex2.core.format.amf.type.AmfTypeDef@TYPE_NUMBER</arg>
+                    <arg>amfNumberReaderImpl</arg>
+                </initMethod>
+                <initMethod name="put">
+                    <arg>@org.seasar.flex2.core.format.amf.type.AmfTypeDef@TYPE_BOOLEAN</arg>
+                    <arg>amfBooleanReaderImpl</arg>
+                </initMethod>
+                <initMethod name="put">
+                    <arg>@org.seasar.flex2.core.format.amf.type.AmfTypeDef@TYPE_STRING</arg>
+                    <arg>amfStringReaderImpl</arg>
+                </initMethod>
+                <initMethod name="put">
+                    <arg>@org.seasar.flex2.core.format.amf.type.AmfTypeDef@TYPE_OBJECT</arg>
+                    <arg>amfObjectReaderImpl</arg>
+                </initMethod>
+                <initMethod name="put">
+                    <arg>@org.seasar.flex2.core.format.amf.type.AmfTypeDef@TYPE_NULL</arg>
+                    <arg>amfNullReaderImpl</arg>
+                </initMethod>
+                <initMethod name="put">
+                    <arg>@org.seasar.flex2.core.format.amf.type.AmfTypeDef@TYPE_FLUSHED_SHARED_OBJECT</arg>
+                    <arg>amfFlushedSharedObjectReaderImpl</arg>
+                </initMethod>
+                <initMethod name="put">
+                    <arg>@org.seasar.flex2.core.format.amf.type.AmfTypeDef@TYPE_ARRAY_SHARED_OBJECT</arg>
+                    <arg>amfArraySharedObjectReaderImpl</arg>
+                </initMethod>
+                <initMethod name="put">
+                    <arg>@org.seasar.flex2.core.format.amf.type.AmfTypeDef@TYPE_ARRAY</arg>
+                    <arg>amfArrayReaderImpl</arg>
+                </initMethod>
+                <initMethod name="put">
+                    <arg>@org.seasar.flex2.core.format.amf.type.AmfTypeDef@TYPE_DATE</arg>
+                    <arg>amfDateImpl</arg>
+                </initMethod>
+                <initMethod name="put">
+                    <arg>@org.seasar.flex2.core.format.amf.type.AmfTypeDef@TYPE_AS_OBJECT</arg>
+                    <arg>amfASObjectReaderImpl</arg>
+                </initMethod>
+                <initMethod name="put">
+                    <arg>@org.seasar.flex2.core.format.amf.type.AmfTypeDef@TYPE_XML</arg>
+                    <arg>amfXmlReaderImpl</arg>
+                </initMethod>
+                <initMethod name="put">
+                    <arg>@org.seasar.flex2.core.format.amf.type.AmfTypeDef@TYPE_CUSTOM_CLASS</arg>
+                    <arg>amfCustomClassReaderImpl</arg>
+                </initMethod>
+            </component>
+        </property>
+    </component>
+
+    <!-- 
+        data writer components
+    -->
+    <component
+	    name="amfStringWriterImpl" 
+	    class="org.seasar.flex2.core.format.amf.io.writer.impl.AmfStringWriterImpl"
+	    autoBinding="none" />
+    <component 
+	    name="amfBigDecimalWriterImpl" 
+	    class="org.seasar.flex2.core.format.amf.io.writer.impl.AmfBigDecimalWriterImpl" 
+	    autoBinding="none" />
+    <component 
+	    name="amfNumberWriterImpl" 
+	    class="org.seasar.flex2.core.format.amf.io.writer.impl.AmfNumberWriterImpl" 
+	    autoBinding="none" />
+    <component 
+	    name="amfBooleanWriterImpl" 
+	    class="org.seasar.flex2.core.format.amf.io.writer.impl.AmfBooleanWriterImpl" 
+	    autoBinding="none" />
+    <component 
+	    name="amfDateWriterImpl"
+	    class="org.seasar.flex2.core.format.amf.io.writer.impl.AmfDateWriterImpl" 
+	    autoBinding="none" />
+    <component 
+	    name="amfArrayWriterImpl" 
+	    class="org.seasar.flex2.core.format.amf.io.writer.impl.AmfArrayWriterImpl" 
+	    autoBinding="property" />
+    <component 
+	    name="amfIteratorWriterImpl" 
+	    class="org.seasar.flex2.core.format.amf.io.writer.impl.AmfIteratorWriterImpl" 
+	    autoBinding="property" />
+    <component 
+	    name="amfCollectionWriterImpl" 
+	    class="org.seasar.flex2.core.format.amf.io.writer.impl.AmfCollectionWriterImpl" 
+	    autoBinding="property" />
+    <component 
+	    name="amfXmlWriterImpl" 
+	    class="org.seasar.flex2.core.format.amf.io.writer.impl.AmfXmlWriterImpl" 
+	    autoBinding="none" />
+    <component 
+	    name="amfObjectWriterImpl" 
+	    class="org.seasar.flex2.core.format.amf.io.writer.impl.AmfObjectWriterImpl" 
+	    autoBinding="property" />
+    <component 
+	    name="amfCustomClassWriterImpl" 
+	    class="org.seasar.flex2.core.format.amf.io.writer.impl.AmfCustomClassWriterImpl" 
+	    autoBinding="property" />
+
+    <component
+        class="org.seasar.flex2.core.format.amf.io.writer.factory.impl.AmfDataWriterFactoryImpl">
+        <property name="writerMap" >
+            <component class="org.seasar.framework.util.ArrayMap">
+                <initMethod name="put">
+                    <arg>@java.lang.String@class</arg>
+                    <arg>amfStringWriterImpl</arg>
+                </initMethod>
+                <initMethod name="put">
+                    <arg>@java.math.BigDecimal@class</arg>
+                    <arg>amfBigDecimalWriterImpl</arg>
+                </initMethod>
+                <initMethod name="put">
+                    <arg>@java.lang.Number@class</arg>
+                    <arg>amfNumberWriterImpl</arg>
+                </initMethod>
+                <initMethod name="put">
+                    <arg>@java.lang.Boolean@class</arg>
+                    <arg>amfBooleanWriterImpl</arg>
+                </initMethod>
+                <initMethod name="put">
+                    <arg>@java.util.Date@class</arg>
+                    <arg>amfDateWriterImpl</arg>
+                </initMethod>
+                <initMethod name="put">
+                    <arg>@java.lang.reflect.Array@class</arg>
+                    <arg>amfArrayWriterImpl</arg>
+                </initMethod>
+                <initMethod name="put">
+                    <arg>@java.util.Iterator@class</arg>
+                    <arg>amfIteratorWriterImpl</arg>
+                </initMethod>
+                <initMethod name="put">
+                    <arg>@java.util.Collection@class</arg>
+                    <arg>amfCollectionWriterImpl</arg>
+                </initMethod>
+                <initMethod name="put">
+                    <arg>@java.util.Map@class</arg>
+                    <arg>amfObjectWriterImpl</arg>
+                </initMethod>
+                <initMethod name="put">
+                    <arg>@java.lang.Class@class</arg>
+                    <arg>amfCustomClassWriterImpl</arg>
+                </initMethod>
+                <initMethod name="put">
+                    <arg>@org.w3c.dom.Document@class</arg>
+                    <arg>amfXmlWriterImpl</arg>
+                </initMethod>
+            </component>
+        </property>
+    </component>
+</components>

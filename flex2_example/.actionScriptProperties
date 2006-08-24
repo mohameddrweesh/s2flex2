@@ -16,6 +16,7 @@
 <sourceAttachmentPath/>
 </compiler>
 <applications>
+<application path="add.mxml"/>
 <application path="exception_example.mxml"/>
 <application path="CameraSnapShotMain.mxml"/>
 <application path="PerformanceTest.mxml"/>

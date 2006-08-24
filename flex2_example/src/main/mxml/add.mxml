@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:s2="http://www.seasar.org/s2flex2/mxml" xmlns="*"  layout="absolute" >
 <mx:Script source="add_script.as" />
-<s2:S2Flex2Service id="amf" destination="addService" 
-	result="onResult(event)" fault="onFault(event)" showBusyCursor="true" />
-<s2:S2Flex2Service id="amf2" destination="addSessionService" 
-	result="onResultData(event)" fault="onFaultData(event)" showBusyCursor="true" />	
+<s2:RemoteService id="amf" destination="addService" 
+	result="onResult(event)" fault="onFault(event)" showBusyCursor="true" useAMF0="true"/>
+<s2:RemoteService id="amf2" destination="addSessionService" 
+	result="onResultData(event)" fault="onFaultData(event)" showBusyCursor="true" useAMF0="true"/>	
 
 	<mx:Label x="122" y="48" text="+" height="20"/>
 	<mx:Label x="215" y="48" text="=" height="20"/>
