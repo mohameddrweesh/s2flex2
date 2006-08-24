@@ -12,8 +12,8 @@ public class SnapshotServiceConfig {
     private String suffix;
 
     public SnapshotServiceConfig(){
-        rootPath = "E:\\profile\\s2flex\\workspace2\\flex2_example_hotdeploy\\snapshot\\";
-        rootUri = "http://localhost/flex2_example_hotdeploy/snapshot/";
+        rootPath = "${DOCUMENTS}\\flex2_example_hotdeploy\\snapshot\\";
+        rootUri = "http://localhost:8080/flex2_example_hotdeploy/snapshot/";
         prefix = "snapshot_";
         suffix = ".png";
     }
