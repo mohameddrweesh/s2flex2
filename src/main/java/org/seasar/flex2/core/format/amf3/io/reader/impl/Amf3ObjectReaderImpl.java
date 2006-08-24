@@ -20,10 +20,10 @@ import java.io.Externalizable;
 import java.io.IOException;
 
 import org.seasar.flex2.core.format.amf.io.reader.AmfDataReader;
-import org.seasar.flex2.core.format.amf.type.AmfObject;
 import org.seasar.flex2.core.format.amf3.Amf3Constants;
 import org.seasar.flex2.core.format.amf3.io.ExternalObjectInput;
 import org.seasar.flex2.core.format.amf3.io.factory.ExternalObjectInputFactory;
+import org.seasar.flex2.core.format.amf3.type.Amf3Object;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
 import org.seasar.framework.beans.factory.BeanDescFactory;
@@ -69,7 +69,7 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
     private final Object readASObjectData(final DataInputStream inputStream)
             throws IOException {
 
-        final AmfObject object = new AmfObject();
+        final Amf3Object object = new Amf3Object();
         addObjectReference(object);
         while (true) {
             String propertyName = (String) stringReader.read(inputStream);
@@ -84,7 +84,7 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
     private final Class readClassDef(final int objectDef,
             final DataInputStream inputStream) throws IOException {
 
-        Class clazz = AmfObject.class;
+        Class clazz = Amf3Object.class;
 
         switch (objectDef & Amf3Constants.CLASS_DEF_INLINE) {
 
@@ -140,8 +140,9 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
         return propertyNames;
     }
 
-    private final Object readExternalizableObjectData(int objectDef,
-            Class clazz, DataInputStream inputStream) throws IOException {
+    private final Object readExternalizableObjectData(final int objectDef,
+            final Class clazz, final DataInputStream inputStream)
+            throws IOException {
         final Externalizable externalObject = (Externalizable) ClassUtil
                 .newInstance(clazz);
         addObjectReference(externalObject);
@@ -169,7 +170,7 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
                 break;
             }
 
-            if (clazz == AmfObject.class) {
+            if (clazz == Amf3Object.class) {
                 object = readASObjectData(inputStream);
                 break;
             }
