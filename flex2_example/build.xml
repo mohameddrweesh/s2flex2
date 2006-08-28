@@ -1,6 +1,6 @@
 <project name="flex2-example" default="dist" basedir=".">
 
-	<property name="ver" value="B7"/>
+	<property name="ver" value="rc-1"/>
 
 	<target name="dist">
 		<delete includeemptydirs="true" failonerror="false">
