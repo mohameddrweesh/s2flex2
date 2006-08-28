@@ -1,5 +1,5 @@
 <project name="s2flex2-backport175" default="dist" basedir=".">
-	<property name="ver" value="B3"/>
+	<property name="ver" value="rc-1"/>
 
 	<target name="dist">
 		<zip zipfile="target/S2Flex2-backport175-${ver}.zip">
