@@ -33,19 +33,21 @@ public class RemotingGateway extends HttpServlet {
     protected RemotingMessageProcessor processor;
 
     public void init() throws ServletException {
-        S2Container container = SingletonS2ContainerFactory.getContainer()
-                .getRoot();
+        final S2Container container = SingletonS2ContainerFactory
+                .getContainer().getRoot();
         processor = (RemotingMessageProcessor) container
                 .getComponent(RemotingMessageProcessor.class);
     }
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws IOException, ServletException {
+    public void doGet(final HttpServletRequest request,
+            final HttpServletResponse response) throws IOException,
+            ServletException {
         response.getWriter().write("RemotingGateway is running on http ...");
     }
 
-    public void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws IOException, ServletException {
+    public void doPost(final HttpServletRequest request,
+            final HttpServletResponse response) throws IOException,
+            ServletException {
         request.getSession(true);
         response.setContentType(RemotingConstants.CONTENT_TYPE);
         processor.process(request, response);

@@ -63,7 +63,7 @@ public abstract class AbstractRemotingServiceInvokerImpl implements
 
     protected final Object invokeServiceMethod(final Object service,
             final String methodName, final Object[] args) throws Throwable {
-        BeanDesc beanDesc = BeanDescFactory.getBeanDesc(service.getClass());
+        final BeanDesc beanDesc = BeanDescFactory.getBeanDesc(service.getClass());
         try {
             return beanDesc.invoke(service, methodName, args);
         } catch (Throwable throwable) {

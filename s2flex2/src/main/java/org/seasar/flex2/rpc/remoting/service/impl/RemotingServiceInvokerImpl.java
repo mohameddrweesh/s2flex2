@@ -18,8 +18,8 @@ package org.seasar.flex2.rpc.remoting.service.impl;
 public class RemotingServiceInvokerImpl extends
         AbstractRemotingServiceInvokerImpl {
 
-    public Object invoke(String serviceName, String methodName, Object[] args)
-            throws Throwable {
+    public Object invoke(final String serviceName, final String methodName,
+            final Object[] args) throws Throwable {
         final Object service = remotingServiceLocator.getService(serviceName);
         return invokeServiceMethod(service, methodName, args);
     }

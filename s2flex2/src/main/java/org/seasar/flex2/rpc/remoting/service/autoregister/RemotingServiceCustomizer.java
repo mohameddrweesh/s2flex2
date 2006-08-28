@@ -29,7 +29,7 @@ public class RemotingServiceCustomizer implements ComponentCustomizer {
 
     private RemotingServiceRepository repository;
 
-    public void customize(ComponentDef componentDef) {
+    public void customize( final ComponentDef componentDef) {
         if (locator == null && repository == null) {
             setupRemotingServiceComponents();
         }

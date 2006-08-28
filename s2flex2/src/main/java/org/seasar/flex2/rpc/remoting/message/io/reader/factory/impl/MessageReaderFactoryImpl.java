@@ -30,7 +30,7 @@ public class MessageReaderFactoryImpl implements MessageReaderFactory {
 
     public MessageReader createMessageReader(
             final DataInputStream dataInputStream) {
-        AmfMessageReaderImpl reader = (AmfMessageReaderImpl) container
+        final AmfMessageReaderImpl reader = (AmfMessageReaderImpl) container
                 .getComponent(messageReaderClass);
         reader.config(dataInputStream);
 

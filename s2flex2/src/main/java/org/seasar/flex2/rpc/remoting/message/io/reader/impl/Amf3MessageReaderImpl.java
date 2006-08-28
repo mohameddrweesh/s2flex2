@@ -50,8 +50,7 @@ public class Amf3MessageReaderImpl extends AmfMessageReaderImpl implements
     }
 
     protected void readHeader() throws IOException {
-
-        int headerCount = inputStream.readUnsignedShort();
+        final int headerCount = inputStream.readUnsignedShort();
         for (int i = 0; i < headerCount; ++i) {
             String name = inputStream.readUTF();
             boolean isRequired = inputStream.readBoolean();
@@ -60,7 +59,7 @@ public class Amf3MessageReaderImpl extends AmfMessageReaderImpl implements
         }
     }
     
-    protected void readVersion() throws IOException {
+    protected final void readVersion() throws IOException {
         message.setVersion(inputStream.readUnsignedShort());
     }
 }

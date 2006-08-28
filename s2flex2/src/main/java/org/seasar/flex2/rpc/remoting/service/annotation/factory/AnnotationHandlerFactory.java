@@ -51,5 +51,4 @@ public class AnnotationHandlerFactory {
     
     protected AnnotationHandlerFactory() {
     }
-
 }
