@@ -1,4 +1,4 @@
-<project name="flex2-example" default="dist" basedir=".">
+<project name="flex2-example_hotdeploy" default="dist" basedir=".">
 
 	<property name="ver" value="rc-1"/>
 
@@ -7,7 +7,7 @@
 			<fileset dir="target"/>
 		</delete>
 		<mkdir dir="target"/>
-		<zip zipfile="target/flex2-example-${ver}.zip">
+		<zip zipfile="target/flex2-example_hotdeploy-${ver}.zip">
 			<zipfileset prefix="flex2_example_hotdeploy" dir=".">				
 				<include name="WEB-INF"/>
 				<include name="WEB-INF/**"/>
