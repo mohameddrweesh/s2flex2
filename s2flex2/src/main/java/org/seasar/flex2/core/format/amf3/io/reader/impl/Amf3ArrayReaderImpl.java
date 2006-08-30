@@ -17,27 +17,41 @@ package org.seasar.flex2.core.format.amf3.io.reader.impl;
 
 import java.io.DataInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+
+import org.seasar.flex2.core.format.amf.io.reader.AmfDataReader;
 
 public class Amf3ArrayReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
 
+    private AmfDataReader stringReader;
+    
     public Object read(final DataInputStream inputStream) throws IOException {
         return readObject(inputStream);
     }
 
-    private final List readArrayData(final int arrayDef,
+    private final Object[] readArrayData(final int arrayDef,
             final DataInputStream inputStream) throws IOException {
         final int arrayLength = arrayDef >> 1;
-        final List array = new ArrayList(arrayLength);
+        final Object[] array = new Object[arrayLength];
         addObjectReference(array);
+        
+        readHashArrayData(inputStream);
 
-        byte dataType = inputStream.readByte(); // class define byte
         for (int i = 0; i < arrayLength; i++) {
-            dataType = inputStream.readByte();
-            array.add(writeElementData(dataType, inputStream));
+            array[i] = readPropertyValue(inputStream);
         }
         return array;
+    }
+
+    private final void readHashArrayData(
+            final DataInputStream inputStream) throws IOException {
+        String propertyName;
+        while (true) {
+            propertyName = (String) stringReader.read(inputStream);
+            if (propertyName.length() <= 0) {
+                break;
+            }
+            readPropertyValue(inputStream);
+        }
     }
 
     protected final Object readInlinedObject(final int reference,
@@ -48,5 +62,9 @@ public class Amf3ArrayReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
     protected final Object readReferencedObject(final int reference,
             final DataInputStream inputStream) {
         return getObjectAt(reference >>> 1);
+    }
+
+    public void setStringReader(AmfDataReader stringReader) {
+        this.stringReader = stringReader;
     }
 }

@@ -18,6 +18,14 @@ package org.seasar.flex2.core.format.amf3.io.reader.impl;
 import java.io.DataInputStream;
 import java.io.Externalizable;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import org.seasar.flex2.core.format.amf.io.reader.AmfDataReader;
 import org.seasar.flex2.core.format.amf3.Amf3Constants;
@@ -32,19 +40,31 @@ import org.seasar.framework.util.ClassUtil;
 
 public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
 
-    private static final void setupObjectProperties(final Object object,
-            final String[] propertyNames, final Object[] propertyValues) {
-        final int propertiesNumber = propertyNames.length;
-        final BeanDesc beanDesc = BeanDescFactory
-                .getBeanDesc(object.getClass());
+    private static final Object convertArrayData(final Class clazz,
+            final Object[] value) {
+        Object result = value;
 
-        PropertyDesc propertyDef;
-        for (int i = 0; i < propertiesNumber; i++) {
-            if (beanDesc.hasPropertyDesc(propertyNames[i])) {
-                propertyDef = beanDesc.getPropertyDesc(propertyNames[i]);
-                if (propertyDef.hasWriteMethod()) {
-                    propertyDef.setValue(object, propertyValues[i]);
-                }
+        if (List.class.isAssignableFrom(clazz)) {
+            result = new ArrayList(Arrays.asList(value));
+        } else if (SortedSet.class.isAssignableFrom(clazz)) {
+            result = new TreeSet(Arrays.asList(value));
+        } else if (Set.class.isAssignableFrom(clazz)) {
+            result = new HashSet(Arrays.asList(value));
+        } else if (Collection.class.isAssignableFrom(clazz)) {
+            result = new ArrayList(Arrays.asList(value));
+        }
+
+        return result;
+    }
+
+    private static final void setObjectProperty(final Object object,
+            PropertyDesc propertyDef, final Object propertyValue) {
+        if (propertyValue != null) {
+            if (propertyValue.getClass().isArray()) {
+                propertyDef.setValue(object, convertArrayData(propertyDef
+                        .getPropertyType(), (Object[]) propertyValue));
+            } else {
+                propertyDef.setValue(object, propertyValue);
             }
         }
     }
@@ -71,8 +91,9 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
 
         final Amf3Object object = new Amf3Object();
         addObjectReference(object);
+        String propertyName;
         while (true) {
-            String propertyName = (String) stringReader.read(inputStream);
+            propertyName = (String) stringReader.read(inputStream);
             if (propertyName.length() <= 0) {
                 break;
             }
@@ -81,10 +102,35 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
         return object;
     }
 
+    private Class readClass(final int objectDef,
+            final DataInputStream inputStream) throws IOException {
+        Class clazz = null;
+        final String className = (String) stringReader.read(inputStream);
+        
+        switch (objectDef & Amf3Constants.OBJECT_ENCODING_TYPE) {
+            case Amf3Constants.OBJECT_PROPERTY_LIST_ENCODED:
+            case Amf3Constants.OBJECT_SINGLE_PROPERTY:
+                clazz = ClassUtil.forName(className);
+                break;
+
+            case Amf3Constants.OBJECT_NAME_VALUE_ENCODED:
+                if( className.length() == 0 ){
+                    clazz = Amf3Object.class;
+                }
+                break;
+
+            default:
+        }
+
+        addClassReference(clazz);
+
+        return clazz;
+    }
+
     private final Class readClassDef(final int objectDef,
             final DataInputStream inputStream) throws IOException {
 
-        Class clazz = Amf3Object.class;
+        Class clazz = null;
 
         switch (objectDef & Amf3Constants.CLASS_DEF_INLINE) {
 
@@ -93,11 +139,7 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
                 break;
 
             case Amf3Constants.CLASS_DEF_INLINE:
-                String className = (String) stringReader.read(inputStream);
-                if (className.length() > 0) {
-                    clazz = ClassUtil.forName(className);
-                }
-                addClassReference(clazz);
+                clazz = readClass(objectDef, inputStream);
                 break;
         }
 
@@ -117,7 +159,7 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
         final Object[] propertyValues = readPropertyValues(propertyNames,
                 inputStream);
 
-        setupObjectProperties(object, propertyNames, propertyValues);
+        setObjectProperties(object, propertyNames, propertyValues);
 
         return object;
     }
@@ -200,12 +242,6 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
         return propertyNames;
     }
 
-    private final Object readPropertyValue(final DataInputStream inputStream)
-            throws IOException {
-        final byte dataType = inputStream.readByte();
-        return writeElementData(dataType, inputStream);
-    }
-
     private final Object[] readPropertyValues(final String[] propertyNames,
             final DataInputStream inputStream) throws IOException {
         final Object[] propertyValues = new Object[propertyNames.length];
@@ -213,6 +249,23 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
             propertyValues[i] = readPropertyValue(inputStream);
         }
         return propertyValues;
+    }
+
+    private final void setObjectProperties(final Object object,
+            final String[] propertyNames, final Object[] propertyValues) {
+        final int propertiesNumber = propertyNames.length;
+        final BeanDesc beanDesc = BeanDescFactory
+                .getBeanDesc(object.getClass());
+
+        PropertyDesc propertyDef;
+        for (int i = 0; i < propertiesNumber; i++) {
+            if (beanDesc.hasPropertyDesc(propertyNames[i])) {
+                propertyDef = beanDesc.getPropertyDesc(propertyNames[i]);
+                if (propertyDef.hasWriteMethod()) {
+                    setObjectProperty(object, propertyDef, propertyValues[i]);
+                }
+            }
+        }
     }
 
     protected final Object readInlinedObject(final int reference,

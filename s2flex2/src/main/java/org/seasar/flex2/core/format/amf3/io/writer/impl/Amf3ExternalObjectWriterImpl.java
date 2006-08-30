@@ -38,7 +38,7 @@ public class Amf3ExternalObjectWriterImpl extends
             final DataOutputStream outputStream) throws IOException {
         int classDef = Amf3Constants.OBJECT_INLINE;
         classDef |= Amf3Constants.CLASS_DEF_INLINE;
-        classDef |= Amf3Constants.PROPERTY_DEF_SINGLE;
+        classDef |= Amf3Constants.OBJECT_SINGLE_PROPERTY;
         writeIntData(classDef, outputStream);
     }
 

@@ -65,33 +65,33 @@ public class Amf3MessageReaderWriterTest extends S2TestCase {
     public MessageReaderFactory messageReaderFactory;
 
     public MessageWriterFactory messageWriterFactory;
-
+    
     public void testArrayForArray() throws Exception {
         Object[] value = new Object[] { "111", "222" };
-        List value2 = (List) convertData(value);
-        assertEquals("1", 2, value2.size());
-        assertEquals("2", "111", value2.get(0));
-        assertEquals("3", "222", value2.get(1));
+        Object[] value2 = (Object[]) convertData(value);
+        assertEquals("1", 2, value2.length);
+        assertEquals("2", "111", value2[0]);
+        assertEquals("3", "222", value2[1]);
     }
 
     public void testArrayForArrayList() throws Exception {
         List value = new ArrayList();
         value.add("111");
         value.add("222");
-        List value2 = (List) convertData(value);
-        assertEquals("1", 2, value2.size());
-        assertEquals("2", "111", value2.get(0));
-        assertEquals("3", "222", value2.get(1));
+        Object[] value2 = (Object[]) convertData(value);
+        assertEquals("1", 2, value2.length);
+        assertEquals("2", "111", value2[0]);
+        assertEquals("3", "222", value2[1]);
     }
 
     public void testArrayForIterator() throws Exception {
         List value = new ArrayList();
         value.add("111");
         value.add("222");
-        List value2 = (List) convertData(value.iterator());
-        assertEquals("1", 2, value2.size());
-        assertEquals("2", "111", value2.get(0));
-        assertEquals("3", "222", value2.get(1));
+        Object[] value2 = (Object[]) convertData(value.iterator());
+        assertEquals("1", 2, value2.length);
+        assertEquals("2", "111", value2[0]);
+        assertEquals("3", "222", value2[1]);
     }
 
     public void testBoolean() throws Exception {
@@ -239,11 +239,11 @@ public class Amf3MessageReaderWriterTest extends S2TestCase {
             value.add("" + i);
         }
 
-        List value2 = (List) convertData(value);
-        assertEquals("1", 100, value2.size());
+        Object[] value2 = (Object[]) convertData(value);
+        assertEquals("1", 100, value2.length);
 
         for (int i = 0; i < 100; i++) {
-            assertEquals("2", "" + i, value2.get(i));
+            assertEquals("2", "" + i, value2[i]);
         }
     }
 
@@ -327,10 +327,10 @@ public class Amf3MessageReaderWriterTest extends S2TestCase {
         assertEquals("4", "4", value2.get("Ddd"));
         assertEquals("5", Boolean.TRUE, value2.get("Eee"));
         assertEquals("6", new Date(5), value2.get("Fff"));
-        List ggg2 = (List) value2.get("Ggg");
-        assertEquals("7", 2, ggg2.size());
-        Map b4 = (Map) ggg2.get(0);
-        Map b5 = (Map) ggg2.get(1);
+        Object[] ggg2 = (Object[]) value2.get("Ggg");
+        assertEquals("7", 2, ggg2.length);
+        Map b4 = (Map) ggg2[0];
+        Map b5 = (Map) ggg2[1];
         assertEquals("8", new Double(2), b4.get("Aaa"));
         assertEquals("9", new Double(3), b5.get("Aaa"));
         Map hhh2 = (Map) value2.get("Hhh");
@@ -346,6 +346,7 @@ public class Amf3MessageReaderWriterTest extends S2TestCase {
     public void testStringMultiBytes() throws Exception {
         assertEquals("1", "あいうえお一二三四五", convertData("あいうえお一二三四五"));
     }
+    
     public void testXml() throws Exception {
         Document xml1 = createXmlDocument();
 

@@ -54,7 +54,7 @@ public class Amf3InitializedObjectWriterImpl extends
         addClassReference(object.getClass());
         int classDef = Amf3Constants.OBJECT_INLINE;
         classDef |= Amf3Constants.CLASS_DEF_INLINE;
-        classDef |= Amf3Constants.PROPERTY_DEF_WITH_VALUE;
+        classDef |= Amf3Constants.OBJECT_NAME_VALUE_ENCODED;
         writeIntData(classDef, outputStream);
         outputStream.writeByte(Amf3Constants.EMPTY_STRING_DATA);
     }
