@@ -17,8 +17,11 @@ package org.seasar.flex2.rpc.remoting.message.io;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
+import java.util.SortedSet;
 
 import org.seasar.flex2.core.format.amf3.type.ByteArray;
 import org.w3c.dom.Document;
@@ -47,6 +50,14 @@ public class MyBean {
 
     private BigDecimal iii;
 
+    private Collection jjj;
+    
+    private Set kkk;
+    
+    private SortedSet lll;
+    
+    private Object[] mmm;
+    
     public int getAaa() {
         return aaa;
     }
@@ -85,6 +96,22 @@ public class MyBean {
 
     public BigDecimal getIii() {
         return iii;
+    }
+
+    public Collection getJjj() {
+        return jjj;
+    }
+
+    public Set getKkk() {
+        return kkk;
+    }
+
+    public SortedSet getLll() {
+        return lll;
+    }
+
+    public Object[] getMmm() {
+        return mmm;
     }
 
     public boolean isEee() {
@@ -133,5 +160,21 @@ public class MyBean {
 
     public void setIii(BigDecimal iii) {
         this.iii = iii;
+    }
+
+    public void setJjj(Collection jjj) {
+        this.jjj = jjj;
+    }
+
+    public void setKkk(Set kkk) {
+        this.kkk = kkk;
+    }
+
+    public void setLll(SortedSet lll) {
+        this.lll = lll;
+    }
+
+    public void setMmm(Object[] mmm) {
+        this.mmm = mmm;
     }
 }

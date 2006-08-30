@@ -51,6 +51,7 @@ public class Amf3TypedClassObjectWriterImpl extends
             final DataOutputStream outputStream) throws IOException {
         int classDef = Amf3Constants.OBJECT_INLINE;
         classDef |= Amf3Constants.CLASS_DEF_INLINE;
+        classDef |= Amf3Constants.OBJECT_PROPERTY_LIST_ENCODED;
         classDef = (beanDesc.getPropertyDescSize() << 4) | classDef;
         writeIntData(classDef, outputStream);
     }
