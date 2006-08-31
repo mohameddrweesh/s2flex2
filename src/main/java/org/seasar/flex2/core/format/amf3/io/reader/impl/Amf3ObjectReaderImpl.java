@@ -18,103 +18,53 @@ package org.seasar.flex2.core.format.amf3.io.reader.impl;
 import java.io.DataInputStream;
 import java.io.Externalizable;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
-import org.seasar.flex2.core.format.amf.io.reader.AmfDataReader;
 import org.seasar.flex2.core.format.amf3.Amf3Constants;
-import org.seasar.flex2.core.format.amf3.io.ExternalObjectInput;
-import org.seasar.flex2.core.format.amf3.io.factory.ExternalObjectInputFactory;
+import org.seasar.flex2.core.format.amf3.io.reader.ASObjectReader;
+import org.seasar.flex2.core.format.amf3.io.reader.ClassTypedObjectReader;
+import org.seasar.flex2.core.format.amf3.io.reader.ExternalObjectReader;
 import org.seasar.flex2.core.format.amf3.type.Amf3Object;
-import org.seasar.framework.beans.BeanDesc;
-import org.seasar.framework.beans.PropertyDesc;
-import org.seasar.framework.beans.factory.BeanDescFactory;
-import org.seasar.framework.exception.ClassNotFoundRuntimeException;
 import org.seasar.framework.util.ClassUtil;
 
 public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
 
-    private static final Object convertArrayData(final Class clazz,
-            final Object[] value) {
-        Object result = value;
+    private ASObjectReader asobjectReader;
 
-        if (List.class.isAssignableFrom(clazz)) {
-            result = new ArrayList(Arrays.asList(value));
-        } else if (SortedSet.class.isAssignableFrom(clazz)) {
-            result = new TreeSet(Arrays.asList(value));
-        } else if (Set.class.isAssignableFrom(clazz)) {
-            result = new HashSet(Arrays.asList(value));
-        } else if (Collection.class.isAssignableFrom(clazz)) {
-            result = new ArrayList(Arrays.asList(value));
-        }
+    private ClassTypedObjectReader classTypedObjectReader;
 
-        return result;
-    }
-
-    private static final void setObjectProperty(final Object object,
-            PropertyDesc propertyDef, final Object propertyValue) {
-        if (propertyValue != null) {
-            if (propertyValue.getClass().isArray()) {
-                propertyDef.setValue(object, convertArrayData(propertyDef
-                        .getPropertyType(), (Object[]) propertyValue));
-            } else {
-                propertyDef.setValue(object, propertyValue);
-            }
-        }
-    }
-
-    private ExternalObjectInputFactory externalizeDataInputFactory;
-
-    private AmfDataReader stringReader;
+    private ExternalObjectReader externalObjectReader;
 
     public Object read(final DataInputStream inputStream) throws IOException {
         return readObject(inputStream);
     }
 
-    public void setExternalizeDataInputFactory(
-            ExternalObjectInputFactory dataInputFactory) {
-        this.externalizeDataInputFactory = dataInputFactory;
+    public void setAsobjectReader(ASObjectReader asobjectReader) {
+        this.asobjectReader = asobjectReader;
     }
 
-    public void setStringReader(AmfDataReader stringReader) {
-        this.stringReader = stringReader;
+    public void setClassTypedObjectReader(
+            ClassTypedObjectReader classTypedObjectReader) {
+        this.classTypedObjectReader = classTypedObjectReader;
     }
 
-    private final Object readASObjectData(final DataInputStream inputStream)
-            throws IOException {
-
-        final Amf3Object object = new Amf3Object();
-        addObjectReference(object);
-        String propertyName;
-        while (true) {
-            propertyName = (String) stringReader.read(inputStream);
-            if (propertyName.length() <= 0) {
-                break;
-            }
-            object.put(propertyName, readPropertyValue(inputStream));
-        }
-        return object;
+    public void setExternalObjectReader(
+            ExternalObjectReader externalObjectReader) {
+        this.externalObjectReader = externalObjectReader;
     }
 
     private Class readClass(final int objectDef,
             final DataInputStream inputStream) throws IOException {
         Class clazz = null;
         final String className = (String) stringReader.read(inputStream);
-        
+
         switch (objectDef & Amf3Constants.OBJECT_ENCODING_TYPE) {
             case Amf3Constants.OBJECT_PROPERTY_LIST_ENCODED:
-            case Amf3Constants.OBJECT_SINGLE_PROPERTY:
+            case Amf3Constants.OBJECT_SINGLE_PROPERTY_ENCODED:
                 clazz = ClassUtil.forName(className);
                 break;
 
             case Amf3Constants.OBJECT_NAME_VALUE_ENCODED:
-                if( className.length() == 0 ){
+                if (className.length() == 0) {
                     clazz = Amf3Object.class;
                 }
                 break;
@@ -146,60 +96,6 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
         return clazz;
     }
 
-    private final Object readClassObjectData(final int objectDef,
-            final Class clazz, final DataInputStream inputStream)
-            throws IOException {
-
-        final Object object = ClassUtil.newInstance(clazz);
-        addObjectReference(object);
-
-        final String[] propertyNames = readClassProperties(objectDef, clazz,
-                inputStream);
-
-        final Object[] propertyValues = readPropertyValues(propertyNames,
-                inputStream);
-
-        setObjectProperties(object, propertyNames, propertyValues);
-
-        return object;
-    }
-
-    private final String[] readClassProperties(final int objectDef,
-            final Class clazz, final DataInputStream inputStream)
-            throws IOException {
-
-        final String[] propertyNames;
-        switch (objectDef & Amf3Constants.CLASS_DEF_INLINE) {
-
-            case Amf3Constants.CLASS_DEF_INLINE:
-                propertyNames = readProperties(objectDef, clazz, inputStream);
-                break;
-
-            default:
-                propertyNames = getPropertiesOf(clazz);
-
-        }
-        return propertyNames;
-    }
-
-    private final Object readExternalizableObjectData(final int objectDef,
-            final Class clazz, final DataInputStream inputStream)
-            throws IOException {
-        final Externalizable externalObject = (Externalizable) ClassUtil
-                .newInstance(clazz);
-        addObjectReference(externalObject);
-
-        final ExternalObjectInput input = externalizeDataInputFactory
-                .createObjectInput(inputStream);
-        try {
-            externalObject.readExternal(input);
-        } catch (ClassNotFoundException e) {
-            throw new ClassNotFoundRuntimeException(e);
-        }
-
-        return externalObject;
-    }
-
     private final Object readObjectData(final int objectDef,
             final DataInputStream inputStream) throws IOException {
 
@@ -213,59 +109,19 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
             }
 
             if (clazz == Amf3Object.class) {
-                object = readASObjectData(inputStream);
+                object = asobjectReader.read(inputStream);
                 break;
             }
 
             if (Externalizable.class.isAssignableFrom(clazz)) {
-                object = readExternalizableObjectData(objectDef, clazz,
-                        inputStream);
+                object = externalObjectReader.read(clazz, inputStream);
                 break;
             }
 
-            object = readClassObjectData(objectDef, clazz, inputStream);
+            object = classTypedObjectReader.read(objectDef, clazz, inputStream);
         } while (false);
 
         return object;
-    }
-
-    private final String[] readProperties(final int objectDef,
-            final Class clazz, final DataInputStream inputStream)
-            throws IOException {
-        final int propertyNumber = objectDef >>> 4;
-        final String[] propertyNames = new String[propertyNumber];
-        for (int i = 0; i < propertyNumber; i++) {
-            propertyNames[i] = (String) stringReader.read(inputStream);
-        }
-        addClassProperties(clazz, propertyNames);
-
-        return propertyNames;
-    }
-
-    private final Object[] readPropertyValues(final String[] propertyNames,
-            final DataInputStream inputStream) throws IOException {
-        final Object[] propertyValues = new Object[propertyNames.length];
-        for (int i = 0; i < propertyNames.length; i++) {
-            propertyValues[i] = readPropertyValue(inputStream);
-        }
-        return propertyValues;
-    }
-
-    private final void setObjectProperties(final Object object,
-            final String[] propertyNames, final Object[] propertyValues) {
-        final int propertiesNumber = propertyNames.length;
-        final BeanDesc beanDesc = BeanDescFactory
-                .getBeanDesc(object.getClass());
-
-        PropertyDesc propertyDef;
-        for (int i = 0; i < propertiesNumber; i++) {
-            if (beanDesc.hasPropertyDesc(propertyNames[i])) {
-                propertyDef = beanDesc.getPropertyDesc(propertyNames[i]);
-                if (propertyDef.hasWriteMethod()) {
-                    setObjectProperty(object, propertyDef, propertyValues[i]);
-                }
-            }
-        }
     }
 
     protected final Object readInlinedObject(final int reference,

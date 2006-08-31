@@ -42,13 +42,13 @@ import org.seasar.flex2.core.format.amf3.io.writer.impl.Amf3BigDecimalWriterImpl
 import org.seasar.flex2.core.format.amf3.io.writer.impl.Amf3BooleanWriterImpl;
 import org.seasar.flex2.core.format.amf3.io.writer.impl.Amf3CollectionWriterImpl;
 import org.seasar.flex2.core.format.amf3.io.writer.impl.Amf3DateWriterImpl;
-import org.seasar.flex2.core.format.amf3.io.writer.impl.Amf3InitializedObjectWriterImpl;
+import org.seasar.flex2.core.format.amf3.io.writer.impl.Amf3ASObjectWriterImpl;
 import org.seasar.flex2.core.format.amf3.io.writer.impl.Amf3IntegerWriterImpl;
 import org.seasar.flex2.core.format.amf3.io.writer.impl.Amf3IteratorWriterImpl;
 import org.seasar.flex2.core.format.amf3.io.writer.impl.Amf3NullWriterImpl;
 import org.seasar.flex2.core.format.amf3.io.writer.impl.Amf3NumberWriterImpl;
 import org.seasar.flex2.core.format.amf3.io.writer.impl.Amf3StringWriterImpl;
-import org.seasar.flex2.core.format.amf3.io.writer.impl.Amf3TypedClassObjectWriterImpl;
+import org.seasar.flex2.core.format.amf3.io.writer.impl.Amf3ClassTypedObjectWriterImpl;
 import org.seasar.flex2.core.format.amf3.io.writer.impl.Amf3XmlWriterImpl;
 import org.seasar.framework.container.S2Container;
 import org.seasar.framework.util.DocumentBuilderFactoryUtil;
@@ -101,13 +101,13 @@ public class Amf3DataWriterFactoryTest extends S2TestCase {
         assertTrue("9", writer instanceof Amf3CollectionWriterImpl);
 
         writer = factory.createDataWriter(new HashMap());
-        assertTrue("10", writer instanceof Amf3InitializedObjectWriterImpl);
+        assertTrue("10", writer instanceof Amf3ASObjectWriterImpl);
 
         writer = factory.createDataWriter(createXmlDocument());
         assertTrue("11", writer instanceof Amf3XmlWriterImpl);
 
         writer = factory.createDataWriter(new Object());
-        assertTrue("12", writer instanceof Amf3TypedClassObjectWriterImpl);
+        assertTrue("12", writer instanceof Amf3ClassTypedObjectWriterImpl);
     }
 
     public void testCreateDataValueWriter() throws Exception {
@@ -147,13 +147,13 @@ public class Amf3DataWriterFactoryTest extends S2TestCase {
         assertTrue("10", writer instanceof Amf3CollectionWriterImpl);
 
         writer = factory.createDataValueWriter(new HashMap());
-        assertTrue("11", writer instanceof Amf3InitializedObjectWriterImpl);
+        assertTrue("11", writer instanceof Amf3ASObjectWriterImpl);
 
         writer = factory.createDataValueWriter(createXmlDocument());
         assertTrue("12", writer instanceof Amf3XmlWriterImpl);
 
         writer = factory.createDataValueWriter(new Object());
-        assertTrue("13", writer instanceof Amf3TypedClassObjectWriterImpl);
+        assertTrue("13", writer instanceof Amf3ClassTypedObjectWriterImpl);
     }
 
     private Document createXmlDocument() throws FileNotFoundException {
