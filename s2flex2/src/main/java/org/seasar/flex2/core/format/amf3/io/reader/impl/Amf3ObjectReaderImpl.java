@@ -70,6 +70,8 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
                 break;
 
             default:
+                throw new RuntimeException("unknown object encoding. "
+                        + "objectDef is [" + objectDef + "].");
         }
 
         addClassReference(clazz);
