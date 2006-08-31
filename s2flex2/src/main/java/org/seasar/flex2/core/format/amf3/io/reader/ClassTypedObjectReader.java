@@ -13,29 +13,12 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.core.format.amf3;
+package org.seasar.flex2.core.format.amf3.io.reader;
 
-public interface Amf3Constants {
+import java.io.DataInputStream;
+import java.io.IOException;
 
-    byte CLASS_DEF_INLINE = 0x02;
-
-    byte CLASS_DEF_REFERENCE = 0x00;
-
-    byte EMPTY_STRING_DATA = 0x01;
-
-    int INTEGER_MAX = 0xFFFFFFF;
-
-    int INTEGER_MIN = -0xFFFFFFF;
-
-    byte OBJECT_INLINE = 0x01;
-
-    byte OBJECT_REFERENCE = 0x00;
-
-    byte OBJECT_ENCODING_TYPE = 0x0C;
-
-    byte OBJECT_PROPERTY_LIST_ENCODED = 0x00;
-    
-    byte OBJECT_NAME_VALUE_ENCODED = 0x08;
-
-    byte OBJECT_SINGLE_PROPERTY_ENCODED = 0x04;
+public interface ClassTypedObjectReader {
+    Object read(int objectDef, final Class clazz,
+            final DataInputStream inputStream) throws IOException;
 }

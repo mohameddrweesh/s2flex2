@@ -24,7 +24,7 @@ import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
 import org.seasar.framework.beans.factory.BeanDescFactory;
 
-public class Amf3TypedClassObjectWriterImpl extends
+public class Amf3ClassTypedObjectWriterImpl extends
         AbstractAmf3ClassObjectWriterImpl {
 
     public int getDataTypeValue() {

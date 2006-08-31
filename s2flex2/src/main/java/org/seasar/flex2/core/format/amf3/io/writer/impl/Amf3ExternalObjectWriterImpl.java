@@ -25,7 +25,7 @@ import org.seasar.flex2.core.format.amf3.io.factory.ExternalObjectOutputFactory;
 import org.seasar.framework.beans.BeanDesc;
 
 public class Amf3ExternalObjectWriterImpl extends
-        Amf3TypedClassObjectWriterImpl {
+        Amf3ClassTypedObjectWriterImpl {
 
     private ExternalObjectOutputFactory externalizeDataOutputFactory;
 
@@ -38,7 +38,7 @@ public class Amf3ExternalObjectWriterImpl extends
             final DataOutputStream outputStream) throws IOException {
         int classDef = Amf3Constants.OBJECT_INLINE;
         classDef |= Amf3Constants.CLASS_DEF_INLINE;
-        classDef |= Amf3Constants.OBJECT_SINGLE_PROPERTY;
+        classDef |= Amf3Constants.OBJECT_SINGLE_PROPERTY_ENCODED;
         writeIntData(classDef, outputStream);
     }
 

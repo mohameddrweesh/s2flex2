@@ -23,7 +23,7 @@ import java.util.Map;
 import org.seasar.flex2.core.format.amf3.Amf3Constants;
 import org.seasar.flex2.core.format.amf3.type.Amf3TypeDef;
 
-public class Amf3InitializedObjectWriterImpl extends
+public class Amf3ASObjectWriterImpl extends
         AbstractAmf3ClassObjectWriterImpl {
 
     public int getDataTypeValue() {

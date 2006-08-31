@@ -84,6 +84,22 @@
 		<property name="stringReader">amf3StringReaderImpl</property>
 	</component>
 	<component
+		name="amf3ASObjectReaderImpl"
+		class="org.seasar.flex2.core.format.amf3.io.reader.impl.Amf3ASObjectReaderImpl"
+	    autoBinding="property">
+		<property name="stringReader">amf3StringReaderImpl</property>
+	</component>
+	<component
+		name="amf3ExternalObjectReaderImpl"
+		class="org.seasar.flex2.core.format.amf3.io.reader.impl.Amf3ExternalObjectReaderImpl"
+	    autoBinding="property"/>
+	<component
+		name="amf3ClassTypedObjectReader"
+		class="org.seasar.flex2.core.format.amf3.io.reader.impl.Amf3ClassTypedObjectReaderImpl"
+	    autoBinding="property">
+		<property name="stringReader">amf3StringReaderImpl</property>
+	</component>
+	<component
 		name="amf3ObjectReaderImpl"
 		class="org.seasar.flex2.core.format.amf3.io.reader.impl.Amf3ObjectReaderImpl"
 	    autoBinding="property">
@@ -250,11 +266,11 @@
 	    autoBinding="property" />
 	<component
 		name="amf3InitializedObjectWriterImpl"
-		class="org.seasar.flex2.core.format.amf3.io.writer.impl.Amf3InitializedObjectWriterImpl" 
+		class="org.seasar.flex2.core.format.amf3.io.writer.impl.Amf3ASObjectWriterImpl" 
 	    autoBinding="property" />
 	<component
 		name="amf3TypedClassObjectWriterImpl"
-		class="org.seasar.flex2.core.format.amf3.io.writer.impl.Amf3TypedClassObjectWriterImpl" 
+		class="org.seasar.flex2.core.format.amf3.io.writer.impl.Amf3ClassTypedObjectWriterImpl" 
 	    autoBinding="property" />
 	<component
 		name="amf3ExternalObjectWriterImpl"
