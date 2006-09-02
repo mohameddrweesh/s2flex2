@@ -19,7 +19,7 @@
 				<include name="bin"/>
 				<include name="bin/**"/>
 				<include name=".*"/>
-				<include name="index.html" />
+				<include name="*" />
 			</zipfileset>
 		</zip>
 	</target>
