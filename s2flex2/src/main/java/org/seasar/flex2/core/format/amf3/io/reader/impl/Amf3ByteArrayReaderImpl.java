@@ -25,7 +25,7 @@ public class Amf3ByteArrayReaderImpl extends AbstractAmf3ObjectReaderImpl {
 
     private ByteArrayFactory byteArrayFactory;
 
-    private final int READ_BUFFER_SIZE = 1024 * 8;
+    private final int READ_BUFFER_SIZE = 1024 * 4;
 
     public ByteArrayFactory getByteArrayFactory() {
         return byteArrayFactory;
