@@ -3,6 +3,9 @@ package examples.flex2.add.service.impl;
 import examples.flex2.add.dto.AddDto;
 import examples.flex2.add.service.AddService;
 
+/**
+ * @org.seasar.flex2.rpc.remoting.service.annotation.RemotingService
+ */
 public class AddServiceImpl implements AddService {
 
 	private AddDto addDto;
