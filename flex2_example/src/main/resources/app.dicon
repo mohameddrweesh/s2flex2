@@ -4,8 +4,10 @@
 <components>
 	<include path="convention.dicon"/>
 	<include path="aop.dicon"/>
+	<!-- if connect to AMF0 switch the bellow. -->
+	<!-- include path="remoting_amf0.dicon"/ -->
 	<include path="remoting_amf3.dicon"/>
-	
+
 	<include condition="#ENV != 'ut'" path="flex2_example-cooldeploy.dicon"/>
 
 	<!--
