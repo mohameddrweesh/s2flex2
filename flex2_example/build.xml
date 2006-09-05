@@ -1,6 +1,6 @@
 <project name="flex2-example" default="dist" basedir=".">
 
-	<property name="ver" value="rc-1"/>
+	<property name="ver" value="rc-2"/>
 
 	<target name="dist">
 		<delete includeemptydirs="true" failonerror="false">
@@ -23,5 +23,24 @@
 			</zipfileset>
 		</zip>
 	</target>
+	
+    <path id="project.class.path">
+        <pathelement path="${basedir}/WEB-INF/lib/backport175-1.0.jar" />
+    </path>
 
+    <target name="build">
+        <taskdef
+            name="annotationc"
+            classname="org.codehaus.backport175.compiler.task.AnnotationCTask"
+            classpathref="project.class.path"
+        />
+
+        <annotationc verbose="true" destdir="${basedir}/WEB-INF/classes">
+            <src path="${basedir}/src/main/java" />
+            <classpath path="${basedir}/WEB-INF/classes"/>
+            <fileset dir="src">
+                <include name="**/*.java" />
+            </fileset>
+        </annotationc>
+    </target>
 </project>
