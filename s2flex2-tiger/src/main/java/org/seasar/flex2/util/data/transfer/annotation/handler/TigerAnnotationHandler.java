@@ -23,29 +23,30 @@ import org.seasar.flex2.util.data.transfer.annotation.handler.impl.BasicAnnotati
 import org.seasar.framework.beans.PropertyDesc;
 
 public class TigerAnnotationHandler extends BasicAnnotationHandlerImpl {
+    
     public String getExportStorageType(final PropertyDesc propertyDesc) {
-        Method method = propertyDesc.getReadMethod();
-        if(method == null)
-        	return null;
-        Export storageType = method.getAnnotation(Export.class);
-
         String type = null;
-        if (storageType != null) {
-            type = storageType.storage();
+
+        final Method method = propertyDesc.getReadMethod();
+        if (method != null){
+            final Export storageType = method.getAnnotation(Export.class);
+            if (storageType != null) {
+                type = storageType.storage();
+            }
         }
 
         return type;
     }
 
     public String getImportStorageType(final PropertyDesc propertyDesc) {
-        Method method = propertyDesc.getWriteMethod();
-        if(method == null)
-        	return null;
-        Import storageType = method.getAnnotation(Import.class);
-
         String type = null;
-        if (storageType != null) {
-            type = storageType.storage();
+        
+        final Method method = propertyDesc.getWriteMethod();
+        if (method != null){
+            final Import storageType = method.getAnnotation(Import.class);
+            if (storageType != null) {
+                type = storageType.storage();
+            }
         }
 
         return type;
