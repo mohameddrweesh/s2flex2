@@ -25,6 +25,8 @@ import org.seasar.framework.beans.PropertyDesc;
 public class TigerAnnotationHandler extends BasicAnnotationHandlerImpl {
     public String getExportStorageType(final PropertyDesc propertyDesc) {
         Method method = propertyDesc.getReadMethod();
+        if(method == null)
+        	return null;
         Export storageType = method.getAnnotation(Export.class);
 
         String type = null;
@@ -37,6 +39,8 @@ public class TigerAnnotationHandler extends BasicAnnotationHandlerImpl {
 
     public String getImportStorageType(final PropertyDesc propertyDesc) {
         Method method = propertyDesc.getWriteMethod();
+        if(method == null)
+        	return null;
         Import storageType = method.getAnnotation(Import.class);
 
         String type = null;
