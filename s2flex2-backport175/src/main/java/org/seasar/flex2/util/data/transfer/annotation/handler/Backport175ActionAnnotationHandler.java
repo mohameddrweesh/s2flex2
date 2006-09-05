@@ -27,26 +27,27 @@ import org.seasar.framework.beans.PropertyDesc;
 public class Backport175ActionAnnotationHandler extends
         BasicAnnotationHandlerImpl {
 
-    public String getExportStorageType(PropertyDesc propertyDesc) {
-        Method method = propertyDesc.getReadMethod();
-        if ( method ==null)
-        	return null;
-        Annotation annotation = Annotations.getAnnotation(Export.class, method);
-        if (annotation != null) {
-            return ((Export) annotation).storage();
+    public String getExportStorageType(final PropertyDesc propertyDesc) {
+        String storage = null;
+        final Method method = propertyDesc.getReadMethod();
+        if ( method !=null){
+            final Annotation annotation = Annotations.getAnnotation(Export.class, method);
+            if (annotation != null) {
+                storage = ((Export) annotation).storage();
+            }
         }
-        return null;
+        return storage;
     }
 
-    public String getImportStorageType(PropertyDesc propertyDesc) {
-        Method method = propertyDesc.getWriteMethod();
-        if ( method ==null)
-        	return null;
-        if(method == null) return null;
-        Annotation annotation = Annotations.getAnnotation(Import.class, method);
-        if (annotation != null) {
-            return ((Import) annotation).storage();
+    public String getImportStorageType( final PropertyDesc propertyDesc) {
+        String storage = null;
+        final Method method = propertyDesc.getWriteMethod();
+        if ( method !=null){
+            final Annotation annotation = Annotations.getAnnotation(Import.class, method);
+            if (annotation != null) {
+                storage = ((Import) annotation).storage();
+            }
         }
-        return null;
+        return storage;
     }
 }
