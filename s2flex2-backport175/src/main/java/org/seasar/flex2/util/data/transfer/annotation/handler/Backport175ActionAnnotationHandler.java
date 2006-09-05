@@ -29,6 +29,8 @@ public class Backport175ActionAnnotationHandler extends
 
     public String getExportStorageType(PropertyDesc propertyDesc) {
         Method method = propertyDesc.getReadMethod();
+        if ( method ==null)
+        	return null;
         Annotation annotation = Annotations.getAnnotation(Export.class, method);
         if (annotation != null) {
             return ((Export) annotation).storage();
@@ -38,6 +40,9 @@ public class Backport175ActionAnnotationHandler extends
 
     public String getImportStorageType(PropertyDesc propertyDesc) {
         Method method = propertyDesc.getWriteMethod();
+        if ( method ==null)
+        	return null;
+        if(method == null) return null;
         Annotation annotation = Annotations.getAnnotation(Import.class, method);
         if (annotation != null) {
             return ((Import) annotation).storage();
