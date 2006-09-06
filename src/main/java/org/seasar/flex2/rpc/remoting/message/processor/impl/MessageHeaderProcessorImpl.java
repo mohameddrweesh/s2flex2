@@ -13,7 +13,7 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.remoting.message.data.processor.impl;
+package org.seasar.flex2.rpc.remoting.message.processor.impl;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -22,13 +22,13 @@ import java.util.List;
 import org.seasar.flex2.rpc.remoting.message.data.Message;
 import org.seasar.flex2.rpc.remoting.message.data.MessageHeader;
 import org.seasar.flex2.rpc.remoting.message.data.factory.MessageHeaderFactory;
-import org.seasar.flex2.rpc.remoting.message.data.processor.MessageHeaderProcessor;
-import org.seasar.flex2.rpc.remoting.processor.RemotingMessageHeaderCreator;
+import org.seasar.flex2.rpc.remoting.message.processor.MessageHeaderCreator;
+import org.seasar.flex2.rpc.remoting.message.processor.MessageHeaderProcessor;
 
 public class MessageHeaderProcessorImpl implements MessageHeaderProcessor {
 
     private final static void addHeader(final Message message,
-            final RemotingMessageHeaderCreator creator) {
+            final MessageHeaderCreator creator) {
         final MessageHeader header = creator.createHeader(message);
         if (header != null) {
             message.addHeader(header);
@@ -43,7 +43,7 @@ public class MessageHeaderProcessorImpl implements MessageHeaderProcessor {
         headerCreators = new ArrayList();
     }
 
-    public void addHeaderCreator(RemotingMessageHeaderCreator creator) {
+    public void addHeaderCreator(MessageHeaderCreator creator) {
         headerCreators.add(creator);
     }
 
@@ -66,7 +66,7 @@ public class MessageHeaderProcessorImpl implements MessageHeaderProcessor {
         if (headerCreators.size() > 0) {
             for (Iterator creatorIt = headerCreators.iterator(); creatorIt
                     .hasNext();) {
-                addHeader(message, (RemotingMessageHeaderCreator) creatorIt
+                addHeader(message, (MessageHeaderCreator) creatorIt
                         .next());
             }
         }

@@ -60,10 +60,10 @@
 		remoting message processor
 	-->
 	<component
-		class="org.seasar.flex2.rpc.remoting.message.data.processor.impl.MessageHeaderProcessorImpl">
+		class="org.seasar.flex2.rpc.remoting.message.processor.impl.MessageHeaderProcessorImpl">
 		<initMethod name="addHeaderCreator">
 			<arg>
-				<component class="org.seasar.flex2.rpc.remoting.processor.impl.AppendToGatewayUrlHeaderCreatorImpl">
+				<component class="org.seasar.flex2.rpc.remoting.message.processor.impl.AppendToGatewayUrlHeaderCreatorImpl">
 					<property name="sessionDecorator">
 						<component class="org.seasar.flex2.util.session.impl.TomcatSessionDecoratorImpl" />
 					</property>
@@ -72,9 +72,9 @@
 		</initMethod>
 	</component>
 	<component
-		class="org.seasar.flex2.rpc.remoting.message.data.processor.impl.MessageBodyProcessorImpl" />
+		class="org.seasar.flex2.rpc.remoting.message.processor.impl.MessageBodyProcessorImpl" />
 	<component
-		class="org.seasar.flex2.rpc.remoting.message.data.processor.impl.MessageProcessorImpl"/>
+		class="org.seasar.flex2.rpc.remoting.message.processor.impl.MessageProcessorImpl"/>
 
 	<!--
 		remoting util

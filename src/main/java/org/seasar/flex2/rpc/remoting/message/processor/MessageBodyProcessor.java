@@ -13,13 +13,11 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.remoting.message.data.processor;
+package org.seasar.flex2.rpc.remoting.message.processor;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import org.seasar.flex2.rpc.remoting.message.data.Message;
 
-public interface MessageProcessor {
-    void process(DataInputStream inputStream, DataOutputStream outputStream)
-            throws IOException;
+public interface MessageBodyProcessor {
+
+    Message process(Message responseMessage);
 }

@@ -19,7 +19,8 @@ import org.seasar.extension.unit.S2TestCase;
 import org.seasar.flex2.rpc.remoting.message.data.factory.MessageFactory;
 import org.seasar.flex2.rpc.remoting.message.data.factory.impl.FaultFactoryImpl;
 import org.seasar.flex2.rpc.remoting.message.data.factory.impl.MessageBodyFactoryImpl;
-import org.seasar.flex2.rpc.remoting.message.data.processor.impl.MessageBodyProcessorImpl;
+import org.seasar.flex2.rpc.remoting.message.processor.MessageBodyProcessor;
+import org.seasar.flex2.rpc.remoting.message.processor.impl.MessageBodyProcessorImpl;
 import org.seasar.framework.container.S2Container;
 
 public class MessageBodyProcessorTest extends S2TestCase {

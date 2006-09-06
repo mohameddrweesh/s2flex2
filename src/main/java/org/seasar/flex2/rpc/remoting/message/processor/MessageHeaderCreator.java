@@ -13,11 +13,11 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.remoting.message.data.processor;
+package org.seasar.flex2.rpc.remoting.message.processor;
 
 import org.seasar.flex2.rpc.remoting.message.data.Message;
+import org.seasar.flex2.rpc.remoting.message.data.MessageHeader;
 
-public interface MessageBodyProcessor {
-
-    Message process(Message responseMessage);
+public interface MessageHeaderCreator {
+    public MessageHeader createHeader(Message requestMessage);
 }

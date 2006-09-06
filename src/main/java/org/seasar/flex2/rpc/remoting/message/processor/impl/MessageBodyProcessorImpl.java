@@ -13,14 +13,14 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.remoting.message.data.processor.impl;
+package org.seasar.flex2.rpc.remoting.message.processor.impl;
 
 import org.seasar.flex2.rpc.remoting.message.data.Message;
 import org.seasar.flex2.rpc.remoting.message.data.MessageBody;
 import org.seasar.flex2.rpc.remoting.message.data.factory.FaultFactory;
 import org.seasar.flex2.rpc.remoting.message.data.factory.MessageBodyFactory;
 import org.seasar.flex2.rpc.remoting.message.data.factory.MessageFactory;
-import org.seasar.flex2.rpc.remoting.message.data.processor.MessageBodyProcessor;
+import org.seasar.flex2.rpc.remoting.message.processor.MessageBodyProcessor;
 import org.seasar.flex2.rpc.remoting.service.RemotingServiceInvoker;
 import org.seasar.flex2.rpc.remoting.service.RemotingServiceInvokerChooser;
 import org.seasar.framework.log.Logger;
