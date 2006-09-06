@@ -19,7 +19,7 @@ import java.util.HashMap;
 
 public class AmfObject extends HashMap {
 
-	private static final long serialVersionUID = 7365019006497173557L;
+    private static final long serialVersionUID = -3575854553905517417L;
     
     private String type_;
 

@@ -18,8 +18,8 @@ package org.seasar.flex2.rpc.remoting.service.exception;
 import org.seasar.framework.exception.SRuntimeException;
 
 public class InvokerNotFoundRuntimeException extends SRuntimeException {
-	
-    private static final long serialVersionUID = 3501672643450033310L;
+
+    private static final long serialVersionUID = -1264752692742094458L;
 
     public InvokerNotFoundRuntimeException(String serviceName) {
 		super("EFLX0001", new Object[]{serviceName});

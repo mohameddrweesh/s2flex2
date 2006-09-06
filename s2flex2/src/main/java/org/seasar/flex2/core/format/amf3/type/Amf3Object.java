@@ -18,5 +18,6 @@ package org.seasar.flex2.core.format.amf3.type;
 import java.util.HashMap;
 
 public class Amf3Object extends HashMap {
+
     private static final long serialVersionUID = 6423442246991792649L;
 }

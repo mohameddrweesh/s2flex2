@@ -18,8 +18,8 @@ package org.seasar.flex2.rpc.remoting.service.exception;
 import org.seasar.framework.exception.SRuntimeException;
 
 public class ServiceNotFoundRuntimeException extends SRuntimeException {
-	
-    private static final long serialVersionUID = 6617890371395913125L;
+
+    private static final long serialVersionUID = -7930993032540098229L;
 
     public ServiceNotFoundRuntimeException(String serviceName) {
 		super("EFLX0002", new Object[]{serviceName});

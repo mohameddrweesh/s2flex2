@@ -28,7 +28,7 @@ import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
 
 public class RemotingGateway extends HttpServlet {
 
-    private static final long serialVersionUID = -5871115000558595292L;
+    private static final long serialVersionUID = -5310847690409934667L;
 
     protected RemotingMessageProcessor processor;
 
@@ -48,7 +48,7 @@ public class RemotingGateway extends HttpServlet {
     public void doPost(final HttpServletRequest request,
             final HttpServletResponse response) throws IOException,
             ServletException {
-        if( !request.isRequestedSessionIdValid()){
+        if( request.isRequestedSessionIdValid()){
             request.getSession(true);
         }
         response.setContentType(RemotingConstants.CONTENT_TYPE);
