@@ -48,7 +48,9 @@ public class RemotingGateway extends HttpServlet {
     public void doPost(final HttpServletRequest request,
             final HttpServletResponse response) throws IOException,
             ServletException {
-        request.getSession(true);
+        if( !request.isRequestedSessionIdValid()){
+            request.getSession(true);
+        }
         response.setContentType(RemotingConstants.CONTENT_TYPE);
         processor.process(request, response);
     }
