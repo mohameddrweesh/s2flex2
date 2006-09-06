@@ -18,7 +18,7 @@ package org.seasar.flex2.core.format.amf3.type.exception;
 import org.seasar.framework.exception.SRuntimeException;
 
 public class FailedCompressRuntimeException extends SRuntimeException {
-    
+
     private static final long serialVersionUID = -350224321932677055L;
 
     public FailedCompressRuntimeException(Throwable cause) {

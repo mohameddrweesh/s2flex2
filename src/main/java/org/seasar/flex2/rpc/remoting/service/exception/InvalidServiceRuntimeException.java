@@ -19,7 +19,7 @@ import org.seasar.framework.exception.SRuntimeException;
 
 public class InvalidServiceRuntimeException extends SRuntimeException {
 
-    private static final long serialVersionUID = 7654336273540512285L;
+    private static final long serialVersionUID = -8585067548270368911L;
 
     public InvalidServiceRuntimeException(String serviceName) {
         super("EFLX0003", new Object[] { serviceName });
