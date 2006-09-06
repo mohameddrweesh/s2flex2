@@ -13,7 +13,7 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.remoting.message.data.processor.impl;
+package org.seasar.flex2.rpc.remoting.message.processor.impl;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
@@ -22,11 +22,11 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 import org.seasar.flex2.rpc.remoting.message.data.Message;
-import org.seasar.flex2.rpc.remoting.message.data.processor.MessageBodyProcessor;
-import org.seasar.flex2.rpc.remoting.message.data.processor.MessageHeaderProcessor;
-import org.seasar.flex2.rpc.remoting.message.data.processor.MessageProcessor;
 import org.seasar.flex2.rpc.remoting.message.io.reader.factory.MessageReaderFactory;
 import org.seasar.flex2.rpc.remoting.message.io.writer.factory.MessageWriterFactory;
+import org.seasar.flex2.rpc.remoting.message.processor.MessageBodyProcessor;
+import org.seasar.flex2.rpc.remoting.message.processor.MessageHeaderProcessor;
+import org.seasar.flex2.rpc.remoting.message.processor.MessageProcessor;
 
 public class MessageProcessorImpl implements MessageProcessor {
 

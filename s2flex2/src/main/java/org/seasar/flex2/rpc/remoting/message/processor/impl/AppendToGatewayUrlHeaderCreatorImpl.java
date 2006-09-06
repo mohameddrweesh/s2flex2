@@ -13,7 +13,7 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.remoting.processor.impl;
+package org.seasar.flex2.rpc.remoting.message.processor.impl;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -21,13 +21,13 @@ import org.seasar.flex2.rpc.remoting.message.RemotingMessageConstants;
 import org.seasar.flex2.rpc.remoting.message.data.Message;
 import org.seasar.flex2.rpc.remoting.message.data.MessageHeader;
 import org.seasar.flex2.rpc.remoting.message.data.factory.MessageHeaderFactory;
-import org.seasar.flex2.rpc.remoting.processor.RemotingMessageHeaderCreator;
+import org.seasar.flex2.rpc.remoting.message.processor.MessageHeaderCreator;
 import org.seasar.flex2.util.session.HttpSessionUtil;
 import org.seasar.flex2.util.session.SessionDecorator;
 import org.seasar.framework.container.S2Container;
 
 public class AppendToGatewayUrlHeaderCreatorImpl implements
-        RemotingMessageHeaderCreator {
+        MessageHeaderCreator {
 
     private S2Container container;
 

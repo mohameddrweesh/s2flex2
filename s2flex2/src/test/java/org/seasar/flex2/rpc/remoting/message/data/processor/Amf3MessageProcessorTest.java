@@ -16,11 +16,12 @@
 package org.seasar.flex2.rpc.remoting.message.data.processor;
 
 import org.seasar.extension.unit.S2TestCase;
-import org.seasar.flex2.rpc.remoting.message.data.processor.impl.MessageBodyProcessorImpl;
-import org.seasar.flex2.rpc.remoting.message.data.processor.impl.MessageHeaderProcessorImpl;
-import org.seasar.flex2.rpc.remoting.message.data.processor.impl.MessageProcessorImpl;
 import org.seasar.flex2.rpc.remoting.message.io.reader.factory.impl.MessageReaderFactoryImpl;
 import org.seasar.flex2.rpc.remoting.message.io.writer.factory.impl.MessageWriterFactoryImpl;
+import org.seasar.flex2.rpc.remoting.message.processor.MessageProcessor;
+import org.seasar.flex2.rpc.remoting.message.processor.impl.MessageBodyProcessorImpl;
+import org.seasar.flex2.rpc.remoting.message.processor.impl.MessageHeaderProcessorImpl;
+import org.seasar.flex2.rpc.remoting.message.processor.impl.MessageProcessorImpl;
 import org.seasar.framework.container.S2Container;
 
 public class Amf3MessageProcessorTest extends S2TestCase {

@@ -23,7 +23,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.seasar.flex2.rpc.remoting.message.data.processor.MessageProcessor;
+import org.seasar.flex2.rpc.remoting.message.processor.MessageProcessor;
 import org.seasar.flex2.rpc.remoting.processor.RemotingMessageProcessor;
 import org.seasar.flex2.util.io.InputStreamUtil;
 import org.seasar.flex2.util.io.OutputStreamUtil;

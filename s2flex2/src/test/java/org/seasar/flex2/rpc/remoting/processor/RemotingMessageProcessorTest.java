@@ -16,7 +16,7 @@
 package org.seasar.flex2.rpc.remoting.processor;
 
 import org.seasar.extension.unit.S2TestCase;
-import org.seasar.flex2.rpc.remoting.message.data.processor.MessageProcessor;
+import org.seasar.flex2.rpc.remoting.message.processor.MessageProcessor;
 import org.seasar.flex2.rpc.remoting.processor.impl.RemotingMessageProcessorImpl;
 import org.seasar.framework.container.S2Container;
 
