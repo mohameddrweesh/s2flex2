@@ -3,12 +3,16 @@ package examples.flex2.add.service.impl;
 import examples.flex2.add.dto.AddDto;
 import examples.flex2.add.service.AddSessionService;
 import examples.flex2.add.service.AddService;
+import org.seasar.flex2.rpc.remoting.service.annotation.RemotingService;
+import org.seasar.flex2.util.data.storage.StorageType;
+import org.seasar.flex2.util.data.transfer.annotation.Export;
+import org.seasar.flex2.util.data.transfer.annotation.Import;
 
 /**
- * <!-- 以下の省略形ではコンパイルできない。 -->
- * @RemotingService
- * @org.seasar.flex2.rpc.remoting.service.annotation.RemotingService
+ * @ RemotingService
+ * @ org.seasar.flex2.rpc.remoting.service.annotation.RemotingService
  */
+@RemotingService
 public class AddSessionServiceImpl implements AddSessionService {
 
 	AddService addService;
@@ -24,17 +28,19 @@ public class AddSessionServiceImpl implements AddSessionService {
     }
 
     /**
-     * @Export(storage="session")
+     * @ Export(storage="session")
      */
+    @Export(storage = StorageType.SESSION)
     public AddDto getAddDtoData(){
     	return addService.getAddDtoData();
     }
 
     
     /**
-     * @Import (storage="session")
+     * @ Import (storage="session")
      * @param addService
      */
+    @Import(storage = StorageType.SESSION)
 	public void setAddService(AddService addService) {
 		this.addService = addService;
 	}
