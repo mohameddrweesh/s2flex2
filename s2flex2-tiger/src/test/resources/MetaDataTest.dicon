@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="Shift_JIS"?>
-<!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.3//EN" 
-	"http://www.seasar.org/dtd/components23.dtd">
+<!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN" 
+	"http://www.seasar.org/dtd/components24.dtd">
 <components>
-	<component class="org.seasar.flex2.rpc.remoting.service.annotation.TestRemotingService" />
-	<component class="org.seasar.flex2.rpc.remoting.service.annotation.TestRemotingServiceFull" />
-	<component class="org.seasar.flex2.rpc.remoting.service.annotation.TestServiceClass" />
+
+	<component name="TestRemotingService" class="org.seasar.flex2.rpc.remoting.service.annotation.TestRemotingService" />
+	<component name="TestRemotingServiceFull" class="org.seasar.flex2.rpc.remoting.service.annotation.TestRemotingServiceFull" />
+	<component name="TestServiceClass" class="org.seasar.flex2.rpc.remoting.service.annotation.TestServiceClass" />
 </components>
