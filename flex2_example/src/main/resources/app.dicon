@@ -9,12 +9,8 @@
 	<include path="remoting_amf3.dicon"/>
 
 	<include condition="#ENV != 'ut'" path="flex2_example-cooldeploy.dicon"/>
-
-	<!--
-		service register
-	-->
-	<!--
-    <component
+    <!--
+	<component
 	  class="org.seasar.framework.container.autoregister.MetaAutoRegister">
 	    <meta name="autoRegister">
 	        <meta name="RemotingService"/>
@@ -22,27 +18,7 @@
 	    <initMethod name="addClassPattern">
 	        <arg>"examples.flex2"</arg>
 	        <arg>".*ServiceImpl"</arg>
-	    </initMethod>
-	    -->
-	    <!-- nomore FacadeImpl class
-	    <initMethod name="addClassPattern">
-	        <arg>"examples.flex2"</arg>
-	        <arg>".*FacadeImpl"</arg>
-	    </initMethod>
-	    -->
-	<!--	    
-	</component>
-
-	<component
-	  class="org.seasar.flex2.rpc.remoting.service.autoregister.FileSystemRemotingServiceAutoRegister">
-	    <initMethod name="addClassPattern">
-	        <arg>"examples.flex2"</arg>
-	        <arg>".*ServiceImpl"</arg>
-	    </initMethod>
-	    <initMethod name="addClassPattern">
-	        <arg>"examples.flex2"</arg>
-	        <arg>".*FacadeImpl"</arg>
-	    </initMethod>
+	    </initMethod>	    
 	</component>
 	-->
 </components>
