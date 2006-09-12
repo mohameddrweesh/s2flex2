@@ -1,13 +1,14 @@
-	<project name="s2flex2-tiger" default="dist" basedir=".">
-	<property name="ver" value="rc-2"/>
+<project name="s2flex2-tiger" default="dist" basedir=".">
+	<property name="ver" value="1.0.0-rc-2"/>
 
 	<target name="dist">
-		<zip zipfile="target/S2Flex2-tiger-${ver}.zip">
+		<zip zipfile="target/s2flex2-tiger-${ver}.zip">
 			<zipfileset prefix="s2flex2-tiger" dir=".">
 				<exclude name="**/target/**"/>
-				<include name="**/target/*.jar"/>
+			</zipfileset>
+			<zipfileset prefix="s2flex2-tiger/lib" dir="target">
+				<include name="s2-flex2-tiger-${ver}.jar"/>
 			</zipfileset>
 		</zip>
 	</target>
-
 </project>
