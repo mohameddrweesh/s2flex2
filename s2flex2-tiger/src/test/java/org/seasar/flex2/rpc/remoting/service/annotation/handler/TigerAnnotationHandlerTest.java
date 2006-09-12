@@ -14,7 +14,8 @@ public class TigerAnnotationHandlerTest extends S2TestCase {
 	S2Container container;
     protected void setUp() throws Exception {
         include(PATH);
-        container = getContainer();
+        container = getContainer().getRoot();
+        
     }
 
     /*
@@ -53,5 +54,13 @@ public class TigerAnnotationHandlerTest extends S2TestCase {
     	assertNotNull("5",componentDef);
     	assertFalse("6",annHandler.hasRemotingService(componentDef));
     	
+    	componentDef = container.getComponentDef("TestRemotingService");
+    	assertTrue("7",annHandler.hasRemotingService(componentDef));
+    	
+    	componentDef = container.getComponentDef("TestRemotingServiceFull");
+    	assertTrue("8",annHandler.hasRemotingService(componentDef));
+    	
+    	componentDef = container.getComponentDef("TestServiceClass");
+    	assertFalse("9",annHandler.hasRemotingService(componentDef));
     }
 }
