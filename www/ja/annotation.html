@@ -57,16 +57,59 @@
           </tr>
           <tr bgcolor="#f8f8f8">
             <td><p>Export</p></td>
-            <td><p>データ保存用のアノテーション。Storageで指定したObject(session,request)にデータを保存するアノテーション</p></td>
+			<td><p>データ取得用のアノテーション。Storageで指定したObject(session,request)からデータを取り出してBindingするときに使用するアノテーション</p></td>
           </tr>
           <tr>
             <td><p>Import</p></td>
-            <td><p>データ取得用のアノテーション。Storageで指定したObject(session,request)からデータを取り出してBindingするときに使用するアノテーション</p></td>
+            <td><p>データ保存用のアノテーション。Storageで指定したObject(session,request)にデータを保存するアノテーション</p></td>       
           </tr>
         </tbody>
       </table>
       <p>JDK1.4 + backport175で利用するケース</p>
+      JDK1.4+backport175
+ <pre>   
+    /**
+     * @org.seasar.flex2.rpc.remoting.service.annotation.RemotingService
+     */
+     public class AddServiceImpl implements AddService {
+     }
+       
+    /** 
+     * @Export(storage = "session") 
+     */
+	public AddDto getAddDto() {
+		return addDto;
+	}
+
+    /**
+     * @ Import(storage = "session") 
+     */
+	public void setAddDto(AddDto addDto) {
+		this.addDto = addDto;
+	}
+	</pre>
       <p>JDK5.0で利用するケース</p>
+      <pre>
+      import org.seasar.flex2.rpc.remoting.service.annotation.RemotingService;
+      
+      @Remoting
+      public class AddServiceImpl implements AddService {
+      
+      }
+      
+    
+    //Sessionに登録されているデータをBeanのプロパティにセットするとき
+    @Export(storage = StorageType.SESSION)
+	public AddDto getAddDto() {
+		return addDto;
+	}
+
+    //Sessionに現在のデータをセットするとき 
+    @Import(storage = StorageType.SESSION)
+	public void setAddDto(AddDto addDto) {
+		this.addDto = addDto;
+	}
+	
     </div>
     <!-- article -->
   </div>
