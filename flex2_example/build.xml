@@ -30,6 +30,7 @@
     <!-- ================================= 
           target: build for backport175          
          ================================= -->
+<!--	
     <target name="build" depends="" description="build and annotaionc..">
         <taskdef
             name="annotationc"
@@ -45,5 +46,5 @@
             </fileset>
         </annotationc>
     </target>
-
+-->
 </project>
