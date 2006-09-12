@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.seasar.flex2.rpc.remoting.service.annotation.RemotingService;
+
 import examples.flex2.performance.service.PerformanceTestService;
 
 /**
  * 
- * @RemotingService
+ * @ RemotingService
  */
+@RemotingService
 public class PerformanceTestServiceImpl implements PerformanceTestService {
 
     public ArrayList getArray(int size) {

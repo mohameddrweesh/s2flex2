@@ -2,13 +2,16 @@ package examples.flex2.camera.snapshot.service.impl;
 
 import java.util.Date;
 
+import org.seasar.flex2.rpc.remoting.service.annotation.RemotingService;
+
 import examples.flex2.camera.snapshot.dto.SnapshotDto;
 import examples.flex2.camera.snapshot.logic.SnapshotSaveLogic;
 import examples.flex2.camera.snapshot.service.SnapshotService;
 
 /**
- * @RemotingService
+ * @ RemotingService
  */
+@RemotingService
 public class SnapshotServiceImpl implements SnapshotService {
 
     private SnapshotSaveLogic snapshotSaveLogic;

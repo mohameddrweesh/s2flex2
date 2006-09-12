@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.seasar.flex2.rpc.remoting.service.annotation.RemotingService;
+
 import examples.flex2.check.dto.CheckDto;
 import examples.flex2.check.service.CheckDtoService;
 
+@RemotingService
 public class CheckDtoServiceImpl implements CheckDtoService {
 
 	public List getCheckDtoList() {
