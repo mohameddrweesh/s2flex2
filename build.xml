@@ -7,13 +7,13 @@
 				<exclude name="**/target/**"/>
 			</zipfileset>
 			<zipfileset prefix="s2flex2/lib" dir="target">
-				<include name="s2flex2-${ver}.jar"/>
+				<include name="s2-flex2-${ver}.jar"/>
 			</zipfileset>
 			<zipfileset prefix="s2flex2/resources" dir="src/test/resources">
 			    <include name="s2flex2.dicon"/>
 				<include name="app.dicon"/>
-				<include name="log4j.properties"/>
-				<include name="web.xml"/>
+				<include name="remoting_amf0.dicon"/>
+				<include name="remoting_amf3.dicon"/>
 			</zipfileset>
 		</zip>
 	</target>
