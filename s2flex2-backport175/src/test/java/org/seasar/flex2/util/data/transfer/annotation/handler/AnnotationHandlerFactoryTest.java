@@ -25,16 +25,6 @@ import org.seasar.framework.beans.impl.BeanDescImpl;
 
 public class AnnotationHandlerFactoryTest extends S2TestCase {
 
-    protected void setUp() throws Exception {
-    }
-
-    /*
-     * @see TestCase#tearDown()
-     */
-    protected void tearDown() throws Exception {
-        super.tearDown();
-    }
-
     public AnnotationHandlerFactoryTest(String name) {
         super(name);
     }
@@ -42,7 +32,8 @@ public class AnnotationHandlerFactoryTest extends S2TestCase {
     public void testCreateHandler() {
         AnnotationHandler annHandler = AnnotationHandlerFactory
                 .getAnnotationHandler();
-        assertTrue("1", annHandler instanceof Backport175ActionAnnotationHandler);
+        assertTrue("1",
+                annHandler instanceof Backport175ActionAnnotationHandler);
     }
 
     public void testGetExportStorageType() {
@@ -51,8 +42,7 @@ public class AnnotationHandlerFactoryTest extends S2TestCase {
                 .getAnnotationHandler();
         BeanDesc beanDesc = new BeanDescImpl(o.getClass());
         PropertyDesc propertyDesc = beanDesc.getPropertyDesc("strData");
-        String exportStorage = annHandler.getExportStorageType(
-                propertyDesc);
+        String exportStorage = annHandler.getExportStorageType(beanDesc,propertyDesc);
 
         assertEquals("1", exportStorage, StorageType.SESSION);
     }
@@ -63,16 +53,22 @@ public class AnnotationHandlerFactoryTest extends S2TestCase {
                 .getAnnotationHandler();
         BeanDesc beanDesc = new BeanDescImpl(o.getClass());
         PropertyDesc propertyDesc = beanDesc.getPropertyDesc("strData");
-        String importStorage = annHandler.getImportStorageType(
-                propertyDesc);
+        String importStorage = annHandler.getImportStorageType(beanDesc,propertyDesc);
 
-       assertEquals("1", importStorage, StorageType.SESSION);
-        assertEquals("1",1,1);
+        assertEquals("1", importStorage, StorageType.SESSION);
+        assertEquals("1", 1, 1);
 
     }
 
     private Object createTarget() {
         TestClass test = new TestClass();
         return test;
+    }
+
+    protected void setUp() throws Exception {
+    }
+
+    protected void tearDown() throws Exception {
+        super.tearDown();
     }
 }

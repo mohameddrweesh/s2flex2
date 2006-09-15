@@ -21,17 +21,18 @@ import org.codehaus.backport175.reader.Annotation;
 import org.codehaus.backport175.reader.Annotations;
 import org.seasar.flex2.util.data.transfer.annotation.Export;
 import org.seasar.flex2.util.data.transfer.annotation.Import;
-import org.seasar.flex2.util.data.transfer.annotation.handler.impl.BasicAnnotationHandlerImpl;
+import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
 
-public class Backport175ActionAnnotationHandler extends
-        BasicAnnotationHandlerImpl {
+public class Backport175ActionAnnotationHandler implements AnnotationHandler {
 
-    public String getExportStorageType(final PropertyDesc propertyDesc) {
+    public String getExportStorageType(final BeanDesc beanDesc,
+            final PropertyDesc propertyDesc) {
         String storage = null;
         final Method method = propertyDesc.getReadMethod();
-        if ( method !=null){
-            final Annotation annotation = Annotations.getAnnotation(Export.class, method);
+        if (method != null) {
+            final Annotation annotation = Annotations.getAnnotation(
+                    Export.class, method);
             if (annotation != null) {
                 storage = ((Export) annotation).storage();
             }
@@ -39,11 +40,13 @@ public class Backport175ActionAnnotationHandler extends
         return storage;
     }
 
-    public String getImportStorageType( final PropertyDesc propertyDesc) {
+    public String getImportStorageType(final BeanDesc beanDesc,
+            final PropertyDesc propertyDesc) {
         String storage = null;
         final Method method = propertyDesc.getWriteMethod();
-        if ( method !=null){
-            final Annotation annotation = Annotations.getAnnotation(Import.class, method);
+        if (method != null) {
+            final Annotation annotation = Annotations.getAnnotation(
+                    Import.class, method);
             if (annotation != null) {
                 storage = ((Import) annotation).storage();
             }

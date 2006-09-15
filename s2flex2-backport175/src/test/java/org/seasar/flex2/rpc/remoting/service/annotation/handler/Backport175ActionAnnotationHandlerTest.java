@@ -8,34 +8,13 @@ import org.seasar.flex2.rpc.remoting.service.annotation.factory.AnnotationHandle
 import org.seasar.framework.container.ComponentDef;
 import org.seasar.framework.container.S2Container;
 
-
 public class Backport175ActionAnnotationHandlerTest extends S2TestCase {
     private final String PATH = "MetaDataTest.dicon";
 
     S2Container container;
 
-    protected void setUp() throws Exception {
-        include(PATH);
-        container = getContainer();
-    }
-
-    /*
-     * @see TestCase#tearDown()
-     */
-    protected void tearDown() throws Exception {
-        super.tearDown();
-        container.destroy();
-    }
-
     public Backport175ActionAnnotationHandlerTest(String name) {
         super(name);
-    }
-
-    public void testCreateHandler() {
-        AnnotationHandler annHandler = AnnotationHandlerFactory
-                .getAnnotationHandler();
-        assertTrue("1",
-                annHandler instanceof Backport175ActionAnnotationHandler);
     }
 
     public void testCheckAnnotation() {
@@ -60,5 +39,22 @@ public class Backport175ActionAnnotationHandlerTest extends S2TestCase {
         assertNotNull("5", componentDef);
         assertFalse("6", annHandler.hasRemotingService(componentDef));
 
+    }
+
+    public void testCreateHandler() {
+        AnnotationHandler annHandler = AnnotationHandlerFactory
+                .getAnnotationHandler();
+        assertTrue("1",
+                annHandler instanceof Backport175ActionAnnotationHandler);
+    }
+
+    protected void setUp() throws Exception {
+        include(PATH);
+        container = getContainer();
+    }
+
+    protected void tearDown() throws Exception {
+        super.tearDown();
+        container.destroy();
     }
 }

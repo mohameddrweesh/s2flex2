@@ -25,19 +25,8 @@ import org.seasar.framework.container.S2Container;
 public class TransferTest extends S2TestCase {
 
     private final static String PATH = "TransferTest.dicon";
-    
 
     private Transfer transfer;
-
-    protected void setUp() throws Exception {
-        include(PATH);
-        S2Container container = getContainer();
-        transfer = (Transfer) container.getComponent(Transfer.class);
-    }
-
-    protected void tearDown() throws Exception {
-        super.tearDown();
-    }
 
     public TransferTest(String name) {
         super(name);
@@ -63,13 +52,23 @@ public class TransferTest extends S2TestCase {
                 .getAttribute("strData"));
     }
 
+    private HttpSession createMockHttpSession() {
+        HttpSession session = getRequest().getSession();
+        return session;
+    }
+
     private TestClass createTarget() {
         TestClass testClass = new TestClass();
         return testClass;
     }
 
-    private HttpSession createMockHttpSession() {
-        HttpSession session = getRequest().getSession();
-        return session;
+    protected void setUp() throws Exception {
+        include(PATH);
+        S2Container container = getContainer();
+        transfer = (Transfer) container.getComponent(Transfer.class);
+    }
+
+    protected void tearDown() throws Exception {
+        super.tearDown();
     }
 }

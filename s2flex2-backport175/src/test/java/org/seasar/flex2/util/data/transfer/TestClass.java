@@ -33,14 +33,11 @@ public class TestClass {
         
     }
     
-    
     /**
      * 
      * @Import(storage = "session") 
      */
     public void setStrData(String strData) {
         this.strData = strData;
-    }
-   
-    
+    } 
 }
