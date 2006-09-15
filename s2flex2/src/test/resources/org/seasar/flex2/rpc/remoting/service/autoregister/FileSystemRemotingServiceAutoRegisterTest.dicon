@@ -9,7 +9,7 @@
 
 	<component
 		name="remotingServiceCustomizer"
-		class="org.seasar.flex2.rpc.remoting.service.autoregister.RemotingServiceCustomizer">
+		class="org.seasar.flex2.rpc.remoting.service.customizer.RemotingServiceCustomizer">
 	</component>
 		
 	<component

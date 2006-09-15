@@ -15,6 +15,7 @@
  */
 package org.seasar.flex2.rpc.remoting.service.autoregister;
 
+import org.seasar.flex2.rpc.remoting.service.customizer.RemotingServiceCustomizer;
 import org.seasar.framework.container.ComponentDef;
 import org.seasar.framework.container.autoregister.AbstractComponentTargetAutoRegister;
 

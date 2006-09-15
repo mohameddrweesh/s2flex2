@@ -15,7 +15,11 @@
  */
 package org.seasar.flex2.util.data.transfer;
 
+import javax.servlet.http.HttpSession;
+
 import org.seasar.extension.unit.S2TestCase;
+import org.seasar.flex2.util.data.storage.Storage;
+import org.seasar.flex2.util.data.storage.impl.HttpSessionDataStorage;
 import org.seasar.flex2.util.data.transfer.Transfer;
 import org.seasar.framework.container.S2Container;
 
@@ -25,21 +29,56 @@ public class TransferTest extends S2TestCase {
 
     private Transfer transfer;
 
-    protected void setUp() throws Exception {
-        include(PATH);
-        S2Container container = getContainer();
-        transfer = (Transfer) container.getComponent(Transfer.class);
-    }
-
-    protected void tearDown() throws Exception {
-        super.tearDown();
-    }
-
     public TransferTest(String name) {
         super(name);
     }
 
     public void testCreate() {
         assertTrue("1", transfer instanceof Transfer);
+    }
+
+    public void testExportTo() {
+        final HttpSession session = createMockHttpSession();
+        final Storage storage = new HttpSessionDataStorage(session);
+        final TestClass testClass = createTarget();
+        
+        testClass.setStrData("moji");
+        transfer.exportToStorage(testClass, storage);
+        
+        assertEquals("1", session.getAttribute("strData"), testClass
+                .getStrData());
+    }
+    
+    public void testImportTo() {
+        final HttpSession session = createMockHttpSession();
+        session.setAttribute("strData", "moji");
+        
+        final Storage storage = new HttpSessionDataStorage(session);
+        final TestClass testClass = createTarget();
+        
+        transfer.importToComponent(storage, testClass);
+        
+        assertEquals("1", testClass.getStrData(), session
+                .getAttribute("strData"));
+    }
+
+    private HttpSession createMockHttpSession() {
+        HttpSession session = getRequest().getSession();
+        return session;
+    }
+
+    private TestClass createTarget() {
+        TestClass testClass = new TestClass();
+        return testClass;
+    }
+
+    protected void setUp() throws Exception {
+        include(PATH);
+        S2Container container = getContainer();
+        transfer = (Transfer) container.getComponent(Transfer.class);
+    }
+    
+    protected void tearDown() throws Exception {
+        super.tearDown();
     }
 }

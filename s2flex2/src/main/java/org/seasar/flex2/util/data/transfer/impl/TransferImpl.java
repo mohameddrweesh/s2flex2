@@ -35,22 +35,25 @@ public class TransferImpl implements Transfer {
             .getAnnotationHandler();
 
     public void exportToStorage(Object target, Storage storage) {
-        final BeanDesc beanDesc = BeanDescFactory.getBeanDesc(target.getClass());
+        final BeanDesc beanDesc = BeanDescFactory
+                .getBeanDesc(target.getClass());
 
         for (int i = 0; i < beanDesc.getPropertyDescSize(); ++i) {
             final PropertyDesc propertyDesc = beanDesc.getPropertyDesc(i);
             if (propertyDesc.hasReadMethod()) {
-                final String type = annotationHandler.getExportStorageType(propertyDesc);
+                final String type = annotationHandler.getExportStorageType(
+                        beanDesc, propertyDesc);
                 if (isTransferTarget(storage, type)) {
                     storage.setProperty(propertyDesc.getPropertyName(),
                             propertyDesc.getValue(target));
-                }                
+                }
             }
         }
     }
 
-    public void importToComponent( final Storage storage, final Object target) {
-        final BeanDesc beanDesc = BeanDescFactory.getBeanDesc(target.getClass());
+    public void importToComponent(final Storage storage, final Object target) {
+        final BeanDesc beanDesc = BeanDescFactory
+                .getBeanDesc(target.getClass());
 
         final Enumeration propertyNames = storage.getPropertyNames();
         while (propertyNames.hasMoreElements()) {
@@ -58,8 +61,8 @@ public class TransferImpl implements Transfer {
             if (beanDesc.hasPropertyDesc(propertyName)) {
                 final PropertyDesc propertyDesc = beanDesc
                         .getPropertyDesc(propertyName);
-                final String type = annotationHandler
-                        .getImportStorageType(propertyDesc);
+                final String type = annotationHandler.getImportStorageType(
+                        beanDesc, propertyDesc);
                 if (isTransferTarget(storage, type)) {
                     if (propertyDesc.hasWriteMethod()) {
                         propertyDesc.setValue(target, storage

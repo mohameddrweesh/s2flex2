@@ -15,12 +15,13 @@
  */
 package org.seasar.flex2.util.data.transfer.annotation.handler;
 
+import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
 
 public interface AnnotationHandler {
 
-    String getExportStorageType(PropertyDesc propertyDesc);
+    String getExportStorageType(BeanDesc beanDesc, PropertyDesc propertyDesc);
 
-    String getImportStorageType(PropertyDesc propertyDesc);
+    String getImportStorageType(BeanDesc beanDesc, PropertyDesc propertyDesc);
 
 }

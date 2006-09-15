@@ -16,6 +16,10 @@
 package org.seasar.flex2.util.data.transfer;
 
 public class TestClass {
+    public static final String strData_EXPORT = "session";
+    
+    public static final String strData_IMPORT = "session";
+    
     private String strData;
 
     private Object[] arrayData;

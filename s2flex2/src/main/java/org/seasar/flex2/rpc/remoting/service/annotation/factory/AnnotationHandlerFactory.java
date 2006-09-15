@@ -16,25 +16,26 @@
 package org.seasar.flex2.rpc.remoting.service.annotation.factory;
 
 import org.seasar.flex2.rpc.remoting.service.annotation.handler.AnnotationHandler;
-import org.seasar.flex2.rpc.remoting.service.annotation.handler.impl.BasicAnnotationHandlerImpl;
+import org.seasar.flex2.rpc.remoting.service.annotation.handler.impl.FieldAnnotationHandler;
 import org.seasar.framework.exception.ClassNotFoundRuntimeException;
 import org.seasar.framework.util.ClassUtil;
 
 public class AnnotationHandlerFactory {
 
     private static AnnotationHandler annotationHandler;
-    
+
     private static final String BACKPORT175_ANNOTATION_HANDLER_CLASS_NAME = "org.seasar.flex2.rpc.remoting.service.annotation.handler.Backport175ActionAnnotationHandler";
 
     private static final String TIGER_ANNOTATION_HANDLER_CLASS_NAME = "org.seasar.flex2.rpc.remoting.service.annotation.handler.TigerAnnotationHandler";
-    
+
     static {
-        Class clazz = BasicAnnotationHandlerImpl.class;
+        Class clazz = FieldAnnotationHandler.class;
         try {
             clazz = ClassUtil.forName(TIGER_ANNOTATION_HANDLER_CLASS_NAME);
         } catch (ClassNotFoundRuntimeException ignore) {
             try {
-                clazz = ClassUtil.forName(BACKPORT175_ANNOTATION_HANDLER_CLASS_NAME);
+                clazz = ClassUtil
+                        .forName(BACKPORT175_ANNOTATION_HANDLER_CLASS_NAME);
             } catch (ClassNotFoundRuntimeException ignore2) {
             }
         }
@@ -44,11 +45,11 @@ public class AnnotationHandlerFactory {
     public static AnnotationHandler getAnnotationHandler() {
         return annotationHandler;
     }
-    
+
     public static void setAnnotationHandler(AnnotationHandler handler) {
         annotationHandler = handler;
     }
-    
+
     protected AnnotationHandlerFactory() {
     }
 }
