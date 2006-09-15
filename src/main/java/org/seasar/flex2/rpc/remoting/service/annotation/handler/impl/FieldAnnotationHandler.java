@@ -16,11 +16,16 @@
 package org.seasar.flex2.rpc.remoting.service.annotation.handler.impl;
 
 import org.seasar.flex2.rpc.remoting.service.annotation.handler.AnnotationHandler;
+import org.seasar.framework.beans.BeanDesc;
+import org.seasar.framework.beans.factory.BeanDescFactory;
 import org.seasar.framework.container.ComponentDef;
 
-public class BasicAnnotationHandlerImpl implements AnnotationHandler {
+public class FieldAnnotationHandler implements AnnotationHandler {
 
-    public boolean hasRemotingService( final ComponentDef componentDef) {
-        return false;
+    public static final String REMOTING_SERVICE = "REMOTING_SERVICE";
+
+    public final boolean hasRemotingService(ComponentDef componentDef) {
+        final BeanDesc beanDesc = BeanDescFactory.getBeanDesc(componentDef.getComponentClass());
+        return beanDesc.hasField(REMOTING_SERVICE);
     }
 }

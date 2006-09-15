@@ -13,30 +13,30 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.remoting.service.autoregister;
+package org.seasar.flex2.rpc.remoting.service.customizer;
 
 import org.seasar.flex2.rpc.remoting.service.RemotingServiceLocator;
 import org.seasar.flex2.rpc.remoting.service.RemotingServiceRepository;
+import org.seasar.framework.container.ComponentCustomizer;
 import org.seasar.framework.container.ComponentDef;
 import org.seasar.framework.container.S2Container;
-import org.seasar.framework.container.autoregister.ComponentCustomizer;
 
 public class RemotingServiceCustomizer implements ComponentCustomizer {
 
     private S2Container container;
 
-    private RemotingServiceLocator locator;
+    private RemotingServiceLocator remotingServiceLocator;
 
-    private RemotingServiceRepository repository;
+    private RemotingServiceRepository remotingServiceRepository;
 
-    public void customize( final ComponentDef componentDef) {
-        if (locator == null && repository == null) {
+    public void customize(final ComponentDef componentDef) {
+        if (remotingServiceLocator == null && remotingServiceRepository == null) {
             setupRemotingServiceComponents();
         }
-        
-        if (locator.isSupportService(componentDef)) {
-            repository.addService(componentDef.getComponentName(),
-                    componentDef);
+
+        if (remotingServiceLocator.isSupportService(componentDef)) {
+            remotingServiceRepository.addService(componentDef
+                    .getComponentName(), componentDef);
         }
     }
 
@@ -46,9 +46,9 @@ public class RemotingServiceCustomizer implements ComponentCustomizer {
 
     private final void setupRemotingServiceComponents() {
         final S2Container container = this.container.getRoot();
-        locator = (RemotingServiceLocator) container
+        remotingServiceLocator = (RemotingServiceLocator) container
                 .getComponent(RemotingServiceLocator.class);
-        repository = (RemotingServiceRepository) container
+        remotingServiceRepository = (RemotingServiceRepository) container
                 .getComponent(RemotingServiceRepository.class);
     }
 }
