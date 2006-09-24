@@ -12,6 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, 
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
+ * @ignore
  */
 package org.seasar.flex2.rpc.remoting {
 
@@ -26,14 +27,17 @@ package org.seasar.flex2.rpc.remoting {
     import mx.managers.CursorManager;
     import mx.messaging.config.ServerConfig;
     import mx.rpc.AbstractService;
+    import mx.rpc.AsyncToken;
     import mx.rpc.Fault;
     import mx.rpc.events.FaultEvent;
     import mx.rpc.events.ResultEvent;
     
     import org.seasar.flex2.net.NetConnection;
+    import org.seasar.flex2.rpc.RpcOperation;
+    import org.seasar.flex2.rpc.RelayResponder;
     
     use namespace flash_proxy;
-
+	// events -------------------------------------------------------------------
     /** @private*/
     [Event(name="fault", type="mx.rpc.events.FaultEvent")]    
     /** @private*/
@@ -41,7 +45,13 @@ package org.seasar.flex2.rpc.remoting {
     [Event(name="ioError", type="flash.events.IOErrorEvent")]
     [Event(name="netStatus",type="flash.events.NetStatusEvent")]
     [Event(name="securityError",type="flash.events.SecurityErrorEvent")]
+    // icon----------------------------------------------------------------------
     [IconFile("S2Component.png")]
+    
+    /**
+    * S2Flex2Serviceは、S2Flex2のgatewayに接続する為のコンポーネントクラスです。
+    * S2Flex2Service is ...
+    */  
     public dynamic class S2Flex2Service extends AbstractService implements IMXMLObject {
         
         [Inspectable(type="String")]
@@ -59,45 +69,79 @@ package org.seasar.flex2.rpc.remoting {
         
         protected var _con:NetConnection;
         
+        /* @private */
         private var document:Object;
-
+		/* @private remoteCredialsUserName  */
         private var remoteCredentialsUsername:String;
-       
+       /* @private remoteCredentialsPassword */
         private var remoteCredentialsPassword:String;
+        
+        public var _opResponderArray:Object;  
                    
-        public function S2Flex2Service(){
-            super(null);
+        public function S2Flex2Service(destination:String=null)
+        {
+            super(destination);
+            this._opResponderArray=new Array();
+
         }
             
-        public function initialized(document:Object,id:String):void{
+        public function initialized(document:Object,id:String):void
+        {
             this.document=document;
         }
          
-        public override function setRemoteCredentials(remoteUsername:String, remotePassword:String):void{
+        public override function setRemoteCredentials(remoteUsername:String, remotePassword:String):void
+        {
             this.remoteCredentialsUsername = remoteUsername;
             this.remoteCredentialsPassword = remotePassword;
         }
         
-        public function onResult(result:*):void{
+        public function onResult(operation:String,result:*):void
+        {
             hiddenBusyCursor();
+            var responder:RelayResponder=this._opResponderArray[operation];
             
-            var resultEvent:ResultEvent=new ResultEvent("result",false,true,result,null,null);
+            var resultEvent:ResultEvent=new ResultEvent("result",false,false,result,responder.asyncToken,responder.asyncToken.message);
             dispatchEvent(resultEvent);
         }
         
-        public function onFault(result:*):void{
+        public function onFault(operation:String,result:*):void
+        {
             hiddenBusyCursor();
             
             var fault:Fault = new Fault(result.code,result.description,result.details);
-            var faultEvent:FaultEvent = new FaultEvent("fault",false,true,fault,null,null);
+            var faultEvent:FaultEvent = new FaultEvent("fault",false,false,fault,null,null);
             dispatchEvent(faultEvent);
         }
         
-        flash_proxy override function callProperty(methodName:*, ...args):* {
+        flash_proxy override function callProperty(methodName:*, ...args):*
+        {
              args.unshift(methodName);
              return remoteCall.apply(null,args);
         }
-
+        
+        /**
+        * Serviceより呼び出すOperationをセットします。
+        * @param name メソッド名
+        * @param value メソッドに対応したRPCOperation
+        **/
+        
+        flash_proxy override function setProperty(name:*,value:*):void{
+        	this.operations[name]=value;
+        }
+        
+        /**
+        * 指定されたnameにあわせたOperationを返します。
+        * @return RPCOperation
+        * @ignore
+        **/ 
+        flash_proxy override function getProperty(name:*):*{
+        	if(this.operations[name]==null){
+        		this.operations[name]=new RpcOperation(this,name);
+        	}
+        	return this.operations[name];
+        }
+        
         protected function createConnection():void{
             _con = new org.seasar.flex2.net.NetConnection();
             _con.objectEncoding = ObjectEncoding.AMF3;
@@ -121,13 +165,15 @@ package org.seasar.flex2.rpc.remoting {
             _con.connect(this.gatewayUrl);
         }
         
-        private function remoteCall(methodName:String, ...rest):void {
+        private function remoteCall(methodName:String, ...rest):AsyncToken {
             setupConnection();
             setupCredential();
             setupCursor();
        
-            var callMethod:String =this.destination +"." +methodName; 
-            var responder:Responder = new Responder(this.onResult,this.onFault);
+            var callMethod:String =this.destination +"." +methodName;
+           	
+            var responder:RelayResponder = new RelayResponder(methodName,this.onResult,this.onFault);
+            this._opResponderArray[methodName]=responder;
             
             if(rest.length>0){
                 rest.unshift(callMethod,responder);
@@ -135,6 +181,8 @@ package org.seasar.flex2.rpc.remoting {
             }else{
                 _con.call(callMethod,responder);
             }
+            return responder.asyncToken;
+            
         }
         
         private function hiddenBusyCursor():void{
@@ -145,7 +193,6 @@ package org.seasar.flex2.rpc.remoting {
         
         private function netStatusHandler(event:NetStatusEvent):void {
             hiddenBusyCursor();
-            //_con =null;
             dispatchEvent(event);
         }
         
