@@ -30,16 +30,12 @@
 	import mx.rpc.events.FaultEvent;
 	import mx.rpc.events.ResultEvent;
 	import mx.rpc.remoting.mxml.RemoteObject;
-	
-	/**
-	 * 
-	 */
+
 	use namespace flash_proxy;
 	
 	/**
 	 * S2Component Invoker
-	 * @author nod
-	 * @author sato-shi
+     * @deprecated use S2Flex2Service
 	 */
 	public dynamic class S2Component extends AbstractService implements IMXMLObject	{
 
