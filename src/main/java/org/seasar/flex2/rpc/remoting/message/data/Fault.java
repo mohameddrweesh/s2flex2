@@ -17,7 +17,7 @@ package org.seasar.flex2.rpc.remoting.message.data;
 
 public class Fault {
 
-    private final String code = "SERVER.PROCESSING";
+    private static final String code = "SERVER.PROCESSING";
 
     private String description;
 

@@ -18,12 +18,7 @@ package org.seasar.flex2.core.format.amf3.io.reader.impl;
 import java.io.DataInputStream;
 import java.io.IOException;
 
-import javax.xml.parsers.DocumentBuilder;
-
-import org.seasar.flex2.core.format.amf3.io.CharsetType;
-import org.seasar.framework.util.DocumentBuilderFactoryUtil;
-import org.seasar.framework.util.DocumentBuilderUtil;
-import org.seasar.framework.util.DomUtil;
+import org.seasar.flex2.core.util.XmlUtil;
 import org.w3c.dom.Document;
 
 public class Amf3XmlReaderImpl extends AbstractAmf3UTF8StringReaderImpl {
@@ -31,13 +26,6 @@ public class Amf3XmlReaderImpl extends AbstractAmf3UTF8StringReaderImpl {
     private static final String DEFAULT_TAG_PREFIX = "<root>";
 
     private static final String DEFAULT_TAG_SUFFIX = "</root>";
-
-    private static final Document getXmlDocument(final String xml) {
-        final DocumentBuilder builder = DocumentBuilderFactoryUtil
-                .newDocumentBuilder();
-        return DocumentBuilderUtil.parse(builder, DomUtil.getContentsAsStream(
-                xml, CharsetType.UTF8));
-    }
 
     private static final String readXmlStringData(final int xmlDef,
             final DataInputStream inputStream) throws IOException {
@@ -55,7 +43,7 @@ public class Amf3XmlReaderImpl extends AbstractAmf3UTF8StringReaderImpl {
 
     private final Document readXmlData(final int xmlDef,
             final DataInputStream inputStream) throws IOException {
-        final Document xml = getXmlDocument(readXmlStringData(xmlDef,
+        final Document xml = XmlUtil.getXmlDocument(readXmlStringData(xmlDef,
                 inputStream));
         addObjectReference(xml);
 

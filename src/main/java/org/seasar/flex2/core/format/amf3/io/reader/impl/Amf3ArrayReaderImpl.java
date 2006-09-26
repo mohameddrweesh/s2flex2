@@ -22,8 +22,6 @@ import org.seasar.flex2.core.format.amf.io.reader.AmfDataReader;
 
 public class Amf3ArrayReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
 
-    private AmfDataReader stringReader;
-    
     public Object read(final DataInputStream inputStream) throws IOException {
         return readObject(inputStream);
     }

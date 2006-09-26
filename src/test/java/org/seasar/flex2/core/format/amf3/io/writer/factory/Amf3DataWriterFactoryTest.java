@@ -119,7 +119,7 @@ public class Amf3DataWriterFactoryTest extends S2TestCase {
 
         assertTrue("1", writer instanceof Amf3NullWriterImpl);
 
-        writer = factory.createDataValueWriter(new String());
+        writer = factory.createDataValueWriter("");
         assertTrue("2", writer instanceof Amf3StringWriterImpl);
 
         writer = factory.createDataValueWriter(BigDecimal.valueOf(1));

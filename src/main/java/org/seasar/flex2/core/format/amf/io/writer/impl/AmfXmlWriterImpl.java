@@ -42,7 +42,6 @@ public class AmfXmlWriterImpl implements AmfDataWriter {
     protected final void write(final Document document,
             final DataOutputStream outputStream) throws IOException {
         outputStream.writeByte(AmfTypeDef.XML);
-        String xmlData = DomUtil.toString(document.getDocumentElement());
-        writeXmlData(xmlData, outputStream);
+        writeXmlData(DomUtil.toString(document.getDocumentElement()), outputStream);
     }
 }
