@@ -65,7 +65,7 @@ public class Amf3MessageReaderWriterTest extends S2TestCase {
     public MessageReaderFactory messageReaderFactory;
 
     public MessageWriterFactory messageWriterFactory;
-    
+
     public void testArrayForArray() throws Exception {
         Object[] value = new Object[] { "111", "222" };
         Object[] value2 = (Object[]) convertData(value);
@@ -270,7 +270,8 @@ public class Amf3MessageReaderWriterTest extends S2TestCase {
         MessageBody body = createMessageBody("aaa.Hoge.foo", "response",
                 new Double(1));
         message.addBody(body);
-        MessageWriter writer = messageWriterFactory.createMessageWriter(dos, message);
+        MessageWriter writer = messageWriterFactory.createMessageWriter(dos,
+                message);
         writer.write();
 
         ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
@@ -293,7 +294,7 @@ public class Amf3MessageReaderWriterTest extends S2TestCase {
         assertEquals("2", "111", value2.get("aaa"));
         assertEquals("3", "222", value2.get("bbb"));
     }
-    
+
     public void testObjectForRemoteClass() throws Exception {
         Map value = new HashMap();
         value.put("_remoteClass", MyBean.class.getName());
@@ -346,7 +347,7 @@ public class Amf3MessageReaderWriterTest extends S2TestCase {
     public void testStringMultiBytes() throws Exception {
         assertEquals("1", "あいうえお一二三四五", convertData("あいうえお一二三四五"));
     }
-    
+
     public void testXml() throws Exception {
         Document xml1 = createXmlDocument();
 
@@ -377,8 +378,7 @@ public class Amf3MessageReaderWriterTest extends S2TestCase {
     }
 
     private final Document createXmlDocument() throws FileNotFoundException {
-        URL url = ResourceUtil
-                .getResource("testXml.xml");
+        URL url = ResourceUtil.getResource("testXml.xml");
         File testXml = new File(url.getPath());
         DocumentBuilder builder = DocumentBuilderFactoryUtil
                 .newDocumentBuilder();
@@ -387,7 +387,7 @@ public class Amf3MessageReaderWriterTest extends S2TestCase {
         return xml1;
     }
 
-    private final String getXmlString( final Document document) {
+    private final String getXmlString(final Document document) {
         Element element = document.getDocumentElement();
         return DomUtil.toString(element);
     }
@@ -399,20 +399,23 @@ public class Amf3MessageReaderWriterTest extends S2TestCase {
         MessageBody body = message.getBody(0);
         return body.getData();
     }
+
     protected DataInputStream convertDataInputStream(Object data)
             throws Exception {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         DataOutputStream dos = new DataOutputStream(baos);
         Message message = messageFactory.createResponseMessage();
-        MessageBody body = messageBodyFactory.createBody("target", "response", data);
+        MessageBody body = messageBodyFactory.createBody("target", "response",
+                data);
         message.addBody(body);
-        MessageWriter writer = messageWriterFactory.createMessageWriter(dos, message);
+        MessageWriter writer = messageWriterFactory.createMessageWriter(dos,
+                message);
         writer.write();
 
         ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
         return new DataInputStream(bais);
     }
-    
+
     protected void setUp() throws Exception {
         include(PATH);
     }

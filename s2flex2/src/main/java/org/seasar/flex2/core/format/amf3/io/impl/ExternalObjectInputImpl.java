@@ -48,7 +48,7 @@ public class ExternalObjectInputImpl implements ExternalObjectInput {
     }
 
     public int read(byte[] b, int off, int len) throws IOException {
-        return read(b, off, len);
+        return inputStream.read(b, off, len);
     }
 
     public boolean readBoolean() throws IOException {
@@ -127,7 +127,7 @@ public class ExternalObjectInputImpl implements ExternalObjectInput {
     }
 
     public int skipBytes(int n) throws IOException {
-        return skipBytes(n);
+        return inputStream.skipBytes(n);
     }
 
     public void write(byte[] b) throws IOException {

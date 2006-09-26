@@ -18,24 +18,25 @@ package org.seasar.flex2.core.format.amf.io.reader.impl;
 import java.io.DataInputStream;
 import java.io.IOException;
 
-import javax.xml.parsers.DocumentBuilder;
-
 import org.seasar.flex2.core.format.amf.io.reader.AmfDataReader;
-import org.seasar.framework.util.DocumentBuilderFactoryUtil;
-import org.seasar.framework.util.DocumentBuilderUtil;
+import org.seasar.flex2.core.util.XmlUtil;
 import org.w3c.dom.Document;
 
 public class AmfXmlReaderImpl implements AmfDataReader {
 
+    private static final String readXmlStringData(final DataInputStream inputStream) throws IOException {
+        final int xmlStringLen = inputStream.readInt();
+        final byte[] xmlStringBytes = new byte[xmlStringLen];
+        inputStream.readFully(xmlStringBytes);
+        return new String(xmlStringBytes);
+    }
+
     public Object read(final DataInputStream inputStream) throws IOException {
         return readXML(inputStream);
     }
-
+    
     protected Document readXML(final DataInputStream inputStream)
             throws IOException {
-        inputStream.skip(4);
-        final DocumentBuilder builder = DocumentBuilderFactoryUtil
-                .newDocumentBuilder();
-        return DocumentBuilderUtil.parse(builder, inputStream);
+        return XmlUtil.getXmlDocument( readXmlStringData(inputStream) );
     }
 }
