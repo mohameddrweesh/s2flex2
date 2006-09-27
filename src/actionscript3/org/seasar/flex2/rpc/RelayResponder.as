@@ -25,23 +25,39 @@ package org.seasar.flex2.rpc
 	import mx.rpc.events.ResultEvent;
 
 	/**
-	 * <h4>
-	 * RelayResponder
-	 * </h4>
+	 * <h4>RelayResponder</h4>
+	 * 
+	 * 
 	 */ 
 	public class RelayResponder extends Responder
 	{
-		/** @private */
+				
+		//--------------------------------------------------------------------------
+		//
+		//  Properties
+		//
+		//--------------------------------------------------------------------------
+	
+		/** 
+		 * @private
+		 */
 		private var _resultFunction:Function;
-		/** @private */
+		/** 
+		 * @private
+		 */
 		private var _statusFunction:Function;
-		/** @private */
+		/** 
+		 * @private
+		 */
 		private var _asyncToken:AsyncToken;
-		/** @private */
+		/** 
+		 * @private
+		 */
 		private var _remoteMessage:RemoteMessage;
 		
 		/**
-		 * Constractor
+		 * Constractor.<br />
+		 * メソッド名に応じたResponderとして生成します。
 		 * @param method call method name
 		 * @param result resultFunction
 		 * @param status statusFunciton
@@ -57,9 +73,14 @@ package org.seasar.flex2.rpc
 			
 			_asyncToken = new AsyncToken(_remoteMessage);
 		}
+		//--------------------------------------------------------------------------
+		//
+		//  Methods
+		//
+		//--------------------------------------------------------------------------		
 		/**
-		 * 
-		 * @param result
+		 * サーバロジック呼び出しが成功したときによばれるハンドラです。
+		 * @param result 実行結果のデータ
 		 * 
 		 */		
 		private function onResultHandler(result:*):void
@@ -73,9 +94,11 @@ package org.seasar.flex2.rpc
 	        }
 		}
 		
-	    /**
-	     *     @private
-	     */
+		/**
+		 * サーバロジック呼び出しが成功したときによばれるハンドラです。
+		 * @param result 実行結果のデータ
+		 * 
+		 */
 	    private function onFaultHandler( fault : * ):void
 	    {
 	        _remoteMessage.body = "fault";
@@ -88,6 +111,7 @@ package org.seasar.flex2.rpc
 	       		}
 	    	}
 		}
+		
 		/**
 		 * このResponderのAsynTokenを返します
 		 * @return AsyncToken このResponderに関連するAsyncToken
