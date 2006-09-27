@@ -12,21 +12,20 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, 
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
+ *
+ * @ignore
  */
-package org.seasar.flex2.rpc.remoting {
-	
+
+package org.seasar.flex2.rpc.remoting
+{
 	import flash.net.ObjectEncoding;
-	
-	import mx.messaging.config.ServerConfig;
-	
-	import org.seasar.flex2.net.NetConnection;
 	
 	public dynamic class RemoteService extends S2Flex2Service {
 	    
 	    [Inspectable(type="Boolean",defaultValue="false")]
    		public var useAMF0:Boolean;
    		
-   		protected override function createConnection():void{
+   		override protected  function createConnection():void{
             super.createConnection();
 			if(useAMF0){
 				_con.objectEncoding = ObjectEncoding.AMF0;
