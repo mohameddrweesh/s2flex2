@@ -32,8 +32,7 @@ public class StorageLocatorImpl implements StorageLocator {
 
     public Storage getStorage( final String storageName) {
         S2Container root = container.getRoot();
-        Storage storage = (Storage) root.getComponent(storageName);
-        return storage;
+        return (Storage) root.getComponent(storageName);
     }
 
     public void setContainer(S2Container container) {
