@@ -23,10 +23,10 @@ package org.seasar.flex2.rpc
 	import mx.rpc.AsyncToken;
 	import mx.rpc.events.FaultEvent;
 	import mx.rpc.events.ResultEvent;
+	import mx.rpc.Fault;
 
 	/**
 	 * <h4>RelayResponder</h4>
-	 * 
 	 * 
 	 */ 
 	public class RelayResponder extends Responder
@@ -66,7 +66,7 @@ package org.seasar.flex2.rpc
 		{
 			super(onResultHandler, onFaultHandler);
 			this._resultFunction = result;
-			this._statusFunction=status;
+			this._statusFunction = status;
 			_remoteMessage = new RemoteMessage();
 			_remoteMessage.operation=method;
 			_remoteMessage.destination=method;
@@ -95,14 +95,15 @@ package org.seasar.flex2.rpc
 		}
 		
 		/**
-		 * サーバロジック呼び出しが成功したときによばれるハンドラです。
-		 * @param result 実行結果のデータ
+		 * サーバロジック呼び出しが失敗したときによばれるハンドラです。
+		 * @param fault 呼び出し失敗時のデータ
 		 * 
 		 */
-	    private function onFaultHandler( fault : * ):void
+	    private function onFaultHandler(status:*):void
 	    {
 	        _remoteMessage.body = "fault";
-        	_statusFunction( RemoteMessage( asyncToken.message ).operation, fault );
+        	_statusFunction( RemoteMessage( asyncToken.message ).operation, status );
+        	var fault:Fault = new Fault(status.code,status.description,status.details);
 			var faultEvent:FaultEvent=new FaultEvent("fault",false,false,fault,asyncToken,_remoteMessage);
 	        if( _asyncToken.hasResponder() ) {
 	            for( var i:int = 0; i < asyncToken.responders.length; i++ )
@@ -110,6 +111,7 @@ package org.seasar.flex2.rpc
 	                _asyncToken.responders[ i ].fault( faultEvent );
 	       		}
 	    	}
+	    	
 		}
 		
 		/**

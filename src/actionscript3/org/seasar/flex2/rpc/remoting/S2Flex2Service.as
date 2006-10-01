@@ -128,9 +128,10 @@ package org.seasar.flex2.rpc.remoting
         public function onFault(operation:String,result:*):void
         {
             hiddenBusyCursor();
-            
+			var responder:RelayResponder=this._opResponderArray[operation];
+			
             var fault:Fault = new Fault(result.code,result.description,result.details);
-            var faultEvent:FaultEvent = new FaultEvent("fault",false,false,fault,null,null);
+            var faultEvent:FaultEvent = new FaultEvent("fault",false,false,fault,responder.asyncToken,responder.asyncToken.message);
             dispatchEvent(faultEvent);
         }
         
