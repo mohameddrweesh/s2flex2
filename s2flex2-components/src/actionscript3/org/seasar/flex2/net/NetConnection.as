@@ -12,8 +12,11 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, 
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
+ *
+ * @ignore
  */
-package org.seasar.flex2.net{
+package org.seasar.flex2.net
+{
     
     import flash.net.NetConnection;
 
@@ -23,30 +26,40 @@ package org.seasar.flex2.net{
         
         private var append:String =null;
         
-        public override function connect(command:String, ...rest):void{
+        public override function connect(command:String, ...rest):void
+        {
             _originalUrl = command;
             super.connect(command,rest);
         }
         
-        public function AppendToGatewayUrl(append:String):void{
-            //TODO: experimental code 
-            // delete this Comment outcode
-            //Alert.show("appendToGatewayUrl"+ this._originalUrl + "+" + append);
+        private function reconnect( uri:String ):void
+        {
+			if( this.connected ){
+				this.close();
+			}
+			this.connect( uri );
+		}
+		
+        public function AppendToGatewayUrl(append:String):void
+        { 
             this.append = append;
-            connect(this._originalUrl + append);
+            var url:String=this._originalUrl+ append;
+            
+            reconnect(url);
         }
         
-        public override function addHeader(operation:String,mustUnderstand:Boolean=false,param:Object=null):void{
+        public override function addHeader(operation:String,mustUnderstand:Boolean=false,param:Object=null):void
+        {
             super.addHeader(operation,mustUnderstand,param);
         }
         
-        public function ReplaceGatewayUrl(url:String):void{
-            //not implements.    
-            //experimental code
-            super.connect(url);
+        public function ReplaceGatewayUrl(url:String):void
+        {
+            reconnect(url);
         }
         
-        public function get connectedUrl():String{
+        public function get connectedUrl():String
+        {
             if(append!= null){
                 return _originalUrl + append;
             }
