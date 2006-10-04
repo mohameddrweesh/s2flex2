@@ -1,6 +1,16 @@
 <project name="s2flex2-components" default="build" basedir=".">
 	<property file="build.properties"/>
 	<property name="ver" value="1.0.0-rc-1"/>
+	<!--
+	<path id="native2html.task.classpath">
+  		<fileset dir="lib">
+    		<include name="*.jar" />
+  		</fileset>
+	</path>
+	<taskdef name="native2html" 
+		classname="com.mycompany.Native2Html"
+		classpathref="native2html.task.classpath" />
+	-->	
     <!-- ================================= 
           target: mxmlc              
          ================================= -->
@@ -104,12 +114,29 @@
     	<arg value="src/resources/Manifest.xml"/>
     	<arg value="-include-namespaces" />
     	<arg value="http://www.seasar.org/s2flex2/mxml" />
-		<arg value="-include-classes"/>		
-		<arg value="org.seasar.flex2.rpc.remoting.S2Component"/>    	
+		<arg value="-include-classes"/>		  	
 		<arg value="org.seasar.flex2.rpc.remoting.S2Flex2Service"/>
 		<arg value="org.seasar.flex2.rpc.remoting.RemoteService"/> 
 	  </java>
   </target>
+    <!-- ================================= 
+          target: asdoc              
+         ================================= -->
+    <target name="asdoc" description="make a asdoc">
+
+        <!-- <native2html encoding="UTF-8" src="src" dest="tmp/src" includes="**/*.as" /> -->
+        <java classname="flex2.tools.ASDoc" fork="true">
+          <classpath>
+            <pathelement location="${flex.sdk.home}/asdoc/hotfix/flex_asdoc_hotfix.jar"/>
+            <pathelement location="${flex.sdk.home}/lib/asdoc.jar"/>	
+          </classpath>
+          <jvmarg value="-Dapplication.home=${flex.sdk.home}"/>
+          <jvmarg value="-Xmx1024m"/>
+          <jvmarg value="-Dsun.io.useCanonCaches=false"/>
+          <jvmarg value="-Xbootclasspath/p:${flex.sdk.home}/asdoc/lib/xalan.jar"/>
+          <arg line="-doc-sources tmp/src -output tmp/api"/>
+        </java>
+    </target>	
     <!-- ================================= 
           target: dist              
          ================================= -->	
