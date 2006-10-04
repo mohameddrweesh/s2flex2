@@ -36,10 +36,9 @@ public class DataTransferSupportedRemotingServiceInvokerImpl extends
         return transfer;
     }
 
-    public Object invoke(final String serviceName, final String methodName,
+    public Object doInvoke(final Object service, final String methodName,
             final Object[] args) throws Throwable {
 
-        final Object service = remotingServiceLocator.getService(serviceName);
         final Storage storage = storageLocator.getStorage(SERVICE_DATA_STORAGE);
         transfer.importToComponent(storage, service);
         try {

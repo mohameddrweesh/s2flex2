@@ -15,9 +15,6 @@
  */
 package org.seasar.flex2.rpc.remoting.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.seasar.flex2.rpc.remoting.message.data.MessageBody;
 import org.seasar.flex2.rpc.remoting.service.RemotingServiceInvoker;
 import org.seasar.flex2.rpc.remoting.service.RemotingServiceInvokerChooser;
@@ -25,20 +22,16 @@ import org.seasar.flex2.rpc.remoting.service.exception.InvokerNotFoundRuntimeExc
 
 public class RemotingServiceInvokerChooserImpl implements RemotingServiceInvokerChooser {
 
-    private final List invokers;
+    private RemotingServiceInvoker[] invokers;
 
-    public RemotingServiceInvokerChooserImpl() {
-        invokers = new ArrayList();
-    }
-
-    public void addInvoker(RemotingServiceInvoker invoker) {
-        invokers.add(invoker);
+    public void setInvoker(RemotingServiceInvoker[] invokers) {
+        this.invokers = invokers;
     }
 
     public RemotingServiceInvoker chooseInvoker( final MessageBody requestBody) {
         RemotingServiceInvoker invoker;
-        for (int i = 0; i < invokers.size(); ++i) {
-            invoker = (RemotingServiceInvoker) invokers.get(i);
+        for (int i = 0; i < invokers.length; ++i) {
+            invoker = invokers[i];
             if (invoker.supports(requestBody.getServiceName(), requestBody
                     .getServiceMethodName(), requestBody.getArgs())) {
                 return invoker;
