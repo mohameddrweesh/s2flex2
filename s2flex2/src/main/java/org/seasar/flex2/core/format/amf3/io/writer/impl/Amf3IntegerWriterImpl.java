@@ -36,7 +36,7 @@ public class Amf3IntegerWriterImpl extends AbstractAmf3IntWriterImpl {
                 | INTEGER_NEGATIVE_SING | list[3]);
 
         for (int i = list.length - 2; i >= 1; i--) {
-            outputStream.writeByte( list[i] | INTEGER_INCLUDE_NEXT_BYTE );
+            outputStream.writeByte(list[i] | INTEGER_INCLUDE_NEXT_BYTE);
         }
         outputStream.writeByte(list[0]);
     }

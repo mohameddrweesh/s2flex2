@@ -23,9 +23,9 @@ public class ByteArrayFactoryImpl implements ByteArrayFactory {
 
     private S2Container container;
 
-    public ByteArray createByteArray(byte[] bytes) {
-        final ByteArray bytearray = (ByteArray) container.getComponent(
-                ByteArray.class);
+    public ByteArray createByteArray(final byte[] bytes) {
+        final ByteArray bytearray = (ByteArray) container
+                .getComponent(ByteArray.class);
         bytearray.initBuffer(bytes);
         return bytearray;
     }
@@ -34,7 +34,7 @@ public class ByteArrayFactoryImpl implements ByteArrayFactory {
         return container;
     }
 
-    public void setContainer(S2Container container) {
+    public void setContainer(final S2Container container) {
         this.container = container;
     }
 }

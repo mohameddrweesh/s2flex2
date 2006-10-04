@@ -47,15 +47,15 @@ public class Fault {
         return type;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(final String description) {
         this.description = description;
     }
 
-    public void setDetails(String details) {
+    public void setDetails(final String details) {
         this.details = details;
     }
 
-    public void setType(String type) {
+    public void setType(final String type) {
         this.type = type;
     }
 }

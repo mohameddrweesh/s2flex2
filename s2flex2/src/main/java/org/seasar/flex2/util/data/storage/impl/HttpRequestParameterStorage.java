@@ -27,7 +27,7 @@ public class HttpRequestParameterStorage implements Storage {
 
     private final HttpServletRequest request;
 
-    public HttpRequestParameterStorage(HttpServletRequest request) {
+    public HttpRequestParameterStorage(final HttpServletRequest request) {
         this.request = request;
     }
 
@@ -35,7 +35,7 @@ public class HttpRequestParameterStorage implements Storage {
         return REQUEST;
     }
 
-    public Object getProperty(String name) {
+    public Object getProperty(final String name) {
         return request.getParameter(name);
     }
 
@@ -44,6 +44,6 @@ public class HttpRequestParameterStorage implements Storage {
         return request.getParameterNames();
     }
 
-    public void setProperty(String name, Object value) {
+    public void setProperty(final String name, final Object value) {
     }
 }

@@ -28,13 +28,13 @@ public class AmfDataReaderFactoryImpl implements AmfDataReaderFactory {
     public AmfDataReaderFactoryImpl() {
     }
 
-    public void setReaderMap(Map readerMap) {
+    public void setReaderMap(final Map readerMap) {
         this.readerMap = readerMap;
     }
 
-    public AmfDataReader createDataReader(byte dataType) {
+    public AmfDataReader createDataReader(final byte dataType) {
         AmfDataReader reader = null;
-        String key = AmfTypeDef.toString(dataType);
+        final String key = AmfTypeDef.toString(dataType);
         reader = (AmfDataReader) readerMap.get(key);
         return reader;
     }

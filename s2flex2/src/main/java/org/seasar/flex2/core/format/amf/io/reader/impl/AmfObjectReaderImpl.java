@@ -49,8 +49,8 @@ public class AmfObjectReaderImpl extends AbstractAmfClassObjectReaderImpl {
     private final void readProperties(final DataInputStream inputStream,
             final AmfObject amfObject) throws IOException {
         while (true) {
-            String key = inputStream.readUTF();
-            byte dataType = inputStream.readByte();
+            final String key = inputStream.readUTF();
+            final byte dataType = inputStream.readByte();
             if (dataType == AmfTypeDef.EOM) {
                 break;
             }

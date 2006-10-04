@@ -21,7 +21,7 @@ import org.seasar.framework.container.S2Container;
 
 public class FaultFactoryImpl implements FaultFactory {
 
-    private static final String getStackTraceString(Throwable t) {
+    private static final String getStackTraceString(final Throwable t) {
         final StackTraceElement[] elements = t.getStackTrace();
         final StringBuffer buf = new StringBuffer(t.toString());
         buf.append('\n');
@@ -34,7 +34,8 @@ public class FaultFactoryImpl implements FaultFactory {
 
     private S2Container container;
 
-    public Fault createFault(String type, String details, String description) {
+    public Fault createFault(final String type, final String details,
+            final String description) {
         final Fault fault = (Fault) container.getComponent(Fault.class);
         fault.setType(type);
         fault.setDetails(details);
@@ -43,12 +44,12 @@ public class FaultFactoryImpl implements FaultFactory {
         return fault;
     }
 
-    public Fault createFault(Throwable throwable) {
+    public Fault createFault(final Throwable throwable) {
         return createFault(throwable.getClass().getName(),
                 getStackTraceString(throwable), throwable.getMessage());
     }
 
-    public void setContainer(S2Container container) {
+    public void setContainer(final S2Container container) {
         this.container = container;
     }
 }

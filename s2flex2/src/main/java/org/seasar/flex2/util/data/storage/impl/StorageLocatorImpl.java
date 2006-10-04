@@ -20,7 +20,7 @@ import org.seasar.flex2.util.data.storage.StorageLocator;
 import org.seasar.framework.container.S2Container;
 
 public class StorageLocatorImpl implements StorageLocator {
-    
+
     private S2Container container;
 
     public StorageLocatorImpl() {
@@ -30,12 +30,12 @@ public class StorageLocatorImpl implements StorageLocator {
         return this.container;
     }
 
-    public Storage getStorage( final String storageName) {
-        S2Container root = container.getRoot();
+    public Storage getStorage(final String storageName) {
+        final S2Container root = container.getRoot();
         return (Storage) root.getComponent(storageName);
     }
 
-    public void setContainer(S2Container container) {
+    public void setContainer(final S2Container container) {
         this.container = container;
     }
 }

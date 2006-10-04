@@ -20,15 +20,16 @@ import org.seasar.flex2.rpc.remoting.service.RemotingServiceInvoker;
 import org.seasar.flex2.rpc.remoting.service.RemotingServiceInvokerChooser;
 import org.seasar.flex2.rpc.remoting.service.exception.InvokerNotFoundRuntimeException;
 
-public class RemotingServiceInvokerChooserImpl implements RemotingServiceInvokerChooser {
+public class RemotingServiceInvokerChooserImpl implements
+        RemotingServiceInvokerChooser {
 
     private RemotingServiceInvoker[] invokers;
 
-    public void setInvoker(RemotingServiceInvoker[] invokers) {
+    public void setInvoker(final RemotingServiceInvoker[] invokers) {
         this.invokers = invokers;
     }
 
-    public RemotingServiceInvoker chooseInvoker( final MessageBody requestBody) {
+    public RemotingServiceInvoker chooseInvoker(final MessageBody requestBody) {
         RemotingServiceInvoker invoker;
         for (int i = 0; i < invokers.length; ++i) {
             invoker = invokers[i];

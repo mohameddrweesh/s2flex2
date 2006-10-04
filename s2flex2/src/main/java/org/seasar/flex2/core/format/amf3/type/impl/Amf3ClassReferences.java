@@ -59,7 +59,7 @@ public class Amf3ClassReferences {
         return reference;
     }
 
-    public int getReferenceIndex(Class clazz) {
+    public int getReferenceIndex(final Class clazz) {
         return classReferences.indexOf(clazz);
     }
 

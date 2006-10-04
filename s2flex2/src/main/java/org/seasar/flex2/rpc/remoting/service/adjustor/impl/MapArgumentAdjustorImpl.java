@@ -29,10 +29,11 @@ public class MapArgumentAdjustorImpl implements ArgumentAdjustor {
     }
 
     public boolean isTarget(final Class clazz, final Object arg) {
-        return arg != null && arg instanceof Map && !(Map.class.isAssignableFrom(clazz));
+        return (arg != null) && (arg instanceof Map)
+                && !(Map.class.isAssignableFrom(clazz));
     }
 
-    public void setMapConverter(Converter mapConverter) {
+    public void setMapConverter(final Converter mapConverter) {
         this.mapConverter = mapConverter;
     }
 }

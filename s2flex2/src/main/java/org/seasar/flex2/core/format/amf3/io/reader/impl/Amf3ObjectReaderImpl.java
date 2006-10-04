@@ -38,17 +38,17 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
         return readObject(inputStream);
     }
 
-    public void setAsobjectReader(ASObjectReader asobjectReader) {
+    public void setAsobjectReader(final ASObjectReader asobjectReader) {
         this.asobjectReader = asobjectReader;
     }
 
     public void setClassTypedObjectReader(
-            ClassTypedObjectReader classTypedObjectReader) {
+            final ClassTypedObjectReader classTypedObjectReader) {
         this.classTypedObjectReader = classTypedObjectReader;
     }
 
     public void setExternalObjectReader(
-            ExternalObjectReader externalObjectReader) {
+            final ExternalObjectReader externalObjectReader) {
         this.externalObjectReader = externalObjectReader;
     }
 

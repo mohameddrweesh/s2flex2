@@ -31,7 +31,7 @@ public class Amf3MessageWriterImpl extends AmfMessageWriterImpl {
         return references;
     }
 
-    public void setReferences(Amf3References references) {
+    public void setReferences(final Amf3References references) {
         this.references = references;
     }
 
@@ -46,15 +46,15 @@ public class Amf3MessageWriterImpl extends AmfMessageWriterImpl {
         references.initialize();
     }
 
-    protected void writeHeader(MessageHeader header) throws IOException {
+    protected void writeHeader(final MessageHeader header) throws IOException {
         outputStream.writeUTF(header.getName());
         outputStream.writeBoolean(header.isRequired());
         outputStream.writeInt(header.getLength());
-        writeData( header.getValue() );
+        writeData(header.getValue());
     }
 
     protected void writeHeaders() throws IOException {
-        int headerNumber = message.getHeaderSize();
+        final int headerNumber = message.getHeaderSize();
         outputStream.writeShort(headerNumber);
         for (int i = 0; i < headerNumber; ++i) {
             writeHeader(message.getHeader(i));

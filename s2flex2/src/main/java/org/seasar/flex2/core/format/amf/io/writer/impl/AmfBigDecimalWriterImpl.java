@@ -25,6 +25,6 @@ public class AmfBigDecimalWriterImpl extends AmfStringWriterImpl implements
 
     public void write(final Object value, final DataOutputStream outputStream)
             throws IOException {
-        write((String) value.toString(), outputStream);
+        write(value.toString(), outputStream);
     }
 }

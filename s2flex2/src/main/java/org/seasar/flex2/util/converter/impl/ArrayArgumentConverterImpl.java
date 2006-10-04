@@ -15,10 +15,9 @@
  */
 package org.seasar.flex2.util.converter.impl;
 
-
 public class ArrayArgumentConverterImpl extends AbstractArrayConverterImpl {
 
-    public Object convert(Object source, Class distClass) {
+    public Object convert(final Object source, final Class distClass) {
         return convertToArray(source, distClass);
     }
 }

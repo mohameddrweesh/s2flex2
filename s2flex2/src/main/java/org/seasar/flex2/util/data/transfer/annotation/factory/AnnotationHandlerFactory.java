@@ -32,11 +32,11 @@ public class AnnotationHandlerFactory {
         Class clazz = FieldAnnotationHandler.class;
         try {
             clazz = ClassUtil.forName(TIGER_ANNOTATION_HANDLER_CLASS_NAME);
-        } catch (ClassNotFoundRuntimeException ignore) {
+        } catch (final ClassNotFoundRuntimeException ignore) {
             try {
                 clazz = ClassUtil
                         .forName(BACKPORT175_ANNOTATION_HANDLER_CLASS_NAME);
-            } catch (ClassNotFoundRuntimeException ignore2) {
+            } catch (final ClassNotFoundRuntimeException ignore2) {
             }
         }
         annotationHandler = (AnnotationHandler) ClassUtil.newInstance(clazz);
@@ -46,7 +46,7 @@ public class AnnotationHandlerFactory {
         return annotationHandler;
     }
 
-    public static void setAnnotationHandler(AnnotationHandler handler) {
+    public static void setAnnotationHandler(final AnnotationHandler handler) {
         annotationHandler = handler;
     }
 

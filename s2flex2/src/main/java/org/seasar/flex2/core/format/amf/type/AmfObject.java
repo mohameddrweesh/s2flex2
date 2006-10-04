@@ -20,49 +20,49 @@ import java.util.HashMap;
 public class AmfObject extends HashMap {
 
     private static final long serialVersionUID = -3575854553905517417L;
-    
+
     private String type_;
 
-	public AmfObject() {
-	}
+    public AmfObject() {
+    }
 
-	public AmfObject(String type) {
-		type_ = type;
-	}
+    public AmfObject(final String type) {
+        type_ = type;
+    }
 
-	public String getType() {
-		return type_;
-	}
+    public String getType() {
+        return type_;
+    }
 
-	public void setType(String type) {
-		type_ = type;
-	}
+    public void setType(final String type) {
+        type_ = type;
+    }
 
-	public boolean containsKey(Object key) {
-		return super.containsKey(toLowerCase(key));
-	}
+    public boolean containsKey(final Object key) {
+        return super.containsKey(toLowerCase(key));
+    }
 
-	public Object get(Object key) {
-		return super.get(toLowerCase(key));
-	}
+    public Object get(final Object key) {
+        return super.get(toLowerCase(key));
+    }
 
-	public Object put(Object key, Object value) {
-		return super.put(toLowerCase(key), value);
-	}
+    public Object put(final Object key, final Object value) {
+        return super.put(toLowerCase(key), value);
+    }
 
-	public Object remove(Object key) {
-		return super.remove(toLowerCase(key));
-	}
+    public Object remove(final Object key) {
+        return super.remove(toLowerCase(key));
+    }
 
-	private Object toLowerCase(Object key) {
-		if (key != null && key instanceof String) {
-			key = ((String) key).toLowerCase();
-		}
-		return key;
-	}
+    private Object toLowerCase(Object key) {
+        if ((key != null) && (key instanceof String)) {
+            key = ((String) key).toLowerCase();
+        }
+        return key;
+    }
 
-	public String toString() {
-		return "ASObject[type=" + getType() + "," + super.toString() + "]";
-	}
+    public String toString() {
+        return "ASObject[type=" + getType() + "," + super.toString() + "]";
+    }
 
 }

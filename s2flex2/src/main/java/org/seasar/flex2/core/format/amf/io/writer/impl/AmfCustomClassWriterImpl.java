@@ -44,7 +44,7 @@ public class AmfCustomClassWriterImpl extends AbstractAmfObjectWriterImpl
             final DataOutputStream outputStream) throws IOException {
         final BeanDesc beanDesc = BeanDescFactory.getBeanDesc(value.getClass());
         for (int i = 0; i < beanDesc.getPropertyDescSize(); ++i) {
-            PropertyDesc pd = (PropertyDesc) beanDesc.getPropertyDesc(i);
+            final PropertyDesc pd = beanDesc.getPropertyDesc(i);
             if (pd.hasReadMethod()) {
                 outputStream.writeUTF(pd.getPropertyName());
                 writeData(pd.getValue(value), outputStream);

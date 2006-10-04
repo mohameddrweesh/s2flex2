@@ -24,9 +24,9 @@ public class MessageFactoryImpl implements MessageFactory {
     public static final String REQUEST_MESSAGE = "requestMessage";
 
     public static final String RESPONCE_MESSAGE = "responseMessage";
-    
+
     private S2Container container;
-    
+
     public Message createRequestMessage() {
         return createMessage(REQUEST_MESSAGE);
     }
@@ -39,13 +39,13 @@ public class MessageFactoryImpl implements MessageFactory {
         return container;
     }
 
-
-    public void setContainer(S2Container container) {
+    public void setContainer(final S2Container container) {
         this.container = container;
     }
 
-    private final Message createMessage( final String messageComponentName ) {
-        final Message message = (Message) container.getComponent(messageComponentName);
+    private final Message createMessage(final String messageComponentName) {
+        final Message message = (Message) container
+                .getComponent(messageComponentName);
 
         return message;
     }

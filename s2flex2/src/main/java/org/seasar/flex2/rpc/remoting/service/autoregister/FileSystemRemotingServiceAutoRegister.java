@@ -29,7 +29,7 @@ public class FileSystemRemotingServiceAutoRegister extends
     }
 
     public void setRemotingServiceCustomizer(
-            RemotingServiceCustomizer remotingServiceCustomizer) {
+            final RemotingServiceCustomizer remotingServiceCustomizer) {
         this.remotingServiceCustomizer = remotingServiceCustomizer;
     }
 

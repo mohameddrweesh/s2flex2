@@ -40,7 +40,7 @@ public class Amf3MessageReaderImpl extends AmfMessageReaderImpl implements
         return message;
     }
 
-    public void setReferences(Amf3References references) {
+    public void setReferences(final Amf3References references) {
         this.references = references;
     }
 
@@ -52,13 +52,14 @@ public class Amf3MessageReaderImpl extends AmfMessageReaderImpl implements
     protected void readHeader() throws IOException {
         final int headerCount = inputStream.readUnsignedShort();
         for (int i = 0; i < headerCount; ++i) {
-            String name = inputStream.readUTF();
-            boolean isRequired = inputStream.readBoolean();
-            inputStream.readInt(); //length
-            message.addHeader(messageHeaderFactory.createHeader(name,readData(),isRequired));
+            final String name = inputStream.readUTF();
+            final boolean isRequired = inputStream.readBoolean();
+            inputStream.readInt(); // length
+            message.addHeader(messageHeaderFactory.createHeader(name,
+                    readData(), isRequired));
         }
     }
-    
+
     protected final void readVersion() throws IOException {
         message.setVersion(inputStream.readUnsignedShort());
     }

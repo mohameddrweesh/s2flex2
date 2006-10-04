@@ -26,7 +26,7 @@ public abstract class AbstractMapConverterImpl implements Converter {
     protected static final Object newIncetance(final Class clazz,
             final Map initProperties) {
         final Object bean = ClassUtil.newInstance(clazz);
-        BeanUtil.copyProperties(initProperties,bean);
+        BeanUtil.copyProperties(initProperties, bean);
         return bean;
     }
 

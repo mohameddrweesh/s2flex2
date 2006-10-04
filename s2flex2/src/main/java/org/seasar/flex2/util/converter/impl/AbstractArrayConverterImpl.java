@@ -21,32 +21,12 @@ import java.util.Map;
 public abstract class AbstractArrayConverterImpl extends
         AbstractMapConverterImpl {
 
-    protected static final Object[] convertToBeanArray(Class clazz,
-            Object[] targetArray) {
-        final Object[] newArray = (Object[]) Array.newInstance(clazz,
-                targetArray.length);
-        final int arrayLength = targetArray.length;
-        for (int i = 0; i < arrayLength; i++) {
-            newArray[i] = newIncetance(clazz, (Map) targetArray[i]);
-        }
-        return newArray;
-    }
-
-    protected static final Object[] convertToTypedArray(Class clazz,
-            Object[] targetArray) {
-        final Object newArray = Array.newInstance(clazz, targetArray.length);
-        if (targetArray.length > 0) {
-            System.arraycopy(targetArray, 0, newArray, 0, targetArray.length);
-        }
-        return (Object[]) newArray;
-    }
-
     protected static final Object convertToArray(final Object source,
             final Class distClass) {
         Object[] result = (Object[]) source;
         if (distClass != Object[].class) {
-            if (result.length > 0
-                    && result[0] instanceof Map
+            if ((result.length > 0)
+                    && (result[0] instanceof Map)
                     && !(Map.class.isAssignableFrom(distClass
                             .getComponentType()))) {
                 result = convertToBeanArray(distClass.getComponentType(),
@@ -57,5 +37,25 @@ public abstract class AbstractArrayConverterImpl extends
             }
         }
         return result;
+    }
+
+    protected static final Object[] convertToBeanArray(final Class clazz,
+            final Object[] targetArray) {
+        final Object[] newArray = (Object[]) Array.newInstance(clazz,
+                targetArray.length);
+        final int arrayLength = targetArray.length;
+        for (int i = 0; i < arrayLength; i++) {
+            newArray[i] = newIncetance(clazz, (Map) targetArray[i]);
+        }
+        return newArray;
+    }
+
+    protected static final Object[] convertToTypedArray(final Class clazz,
+            final Object[] targetArray) {
+        final Object newArray = Array.newInstance(clazz, targetArray.length);
+        if (targetArray.length > 0) {
+            System.arraycopy(targetArray, 0, newArray, 0, targetArray.length);
+        }
+        return (Object[]) newArray;
     }
 }

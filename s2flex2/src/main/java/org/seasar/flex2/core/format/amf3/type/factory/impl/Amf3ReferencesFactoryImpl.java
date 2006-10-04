@@ -27,7 +27,7 @@ public class Amf3ReferencesFactoryImpl implements Amf3ReferencesFactory {
         return container;
     }
 
-    public void setContainer(S2Container container) {
+    public void setContainer(final S2Container container) {
         this.container = container;
     }
 

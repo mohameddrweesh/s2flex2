@@ -29,7 +29,8 @@ public abstract class AbstractAmf3ObjectWriterImpl extends
 
     public abstract int getDataTypeValue();
 
-    public void setReferencesFactory(Amf3ReferencesFactory referencesFactory) {
+    public void setReferencesFactory(
+            final Amf3ReferencesFactory referencesFactory) {
         this.referencesFactory = referencesFactory;
     }
 

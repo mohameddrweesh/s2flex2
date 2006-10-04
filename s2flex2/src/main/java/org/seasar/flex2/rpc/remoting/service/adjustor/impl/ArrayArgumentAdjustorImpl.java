@@ -27,10 +27,10 @@ public class ArrayArgumentAdjustorImpl implements ArgumentAdjustor {
     }
 
     public boolean isTarget(final Class clazz, final Object arg) {
-        return arg != null && arg.getClass().isArray() && clazz.isArray();
+        return (arg != null) && arg.getClass().isArray() && clazz.isArray();
     }
 
-    public void setArrayConverter(Converter arrayConverter) {
+    public void setArrayConverter(final Converter arrayConverter) {
         this.arrayConverter = arrayConverter;
     }
 }

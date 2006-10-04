@@ -27,14 +27,15 @@ import org.seasar.framework.beans.factory.BeanDescFactory;
 
 public class TransferImpl implements Transfer {
 
-    private static final boolean isTransferTarget(Storage storage, String type) {
-        return (type != null && storage.getName().equalsIgnoreCase(type));
+    private static final boolean isTransferTarget(final Storage storage,
+            final String type) {
+        return ((type != null) && storage.getName().equalsIgnoreCase(type));
     }
 
     private static final AnnotationHandler annotationHandler = AnnotationHandlerFactory
             .getAnnotationHandler();
 
-    public void exportToStorage(Object target, Storage storage) {
+    public void exportToStorage(final Object target, final Storage storage) {
         final BeanDesc beanDesc = BeanDescFactory
                 .getBeanDesc(target.getClass());
 

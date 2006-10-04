@@ -21,7 +21,9 @@ public class ServiceInvocationFailedRuntimeException extends SRuntimeException {
 
     private static final long serialVersionUID = -3058998807768139721L;
 
-    public ServiceInvocationFailedRuntimeException(String serviceClassName, String methodName, Throwable cause) {
+    public ServiceInvocationFailedRuntimeException(
+            final String serviceClassName, final String methodName,
+            final Throwable cause) {
         super("EFLX0004", new Object[] { serviceClassName, methodName }, cause);
     }
 }

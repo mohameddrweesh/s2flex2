@@ -18,7 +18,7 @@ package org.seasar.flex2.core.format.amf3.io.writer.factory;
 import org.seasar.flex2.core.format.amf.io.writer.factory.AmfDataWriterFactory;
 import org.seasar.flex2.core.format.amf3.io.writer.Amf3DataWriter;
 
-public interface Amf3DataWriterFactory extends AmfDataWriterFactory{
+public interface Amf3DataWriterFactory extends AmfDataWriterFactory {
 
     Amf3DataWriter createDataValueWriter(Object value);
 

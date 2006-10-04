@@ -31,12 +31,12 @@ public class Amf3DataReaderFactoryImpl extends AmfDataReaderFactoryImpl
     public Amf3DataReaderFactoryImpl() {
     }
 
-    public AmfDataReader createAmf3DataReader(byte dataType) {
+    public AmfDataReader createAmf3DataReader(final byte dataType) {
         final String key = Amf3TypeDef.toString(dataType);
         return (AmfDataReader) amf3DataReaderMap.get(key);
     }
 
-    public AmfDataReader createDataReader(byte dataType) {
+    public AmfDataReader createDataReader(final byte dataType) {
         final String key;
 
         if (dataType != Amf3TypeDef.AMF3_DATA_MARKER) {
@@ -48,7 +48,7 @@ public class Amf3DataReaderFactoryImpl extends AmfDataReaderFactoryImpl
         return (AmfDataReader) readerMap.get(key);
     }
 
-    public void setAmf3DataReaderMap(Map amf3DataReaderMap) {
+    public void setAmf3DataReaderMap(final Map amf3DataReaderMap) {
         this.amf3DataReaderMap = amf3DataReaderMap;
     }
 }

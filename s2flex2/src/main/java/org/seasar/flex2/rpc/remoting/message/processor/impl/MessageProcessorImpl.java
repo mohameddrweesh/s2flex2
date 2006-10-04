@@ -67,19 +67,19 @@ public class MessageProcessorImpl implements MessageProcessor {
         writeMessage(responseMessage, outputStream);
     }
 
-    public void setBodyProcessor(MessageBodyProcessor bodyProcessor) {
+    public void setBodyProcessor(final MessageBodyProcessor bodyProcessor) {
         this.bodyProcessor = bodyProcessor;
     }
 
-    public void setHeaderProcessor(MessageHeaderProcessor headerProcessor) {
+    public void setHeaderProcessor(final MessageHeaderProcessor headerProcessor) {
         this.headerProcessor = headerProcessor;
     }
 
-    public void setReaderFactory(MessageReaderFactory readerFactory) {
+    public void setReaderFactory(final MessageReaderFactory readerFactory) {
         this.readerFactory = readerFactory;
     }
 
-    public void setWriterFactory(MessageWriterFactory writerFactory) {
+    public void setWriterFactory(final MessageWriterFactory writerFactory) {
         this.writerFactory = writerFactory;
     }
 

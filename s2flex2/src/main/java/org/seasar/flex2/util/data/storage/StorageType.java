@@ -17,5 +17,6 @@ package org.seasar.flex2.util.data.storage;
 
 public interface StorageType {
     final static String SESSION = "session";
+
     final static String REQUEST = "request";
 }

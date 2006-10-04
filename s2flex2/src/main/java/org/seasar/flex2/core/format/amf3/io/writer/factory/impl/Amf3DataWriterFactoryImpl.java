@@ -54,11 +54,11 @@ public class Amf3DataWriterFactoryImpl implements Amf3DataWriterFactory {
         return writer;
     }
 
-    public void setAmf3DataWriterMap(Map dataWriterMap) {
+    public void setAmf3DataWriterMap(final Map dataWriterMap) {
         this.amf3DataWriterMap = dataWriterMap;
     }
 
-    public void setWriterMap(Map writerMap) {
+    public void setWriterMap(final Map writerMap) {
         this.writerMap = writerMap;
     }
 
@@ -98,9 +98,9 @@ public class Amf3DataWriterFactoryImpl implements Amf3DataWriterFactory {
                 break;
             }
             if (value instanceof Integer) {
-                int data = ((Integer) value).intValue();
-                if (data <= Amf3Constants.INTEGER_MAX
-                        && data >= Amf3Constants.INTEGER_MIN) {
+                final int data = ((Integer) value).intValue();
+                if ((data <= Amf3Constants.INTEGER_MAX)
+                        && (data >= Amf3Constants.INTEGER_MIN)) {
                     dataType = Amf3TypeDef.TYPE_INTEGER;
                     break;
                 }
@@ -153,8 +153,8 @@ public class Amf3DataWriterFactoryImpl implements Amf3DataWriterFactory {
                 dataType = Amf3TypeDef.TYPE_BYTEARRAY;
                 break;
             }
-            if (value.getClass() == Byte.class
-                    || value.getClass() == Short.class) {
+            if ((value.getClass() == Byte.class)
+                    || (value.getClass() == Short.class)) {
                 dataType = Amf3TypeDef.TYPE_INTEGER;
                 break;
             }

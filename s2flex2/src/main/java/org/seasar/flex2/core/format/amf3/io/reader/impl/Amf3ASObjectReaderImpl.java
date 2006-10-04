@@ -40,13 +40,13 @@ public class Amf3ASObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl
         return object;
     }
 
-    protected Object readInlinedObject(int reference,
-            DataInputStream inputStream) throws IOException {
+    protected Object readInlinedObject(final int reference,
+            final DataInputStream inputStream) throws IOException {
         return null;
     }
 
-    protected Object readReferencedObject(int reference,
-            DataInputStream inputStream) throws IOException {
+    protected Object readReferencedObject(final int reference,
+            final DataInputStream inputStream) throws IOException {
         return null;
     }
 }

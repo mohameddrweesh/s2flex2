@@ -24,7 +24,7 @@ public abstract class AbstractAmf3IntWriterImpl implements Amf3DataWriter {
     private static final int INTEGER_INCLUDE_NEXT_BYTE = 0x80;
 
     private static final int INTEGER_DATA_MASK = 0x7F;
-    
+
     protected static final int[] getVariableIntBytes(final int value) {
         final int intByteLength = getIntByteLength(value);
         if (intByteLength < 0) {

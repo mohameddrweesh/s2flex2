@@ -31,17 +31,17 @@ public abstract class AbstractAmfObjectWriterImpl implements AmfDataWriter {
     private AmfDataWriterFactory writerFactory;
 
     public void setSharedObjectFactory(
-            AmfSharedObjectFactory sharedObjectFactory) {
+            final AmfSharedObjectFactory sharedObjectFactory) {
         this.sharedObjectFactory = sharedObjectFactory;
     }
 
-    public void setWriterFactory(AmfDataWriterFactory writerFactory) {
+    public void setWriterFactory(final AmfDataWriterFactory writerFactory) {
         this.writerFactory = writerFactory;
     }
 
     public void write(final Object value, final DataOutputStream outputStream)
             throws IOException {
-        int index = getSharedObject().getSharedIndex(value);
+        final int index = getSharedObject().getSharedIndex(value);
         if (index >= 0) {
             writeSharedIndex(index, outputStream);
         } else {

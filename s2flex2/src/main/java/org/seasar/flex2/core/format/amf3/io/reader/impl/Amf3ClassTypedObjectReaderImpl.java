@@ -31,7 +31,7 @@ public class Amf3ClassTypedObjectReaderImpl extends
 
     private Converter propertyArrayConverter;
 
-    public Object read(DataInputStream inputStream) throws IOException {
+    public Object read(final DataInputStream inputStream) throws IOException {
         return null;
     }
 
@@ -52,7 +52,7 @@ public class Amf3ClassTypedObjectReaderImpl extends
         return object;
     }
 
-    public void setPropertyArrayConverter(Converter propertyConverter) {
+    public void setPropertyArrayConverter(final Converter propertyConverter) {
         this.propertyArrayConverter = propertyConverter;
     }
 
@@ -117,8 +117,8 @@ public class Amf3ClassTypedObjectReaderImpl extends
             final PropertyDesc propertyDef, final Object propertyValue) {
         if (propertyValue != null) {
             if (propertyValue.getClass().isArray()) {
-                final Object array = propertyArrayConverter.convert(propertyValue,
-                        propertyDef.getPropertyType());
+                final Object array = propertyArrayConverter.convert(
+                        propertyValue, propertyDef.getPropertyType());
                 propertyDef.setValue(object, array);
             } else {
                 propertyDef.setValue(object, propertyValue);
@@ -126,13 +126,13 @@ public class Amf3ClassTypedObjectReaderImpl extends
         }
     }
 
-    protected Object readInlinedObject(int reference,
-            DataInputStream inputStream) throws IOException {
+    protected Object readInlinedObject(final int reference,
+            final DataInputStream inputStream) throws IOException {
         return null;
     }
 
-    protected Object readReferencedObject(int reference,
-            DataInputStream inputStream) throws IOException {
+    protected Object readReferencedObject(final int reference,
+            final DataInputStream inputStream) throws IOException {
         return null;
     }
 }

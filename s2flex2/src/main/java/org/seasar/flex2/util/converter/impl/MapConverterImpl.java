@@ -18,7 +18,7 @@ package org.seasar.flex2.util.converter.impl;
 import java.util.Map;
 
 public class MapConverterImpl extends AbstractMapConverterImpl {
-    public Object convert(Object source, Class distClass) {
+    public Object convert(final Object source, final Class distClass) {
         return newIncetance(distClass, (Map) source);
     }
 }

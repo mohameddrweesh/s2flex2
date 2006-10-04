@@ -67,7 +67,7 @@ public class MessageBody {
     }
 
     public final String toString() {
-        StringBuffer buf = new StringBuffer();
+        final StringBuffer buf = new StringBuffer();
         buf.append("target=");
         buf.append(target);
         buf.append(",response=");
@@ -78,7 +78,7 @@ public class MessageBody {
     }
 
     protected void setupData() {
-        if (data != null && data instanceof List) {
+        if ((data != null) && (data instanceof List)) {
             args = ((List) data).toArray();
         } else {
             args = EMPTY_ARGS;
@@ -86,34 +86,34 @@ public class MessageBody {
     }
 
     protected void setupTarget() {
-        int dotIndex = target.lastIndexOf('.');
+        final int dotIndex = target.lastIndexOf('.');
         if (dotIndex > 0) {
             serviceName = target.substring(0, dotIndex);
             serviceMethodName = target.substring(dotIndex + 1);
         }
     }
 
-    public void setArgs(Object[] args) {
+    public void setArgs(final Object[] args) {
         this.args = args;
     }
 
-    public void setData(Object data) {
+    public void setData(final Object data) {
         this.data = data;
     }
 
-    public void setServiceMethodName(String serviceMethodName) {
+    public void setServiceMethodName(final String serviceMethodName) {
         this.serviceMethodName = serviceMethodName;
     }
 
-    public void setServiceName(String serviceName) {
+    public void setServiceName(final String serviceName) {
         this.serviceName = serviceName;
     }
 
-    public void setResponse(String response) {
+    public void setResponse(final String response) {
         this.response = response;
     }
 
-    public void setTarget(String target) {
+    public void setTarget(final String target) {
         this.target = target;
     }
 }

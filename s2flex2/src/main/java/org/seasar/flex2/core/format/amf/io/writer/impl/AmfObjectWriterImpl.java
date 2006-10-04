@@ -36,8 +36,8 @@ public class AmfObjectWriterImpl extends AbstractAmfObjectWriterImpl {
 
     private final void writeObjectProperties(final Map value,
             final DataOutputStream outputStream) throws IOException {
-        for (Iterator i = value.entrySet().iterator(); i.hasNext();) {
-            Map.Entry e = (Map.Entry) i.next();
+        for (final Iterator i = value.entrySet().iterator(); i.hasNext();) {
+            final Map.Entry e = (Map.Entry) i.next();
             outputStream.writeUTF(String.valueOf(e.getKey()));
             writeData(e.getValue(), outputStream);
         }

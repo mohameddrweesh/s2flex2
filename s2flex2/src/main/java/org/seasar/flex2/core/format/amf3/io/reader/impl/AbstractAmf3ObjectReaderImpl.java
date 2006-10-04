@@ -27,7 +27,8 @@ public abstract class AbstractAmf3ObjectReaderImpl extends
 
     protected Amf3ReferencesFactory referencesFactory;
 
-    public void setReferencesFactory(Amf3ReferencesFactory referencesFactory) {
+    public void setReferencesFactory(
+            final Amf3ReferencesFactory referencesFactory) {
         this.referencesFactory = referencesFactory;
     }
 

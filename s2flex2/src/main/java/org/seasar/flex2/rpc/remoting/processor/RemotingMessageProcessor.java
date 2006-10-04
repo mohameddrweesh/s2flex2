@@ -23,6 +23,6 @@ import javax.servlet.http.HttpServletResponse;
 
 public interface RemotingMessageProcessor {
 
-	public void process(HttpServletRequest request, HttpServletResponse response)
-			throws IOException, ServletException;
+    public void process(HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ServletException;
 }

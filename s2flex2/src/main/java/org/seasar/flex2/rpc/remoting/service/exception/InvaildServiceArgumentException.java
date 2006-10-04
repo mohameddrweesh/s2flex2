@@ -21,7 +21,8 @@ public class InvaildServiceArgumentException extends SRuntimeException {
 
     private static final long serialVersionUID = 2686726895547406978L;
 
-    public InvaildServiceArgumentException(String serviceClassName, String methodName) {
+    public InvaildServiceArgumentException(final String serviceClassName,
+            final String methodName) {
         super("EFLX0005", new Object[] { serviceClassName, methodName }, null);
     }
 }

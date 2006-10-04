@@ -34,7 +34,8 @@ public class AmfMessageWriterImpl implements MessageWriter {
 
     protected DataOutputStream outputStream;
 
-    public void config(Message message, DataOutputStream outputStream) {
+    public void config(final Message message,
+            final DataOutputStream outputStream) {
         this.message = message;
         this.outputStream = outputStream;
     }
@@ -47,11 +48,11 @@ public class AmfMessageWriterImpl implements MessageWriter {
         return sharedObject;
     }
 
-    public void setDataWriterFactory(AmfDataWriterFactory writerFactory) {
+    public void setDataWriterFactory(final AmfDataWriterFactory writerFactory) {
         this.dataWriterFactory = writerFactory;
     }
 
-    public void setSharedObject(AmfSharedObject sharedObject) {
+    public void setSharedObject(final AmfSharedObject sharedObject) {
         this.sharedObject = sharedObject;
     }
 
@@ -73,7 +74,7 @@ public class AmfMessageWriterImpl implements MessageWriter {
         }
     }
 
-    protected void writeBody(MessageBody body) throws IOException {
+    protected void writeBody(final MessageBody body) throws IOException {
         outputStream.writeUTF(body.getTarget());
         outputStream.writeUTF(body.getResponse());
         outputStream.writeInt(-1);
