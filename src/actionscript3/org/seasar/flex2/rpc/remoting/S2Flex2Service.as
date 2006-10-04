@@ -41,22 +41,34 @@ package org.seasar.flex2.rpc.remoting
     
     use namespace flash_proxy;
     
-	//--------------------------------------------------------------------------
-	//
-	//  events
-	//
-	//--------------------------------------------------------------------------
-    /** @private*/
-    [Event(name="fault", type="mx.rpc.events.FaultEvent")]    
-    /** @private*/
-    [Event(name="result", type="mx.rpc.events.ResultEvent")]
-    [Event(name="ioError", type="flash.events.IOErrorEvent")]
-    [Event(name="netStatus",type="flash.events.NetStatusEvent")]
-    [Event(name="securityError",type="flash.events.SecurityErrorEvent")]
-    
-    // icon----------------------------------------------------------------------
+	//--------------------------------------
+    // icon
+	//--------------------------------------
     [IconFile("S2Component.png")]
-    
+	//--------------------------------------
+	//  Events
+	//--------------------------------------
+    /** 
+     *  @eventType mx.rpc.events.FaultEvent.FAULT
+     */
+    [Event(name="fault", type="mx.rpc.events.FaultEvent")]
+    /** 
+     *  @eventType mx.rpc.events.ResultEvent.RESULT
+     */
+    [Event(name="result", type="mx.rpc.events.ResultEvent")]
+    /** 
+     *  @eventType flash.events.IOErrorEvent.IO_ERROR
+     */
+    [Event(name="ioError", type="flash.events.IOErrorEvent")]
+    /** 
+     *  @eventType flash.events.NetStatusEvent.NET_STATUS
+     */
+    [Event(name="netStatus",type="flash.events.NetStatusEvent")]
+    /** 
+     *  @eventType flash.events.SecurityErrorEvent.SECURITY_ERROR
+     */
+    [Event(name="securityError",type="flash.events.SecurityErrorEvent")]
+
     /**
     * S2Flex2Serviceは、S2Flex2のgatewayに接続する為のコンポーネントクラスです。
     * S2Flex2Service is ...
