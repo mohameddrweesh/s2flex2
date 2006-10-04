@@ -27,7 +27,8 @@ public class ExternalObjectInputFactoryImpl implements
 
     private S2Container container;
 
-    public ExternalObjectInput createObjectInput(DataInputStream inputStream) {
+    public ExternalObjectInput createObjectInput(
+            final DataInputStream inputStream) {
         final ExternalObjectInputImpl input = (ExternalObjectInputImpl) container
                 .getComponent(ExternalObjectInput.class);
         input.setInputStream(inputStream);
@@ -38,7 +39,7 @@ public class ExternalObjectInputFactoryImpl implements
         return container;
     }
 
-    public void setContainer(S2Container container) {
+    public void setContainer(final S2Container container) {
         this.container = container;
     }
 

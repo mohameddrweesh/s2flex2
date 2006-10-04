@@ -30,7 +30,7 @@ public class Amf3DataReaderImpl implements AmfDataReader {
         return readerFactory.createAmf3DataReader(dataType).read(inputStream);
     }
 
-    public void setReaderFactory(Amf3DataReaderFactory readerFactory) {
+    public void setReaderFactory(final Amf3DataReaderFactory readerFactory) {
         this.readerFactory = readerFactory;
     }
 }

@@ -25,20 +25,20 @@ import org.seasar.flex2.core.format.amf.io.reader.AmfDataReader;
 
 public class AmfDateReaderImpl implements AmfDataReader {
 
+    private static final Date createDate(final double ms, final int offset) {
+        final int defaultOffset = TimeZone.getDefault().getRawOffset();
+        return new Date((long) (ms + defaultOffset - offset));
+    }
+
     public Object read(final DataInputStream inputStream) throws IOException {
         return readDate(inputStream);
     }
 
     private final Date readDate(final DataInputStream inputStream)
             throws IOException {
-        double ms = inputStream.readDouble();
-        int offset = inputStream.readUnsignedShort()
+        final double ms = inputStream.readDouble();
+        final int offset = inputStream.readUnsignedShort()
                 * AmfConstants.MILLS_PER_HOUR;
         return createDate(ms, offset);
-    }
-
-    private static final Date createDate(final double ms, final int offset) {
-        int defaultOffset = TimeZone.getDefault().getRawOffset();
-        return new Date((long) (ms + defaultOffset - offset));
     }
 }

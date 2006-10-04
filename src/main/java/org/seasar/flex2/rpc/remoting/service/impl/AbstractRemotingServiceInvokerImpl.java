@@ -55,15 +55,15 @@ public abstract class AbstractRemotingServiceInvokerImpl implements
         return doInvoke(service, methodName, args);
     }
 
-    public void setArgumentAdjustor(ArgumentAdjustor[] argumentAdjustors) {
+    public void setArgumentAdjustor(final ArgumentAdjustor[] argumentAdjustors) {
         this.argumentAdjustors = argumentAdjustors;
     }
 
-    public void setForbiddenMethodMap(Map forbiddenMethodMap) {
+    public void setForbiddenMethodMap(final Map forbiddenMethodMap) {
         this.forbiddenMethodMap = forbiddenMethodMap;
     }
 
-    public void setServiceLocator(RemotingServiceLocator serviceLocator) {
+    public void setServiceLocator(final RemotingServiceLocator serviceLocator) {
         this.remotingServiceLocator = serviceLocator;
     }
 
@@ -105,7 +105,7 @@ public abstract class AbstractRemotingServiceInvokerImpl implements
                 .getClass());
         final Method[] methods = beanDesc.getMethods(methodName);
         boolean isValid = false;
-        
+
         for (int i = 0; i < methods.length; i++) {
             final Class[] classes = methods[i].getParameterTypes();
             if (classes.length == args.length) {
@@ -114,7 +114,7 @@ public abstract class AbstractRemotingServiceInvokerImpl implements
                 break;
             }
         }
-        
+
         return isValid;
     }
 
@@ -124,7 +124,7 @@ public abstract class AbstractRemotingServiceInvokerImpl implements
                 .getClass());
         try {
             return beanDesc.invoke(service, methodName, args);
-        } catch (Throwable throwable) {
+        } catch (final Throwable throwable) {
             logger.debug("invoke service method exception", throwable);
             throw throwable;
         }

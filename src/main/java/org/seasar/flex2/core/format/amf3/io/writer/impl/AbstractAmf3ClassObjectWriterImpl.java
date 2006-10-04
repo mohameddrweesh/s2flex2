@@ -44,8 +44,8 @@ public abstract class AbstractAmf3ClassObjectWriterImpl extends
         writeIntData(referenceDef, outputStream);
     }
 
-    protected final void writeTypeString(String propertyName,
-            DataOutputStream outputStream) throws IOException {
+    protected final void writeTypeString(final String propertyName,
+            final DataOutputStream outputStream) throws IOException {
         addStringReference(propertyName);
         writeUTF8String(propertyName, outputStream);
     }

@@ -24,31 +24,30 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-
 public class ArrayPropertyConverterImpl extends AbstractArrayConverterImpl {
 
-    public Object convert(Object source, Class distClass) {
+    public Object convert(final Object source, final Class distClass) {
         Object result = source;
 
         do {
-            if( distClass.isArray() && distClass != Object[].class){
+            if (distClass.isArray() && (distClass != Object[].class)) {
                 result = convertToArray(source, distClass);
                 break;
             }
             if (List.class.isAssignableFrom(distClass)) {
-                result = new ArrayList(Arrays.asList((Object[])result));
+                result = new ArrayList(Arrays.asList((Object[]) result));
                 break;
             }
             if (SortedSet.class.isAssignableFrom(distClass)) {
-                result = new TreeSet(Arrays.asList((Object[])result));
+                result = new TreeSet(Arrays.asList((Object[]) result));
                 break;
             }
             if (Set.class.isAssignableFrom(distClass)) {
-                result = new HashSet(Arrays.asList((Object[])result));
+                result = new HashSet(Arrays.asList((Object[]) result));
                 break;
             }
             if (Collection.class.isAssignableFrom(distClass)) {
-                result = new ArrayList(Arrays.asList((Object[])result));
+                result = new ArrayList(Arrays.asList((Object[]) result));
                 break;
             }
         } while (false);

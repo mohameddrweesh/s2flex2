@@ -78,7 +78,7 @@ public final class AmfTypeDef {
     private AmfTypeDef() {
     }
 
-    public static final String toString(byte dataType) {
+    public static final String toString(final byte dataType) {
 
         switch (dataType) {
             case NUMBER:

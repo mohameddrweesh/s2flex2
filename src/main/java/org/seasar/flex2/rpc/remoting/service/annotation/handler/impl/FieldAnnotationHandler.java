@@ -24,8 +24,9 @@ public class FieldAnnotationHandler implements AnnotationHandler {
 
     public static final String REMOTING_SERVICE = "REMOTING_SERVICE";
 
-    public final boolean hasRemotingService(ComponentDef componentDef) {
-        final BeanDesc beanDesc = BeanDescFactory.getBeanDesc(componentDef.getComponentClass());
+    public final boolean hasRemotingService(final ComponentDef componentDef) {
+        final BeanDesc beanDesc = BeanDescFactory.getBeanDesc(componentDef
+                .getComponentClass());
         return beanDesc.hasField(REMOTING_SERVICE);
     }
 }

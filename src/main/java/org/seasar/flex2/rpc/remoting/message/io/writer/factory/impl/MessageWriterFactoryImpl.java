@@ -31,17 +31,17 @@ public class MessageWriterFactoryImpl implements MessageWriterFactory {
 
     public MessageWriter createMessageWriter(
             final DataOutputStream dataOutputStream, final Message message) {
-        AmfMessageWriterImpl writer = (AmfMessageWriterImpl) container
+        final AmfMessageWriterImpl writer = (AmfMessageWriterImpl) container
                 .getComponent(messageWriterClass);
         writer.config(message, dataOutputStream);
         return writer;
     }
 
-    public void setMessageWriterClass(Class amfMessageWriterClass) {
+    public void setMessageWriterClass(final Class amfMessageWriterClass) {
         this.messageWriterClass = amfMessageWriterClass;
     }
 
-    public void setContainer(S2Container container) {
+    public void setContainer(final S2Container container) {
         this.container = container;
     }
 }

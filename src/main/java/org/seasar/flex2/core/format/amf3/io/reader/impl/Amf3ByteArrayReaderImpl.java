@@ -35,7 +35,7 @@ public class Amf3ByteArrayReaderImpl extends AbstractAmf3ObjectReaderImpl {
         return readObject(inputStream);
     }
 
-    public void setByteArrayFactory(ByteArrayFactory byteArrayFactory) {
+    public void setByteArrayFactory(final ByteArrayFactory byteArrayFactory) {
         this.byteArrayFactory = byteArrayFactory;
     }
 

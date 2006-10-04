@@ -27,11 +27,11 @@ public class AmfSharedObjectImpl implements AmfSharedObject {
         sharedObjects = new ArrayList(24);
     }
 
-    public void addSharedObject(Object o) {
+    public void addSharedObject(final Object o) {
         sharedObjects.add(o);
     }
 
-    public int getSharedIndex(Object o) {
+    public int getSharedIndex(final Object o) {
         for (int i = 0; i < sharedObjects.size(); ++i) {
             if (o == sharedObjects.get(i)) {
                 return i;
@@ -48,7 +48,7 @@ public class AmfSharedObjectImpl implements AmfSharedObject {
         sharedObjects.clear();
     }
 
-    public Object getSharedObject(int index) {
+    public Object getSharedObject(final int index) {
         return sharedObjects.get(index);
     }
 }

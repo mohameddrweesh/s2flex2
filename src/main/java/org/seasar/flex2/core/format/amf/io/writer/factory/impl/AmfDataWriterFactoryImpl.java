@@ -31,11 +31,7 @@ public class AmfDataWriterFactoryImpl implements AmfDataWriterFactory {
 
     protected Map writerMap;
 
-    public void setWriterMap(Map writerMap) {
-        this.writerMap = writerMap;
-    }
-
-    public AmfDataWriter createDataWriter(Object value) {
+    public AmfDataWriter createDataWriter(final Object value) {
 
         AmfDataWriter writer = null;
         do {
@@ -88,5 +84,9 @@ public class AmfDataWriterFactoryImpl implements AmfDataWriterFactory {
         } while (false);
 
         return writer;
+    }
+
+    public void setWriterMap(final Map writerMap) {
+        this.writerMap = writerMap;
     }
 }

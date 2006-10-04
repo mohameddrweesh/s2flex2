@@ -27,7 +27,7 @@ public class Amf3DateWriterImpl extends AbstractAmf3ObjectWriterImpl {
     private static final void writeDateData(final Date date,
             final DataOutputStream outputStream) throws IOException {
         outputStream.writeByte(Amf3Constants.OBJECT_INLINE);
-        outputStream.writeDouble(((Date) date).getTime());
+        outputStream.writeDouble((date).getTime());
     }
 
     public int getDataTypeValue() {

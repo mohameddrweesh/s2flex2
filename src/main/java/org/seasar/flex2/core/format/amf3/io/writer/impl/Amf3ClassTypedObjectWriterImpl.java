@@ -31,7 +31,7 @@ public class Amf3ClassTypedObjectWriterImpl extends
         return Amf3TypeDef.OBJECT;
     }
 
-    private final void writeClassObjectProperty(PropertyDesc propertyDef,
+    private final void writeClassObjectProperty(final PropertyDesc propertyDef,
             final Object value, final DataOutputStream outputStream)
             throws IOException {
         if (propertyDef.hasReadMethod()) {
@@ -78,11 +78,10 @@ public class Amf3ClassTypedObjectWriterImpl extends
         }
     }
 
-    protected void writeClassProperties(BeanDesc beanDesc,
+    protected void writeClassProperties(final BeanDesc beanDesc,
             final DataOutputStream outputStream) throws IOException {
         for (int i = 0; i < beanDesc.getPropertyDescSize(); ++i) {
-            writeClassPropertyName(outputStream, (PropertyDesc) beanDesc
-                    .getPropertyDesc(i));
+            writeClassPropertyName(outputStream, beanDesc.getPropertyDesc(i));
         }
     }
 
@@ -90,14 +89,15 @@ public class Amf3ClassTypedObjectWriterImpl extends
             final DataOutputStream outputStream) throws IOException {
         addClassReference(object.getClass());
 
-        BeanDesc beanDesc = BeanDescFactory.getBeanDesc(object.getClass());
+        final BeanDesc beanDesc = BeanDescFactory
+                .getBeanDesc(object.getClass());
         writeClassDefine(beanDesc, outputStream);
         writeClassName(object, outputStream);
         writeClassProperties(beanDesc, outputStream);
     }
 
-    protected void writeInlineObject(Object object,
-            DataOutputStream outputStream) throws IOException {
+    protected void writeInlineObject(final Object object,
+            final DataOutputStream outputStream) throws IOException {
         writeClassObject(object, outputStream);
     }
 }

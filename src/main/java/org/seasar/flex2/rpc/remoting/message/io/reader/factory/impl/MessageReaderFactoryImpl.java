@@ -37,11 +37,11 @@ public class MessageReaderFactoryImpl implements MessageReaderFactory {
         return reader;
     }
 
-    public void setContainer(S2Container container) {
+    public void setContainer(final S2Container container) {
         this.container = container;
     }
 
-    public void setMessageReaderClass(Class amfMessageReaderClass) {
+    public void setMessageReaderClass(final Class amfMessageReaderClass) {
         this.messageReaderClass = amfMessageReaderClass;
     }
 }

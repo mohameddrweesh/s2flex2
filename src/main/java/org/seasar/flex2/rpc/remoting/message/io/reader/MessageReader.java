@@ -21,5 +21,5 @@ import org.seasar.flex2.rpc.remoting.message.data.Message;
 
 public interface MessageReader {
 
-	Message read() throws IOException;
+    Message read() throws IOException;
 }

@@ -22,17 +22,19 @@ import org.seasar.framework.container.S2Container;
 public class MessageHeaderFactoryImpl implements MessageHeaderFactory {
 
     private S2Container container;
-    
-    public MessageHeader createHeader(String name, Object value, boolean required) {
-        final MessageHeader header = (MessageHeader)container.getComponent(MessageHeader.class);
-        header.setName( name );
-        header.setValue( value );
-        header.setRequired( required );
-        
+
+    public MessageHeader createHeader(final String name, final Object value,
+            final boolean required) {
+        final MessageHeader header = (MessageHeader) container
+                .getComponent(MessageHeader.class);
+        header.setName(name);
+        header.setValue(value);
+        header.setRequired(required);
+
         return header;
     }
 
-    public void setContainer(S2Container container) {
+    public void setContainer(final S2Container container) {
         this.container = container;
     }
 

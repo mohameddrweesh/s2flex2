@@ -26,7 +26,7 @@ import org.w3c.dom.Document;
 
 public class AmfXmlWriterImpl implements AmfDataWriter {
 
-    private static final void writeXmlData(String xmlData,
+    private static final void writeXmlData(final String xmlData,
             final DataOutputStream outputStream) throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         baos.write(xmlData.getBytes());
@@ -42,6 +42,7 @@ public class AmfXmlWriterImpl implements AmfDataWriter {
     protected final void write(final Document document,
             final DataOutputStream outputStream) throws IOException {
         outputStream.writeByte(AmfTypeDef.XML);
-        writeXmlData(DomUtil.toString(document.getDocumentElement()), outputStream);
+        writeXmlData(DomUtil.toString(document.getDocumentElement()),
+                outputStream);
     }
 }

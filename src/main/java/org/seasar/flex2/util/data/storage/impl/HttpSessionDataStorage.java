@@ -27,7 +27,7 @@ public class HttpSessionDataStorage implements Storage {
 
     private final HttpSession session;
 
-    public HttpSessionDataStorage(HttpSession session) {
+    public HttpSessionDataStorage(final HttpSession session) {
         this.session = session;
     }
 
@@ -35,7 +35,7 @@ public class HttpSessionDataStorage implements Storage {
         return SESSION;
     }
 
-    public Object getProperty( final String name) {
+    public Object getProperty(final String name) {
         return session.getAttribute(name);
     }
 
@@ -44,7 +44,7 @@ public class HttpSessionDataStorage implements Storage {
         return session.getAttributeNames();
     }
 
-    public void setProperty( final String name, final Object value) {
+    public void setProperty(final String name, final Object value) {
         session.setAttribute(name, value);
     }
 }

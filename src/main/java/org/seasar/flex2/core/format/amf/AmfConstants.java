@@ -17,5 +17,6 @@ package org.seasar.flex2.core.format.amf;
 
 public interface AmfConstants {
     int MILLS_PER_HOUR = 3600000;
+
     String REMOTE_CLASS = "_remoteClass";
 }

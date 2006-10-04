@@ -23,7 +23,7 @@ import java.io.OutputStream;
 public class OutputStreamUtil {
 
     public static final OutputStream toBufferedDataOutputStream(
-            OutputStream outputStream) throws IOException {
+            final OutputStream outputStream) throws IOException {
         return new DataOutputStream(toBufferedOutputStream(outputStream));
     }
 

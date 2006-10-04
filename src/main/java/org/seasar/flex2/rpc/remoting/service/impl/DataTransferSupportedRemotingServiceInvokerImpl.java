@@ -48,11 +48,11 @@ public class DataTransferSupportedRemotingServiceInvokerImpl extends
         }
     }
 
-    public void setStorageLocator(StorageLocator storageLocator) {
+    public void setStorageLocator(final StorageLocator storageLocator) {
         this.storageLocator = storageLocator;
     }
 
-    public void setTransfer(Transfer transfer) {
+    public void setTransfer(final Transfer transfer) {
         this.transfer = transfer;
     }
 }

@@ -43,11 +43,12 @@ public class ExternalObjectInputImpl implements ExternalObjectInput {
         return inputStream.read();
     }
 
-    public int read(byte[] b) throws IOException {
+    public int read(final byte[] b) throws IOException {
         return inputStream.read(b);
     }
 
-    public int read(byte[] b, int off, int len) throws IOException {
+    public int read(final byte[] b, final int off, final int len)
+            throws IOException {
         return inputStream.read(b, off, len);
     }
 
@@ -71,11 +72,12 @@ public class ExternalObjectInputImpl implements ExternalObjectInput {
         return inputStream.readFloat();
     }
 
-    public void readFully(byte[] b) throws IOException {
+    public void readFully(final byte[] b) throws IOException {
         inputStream.readFully(b);
     }
 
-    public void readFully(byte[] b, int off, int len) throws IOException {
+    public void readFully(final byte[] b, final int off, final int len)
+            throws IOException {
         inputStream.readFully(b, off, len);
     }
 
@@ -114,25 +116,25 @@ public class ExternalObjectInputImpl implements ExternalObjectInput {
         return inputStream.readUTF();
     }
 
-    public void setInputStream(DataInputStream inputStream) {
+    public void setInputStream(final DataInputStream inputStream) {
         this.inputStream = inputStream;
     }
 
-    public void setReaderFactory(Amf3DataReaderFactory readerFactory) {
+    public void setReaderFactory(final Amf3DataReaderFactory readerFactory) {
         this.readerFactory = readerFactory;
     }
 
-    public long skip(long n) throws IOException {
+    public long skip(final long n) throws IOException {
         return inputStream.skip(n);
     }
 
-    public int skipBytes(int n) throws IOException {
+    public int skipBytes(final int n) throws IOException {
         return inputStream.skipBytes(n);
     }
 
-    public void write(byte[] b) throws IOException {
+    public void write(final byte[] b) throws IOException {
     }
 
-    public void write(int b) throws IOException {
+    public void write(final int b) throws IOException {
     }
 }

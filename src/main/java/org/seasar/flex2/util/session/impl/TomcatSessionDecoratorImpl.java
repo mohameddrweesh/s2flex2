@@ -17,13 +17,13 @@ package org.seasar.flex2.util.session.impl;
 
 import org.seasar.flex2.util.session.SessionDecorator;
 
-public class TomcatSessionDecoratorImpl implements SessionDecorator{
+public class TomcatSessionDecoratorImpl implements SessionDecorator {
 
     private static final String SESSIONID_PREFIX = ";jsessionid=";
-    
-    private static final String SESSIONID_SUFFIX = "?";   
-    
-    public String formatSessionId(String sessionId) {
+
+    private static final String SESSIONID_SUFFIX = "?";
+
+    public String formatSessionId(final String sessionId) {
         return SESSIONID_PREFIX + sessionId + SESSIONID_SUFFIX;
     }
 }

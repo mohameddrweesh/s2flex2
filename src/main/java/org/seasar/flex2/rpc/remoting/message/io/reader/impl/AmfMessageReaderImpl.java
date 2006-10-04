@@ -34,7 +34,7 @@ public class AmfMessageReaderImpl implements MessageReader {
     protected AmfDataReaderFactory dataReaderFactory;
 
     protected DataInputStream inputStream;
-    
+
     protected Message message;
 
     protected MessageBodyFactory messageBodyFactory;
@@ -46,7 +46,7 @@ public class AmfMessageReaderImpl implements MessageReader {
     public AmfMessageReaderImpl() {
     }
 
-    public void config(DataInputStream inputStream) {
+    public void config(final DataInputStream inputStream) {
         this.inputStream = inputStream;
         this.message = createMessage();
     }
@@ -73,29 +73,30 @@ public class AmfMessageReaderImpl implements MessageReader {
         return message;
     }
 
-    public void setDataReaderFactory(AmfDataReaderFactory readerFactory) {
+    public void setDataReaderFactory(final AmfDataReaderFactory readerFactory) {
         this.dataReaderFactory = readerFactory;
     }
 
-    public void setMessageBodyFactory(MessageBodyFactory bodyFactory) {
+    public void setMessageBodyFactory(final MessageBodyFactory bodyFactory) {
         this.messageBodyFactory = bodyFactory;
     }
 
-    public void setMessageFactory(MessageFactory messageFactory) {
+    public void setMessageFactory(final MessageFactory messageFactory) {
         this.messageFactory = messageFactory;
     }
 
-    public void setMessageHeaderFactory(MessageHeaderFactory messageHeaderFactory) {
+    public void setMessageHeaderFactory(
+            final MessageHeaderFactory messageHeaderFactory) {
         this.messageHeaderFactory = messageHeaderFactory;
     }
 
-    public void setSharedObject(AmfSharedObject sharedObject) {
+    public void setSharedObject(final AmfSharedObject sharedObject) {
         this.sharedObject = sharedObject;
     }
 
     private final void skipHeaders() throws IOException {
         inputStream.readUnsignedShort();
-        int headerCount = inputStream.readUnsignedShort();
+        final int headerCount = inputStream.readUnsignedShort();
         for (int i = 0; i < headerCount; ++i) {
             inputStream.readUTF();
             inputStream.readByte();
@@ -108,7 +109,8 @@ public class AmfMessageReaderImpl implements MessageReader {
         sharedObject.initialize();
     }
 
-    protected MessageBody createBody(String target, String response, Object data) {
+    protected MessageBody createBody(final String target,
+            final String response, final Object data) {
         return messageBodyFactory.createBody(target, response, data);
     }
 
@@ -117,18 +119,18 @@ public class AmfMessageReaderImpl implements MessageReader {
     }
 
     protected void readBodies() throws IOException {
-        int bodySize = inputStream.readUnsignedShort();
+        final int bodySize = inputStream.readUnsignedShort();
         for (int i = 0; i < bodySize; ++i) {
             clean();
-            String target = inputStream.readUTF();
-            String response = inputStream.readUTF();
+            final String target = inputStream.readUTF();
+            final String response = inputStream.readUTF();
             inputStream.readInt();
             message.addBody(createBody(target, response, readData()));
         }
     }
 
     protected final Object readData() throws IOException {
-        byte dataType = inputStream.readByte();
+        final byte dataType = inputStream.readByte();
         return dataReaderFactory.createDataReader(dataType).read(inputStream);
     }
 }

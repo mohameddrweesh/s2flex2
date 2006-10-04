@@ -21,7 +21,7 @@ public class ServiceNotFoundRuntimeException extends SRuntimeException {
 
     private static final long serialVersionUID = -7930993032540098229L;
 
-    public ServiceNotFoundRuntimeException(String serviceName) {
-		super("EFLX0002", new Object[]{serviceName});
-	}
+    public ServiceNotFoundRuntimeException(final String serviceName) {
+        super("EFLX0002", new Object[] { serviceName });
+    }
 }

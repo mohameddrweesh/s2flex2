@@ -25,7 +25,8 @@ import org.seasar.flex2.core.format.amf3.io.reader.ExternalObjectReader;
 import org.seasar.framework.exception.ClassNotFoundRuntimeException;
 import org.seasar.framework.util.ClassUtil;
 
-public class Amf3ExternalObjectReaderImpl extends AbstractAmf3ObjectReaderImpl implements ExternalObjectReader{
+public class Amf3ExternalObjectReaderImpl extends AbstractAmf3ObjectReaderImpl
+        implements ExternalObjectReader {
 
     private ExternalObjectInputFactory externalizeDataInputFactory;
 
@@ -39,27 +40,29 @@ public class Amf3ExternalObjectReaderImpl extends AbstractAmf3ObjectReaderImpl i
                 .createObjectInput(inputStream);
         try {
             externalObject.readExternal(input);
-        } catch (ClassNotFoundException e) {
+        } catch (final ClassNotFoundException e) {
             throw new ClassNotFoundRuntimeException(e);
         }
 
         return externalObject;
     }
 
-    public Object read(DataInputStream inputStream) throws IOException {
+    public Object read(final DataInputStream inputStream) throws IOException {
         return null;
     }
 
     public void setExternalizeDataInputFactory(
-            ExternalObjectInputFactory dataInputFactory) {
+            final ExternalObjectInputFactory dataInputFactory) {
         this.externalizeDataInputFactory = dataInputFactory;
     }
 
-    protected Object readInlinedObject(int reference, DataInputStream inputStream) throws IOException {
+    protected Object readInlinedObject(final int reference,
+            final DataInputStream inputStream) throws IOException {
         return null;
     }
 
-    protected Object readReferencedObject(int reference, DataInputStream inputStream) throws IOException {
+    protected Object readReferencedObject(final int reference,
+            final DataInputStream inputStream) throws IOException {
         return null;
     }
 }

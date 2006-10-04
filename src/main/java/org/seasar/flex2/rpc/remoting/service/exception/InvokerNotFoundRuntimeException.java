@@ -21,7 +21,7 @@ public class InvokerNotFoundRuntimeException extends SRuntimeException {
 
     private static final long serialVersionUID = -1264752692742094458L;
 
-    public InvokerNotFoundRuntimeException(String serviceName) {
-		super("EFLX0001", new Object[]{serviceName});
-	}
+    public InvokerNotFoundRuntimeException(final String serviceName) {
+        super("EFLX0001", new Object[] { serviceName });
+    }
 }

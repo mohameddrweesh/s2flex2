@@ -26,7 +26,7 @@ public abstract class AbstractAmf3TypedObjectWriterImpl extends
 
     protected Amf3DataWriterFactory writerFactory;
 
-    public void setWriterFactory(Amf3DataWriterFactory writerFactory) {
+    public void setWriterFactory(final Amf3DataWriterFactory writerFactory) {
         this.writerFactory = writerFactory;
     }
 

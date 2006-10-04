@@ -17,8 +17,8 @@ package org.seasar.flex2.rpc.remoting.service;
 
 public interface RemotingServiceInvoker {
 
-	public Object invoke(String serviceName, String methodName, Object[] args)
-			throws Throwable;
+    public Object invoke(String serviceName, String methodName, Object[] args)
+            throws Throwable;
 
-	public boolean supports(String serviceName, String methodName, Object[] args);
+    public boolean supports(String serviceName, String methodName, Object[] args);
 }

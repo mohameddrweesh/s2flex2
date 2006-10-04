@@ -83,7 +83,8 @@ public class RemotingServiceLocatorImpl implements RemotingServiceLocator {
     }
 
     public boolean isSupportService(final ComponentDef componentDef) {
-        boolean isSupport = repository.hasService(componentDef.getComponentName());
+        boolean isSupport = repository.hasService(componentDef
+                .getComponentName());
 
         if (!isSupport) {
             isSupport = canRegisterService(componentDef);
@@ -91,7 +92,7 @@ public class RemotingServiceLocatorImpl implements RemotingServiceLocator {
 
         return isSupport;
     }
-    
+
     public boolean isSupportService(final String serviceName) {
         boolean isSupport = repository.hasService(serviceName);
 
@@ -104,11 +105,11 @@ public class RemotingServiceLocatorImpl implements RemotingServiceLocator {
         return isSupport;
     }
 
-    public void setContainer(S2Container container) {
+    public void setContainer(final S2Container container) {
         this.container = container;
     }
 
-    public void setRepository(RemotingServiceRepository repository) {
+    public void setRepository(final RemotingServiceRepository repository) {
         this.repository = repository;
     }
 
@@ -119,14 +120,14 @@ public class RemotingServiceLocatorImpl implements RemotingServiceLocator {
             try {
                 final Class clazz = ClassUtil.forName(serviceName);
                 isSupport = root.hasComponentDef(clazz);
-            } catch (Throwable ignore) {
+            } catch (final Throwable ignore) {
             }
         }
 
         return isSupport;
     }
 
-    protected final ComponentDef getServiceComponentDef( final String serviceName) {
+    protected final ComponentDef getServiceComponentDef(final String serviceName) {
         final S2Container root = container.getRoot();
         final ComponentDef componentDef;
         if (root.hasComponentDef(serviceName)) {

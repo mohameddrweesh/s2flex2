@@ -19,5 +19,5 @@ import org.seasar.flex2.core.format.amf3.type.ByteArray;
 
 public interface ByteArrayFactory {
 
-    ByteArray createByteArray( byte[] bytes);
+    ByteArray createByteArray(byte[] bytes);
 }

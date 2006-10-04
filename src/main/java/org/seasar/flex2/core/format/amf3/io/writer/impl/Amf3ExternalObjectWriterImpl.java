@@ -30,7 +30,7 @@ public class Amf3ExternalObjectWriterImpl extends
     private ExternalObjectOutputFactory externalizeDataOutputFactory;
 
     public void setExternalizeDataOutputFactory(
-            ExternalObjectOutputFactory dataOutputFactory) {
+            final ExternalObjectOutputFactory dataOutputFactory) {
         this.externalizeDataOutputFactory = dataOutputFactory;
     }
 
@@ -52,7 +52,7 @@ public class Amf3ExternalObjectWriterImpl extends
         }
     }
 
-    protected final void writeClassProperties(BeanDesc beanDesc,
+    protected final void writeClassProperties(final BeanDesc beanDesc,
             final DataOutputStream outputStream) throws IOException {
     }
 }

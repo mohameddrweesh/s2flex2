@@ -23,8 +23,7 @@ import java.util.Map;
 import org.seasar.flex2.core.format.amf3.Amf3Constants;
 import org.seasar.flex2.core.format.amf3.type.Amf3TypeDef;
 
-public class Amf3ASObjectWriterImpl extends
-        AbstractAmf3ClassObjectWriterImpl {
+public class Amf3ASObjectWriterImpl extends AbstractAmf3ClassObjectWriterImpl {
 
     public int getDataTypeValue() {
         return Amf3TypeDef.OBJECT;
@@ -35,7 +34,7 @@ public class Amf3ASObjectWriterImpl extends
         addObjectReference(value);
         writeClassReference(value, outputStream);
 
-        for (Iterator i = value.entrySet().iterator(); i.hasNext();) {
+        for (final Iterator i = value.entrySet().iterator(); i.hasNext();) {
             writeObjectEntry(outputStream, (Map.Entry) i.next());
         }
 

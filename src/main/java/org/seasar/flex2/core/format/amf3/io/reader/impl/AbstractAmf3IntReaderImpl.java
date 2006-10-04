@@ -21,7 +21,7 @@ import java.io.IOException;
 import org.seasar.flex2.core.format.amf.io.reader.AmfDataReader;
 
 public abstract class AbstractAmf3IntReaderImpl implements AmfDataReader {
-    
+
     private static final int INTEGER_DATA_MASK = 0x7F;
 
     private static final int INTEGER_MAX_DATA_BYTES = 0x04;
@@ -29,7 +29,8 @@ public abstract class AbstractAmf3IntReaderImpl implements AmfDataReader {
     private static final int readIntData(final int firstByte,
             final DataInputStream inputStream) throws IOException {
         final int[] intBytes = new int[INTEGER_MAX_DATA_BYTES];
-        int intByteLength = readIntDataBytes(firstByte, inputStream, intBytes);
+        final int intByteLength = readIntDataBytes(firstByte, inputStream,
+                intBytes);
 
         int intData = toInt(intBytes, intByteLength);
         if ((firstByte >>> 6) == 0x03) {
@@ -66,7 +67,7 @@ public abstract class AbstractAmf3IntReaderImpl implements AmfDataReader {
         if (bytes >= INTEGER_MAX_DATA_BYTES) {
             offset = 8;
         }
-        
+
         for (int i = bytes - 1; i > 0; i--) {
             intValue |= (list[i - 1] << offset);
             offset += 7;

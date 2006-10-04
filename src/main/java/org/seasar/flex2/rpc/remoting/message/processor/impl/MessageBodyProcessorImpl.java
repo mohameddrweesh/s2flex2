@@ -67,20 +67,20 @@ public class MessageBodyProcessorImpl implements MessageBodyProcessor {
         return responseMessage;
     }
 
-    public void setBodyFactory(MessageBodyFactory bodyFactory) {
+    public void setBodyFactory(final MessageBodyFactory bodyFactory) {
         this.bodyFactory = bodyFactory;
     }
 
-    public void setFaultFactory(FaultFactory faultFactory) {
+    public void setFaultFactory(final FaultFactory faultFactory) {
         this.faultFactory = faultFactory;
     }
 
-    public void setMessageFactory(MessageFactory messageFactory) {
+    public void setMessageFactory(final MessageFactory messageFactory) {
         this.messageFactory = messageFactory;
     }
 
     public void setServiceInvokerChooser(
-            RemotingServiceInvokerChooser serviceInvokerChooser) {
+            final RemotingServiceInvokerChooser serviceInvokerChooser) {
         this.serviceInvokerChooser = serviceInvokerChooser;
     }
 
@@ -100,7 +100,7 @@ public class MessageBodyProcessorImpl implements MessageBodyProcessor {
                     .getServiceMethodName(), requestBody.getArgs());
 
             responseTarget = requestBody.getResponse() + RESPONSE_RESULT;
-        } catch (Throwable throwable) {
+        } catch (final Throwable throwable) {
             result = faultFactory.createFault(throwable);
             responseTarget = requestBody.getResponse() + RESPONSE_STATUS;
             logger.log(throwable);

@@ -30,7 +30,8 @@ public class Amf3XmlReaderImpl extends AbstractAmf3UTF8StringReaderImpl {
     private static final String readXmlStringData(final int xmlDef,
             final DataInputStream inputStream) throws IOException {
         String xmlStringData = readStringData(xmlDef, inputStream);
-        if (xmlStringData.indexOf('<') < 0 || xmlStringData.indexOf('<') > 1) {
+        if ((xmlStringData.indexOf('<') < 0)
+                || (xmlStringData.indexOf('<') > 1)) {
             xmlStringData = DEFAULT_TAG_PREFIX + xmlStringData
                     + DEFAULT_TAG_SUFFIX;
         }

@@ -26,16 +26,16 @@ import org.seasar.flex2.core.format.amf.type.AmfTypeDef;
 
 public class AmfDateWriterImpl implements AmfDataWriter {
 
-    public void write(Object value, DataOutputStream outputStream)
-            throws IOException {
-        write((Date) value, outputStream);
+    private static final void write(final Date value,
+            final DataOutputStream outputStream) throws IOException {
+        outputStream.writeByte(AmfTypeDef.DATE);
+        outputStream.writeDouble((value).getTime());
+        final int offset = TimeZone.getDefault().getRawOffset();
+        outputStream.writeShort(offset / AmfConstants.MILLS_PER_HOUR);
     }
 
-    private static final void write(Date value, DataOutputStream outputStream)
+    public void write(final Object value, final DataOutputStream outputStream)
             throws IOException {
-        outputStream.writeByte(AmfTypeDef.DATE);
-        outputStream.writeDouble(((Date) value).getTime());
-        int offset = TimeZone.getDefault().getRawOffset();
-        outputStream.writeShort(offset / AmfConstants.MILLS_PER_HOUR);
+        write((Date) value, outputStream);
     }
 }

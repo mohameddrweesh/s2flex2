@@ -30,7 +30,8 @@ public class RemotingServiceCustomizer implements ComponentCustomizer {
     private RemotingServiceRepository remotingServiceRepository;
 
     public void customize(final ComponentDef componentDef) {
-        if (remotingServiceLocator == null && remotingServiceRepository == null) {
+        if ((remotingServiceLocator == null)
+                && (remotingServiceRepository == null)) {
             setupRemotingServiceComponents();
         }
 
@@ -40,7 +41,7 @@ public class RemotingServiceCustomizer implements ComponentCustomizer {
         }
     }
 
-    public void setContainer(S2Container container) {
+    public void setContainer(final S2Container container) {
         this.container = container;
     }
 

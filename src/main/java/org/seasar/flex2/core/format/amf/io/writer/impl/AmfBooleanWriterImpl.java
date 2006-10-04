@@ -23,14 +23,14 @@ import org.seasar.flex2.core.format.amf.type.AmfTypeDef;
 
 public class AmfBooleanWriterImpl implements AmfDataWriter {
 
-    public void write(final Object value, final DataOutputStream outputStream)
-            throws IOException {
-        write((Boolean) value, outputStream);
-    }
-
     private static final void write(final Boolean value,
             final DataOutputStream outputStream) throws IOException {
         outputStream.writeByte(AmfTypeDef.BOOLEAN);
         outputStream.writeBoolean(value.booleanValue());
+    }
+
+    public void write(final Object value, final DataOutputStream outputStream)
+            throws IOException {
+        write((Boolean) value, outputStream);
     }
 }

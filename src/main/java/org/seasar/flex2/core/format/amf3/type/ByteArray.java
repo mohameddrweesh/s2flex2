@@ -37,12 +37,12 @@ public interface ByteArray extends ObjectInput, ObjectOutput {
     void reset();
 
     void uncompress();
-    
+
     void writeBytes(byte[] bytes, int offset, int length) throws IOException;
-    
+
     void writeMultiByte(String value, String charSet) throws IOException;
-    
+
     void writeUnsignedInt(int value) throws IOException;
-    
+
     void writeUTFBytes(String value) throws IOException;
 }

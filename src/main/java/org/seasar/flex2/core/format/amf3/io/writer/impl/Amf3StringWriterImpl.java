@@ -28,7 +28,7 @@ public class Amf3StringWriterImpl extends AbstractAmf3ObjectWriterImpl {
 
     protected void writeInlineObject(final Object object,
             final DataOutputStream outputStream) throws IOException {
-        addStringReference((String)object);
+        addStringReference((String) object);
         writeUTF8String((String) object, outputStream);
     }
 }

@@ -28,7 +28,7 @@ public class AmfArrayReaderImpl extends AbstractAmfObjectReaderImpl {
 
     private final void readArrayElements(final DataInputStream inputStream,
             final ArrayList array) throws IOException {
-        byte dataType = inputStream.readByte();
+        final byte dataType = inputStream.readByte();
         array.add(readData(dataType, inputStream));
     }
 
@@ -36,7 +36,7 @@ public class AmfArrayReaderImpl extends AbstractAmfObjectReaderImpl {
             throws IOException {
         final ArrayList array = new ArrayList();
         addSharedObject(array);
-        int length = inputStream.readInt();
+        final int length = inputStream.readInt();
         for (int i = 0; i < length; i++) {
             readArrayElements(inputStream, array);
         }

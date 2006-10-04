@@ -28,7 +28,7 @@ public abstract class AbstractAmf3UTF8StringWriterImpl extends
     private static final byte[] getUTF8StringBytes(final String string) {
         try {
             return string.getBytes(CharsetType.UTF8);
-        } catch (UnsupportedEncodingException e) {
+        } catch (final UnsupportedEncodingException e) {
             return new byte[0];
         }
     }
@@ -37,7 +37,8 @@ public abstract class AbstractAmf3UTF8StringWriterImpl extends
             final DataOutputStream outputStream) throws IOException {
 
         final byte[] stringBytes = getUTF8StringBytes(value);
-        final int stringDef = (stringBytes.length << 1) | Amf3Constants.OBJECT_INLINE;
+        final int stringDef = (stringBytes.length << 1)
+                | Amf3Constants.OBJECT_INLINE;
         writeIntData(stringDef, outputStream);
 
         if (stringBytes.length > 0) {

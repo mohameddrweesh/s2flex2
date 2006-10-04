@@ -25,7 +25,7 @@ public class AmfIteratorWriterImpl extends AmfArrayWriterImpl {
     protected void writeObjectData(final Object value,
             final DataOutputStream outputStream) throws IOException {
         final ArrayList list = new ArrayList();
-        for (Iterator iter = (Iterator) value; iter.hasNext();) {
+        for (final Iterator iter = (Iterator) value; iter.hasNext();) {
             list.add(iter.next());
         }
         super.writeObjectData(list.toArray(new Object[list.size()]),

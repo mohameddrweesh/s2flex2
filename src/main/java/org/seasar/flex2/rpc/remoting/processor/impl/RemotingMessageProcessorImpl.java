@@ -51,7 +51,7 @@ public class RemotingMessageProcessorImpl implements RemotingMessageProcessor {
             response.setContentLength(outputStream.size());
             outputStream.flush();
 
-        } catch (Throwable throwable) {
+        } catch (final Throwable throwable) {
             if (throwable instanceof RuntimeException) {
                 throw (RuntimeException) throwable;
             } else if (throwable instanceof Error) {
@@ -66,7 +66,7 @@ public class RemotingMessageProcessorImpl implements RemotingMessageProcessor {
         }
     }
 
-    public void setMessageProcessor(MessageProcessor processor) {
+    public void setMessageProcessor(final MessageProcessor processor) {
         this.messageProcessor = processor;
     }
 }

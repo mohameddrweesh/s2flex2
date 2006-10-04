@@ -28,7 +28,7 @@ public abstract class AbstractAmfClassObjectReaderImpl extends
         AbstractAmfObjectReaderImpl {
 
     private static final Object createBeanObject(final AmfObject amfObject) {
-        Class clazz = ClassUtil.forName((String) amfObject
+        final Class clazz = ClassUtil.forName((String) amfObject
                 .get(AmfConstants.REMOTE_CLASS));
         return ClassUtil.newInstance(clazz);
     }
@@ -36,7 +36,7 @@ public abstract class AbstractAmfClassObjectReaderImpl extends
     private void translateBeanProperty(final BeanDesc beanDesc,
             final Object bean, final String key, final AmfObject amfObject) {
         if (beanDesc.hasPropertyDesc(key)) {
-            PropertyDesc pd = beanDesc.getPropertyDesc(key);
+            final PropertyDesc pd = beanDesc.getPropertyDesc(key);
             if (pd.hasWriteMethod()) {
                 pd.setValue(bean, amfObject.get(key));
             }
@@ -46,7 +46,7 @@ public abstract class AbstractAmfClassObjectReaderImpl extends
     protected final Object translateBean(final AmfObject amfObject) {
         final Object bean = createBeanObject(amfObject);
         final BeanDesc beanDesc = BeanDescFactory.getBeanDesc(bean.getClass());
-        for (Iterator i = amfObject.keySet().iterator(); i.hasNext();) {
+        for (final Iterator i = amfObject.keySet().iterator(); i.hasNext();) {
             translateBeanProperty(beanDesc, bean, (String) i.next(), amfObject);
         }
         return bean;

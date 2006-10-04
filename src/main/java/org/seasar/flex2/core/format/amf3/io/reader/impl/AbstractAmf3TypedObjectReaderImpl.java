@@ -28,16 +28,17 @@ public abstract class AbstractAmf3TypedObjectReaderImpl extends
 
     protected AmfDataReader stringReader;
 
-    public void setReaderFactory(Amf3DataReaderFactory readerFactory) {
+    public void setReaderFactory(final Amf3DataReaderFactory readerFactory) {
         this.readerFactory = readerFactory;
     }
-    
-    public void setStringReader(AmfDataReader stringReader) {
+
+    public void setStringReader(final AmfDataReader stringReader) {
         this.stringReader = stringReader;
     }
 
     protected final Object readPropertyValue(final DataInputStream inputStream)
             throws IOException {
-        return readerFactory.createAmf3DataReader(inputStream.readByte()).read(inputStream);
+        return readerFactory.createAmf3DataReader(inputStream.readByte()).read(
+                inputStream);
     }
 }

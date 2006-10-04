@@ -21,7 +21,7 @@ public class FailedUnCompressRuntimeException extends SRuntimeException {
 
     private static final long serialVersionUID = 1540983695485720148L;
 
-    public FailedUnCompressRuntimeException(Throwable cause) {
-        super("EFLX1001",null,cause);
+    public FailedUnCompressRuntimeException(final Throwable cause) {
+        super("EFLX1001", null, cause);
     }
 }

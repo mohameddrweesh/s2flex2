@@ -48,13 +48,13 @@ public class AmfCustomClassReaderImpl extends AbstractAmfClassObjectReaderImpl {
             final Object bean) throws IOException {
         final BeanDesc beanDesc = BeanDescFactory.getBeanDesc(bean.getClass());
         while (true) {
-            String key = inputStream.readUTF();
-            byte dataType = inputStream.readByte();
+            final String key = inputStream.readUTF();
+            final byte dataType = inputStream.readByte();
             if (dataType == AmfTypeDef.EOM) {
                 break;
             }
             if (beanDesc.hasPropertyDesc(key)) {
-                PropertyDesc pd = beanDesc.getPropertyDesc(key);
+                final PropertyDesc pd = beanDesc.getPropertyDesc(key);
                 if (pd.hasWriteMethod()) {
                     pd.setValue(bean, readData(dataType, inputStream));
                 }

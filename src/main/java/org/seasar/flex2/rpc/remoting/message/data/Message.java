@@ -37,16 +37,16 @@ public class Message {
         version = 0x03;
     }
 
-    public void addBody(MessageBody body) {
+    public void addBody(final MessageBody body) {
         bodies.add(body);
     }
 
-    public void addHeader(MessageHeader header) {
+    public void addHeader(final MessageHeader header) {
         headers.add(header);
         headerMap.put(header.getName(), header.getValue());
     }
 
-    public MessageBody getBody(int index) {
+    public MessageBody getBody(final int index) {
         return (MessageBody) bodies.get(index);
     }
 
@@ -54,11 +54,11 @@ public class Message {
         return bodies.size();
     }
 
-    public MessageHeader getHeader(int index) {
+    public MessageHeader getHeader(final int index) {
         return (MessageHeader) headers.get(index);
     }
 
-    public String getHeader(String headerName) {
+    public String getHeader(final String headerName) {
         return (String) headerMap.get(headerName);
     }
 
@@ -70,7 +70,7 @@ public class Message {
         return version;
     }
 
-    public void setVersion(int version) {
+    public void setVersion(final int version) {
         this.version = version;
     }
 }

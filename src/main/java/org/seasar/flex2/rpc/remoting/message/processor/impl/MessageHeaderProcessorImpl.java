@@ -46,17 +46,17 @@ public class MessageHeaderProcessorImpl implements MessageHeaderProcessor {
         createMessageHeaders(responseMessage);
     }
 
-    public void setHeaderCreator(MessageHeaderCreator[] headerCreators) {
+    public void setHeaderCreator(final MessageHeaderCreator[] headerCreators) {
         this.headerCreators = headerCreators;
     }
 
-    public void setHeaderFactory(MessageHeaderFactory headerFactory) {
+    public void setHeaderFactory(final MessageHeaderFactory headerFactory) {
         this.headerFactory = headerFactory;
     }
 
     private final void createMessageHeaders(final Message message) {
         for (int i = 0; i < headerCreators.length; i++) {
-            addHeader(message, (MessageHeaderCreator) headerCreators[i]);
+            addHeader(message, headerCreators[i]);
         }
     }
 }

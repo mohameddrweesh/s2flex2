@@ -31,7 +31,7 @@ public class Amf3ArrayReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
         final int arrayLength = arrayDef >> 1;
         final Object[] array = new Object[arrayLength];
         addObjectReference(array);
-        
+
         readHashArrayData(inputStream);
 
         for (int i = 0; i < arrayLength; i++) {
@@ -40,8 +40,8 @@ public class Amf3ArrayReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
         return array;
     }
 
-    private final void readHashArrayData(
-            final DataInputStream inputStream) throws IOException {
+    private final void readHashArrayData(final DataInputStream inputStream)
+            throws IOException {
         String propertyName;
         while (true) {
             propertyName = (String) stringReader.read(inputStream);
@@ -62,7 +62,7 @@ public class Amf3ArrayReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
         return getObjectAt(reference >>> 1);
     }
 
-    public void setStringReader(AmfDataReader stringReader) {
+    public void setStringReader(final AmfDataReader stringReader) {
         this.stringReader = stringReader;
     }
 }

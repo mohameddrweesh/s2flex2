@@ -66,7 +66,7 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
                 deflater.deflate(deflatingBuffer);
                 outputStream.write(deflatingBuffer);
             }
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             throw new FailedCompressRuntimeException(t);
         } finally {
             if (outputStream.size() > 0) {
@@ -108,7 +108,7 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
         return dataInputStream.readByte();
     }
 
-    public void readBytes(byte[] bytes, int offset, int length)
+    public void readBytes(final byte[] bytes, final int offset, final int length)
             throws IOException {
         dataInputStream.readFully(bytes, offset, length);
     }
@@ -125,11 +125,12 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
         return dataInputStream.readFloat();
     }
 
-    public void readFully(byte[] b) throws IOException {
+    public void readFully(final byte[] b) throws IOException {
         dataInputStream.readFully(b);
     }
 
-    public void readFully(byte[] b, int off, int len) throws IOException {
+    public void readFully(final byte[] b, final int off, final int len)
+            throws IOException {
         dataInputStream.readFully(b, off, len);
     }
 
@@ -145,7 +146,8 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
         return dataInputStream.readLong();
     }
 
-    public String readMultiByte(int length, String charSet) throws IOException {
+    public String readMultiByte(final int length, final String charSet)
+            throws IOException {
         final byte[] charBytes = new byte[length];
         read(charBytes, 0, length);
         return new String(charBytes, charSet);
@@ -174,19 +176,21 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
         return dataInputStream.readUTF();
     }
 
-    public String readUTFBytes(int length) throws IOException {
+    public String readUTFBytes(final int length) throws IOException {
         return readMultiByte(length, CharsetType.UTF8);
     }
 
-    public void setDataReaderFactory(Amf3DataReaderFactory dataReaderFactory) {
+    public void setDataReaderFactory(
+            final Amf3DataReaderFactory dataReaderFactory) {
         this.dataReaderFactory = dataReaderFactory;
     }
 
-    public void setDataWriterFactory(Amf3DataWriterFactory dataWriterFactory) {
+    public void setDataWriterFactory(
+            final Amf3DataWriterFactory dataWriterFactory) {
         this.dataWriterFactory = dataWriterFactory;
     }
 
-    public int skipBytes(int n) throws IOException {
+    public int skipBytes(final int n) throws IOException {
         return dataInputStream.skipBytes(n);
     }
 
@@ -200,7 +204,7 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
                 inflater.inflate(inflatingBuffer);
                 outputStream.write(inflatingBuffer);
             }
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             throw new FailedUnCompressRuntimeException(t);
         } finally {
             if (outputStream.size() > 0) {
@@ -213,84 +217,86 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
         }
     }
 
-    public void write(byte[] b) throws IOException {
+    public void write(final byte[] b) throws IOException {
         dataOutputStream.write(b);
     }
 
-    public void write(byte[] b, int off, int len) throws IOException {
+    public void write(final byte[] b, final int off, final int len)
+            throws IOException {
         dataOutputStream.write(b, off, len);
     }
-    
-    public void write(int b) throws IOException {
+
+    public void write(final int b) throws IOException {
         dataOutputStream.write(b);
     }
 
-    public void writeBoolean(boolean value) throws IOException {
+    public void writeBoolean(final boolean value) throws IOException {
         dataOutputStream.writeBoolean(value);
     }
 
-    public void writeByte(int value) throws IOException {
+    public void writeByte(final int value) throws IOException {
         dataOutputStream.writeByte(value);
     }
 
-    public void writeBytes(byte[] bytes, int offset, int length)
-            throws IOException {
+    public void writeBytes(final byte[] bytes, final int offset,
+            final int length) throws IOException {
         dataOutputStream.write(bytes, offset, length);
     }
 
-    public void writeBytes(String s) throws IOException {
+    public void writeBytes(final String s) throws IOException {
         dataOutputStream.writeBytes(s);
     }
 
-    public void writeChar(int v) throws IOException {
+    public void writeChar(final int v) throws IOException {
         dataOutputStream.writeChar(v);
     }
 
-    public void writeChars(String s) throws IOException {
+    public void writeChars(final String s) throws IOException {
         dataOutputStream.writeChars(s);
     }
 
-    public void writeDouble(double value) throws IOException {
+    public void writeDouble(final double value) throws IOException {
         dataOutputStream.writeDouble(value);
     }
 
-    public void writeFloat(float value) throws IOException {
+    public void writeFloat(final float value) throws IOException {
         dataOutputStream.writeFloat(value);
 
     }
 
-    public void writeInt(int value) throws IOException {
+    public void writeInt(final int value) throws IOException {
         dataOutputStream.writeInt(value);
     }
 
-    public void writeLong(long v) throws IOException {
+    public void writeLong(final long v) throws IOException {
         dataOutputStream.writeLong(v);
     }
 
-    public void writeMultiByte(String value, String charSet) throws IOException {
+    public void writeMultiByte(final String value, final String charSet)
+            throws IOException {
         final byte[] charBytes = value.getBytes(charSet);
         writeBytes(charBytes, 0, charBytes.length);
     }
 
-    public void writeObject(Object object) throws IOException {
+    public void writeObject(final Object object) throws IOException {
         final Amf3DataWriter writer = dataWriterFactory
                 .createDataValueWriter(object);
         writer.writeData(object, dataOutputStream);
     }
 
-    public void writeShort(int value) throws IOException {
+    public void writeShort(final int value) throws IOException {
         dataOutputStream.writeShort(value);
     }
 
-    public void writeUnsignedInt(int value) throws IOException {
+    public void writeUnsignedInt(final int value) throws IOException {
         writeInt(value & 0x7FFF);
     }
 
-    public void writeUTF(String value) throws IOException {
+    public void writeUTF(final String value) throws IOException {
         dataOutputStream.writeUTF(value);
     }
 
-    public void writeUTFBytes(String value) throws IOException {
+    public void writeUTFBytes(final String value) throws IOException {
         writeMultiByte(value, CharsetType.UTF8);
     }
 

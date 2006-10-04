@@ -24,7 +24,8 @@ import org.w3c.dom.Document;
 
 public class AmfXmlReaderImpl implements AmfDataReader {
 
-    private static final String readXmlStringData(final DataInputStream inputStream) throws IOException {
+    private static final String readXmlStringData(
+            final DataInputStream inputStream) throws IOException {
         final int xmlStringLen = inputStream.readInt();
         final byte[] xmlStringBytes = new byte[xmlStringLen];
         inputStream.readFully(xmlStringBytes);
@@ -34,9 +35,9 @@ public class AmfXmlReaderImpl implements AmfDataReader {
     public Object read(final DataInputStream inputStream) throws IOException {
         return readXML(inputStream);
     }
-    
+
     protected Document readXML(final DataInputStream inputStream)
             throws IOException {
-        return XmlUtil.getXmlDocument( readXmlStringData(inputStream) );
+        return XmlUtil.getXmlDocument(readXmlStringData(inputStream));
     }
 }

@@ -29,7 +29,7 @@ public abstract class AbstractAmf3UTF8StringReaderImpl extends
             final int utflen) {
         try {
             return new String(bytearr, 0, utflen, CharsetType.UTF8);
-        } catch (UnsupportedEncodingException e) {
+        } catch (final UnsupportedEncodingException e) {
             return null;
         }
     }
@@ -39,7 +39,7 @@ public abstract class AbstractAmf3UTF8StringReaderImpl extends
         final int stringBytes = stringDef >> 1;
         final String string;
         if (stringBytes > 0) {
-            byte[] charArray = new byte[stringBytes];
+            final byte[] charArray = new byte[stringBytes];
             inputStream.readFully(charArray, 0, stringBytes);
             string = getUTF8String(charArray, stringBytes);
         } else {

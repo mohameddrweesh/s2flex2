@@ -25,7 +25,8 @@ public class MessageBodyFactoryImpl implements MessageBodyFactory {
 
     private String defaultResponseTarget = "";
 
-    public MessageBody createBody(String target, String response, Object data) {
+    public MessageBody createBody(final String target, final String response,
+            final Object data) {
         MessageBody body;
         if (response != null) {
             body = createMessageBody(target, response, data);
@@ -39,11 +40,11 @@ public class MessageBodyFactoryImpl implements MessageBodyFactory {
         return defaultResponseTarget;
     }
 
-    public void setDefaultResponseTarget(String responseTarget) {
+    public void setDefaultResponseTarget(final String responseTarget) {
         this.defaultResponseTarget = responseTarget;
     }
 
-    public void setContainer(S2Container container) {
+    public void setContainer(final S2Container container) {
         this.container = container;
     }
 

@@ -22,10 +22,6 @@ import org.seasar.flex2.core.format.amf.io.reader.AmfDataReader;
 
 public class AmfBooleanReaderImpl implements AmfDataReader {
 
-    public Object read(final DataInputStream inputStream) throws IOException {
-        return readBoolean(inputStream);
-    }
-
     private static final Boolean readBoolean(final DataInputStream inputStream)
             throws IOException {
         Boolean result = Boolean.FALSE;
@@ -35,5 +31,9 @@ public class AmfBooleanReaderImpl implements AmfDataReader {
         }
 
         return result;
+    }
+
+    public Object read(final DataInputStream inputStream) throws IOException {
+        return readBoolean(inputStream);
     }
 }
