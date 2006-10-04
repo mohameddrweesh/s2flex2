@@ -23,13 +23,15 @@ import org.seasar.framework.util.ArrayMap;
 
 public class Amf3ClassReferences {
 
+    private static final int REFERENCE_SIZE = 32;
+
     private final List classReferences;
 
     private final Map propertiesReferences;
 
     public Amf3ClassReferences() {
-        classReferences = new ArrayList(64);
-        propertiesReferences = new ArrayMap(64);
+        classReferences = new ArrayList(REFERENCE_SIZE);
+        propertiesReferences = new ArrayMap(REFERENCE_SIZE);
     }
 
     public void addClassReference(final Class clazz) {

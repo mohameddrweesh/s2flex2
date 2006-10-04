@@ -15,10 +15,6 @@
  */
 package org.seasar.flex2.rpc.remoting.message.processor.impl;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 import org.seasar.flex2.rpc.remoting.message.data.Message;
 import org.seasar.flex2.rpc.remoting.message.data.MessageHeader;
 import org.seasar.flex2.rpc.remoting.message.data.factory.MessageHeaderFactory;
@@ -35,17 +31,9 @@ public class MessageHeaderProcessorImpl implements MessageHeaderProcessor {
         }
     }
 
-    private final List headerCreators;
+    private MessageHeaderCreator[] headerCreators;
 
     private MessageHeaderFactory headerFactory;
-
-    public MessageHeaderProcessorImpl() {
-        headerCreators = new ArrayList();
-    }
-
-    public void addHeaderCreator(MessageHeaderCreator creator) {
-        headerCreators.add(creator);
-    }
 
     public MessageHeaderFactory getHeaderFactory() {
         return headerFactory;
@@ -58,17 +46,17 @@ public class MessageHeaderProcessorImpl implements MessageHeaderProcessor {
         createMessageHeaders(responseMessage);
     }
 
+    public void setHeaderCreator(MessageHeaderCreator[] headerCreators) {
+        this.headerCreators = headerCreators;
+    }
+
     public void setHeaderFactory(MessageHeaderFactory headerFactory) {
         this.headerFactory = headerFactory;
     }
 
     private final void createMessageHeaders(final Message message) {
-        if (headerCreators.size() > 0) {
-            for (Iterator creatorIt = headerCreators.iterator(); creatorIt
-                    .hasNext();) {
-                addHeader(message, (MessageHeaderCreator) creatorIt
-                        .next());
-            }
+        for (int i = 0; i < headerCreators.length; i++) {
+            addHeader(message, (MessageHeaderCreator) headerCreators[i]);
         }
     }
 }

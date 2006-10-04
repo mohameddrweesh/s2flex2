@@ -98,6 +98,9 @@
 		class="org.seasar.flex2.core.format.amf3.io.reader.impl.Amf3ClassTypedObjectReaderImpl"
 	    autoBinding="property">
 		<property name="stringReader">amf3StringReaderImpl</property>
+		<property name="propertyArrayConverter">
+			<component class="org.seasar.flex2.util.converter.impl.ArrayPropertyConverterImpl"/>
+		</property>
 	</component>
 	<component
 		name="amf3ObjectReaderImpl"

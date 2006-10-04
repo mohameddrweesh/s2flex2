@@ -17,11 +17,11 @@ package org.seasar.flex2.rpc.remoting.service.exception;
 
 import org.seasar.framework.exception.SRuntimeException;
 
-public class ServiceInvocationFailedRuntimeException extends SRuntimeException {
+public class InvaildServiceArgumentException extends SRuntimeException {
 
-    private static final long serialVersionUID = -3058998807768139721L;
+    private static final long serialVersionUID = 2686726895547406978L;
 
-    public ServiceInvocationFailedRuntimeException(String serviceClassName, String methodName, Throwable cause) {
-        super("EFLX0004", new Object[] { serviceClassName, methodName }, cause);
+    public InvaildServiceArgumentException(String serviceClassName, String methodName) {
+        super("EFLX0005", new Object[] { serviceClassName, methodName }, null);
     }
 }

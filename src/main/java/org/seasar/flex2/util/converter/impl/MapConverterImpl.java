@@ -13,15 +13,12 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.remoting.service.exception;
+package org.seasar.flex2.util.converter.impl;
 
-import org.seasar.framework.exception.SRuntimeException;
+import java.util.Map;
 
-public class ServiceInvocationFailedRuntimeException extends SRuntimeException {
-
-    private static final long serialVersionUID = -3058998807768139721L;
-
-    public ServiceInvocationFailedRuntimeException(String serviceClassName, String methodName, Throwable cause) {
-        super("EFLX0004", new Object[] { serviceClassName, methodName }, cause);
+public class MapConverterImpl extends AbstractMapConverterImpl {
+    public Object convert(Object source, Class distClass) {
+        return newIncetance(distClass, (Map) source);
     }
 }
