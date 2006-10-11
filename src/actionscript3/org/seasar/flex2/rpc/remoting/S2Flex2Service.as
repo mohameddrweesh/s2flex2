@@ -12,12 +12,9 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, 
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
- *
  * @ignore
  */
- 
-package org.seasar.flex2.rpc.remoting 
-{
+package org.seasar.flex2.rpc.remoting {
 
     import flash.events.IOErrorEvent;
     import flash.events.NetStatusEvent;
@@ -26,7 +23,9 @@ package org.seasar.flex2.rpc.remoting
     import flash.net.Responder;
     import flash.utils.flash_proxy;
     
+    import mx.core.Application;
     import mx.core.IMXMLObject;
+    import mx.core.UIComponent;
     import mx.managers.CursorManager;
     import mx.messaging.config.ServerConfig;
     import mx.rpc.AbstractService;
@@ -34,41 +33,24 @@ package org.seasar.flex2.rpc.remoting
     import mx.rpc.Fault;
     import mx.rpc.events.FaultEvent;
     import mx.rpc.events.ResultEvent;
+    import mx.utils.URLUtil;
     
     import org.seasar.flex2.net.NetConnection;
     import org.seasar.flex2.rpc.RelayResponder;
     import org.seasar.flex2.rpc.RpcOperation;
     
     use namespace flash_proxy;
-    
-	//--------------------------------------
-    // icon
-	//--------------------------------------
-    [IconFile("S2Component.png")]
-	//--------------------------------------
-	//  Events
-	//--------------------------------------
-    /** 
-     *  @eventType mx.rpc.events.FaultEvent.FAULT
-     */
-    [Event(name="fault", type="mx.rpc.events.FaultEvent")]
-    /** 
-     *  @eventType mx.rpc.events.ResultEvent.RESULT
-     */
+	// events -------------------------------------------------------------------
+    /** @private*/
+    [Event(name="fault", type="mx.rpc.events.FaultEvent")]    
+    /** @private*/
     [Event(name="result", type="mx.rpc.events.ResultEvent")]
-    /** 
-     *  @eventType flash.events.IOErrorEvent.IO_ERROR
-     */
     [Event(name="ioError", type="flash.events.IOErrorEvent")]
-    /** 
-     *  @eventType flash.events.NetStatusEvent.NET_STATUS
-     */
     [Event(name="netStatus",type="flash.events.NetStatusEvent")]
-    /** 
-     *  @eventType flash.events.SecurityErrorEvent.SECURITY_ERROR
-     */
     [Event(name="securityError",type="flash.events.SecurityErrorEvent")]
-
+    // icon----------------------------------------------------------------------
+    [IconFile("S2Component.png")]
+    
     /**
     * S2Flex2Serviceは、S2Flex2のgatewayに接続する為のコンポーネントクラスです。
     * S2Flex2Service is ...
@@ -89,28 +71,21 @@ package org.seasar.flex2.rpc.remoting
         public var id:String;
         
         protected var _con:NetConnection;
-
-        /**
-         *  @private
-         */  
-        private var document:Object;
-        /**
-         *  @private
-         */  
-        private var remoteCredentialsUsername:String;
-        /**
-         *  @private
-         */  
-        private var remoteCredentialsPassword:String;
-        /**
-         *  @private
-         */        
-        private var _opResponderArray:Object;  
         
-        /**
-         * コンストラクタ<br/>
-         * destinationをセットしたうえでResponderの配列を初期化します。
-         */            
+        /* @private */
+        private var document:UIComponent;
+        
+		/* @private remoteCredialsUserName  */
+        private var remoteCredentialsUsername:String;
+        
+        /* @private remoteCredentialsPassword */
+        private var remoteCredentialsPassword:String;
+        
+        public var _opResponderArray:Object;
+        
+        [Inspectable(enumeration="flashvars,xml,url",defaultValue="url",category="General")]
+        public var configType:String;
+                   
         public function S2Flex2Service(destination:String=null)
         {
             super(destination);
@@ -119,10 +94,10 @@ package org.seasar.flex2.rpc.remoting
             
         public function initialized(document:Object,id:String):void
         {
-            this.document=document;
+            this.document = document as UIComponent;
         }
          
-        override public function setRemoteCredentials(remoteUsername:String, remotePassword:String):void
+        public override function setRemoteCredentials(remoteUsername:String, remotePassword:String):void
         {
             this.remoteCredentialsUsername = remoteUsername;
             this.remoteCredentialsPassword = remotePassword;
@@ -140,10 +115,9 @@ package org.seasar.flex2.rpc.remoting
         public function onFault(operation:String,result:*):void
         {
             hiddenBusyCursor();
-			var responder:RelayResponder=this._opResponderArray[operation];
-			
+            
             var fault:Fault = new Fault(result.code,result.description,result.details);
-            var faultEvent:FaultEvent = new FaultEvent("fault",false,false,fault,responder.asyncToken,responder.asyncToken.message);
+            var faultEvent:FaultEvent = new FaultEvent("fault",false,false,fault,null,null);
             dispatchEvent(faultEvent);
         }
         
@@ -154,76 +128,50 @@ package org.seasar.flex2.rpc.remoting
         }
         
         /**
-         * Serviceより呼び出すOperationをセットします。
-         * @param name メソッド名
-         * @param value メソッドに対応したRPCOperation
-         */
-        flash_proxy override function setProperty(name:*,value:*):void
-        {
+        * Serviceより呼び出すOperationをセットします。
+        * @param name メソッド名
+        * @param value メソッドに対応したRPCOperation
+        **/
+        flash_proxy override function setProperty(name:*,value:*):void{
         	this.operations[name]=value;
         }
         
         /**
-         * 指定されたnameにあわせたOperationを返します。
-         * @return RPCOperation
-         * @ignore
-         */ 
-        flash_proxy override function getProperty(name:*):*
-        {
+        * 指定されたnameにあわせたOperationを返します。
+        * @return RPCOperation
+        * @ignore
+        **/ 
+        flash_proxy override function getProperty(name:*):*{
         	if(this.operations[name]==null){
         		this.operations[name]=new RpcOperation(this,name);
         	}
         	return this.operations[name];
         }
         
-        /**
-         * NetConnectionのインスタンスを生成します。
-         * 
-         */  
-        protected function createConnection():void
-        {
+        protected function createConnection():void{
             _con = new org.seasar.flex2.net.NetConnection();
             _con.objectEncoding = ObjectEncoding.AMF3;
             _con.addHeader("DescribeService", false, 0);    
         }
-        
-        /**
-         * NetConnectionの初期化を行います。
-         * 
-         */
-        protected function initConnection():void
-        {
+
+        protected function initConnection():void{
             createConnection();
             resolveGatewayUrl();
             configureListeners();
             processConnect();
         }
-       /**
-         * NetConnectionにEventListenerの設定を行います。
-         * 
-         */
-        protected function configureListeners():void
-        {
+
+        protected function configureListeners():void {
             _con.addEventListener(NetStatusEvent.NET_STATUS, netStatusHandler);
             _con.addEventListener(SecurityErrorEvent.SECURITY_ERROR, securityErrorHandler);
             _con.addEventListener(flash.events.IOErrorEvent.IO_ERROR , ioErrorHandler);
         }
         
-        /**
-         * gatewayUrlとして指定された場所に接続を行います。
-         * @private
-         */ 
-        private function processConnect():void
-        {
+        private function processConnect():void{
             _con.connect(this.gatewayUrl);
         }
         
-        /**
-         * サーバロジックを呼び出します。
-         * @private
-         */ 
-        private function remoteCall(methodName:String, ...rest):AsyncToken 
-        {
+        private function remoteCall(methodName:String, ...rest):AsyncToken {
             setupConnection();
             setupCredential();
             setupCursor();
@@ -243,40 +191,34 @@ package org.seasar.flex2.rpc.remoting
             
         }
         
-        private function hiddenBusyCursor():void
-        {
+        private function hiddenBusyCursor():void{
             if (this.showBusyCursor){
                 CursorManager.removeBusyCursor();
             }
         }
         
-        private function netStatusHandler(event:NetStatusEvent):void 
-        {
+        private function netStatusHandler(event:NetStatusEvent):void {
             hiddenBusyCursor();
             dispatchEvent(event);
         }
         
-        private function securityErrorHandler(event:SecurityErrorEvent):void
-        {
+        private function securityErrorHandler(event:SecurityErrorEvent):void {
             hiddenBusyCursor();
             dispatchEvent(event);
-		}
+          }
         
-        private function ioErrorHandler(event:IOErrorEvent):void
-        {
+        private function ioErrorHandler(event:IOErrorEvent):void {
             hiddenBusyCursor();
             dispatchEvent(event);
         }
         
-        private function setupConnection():void
-        {
+        private function setupConnection():void{
             if(_con==null||!_con.connected){
                 initConnection();
             }           
         }
         
-        private function setupCredential():void
-        {
+        private function setupCredential():void{
             if( remoteCredentialsUsername != null ){
                 _con.addHeader(
                     S2Flex2ServiceConstants.REMOTE_CREDENTIALS_USERNAME,
@@ -293,19 +235,51 @@ package org.seasar.flex2.rpc.remoting
             }
         }
         
-        private function setupCursor():void
-        {
+        private function setupCursor():void{
             if (this.showBusyCursor){
                 CursorManager.setBusyCursor();
             }
         }
         
-        private function resolveGatewayUrl():void
-        {
-            if(this.gatewayUrl == null){
-                var config:XML = ServerConfig.xml;
-                this.gatewayUrl=config.channels.channel.(@id==config..destination.(@id==this.destination).channels.channel.@ref).endpoint.@uri.toString();
+        private function resolveGatewayUrl():void{
+            if(this.gatewayUrl == null && this.destination != null ){
+                if( this.configType == "flashvars"){
+                    this.gatewayUrl = getApplicationParameterValue( this.destination );                    
+                } else if(this.configType == "xml"){
+                    //It has not implemented yet. 
+                } else {
+                    resulveDefualtGatewayUrl();
+                }
             }
+        }
+        
+        private function resulveDefualtGatewayUrl():void{
+            const url:String = document.systemManager.loaderInfo.url;
+            if( URLUtil.isHttpURL(url) || URLUtil.isHttpsURL(url)){
+                const lashSlash:int = url.lastIndexOf("/");
+                this.gatewayUrl = url.substring(0, lashSlash+1 ) + "/gateway";
+            } else {
+                this.gatewayUrl = getApplicationParameterValue( "defualtGateway" );
+            }
+        }
+        
+        private function getApplicationParameterValue( parameterName:String ):String{
+            var parameterValue:String = null;
+            
+            if( document != null ){
+                
+                var application:Application = document.parentApplication as Application;
+                if( application != null ){
+                    parameterValue = application.parameters[ parameterName ];
+                } else {
+                    application = document.parentDocument as Application;
+                    if( application != null ){
+                        parameterValue = application.parameters[ parameterName ];
+                    }
+                }        
+            }
+            
+            return parameterValue;
         }
     }
 }
