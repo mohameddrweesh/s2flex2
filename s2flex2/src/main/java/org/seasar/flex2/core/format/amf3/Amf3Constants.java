@@ -38,4 +38,6 @@ public interface Amf3Constants {
     byte OBJECT_NAME_VALUE_ENCODED = 0x08;
 
     byte OBJECT_SINGLE_PROPERTY_ENCODED = 0x04;
+
+    byte OBJECT_SINGLE_PROPERTY_NAME_VALUE_ENCODED = 0x0C;
 }
