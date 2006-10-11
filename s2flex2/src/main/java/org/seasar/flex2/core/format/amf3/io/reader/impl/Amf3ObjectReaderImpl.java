@@ -52,64 +52,77 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
         this.externalObjectReader = externalObjectReader;
     }
 
-    private Class readClass(final int objectDef,
+    private final Object readInlineClassObjectData(final int objectDef,
             final DataInputStream inputStream) throws IOException {
-        Class clazz = null;
+        Object object = null;
         final String className = (String) stringReader.read(inputStream);
-
         switch (objectDef & Amf3Constants.OBJECT_ENCODING_TYPE) {
-            case Amf3Constants.OBJECT_PROPERTY_LIST_ENCODED:
-            case Amf3Constants.OBJECT_SINGLE_PROPERTY_ENCODED:
-                clazz = ClassUtil.forName(className);
+            case Amf3Constants.OBJECT_PROPERTY_LIST_ENCODED: {
+                final Class clazz = ClassUtil.forName(className);
+                addClassReference(clazz);
+                object = classTypedObjectReader.read(objectDef, clazz,
+                        inputStream);
                 break;
+            }
 
-            case Amf3Constants.OBJECT_NAME_VALUE_ENCODED:
-                if (className.length() == 0) {
-                    clazz = Amf3Object.class;
+            case Amf3Constants.OBJECT_SINGLE_PROPERTY_ENCODED: {
+                final Class clazz = ClassUtil.forName(className);
+                if (Externalizable.class.isAssignableFrom(clazz)) {
+                    addClassReference(clazz);
+                    object = externalObjectReader.read(clazz, inputStream);
+                    break;
                 }
+                throw new RuntimeException("Unsupport class type."
+                        + "class is [" + clazz + "].");
+            }
+
+            case Amf3Constants.OBJECT_NAME_VALUE_ENCODED: {
+                addClassReference(Amf3Object.class);
+                object = asobjectReader.read(inputStream);
                 break;
+            }
+
+            case Amf3Constants.OBJECT_SINGLE_PROPERTY_NAME_VALUE_ENCODED:
+                throw new RuntimeException("Unsupport encoding."
+                        + "objectDef is [" + objectDef + "].");
 
             default:
                 throw new RuntimeException("unknown object encoding. "
                         + "objectDef is [" + objectDef + "].");
         }
 
-        addClassReference(clazz);
-
-        return clazz;
-    }
-
-    private final Class readClassDef(final int objectDef,
-            final DataInputStream inputStream) throws IOException {
-
-        Class clazz = null;
-
-        switch (objectDef & Amf3Constants.CLASS_DEF_INLINE) {
-
-            case Amf3Constants.CLASS_DEF_REFERENCE:
-                clazz = getClassAt(objectDef >>> 2);
-                break;
-
-            case Amf3Constants.CLASS_DEF_INLINE:
-                clazz = readClass(objectDef, inputStream);
-                break;
-        }
-
-        return clazz;
+        return object;
     }
 
     private final Object readObjectData(final int objectDef,
             final DataInputStream inputStream) throws IOException {
 
-        final Class clazz = readClassDef(objectDef, inputStream);
-
         Object object = null;
-        do {
 
-            if (clazz == null) {
+        switch (objectDef & Amf3Constants.CLASS_DEF_INLINE) {
+
+            case Amf3Constants.CLASS_DEF_REFERENCE: {
+                object = readReferenceClassObjectData(objectDef, inputStream,
+                        getClassAt(objectDef >>> 2));
                 break;
             }
 
+            case Amf3Constants.CLASS_DEF_INLINE: {
+                object = readInlineClassObjectData(objectDef, inputStream);
+                break;
+            }
+
+            default:
+        }
+
+        return object;
+    }
+
+    private final Object readReferenceClassObjectData(final int objectDef,
+            final DataInputStream inputStream, final Class clazz)
+            throws IOException {
+        Object object = null;
+        do {
             if (clazz == Amf3Object.class) {
                 object = asobjectReader.read(inputStream);
                 break;
