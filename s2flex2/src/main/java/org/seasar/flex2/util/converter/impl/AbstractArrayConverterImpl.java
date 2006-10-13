@@ -19,7 +19,7 @@ import java.lang.reflect.Array;
 import java.util.Map;
 
 public abstract class AbstractArrayConverterImpl extends
-        AbstractMapConverterImpl {
+        AbstractBeanConverterImpl {
 
     protected static final Object convertToArray(final Object source,
             final Class distClass) {
