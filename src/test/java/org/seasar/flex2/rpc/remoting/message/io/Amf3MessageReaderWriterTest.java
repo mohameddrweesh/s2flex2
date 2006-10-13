@@ -357,6 +357,10 @@ public class Amf3MessageReaderWriterTest extends S2TestCase {
 
     }
 
+    public void testASObjectToBean() throws Exception {
+        
+    }
+    
     private final ByteArray createByteArrayOf(final byte[] bs) {
         S2Container container = getContainer();
         ByteArrayFactory bafactory = (ByteArrayFactory) container

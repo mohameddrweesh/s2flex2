@@ -97,14 +97,14 @@
     -->
     <component
         class="org.seasar.flex2.rpc.remoting.service.adjustor.impl.ArrayArgumentAdjustorImpl">
-        <property name="arrayConverter">
+        <property name="converter">
             <component class="org.seasar.flex2.util.converter.impl.ArrayArgumentConverterImpl"/>
         </property>
     </component>
     <component
         class="org.seasar.flex2.rpc.remoting.service.adjustor.impl.MapArgumentAdjustorImpl">
-        <property name="mapConverter">
-            <component class="org.seasar.flex2.util.converter.impl.MapConverterImpl"/>
+        <property name="converter">
+            <component class="org.seasar.flex2.util.converter.impl.MapToBeanConverterImpl"/>
         </property>
     </component>
 

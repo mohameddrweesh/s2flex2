@@ -20,17 +20,17 @@ import org.seasar.flex2.util.converter.Converter;
 
 public class ArrayArgumentAdjustorImpl implements ArgumentAdjustor {
 
-    private Converter arrayConverter;
+    private Converter converter;
 
     public final Object adjust(final Class clazz, final Object arg) {
-        return arrayConverter.convert(arg, clazz);
+        return converter.convert(arg, clazz);
     }
 
     public boolean isTarget(final Class clazz, final Object arg) {
         return (arg != null) && arg.getClass().isArray() && clazz.isArray();
     }
 
-    public void setArrayConverter(final Converter arrayConverter) {
-        this.arrayConverter = arrayConverter;
+    public void setConverter(final Converter converter) {
+        this.converter = converter;
     }
 }

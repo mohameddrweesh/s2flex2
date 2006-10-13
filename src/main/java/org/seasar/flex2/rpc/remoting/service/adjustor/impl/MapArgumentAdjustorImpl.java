@@ -22,10 +22,10 @@ import org.seasar.flex2.util.converter.Converter;
 
 public class MapArgumentAdjustorImpl implements ArgumentAdjustor {
 
-    private Converter mapConverter;
+    private Converter converter;
 
     public final Object adjust(final Class clazz, final Object arg) {
-        return mapConverter.convert(arg, clazz);
+        return converter.convert(arg, clazz);
     }
 
     public boolean isTarget(final Class clazz, final Object arg) {
@@ -33,7 +33,7 @@ public class MapArgumentAdjustorImpl implements ArgumentAdjustor {
                 && !(Map.class.isAssignableFrom(clazz));
     }
 
-    public void setMapConverter(final Converter mapConverter) {
-        this.mapConverter = mapConverter;
+    public void setConverter(final Converter converter) {
+        this.converter = converter;
     }
 }

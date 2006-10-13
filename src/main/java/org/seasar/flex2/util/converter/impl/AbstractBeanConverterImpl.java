@@ -21,7 +21,7 @@ import org.seasar.flex2.util.converter.Converter;
 import org.seasar.framework.beans.util.BeanUtil;
 import org.seasar.framework.util.ClassUtil;
 
-public abstract class AbstractMapConverterImpl implements Converter {
+public abstract class AbstractBeanConverterImpl implements Converter {
 
     protected static final Object newIncetance(final Class clazz,
             final Map initProperties) {
