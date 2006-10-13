@@ -15,8 +15,6 @@
  */
 package org.seasar.flex2.util.data.transfer.impl;
 
-import java.util.Enumeration;
-
 import org.seasar.flex2.util.data.storage.Storage;
 import org.seasar.flex2.util.data.transfer.Transfer;
 import org.seasar.flex2.util.data.transfer.annotation.factory.AnnotationHandlerFactory;
@@ -27,13 +25,13 @@ import org.seasar.framework.beans.factory.BeanDescFactory;
 
 public class TransferImpl implements Transfer {
 
+    private static final AnnotationHandler annotationHandler = AnnotationHandlerFactory
+            .getAnnotationHandler();
+
     private static final boolean isTransferTarget(final Storage storage,
             final String type) {
         return ((type != null) && storage.getName().equalsIgnoreCase(type));
     }
-
-    private static final AnnotationHandler annotationHandler = AnnotationHandlerFactory
-            .getAnnotationHandler();
 
     public void exportToStorage(final Object target, final Storage storage) {
         final BeanDesc beanDesc = BeanDescFactory
@@ -55,20 +53,14 @@ public class TransferImpl implements Transfer {
     public void importToComponent(final Storage storage, final Object target) {
         final BeanDesc beanDesc = BeanDescFactory
                 .getBeanDesc(target.getClass());
-
-        final Enumeration propertyNames = storage.getPropertyNames();
-        while (propertyNames.hasMoreElements()) {
-            final String propertyName = (String) propertyNames.nextElement();
-            if (beanDesc.hasPropertyDesc(propertyName)) {
-                final PropertyDesc propertyDesc = beanDesc
-                        .getPropertyDesc(propertyName);
+        for (int i = 0; i < beanDesc.getPropertyDescSize(); ++i) {
+            final PropertyDesc propertyDesc = beanDesc.getPropertyDesc(i);
+            if (propertyDesc.hasWriteMethod()) {
                 final String type = annotationHandler.getImportStorageType(
                         beanDesc, propertyDesc);
                 if (isTransferTarget(storage, type)) {
-                    if (propertyDesc.hasWriteMethod()) {
-                        propertyDesc.setValue(target, storage
-                                .getProperty(propertyName));
-                    }
+                    propertyDesc.setValue(target, storage
+                            .getProperty(propertyDesc.getPropertyName()));
                 }
             }
         }
