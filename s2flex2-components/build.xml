@@ -119,8 +119,7 @@
 	<target name="dist" description="dist the project..">
 		<zip zipfile="target/S2Flex2-components-${ver}.zip">
 			<zipfileset prefix="s2flex2-components" dir=".">
-				<include name="**/target/*.swc"/>
-				<exclude name="**/target/**"/>
+				<exclude name="**/target/**.zip"/>
 				<exclude name="**/lib/**"/>
 				<exclude name="**/generated/**"/>
 				<exclude name="**/AMF0Connection.as"/>
