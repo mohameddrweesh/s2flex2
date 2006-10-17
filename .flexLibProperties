@@ -2,8 +2,12 @@
 <flexLibProperties version="1">
   <includeClasses>
     <classEntry path="org.seasar.flex2.net.NetConnection"/>
-    <classEntry path="org.seasar.flex2.rpc.remoting.S2Component"/>
+    <classEntry path="org.seasar.flex2.rpc.RelayResponder"/>
+    <classEntry path="org.seasar.flex2.rpc.RemoteMessage"/>
+    <classEntry path="org.seasar.flex2.rpc.RpcOperation"/>
+    <classEntry path="org.seasar.flex2.rpc.remoting.RemoteService"/>
     <classEntry path="org.seasar.flex2.rpc.remoting.S2Flex2Service"/>
+    <classEntry path="org.seasar.flex2.rpc.remoting.S2Flex2ServiceConstants"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests>
