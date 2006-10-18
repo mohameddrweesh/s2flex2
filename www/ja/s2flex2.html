@@ -1,134 +1,146 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <!-- don't edit start -->
-<head><title>S2Flex2 -  AMF3Gateway with DI Container - </title>
+<head>
+<title>S2Flex2 - AMF3Gateway with DI Container -</title>
 <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
 <link href="styles/seasar_b.css" type="text/css" rel="stylesheet" media="screen">
 <link href="styles/seasar_p.css" type="text/css" rel="stylesheet" media="print">
 <script src="styles/seasar_b.js" type="text/JavaScript" language="JavaScript"></script>
 </head>
 <body onLoad="preload('ja')">
-<table width="100%" border="0" cellspacing="0" cellpadding="0" align="left" height="100%"><tr>
-<td align="left" valign="top" width="780"><table width="780" border="0" cellspacing="0" cellpadding="0" class="white">
-<tr><td colspan="7"><img height="5" width="780" src="images/top01_b.gif" alt=""></td></tr>
-<tr><td><img height="117" width="235" src="images/top02_b.gif" alt="Seasar"></td>
-<td colspan="3"><img height="117" width="289" src="images/top03.gif" alt="DI Container with AOP"></td>
-<td colspan="3"><img height="117" width="256" src="images/spacer.gif" alt=""></td>
-</tr><tr><td rowspan="2"><img src="images/top04.gif" alt="" height="49" width="235"></td>
-<td><a href="http://www.seasar.org/index.html"><img src="images/menu01_b_ja.gif" height="30" width="78" border="0" alt="" id="menu01" onmouseover="swap(1)" onmouseout="restore(1)"></a></td>
-<td><a href="http://www.seasar.org/projects.html"><img src="images/menu02_b_ja.gif" height="30" width="101" border="0" alt="" id="menu02" onmouseover="swap(2)" onmouseout="restore(2)"></a></td>
-<td><a href="http://www.seasar.org/products.html"><img src="images/menu03_b_ja.gif" height="30" width="110" border="0" alt="" id="menu03" onmouseover="swap(3)" onmouseout="restore(3)"></a></td>
-<td><a href="http://www.seasar.org/resources.html"><img src="images/menu04_b_ja.gif" height="30" width="113" border="0" alt="" id="menu04" onmouseover="swap(4)" onmouseout="restore(4)"></a></td>
-<td><img src="images/menu05_b_ja.gif" height="30" width="109" border="0" alt="" id="menu05" onmouseover="swap(5)" onmouseout="restore(5)"></td>
-<td><img height="30" width="34" src="images/menu06.gif" alt=""></td></tr><tr>
-<td colspan="6"><img height="19" width="545" src="images/spacer.gif" alt=""></td></tr></table>
-<table  width="780" border="0" cellspacing="0" cellpadding="0" height="100%" class="white">
-<tr align="left" valign="top"><td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td>
-<td width="752" class="main">
-<!-- don't edit end -->
-<!-- document start -->
-<div id="contents_left">
-<ul>
-<li><a href="#Setup">セットアップ</a></li>
-</ul>
-</div>
-<h3><a name="Setup">セットアップ</a></h3>
-<h4>前提条件</h4>
-<p>S2Flex2を利用するには、以下のものが必要です。</p>
-<ul>
-  <li> <a href="http://www.adobe.com/go/flex_trial">Flex Builder 2</a> 
-    <ul>
-      <li> ※Flex Builder 2は swfを作成するのに必要なものです。</li>
-      <li>※StandAloneの場合は、JDT(Java Development Tools)が必要です。<br>
-          JDTのインストールをSoftwareupdates経由で行ってください。</li>
-      <li><a href="http://www.adobe.com/go/flex_trial">Flex SDK2.0</a>があればswfは作成できますので、<strong>必須ではありません</strong>。</li>
-      </ul>
-  </li>
-  <li><a href="http://www.adobe.com/go/getflashplayer"  target="externallink"> Flash Player 9</a></li>    
-  <li><a href="http://s2container.seasar.org/" target="externallink">S2Container</a><ul>
-    <li>V2.4-rc2</li>
-      </ul>
-  <li><a href="http://java.sun.com/javase/downloads/index.html" target="externallink">Java実行環境</a>
-    <ul>
-      <li><a href="http://java.sun.com/javase/downloads/index.html" target="externallink"> JDK (J2SE SDK) 1.4または5.0</a></li>
-      <li>※Tigerアノテーションを利用したアドオン機能を利用するときにはJava5.0が必要になります。</li>
-      <li>※J2SDK1.4では、定数アノテーションを利用することで、Tigerのアノテーションと同様のものを指定することが可能です。</li>
-      </ul>
-  </li>
-  <li>Servletコンテナ
-    <ul>
-      <li><a href="http://tomcat.apache.org/download-55.cgi#5.0.28" target="external">Tomcat5.0/Tomcat5.5</a></li>
-      <li>※S2Flex2は現在のところ、Tomcatを利用して開発、動作確認をしております。</li>
-      <li>※他のServletコンテナは未検証です。</li>
-    </ul>
-  </li>
-  </ul>
-<p>以下のものがあると便利です。</p>
-<ul>
-  <li><a href="http://www.sysdeo.com/eclipse/tomcatplugin"  target="externallink">Sysdeo Eclipse Tomcat Launcher plugin</a>
-    <ul>
-      <li>EcliseでTomcatの起動・停止・再起動を行うpluginです。</li>
-    </ul>
-  </li>
-  <li><a href="http://www.seasar.org/updates.html" target="external">Kijimuna</a>
-    <ul>
-      <li>Seasar2で利用する設定ファイル(diconファイル)を編集するpluginです。</li>
-      </ul>
-  </li>
-  <li><a href="http://subclipse.tigris.org/update_1.0.x" target="external">Subclipse</a>
-    <ul>
-      <li>Eclipse(Flex Builder2.0)でSVNを利用するpluginです。 </li>
-    </ul>
-  </li>
-  </ul>
-<h4>ダウンロード</h4>
-<p>S2Flex2は<a href="http://s2flex2.sandobox.seasar.org/ja/" target="internal">こちら</a>からダウンロードすることが出来ます。</p>
-<h4>インストール</h4>
-<h5>s2flex2</h5>
-<ol>
-  <li>ダウンロードしたS2Flex2-xxx.zipファイルをワークスペースとして利用しているディレクトリ(MyDocuments\Flex Builder 2など)に保存します。</li>
-  <li>Flex Builder 2を 起動しファイル-&gt;インポート...(File -&gt;Import ....)を選択します。</li>
-  <li>インポートウィザードで既存プロジェクトをワークスペースへ(Existing Projects into Workspace)を選択し、次へ(Next &gt;)をクリックします。</li>
-  <li>Select root Direcotryを選択してBrowse...ボタンをクリックし、さきに解凍したディレクトリ(MyDocuments\Flex Builder2.0\s2flex2)を選択しOKボタンをクリックします。</li>
-  <li>終了ボタンをクリックします。 </li>
-</ol>
-<h5>flex2_example</h5>
-<p>サンプルはflex2-example-x.x.x.zipとして別途用意されているので、別途ダウンロードします。あとはS2Flex2と同様です。</p>
-<ol>
-  <li>ダウンロードしたflex2-example-xxx,zipファイルをワークスペースとして利用しているディレクトリ(MyDocuments\Flex Builder 2.0など)に保存します。</li>
-  <li>Flex Builder 2を 起動しファイル-&gt;インポート...(File -&gt;Import ....)を選択します。</li>
-  <li>インポートウィザードで既存プロジェクトをワークスペースへ(Existing Projects into Workspace)を選択し、次へ(Next &gt;)をクリックします。</li>
-  <li>Select root Direcotryを選択してBrowse...ボタンをクリックし、さきに解凍したディレクトリ(MyDocuments\Flex Builder2.0\flex2_example)を選択しOKボタンをクリックします。</li>
-  <li>終了ボタンをクリックします。</li>
-</ol>
-<h3>サンプルの実行</h3>
-<p>S2Flex2のサンプル(flex2_example)は現在のところ、Eclipse3.1(Flex Builder2)からTomcat Pluginを利用してTomcatを起動することで動作確認をしています。</p>
-<ol>
-  <li>インストールしたflex2_exampleプロジェクトを選択して右クリックでTomcatプロジェクト-&gt;Tomcatのコンテキストを更新するを選択します。</li>
-  <li>TomcatをTomcatPlugin経由で起動します。</li>
-  <li>コンパイル済みのサンプルを以下のURLにアクセスすることで見る事ができます。  (ホスト名やポート番号はお使いの環境に合わせてください。)  </li>
-</ol>
-<ul>
-  <li><a href="http://localhost:8080/flex2_example/bin/s2flex2_example2.html"> http://localhost:8080/flex2_example/bin/s2flex2_example2.</a><a href="http://localhost:8080/flex2_example/bin/exception_example.mxml">html</a></li>
-  <li><a href="http://localhost:8080/flex2_example/bin/exception_example.html">http://localhost:8080/flex2_example/bin/exception_example.html</a></li>
-  <li><a href="http://localhost:8080/flex2_example/bin/flex2_example.html">
-    http://localhost:8080/flex2_example/bin/s2flex2_checkDto_example.html</a></li>
-  <li><a href="http://localhost:8080/flex2_example/bin/flex2_example.html">
-    http://localhost:8080/flex2_example/bin/flex2_example.html</a></li>
-</ul>
-<p>サンプル用mxmlおよびasファイルは、プロジェクト直下の&quot;src&quot;ディレクトリ(flex2_example\src)にあります。<!-- don't edit start -->変更・修正したときには、変更したmxmlファイルを選択して右クリック-&gt;Run As-&gt;Flex Applicationを選択すると、swfがコンパイルされてブラウザで表示します。 </p>
-</td>
-<td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td>
-</tr><tr>
-<td width="14"><img height="30" width="14" src="images/spacer.gif" alt=""></td>
-<td width="766"><img height="30" width="592" src="images/spacer.gif" alt=""></td>
-</tr><tr>
-<td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td>
-<td width="766" class="copyright">Copyright&copy; 2004-2006, The Seasar Foundation and the others. All rights reserved.</td>
-</tr></table>
-<td class="backright" align="left" valign="top">&nbsp;</td></tr><tr>
-<td class="backunder" align="left"  valign="top" width="780" height="16">&nbsp;</td>
-<td class="backcorner" align="left" valign="top" height="16">&nbsp;</td>
-</tr></table></body>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" align="left" height="100%">
+  <tr>
+    <td align="left" valign="top" width="780"><table width="780" border="0" cellspacing="0" cellpadding="0" class="white">
+        <tr>
+          <td colspan="7"><img height="5" width="780" src="images/top01_b.gif" alt=""></td>
+        </tr>
+        <tr>
+          <td><img height="117" width="235" src="images/top02_b.gif" alt="Seasar"></td>
+          <td colspan="3"><img height="117" width="289" src="images/top03.gif" alt="DI Container with AOP"></td>
+          <td colspan="3"><img height="117" width="256" src="images/spacer.gif" alt=""></td>
+        </tr>
+        <tr>
+          <td rowspan="2"><img src="images/top04.gif" alt="" height="49" width="235"></td>
+          <td><a href="http://www.seasar.org/index.html"><img src="images/menu01_b_ja.gif" height="30" width="78" border="0" alt="" id="menu01" onmouseover="swap(1)" onmouseout="restore(1)"></a></td>
+          <td><a href="http://www.seasar.org/projects.html"><img src="images/menu02_b_ja.gif" height="30" width="101" border="0" alt="" id="menu02" onmouseover="swap(2)" onmouseout="restore(2)"></a></td>
+          <td><a href="http://www.seasar.org/products.html"><img src="images/menu03_b_ja.gif" height="30" width="110" border="0" alt="" id="menu03" onmouseover="swap(3)" onmouseout="restore(3)"></a></td>
+          <td><a href="http://www.seasar.org/resources.html"><img src="images/menu04_b_ja.gif" height="30" width="113" border="0" alt="" id="menu04" onmouseover="swap(4)" onmouseout="restore(4)"></a></td>
+          <td><img src="images/menu05_b_ja.gif" height="30" width="109" border="0" alt="" id="menu05" onmouseover="swap(5)" onmouseout="restore(5)"></td>
+          <td><img height="30" width="34" src="images/menu06.gif" alt=""></td>
+        </tr>
+        <tr>
+          <td colspan="6"><img height="19" width="545" src="images/spacer.gif" alt=""></td>
+        </tr>
+      </table>
+      <table  width="780" border="0" cellspacing="0" cellpadding="0" height="100%" class="white">
+        <tr align="left" valign="top">
+          <td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td>
+          <td width="752" class="main"><!-- don't edit end -->
+            <!-- document start -->
+            <div id="contents_left">
+              <ul>
+                <li><a href="#Setup">セットアップ</a></li>
+              </ul>
+            </div>
+            <h3><a name="Setup">セットアップ</a></h3>
+            <h4>前提条件</h4>
+            <p>S2Flex2を利用するには、以下のものが必要です。</p>
+            <ul>
+              <li> <a href="http://www.adobe.com/go/flex_trial">Flex Builder 2</a>
+                <ul>
+                  <li> ※Flex Builder 2は swfを作成するのに必要なものです。</li>
+                  <li>※StandAloneの場合は、JDT(Java Development Tools)が必要です。<br>
+                    JDTのインストールをSoftwareupdates経由で行ってください。</li>
+                  <li><a href="http://www.adobe.com/go/flex_trial">Flex SDK2.0</a>があればswfは作成できますので、<strong>必須ではありません</strong>。</li>
+                </ul>
+              </li>
+              <li><a href="http://www.adobe.com/go/getflashplayer"  target="externallink"> Flash Player 9</a>
+                <ul>
+                  <li>Flash Player は 9.0.16以降を対象としています。</li>
+                </ul>
+              </li>
+              <li><a href="http://s2container.seasar.org/" target="externallink">S2Container</a>
+                <ul>
+                  <li>V2.4-rc2</li>
+                </ul>
+              <li><a href="http://java.sun.com/javase/downloads/index.html" target="externallink">Java実行環境</a>
+                <ul>
+                  <li><a href="http://java.sun.com/javase/downloads/index.html" target="externallink"> JDK (J2SE SDK) 1.4または5.0</a></li>
+                  <li>※Tigerアノテーションを利用したアドオン機能を利用するときにはJava5.0が必要になります。</li>
+                  <li>※J2SDK1.4では、定数アノテーションを利用することで、Tigerのアノテーションと同様のものを指定することが可能です。</li>
+                </ul>
+              </li>
+              <li>Servletコンテナ
+                <ul>
+                  <li><a href="http://tomcat.apache.org/download-55.cgi#5.0.28" target="external">Tomcat5.0/Tomcat5.5</a></li>
+                  <li>※S2Flex2は現在のところ、Tomcatを利用して開発、動作確認をしております。</li>
+                  <li>※他のServletコンテナは未検証です。</li>
+                </ul>
+              </li>
+            </ul>
+            <p>以下のものがあると便利です。</p>
+            <ul>
+              <li><a href="http://www.sysdeo.com/eclipse/tomcatplugin"  target="externallink">Sysdeo Eclipse Tomcat Launcher plugin</a>
+                <ul>
+                  <li>EcliseでTomcatの起動・停止・再起動を行うpluginです。</li>
+                </ul>
+              </li>
+              <li><a href="http://www.seasar.org/updates.html" target="external">Kijimuna</a>
+                <ul>
+                  <li>Seasar2で利用する設定ファイル(diconファイル)を編集するpluginです。</li>
+                </ul>
+              </li>
+              <li><a href="http://subclipse.tigris.org/update_1.0.x" target="external">Subclipse</a>
+                <ul>
+                  <li>Eclipse(Flex Builder2.0)でSVNを利用するpluginです。 </li>
+                </ul>
+              </li>
+            </ul>
+            <h4>ダウンロード</h4>
+            <p>S2Flex2は<a href="http://s2flex2.sandobox.seasar.org/ja/" target="internal">こちら</a>からダウンロードすることが出来ます。</p>
+            <h4>インストール</h4>
+            <h5>s2flex2</h5>
+            <ol>
+              <li>ダウンロードしたS2Flex2-xxx.zipファイルをワークスペースとして利用しているディレクトリ(MyDocuments\Flex Builder 2など)に保存します。</li>
+              <li>Flex Builder 2を 起動しファイル-&gt;インポート...(File -&gt;Import ....)を選択します。</li>
+              <li>インポートウィザードで既存プロジェクトをワークスペースへ(Existing Projects into Workspace)を選択し、次へ(Next &gt;)をクリックします。</li>
+              <li>Select root Direcotryを選択してBrowse...ボタンをクリックし、さきに解凍したディレクトリ(MyDocuments\Flex Builder2.0\s2flex2)を選択しOKボタンをクリックします。</li>
+              <li>終了ボタンをクリックします。 </li>
+            </ol>
+            <h5>flex2_example</h5>
+            <p>サンプルはflex2-example-x.x.x.zipとして別途用意されているので、別途ダウンロードします。あとはS2Flex2と同様です。</p>
+            <ol>
+              <li>ダウンロードしたflex2-example-xxx,zipファイルをワークスペースとして利用しているディレクトリ(MyDocuments\Flex Builder 2.0など)に保存します。</li>
+              <li>Flex Builder 2を 起動しファイル-&gt;インポート...(File -&gt;Import ....)を選択します。</li>
+              <li>インポートウィザードで既存プロジェクトをワークスペースへ(Existing Projects into Workspace)を選択し、次へ(Next &gt;)をクリックします。</li>
+              <li>Select root Direcotryを選択してBrowse...ボタンをクリックし、さきに解凍したディレクトリ(MyDocuments\Flex Builder2.0\flex2_example)を選択しOKボタンをクリックします。</li>
+              <li>終了ボタンをクリックします。</li>
+            </ol>
+            <h3>サンプルの実行</h3>
+            <p>S2Flex2のサンプル(flex2_example)は現在のところ、Eclipse3.1(Flex Builder2)からTomcat Pluginを利用してTomcatを起動することで動作確認をしています。</p>
+            <ol>
+              <li>インストールしたflex2_exampleプロジェクトを選択して右クリックでTomcatプロジェクト-&gt;Tomcatのコンテキストを更新するを選択します。</li>
+              <li>TomcatをTomcatPlugin経由で起動します。</li>
+              <li>コンパイル済みのサンプルを以下のURLにアクセスすることで見る事ができます。 (ホスト名やポート番号はお使いの環境に合わせてください。) </li>
+            </ol>
+            <ul>
+              <li><a href="http://localhost:8080/flex2_example/bin/s2flex2_example2.html"> http://localhost:8080/flex2_example/bin/s2flex2_example2.</a><a href="http://localhost:8080/flex2_example/bin/exception_example.mxml">html</a></li>
+              <li><a href="http://localhost:8080/flex2_example/bin/exception_example.html">http://localhost:8080/flex2_example/bin/exception_example.html</a></li>
+              <li><a href="http://localhost:8080/flex2_example/bin/flex2_example.html"> http://localhost:8080/flex2_example/bin/s2flex2_checkDto_example.html</a></li>
+              <li><a href="http://localhost:8080/flex2_example/bin/flex2_example.html"> http://localhost:8080/flex2_example/bin/flex2_example.html</a></li>
+            </ul>
+            <p>サンプル用mxmlおよびasファイルは、プロジェクト直下の&quot;src&quot;ディレクトリ(flex2_example\src)にあります。変更・修正したときには、変更したmxmlファイルを選択して右クリック-&gt;Run As-&gt;Flex Applicationを選択すると、swfがコンパイルされてブラウザで表示します。</p>
+            <!-- don't edit start -->
+          </td>
+        </tr>
+        <tr>
+          <td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td>
+          <td width="766" class="copyright">Copyright&copy; 2004-2006, The Seasar Foundation and the others. All rights reserved.</td>
+        </tr>
+      </table>
+  </tr>
+</table>
+</body>
 <!-- don't edit end -->
 </html>
