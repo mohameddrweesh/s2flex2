@@ -1,74 +1,60 @@
 セットアップ
-
-・Flash Player 9
-・Flex Builder 2
-・JDTのインストール
-・Tomcat Pluginのインストール
-・Tomcatのインストール
-・Tomcat Pluginの設定
-
-ファイル->インポート....
-ActionScriptのsourceパス設定の変更
- [source path]actionscriptを選択して削除する。
- 再度設定をしなおす。
- プロジェクトを選択してプロパティ -> Flexビルドパスを選択
- メインソースフォルダの外側になるその他のソースフォルダ：の中にある
- ソースパスを一度削除する。
-
-[source path]actionscriptを削除する。
-右クリック-&gt;プロパティ-&gt;Flex ビルドパス-&gt;source pathで
-指定されているソースパスを削除する。
-一度閉じた後再度開く。
-
-sourcepathでプロジェクト内のsrc/main/actionscriptを指定する
-
- 
-サーバの接続先を変更する。
-　src/main/resources/flex-services.xmlのchannel設定を変更して
-  endopointのuriを変更します。
-
-      <channels>
-    	<!-- 
-    	s2flex2 gateway
-    	-->
-        <channel-definition id="s2-amf" class="mx.messaging.channels.AMFChannel">
-            <endpoint uri="http://localhost:8080/flex2_example/gateway"  class="flex.messaging.endpoints.AMFEndpoint"/>
-            <properties>
-                <polling-enabled>false</polling-enabled>
-            </properties>
-        </channel-definition>
-            :
-            :
-
-
-　設定ファイルを変更しただけだと変更が反映されないときがあります。
-　そのときは一度プロジェクトをクリーンすると、再度コンパイルされます。
-　cleanをしてclassファイルも含めてすべて削除されてしまうのが困るときには
-　bin以下に生成されている、swfを削除したのち、mxmlを選択して右クリックすると出てくるメニューで
-　アプリケーションの実行を選択すると、更新されます。
-
-
-　■flex2_exampleの更新
-.projectを開く
- &lt;linkedResources&gt;
- &lt;link&gt;
- &lt;name&gt;actionscript</name&gt;
- &lt;type&gt;2&lt;/type&gt;
-
-&lt;location&gt;E:/profile/s2flex/workspace2/flex2_example_hotdeploy/src/main/acti
-onscript&lt;/location&gt;
- &lt;/link&gt;
- &lt;/linkedResources&gt;
-
-上記を各自のワークスペースのロケーションに合わせて変更する。
-
-
-
-tomcatpluginでtomcatの実行
-
-
-
-○動作しないとき：
-JDK5.0でコンパイルしているかどうかを確認する。
--&gt;Annotationを利用してFlex2側から呼び出していいクラスであるかを判定しています。
-S2Flex2のGatewayとして動作しているかを
+<p>・Flash Player 9<br>
+  ・Flex Builder 2<br>
+  ・JDTのインストール<br>
+  ・Tomcat Pluginのインストール<br>
+  ・Tomcatのインストール<br>
+  ・Tomcat Pluginの設定</p>
+<p>ファイル-&gt;インポート....<br>
+  ActionScriptのsourceパス設定の変更<br>
+  [source path]actionscriptを選択して削除する。<br>
+  再度設定をしなおす。<br>
+  プロジェクトを選択してプロパティ -&gt; Flexビルドパスを選択<br>
+  メインソースフォルダの外側になるその他のソースフォルダ：の中にある<br>
+  ソースパスを一度削除する。</p>
+<p>[source path]actionscriptを削除する。<br>
+  右クリック-&amp;gt;プロパティ-&amp;gt;Flex ビルドパス-&amp;gt;source pathで<br>
+  指定されているソースパスを削除する。<br>
+  一度閉じた後再度開く。</p>
+<p>sourcepathでプロジェクト内のsrc/main/actionscriptを指定する</p>
+<p> <br>
+  サーバの接続先を変更する。<br>
+  　 src/main/resources/flex-services.xmlのchannel設定を変更して<br>
+  endopointのuriを変更します。</p>
+<p> &lt;channels&gt;<br>
+&lt;!-- <br>
+  s2flex2 gateway<br>
+  --&gt;<br>
+&lt;channel-definition id=&quot;s2-amf&quot; class=&quot;mx.messaging.channels.AMFChannel&quot;&gt;<br>
+&lt;endpoint uri=&quot;http://localhost:8080/flex2_example/gateway&quot; class=&quot;flex.messaging.endpoints.AMFEndpoint&quot;/&gt;<br>
+&lt;properties&gt;<br>
+&lt;polling-enabled&gt;false&lt;/polling-enabled&gt;<br>
+&lt;/properties&gt;<br>
+&lt;/channel-definition&gt;<br>
+  :<br>
+  :<br>
+</p>
+<p>　設定ファイルを変更しただけだと変更が反映されないときがあります。<br>
+    　 そのときは一度プロジェクトをクリーンすると、再度コンパイルされます。<br>
+  　 cleanをしてclassファイルも含めてすべて削除されてしまうのが困るときには<br>
+  　 bin以下に生成されている、swfを削除したのち、mxmlを選択して右クリックすると出てくるメニューで<br>
+  　 アプリケーションの実行を選択すると、更新されます。<br>
+</p>
+<p>　■flex2_exampleの更新<br>
+  .projectを開く<br>
+&amp;lt;linkedResources&amp;gt;<br>
+&amp;lt;link&amp;gt;<br>
+&amp;lt;name&amp;gt;actionscript&lt;/name&amp;gt;<br>
+&amp;lt;type&amp;gt;2&amp;lt;/type&amp;gt;</p>
+<p>&amp;lt;location&amp;gt;E:/profile/s2flex/workspace2/flex2_example_hotdeploy/src/main/acti<br>
+  onscript&amp;lt;/location&amp;gt;<br>
+&amp;lt;/link&amp;gt;<br>
+&amp;lt;/linkedResources&amp;gt;</p>
+<p>上記を各自のワークスペースのロケーションに合わせて変更する。</p>
+<p>&nbsp;</p>
+<p>tomcatpluginでtomcatの実行</p>
+<p>&nbsp;</p>
+<p>○動作しないとき：<br>
+  JDK5.0でコンパイルしているかどうかを確認する。<br>
+  -&amp;gt;Annotationを利用してFlex2側から呼び出していいクラスであるかを判定しています。<br>
+  S2Flex2のGatewayとして動作しているかを</p>
