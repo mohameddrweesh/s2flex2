@@ -7,9 +7,7 @@ import org.seasar.flex2.util.data.transfer.annotation.Export;
 import examples.flex2.add.dto.AddDto;
 import examples.flex2.add.service.AddService;
 
-/**
- * @ org.seasar.flex2.rpc.remoting.service.annotation.RemotingService
- */
+
 @RemotingService
 public class AddServiceImpl implements AddService {
 
@@ -33,17 +31,12 @@ public class AddServiceImpl implements AddService {
     	this.addDto = new AddDto();
     	return this.addDto;
     }
-    /** 
-     * @ Export(storage = "session") 
-     */
+
     @Export(storage = StorageType.SESSION)
 	public AddDto getAddDto() {
 		return addDto;
 	}
 
-    /**
-     * @ Import(storage = "session") 
-     */
     @Import(storage = StorageType.SESSION)
 	public void setAddDto(AddDto addDto) {
 		this.addDto = addDto;

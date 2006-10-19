@@ -8,10 +8,6 @@ import org.seasar.flex2.util.data.storage.StorageType;
 import org.seasar.flex2.util.data.transfer.annotation.Export;
 import org.seasar.flex2.util.data.transfer.annotation.Import;
 
-/**
- * @ RemotingService
- * @ org.seasar.flex2.rpc.remoting.service.annotation.RemotingService
- */
 @RemotingService
 public class AddSessionServiceImpl implements AddSessionService {
 

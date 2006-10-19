@@ -1,60 +1,17 @@
 <?xml version="1.0" encoding="Shift_JIS"?>
-<!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN" 
+<!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN"
 	"http://www.seasar.org/dtd/components24.dtd">
 <components>
 	<include path="convention.dicon"/>
 	<include path="flex2_example-customizer.dicon"/>
 
-	<!--
-		include config dicon
-	-->
-	<include path="snap-shot-config.dicon"/>
+	<component
+		class="org.seasar.framework.container.creator.DtoCreator"/>
+	<component
+		class="org.seasar.framework.container.creator.LogicCreator"/>
+	<component
+		class="org.seasar.framework.container.creator.ServiceCreator"/>
 
-	<!--
-		cool deploy
-	-->
-	<component
-		class="examples.flex2.cooldeploy.creator.ResolverCoolCreator"/>	
-	<component
-		class="org.seasar.framework.container.cooldeploy.creator.DtoCoolCreator"/>
-	<component
-		class="org.seasar.framework.container.cooldeploy.creator.LogicCoolCreator"/>
-	<component
-		class="org.seasar.framework.container.cooldeploy.creator.ServiceCoolCreator">
-		<property name="instanceDef">@org.seasar.framework.container.deployer.InstanceDefFactory@SESSION</property>
-	</component>
+	<component class="org.seasar.framework.container.cooldeploy.CoolComponentAutoRegister"/>
 
-	<component name="snapshotProject" class="org.seasar.framework.container.cooldeploy.impl.CoolProjectImpl">
-		<property name="rootPackageName">"examples.flex2.camera.snapshot"</property>
-	</component>
-	<component name="addProject" class="org.seasar.framework.container.cooldeploy.impl.CoolProjectImpl">
-		<property name="rootPackageName">"examples.flex2.add"</property>
-	</component>
-	<component name="checkProject" class="org.seasar.framework.container.cooldeploy.impl.CoolProjectImpl">
-		<property name="rootPackageName">"examples.flex2.check"</property>
-	</component>
-	<component name="paramProject" class="org.seasar.framework.container.cooldeploy.impl.CoolProjectImpl">
-		<property name="rootPackageName">"examples.flex2.param"</property>
-	</component>
-	<component name="performanceProject" class="org.seasar.framework.container.cooldeploy.impl.CoolProjectImpl">
-		<property name="rootPackageName">"examples.flex2.performance"</property>
-	</component>
-
-	<component class="org.seasar.framework.container.cooldeploy.CoolComponentAutoRegister">
-		<initMethod name="addProject">
-			<arg>addProject</arg>
-		</initMethod>
-		<initMethod name="addProject">
-			<arg>snapshotProject</arg>
-		</initMethod>
-		<initMethod name="addProject">
-			<arg>checkProject</arg>
-		</initMethod>
-		<initMethod name="addProject">
-			<arg>paramProject</arg>
-		</initMethod>
-		<initMethod name="addProject">
-			<arg>performanceProject</arg>
-		</initMethod>
-	</component>
 </components>
