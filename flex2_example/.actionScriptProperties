@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <actionScriptProperties version="1" mainApplicationPath="src/main/mxml/flex2_example.mxml">
-  <compiler additionalCompilerArguments="-locale ja_JP --services=..\resources\flex-services.xml" copyDependentFiles="true" generateAccessible="false" strict="true" warn="true" htmlGenerate="true" htmlPlayerVersionCheck="true" htmlPlayerVersion="9.0.0" htmlExpressInstall="true" htmlHistoryManagement="true" outputFolderPath="bin" sourceFolderPath="src\main\mxml">
+  <compiler additionalCompilerArguments="-locale ja_JP" copyDependentFiles="true" generateAccessible="false" strict="true" warn="true" htmlGenerate="true" htmlPlayerVersionCheck="true" htmlPlayerVersion="9.0.16" htmlExpressInstall="true" htmlHistoryManagement="true" outputFolderPath="bin" sourceFolderPath="src\main\mxml">
     <compilerSourcePath>
       <compilerSourcePathEntry kind="1" path="${DOCUMENTS}\flex2_example\src\main\actionscript"/>
     </compilerSourcePath>
