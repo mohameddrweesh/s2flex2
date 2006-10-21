@@ -248,18 +248,18 @@ package org.seasar.flex2.rpc.remoting {
                 } else if(this.configType == "xml"){
                     //It has not implemented yet. 
                 } else {
-                    resulveDefualtGatewayUrl();
+                    resolveDefaultGatewayUrl();
                 }
             }
         }
         
-        private function resulveDefualtGatewayUrl():void{
+        private function resolveDefaultGatewayUrl():void{
             const url:String = document.systemManager.loaderInfo.url;
             if( URLUtil.isHttpURL(url) || URLUtil.isHttpsURL(url)){
                 const lashSlash:int = url.lastIndexOf("/");
-                this.gatewayUrl = url.substring(0, lashSlash+1 ) + "/gateway";
+                this.gatewayUrl = url.substring(0, lashSlash+1 ) + "gateway";
             } else {
-                this.gatewayUrl = getApplicationParameterValue( "defualtGateway" );
+                this.gatewayUrl = getApplicationParameterValue( "defaultGateway" );
             }
         }
         
