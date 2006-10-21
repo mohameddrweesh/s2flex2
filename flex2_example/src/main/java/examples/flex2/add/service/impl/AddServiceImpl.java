@@ -1,9 +1,12 @@
 package examples.flex2.add.service.impl;
 
+import java.util.Date;
+
 import org.seasar.flex2.rpc.remoting.service.annotation.RemotingService;
 import org.seasar.flex2.util.data.storage.StorageType;
-import org.seasar.flex2.util.data.transfer.annotation.Import;
 import org.seasar.flex2.util.data.transfer.annotation.Export;
+import org.seasar.flex2.util.data.transfer.annotation.Import;
+
 import examples.flex2.add.dto.AddDto;
 import examples.flex2.add.service.AddService;
 
@@ -19,9 +22,12 @@ public class AddServiceImpl implements AddService {
 
     public AddDto calculate2(AddDto addDto) {
 
+    	addDto.setArg1(addDto.getArg1());
+    	addDto.setArg2(addDto.getArg2());
         addDto.setSum(addDto.getArg1() + addDto.getArg2());
         this.addDto=addDto;
-        return addDto;
+        this.addDto.setCalclateDate(new Date());
+        return this.addDto;
     }
     
     public AddDto getAddDtoData(){
@@ -32,11 +38,11 @@ public class AddServiceImpl implements AddService {
     	return this.addDto;
     }
 
+
     @Export(storage = StorageType.SESSION)
 	public AddDto getAddDto() {
 		return addDto;
 	}
-
     @Import(storage = StorageType.SESSION)
 	public void setAddDto(AddDto addDto) {
 		this.addDto = addDto;

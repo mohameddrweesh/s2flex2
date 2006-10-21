@@ -23,6 +23,7 @@
 			private function onFault(faultEvent:FaultEvent):void{
 				ret_text.text=ObjectUtil.toString(faultEvent.fault);
 			}
+			
 			private function onGetData(resultEvent:ResultEvent):void{
 				var addDto:AddDto = resultEvent.result as AddDto;
 				if(addDto!=null){
@@ -33,7 +34,8 @@
 			}
 			private function getFromSession():void{
 				//S2Flex2ServiceはScriptで生成する方法もあります。
-				addService=  new S2Flex2Service();
+				addService=  new S2Flex2Service("addService");
+				addService.initialized(this,"addService");
 				addService.destination="addService";
 				addService.addEventListener(ResultEvent.RESULT,onGetData);
 				addService.addEventListener(FaultEvent.FAULT,onFault);
@@ -64,15 +66,16 @@
 			}
 		]]>
 	</mx:Script>
-	<s2:S2Flex2Service id="paramCheckService" destination="paramCheckService" result="onResult(event)" fault="onFault(event)" >
-		
-	</s2:S2Flex2Service>
+	<s2:S2Flex2Service id="paramCheckService" 
+		destination="paramCheckService" result="onResult(event)" fault="onFault(event)" />
+
 	<mx:Panel x="435" y="30" width="198" height="167" layout="absolute" title="AddDto(from Session)">
 		<mx:TextInput x="10" y="10" id="arg1_txt"/>
 		<mx:TextInput x="10" y="40" id="arg2_txt"/>
 		<mx:TextInput x="10" y="70" id="sum_txt"/>
 		<mx:Button x="10" y="100" label="getFromSession!" click="getFromSession()"/>
 	</mx:Panel>
+
 	<mx:Panel x="25" y="30" width="402" height="275" layout="absolute" title="paramcheckService">
 		<mx:TextArea x="5" y="7" height="188" width="372" id="ret_text"/>
 		<mx:ControlBar>
