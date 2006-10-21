@@ -1,5 +1,5 @@
 <project name="s2flex2-tiger" default="dist" basedir=".">
-	<property name="ver" value="1.0.0-rc-2"/>
+	<property name="ver" value="1.0.0-rc-3"/>
 
 	<target name="dist">
 		<zip zipfile="target/s2flex2-tiger-${ver}.zip">
