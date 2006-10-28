@@ -25,6 +25,28 @@ public abstract class AbstractAmf3IntWriterImpl implements Amf3DataWriter {
 
     private static final int INTEGER_DATA_MASK = 0x7F;
 
+    private static final int getIntByteLength(final int value) {
+        if (value < 0) {
+            return 4;
+        }
+        if (value >= 0x10000000) {
+            return -1;
+        }
+        if (value >= 0x200000) {
+            return 4;
+        }
+        if (value >= 0x4000) {
+            return 3;
+        }
+        if (value >= 0x80) {
+            return 2;
+        }
+        if (value >= 0x0) {
+            return 1;
+        }
+        return -1;
+    }
+
     protected static final int[] getVariableIntBytes(final int value) {
         final int intByteLength = getIntByteLength(value);
         if (intByteLength < 0) {
@@ -47,28 +69,6 @@ public abstract class AbstractAmf3IntWriterImpl implements Amf3DataWriter {
             intValue = intValue >>> 7;
         }
         return list;
-    }
-
-    private static final int getIntByteLength(final int value) {
-        if (value < 0) {
-            return 4;
-        }
-        if (value >= 0x10000000) {
-            return -1;
-        }
-        if (value >= 0x200000) {
-            return 4;
-        }
-        if (value >= 0x4000) {
-            return 3;
-        }
-        if (value >= 0x80) {
-            return 2;
-        }
-        if (value >= 0x0) {
-            return 1;
-        }
-        return -1;
     }
 
     protected static final void writeIntData(final int value,

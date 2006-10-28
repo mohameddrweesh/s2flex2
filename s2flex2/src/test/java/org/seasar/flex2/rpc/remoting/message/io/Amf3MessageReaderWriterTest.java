@@ -35,6 +35,7 @@ import java.util.Map;
 import javax.xml.parsers.DocumentBuilder;
 
 import org.seasar.extension.unit.S2TestCase;
+import org.seasar.flex2.core.format.amf3.Amf3Constants;
 import org.seasar.flex2.core.format.amf3.io.CharsetType;
 import org.seasar.flex2.core.format.amf3.type.ByteArray;
 import org.seasar.flex2.core.format.amf3.type.factory.ByteArrayFactory;
@@ -265,26 +266,13 @@ public class Amf3MessageReaderWriterTest extends S2TestCase {
     
     public void testInteger() throws Exception {
         List value = new ArrayList();
-
-        value.add(new Integer(8191));
-        value.add(new Integer(8192));
-        value.add(new Integer(10000));
-        value.add(new Integer(16383));
-        value.add(new Integer(16384));
-        value.add(new Integer(1048575));
-        value.add(new Integer(1048576));
-        value.add(new Integer(2097151));
-        value.add(new Integer(2097152));
-        value.add(new Integer(-1));
-        value.add(new Integer(-8191));
-        value.add(new Integer(-8192));
-        value.add(new Integer(-10000));
-        value.add(new Integer(-16383));
-        value.add(new Integer(-16384));
-        value.add(new Integer(-1048575));
-        value.add(new Integer(-1048576));
-        value.add(new Integer(-2097151));
-        value.add(new Integer(-2097152));
+        
+        for( int i = 0; i < 29; i++ ) {
+            value.add(Integer.valueOf( Amf3Constants.INTEGER_MAX >>> i ));
+        }
+        for( int i = 0; i < 29; i++ ) {
+            value.add(Integer.valueOf( Amf3Constants.INTEGER_MIN >> i ));
+        }
 
         Object[] value2 = (Object[]) convertData(value);
         assertEquals("1", value.size(), value2.length);
