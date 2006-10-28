@@ -22,9 +22,26 @@ import org.seasar.flex2.core.format.amf.io.reader.AmfDataReader;
 
 public abstract class AbstractAmf3IntReaderImpl implements AmfDataReader {
 
+    private static final int INTEGER_NAGATIVE_SIGN = 0x03;
+
     private static final int INTEGER_DATA_MASK = 0x7F;
 
     private static final int INTEGER_MAX_DATA_BYTES = 0x04;
+
+    protected static final int readInt(final DataInputStream inputStream)
+            throws IOException {
+
+        final int firstByte = inputStream.readUnsignedByte();
+
+        int result;
+        if ((firstByte >>> 7) == 0x00) {
+            result = firstByte & INTEGER_DATA_MASK;
+        } else {
+            result = readIntData(firstByte, inputStream);
+        }
+
+        return result;
+    }
 
     private static final int readIntData(final int firstByte,
             final DataInputStream inputStream) throws IOException {
@@ -33,7 +50,9 @@ public abstract class AbstractAmf3IntReaderImpl implements AmfDataReader {
                 intBytes);
 
         int intData = toInt(intBytes, intByteLength);
-        if ((firstByte >>> 6) == 0x03) {
+
+        if (intByteLength >= INTEGER_MAX_DATA_BYTES
+                && (firstByte >>> 6) == INTEGER_NAGATIVE_SIGN) {
             intData |= 0xF0000000;
         }
 
@@ -74,20 +93,5 @@ public abstract class AbstractAmf3IntReaderImpl implements AmfDataReader {
         }
 
         return intValue;
-    }
-
-    protected static final int readInt(final DataInputStream inputStream)
-            throws IOException {
-
-        final int firstByte = inputStream.readUnsignedByte();
-
-        int result;
-        if ((firstByte >>> 7) == 0x00) {
-            result = firstByte & INTEGER_DATA_MASK;
-        } else {
-            result = readIntData(firstByte, inputStream);
-        }
-
-        return result;
     }
 }
