@@ -262,7 +262,38 @@ public class Amf3MessageReaderWriterTest extends S2TestCase {
     public void testNull() throws Exception {
         assertEquals("1", null, convertData(null));
     }
+    
+    public void testInteger() throws Exception {
+        List value = new ArrayList();
 
+        value.add(new Integer(8191));
+        value.add(new Integer(8192));
+        value.add(new Integer(10000));
+        value.add(new Integer(16383));
+        value.add(new Integer(16384));
+        value.add(new Integer(1048575));
+        value.add(new Integer(1048576));
+        value.add(new Integer(2097151));
+        value.add(new Integer(2097152));
+        value.add(new Integer(-1));
+        value.add(new Integer(-8191));
+        value.add(new Integer(-8192));
+        value.add(new Integer(-10000));
+        value.add(new Integer(-16383));
+        value.add(new Integer(-16384));
+        value.add(new Integer(-1048575));
+        value.add(new Integer(-1048576));
+        value.add(new Integer(-2097151));
+        value.add(new Integer(-2097152));
+
+        Object[] value2 = (Object[]) convertData(value);
+        assertEquals("1", value.size(), value2.length);
+
+        for (int i = 0; i < value2.length; i++) {
+            assertEquals("2", ((Integer)value.get(i)).intValue(), ((Integer)value2[i]).intValue());
+        }
+    }
+    
     public void testNumber() throws Exception {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         DataOutputStream dos = new DataOutputStream(baos);
