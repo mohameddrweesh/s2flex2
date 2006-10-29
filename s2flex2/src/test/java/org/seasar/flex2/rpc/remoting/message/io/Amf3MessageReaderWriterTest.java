@@ -268,10 +268,10 @@ public class Amf3MessageReaderWriterTest extends S2TestCase {
         List value = new ArrayList();
         
         for( int i = 0; i < 29; i++ ) {
-            value.add(Integer.valueOf( Amf3Constants.INTEGER_MAX >>> i ));
+            value.add(new Integer(Amf3Constants.INTEGER_MAX >>>i));
         }
         for( int i = 0; i < 29; i++ ) {
-            value.add(Integer.valueOf( Amf3Constants.INTEGER_MIN >> i ));
+            value.add(new Integer(Amf3Constants.INTEGER_MIN >> i));
         }
 
         Object[] value2 = (Object[]) convertData(value);
