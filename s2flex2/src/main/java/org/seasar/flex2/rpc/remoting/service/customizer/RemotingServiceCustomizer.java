@@ -15,41 +15,22 @@
  */
 package org.seasar.flex2.rpc.remoting.service.customizer;
 
-import org.seasar.flex2.rpc.remoting.service.RemotingServiceLocator;
-import org.seasar.flex2.rpc.remoting.service.RemotingServiceRepository;
+import org.seasar.flex2.rpc.remoting.service.RemotingServiceRegister;
+import org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceRegisterImpl;
 import org.seasar.framework.container.ComponentCustomizer;
 import org.seasar.framework.container.ComponentDef;
-import org.seasar.framework.container.S2Container;
 
-public class RemotingServiceCustomizer implements ComponentCustomizer {
+public class RemotingServiceCustomizer extends RemotingServiceRegisterImpl
+        implements ComponentCustomizer {
+    
+    private RemotingServiceRegister remotingServiceRegister;
 
-    private S2Container container;
-
-    private RemotingServiceLocator remotingServiceLocator;
-
-    private RemotingServiceRepository remotingServiceRepository;
+    public void setRemotingServiceRegister(
+            RemotingServiceRegister remotingServiceRegister) {
+        this.remotingServiceRegister = remotingServiceRegister;
+    }
 
     public void customize(final ComponentDef componentDef) {
-        if ((remotingServiceLocator == null)
-                && (remotingServiceRepository == null)) {
-            setupRemotingServiceComponents();
-        }
-
-        if (remotingServiceLocator.isSupportService(componentDef)) {
-            remotingServiceRepository.addService(componentDef
-                    .getComponentName(), componentDef);
-        }
-    }
-
-    public void setContainer(final S2Container container) {
-        this.container = container;
-    }
-
-    private final void setupRemotingServiceComponents() {
-        final S2Container container = this.container.getRoot();
-        remotingServiceLocator = (RemotingServiceLocator) container
-                .getComponent(RemotingServiceLocator.class);
-        remotingServiceRepository = (RemotingServiceRepository) container
-                .getComponent(RemotingServiceRepository.class);
+        remotingServiceRegister.register(componentDef);
     }
 }

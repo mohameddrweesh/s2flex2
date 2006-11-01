@@ -46,7 +46,7 @@ public class MessageHeaderProcessorImpl implements MessageHeaderProcessor {
         createMessageHeaders(responseMessage);
     }
 
-    public void setHeaderCreator(final MessageHeaderCreator[] headerCreators) {
+    public void setHeaderCreators(final MessageHeaderCreator[] headerCreators) {
         this.headerCreators = headerCreators;
     }
 

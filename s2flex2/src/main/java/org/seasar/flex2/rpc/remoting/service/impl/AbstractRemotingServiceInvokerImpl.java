@@ -55,7 +55,7 @@ public abstract class AbstractRemotingServiceInvokerImpl implements
         return doInvoke(service, methodName, args);
     }
 
-    public void setArgumentAdjustor(final ArgumentAdjustor[] argumentAdjustors) {
+    public void setArgumentAdjustors(final ArgumentAdjustor[] argumentAdjustors) {
         this.argumentAdjustors = argumentAdjustors;
     }
 

@@ -15,25 +15,21 @@
  */
 package org.seasar.flex2.rpc.remoting.service.autoregister;
 
-import org.seasar.flex2.rpc.remoting.service.customizer.RemotingServiceCustomizer;
+import org.seasar.flex2.rpc.remoting.service.RemotingServiceRegister;
 import org.seasar.framework.container.ComponentDef;
 import org.seasar.framework.container.autoregister.AbstractComponentTargetAutoRegister;
 
-public class FileSystemRemotingServiceAutoRegister extends
+public class RemotingServiceAutoRegister extends
         AbstractComponentTargetAutoRegister {
 
-    private RemotingServiceCustomizer remotingServiceCustomizer;
+    private RemotingServiceRegister remotingServiceRegister;
 
-    public RemotingServiceCustomizer getRemotingServiceCustomizer() {
-        return remotingServiceCustomizer;
-    }
-
-    public void setRemotingServiceCustomizer(
-            final RemotingServiceCustomizer remotingServiceCustomizer) {
-        this.remotingServiceCustomizer = remotingServiceCustomizer;
+    public void setRemotingServiceRegister(
+            RemotingServiceRegister remotingServiceRegister) {
+        this.remotingServiceRegister = remotingServiceRegister;
     }
 
     protected void register(final ComponentDef componentDef) {
-        remotingServiceCustomizer.customize(componentDef);
+        remotingServiceRegister.register(componentDef);
     }
 }
