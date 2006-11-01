@@ -25,7 +25,7 @@ public class RemotingServiceInvokerChooserImpl implements
 
     private RemotingServiceInvoker[] invokers;
 
-    public void setInvoker(final RemotingServiceInvoker[] invokers) {
+    public void setInvokers(final RemotingServiceInvoker[] invokers) {
         this.invokers = invokers;
     }
 

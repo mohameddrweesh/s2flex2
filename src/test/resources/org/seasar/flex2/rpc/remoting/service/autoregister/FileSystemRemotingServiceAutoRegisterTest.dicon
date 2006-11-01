@@ -41,7 +41,10 @@
 	</component>
 	
 	<component
-	  class="org.seasar.flex2.rpc.remoting.service.autoregister.FileSystemRemotingServiceAutoRegister">
+	  class="org.seasar.flex2.rpc.remoting.service.autoregister.RemotingServiceAutoRegister">
+		<property name="remotingServiceRegister">
+			<component class="org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceRegisterImpl" />
+		</property>
 		<initMethod name="addClassPattern">
 			<arg>"org.seasar.flex2.rpc.remoting.service.autoregister.impl"</arg>
 			<arg>"TestService.*Impl"</arg>

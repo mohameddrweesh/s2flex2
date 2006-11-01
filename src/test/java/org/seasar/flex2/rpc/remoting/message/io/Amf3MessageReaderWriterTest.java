@@ -269,8 +269,6 @@ public class Amf3MessageReaderWriterTest extends S2TestCase {
         
         for( int i = 0; i < 29; i++ ) {
             value.add(new Integer(Amf3Constants.INTEGER_MAX >>>i));
-        }
-        for( int i = 0; i < 29; i++ ) {
             value.add(new Integer(Amf3Constants.INTEGER_MIN >> i));
         }
 
@@ -279,6 +277,24 @@ public class Amf3MessageReaderWriterTest extends S2TestCase {
 
         for (int i = 0; i < value2.length; i++) {
             assertEquals("2", ((Integer)value.get(i)).intValue(), ((Integer)value2[i]).intValue());
+        }
+    }
+    
+    public void testLongNumber() throws Exception {
+        List value = new ArrayList();
+        final double max = 1000000000000000000000.0;
+        final double min = -1000000000000000000000.0;
+        
+        for( int i = 0; i < 64; i++ ) {
+            value.add(new Double( max / Math.pow(2,(i+1))));
+            value.add(new Double( min / Math.pow(2,(i+1))));
+        }
+
+        Object[] value2 = (Object[]) convertData(value);
+        assertEquals("1", value.size(), value2.length);
+
+        for (int i = 0; i < value2.length; i++) {
+            assertEquals("2", ((Double)value.get(i)).doubleValue(), ((Double)value2[i]).doubleValue(),0.0);
         }
     }
     
