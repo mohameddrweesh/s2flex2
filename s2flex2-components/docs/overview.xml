@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <overviews>
 	<book>
-		<description><![CDATA[The FlexUnit ActionScript 3 API Reference provides syntax, usage information, and code examples for every element in the FlexUnit ActionScript 3 library.]]></description>
+		<description><![CDATA[The S2FLex2-Components API Reference provides syntax, usage information, and code examples for every element in the FlexUnit ActionScript 3 library.]]></description>
 	</book>
 	<all-packages>
 		<description><![CDATA[All Packages detailed description. Content TBD.]]></description>
