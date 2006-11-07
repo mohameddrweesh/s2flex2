@@ -15,8 +15,7 @@
  *
  * @ignore
  */
-package org.seasar.flex2.net
-{
+package org.seasar.flex2.net{
     
     import flash.net.NetConnection;
 
@@ -26,40 +25,34 @@ package org.seasar.flex2.net
         
         private var append:String =null;
         
-        public override function connect(command:String, ...rest):void
-        {
+        public override function connect(command:String, ...rest):void{
             _originalUrl = command;
             super.connect(command,rest);
         }
         
-        private function reconnect( uri:String ):void
-        {
-			if( this.connected ){
-				this.close();
-			}
-			this.connect( uri );
-		}
-		
-        public function AppendToGatewayUrl(append:String):void
-        { 
+        private function reconnect( uri:String ):void{
+            if( this.connected ){
+                this.close();
+            }
+            this.connect( uri );
+        }
+        
+        public function AppendToGatewayUrl(append:String):void{ 
             this.append = append;
             var url:String=this._originalUrl+ append;
             
             reconnect(url);
         }
         
-        public override function addHeader(operation:String,mustUnderstand:Boolean=false,param:Object=null):void
-        {
+        public override function addHeader(operation:String,mustUnderstand:Boolean=false,param:Object=null):void{
             super.addHeader(operation,mustUnderstand,param);
         }
         
-        public function ReplaceGatewayUrl(url:String):void
-        {
+        public function ReplaceGatewayUrl(url:String):void{
             reconnect(url);
         }
         
-        public function get connectedUrl():String
-        {
+        public function get connectedUrl():String{
             if(append!= null){
                 return _originalUrl + append;
             }

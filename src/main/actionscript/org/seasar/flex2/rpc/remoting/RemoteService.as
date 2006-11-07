@@ -16,22 +16,26 @@
  * @ignore
  */
 
-package org.seasar.flex2.rpc.remoting
-{
-	import flash.net.ObjectEncoding;
-	
-	public dynamic class RemoteService extends S2Flex2Service {
-	    
-	    [Inspectable(type="Boolean",defaultValue="false")]
-   		public var useAMF0:Boolean;
-   		
-   		override protected  function createConnection():void{
+package org.seasar.flex2.rpc.remoting {
+    
+    import flash.net.ObjectEncoding;
+    
+    /**
+     * 
+     * 
+     */
+    public dynamic class RemoteService extends S2Flex2Service {
+        
+        [Inspectable(type="Boolean",defaultValue="false")]
+           public var useAMF0:Boolean;
+           
+           override protected  function createConnection():void{
             super.createConnection();
-			if(useAMF0){
-				_con.objectEncoding = ObjectEncoding.AMF0;
-			}else{//default is AMF3
-				_con.objectEncoding = ObjectEncoding.AMF3;
-			}
+            if(useAMF0){
+                _con.objectEncoding = ObjectEncoding.AMF0;
+            }else{//default is AMF3
+                _con.objectEncoding = ObjectEncoding.AMF3;
+            }
         }
-	}
+    }
 }

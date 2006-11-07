@@ -15,12 +15,16 @@
  * 
  * @ignore
  */
-package org.seasar.flex2.rpc.remoting
-{
-    public dynamic class S2Flex2ServiceConstants {
+package org.seasar.flex2.rpc.remoting{
+    public final class S2Flex2ServiceConstants {
+
+        public static const CREDENTIALS_PASSWORD:String = "credentialsPassword";
+        
+        public static const CREDENTIALS_USERNAME:String = "credentialsUsername";
         
         public static const REMOTE_CREDENTIALS_PASSWORD:String = "remoteCredentialsPassword";
         
         public static const REMOTE_CREDENTIALS_USERNAME:String = "remoteCredentialsUsername";
+        
     }
 }
