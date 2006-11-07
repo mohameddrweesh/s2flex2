@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <flexLibProperties version="1">
-  <includeClasses>
-    <classEntry path="org.seasar.flex2.net.NetConnection"/>
-    <classEntry path="org.seasar.flex2.rpc.RelayResponder"/>
-    <classEntry path="org.seasar.flex2.rpc.RemoteMessage"/>
-    <classEntry path="org.seasar.flex2.rpc.RpcOperation"/>
-    <classEntry path="org.seasar.flex2.rpc.remoting.RemoteService"/>
-    <classEntry path="org.seasar.flex2.rpc.remoting.S2Flex2Service"/>
-    <classEntry path="org.seasar.flex2.rpc.remoting.S2Flex2ServiceConstants"/>
-  </includeClasses>
-  <includeResources/>
-  <namespaceManifests>
-    <namespaceManifestEntry namespace="http://www.seasar.org/s2flex2/mxml" manifest="../resources/Manifest.xml"/>
-  </namespaceManifests>
+<includeClasses>
+<classEntry path="org.seasar.flex2.net.NetConnection"/>
+<classEntry path="org.seasar.flex2.rpc.RelayResponder"/>
+<classEntry path="org.seasar.flex2.rpc.RemoteMessage"/>
+<classEntry path="org.seasar.flex2.rpc.RpcOperation"/>
+<classEntry path="org.seasar.flex2.rpc.remoting.RemoteService"/>
+<classEntry path="org.seasar.flex2.rpc.remoting.S2Flex2Service"/>
+<classEntry path="org.seasar.flex2.rpc.remoting.S2Flex2ServiceConstants"/>
+</includeClasses>
+<includeResources/>
+<namespaceManifests>
+<namespaceManifestEntry manifest="../resources/Manifest.xml" namespace="http://www.seasar.org/s2flex2/mxml"/>
+</namespaceManifests>
 </flexLibProperties>
