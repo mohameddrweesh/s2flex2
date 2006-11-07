@@ -55,10 +55,10 @@
 	      <jvmarg value="-Xmx1024m"/>
 	      <jvmarg value="-Dsun.io.useCanonCaches=false"/>
 	      <jvmarg value="-Xbootclasspath/p:${flex.sdk.home}/asdoc/lib/xalan.jar"/>
-	      <arg line='-source-path src/actionscript3 '/>
+	      <arg line='-source-path src/main/actionscript '/>
 	      <!--<arg line='-library-path+=buildlib\fds.swc'/> -->
 	      <arg line='-window-title "S2Flex2-Components API"'/>
-	      <arg line='-doc-sources src/actionscript3 '/>
+	      <arg line='-doc-sources src/main/actionscript '/>
 	      <arg line='-output docs/api/'/>
 	    </java>
 	</target>
