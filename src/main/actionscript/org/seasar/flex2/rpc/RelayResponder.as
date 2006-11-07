@@ -15,9 +15,8 @@
  
  * @ignore
  */
- 
-package org.seasar.flex2.rpc
-{
+package org.seasar.flex2.rpc {
+    
 	import flash.net.Responder;
 	
 	import mx.rpc.AsyncToken;
@@ -29,8 +28,7 @@ package org.seasar.flex2.rpc
 	 * <h4>RelayResponder</h4>
 	 * 
 	 */ 
-	public class RelayResponder extends Responder
-	{
+	public class RelayResponder extends Responder{
 				
 		//--------------------------------------------------------------------------
 		//
@@ -62,8 +60,7 @@ package org.seasar.flex2.rpc
 		 * @param result resultFunction
 		 * @param status statusFunciton
 		 */
-		public function RelayResponder(method:String,result:Function, status:Function=null)
-		{
+		public function RelayResponder(method:String,result:Function, status:Function=null){
 			super(onResultHandler, onFaultHandler);
 			this._resultFunction = result;
 			this._statusFunction = status;
@@ -83,8 +80,7 @@ package org.seasar.flex2.rpc
 		 * @param result 実行結果のデータ
 		 * 
 		 */		
-		private function onResultHandler(result:*):void
-		{
+		private function onResultHandler(result:*):void{
 			_remoteMessage.body="success";
 	        _resultFunction( RemoteMessage( asyncToken.message ).operation, result );
 			var resultEvent:ResultEvent=new ResultEvent("result",false,false,result,asyncToken,_remoteMessage);
@@ -99,8 +95,7 @@ package org.seasar.flex2.rpc
 		 * @param fault 呼び出し失敗時のデータ
 		 * 
 		 */
-	    private function onFaultHandler(status:*):void
-	    {
+	    private function onFaultHandler(status:*):void{
 	        _remoteMessage.body = "fault";
         	_statusFunction( RemoteMessage( asyncToken.message ).operation, status );
         	var fault:Fault = new Fault(status.code,status.description,status.details);
@@ -111,15 +106,13 @@ package org.seasar.flex2.rpc
 	                _asyncToken.responders[ i ].fault( faultEvent );
 	       		}
 	    	}
-	    	
 		}
 		
 		/**
 		 * このResponderのAsynTokenを返します
 		 * @return AsyncToken このResponderに関連するAsyncToken
 		 */ 
-		public function get asyncToken():AsyncToken
-		{
+		public function get asyncToken():AsyncToken{
 			return this._asyncToken;
 		}
 	}

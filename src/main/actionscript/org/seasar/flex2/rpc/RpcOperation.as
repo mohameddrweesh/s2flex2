@@ -15,16 +15,15 @@
  *
  * @ignore
  */
- package org.seasar.flex2.rpc
-{
+package org.seasar.flex2.rpc {
+    
 	import mx.rpc.AbstractOperation;
 	import mx.rpc.AbstractService;
 	import mx.rpc.AsyncToken;
 
-	public class RpcOperation extends AbstractOperation
-	{
-		public function RpcOperation(service:AbstractService,name:String)
-		{
+	public class RpcOperation extends AbstractOperation {
+	    
+		public function RpcOperation(service:AbstractService,name:String){
 			super(service,name);	
 		}
 	}

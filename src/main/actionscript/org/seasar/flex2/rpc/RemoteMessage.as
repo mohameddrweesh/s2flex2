@@ -15,24 +15,23 @@
  *
  * @ignore
  */
- package org.seasar.flex2.rpc
-{
+package org.seasar.flex2.rpc {
+
 	import mx.messaging.messages.IMessage;
 	import mx.messaging.messages.AbstractMessage;
 
-	public class RemoteMessage extends AbstractMessage implements IMessage
-	{
+	public class RemoteMessage extends AbstractMessage implements IMessage {
+		
 		/**
 		 * @private
 		 */ 
 		private var _operation:String;
 		
-		public function get operation():String
-		{
+		public function get operation():String{
 			return this._operation;
 		}
-		public function set operation(value:String):void
-		{
+		
+		public function set operation(value:String):void{
 			this._operation=value;
 		}
 	}
