@@ -42,26 +42,26 @@ package org.seasar.flex2.rpc.remoting {
     
     use namespace flash_proxy;
     
-	//--------------------------------------
+    //--------------------------------------
     // icon
-	//--------------------------------------
+    //--------------------------------------
     [IconFile("S2Component.png")]
-	//--------------------------------------
-	//  Events
-	//--------------------------------------
+    //--------------------------------------
+    //  Events
+    //--------------------------------------
     /** 
      *  @eventType mx.rpc.events.FaultEvent.FAULT
-	 *  @tiptext fault event
+     *  @tiptext fault event
      */
     [Event(name="fault", type="mx.rpc.events.FaultEvent")]
     /** 
      *  @eventType mx.rpc.events.ResultEvent.RESULT
      *  @tiptext result event
-	 */
+     */
     [Event(name="result", type="mx.rpc.events.ResultEvent")]
     /** 
      *  @eventType flash.events.IOErrorEvent.IO_ERROR
-	 *  @tiptext ioError event
+     *  @tiptext ioError event
      */
     [Event(name="ioError", type="flash.events.IOErrorEvent")]
     /** 
@@ -71,7 +71,7 @@ package org.seasar.flex2.rpc.remoting {
     [Event(name="netStatus",type="flash.events.NetStatusEvent")]
     /** 
      *  @eventType flash.events.SecurityErrorEvent.SECURITY_ERROR
-	 *  @tiptext securityError event
+     *  @tiptext securityError event
      */
     [Event(name="securityError",type="flash.events.SecurityErrorEvent")]
     
@@ -110,6 +110,17 @@ package org.seasar.flex2.rpc.remoting {
          *  @private
          */
         private var remoteCredentialsPassword:String;
+
+        /**
+         *  @private
+         */
+        private var credentialsUsername:String;
+        
+        /**
+         *  @private
+         */
+        private var credentialsPassword:String;
+        
         /**
          *  @private
          */        
@@ -122,25 +133,26 @@ package org.seasar.flex2.rpc.remoting {
          * コンストラクタ<br/>
          * destinationをセットしたうえでResponderの配列を初期化します。
          */
-        public function S2Flex2Service(destination:String=null)
-        {
+        public function S2Flex2Service(destination:String=null){
             super(destination);
             this._opResponderArray=new Array();
         }
             
-        public function initialized(document:Object,id:String):void
-        {
+        public function initialized(document:Object,id:String):void{
             this.document = document as UIComponent;
         }
          
-        public override function setRemoteCredentials(remoteUsername:String, remotePassword:String):void
-        {
+        public override function setCredentials(username:String, password:String):void{
+            this.credentialsUsername = username;
+            this.credentialsPassword = password;
+        }
+         
+        public override function setRemoteCredentials(remoteUsername:String, remotePassword:String):void{
             this.remoteCredentialsUsername = remoteUsername;
             this.remoteCredentialsPassword = remotePassword;
         }
         
-        public function onResult(operation:String,result:*):void
-        {
+        public function onResult(operation:String,result:*):void{
             hiddenBusyCursor();
             var responder:RelayResponder=this._opResponderArray[operation];
             
@@ -148,17 +160,15 @@ package org.seasar.flex2.rpc.remoting {
             dispatchEvent(resultEvent);
         }
         
-        public function onFault(operation:String,result:*):void
-        {
-			var responder:RelayResponder=this._opResponderArray[operation];
-			
+        public function onFault(operation:String,result:*):void{
+            var responder:RelayResponder=this._opResponderArray[operation];
+            
             var fault:Fault = new Fault(result.code,result.description,result.details);
             var faultEvent:FaultEvent = new FaultEvent("fault",false,false,fault,responder.asyncToken,responder.asyncToken.message);
             dispatchEvent(faultEvent);
         }
         
-        flash_proxy override function callProperty(methodName:*, ...args):*
-        {
+        flash_proxy override function callProperty(methodName:*, ...args):*{
              args.unshift(methodName);
              return remoteCall.apply(null,args);
         }
@@ -169,7 +179,7 @@ package org.seasar.flex2.rpc.remoting {
         * @param value メソッドに対応したRPCOperation
         */
         flash_proxy override function setProperty(name:*,value:*):void{
-        	this.operations[name]=value;
+            this.operations[name]=value;
         }
         
         /**
@@ -178,11 +188,12 @@ package org.seasar.flex2.rpc.remoting {
         * @ignore
         */ 
         flash_proxy override function getProperty(name:*):*{
-        	if(this.operations[name]==null){
-        		this.operations[name]=new RpcOperation(this,name);
-        	}
-        	return this.operations[name];
+            if(this.operations[name]==null){
+                this.operations[name]=new RpcOperation(this,name);
+            }
+            return this.operations[name];
         }
+
         /**
          * NetConnectionのインスタンスを生成します。
          * 
@@ -192,7 +203,8 @@ package org.seasar.flex2.rpc.remoting {
             _con.objectEncoding = ObjectEncoding.AMF3;
             _con.addHeader("DescribeService", false, 0);    
         }
-		/**
+
+        /**
          * NetConnectionの初期化を行います。
          * 
          */
@@ -224,11 +236,12 @@ package org.seasar.flex2.rpc.remoting {
          */        
         private function remoteCall(methodName:String, ...rest):AsyncToken {
             setupConnection();
-            setupCredential();
+            setupCredentials();
+            setupRemoteCredentials();
             setupCursor();
        
             var callMethod:String =this.destination +"." +methodName;
-           	
+               
             var responder:RelayResponder = new RelayResponder(methodName,this.onResult,this.onFault);
             this._opResponderArray[methodName]=responder;
             
@@ -268,8 +281,25 @@ package org.seasar.flex2.rpc.remoting {
                 initConnection();
             }           
         }
+
+        private function setupCredentials():void {
+            if( credentialsUsername != null ){
+                _con.addHeader(
+                    S2Flex2ServiceConstants.CREDENTIALS_USERNAME,
+                    true,
+                    credentialsUsername
+                );
+                _con.addHeader(
+                    S2Flex2ServiceConstants.CREDENTIALS_PASSWORD,
+                    true,
+                    credentialsPassword
+                );
+                credentialsUsername = null;
+                credentialsPassword = null;
+            }
+        }
         
-        private function setupCredential():void{
+        private function setupRemoteCredentials():void {
             if( remoteCredentialsUsername != null ){
                 _con.addHeader(
                     S2Flex2ServiceConstants.REMOTE_CREDENTIALS_USERNAME,
@@ -327,7 +357,7 @@ package org.seasar.flex2.rpc.remoting {
                     if( application != null ){
                         parameterValue = application.parameters[ parameterName ];
                     }
-                }        
+                }
             }
             
             return parameterValue;
