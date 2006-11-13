@@ -22,6 +22,5 @@
 </compiler>
 <applications>
 <application path="RemotingServiceBrowser.mxml"/>
-<application path="src\main\mxml\RemotingServiceBrowser.mxml"/>
 </applications>
 </actionScriptProperties>
