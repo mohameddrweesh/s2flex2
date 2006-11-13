@@ -21,9 +21,15 @@ import java.util.Set;
 
 import org.seasar.flex2.rpc.remoting.service.RemotingServiceRepository;
 import org.seasar.framework.container.ComponentDef;
+import org.seasar.framework.container.impl.S2ContainerImpl;
+import org.seasar.framework.log.Logger;
 import org.seasar.framework.util.ArrayMap;
 
 public class RemotingServiceRepositoryImpl implements RemotingServiceRepository {
+
+    private static final Logger logger = Logger
+            .getLogger(S2ContainerImpl.class);
+
     protected final Map serviceCache;
 
     public RemotingServiceRepositoryImpl() {
@@ -33,6 +39,7 @@ public class RemotingServiceRepositoryImpl implements RemotingServiceRepository 
     public void addService(final String serviceName, final ComponentDef service) {
         if (!serviceCache.containsKey(serviceName)) {
             serviceCache.put(serviceName, service);
+            logger.log("DFLX0001", new String[]{serviceName,service.getComponentClass().getName()});
         }
     }
 
