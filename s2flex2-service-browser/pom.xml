@@ -76,8 +76,8 @@
   <dependencies>
     <dependency>
       <groupId>org.seasar.container</groupId>
-      <artifactId>s2-extension</artifactId>
-      <version>2.4.0-beta-4</version>
+      <artifactId>s2-framework</artifactId>
+      <version>2.4.1</version>
       <type>jar</type>
     </dependency>
     <dependency>
@@ -90,7 +90,7 @@
     <dependency>
       <groupId>org.seasar.flex2</groupId>
       <artifactId>s2-flex2</artifactId>
-      <version>1.0.0-RC1-SNAPSHOT</version>
+      <version>1.0.0-rc-3-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>

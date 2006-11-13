@@ -100,7 +100,7 @@ public class BrowserServiceImpl implements BrowserService {
 
         for (int j = 0; j < methods.length; j++) {
             list.add(createMethodDetail(methods[j], deanDesc
-                    .getMethodParameterNames(methods[j])));
+                    .getMethodParameterNamesNoException(methods[j])));
         }
     }
 
