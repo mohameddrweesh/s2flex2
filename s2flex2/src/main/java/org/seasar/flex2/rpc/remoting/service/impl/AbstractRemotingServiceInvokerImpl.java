@@ -49,7 +49,7 @@ public abstract class AbstractRemotingServiceInvokerImpl implements
             final Object[] args) throws Throwable {
 
         final Object service = remotingServiceLocator.getService(serviceName);
-        if (!isValidArguments(methodName, args, service)) {
+        if (!isValidArguments(service, methodName, args)) {
             throw new InvaildServiceArgumentException(serviceName, methodName);
         }
         return doInvoke(service, methodName, args);
@@ -99,8 +99,8 @@ public abstract class AbstractRemotingServiceInvokerImpl implements
         return forbiddenMethodMap.containsKey(methodName);
     }
 
-    private final boolean isValidArguments(final String methodName,
-            final Object[] args, final Object service) {
+    private final boolean isValidArguments(final Object service,
+            final String methodName, final Object[] args) {
         final BeanDesc beanDesc = BeanDescFactory.getBeanDesc(service
                 .getClass());
         final Method[] methods = beanDesc.getMethods(methodName);
