@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN" 
+    "http://www.seasar.org/dtd/components24.dtd">
+<components>
+    <component
+        class="org.seasar.flex2.rpc.remoting.service.validator.impl.DefaultRemotingServiceValidatorImpl">
+		<property name="forbiddenMethodMap">
+            <component class="java.util.HashMap">
+                <initMethod name="put">
+                    <arg>"equals"</arg>
+                    <arg>null</arg>
+                </initMethod>
+                <initMethod name="put">
+                    <arg>"getClass"</arg>
+                    <arg>null</arg>
+                </initMethod>
+                <initMethod name="put">
+                    <arg>"hashCode"</arg>
+                    <arg>null</arg>
+                </initMethod>
+                <initMethod name="put">
+                    <arg>"notify"</arg>
+                    <arg>null</arg>
+                </initMethod>
+                <initMethod name="put">
+                    <arg>"notifyAll"</arg>
+                    <arg>null</arg>
+                </initMethod>
+                <initMethod name="put">
+                    <arg>"toString"</arg>
+                    <arg>null</arg>
+                </initMethod>
+                <initMethod name="put">
+                    <arg>"wait"</arg>
+                    <arg>null</arg>
+                </initMethod>
+            </component>
+        </property>
+    </component>
+</components>

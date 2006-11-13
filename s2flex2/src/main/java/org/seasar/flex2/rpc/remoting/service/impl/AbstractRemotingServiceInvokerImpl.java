@@ -16,12 +16,12 @@
 package org.seasar.flex2.rpc.remoting.service.impl;
 
 import java.lang.reflect.Method;
-import java.util.Map;
 
 import org.seasar.flex2.rpc.remoting.service.RemotingServiceInvoker;
 import org.seasar.flex2.rpc.remoting.service.RemotingServiceLocator;
 import org.seasar.flex2.rpc.remoting.service.adjustor.ArgumentAdjustor;
 import org.seasar.flex2.rpc.remoting.service.exception.InvaildServiceArgumentException;
+import org.seasar.flex2.rpc.remoting.service.validator.RemotingServiceValidator;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.factory.BeanDescFactory;
 import org.seasar.framework.log.Logger;
@@ -34,7 +34,7 @@ public abstract class AbstractRemotingServiceInvokerImpl implements
 
     private ArgumentAdjustor[] argumentAdjustors;
 
-    private Map forbiddenMethodMap;
+    private RemotingServiceValidator[] remotingServiceValidators;
 
     protected RemotingServiceLocator remotingServiceLocator;
 
@@ -49,7 +49,7 @@ public abstract class AbstractRemotingServiceInvokerImpl implements
             final Object[] args) throws Throwable {
 
         final Object service = remotingServiceLocator.getService(serviceName);
-        if (!isValidArguments(service, methodName, args)) {
+        if (!checkMethodArgumentsValidation(service, methodName, args)) {
             throw new InvaildServiceArgumentException(serviceName, methodName);
         }
         return doInvoke(service, methodName, args);
@@ -59,8 +59,9 @@ public abstract class AbstractRemotingServiceInvokerImpl implements
         this.argumentAdjustors = argumentAdjustors;
     }
 
-    public void setForbiddenMethodMap(final Map forbiddenMethodMap) {
-        this.forbiddenMethodMap = forbiddenMethodMap;
+    public void setRemotingServiceValidators(
+            RemotingServiceValidator[] remotingServiceValidators) {
+        this.remotingServiceValidators = remotingServiceValidators;
     }
 
     public void setServiceLocator(final RemotingServiceLocator serviceLocator) {
@@ -69,11 +70,8 @@ public abstract class AbstractRemotingServiceInvokerImpl implements
 
     public boolean supports(final String serviceName, final String methodName,
             final Object[] args) {
-        boolean isSupport = false;
-        if (!isForbiddenMethod(methodName)) {
-            isSupport = remotingServiceLocator.isSupportService(serviceName);
-        }
-        return isSupport;
+        return checkServiceValidation(serviceName, methodName, args)
+                && remotingServiceLocator.isSupportService(serviceName);
     }
 
     private final Object adjustArgument(final Class clazz, final Object arg) {
@@ -95,11 +93,7 @@ public abstract class AbstractRemotingServiceInvokerImpl implements
         }
     }
 
-    private final boolean isForbiddenMethod(final String methodName) {
-        return forbiddenMethodMap.containsKey(methodName);
-    }
-
-    private final boolean isValidArguments(final Object service,
+    private final boolean checkMethodArgumentsValidation(final Object service,
             final String methodName, final Object[] args) {
         final BeanDesc beanDesc = BeanDescFactory.getBeanDesc(service
                 .getClass());
@@ -115,6 +109,19 @@ public abstract class AbstractRemotingServiceInvokerImpl implements
             }
         }
 
+        return isValid;
+    }
+
+    private final boolean checkServiceValidation(final String serviceName,
+            final String methodName, final Object[] args) {
+        boolean isValid = true;
+        for (int i = 0; i < remotingServiceValidators.length; i++) {
+            if (!remotingServiceValidators[i].isValidate(serviceName,
+                    methodName, args)) {
+                isValid = false;
+                break;
+            }
+        }
         return isValid;
     }
 
