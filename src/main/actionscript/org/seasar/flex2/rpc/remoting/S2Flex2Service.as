@@ -323,8 +323,8 @@ package org.seasar.flex2.rpc.remoting {
         }
         
         private function resolveGatewayUrl():void{
-            if(this.gatewayUrl == null && this.destination != null ){
-                if( this.configType == "flashvars"){
+            if(this.gatewayUrl == null ){
+                if( this.configType == "flashvars" && this.destination != null){
                     this.gatewayUrl = getApplicationParameterValue( this.destination );                    
                 } else if(this.configType == "xml"){
                     //It has not implemented yet. 
