@@ -50,21 +50,30 @@ package org.seasar.flex2.rpc.remoting {
     //  Events
     //--------------------------------------
     /** 
+     *
+     *  The fault event is dispatched when a service call fails and isn't handled by the Operation itself.
+    　　  *   <br />
+     *  fault イベントは、サービス(サーバロジック)を実行した際に、失敗、または例外が発生したときに送出されます。
      *  @eventType mx.rpc.events.FaultEvent.FAULT
      *  @tiptext fault event
      */
     [Event(name="fault", type="mx.rpc.events.FaultEvent")]
     /** 
+     * The result event is dispatched when a service call successfully returns and isn't handled by the Operation itself.
+     *  <br />
+	 *  result イベントは、サーバロジックを実行し正常に処理されたときに送出されます。
      *  @eventType mx.rpc.events.ResultEvent.RESULT
      *  @tiptext result event
      */
     [Event(name="result", type="mx.rpc.events.ResultEvent")]
     /** 
+	　*　　IOErrorはNetwork接続時に入出力エラーが発生したときに送出されます。
      *  @eventType flash.events.IOErrorEvent.IO_ERROR
      *  @tiptext ioError event
      */
     [Event(name="ioError", type="flash.events.IOErrorEvent")]
     /** 
+
      *  @eventType flash.events.NetStatusEvent.NET_STATUS
      *  @tiptext netStatus event
      */
@@ -81,19 +90,24 @@ package org.seasar.flex2.rpc.remoting {
     */  
     public dynamic class S2Flex2Service extends AbstractService implements IMXMLObject {
         
+        /** サーバ接続する際のURLです。 AMFのGatewayを指定します。 */
         [Inspectable(type="String")]
         public var gatewayUrl:String;
    
+   		/** サーバロジックを呼び出している間、カーソルをBusyCursorにするかどうかを決定します。 デフォルトはtrueです。*/
         [Inspectable(type="Boolean",defaultValue="true")]
         public var showBusyCursor:Boolean;
        
         /* not implements */
+        /** このプロパティについては、実装には反映されていません。(TBD)<br/>将来のリリースで改善される可能性はあります。 */
         [Inspectable(enumeration="single,last,multiple",defaultValue="single",category="General")]
         public var concurrency:String;
-
+        
+		/** mxml内部ドキュメント内部で管理されるこの S2Flex2Sericeインスタンスを特定するID です。 */
         [Inspectable(type="String")]
         public var id:String;
         
+        /** サーバ接続の際に利用されるNetConnectionのインスタンスです。*/
         protected var _con:NetConnection;
         
         /**
@@ -102,25 +116,29 @@ package org.seasar.flex2.rpc.remoting {
         private var document:UIComponent;
         
         /**
+                  * 　認証が必要な外部接続サービスを呼び出す際に指定する、ユーザ名です。
          *  @private
          */
         private var remoteCredentialsUsername:String;
         
         /**
-         *  @private
-         */
+		　*   認証が必要な外部接続サービスを呼び出す際に指定する、パスワードです。
+		　*  @private
+		　*/
         private var remoteCredentialsPassword:String;
 
         /**
+		　* 認証が必要なサービスを呼び出す際に指定するユーザ名です。
          *  @private
          */
         private var credentialsUsername:String;
-        
+
         /**
+		　* 認証が必要なサービスを呼び出す際に指定するパスワードです。
          *  @private
          */
         private var credentialsPassword:String;
-        
+
         /**
          *  @private
          */        
@@ -128,7 +146,7 @@ package org.seasar.flex2.rpc.remoting {
         
         [Inspectable(enumeration="flashvars,xml,url",defaultValue="url",category="General")]
         public var configType:String;
- 
+
          /**
          * コンストラクタ<br/>
          * destinationをセットしたうえでResponderの配列を初期化します。
@@ -137,21 +155,40 @@ package org.seasar.flex2.rpc.remoting {
             super(destination);
             this._opResponderArray=new Array();
         }
-            
+
+		/**
+		 * このクラスを ActionScript で作成し、検証で機能させるには、このメソッドを呼び出して、MXML ドキュメントと S2Flex2Service の id を渡す必要があります。
+		 * 正しく指定しないと、Gatewayの指定が正しく行われない可能性があります。
+		 * 
+		 */ 
         public function initialized(document:Object,id:String):void{
             this.document = document as UIComponent;
         }
-         
+
+        /**
+        * 認証が必要なサービスを呼び出す際に必要な認証情報をセットします。
+        * 
+        * @param username 認証に利用するユーザID
+        * @param password 認証に利用するパスワード
+        */
         public override function setCredentials(username:String, password:String):void{
             this.credentialsUsername = username;
             this.credentialsPassword = password;
         }
-         
+
+        /**
+        * 認証が必要な外部サービスを呼び出す際に必要な認証情報をセットします。
+        * (TBD.)
+        * <br/>
+        * <small>このメソッドは呼び出しても、S2Flex2 1.0.xでは認識しません。</small>
+        * @param username 認証に利用するユーザID
+        * @param password 認証に利用するパスワード
+        */         
         public override function setRemoteCredentials(remoteUsername:String, remotePassword:String):void{
             this.remoteCredentialsUsername = remoteUsername;
             this.remoteCredentialsPassword = remotePassword;
         }
-        
+
         public function onResult(operation:String,result:*):void{
             hiddenBusyCursor();
             var responder:RelayResponder=this._opResponderArray[operation];
@@ -159,7 +196,7 @@ package org.seasar.flex2.rpc.remoting {
             var resultEvent:ResultEvent=new ResultEvent("result",false,false,result,responder.asyncToken,responder.asyncToken.message);
             dispatchEvent(resultEvent);
         }
-        
+
         public function onFault(operation:String,result:*):void{
             var responder:RelayResponder=this._opResponderArray[operation];
             
@@ -167,7 +204,7 @@ package org.seasar.flex2.rpc.remoting {
             var faultEvent:FaultEvent = new FaultEvent("fault",false,false,fault,responder.asyncToken,responder.asyncToken.message);
             dispatchEvent(faultEvent);
         }
-        
+
         flash_proxy override function callProperty(methodName:*, ...args):*{
              args.unshift(methodName);
              return remoteCall.apply(null,args);
@@ -214,15 +251,17 @@ package org.seasar.flex2.rpc.remoting {
             configureListeners();
             processConnect();
         }
+
        /**
          * NetConnectionにEventListenerの設定を行います。
          * 
-         */
+        */
         protected function configureListeners():void {
             _con.addEventListener(NetStatusEvent.NET_STATUS, netStatusHandler);
             _con.addEventListener(SecurityErrorEvent.SECURITY_ERROR, securityErrorHandler);
             _con.addEventListener(flash.events.IOErrorEvent.IO_ERROR , ioErrorHandler);
         }
+        
          /**
          * gatewayUrlとして指定された場所に接続を行います。
          * @private
@@ -230,8 +269,11 @@ package org.seasar.flex2.rpc.remoting {
         private function processConnect():void{
             _con.connect(this.gatewayUrl);
         }
+        
         /**
-         * サーバロジックを呼び出します。
+         * 指定されたサービスを呼び出します。
+         * @param methodName 呼び出すメソッド名
+         * @param rest メソッドを呼び出すときのパラメータ
          * @private
          */        
         private function remoteCall(methodName:String, ...rest):AsyncToken {
@@ -254,34 +296,50 @@ package org.seasar.flex2.rpc.remoting {
             return responder.asyncToken;
             
         }
-        
+        /**
+        * busyCursorをもとのCursorに戻します。
+        * @private
+        */ 
         private function hiddenBusyCursor():void{
             if (this.showBusyCursor){
                 CursorManager.removeBusyCursor();
             }
         }
-        
+        /**
+        * @private
+        */ 
         private function netStatusHandler(event:NetStatusEvent):void {
             hiddenBusyCursor();
             dispatchEvent(event);
         }
         
+        /**
+        * @private
+        */         
         private function securityErrorHandler(event:SecurityErrorEvent):void {
             hiddenBusyCursor();
             dispatchEvent(event);
-          }
-        
+        }
+          
+        /**
+        * @private
+        */         
         private function ioErrorHandler(event:IOErrorEvent):void {
             hiddenBusyCursor();
             dispatchEvent(event);
         }
         
+        /**
+        * @private
+        */
         private function setupConnection():void{
             if(_con==null||!_con.connected){
                 initConnection();
             }           
         }
-
+        /**
+        * @private
+        */
         private function setupCredentials():void {
             if( credentialsUsername != null ){
                 _con.addHeader(
@@ -298,7 +356,9 @@ package org.seasar.flex2.rpc.remoting {
                 credentialsPassword = null;
             }
         }
-        
+        /**
+        * @private
+        */
         private function setupRemoteCredentials():void {
             if( remoteCredentialsUsername != null ){
                 _con.addHeader(
@@ -315,17 +375,31 @@ package org.seasar.flex2.rpc.remoting {
                 remoteCredentialsPassword = null;
             }
         }
-        
+        /**
+        * @private
+        */
         private function setupCursor():void{
             if (this.showBusyCursor){
                 CursorManager.setBusyCursor();
             }
         }
-        
+        /**
+        * Serviceを呼び出す際のGatewayUrlを解決します。<br>
+        * <ul>
+        * <li>gatewayURLが指定されているときは、指定されたURLを利用します。</li>
+        * <li>configTypeが"flashvars"として指定されておりdestinationがnullでないときには、destination毎のURLを利用します。</li>
+        * <li>configTypeがflashvars以外のときには、swfファイルと同一階層にあるgatewayを利用します。</li>
+        * </ul>
+        * @private
+        */
         private function resolveGatewayUrl():void{
             if(this.gatewayUrl == null ){
                 if( this.configType == "flashvars" && this.destination != null){
                     this.gatewayUrl = getApplicationParameterValue( this.destination );                    
+                    //destination単位でURLが指定されていないときには、defaultGatewayを指定する。
+                    if(this.gatewayUrl==null){
+                    	this.gatewayUrl = getApplicationParameterValue( "defaultGateway" );
+                    }
                 } else if(this.configType == "xml"){
                     //It has not implemented yet. 
                 } else {
@@ -333,17 +407,25 @@ package org.seasar.flex2.rpc.remoting {
                 }
             }
         }
-        
+        /**
+        * @private
+        */
         private function resolveDefaultGatewayUrl():void{
             const url:String = document.systemManager.loaderInfo.url;
             if( URLUtil.isHttpURL(url) || URLUtil.isHttpsURL(url)){
                 const lashSlash:int = url.lastIndexOf("/");
+                //TODO:　ここの値は、+1していると、//gatewayになったような..
                 this.gatewayUrl = url.substring(0, lashSlash+1 ) + "gateway";
             } else {
                 this.gatewayUrl = getApplicationParameterValue( "defaultGateway" );
             }
         }
-        
+        /**
+        * 指定されたパラメータに対する値を取得する。
+        * @private
+        * @param prameterName パラメータ名
+        * @return parameterValue パラメータの値 
+        */
         private function getApplicationParameterValue( parameterName:String ):String{
             var parameterValue:String = null;
             

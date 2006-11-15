@@ -19,17 +19,50 @@ package org.seasar.flex2.net{
     
     import flash.net.NetConnection;
 
+/**
+ * NetConnectionは、flash.net.Connectionクラスに、サーバロジック呼び出し時のcallBack関数を追加したクラスです。
+ * CallBack関数には以下のものがあります。
+ * <ul>
+ * 	<li>AppendToGatewayUrl</li>
+ * 	<li> ReplaceGatewayUrl</li>
+ * </ul>
+ * Flash Player 9のセキュリティに関する仕様については以下をご参照ください。
+ * <ul>
+ * <li>
+ * <a href="http://livedocs.macromedia.com/flex/2_jp/docs/wwhelp/wwhimpl/js/html/wwhelp.htm?href=00001950.html">Flash Player セキュリティ</a>
+ * </li>
+ * <li>
+ * <a href="http://www.adobe.com/devnet/flashplayer/articles/flash_player_9_security.pdf">Flash Player 9 Secirity</a>
+ * </li>
+ * </ul>
+ */ 
     public class NetConnection extends flash.net.NetConnection{
-        
+        /**
+        * @private
+        */ 
         private var _originalUrl:String;
-        
+        /**
+        * @private
+        * sessionIdを含む接続URLに加える文字列.<br />
+        * リモートサービス呼び出し時のcallBack関数のひとつである&qout;AppendToGatewayUrl&qout;の引数で来た文字列が入る
+        */ 
         private var append:String =null;
         
+        /**
+        * 引数で指定されたサーバに接続します。
+        * @param command 接続先URL
+        * @param rest 接続時のパラメータ
+        */ 
         public override function connect(command:String, ...rest):void{
             _originalUrl = command;
             super.connect(command,rest);
         }
         
+        /**
+        * 引数で指定されたURLに接続します。既にどこかのサーバに接続しているときには一度切断(close)してから接続します。
+        * 
+        * @param uri 接続先URI
+        */  
         private function reconnect( uri:String ):void{
             if( this.connected ){
                 this.close();
