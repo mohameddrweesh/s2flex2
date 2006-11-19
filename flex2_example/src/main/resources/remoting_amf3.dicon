@@ -83,7 +83,15 @@
         name="serviceDataStorage"
         class="org.seasar.flex2.util.data.storage.impl.HttpSessionDataStorage"
         instance="session" />
-
+	<!--
+		remoting service browse service 
+	-->
+	<component
+		name="browserService"
+        class="org.seasar2.flex2.rpc.remoting.service.browser.service.impl.BrowserServiceImpl">
+        <meta name="RemotingService"/>
+    </component>
+    
     <!--
         remoting service
     -->
