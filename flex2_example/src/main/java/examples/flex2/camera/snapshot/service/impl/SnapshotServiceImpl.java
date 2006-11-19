@@ -8,9 +8,7 @@ import examples.flex2.camera.snapshot.dto.SnapshotDto;
 import examples.flex2.camera.snapshot.logic.SnapshotSaveLogic;
 import examples.flex2.camera.snapshot.service.SnapshotService;
 
-/**
- * @ RemotingService
- */
+
 @RemotingService
 public class SnapshotServiceImpl implements SnapshotService {
 

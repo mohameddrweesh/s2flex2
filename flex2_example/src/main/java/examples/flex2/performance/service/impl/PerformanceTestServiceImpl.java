@@ -8,10 +8,6 @@ import org.seasar.flex2.rpc.remoting.service.annotation.RemotingService;
 
 import examples.flex2.performance.service.PerformanceTestService;
 
-/**
- * 
- * @ RemotingService
- */
 @RemotingService
 public class PerformanceTestServiceImpl implements PerformanceTestService {
 

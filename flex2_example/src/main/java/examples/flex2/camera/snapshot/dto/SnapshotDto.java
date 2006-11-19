@@ -1,15 +1,12 @@
 package examples.flex2.camera.snapshot.dto;
 
-import org.seasar.flex2.core.format.amf3.type.ByteArray;
-
 public class SnapshotDto {
-    private ByteArray source;
+    private Byte[] source;
 
-    public ByteArray getSource() {
+    public Byte[] getSource() {
         return source;
     }
-
-    public void setSource(ByteArray source) {
+    public void setSource(Byte[] source) {
         this.source = source;
     }
 }
