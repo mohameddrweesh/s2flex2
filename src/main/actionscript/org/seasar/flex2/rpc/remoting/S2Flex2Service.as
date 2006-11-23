@@ -85,8 +85,75 @@ package org.seasar.flex2.rpc.remoting {
     [Event(name="securityError",type="flash.events.SecurityErrorEvent")]
     
     /**
-    * S2Flex2Serviceは、S2Flex2のgatewayに接続する為のコンポーネントクラスです。<br />
+    * 
+    * <p>S2Flex2Serviceは、S2Flex2のgatewayに接続する為のコンポーネントクラスです。<br />
+    * S2Container(Seasar2)に登録されたコンポーネントにアクセスして、メソッド実行を可能にします。</p>
+    * <!--
     * S2Flex2Service is ...(TBD)
+    *  -->
+    * <h4>Gatewayの指定</h4>
+    * <p>このサービスの接続先であるGatewayを指定する方法は、３パターンあります。</p>
+    * <ul>
+    * <li>gatewayUrlプロパティで指定する方法</li>
+    * <li>configType="url"で指定する方法</li>
+    * <li>configType="flashvars"で指定する方法</li>
+    * </ul>
+    * <h5>gatewayUrlプロパティで指定する方法</h5>
+    * <p>接続先の指定としてgatewayURLプロパティに指定する方法があります。<br/>
+    * <code>&lt;s2:S2Flex2Service gatewayUrl="http://127.0.0.1:8080/flex/gateway" ...</code>
+    * この方法を使うと明示的に接続先を指定することができますが、接続先が変更になると、再度コンパイルする必要があります。</p>
+    * 
+    * <h5>configType="url"で指定する方法<</h5>
+    * <p>接続先の設定としてデフォルト設定になっているのは、このurlで指定する方法です。
+    * systemManager.loaderInfo.urlの値を使って処理します。
+    * 例)
+    *	http://127.0.0.1/test/test.swfだった場合は、
+    *	http://127.0.0.1/test/gatewayとしてます。
+    *	
+    *	同じ階層のgatewayというURLをGatewayURLに指定します。</p>
+    *  <p>Flex Builder 2 などでデバッグしているときは、flashvarsでdefaultGatewayを指定することで
+    * 　接続することができるようになります。</p>
+    *   <code>&lt;param name=&quot;FlashVars&quot; value=&quot;defaultGateway=http://127.0.0.1/flex2/gateway&quot; /&gt;</code>
+    * <p />
+    * <h5>configType=&quot;flashvars&quot;で指定する方法</h5>
+    * <p>configType=&quot;flashvars&quot;を指定したときには、htmlファイルの中でflashvarsに<strong>defaultGateway</strong>を指定します。
+    * サービス単位で接続先を変更するときには、destination名でgatewayUrlを指定します。
+    * 以下は、addServiceの接続先を指定する例です。addSevrice意外のサービスは、defaultGatewayに接続する事になります。</p>
+    * <code>&lt;param name=&quot;FlashVars&quot; value=&quot;addService="http://127.0.0.1/flexservice/gateway"&amp;&quot;defaultGateway=http://127.0.0.1/flex2/gateway&quot; /&gt;</code>
+    * @mxml
+    * 
+    * <p><code>&lt;s2:S2Service&gt;</code>タグは、スーパークラスの属性に加えて以下の属性を持ちます。</p>
+    * 
+    * <pre>
+    * &lt;s2:S2Flex2Service
+    * <b>Properties</b>
+    * gatewayUrl="null"
+    * showBusyCursor="true|false"
+    * id="<i>No default</i>"
+    * fault="<i>No default</i>"
+    * result="<i>No default</i>"
+    * destination="<i>No default</i>"
+    * configType="flashvars|xml|url"
+    * /&gt;
+    * </pre>
+    * 
+    * @example S2Flex2Serviceの使用例は以下の通りです。
+    * <pre>
+	* 	addService=  new S2Flex2Service("addService");
+	* 	addService.initialized(this,"addService");
+	* 
+	* 	addService.destination="addService";
+	* 	addService.addEventListener(ResultEvent.RESULT,onGetData);
+	* 	addService.addEventListener(FaultEvent.FAULT,onFault);
+ 	*	addService.addEventListener(IOErrorEvent.IO_ERROR,failreProcess);
+ 	*	addService.addEventListener(IOErrorEvent.NETWORK_ERROR,failureProcess);
+	*	addService.addEventListener(NetStatusEvent.NET_STATUS,failureProcess);
+	*	addService.addEventListener(SecurityErrorEvent.SECURITY_ERROR,failureProcess);
+	*	addService.addEventListener(FaultEvent.FAULT, failurProcess);
+	*	addService.setCredentials("user_id","password");	//Authenication
+	* 	addService.getAddDtoData();							//service invoke
+    * </pre>
+    * 
     */  
     public dynamic class S2Flex2Service extends AbstractService implements IMXMLObject {
         
@@ -116,7 +183,7 @@ package org.seasar.flex2.rpc.remoting {
         private var document:UIComponent;
         
         /**
-                  * 　認証が必要な外部接続サービスを呼び出す際に指定する、ユーザ名です。
+	     * 　認証が必要な外部接続サービスを呼び出す際に指定する、ユーザ名です。
          *  @private
          */
         private var remoteCredentialsUsername:String;
@@ -148,8 +215,11 @@ package org.seasar.flex2.rpc.remoting {
         public var configType:String;
 
          /**
-         * コンストラクタ<br/>
-         * destinationをセットしたうえでResponderの配列を初期化します。
+         * コンストラクタ.<br/>
+         * <p>destinationをセットしたうえでResponderの配列を初期化します。</p>
+         * 
+         * @param destination サービスの宛先.呼び出すコンポーネントの名称を指定します。
+         * 
          */
         public function S2Flex2Service(destination:String=null){
             super(destination);
@@ -157,8 +227,13 @@ package org.seasar.flex2.rpc.remoting {
         }
 
 		/**
+		 * mxmlファイル内でS2Flex2Serviceをタグとして設定したときにMXMLコンパイラ(mxmlc)によって自動的に呼び出されます。<br/>
+		 * <!--ActionScriptでインスタンスを生成した場合は、このメソッドを呼び出す事で、GatewayURLを自動的にセットすることが可能になります。-->
 		 * このクラスを ActionScript で作成し、検証で機能させるには、このメソッドを呼び出して、MXML ドキュメントと S2Flex2Service の id を渡す必要があります。
 		 * 正しく指定しないと、Gatewayの指定が正しく行われない可能性があります。
+		 * 
+		 * @param document このクラスを利用しているmxml documents
+		 * @param id S2Flex2Serviceのインスタンス
 		 * 
 		 */ 
         public function initialized(document:Object,id:String):void{
@@ -188,7 +263,13 @@ package org.seasar.flex2.rpc.remoting {
             this.remoteCredentialsUsername = remoteUsername;
             this.remoteCredentialsPassword = remotePassword;
         }
-
+		
+		/**
+		 * 呼び出したリモートサービスが正常に終了したときに呼ばれます
+		 * @param operation 呼び出したサービスのメソッド名
+		 * @param result 呼び出したサービスの結果
+		 * 
+		 */ 
         public function onResult(operation:String,result:*):void{
             hiddenBusyCursor();
             var responder:RelayResponder=this._opResponderArray[operation];
@@ -196,7 +277,12 @@ package org.seasar.flex2.rpc.remoting {
             var resultEvent:ResultEvent=new ResultEvent("result",false,false,result,responder.asyncToken,responder.asyncToken.message);
             dispatchEvent(resultEvent);
         }
-
+        
+		/**
+		 * 呼び出したリモートサービスが何らかのエラーを返してきたときに呼ばれます
+		 * @param operation 呼び出したサービスのメソッド名
+		 * @param result 呼び出したエラー結果
+		 */ 
         public function onFault(operation:String,result:*):void{
             var responder:RelayResponder=this._opResponderArray[operation];
             
@@ -408,13 +494,14 @@ package org.seasar.flex2.rpc.remoting {
             }
         }
         /**
+        * gatewayのURLを実行された環境にあわせて解決してセットします。
+        * swfのURLがHTTP/HTTPS以外のときには、defaultGatewayの値を使用します。
         * @private
         */
         private function resolveDefaultGatewayUrl():void{
             const url:String = document.systemManager.loaderInfo.url;
             if( URLUtil.isHttpURL(url) || URLUtil.isHttpsURL(url)){
                 const lashSlash:int = url.lastIndexOf("/");
-                //TODO:　ここの値は、+1していると、//gatewayになったような..
                 this.gatewayUrl = url.substring(0, lashSlash+1 ) + "gateway";
             } else {
                 this.gatewayUrl = getApplicationParameterValue( "defaultGateway" );
