@@ -38,7 +38,7 @@
 			<arg line='-library-path+=buildlib\fds.swc'/>
 			<arg line='-doc-sources .'/>
 			<arg line='-examples-path .'/>			
-			<arg line='-window-title "Adobe Consulting EMEA"'/>
+			<arg line='-window-title "S2Flex2-Components"'/>
 			<arg line='-output ${Output.dir}'/>
 		</exec>
 	</target>	
