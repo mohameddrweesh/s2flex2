@@ -1,0 +1,176 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html><!-- InstanceBegin template="/Templates/temp1.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<meta http-equiv="Content-Language" content="ja" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="keywords" content="The Seasar Foundation, Project Site, OSS, オープンソースソフトウェア, Java, DI, AOP, フレームワーク" />
+<meta name="description" content="私たちSeasarファウンデーションはオープンソースという仕組みの元、開発者のゆとりを実現できるプロダクトの開発と提供を通じて、ユーザと開発者とが共に喜びを分かち合える環境実現をお手伝いすることを目指し活動しています。 " />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- InstanceBeginEditable name="doctitle" -->
+<title>S2Flex2 - AMF3Gateway with DI Container -</title>
+<!-- InstanceEndEditable --><link rel="stylesheet" type="text/css" href="styles/main.css" media="screen,projection" />
+<link rel="stylesheet" type="text/css" href="styles/print.css" media="print" />
+<!-- InstanceBeginEditable name="head" --><!-- InstanceEndEditable -->
+</head>
+
+<body>
+<div id="wrapper">
+  <div id="header">
+    <div class="line"><span class="hide">spacer</span></div>
+    <div id="logo">
+      <h1 id="h01" class="hide">S2Flex2 ProjectSite</h1>
+      <img src="http://www.seasar.org/images/seasar_logo_blue.gif" alt="The Seasar Foundation" width="390" height="180" /></div>
+    <div id="tool">
+      <h2><a href="http://search.seasar.org/">Site Search</a></h2>
+      <form id="search" name="search" action="http://search.seasar.org/">
+        <div>
+          <input id="search_phrase" type="text" name="phrase" size="20" />
+          <input type="hidden" name="perpage" value="30" />
+          <input type="hidden" name="enc" value="UTF-8" />
+          <input id="search_go" type="submit" value="検索" />
+        </div>
+      </form>
+      <h2>Seasar Banner</h2>
+      <p><a href="images/seasar_banner.gif"><img src="http://www.seasar.org/images/seasar_banner.gif" alt="Seasar Banner" title="Seasar Banner" width="146" height="33" /></a></p>
+    </div>
+    <div id="navi">
+      <p><a href="#">English</a> | Japanese</p>
+    </div>
+  </div>
+  <!-- header -->
+  <div id="contents_left">
+    <h2>メニュー</h2>
+  </div>
+    <div id="contents_center">
+      <div id="article"> <!-- InstanceBeginEditable name="contents" -->
+	    <p>&nbsp;</p>
+	    <h2>AS3のクラスとJavaクラスの変換マッピング</h2>
+	    <table width="80%"  border="1">
+          <caption align="top">
+          ActionScript3->Javaの変換
+          </caption>
+          <tr>
+            <th scope="col"><p>&nbsp;</p>
+            <p>AS3の型</p></th>
+            <th scope="col">Javaの型</th>
+          </tr>
+          <tr>
+            <td>int</td>
+            <td><p>int<br>
+              Integer</p>
+            </td>
+          </tr>
+          <tr>
+            <td>uint</td>
+            <td><p>int<br>
+              Integer</p>
+            </td>
+          </tr>
+          <tr>
+            <td>Number</td>
+            <td><p>int<br>
+              short<br>
+              long<br>
+              double<br>
+              Integer<br>
+              Double<br>
+              BigInteger<br>
+              BigDecimal
+            </p>
+            </td>
+          </tr>
+          <tr>
+            <td>String</td>
+            <td>String</td>
+          </tr>
+		            <tr>
+            <td>&quot;true&quot;</td>
+            <td>Boolean</td>
+          </tr>
+		            <tr>
+            <td>&quot;false&quot;</td>
+            <td>Boolean</td>
+          </tr>
+          <tr>
+            <td>Array</td>
+            <td><p>Object{]<br>
+              Bean[]<br>
+              java.util.List <a href="#1">※１</a><br>
+              Map <a href="#2">※2</a></p>
+            </td>
+          </tr>
+          <tr>
+            <td>ByteArray</td>
+            <td><p>org.seasar.flex2.core.format.amf3.BytepArray (source=byte[])<br>
+              Byte[](FDS2)</p>
+            </td>
+          </tr>
+          <tr>
+            <td>CustomClass(ASObject)</td>
+            <td><p>Bean <a href="#3">※3</a></p>
+            </td>
+          </tr>
+          <tr>
+            <td>Boolean</td>
+            <td>boolean<br>
+              Boolean</td>
+          </tr>
+          <tr>
+            <td>Date</td>
+            <td><p>java.util.Date</p>
+            </td>
+          </tr>
+          <tr>
+            <td>XML</td>
+            <td>org.w3c.dom.Document</td>
+          </tr>
+          <tr>
+            <td>XMLDocument((古い XML 型)</td>
+            <td>org.w3c.dom.Document</td>
+          </tr>
+          <tr>
+            <td>flash.utils.IExternalizable</td>
+            <td>java.io.Externalizable</td>
+          </tr>
+		            <tr>
+            <td>Map</td>
+            <td>java.util.Map※4</td>
+          </tr>
+        </table>
+		<p><a name="1">※１</a>　diconファイルで切り替えることで対応<br>
+		  <a name="2">※２</a> 連想配列(結合配列)は対応しないですよね？<br>
+		  <a name="3">※３</a> RemoteClassで指定されている型にマッピングします。<br>
+	    <a name="4">※4</a> AMF3ではkeyの値は大文字小文字を区別します。</p>
+		<h4>引数で渡すケース</h4>
+        <table width="80%"  border="1">
+          <tr>
+            <th scope="col">AS3のクラスで引数として渡す型</th>
+            <th scope="col">Java側のServiceメソッドの引数</th>
+          </tr>
+          <tr>
+            <td>Array(蜜)</td>
+            <td>Object[]<br>
+              Bean[]</td>
+          </tr>
+          <tr>
+            <td>Array(疎)　結合配列(連想配列)</td>
+            <td><strong>未対応</strong></td>
+          </tr>
+        </table>
+        <p>&nbsp;</p>
+      <!-- InstanceEndEditable --></div>
+      <!-- article -->
+  </div>
+  <!-- contents_center -->
+  <div id="footer">
+    <address>
+&copy; Copyright The Seasar Foundation and the others 2004-2006, all rights reserved.
+    </address>
+    <div class="line"><span class="hide">spacer</span></div>
+  </div>
+  <!-- footer -->
+</div>
+<!-- wrapper -->
+</body>
+<!-- InstanceEnd --></html>
