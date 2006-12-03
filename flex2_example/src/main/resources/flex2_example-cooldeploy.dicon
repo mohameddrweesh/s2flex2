@@ -4,7 +4,7 @@
 <components>
 	<include path="convention.dicon"/>
 	<include path="flex2_example-customizer.dicon"/>
-
+	<include path="snap-shot-config.dicon" />
 	<component
 		class="org.seasar.framework.container.creator.DtoCreator"/>
 	<component
