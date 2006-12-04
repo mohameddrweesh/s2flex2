@@ -22,7 +22,9 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 import org.seasar.flex2.rpc.remoting.message.data.Message;
+import org.seasar.flex2.rpc.remoting.message.io.reader.MessageReader;
 import org.seasar.flex2.rpc.remoting.message.io.reader.factory.MessageReaderFactory;
+import org.seasar.flex2.rpc.remoting.message.io.writer.MessageWriter;
 import org.seasar.flex2.rpc.remoting.message.io.writer.factory.MessageWriterFactory;
 import org.seasar.flex2.rpc.remoting.message.processor.MessageBodyProcessor;
 import org.seasar.flex2.rpc.remoting.message.processor.MessageHeaderProcessor;
@@ -30,7 +32,7 @@ import org.seasar.flex2.rpc.remoting.message.processor.MessageProcessor;
 
 public class MessageProcessorImpl implements MessageProcessor {
 
-    private static final int MESSAGE_WRITING_BUFFER_SIZE = 1024 * 2;
+    private static final int MESSAGE_WRITING_BUFFER_SIZE = 1024 * 4;
 
     private MessageBodyProcessor bodyProcessor;
 
@@ -58,13 +60,22 @@ public class MessageProcessorImpl implements MessageProcessor {
 
     public void process(final DataInputStream inputStream,
             final DataOutputStream outputStream) throws IOException {
-        final Message requestMessage = readMessage(inputStream);
-        headerProcessor.processRequest(requestMessage);
+        final Message requestMessage = requestReadProcess(inputStream);
 
+        final Message responseMessage = requestProcess(requestMessage);
+
+        responseWriteProcess(responseMessage, outputStream);
+    }
+
+    /**
+     * @param requestMessage
+     * @return
+     */
+    public Message requestProcess(final Message requestMessage) {
+        headerProcessor.processRequest(requestMessage);
         final Message responseMessage = bodyProcessor.process(requestMessage);
         headerProcessor.processResponse(responseMessage);
-
-        writeMessage(responseMessage, outputStream);
+        return responseMessage;
     }
 
     public void setBodyProcessor(final MessageBodyProcessor bodyProcessor) {
@@ -83,22 +94,45 @@ public class MessageProcessorImpl implements MessageProcessor {
         this.writerFactory = writerFactory;
     }
 
-    private final Message readMessage(
-            final DataInputStream requestDataInputStream) throws IOException {
-        return readerFactory.createMessageReader(requestDataInputStream).read();
+    /**
+     * @param inputStream
+     * @return
+     * @throws IOException
+     */
+    private final Message requestReadProcess(final DataInputStream inputStream)
+            throws IOException {
+        final MessageReader messageReader = readerFactory
+                .createMessageReader(inputStream);
+        return messageReader.read();
     }
 
-    private final void writeMessage(final Message responseMessage,
+    /**
+     * @param responseMessage
+     * @param messageByteArrayOutputStream
+     * @throws IOException
+     */
+    private final void responseMessageWriteProcess(
+            final Message responseMessage,
+            final ByteArrayOutputStream messageByteArrayOutputStream)
+            throws IOException {
+        final DataOutputStream messageDataOutputStream = new DataOutputStream(
+                messageByteArrayOutputStream);
+
+        final MessageWriter messageWriter = writerFactory.createMessageWriter(
+                messageDataOutputStream, responseMessage);
+        messageWriter.write();
+    }
+
+    private final void responseWriteProcess(final Message responseMessage,
             final OutputStream responseOutputStream) throws IOException {
 
-        final ByteArrayOutputStream messageOutputStream = new ByteArrayOutputStream(
+        final ByteArrayOutputStream messageByteArrayOutputStream = new ByteArrayOutputStream(
                 MESSAGE_WRITING_BUFFER_SIZE);
 
-        writerFactory.createMessageWriter(
-                new DataOutputStream(messageOutputStream), responseMessage)
-                .write();
+        responseMessageWriteProcess(responseMessage,
+                messageByteArrayOutputStream);
 
-        messageOutputStream.writeTo(responseOutputStream);
+        messageByteArrayOutputStream.writeTo(responseOutputStream);
         responseOutputStream.flush();
     }
 }
