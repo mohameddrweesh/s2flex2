@@ -41,9 +41,9 @@ public class RemotingMessageProcessorImpl implements RemotingMessageProcessor {
             ServletException {
 
         try {
-            final DataInputStream inputStream = (DataInputStream) InputStreamUtil
+            final DataInputStream inputStream = InputStreamUtil
                     .toBufferedDataInputStream(request.getInputStream());
-            final DataOutputStream outputStream = (DataOutputStream) OutputStreamUtil
+            final DataOutputStream outputStream = OutputStreamUtil
                     .toBufferedDataOutputStream(response.getOutputStream());
 
             messageProcessor.process(inputStream, outputStream);
