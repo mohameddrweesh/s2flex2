@@ -23,35 +23,80 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.seasar.flex2.rpc.remoting.processor.RemotingMessageProcessor;
+import org.seasar.flex2.util.BooleanUtil;
 import org.seasar.framework.container.S2Container;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
 
 public class RemotingGateway extends HttpServlet {
 
-    private static final long serialVersionUID = -5310847690409934667L;
+    /**
+     * 
+     */
+    private static final String PARAMETER_SHOW_GET_RESPONSE = "showGetResponse";
+
+    /**
+     * 
+     */
+    private static final String PARAMETER_USE_SESSION = "useSession";
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 4841210303706096594L;
+
+    private boolean isShowGetResponse;
+
+    private boolean isUseSession;
 
     protected RemotingMessageProcessor processor;
+
+    public void doGet(final HttpServletRequest request,
+            final HttpServletResponse response) throws IOException,
+            ServletException {
+        showGetResponse(response);
+    }
+
+    public void doPost(final HttpServletRequest request,
+            final HttpServletResponse response) throws IOException,
+            ServletException {
+        decisionSessionMode(request);
+        response.setContentType(RemotingConstants.CONTENT_TYPE);
+        processor.process(request, response);
+    }
 
     public void init() throws ServletException {
         final S2Container container = SingletonS2ContainerFactory
                 .getContainer().getRoot();
         processor = (RemotingMessageProcessor) container
                 .getComponent(RemotingMessageProcessor.class);
+        isShowGetResponse = getInitBooleanParameter(PARAMETER_SHOW_GET_RESPONSE);
+        isUseSession = getInitBooleanParameter(PARAMETER_USE_SESSION);
     }
 
-    public void doGet(final HttpServletRequest request,
-            final HttpServletResponse response) throws IOException,
-            ServletException {
-        response.getWriter().write("RemotingGateway is running on http ...");
-    }
-
-    public void doPost(final HttpServletRequest request,
-            final HttpServletResponse response) throws IOException,
-            ServletException {
-        if (request.isRequestedSessionIdValid()) {
-            request.getSession(true);
+    /**
+     * @param request
+     */
+    private final void decisionSessionMode(final HttpServletRequest request) {
+        if (isUseSession) {
+            if (request.isRequestedSessionIdValid()) {
+                request.getSession(true);
+            }
         }
-        response.setContentType(RemotingConstants.CONTENT_TYPE);
-        processor.process(request, response);
+    }
+
+    private final boolean getInitBooleanParameter(final String name) {
+        return BooleanUtil.toBoolean(this.getInitParameter(name));
+    }
+
+    /**
+     * @param response
+     * @throws IOException
+     */
+    private final void showGetResponse(final HttpServletResponse response)
+            throws IOException {
+        if (isShowGetResponse) {
+            response.getWriter()
+                    .write("RemotingGateway is running on http ...");
+        }
     }
 }
