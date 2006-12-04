@@ -22,7 +22,7 @@ import java.io.InputStream;
 
 public class InputStreamUtil {
 
-    public static final InputStream toBufferedDataInputStream(
+    public static final DataInputStream toBufferedDataInputStream(
             final InputStream outputStream) throws IOException {
         return new DataInputStream(toBufferedInputStream(outputStream));
     }
