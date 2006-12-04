@@ -106,7 +106,7 @@ public class RemotingServiceLocatorImpl implements RemotingServiceLocator {
     }
 
     public void setContainer(final S2Container container) {
-        this.container = container;
+        this.container = container.getRoot();
     }
 
     public void setRepository(final RemotingServiceRepository repository) {
@@ -114,7 +114,7 @@ public class RemotingServiceLocatorImpl implements RemotingServiceLocator {
     }
 
     private final boolean hasServiceComponentByName(final String serviceName) {
-        final S2Container root = container.getRoot();
+        final S2Container root = container;
         boolean isSupport = root.hasComponentDef(serviceName);
         if (!isSupport) {
             try {
@@ -128,7 +128,7 @@ public class RemotingServiceLocatorImpl implements RemotingServiceLocator {
     }
 
     protected final ComponentDef getServiceComponentDef(final String serviceName) {
-        final S2Container root = container.getRoot();
+        final S2Container root = container;
         final ComponentDef componentDef;
         if (root.hasComponentDef(serviceName)) {
             componentDef = root.getComponentDef(serviceName);

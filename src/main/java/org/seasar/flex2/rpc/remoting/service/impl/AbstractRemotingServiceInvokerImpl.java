@@ -70,7 +70,7 @@ public abstract class AbstractRemotingServiceInvokerImpl implements
 
     public boolean supports(final String serviceName, final String methodName,
             final Object[] args) {
-        return checkServiceValidation(serviceName, methodName, args)
+        return canServiceCallValidation(serviceName, methodName, args)
                 && remotingServiceLocator.isSupportService(serviceName);
     }
 
@@ -93,6 +93,19 @@ public abstract class AbstractRemotingServiceInvokerImpl implements
         }
     }
 
+    private final boolean canServiceCallValidation(final String serviceName,
+            final String methodName, final Object[] args) {
+        boolean isValid = true;
+        for (int i = 0; i < remotingServiceValidators.length; i++) {
+            if (!remotingServiceValidators[i].isValidate(serviceName,
+                    methodName, args)) {
+                isValid = false;
+                break;
+            }
+        }
+        return isValid;
+    }
+
     private final boolean checkMethodArgumentsValidation(final Object service,
             final String methodName, final Object[] args) {
         final BeanDesc beanDesc = BeanDescFactory.getBeanDesc(service
@@ -109,19 +122,6 @@ public abstract class AbstractRemotingServiceInvokerImpl implements
             }
         }
 
-        return isValid;
-    }
-
-    private final boolean checkServiceValidation(final String serviceName,
-            final String methodName, final Object[] args) {
-        boolean isValid = true;
-        for (int i = 0; i < remotingServiceValidators.length; i++) {
-            if (!remotingServiceValidators[i].isValidate(serviceName,
-                    methodName, args)) {
-                isValid = false;
-                break;
-            }
-        }
         return isValid;
     }
 
