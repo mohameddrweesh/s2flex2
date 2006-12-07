@@ -54,92 +54,100 @@
             <th scope="col"><p>&nbsp;</p>
             <p>AS3の型</p></th>
             <th scope="col">Javaの型</th>
+          <th scope="col">対応する型バインディング</th>
           </tr>
           <tr>
             <td>int</td>
-            <td><p>int<br>
-              Integer</p>
-            </td>
+            <td><p>int</p></td>
+          <td>int<br>
+Integer</td>
           </tr>
           <tr>
             <td>uint</td>
             <td><p>int<br>
-              Integer</p>
-            </td>
+    </p></td>
+          <td>int<br>
+Integer</td>
           </tr>
           <tr>
             <td>Number</td>
-            <td><p>int<br>
-              short<br>
-              long<br>
-              double<br>
-              Integer<br>
-              Double<br>
-              BigInteger<br>
-              BigDecimal
-            </p>
-            </td>
+            <td>double</td>
+          <td>int<br>
+short<br>
+long<br>
+double<br>
+Integer<br>
+Double<br>
+BigInteger<br>
+BigDecimal </td>
           </tr>
           <tr>
             <td>String</td>
             <td>String</td>
+          <td><p>String</p>
+            </td>
           </tr>
 		            <tr>
             <td>&quot;true&quot;</td>
             <td>Boolean</td>
+          <td><p>boolean<br>
+              Boolean</p>
+            </td>
           </tr>
 		            <tr>
             <td>&quot;false&quot;</td>
             <td>Boolean</td>
+          <td>boolean<br>
+Boolean</td>
           </tr>
           <tr>
             <td>Array</td>
             <td><p>Object{]<br>
-              Bean[]<br>
-              java.util.List <a href="#1">※１</a><br>
-              Map <a href="#2">※2</a></p>
-            </td>
+    <br>
+            </p></td>
+          <td>Bean[]<br>
+java.util.List <a href="#1">※１</a></td>
           </tr>
           <tr>
             <td>ByteArray</td>
             <td><p>org.seasar.flex2.core.format.amf3.BytepArray (source=byte[])<br>
-              Byte[](FDS2)</p>
-            </td>
+    <a href="#2">※２</a></p></td>
+          <td>&nbsp;</td>
           </tr>
           <tr>
             <td>CustomClass(ASObject)</td>
-            <td><p>Bean <a href="#3">※3</a></p>
-            </td>
+            <td><p>Bean <a href="#3">※3</a></p></td>
+          <td>&nbsp;</td>
           </tr>
           <tr>
             <td>Boolean</td>
-            <td>boolean<br>
-              Boolean</td>
+            <td>Boolean</td>
+          <td>boolean<br>
+Boolean</td>
           </tr>
           <tr>
             <td>Date</td>
-            <td><p>java.util.Date</p>
-            </td>
+            <td><p>java.util.Date</p></td>
+          <td>&nbsp;</td>
           </tr>
           <tr>
             <td>XML</td>
             <td>org.w3c.dom.Document</td>
-          </tr>
-          <tr>
-            <td>XMLDocument((古い XML 型)</td>
-            <td>org.w3c.dom.Document</td>
+          <td>&nbsp;</td>
           </tr>
           <tr>
             <td>flash.utils.IExternalizable</td>
             <td>java.io.Externalizable</td>
+          <td>&nbsp;</td>
           </tr>
 		            <tr>
             <td>Map</td>
             <td>java.util.Map※4</td>
+          <td>&nbsp;</td>
           </tr>
         </table>
 		<p><a name="1">※１</a>　diconファイルで切り替えることで対応<br>
-		  <a name="2">※２</a> 連想配列(結合配列)は対応しないですよね？<br>
+		  <a name="2">※２</a> FDS2ではByte[]にマッピングされます。<br>
 		  <a name="3">※３</a> RemoteClassで指定されている型にマッピングします。<br>
 	    <a name="4">※4</a> AMF3ではkeyの値は大文字小文字を区別します。</p>
 		<h4>引数で渡すケース</h4>
