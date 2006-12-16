@@ -10,6 +10,14 @@
 <title>S2Flex2 - AMF3Gateway with DI Container -</title>
 <link rel="stylesheet" type="text/css" href="styles/main.css" media="screen,projection" />
 <link rel="stylesheet" type="text/css" href="styles/print.css" media="print" />
+<style type="text/css">
+<!--
+.style1 {
+	color: #0000FF;
+	font-weight: bold;
+}
+-->
+</style>
 </head>
 <body>
 <div id="wrapper">
@@ -52,7 +60,7 @@
             <th> <p>説明</p></th>
           </tr>
           <tr>
-            <td><p>AmfRemotingService</p></td>
+            <td><p>RemotingService</p></td>
             <td><p>Flex2から呼び出すサービス用アノテーション</p></td>
           </tr>
           <tr bgcolor="#f8f8f8">
@@ -65,51 +73,82 @@
           </tr>
         </tbody>
       </table>
-      <p>JDK1.4 + backport175で利用するケース</p>
-      JDK1.4+backport175
- <pre>   
-    /**
-     * @org.seasar.flex2.rpc.remoting.service.annotation.RemotingService
-     */
-     public class AddServiceImpl implements AddService {
-     }
-       
-    /** 
-     * @Export(storage = "session") 
-     */
-	public AddDto getAddDto() {
-		return addDto;
-	}
-
-    /**
-     * @ Import(storage = "session") 
-     */
-	public void setAddDto(AddDto addDto) {
-		this.addDto = addDto;
-	}
-	</pre>
-      <p>JDK5.0で利用するケース</p>
+	  <p>※アノテーションを利用するには、S2Flex2-tigerをクラスパスに含める必要があります。</p>
+	  <p>以下使用例です。</p>
+	  <pre>package examples.flex2.add.service.impl;</pre>
+      <pre>import java.util.Date;</pre>
       <pre>
-      import org.seasar.flex2.rpc.remoting.service.annotation.RemotingService;
-      
-      @Remoting
-      public class AddServiceImpl implements AddService {
-      
-      }
-      
-    
-    //Sessionに登録されているデータをBeanのプロパティにセットするとき
-    @Export(storage = StorageType.SESSION)
+import org.seasar.flex2.rpc.remoting.service.annotation.RemotingService;
+import org.seasar.flex2.util.data.storage.StorageType;
+import org.seasar.flex2.util.data.transfer.annotation.Export;
+import org.seasar.flex2.util.data.transfer.annotation.Import;
+
+import examples.flex2.add.dto.AddDto;
+import examples.flex2.add.service.AddService;
+
+
+//このRemotingServiceを指定してFlex2クライアントから呼び出せるようにします。
+<strong class="style1">@RemotingService</strong>
+public class AddServiceImpl implements AddService {
+	private AddDto addDto;
+           
+	puｂlic int calculate(int arg1, int arg2) {
+		return arg1 + arg2;
+	}
+
+//Sessionに登録されているデータをBeanのプロパティにセットするとき
+<span class="style1">@Export(storage = StorageType.SESSION)</span>
 	public AddDto getAddDto() {
 		return addDto;
 	}
 
-    //Sessionに現在のデータをセットするとき 
-    @Import(storage = StorageType.SESSION)
+//Sessionに現在のデータをセットするとき
+<span class="style1">@Import(storage = StorageType.SESSION)</span>
 	public void setAddDto(AddDto addDto) {
 		this.addDto = addDto;
 	}
-	
+}
+       </pre>
+      
+      <h3>JDK1.4で利用するには。</h3>
+      <p>JDK1.4でS2Flex2を利用するときには、定数アノテーションを利用して指定することができます。定数アノテーションとしてい用意しているのは以下のとおりです。</p>
+      <table border="0" cellpadding="0" cellspacing="0" class="list">
+        <tbody>
+          <tr class="a">
+            <th> <p>アノテーション</p></th>
+            <th> <p>説明</p></th>
+          </tr>
+          <tr>
+            <td><p>REMOTING_SERVICE</p></td>
+            <td><p>Flex2から呼び出すサービスを示す定数アノテーション。<br>
+            Stringで指定します。</p>
+            </td>
+          </tr>
+          <tr bgcolor="#f8f8f8">
+            <td><p>$変数名_EXPORT</p></td>
+            <td><p>sessionからデータを取得するときに利用する定数アノテーション。<br>
+              Stringで指定します。値は、Strageを指定します。</p></td>
+          </tr>
+          <tr>
+            <td><p>$変数名_IMPORT</p></td>
+            <td><p>sessionにデータを保存するときに利用する定数ノテーション。<br>
+              sessionからデータを取得するときに利用する定数アノテーション。<br>
+Stringで指定します。値は、Storageを指定します。</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      使用例
+      <p>//For JDK1.4 Field Annotations.<br>
+        //値は特に問いませんが、service名称をそのまま指定しておきます。<br>
+      <strong>public static final String REMOTING_SERVICE</strong> = &quot;testRemotingService&quot;;</p>
+      <p> //sessionから取得したデータをセットするとき<br>
+        public static final String <strong>strData_EXPORT = &quot;session&quot;;</strong><br>
+        //sessionにデータを保存するとき<br>
+        public static final String <strong>strData_IMPORT = &quot;session&quot;;</strong><br>
+        //sessionデータバインディング対象プロパティ<br>
+      private String strData;</p>
+      <pre>&nbsp;</pre>
     </div>
     <!-- article -->
   </div>

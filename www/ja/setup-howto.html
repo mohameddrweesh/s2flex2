@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="ja" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<title>AKABANA - S2Flex 2 - how to setup the example programs</title>
+<link rel="stylesheet" type="text/css" href="http://www.seasar.org/theme/main.css" media="screen,projection" />
+<link rel="stylesheet" type="text/css" href="http://www.seasar.org/theme/print.css" media="print" />
+<link href="./css/maven-base.css" type="text/css" rel="stylesheet" media="screen" />
+<link href="./css/maven-theme.css" type="text/css" rel="stylesheet" media="screen" />
+<style type="text/css">
+<!--
+.style1 {
+	color: #CC3300;
+	font-weight: bold;
+}
+-->
+</style>
+</head>
+<body>
+<div id="wrapper">
+  <div id="header">
+    <div class="line"><span class="hide">spacer</span></div>
+    <div id="logo">
+      <h1 id="h01" class="hide">The Seasar Foundation Project Site</h1>
+      <img src="../../images/logo-rc1.png" alt="The Seasar Foundation" width="400" height="110" align="left" /><img align="right"  alt="Akabana Project" height="110" src="../../images/seasar-logo.png" width="254"/></div>
+    <div id="tool">
+      <!--
+<h2><a href="http://search.seasar.org/">Site Search</a></h2>
+
+<form id="search" action="http://search.seasar.org/">
+<div>
+	<input id="search_phrase" type="text" name="phrase" size="20" />
+	<input type="hidden" name="perpage" value="30" />
+	<input type="hidden" name="enc" value="UTF-8" />
+	<input id="search_go" type="submit" value="Search" />
+</div>
+</form>
+
+<h2>Seasar Banner</h2>
+
+<p><a href="http://www.seasar.org/images/seasar_banner.gif"><img src="http://www.seasar.org/images/seasar_banner.gif" alt="Seasar Banner" title="Seasar Banner" width="146" height="33" /></a></p>
+-->
+    </div>
+    <div id="navi">
+      <p><a href="../en/">English</a> | <a href="../ja/">Japanese</a></p>
+    </div>
+  </div>
+  <!-- header -->
+  <div id="contents_left">
+    <h2>Menu</h2>
+    <ul>
+      <li class="none"> <strong>Introduction</strong> </li>
+      <li class="none"> <a href="#Download">Download</a> </li>
+      <li class="none"> <a href="#">Tutorials</a> </li>
+      <li class="none"> <a href="#">Examples</a> </li>
+      <li class="none"> <a href="#">User's Guide</a> </li>
+      <li class="none"> <a href="#">Development's Guide</a> </li>
+      <li class="none"> <a href="#">API Javadoc</a> </li>
+      <li class="none"> <a href="#">FAQ</a> </li>
+    </ul>
+    <h2>プロジェクト文書</h2>
+    <ul>
+      <li class="expanded"> <a href="../../project-info.html">プロジェクト情報</a>
+        <ul>
+          <li class="none"> <strong>このプロジェクトについて</strong> </li>
+          <li class="none"> <a href="../../source-repository.html">ソースリポジトリ</a> </li>
+          <li class="none"> <a href="../../project-summary.html">プロジェクトサマリ</a> </li>
+          <li class="none"> <a href="../../team-list.html">プロジェクトチーム</a> </li>
+          <li class="none"> <a href="../../license.html">プロジェクトライセンス</a> </li>
+          <li class="none"> <a href="../../mail-lists.html">メーリングリスト</a> </li>
+          <li class="none"> <a href="../../dependencies.html">依存関係</a> </li>
+          <li class="none"> <a href="../../issue-tracking.html">課題追跡</a> </li>
+          <li class="none"> <a href="../../integration.html">継続的結合</a> </li>
+        </ul>
+      </li>
+    </ul>
+    <a href="http://maven.apache.org/" title="Built by Maven" id="poweredBy" name="poweredBy"> <img alt="Built by Maven" src="./images/logos/maven-feather.png" /> </a> </div>
+  <!-- contents_left -->
+  <div id="contents_center">
+    <div id="article">
+      <div class="section">
+        <h2>flex2_example(S2Flex2のサンプル)の設定方法</h2>
+        <p>flex2_exampleをdownloadした後の設定方法です。</p>
+        <h2> <a name="Overview" id="Overview">概要</a></h2>
+        <p>flex2_exampleは、Tomcatプロジェクトとflexプロジェクトをあわせたプロジェクトになっています。</p>
+        <p>Flexプロジェクトでは、ソースフォルダとして指定されたメインの場所以外にソースフォルダを指定できるようになっているのですが、このパスの情報が.projectファイルにフルパスで記述されてしまいます。</p>
+        <p>downloadしたflex2_example-x.x.x.zipを解凍する際に、.projectに記述されたパスと異なる場所に配置するときには以下の方法を用いて、各自の環境にあわせる必要がでてきます。</p>
+        <p>ここでは、各自の環境に合わせて動作するように設定変更する方法を示します。</p>
+        <h2> 方法1 &quot;.project&quot;ファイルを編集する。</h2>
+        <p>一つ目の方法は、直接.projectファイルを編集する方法です。編集後Flex Builder 2でプロジェクトを選択して右クリック-&gt;更新を選択することで反映されます。 <br />
+        </p>
+        <p>flex2_example直下にある<strong>&quot;,project&quot;</strong>ファイルを任意のエディタで開きます。以下の記述を探します。</p>
+        <pre>             
+ &lt;linkedResources&gt;
+ &lt;link&gt;
+ &lt;name&gt;[source path] actionscript&lt;/name&gt;
+ &lt;type&gt;2&lt;/type&gt;
+ &lt;location&gt;<span class="style1">E:/profile/s2flex/workspace/flex2_example/src/main/actionscript</span>
+         &lt;/location&gt;
+ &lt;/link&gt;
+ &lt;/linkedResources&gt;
+           </pre>
+        <p><br />
+          上記のlocationタグの値を各自の環境に合わせて変更します。</p>
+        <h2> 方法2.
+          
+          Flex Builder 2(Eclipse)上で再設定する。</h2>
+        <p>２つ目の方法は、 Flex Builder 2上で修正する方法です。方法1と比べて手順は多いですがマウスクリックで設定することができます。</p>
+        <h4>1.既存リンクの削除</h4>
+        <p>Flex Builder 2にimportしたflex2_exampleを開きます。[source path]actionscriptのマークに!マークがついていることを確認したら、[source path] actionscriptを選択して右クリックで削除します。</p>
+        <p>！マークがついている[source path]actionscriptを選択します。 <br />
+          <img src="images/setup/flex2_example-setup-1.png" alt="リンクの削除" width="379" height="413" /></p>
+        <p>右クリックで削除を選択すると、削除の確認ダイアログが表示されます。</p>
+        <p><img src="images/setup/flex2_example-setup-2.png" alt="削除確認" width="441" height="142" /></p>
+        <p>はいを選択して削除します。</p>
+        <h4>2 Flex ビルドパスの表示 </h4>
+        <p>.プロジェクトを選択してプロパティ-&gt;Flex ビルドパスを選択してソースパスタブを開きます。</p>
+        <img src="images/setup/flex2_example-setup-3.png" alt="ソースパスタブ" width="619" height="539" />
+        <p>フォルダがひとつだけ設定されていることを確認します。</p>
+        <h4>3.設定の削除</h4>
+        <p>2.で表示したFlexビルドパス画面で、メインソースフォルダの外側にあるその他のソースフォルダにある設定を選択します。</p>
+        <p><img src="images/setup/flex2_example-setup-4.png" alt="" width="619" height="539" /><br />
+        </p>
+        <p>.削除ボタンをクリックしてソースフォルダから一度削除します。<br />
+          ここで一度OKボタンをクリックして設定画面を閉じます。</p>
+        <h4>4.ソースフォルダの再設定</h4>
+        <p>一度閉じたプロパティ画面を再度表示します。Flexビルドパス画面を選択してフォルダの追加..ボタンをクリックして、flex2_exampleのフォルダ以下にある/src/main/actionscriptを選択します。</p>
+        <p><img src="images/setup/flex2_example-setup-5.png" alt="フォルダの追加" width="401" height="144" /><br />
+          <br />
+          <br />
+          通常だと以下のパスになります。<br />
+          ${DOCUMENTS}\flex2_example\src\main\actionscript</p>
+        <p><br />
+          ※上記はflex2_exampleプロジェクトが、デフォルトの場所に保存されているときの例です。<br />
+          ※デフォルト以外の場所にプロジェクトをおいている場合は、上記と同じにならない可能性があります。<br />
+        </p>
+        <h4>5.設定変更の確認</h4>
+        <p>ソースフォルダを再設定してOKボタンをクリックすると、外部リンクのパスがFlex Builder 2によって設定され以下の様に表示されるようになります。</p>
+        <p><img src="images/setup/flex2_example-setup-6.png" alt="正しいリンク" width="362" height="404" /><br />
+          外部リンクが正しくなると、アイコンが変わります。<br />
+          フォルダを開くとエイリアス(ショートカット)のようにactionscript以下のファイルが表示されるようになります。 </p>
+      </div>
+    </div>
+    <!-- article -->
+  </div>
+  <!-- contents_center -->
+  <div id="footer">
+    <address>
+    &copy; Copyright 2006, The Seasar Foundation and the others. All rights reserved.
+    </address>
+    <div class="line"><span class="hide">spacer</span></div>
+  </div>
+  <!-- footer -->
+</div>
+<!-- wrapper -->
+</body>
+</html>
