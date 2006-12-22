@@ -48,6 +48,7 @@
     <h2>メニュー</h2>
   </div>
   <div id="contents_center">
+  	<div align="right">2006/12/22修正版</div>
     <div id="article">
       <div class="section">
         <h4 id="h02">利用できるアノテーション</h4>
@@ -131,23 +132,30 @@ public class AddServiceImpl implements AddService {
           </tr>
           <tr>
             <td><p>$変数名_IMPORT</p></td>
-            <td><p>sessionにデータを保存するときに利用する定数ノテーション。<br>
-              sessionからデータを取得するときに利用する定数アノテーション。<br>
-Stringで指定します。値は、Storageを指定します。</p>
+            <td><p>sessionにデータを保存するときに利用する定数アノテーション。<br>
+              Stringで指定します。値は、Storageを指定します。</p>
             </td>
           </tr>
         </tbody>
       </table>
-      使用例
+      <p>storageには、org.seasar.flex2.util.data.storage.StorageTypeで定義されているものを利用します。<br />
+      現在の所以下の２つを用意しています。</p>
+      <ul>
+      	<li>org.seasar.flex2.util.data.storage.StorageType.SESSION</li>
+      	<li>org.seasar.flex2.util.data.storage.StorageType.REQUEST</li>
+      </ul>
+      <p>現状ではStorageType.SESSIONを使うのが効果的です。</p>
+      <p>使用例</p>
       <p>//For JDK1.4 Field Annotations.<br>
         //値は特に問いませんが、service名称をそのまま指定しておきます。<br>
-      <strong>public static final String REMOTING_SERVICE</strong> = &quot;testRemotingService&quot;;</p>
+      <strong>public static final String REMOTING_SERVICE</strong> = &quot;testRemotingService&quot;</p>
       <p> //sessionから取得したデータをセットするとき<br>
-        public static final String <strong>strData_EXPORT = &quot;session&quot;;</strong><br>
+        public static final String <strong>strData_EXPORT = StorageType.SESSION</strong><br>
         //sessionにデータを保存するとき<br>
-        public static final String <strong>strData_IMPORT = &quot;session&quot;;</strong><br>
+        public static final String <strong>strData_IMPORT = StorageType.SESSION</strong><br>
         //sessionデータバインディング対象プロパティ<br>
       private String strData;</p>
+
       <pre>&nbsp;</pre>
     </div>
     <!-- article -->
