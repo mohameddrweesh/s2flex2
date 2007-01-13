@@ -1,0 +1,805 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../../../../../style.css" type="text/css" media="screen">
+<link rel="stylesheet" href="../../../../../print.css" type="text/css" media="print">
+<meta content="S2Flex2Service,org.seasar.flex2.rpc.remoting.S2Flex2Service,gatewayUrl,gatewayUrl,showBusyCursor,showBusyCursor,concurrency,concurrency,id,id,_con,configType,initialized,setCredentials,setRemoteCredentials,onResult,onFault,callProperty,setProperty,getProperty,createConnection,initConnection,configureListeners" name="keywords">
+<title>org.seasar.flex2.rpc.remoting.S2Flex2Service</title>
+</head>
+<body>
+<script type="text/javascript" language="javascript" src="../../../../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../../../../cookies.js"></script><script type="text/javascript" language="javascript">
+<!--
+				asdocTitle = 'S2Flex2Service - S2Flex2-Components API';
+				var baseRef = '../../../../../';
+				window.onload = configPage;
+			--></script>
+<table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
+<tr>
+<td align="left" class="titleTableTitle">API Documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../../../all-classes.html')" href="../../../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../../all-classes.html')" href="../../../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../../index-list.html')" href="../../../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../../../index.html?org/seasar/flex2/rpc/remoting/S2Flex2Service.html&amp;org/seasar/flex2/rpc/remoting/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../../../../images/logo.jpg"></td>
+</tr>
+<tr class="titleTableRow2">
+<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;S2Flex2Service</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a>&nbsp;| <a href="#eventSummary">Events</a></td>
+</tr>
+<tr class="titleTableRow3">
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+<script type="text/javascript" language="javascript">
+<!--
+if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class S2Flex2Service"); titleBar_setSubNav(false,true,false,false,true,false,true,false,false,false,false,false,false,false);}
+--></script>
+<div class="MainContent">
+<table cellspacing="0" cellpadding="0" class="classHeaderTable">
+<tr>
+<td class="classHeaderTableLabel">Package</td><td><a onclick="javascript:loadClassListFrame('class-list.html')" href="package-detail.html">org.seasar.flex2.rpc.remoting</a></td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Class</td><td class="classSignature">public dynamic  class S2Flex2Service</td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">S2Flex2Service <img class="inheritArrow" alt="Inheritance" title="Inheritance" src="../../../../../images/inherit-arrow.gif"> mx.rpc.AbstractService</td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Implements</td><td>mx.core.IMXMLObject</td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Subclasses</td><td><a href="../remoting/RemoteService.html">RemoteService</a></td>
+</tr>
+</table>
+<p></p>
+    
+    <p>S2Flex2Serviceは、S2Flex2のgatewayに接続する為のコンポーネントクラスです。<br />
+    S2Container(Seasar2)に登録されたコンポーネントにアクセスして、メソッド実行を可能にします。</p>
+    <!--
+    S2Flex2Service is ...(TBD)
+     -->
+    <h4>Gatewayの指定</h4>
+    <p>このサービスの接続先であるGatewayを指定する方法は、３パターンあります。</p>
+    <ul>
+    <li>gatewayUrlプロパティで指定する方法</li>
+    <li>configType="url"で指定する方法</li>
+    <li>configType="flashvars"で指定する方法</li>
+    </ul>
+    <h5>gatewayUrlプロパティで指定する方法</h5>
+    <p>接続先の指定としてgatewayURLプロパティに指定する方法があります。<br/>
+    <code>&lt;s2:S2Flex2Service gatewayUrl="http://127.0.0.1:8080/flex/gateway" ...</code>
+    この方法を使うと明示的に接続先を指定することができますが、接続先が変更になると、再度コンパイルする必要があります。</p>
+    
+    <h5>configType="url"で指定する方法<</h5>
+    <p>接続先の設定としてデフォルト設定になっているのは、このurlで指定する方法です。
+    systemManager.loaderInfo.urlの値を使って処理します。
+    例)
+    http://127.0.0.1/test/test.swfだった場合は、
+    http://127.0.0.1/test/gatewayとしてます。
+    
+    同じ階層のgatewayというURLをGatewayURLに指定します。</p>
+     <p>Flex Builder 2 などでデバッグしているときは、flashvarsでdefaultGatewayを指定することで
+    　接続することができるようになります。</p>
+      <code>&lt;param name=&quot;FlashVars&quot; value=&quot;defaultGateway=http://127.0.0.1/flex2/gateway&quot; /&gt;</code>
+    <p />
+    <h5>configType=&quot;flashvars&quot;で指定する方法</h5>
+    <p>configType=&quot;flashvars&quot;を指定したときには、htmlファイルの中でflashvarsに<strong>defaultGateway</strong>を指定します。
+    サービス単位で接続先を変更するときには、destination名でgatewayUrlを指定します。
+    以下は、addServiceの接続先を指定する例です。addSevrice意外のサービスは、defaultGatewayに接続する事になります。</p>
+    <code>&lt;param name=&quot;FlashVars&quot; value=&quot;addService="http://127.0.0.1/flexservice/gateway"&amp;&quot;defaultGateway=http://127.0.0.1/flex2/gateway&quot; /&gt;</code>
+    <p></p>
+<a name="mxmlSyntaxSummary"></a><span class="classHeaderTableLabel">MXML Syntax</span><span style="display:none" id="showMxmlLink"><a onclick="toggleMXMLOnly();" href="#mxmlSyntaxSummary"><img class="collapsedImage" alt="collapsed" title="collapsed" src="../../../../../images/collapsed.gif"> Show MXML Syntax</a>
+<br>
+</span><span id="hideMxmlLink"><a onclick="toggleMXMLOnly();" href="#mxmlSyntaxSummary"><img class="expandedImage" alt="expanded" title="expanded" src="../../../../../images/expanded.gif"> Hide MXML Syntax</a></span>
+<div class="mxmlSyntax" id="mxmlSyntax">    
+    <p><code>&lt;s2:S2Service&gt;</code>タグは、スーパークラスの属性に加えて以下の属性を持ちます。</p>
+    
+    <pre>
+    &lt;s2:S2Flex2Service
+    <b>Properties</b>
+    gatewayUrl="null"
+    showBusyCursor="true|false"
+    id="<i>No default</i>"
+    fault="<i>No default</i>"
+    result="<i>No default</i>"
+    destination="<i>No default</i>"
+    configType="flashvars|xml|url"
+    /&gt;
+    </pre>
+    
+    </div>
+<script type="text/javascript" language="javascript">
+<!--
+setMXMLOnly();
+--></script>
+<br>
+<span class="label">Example</span>
+<br>S2Flex2Serviceの使用例は以下の通りです。
+    <pre>
+  addService=  new S2Flex2Service("addService");
+  addService.initialized(this,"addService");
+ 
+  addService.destination="addService";
+  addService.addEventListener(ResultEvent.RESULT,onGetData);
+  addService.addEventListener(FaultEvent.FAULT,onFault);
+  addService.addEventListener(IOErrorEvent.IO_ERROR,failreProcess);
+  addService.addEventListener(IOErrorEvent.NETWORK_ERROR,failureProcess);
+ addService.addEventListener(NetStatusEvent.NET_STATUS,failureProcess);
+ addService.addEventListener(SecurityErrorEvent.SECURITY_ERROR,failureProcess);
+ addService.addEventListener(FaultEvent.FAULT, failurProcess);
+ addService.setCredentials("user_id","password"); //Authenication
+  addService.getAddDtoData();       //service invoke
+    </pre>
+    
+    <p></p>
+<br>
+<hr>
+</div>
+<a name="propertySummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Properties</div>
+<table id="summaryTableProperty" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#concurrency">concurrency</a> : String<div class="summaryTableDescription"> このプロパティについては、実装には反映されていません。(TBD)<br/>将来のリリースで改善される可能性はあります。 </div>
+</td><td class="summaryTableOwnerCol">S2Flex2Service</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#concurrency">concurrency</a> : String<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">S2Flex2Service</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#configType">configType</a> : String<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">S2Flex2Service</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#gatewayUrl">gatewayUrl</a> : String<div class="summaryTableDescription"> サーバ接続する際のURLです。 AMFのGatewayを指定します。 </div>
+</td><td class="summaryTableOwnerCol">S2Flex2Service</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#gatewayUrl">gatewayUrl</a> : String<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">S2Flex2Service</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#id">id</a> : String<div class="summaryTableDescription"> mxml内部ドキュメント内部で管理されるこの S2Flex2Sericeインスタンスを特定するID です。 </div>
+</td><td class="summaryTableOwnerCol">S2Flex2Service</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#id">id</a> : String<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">S2Flex2Service</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#showBusyCursor">showBusyCursor</a> : Boolean<div class="summaryTableDescription"> サーバロジックを呼び出している間、カーソルをBusyCursorにするかどうかを決定します。 デフォルトはtrueです。</div>
+</td><td class="summaryTableOwnerCol">S2Flex2Service</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#showBusyCursor">showBusyCursor</a> : Boolean<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">S2Flex2Service</td>
+</tr>
+</table>
+</div>
+<a name="protectedPropertySummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Protected Properties</div>
+<table id="summaryTableProtectedProperty" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#_con">_con</a> : <a href="../../net/NetConnection.html">NetConnection</a>
+<div class="summaryTableDescription"> サーバ接続の際に利用されるNetConnectionのインスタンスです。</div>
+</td><td class="summaryTableOwnerCol">S2Flex2Service</td>
+</tr>
+</table>
+</div>
+<a name="methodSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Methods</div>
+<table id="summaryTableMethod" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#S2Flex2Service()">S2Flex2Service</a>(destination:String = null)</div>
+<div class="summaryTableDescription">
+         コンストラクタ.<br/>
+         <p>destinationをセットしたうえでResponderの配列を初期化します。</p>
+         
+         </div>
+</td><td class="summaryTableOwnerCol">S2Flex2Service</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#initialized()">initialized</a>(document:Object, id:String):void</div>
+<div class="summaryTableDescription">
+   mxmlファイル内でS2Flex2Serviceをタグとして設定したときにMXMLコンパイラ(mxmlc)によって自動的に呼び出されます。<br/>
+   <!--ActionScriptでインスタンスを生成した場合は、このメソッドを呼び出す事で、GatewayURLを自動的にセットすることが可能になります。-->
+   このクラスを ActionScript で作成し、検証で機能させるには、このメソッドを呼び出して、MXML ドキュメントと S2Flex2Service の id を渡す必要があります。
+   正しく指定しないと、Gatewayの指定が正しく行われない可能性があります。
+   
+   </div>
+</td><td class="summaryTableOwnerCol">S2Flex2Service</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#onFault()">onFault</a>(operation:String, result:*):void</div>
+<div class="summaryTableDescription">
+   呼び出したリモートサービスが何らかのエラーを返してきたときに呼ばれます
+   </div>
+</td><td class="summaryTableOwnerCol">S2Flex2Service</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#onResult()">onResult</a>(operation:String, result:*):void</div>
+<div class="summaryTableDescription">
+   呼び出したリモートサービスが正常に終了したときに呼ばれます
+   </div>
+</td><td class="summaryTableOwnerCol">S2Flex2Service</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#setCredentials()">setCredentials</a>(username:String, password:String):void</div>
+<div class="summaryTableDescription">
+        認証が必要なサービスを呼び出す際に必要な認証情報をセットします。
+        
+        </div>
+</td><td class="summaryTableOwnerCol">S2Flex2Service</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#setRemoteCredentials()">setRemoteCredentials</a>(remoteUsername:String, remotePassword:String):void</div>
+<div class="summaryTableDescription">
+        認証が必要な外部サービスを呼び出す際に必要な認証情報をセットします。
+        (TBD.)
+        <br/>
+        <small>このメソッドは呼び出しても、S2Flex2 1.0.xでは認識しません。</small>
+        </div>
+</td><td class="summaryTableOwnerCol">S2Flex2Service</td>
+</tr>
+</table>
+</div>
+<a name="protectedMethodSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Protected Methods</div>
+<table id="summaryTableProtectedMethod" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#callProperty()">callProperty</a>(methodName:*, ... args):*</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">S2Flex2Service</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#configureListeners()">configureListeners</a>():void</div>
+<div class="summaryTableDescription">
+         NetConnectionにEventListenerの設定を行います。
+         
+        </div>
+</td><td class="summaryTableOwnerCol">S2Flex2Service</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#createConnection()">createConnection</a>():void</div>
+<div class="summaryTableDescription">
+         NetConnectionのインスタンスを生成します。
+         
+         </div>
+</td><td class="summaryTableOwnerCol">S2Flex2Service</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#getProperty()">getProperty</a>(name:*):*</div>
+<div class="summaryTableDescription">
+        指定されたnameにあわせたOperationを返します。
+        </div>
+</td><td class="summaryTableOwnerCol">S2Flex2Service</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#initConnection()">initConnection</a>():void</div>
+<div class="summaryTableDescription">
+         NetConnectionの初期化を行います。
+         
+         </div>
+</td><td class="summaryTableOwnerCol">S2Flex2Service</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#setProperty()">setProperty</a>(name:*, value:*):void</div>
+<div class="summaryTableDescription">
+        Serviceより呼び出すOperationをセットします。
+        </div>
+</td><td class="summaryTableOwnerCol">S2Flex2Service</td>
+</tr>
+</table>
+</div>
+<a name="eventSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Events</div>
+<table id="summaryTableEvent" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Event</th><th>Summary</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#event:fault">fault</a>
+</div>
+</td><td class="summaryTableDescription summaryTableCol"> 
+           The fault event is dispatched when a service call fails and isn't handled by the Operation itself.</td><td class="summaryTableOwnerCol">S2Flex2Service</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#event:ioError">ioError</a>
+</div>
+</td><td class="summaryTableDescription summaryTableCol"> 
+ 　　IOErrorはNetwork接続時に入出力エラーが発生したときに送出されます。
+      </td><td class="summaryTableOwnerCol">S2Flex2Service</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#event:netStatus">netStatus</a>
+</div>
+</td><td class="summaryTableDescription summaryTableCol">&nbsp;</td><td class="summaryTableOwnerCol">S2Flex2Service</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#event:result">result</a>
+</div>
+</td><td class="summaryTableDescription summaryTableCol"> 
+     The result event is dispatched when a service call successfully returns and isn't handled by the Operation itself.</td><td class="summaryTableOwnerCol">S2Flex2Service</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#event:securityError">securityError</a>
+</div>
+</td><td class="summaryTableDescription summaryTableCol">&nbsp;</td><td class="summaryTableOwnerCol">S2Flex2Service</td>
+</tr>
+</table>
+</div>
+<script type="text/javascript" language="javascript">
+<!--
+showHideInherited();
+--></script>
+<div class="MainContent">
+<a name="propertyDetail"></a>
+<div class="detailSectionHeader">Property detail</div>
+<a name="_con"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">_con</td><td class="detailHeaderType">property</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected var _con:<a href="../../net/NetConnection.html">NetConnection</a></code><p> サーバ接続の際に利用されるNetConnectionのインスタンスです。</p></div>
+<a name="concurrency"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">concurrency</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var concurrency:String</code><p> このプロパティについては、実装には反映されていません。(TBD)<br/>将来のリリースで改善される可能性はあります。 </p></div>
+<a name="concurrency"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">concurrency</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var concurrency:String</code>
+</div>
+<a name="configType"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">configType</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var configType:String</code>
+</div>
+<a name="gatewayUrl"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">gatewayUrl</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var gatewayUrl:String</code><p> サーバ接続する際のURLです。 AMFのGatewayを指定します。 </p></div>
+<a name="gatewayUrl"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">gatewayUrl</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var gatewayUrl:String</code>
+</div>
+<a name="id"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">id</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var id:String</code><p> mxml内部ドキュメント内部で管理されるこの S2Flex2Sericeインスタンスを特定するID です。 </p></div>
+<a name="id"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">id</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var id:String</code>
+</div>
+<a name="showBusyCursor"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">showBusyCursor</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var showBusyCursor:Boolean</code><p> サーバロジックを呼び出している間、カーソルをBusyCursorにするかどうかを決定します。 デフォルトはtrueです。</p></div>
+<a name="showBusyCursor"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">showBusyCursor</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var showBusyCursor:Boolean</code>
+</div>
+<a name="constructorDetail"></a>
+<div class="detailSectionHeader">Constructor detail</div>
+<a name="S2Flex2Service()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">S2Flex2Service</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">constructor</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function S2Flex2Service(destination:String = null)</code><p>
+         コンストラクタ.<br/>
+         </p><p>destinationをセットしたうえでResponderの配列を初期化します。</p>
+         
+         <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">destination</span>:String</code> (default = <code>null</code>)<code></code> &mdash; サービスの宛先.呼び出すコンポーネントの名称を指定します。
+         
+         </td>
+</tr>
+</table>
+</div>
+<a name="methodDetail"></a>
+<div class="detailSectionHeader">Method detail</div>
+<a name="callProperty()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">callProperty</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>flash_proxy override function callProperty(methodName:*, ... args):*</code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">methodName</span>:*</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code>... <span class="label">args</span></code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>*</code></td>
+</tr>
+</table>
+</div>
+<a name="configureListeners()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">configureListeners</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function configureListeners():void</code><p>
+         NetConnectionにEventListenerの設定を行います。
+         
+        </p></div>
+<a name="createConnection()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">createConnection</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function createConnection():void</code><p>
+         NetConnectionのインスタンスを生成します。
+         
+         </p></div>
+<a name="getProperty()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">getProperty</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>flash_proxy override function getProperty(name:*):*</code><p>
+        指定されたnameにあわせたOperationを返します。
+        </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">name</span>:*</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>*</code> &mdash; RPCOperation
+        </td>
+</tr>
+</table>
+</div>
+<a name="initConnection()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">initConnection</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function initConnection():void</code><p>
+         NetConnectionの初期化を行います。
+         
+         </p></div>
+<a name="initialized()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">initialized</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function initialized(document:Object, id:String):void</code><p>
+   mxmlファイル内でS2Flex2Serviceをタグとして設定したときにMXMLコンパイラ(mxmlc)によって自動的に呼び出されます。<br/>
+   <!--ActionScriptでインスタンスを生成した場合は、このメソッドを呼び出す事で、GatewayURLを自動的にセットすることが可能になります。-->
+   このクラスを ActionScript で作成し、検証で機能させるには、このメソッドを呼び出して、MXML ドキュメントと S2Flex2Service の id を渡す必要があります。
+   正しく指定しないと、Gatewayの指定が正しく行われない可能性があります。
+   
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">document</span>:Object</code> &mdash; このクラスを利用しているmxml documents
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">id</span>:String</code> &mdash; S2Flex2Serviceのインスタンス
+   
+   </td>
+</tr>
+</table>
+</div>
+<a name="onFault()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">onFault</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function onFault(operation:String, result:*):void</code><p>
+   呼び出したリモートサービスが何らかのエラーを返してきたときに呼ばれます
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">operation</span>:String</code> &mdash; 呼び出したサービスのメソッド名
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">result</span>:*</code> &mdash; 呼び出したエラー結果
+   </td>
+</tr>
+</table>
+</div>
+<a name="onResult()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">onResult</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function onResult(operation:String, result:*):void</code><p>
+   呼び出したリモートサービスが正常に終了したときに呼ばれます
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">operation</span>:String</code> &mdash; 呼び出したサービスのメソッド名
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">result</span>:*</code> &mdash; 呼び出したサービスの結果
+   
+   </td>
+</tr>
+</table>
+</div>
+<a name="setCredentials()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">setCredentials</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public override function setCredentials(username:String, password:String):void</code><p>
+        認証が必要なサービスを呼び出す際に必要な認証情報をセットします。
+        
+        </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">username</span>:String</code> &mdash; 認証に利用するユーザID
+        </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">password</span>:String</code> &mdash; 認証に利用するパスワード
+        </td>
+</tr>
+</table>
+</div>
+<a name="setProperty()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">setProperty</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>flash_proxy override function setProperty(name:*, value:*):void</code><p>
+        Serviceより呼び出すOperationをセットします。
+        </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">name</span>:*</code> &mdash; メソッド名
+        </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">value</span>:*</code> &mdash; メソッドに対応したRPCOperation
+        </td>
+</tr>
+</table>
+</div>
+<a name="setRemoteCredentials()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">setRemoteCredentials</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public override function setRemoteCredentials(remoteUsername:String, remotePassword:String):void</code><p>
+        認証が必要な外部サービスを呼び出す際に必要な認証情報をセットします。
+        (TBD.)
+        <br/>
+        <small>このメソッドは呼び出しても、S2Flex2 1.0.xでは認識しません。</small>
+        </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">remoteUsername</span>:String</code> &mdash; 認証に利用するユーザID
+        </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">remotePassword</span>:String</code> &mdash; 認証に利用するパスワード
+        </td>
+</tr>
+</table>
+</div>
+<div class="detailSectionHeader">Event detail</div>
+<a name="event:fault"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">fault</td><td class="detailHeaderType">event&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<span class="label">Event object type: </span><a href=""><code>mx.rpc.events.FaultEvent</code></a>
+<br>
+<p></p><p> 
+           The fault event is dispatched when a service call fails and isn't handled by the Operation itself.
+    　　    <br />
+      fault イベントは、サービス(サーバロジック)を実行した際に、失敗、または例外が発生したときに送出されます。
+      </p></div>
+<a name="event:ioError"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">ioError</td><td class="detailHeaderType">event&nbsp;</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<span class="label">Event object type: </span><a href=""><code>flash.events.IOErrorEvent</code></a>
+<br>
+<p></p><p> 
+ 　　IOErrorはNetwork接続時に入出力エラーが発生したときに送出されます。
+      </p></div>
+<a name="event:netStatus"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">netStatus</td><td class="detailHeaderType">event&nbsp;</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<span class="label">Event object type: </span><a href=""><code>flash.events.NetStatusEvent</code></a>
+<br>
+<p></p>
+</div>
+<a name="event:result"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">result</td><td class="detailHeaderType">event&nbsp;</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<span class="label">Event object type: </span><a href=""><code>mx.rpc.events.ResultEvent</code></a>
+<br>
+<p></p><p> 
+     The result event is dispatched when a service call successfully returns and isn't handled by the Operation itself.
+      <br />
+   result イベントは、サーバロジックを実行し正常に処理されたときに送出されます。
+      </p></div>
+<a name="event:securityError"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">securityError</td><td class="detailHeaderType">event&nbsp;</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<span class="label">Event object type: </span><a href=""><code>flash.events.SecurityErrorEvent</code></a>
+<br>
+<p></p>
+</div>
+<br>
+<br>
+<hr>
+<br>
+<p></p>
+<center class="copyright"> 
+</center>
+</div>
+</body>
+</html>
+<!-- -->
