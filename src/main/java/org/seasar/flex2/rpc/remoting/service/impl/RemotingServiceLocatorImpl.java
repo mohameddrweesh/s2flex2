@@ -23,6 +23,7 @@ import org.seasar.flex2.rpc.remoting.service.annotation.handler.AnnotationHandle
 import org.seasar.flex2.rpc.remoting.service.exception.InvalidServiceRuntimeException;
 import org.seasar.framework.container.ComponentDef;
 import org.seasar.framework.container.S2Container;
+import org.seasar.framework.container.hotdeploy.HotdeployUtil;
 import org.seasar.framework.util.ClassUtil;
 
 public class RemotingServiceLocatorImpl implements RemotingServiceLocator {
@@ -68,6 +69,9 @@ public class RemotingServiceLocatorImpl implements RemotingServiceLocator {
     public Object getService(final String serviceName) {
         final ComponentDef serviceComponentDef;
 
+        if (HotdeployUtil.isHotdeploy()) {
+            repository.removeService(serviceName);
+        }
         if (repository.hasService(serviceName)) {
             serviceComponentDef = repository.getService(serviceName);
         } else {
