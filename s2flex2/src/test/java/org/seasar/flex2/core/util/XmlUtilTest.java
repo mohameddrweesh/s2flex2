@@ -1,0 +1,64 @@
+/*
+ * Copyright 2004-2007 the Seasar Foundation and the Others.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, 
+ * either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
+ */
+package org.seasar.flex2.core.util;
+
+import javax.xml.parsers.DocumentBuilder;
+
+import org.seasar.flex2.core.format.amf3.io.CharsetType;
+import org.seasar.framework.util.DocumentBuilderFactoryUtil;
+import org.seasar.framework.util.DocumentBuilderUtil;
+import org.seasar.framework.util.DomUtil;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import junit.framework.TestCase;
+
+
+/**
+ * XmlUtil Class Test case
+ *
+ */
+public class XmlUtilTest extends TestCase {
+
+    /**
+     * 文字列で定義されたxmlをDocumentクラスにparseできることを確認する。
+     *
+     */
+    public void testGetXmlDocumentTest() {
+        String xml="<document><names><name>どきゅめんと1</name><name>どきゅめんと2</name><name>どきゅめんと3</name><name>どきゅめんと4</name><name>どきゅめんと4</name></names></document>";
+        Document document = XmlUtil.getXmlDocument(xml);
+        assertNotNull("1:Ducument is not null",document);
+        assertNotNull("2",document.getNodeName());
+    }
+    /**
+     * 文字列で定義されたxmlをDocumentクラスにparseした後に、Documentの文字列表現とparse前の文字列が同一である事を確認する。
+     *
+     */
+    public void testDocumentTest() {
+        String xml="<document><names><name>どきゅめんと1</name><name>どきゅめんと2</name><name>どきゅめんと3</name><name>どきゅめんと4</name><name>どきゅめんと4</name></names></document>";
+
+        final DocumentBuilder builder = DocumentBuilderFactoryUtil
+        .newDocumentBuilder();
+        
+        Document doc = DocumentBuilderUtil.parse(builder, DomUtil.getContentsAsStream(
+        xml, CharsetType.UTF8));
+        assertNotNull(doc);
+        Element root = doc.getDocumentElement();
+        String contents = DomUtil.toString(root);
+        assertEquals("1",xml,contents);
+    }
+    
+} 
