@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2006 the Seasar Foundation and the Others.
+ * Copyright 2004-2007 the Seasar Foundation and the Others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -39,7 +40,11 @@ public class ArrayArgumentAdjustorListConvertTest extends S2TestCase {
         List l = new ArrayList();
         assertFalse("1", argumentAdjustor.isTarget(TestBean[].class, map));
         assertTrue("2", argumentAdjustor.isTarget(TestBean[].class, ts));
-        
+        assertFalse("3",argumentAdjustor.isTarget(List.class, map));
+        assertTrue("4",argumentAdjustor.isTarget(List.class, ts));
+        assertTrue("5",argumentAdjustor.isTarget(ArrayList.class, ts));
+        assertTrue("6",argumentAdjustor.isTarget(LinkedList.class, ts));
+        //assertTrue("7",argumentAdjustor.isTarget(Sin.class, ts));
     }
     
     public void testAdjustList() throws Exception {
