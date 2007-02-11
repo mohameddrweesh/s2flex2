@@ -1,5 +1,5 @@
 <project name="s2flex2-tiger" default="dist" basedir=".">
-	<property name="ver" value="1.0.0"/>
+	<property name="ver" value="1.0.1-SNAPSHOT"/>
 
 	<target name="dist">
 		<zip zipfile="target/s2flex2-tiger-${ver}.zip">
@@ -8,6 +8,7 @@
 			</zipfileset>
 			<zipfileset prefix="s2flex2-tiger/lib" dir="target">
 				<include name="s2-flex2-tiger-${ver}.jar"/>
+				<include name="s2-flex2-tiger-${ver}-sources.jar"/>
 			</zipfileset>
 		</zip>
 	</target>
