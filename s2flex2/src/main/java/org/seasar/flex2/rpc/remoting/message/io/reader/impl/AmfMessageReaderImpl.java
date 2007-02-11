@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2006 the Seasar Foundation and the Others.
+ * Copyright 2004-2007 the Seasar Foundation and the Others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -66,10 +66,14 @@ public class AmfMessageReaderImpl implements MessageReader {
     public MessageHeaderFactory getMessageHeaderFactory() {
         return messageHeaderFactory;
     }
-
+    /**
+     * AMFデータを読み込み、Messageを返します。
+     */
     public Message read() throws IOException {
-        skipHeaders();
-        readBodies();
+        readVersion();  //versionの読み込み
+        readHeader();   //Header の読み込み
+        //skipHeaders();
+        readBodies();   //Body部のの読み込み
         return message;
     }
 
@@ -105,6 +109,20 @@ public class AmfMessageReaderImpl implements MessageReader {
         }
     }
 
+    protected void readHeader() throws IOException {
+        final int headerCount = inputStream.readUnsignedShort();
+        for (int i = 0; i < headerCount; ++i) {
+            final String name = inputStream.readUTF();
+            final boolean isRequired = inputStream.readBoolean();
+            inputStream.readInt(); // length
+            message.addHeader(messageHeaderFactory.createHeader(name,
+                    readData(), isRequired));
+        }
+    }
+    protected final void readVersion() throws IOException {
+        message.setVersion(inputStream.readUnsignedShort());
+    }
+    
     protected void clean() {
         sharedObject.initialize();
     }

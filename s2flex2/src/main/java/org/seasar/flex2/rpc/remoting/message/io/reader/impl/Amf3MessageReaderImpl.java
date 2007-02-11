@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2006 the Seasar Foundation and the Others.
+ * Copyright 2004-2007 the Seasar Foundation and the Others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -59,8 +59,10 @@ public class Amf3MessageReaderImpl extends AmfMessageReaderImpl implements
                     readData(), isRequired));
         }
     }
-
+/*
+AmfMessageReaderImplへ移動
     protected final void readVersion() throws IOException {
         message.setVersion(inputStream.readUnsignedShort());
     }
+    */
 }
