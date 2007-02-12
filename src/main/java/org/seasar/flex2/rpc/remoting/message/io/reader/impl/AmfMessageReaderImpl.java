@@ -72,7 +72,6 @@ public class AmfMessageReaderImpl implements MessageReader {
     public Message read() throws IOException {
         readVersion();  //versionの読み込み
         readHeader();   //Header の読み込み
-        //skipHeaders();
         readBodies();   //Body部のの読み込み
         return message;
     }
@@ -98,6 +97,10 @@ public class AmfMessageReaderImpl implements MessageReader {
         this.sharedObject = sharedObject;
     }
 
+    /**
+     * @deprecated
+     * @throws IOException
+     */
     private final void skipHeaders() throws IOException {
         inputStream.readUnsignedShort();
         final int headerCount = inputStream.readUnsignedShort();
