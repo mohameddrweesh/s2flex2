@@ -1,0 +1,233 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Language" content="ja" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="keywords" content="The Seasar Foundation, Project Site, OSS, オープンソースソフトウェア, Java, DI, AOP, フレームワーク" />
+<meta name="description" content="私たちSeasarファウンデーションはオープンソースという仕組みの元、開発者のゆとりを実現できるプロダクトの開発と提供を通じて、ユーザと開発者とが共に喜びを分かち合える環境実現をお手伝いすることを目指し活動しています。 " />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>S2Flex2 - AMF3Gateway with DI Container -</title>
+<link rel="stylesheet" type="text/css" href="styles/main.css" media="screen,projection" />
+<link rel="stylesheet" type="text/css" href="styles/print.css" media="print" />
+</head>
+<body>
+<div id="wrapper">
+  <div id="header">
+    <div class="line"><span class="hide">spacer</span></div>
+    <div id="logo">
+      <h1 id="h01" class="hide">S2Flex2 ProjectSite</h1>
+      <img src="http://www.seasar.org/images/seasar_logo_blue.gif" alt="The Seasar Foundation" width="390" height="180" /></div>
+    <div id="tool">
+      <h2><a href="http://search.seasar.org/">Site Search</a></h2>
+      <form id="search" name="search" action="http://search.seasar.org/">
+        <div>
+          <input id="search_phrase" type="text" name="phrase" size="20" />
+          <input type="hidden" name="perpage" value="30" />
+          <input type="hidden" name="enc" value="UTF-8" />
+          <input id="search_go" type="submit" value="検索" />
+        </div>
+      </form>
+      <h2>Seasar Banner</h2>
+      <p><a href="images/seasar_banner.gif"><img src="http://www.seasar.org/images/seasar_banner.gif" alt="Seasar Banner" title="Seasar Banner" width="146" height="33" /></a></p>
+    </div>
+    <div id="navi">
+      <p><a href="#">English</a> | Japanese</p>
+    </div>
+  </div>
+  <!-- header -->
+  <div id="contents_left">
+    <h2>メニュー</h2>
+  </div>
+  <div id="contents_center">
+  	<div align="right">2007/02/12作成</div>
+    <div id="article">
+      <div class="section">
+	  
+        <h2 id="h02">Web.xmlの編集</h2>
+        <p>S2Flex2利用するには、WEB-INF/web.xml以下にGatewayServletの設定をする必要があります。ここではweb.xmlに必要な設定を説明します。</p>
+      </div>
+      <h4>1.Servletの設定</h4>
+      <p>S2Flex2を利用する上で必要なServletは以下の２つになります。</p>
+      <ul>
+        <li>S2ContainerServlet</li>
+        <li>RemotingGateway</li>
+      </ul>
+      <h5>S2ContainerServletの設定</h5>
+      <p>  Seasar2のコンテナを起動するServletです。記述は以下の通りです。</p>
+      <pre>
+&lt;servlet&gt;
+   &lt;servlet-name&gt;s2servlet&lt;/servlet-name&gt;
+   &lt;servlet-class&gt;org.seasar.framework.container.servlet.S2ContainerServlet&lt;/servlet-class&gt;
+   &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+&lt;/servlet&gt;</pre>
+      ※S2ContainerServletの詳細については<a href="http://s2container.seasar.org/ja/DIContainer.html#request" target="external">こちら</a>に説明がありますのでご参照ください。
+      <h5>RemotingGatewayの設定</h5>
+      <p>Flex2からのリクエストを受付け、Seasar2に登録されたComponentsを呼び出すServletです。</p>
+      <pre>&lt;servlet&gt;
+   &lt;servlet-name&gt;gateway&lt;/servlet-name&gt;
+   &lt;servlet-class&gt;org.seasar.flex2.rpc.remoting.RemotingGateway&lt;/servlet-class&gt;
+   &lt;init-param&gt;
+   &lt;param-name&gt;showGetResponse&lt;/param-name&gt;
+   &lt;param-value&gt;true&lt;/param-value&gt;
+   &lt;/init-param&gt;
+   &lt;init-param&gt;
+   &lt;param-name&gt;useSession&lt;/param-name&gt;
+   &lt;param-value&gt;true&lt;/param-value&gt;
+   &lt;/init-param&gt;
+   &lt;load-on-startup&gt;2&lt;/load-on-startup&gt;
+&lt;/servlet&gt;             </pre>
+      <table border="0" cellpadding="0" cellspacing="0" class="list">
+        <tbody>
+          <tr class="a">
+            <th> <p>初期パラメータ</p></th>
+            <th>デフォルト値</th>
+            <th> <p>説明</p></th>
+          </tr>
+          <tr>
+            <td><p>showGetResponse</p></td>
+            <td><p>false</p></td>
+            <td><p>HTTPのGETメソッドでgatewayServletにアクセスした場合の表示の有無を設定します。</p></td>
+          </tr>
+          <tr bgcolor="#f8f8f8">
+            <td><p>useSession</p></td>
+            <td><p>false</p></td>
+            <td><p>HTTPSessionを利用するときには、<!--データの保存先にSessionを利用するときなどは、 -->trueを設定します。</p></td>
+          </tr>
+        </tbody>
+      </table>
+	  <p>S2Flex2 1.0.0の時には、上記パラメータに相当するものはともに<strong>true</strong>として動作しています。<br>
+	  1.0.1にアップデートした際に1.0.0と同様の動作にするには、初期パラメータを設定の上、valueをtrueに設定するようにします。</p>
+	  <h5>showGetResponse</h5>
+	  <p>trueに設定すると、GETでアクセスしたときに以下のメッセージを表示します。この設定はS2Flex2 1.0.1から利用することが可能になります。 </p>
+	  <blockquote>RemotingGateway $VERSION is running ... </blockquote>
+	  <p>※$VERSIONには、GatewayServletのVERSIONが入ります。</p>
+	  <p>1.0.0ではGETアクセス時には常に以下の表示を返します。</p>
+	  <blockquote>RemotingGateway is running on http ... </blockquote>
+	  <h5>useSession</h5>
+	  <p>trueにすると、リクエスト毎にHttpSessionが有効であるかどうかをチェックし、無効であるときには、新規のSessionを取得します。S2Flex2ではHttpSessionはデータの保存(Import)やデータの取得(Export)を利用する際にStorageとして利用します。SessionをStorageとして利用しないときにはfalseを指定することで、HttpSessionを取得しなくなります。</p>
+	  <p>この設定もS2Flex2 1.0.1から利用可能になります。 </p>
+	  <h4>2.ServletFilterの設定</h4>
+	  <p>S2Flex2で利用するServletFilterは以下の通りです。</p>
+	  <ul>
+	    <li>S2ContainerFilter</li>
+	    <li>HotdeployFilter</li>
+	  </ul>
+	  <h5>S2ContainerFilter</h5>
+	  <p>HttpServletRequestやHttpServletResponseなどをSeasar2に登録されたコンポーネントから利用できるようにするFilterです。S2Flex2を利用するときには、S2ContainerFilterをすべてのリクエストに対して設定します。</p>
+	  <pre>   &lt;filter-name&gt;s2filter&lt;/filter-name&gt;
+   &lt;filter-class&gt;org.seasar.framework.container.filter.S2ContainerFilter&lt;/filter-class&gt;
+   &lt;/filter&gt;
+　　　　：（中略)
+　　&lt;filter-mapping&gt;
+   &lt;filter-name&gt;s2filter&lt;/filter-name&gt;
+   &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+   &lt;/filter-mapping&gt;
+   &lt;filter-mapping&gt;</pre>
+	  <p>S2ContainerFilterについての詳細は<a href="http://s2container.seasar.org/ja/DIContainer.html#request" target="external">こちら</a>に説明がありますのでご参照ください。</p>
+	  <h5>HotdeployFilter</h5>
+	  <p>Seasar2.4からの新機能であるSmartDeployのうち、HotDeployを利用するときにはHotDeployFilterの設定が必要になります。S2Flex2でHotDeployを利用するときにはすべてのリクエストに対してHotDeployFilterを設定します。</p>
+	  <pre>   &lt;filter&gt;
+   &lt;filter-name&gt;hotdeployfilter&lt;/filter-name&gt;
+   &lt;filter-class&gt;org.seasar.framework.container.hotdeploy.HotdeployFilter&lt;/filter-class&gt;
+   &lt;/filter&gt;
+   :(中略)
+   &lt;filter-mapping&gt;
+   &lt;filter-name&gt;hotdeployfilter&lt;/filter-name&gt;
+   &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+   &lt;/filter-mapping&gt; </pre>
+	  <h4>3.web.xml全体
+	    
+      </h4>
+	  <p>S2Flex2を利用する上で必要な設定を記述したweb.xmlはS2Flex2 1.0.1からリリースファイルのresources以下に含まれています。</p>
+	  <p>s2flex2/resources/web.xml</p>
+	  <p>以下web.xmlの内容です。</p>
+	  <pre> &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</pre>
+	  <pre>&lt;!--
+ 	    * Copyright 2004-2007 the Seasar Foundation and the Others.
+ 	    *
+ 	    * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ 	    * you may not use this file except in compliance with the License.
+ 	    * You may obtain a copy of the License at
+ 	    *
+ 	    *      http://www.apache.org/licenses/LICENSE-2.0
+ 	    *
+ 	    * Unless required by applicable law or agreed to in writing, software
+ 	    * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ 	    * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ 	    * either express or implied. See the License for the specific language
+ 	    * governing permissions and limitations under the License.
+--&gt;</pre>
+	  <pre>&lt;!DOCTYPE web-app PUBLIC
+   &quot;-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN&quot;
+   &quot;http://java.sun.com/dtd/web-app_2_3.dtd&quot;&gt;</pre>
+	  <pre>&lt;web-app&gt;
+   &lt;display-name&gt;S2Flex2&lt;/display-name&gt;
+   &lt;description&gt;S2Flex2 Application&lt;/description&gt;
+   &lt;filter&gt;
+   &lt;filter-name&gt;s2filter&lt;/filter-name&gt;
+   &lt;filter-class&gt;org.seasar.framework.container.filter.S2ContainerFilter&lt;/filter-class&gt;
+   &lt;/filter&gt;
+   &lt;filter&gt;
+   &lt;filter-name&gt;hotdeployfilter&lt;/filter-name&gt;
+   &lt;filter-class&gt;org.seasar.framework.container.hotdeploy.HotdeployFilter&lt;/filter-class&gt;
+   &lt;/filter&gt; 
+   &lt;filter-mapping&gt;
+   &lt;filter-name&gt;s2filter&lt;/filter-name&gt;
+   &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+   &lt;/filter-mapping&gt;
+   &lt;filter-mapping&gt;
+   &lt;filter-name&gt;hotdeployfilter&lt;/filter-name&gt;
+   &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+　　　&lt;filter-mapping&gt;
+   &lt;servlet&gt;
+   &lt;servlet-name&gt;s2servlet&lt;/servlet-name&gt;
+   &lt;servlet-class&gt;org.seasar.framework.container.servlet.S2ContainerServlet&lt;/servlet-class&gt;
+   &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+   &lt;/servlet&gt;
+   &lt;servlet&gt;
+   &lt;servlet-name&gt;gateway&lt;/servlet-name&gt;
+   &lt;servlet-class&gt;org.seasar.flex2.rpc.remoting.RemotingGateway&lt;/servlet-class&gt;
+   &lt;init-param&gt;
+   &lt;param-name&gt;showGetResponse&lt;/param-name&gt;
+   &lt;param-value&gt;true&lt;/param-value&gt;
+   &lt;/init-param&gt;
+   &lt;init-param&gt;
+   &lt;param-name&gt;useSession&lt;/param-name&gt;
+   &lt;param-value&gt;true&lt;/param-value&gt;
+   &lt;/init-param&gt;
+   &lt;load-on-startup&gt;2&lt;/load-on-startup&gt;
+   &lt;/servlet&gt;
+   &lt;servlet-mapping&gt;
+   &lt;servlet-name&gt;s2servlet&lt;/servlet-name&gt;
+   &lt;url-pattern&gt;/s2servlet&lt;/url-pattern&gt;
+   &lt;/servlet-mapping&gt;
+   &lt;servlet-mapping&gt;
+   &lt;servlet-name&gt;gateway&lt;/servlet-name&gt;
+   &lt;url-pattern&gt;/bin/gateway&lt;/url-pattern&gt;
+   &lt;/servlet-mapping&gt; 
+   &lt;servlet-mapping&gt;
+   &lt;servlet-name&gt;gateway&lt;/servlet-name&gt;
+   &lt;url-pattern&gt;/gateway&lt;/url-pattern&gt;
+   &lt;/servlet-mapping&gt;
+   &lt;welcome-file-list&gt;
+   &lt;welcome-file&gt;index.html&lt;/welcome-file&gt;
+   &lt;/welcome-file-list&gt;
+   &lt;/web-app&gt;</pre>
+	  <p><br>
+	  </p>
+    </div>
+    <!-- article -->
+  </div>
+  <!-- contents_center -->
+  <div id="footer">
+    <address>
+&copy; Copyright The Seasar Foundation and the others 2004-2007, all rights reserved.
+    </address>
+    <div class="line"><span class="hide">spacer</span></div>
+  </div>
+  <!-- footer -->
+</div>
+<!-- wrapper -->
+</body>
+</html>
