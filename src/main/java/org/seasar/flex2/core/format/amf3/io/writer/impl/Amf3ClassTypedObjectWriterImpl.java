@@ -20,6 +20,7 @@ import java.io.IOException;
 
 import org.seasar.flex2.core.format.amf3.Amf3Constants;
 import org.seasar.flex2.core.format.amf3.type.Amf3TypeDef;
+import org.seasar.framework.aop.javassist.AspectWeaver;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
 import org.seasar.framework.beans.factory.BeanDescFactory;
@@ -58,7 +59,13 @@ public class Amf3ClassTypedObjectWriterImpl extends
 
     protected final void writeClassName(final Object object,
             final DataOutputStream outputStream) throws IOException {
-        final String type = object.getClass().getName();
+        String type = object.getClass().getName();
+        if (type.startsWith(AspectWeaver.PREFIX_ENHANCED_CLASS)) {
+            int index = type.lastIndexOf(AspectWeaver.SUFFIX_ENHANCED_CLASS);
+            if (index > 0) {
+                type = type.substring(2, index);
+            }
+        }
         writeTypeString(type, outputStream);
     }
 
