@@ -7,6 +7,7 @@
 				<exclude name="**/target/**"/>
 			</zipfileset>
 			<zipfileset prefix="s2flex2/lib" dir="target">
+				<include name="s2-flex2-${ver}-sources.jar"/>
 				<include name="s2-flex2-${ver}.jar"/>
 			</zipfileset>
 			<zipfileset prefix="s2flex2/resources" dir="src/test/resources">
