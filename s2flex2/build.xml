@@ -1,10 +1,11 @@
 <project name="s2flex2" default="dist" basedir=".">
-	<property name="ver" value="1.0.1-SNAPSHOT"/>
+	<property name="ver" value="1.0.2-SNAPSHOT"/>
 
 	<target name="dist">
 		<zip zipfile="target/S2Flex2-${ver}.zip">
 			<zipfileset prefix="s2flex2" dir=".">
 				<exclude name="**/target/**"/>
+				<exclude name="**/.DS_Store"/>
 			</zipfileset>
 			<zipfileset prefix="s2flex2/lib" dir="target">
 				<include name="s2-flex2-${ver}-sources.jar"/>
