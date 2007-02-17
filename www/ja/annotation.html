@@ -48,7 +48,7 @@
     <h2>メニュー</h2>
   </div>
   <div id="contents_center">
-  	<div align="right">2006/12/22修正版</div>
+  	<div align="right">2006/12/22修正版<br/>2007/02/12 コード例の修正</div>
     <div id="article">
       <div class="section">
         <h4 id="h02">利用できるアノテーション</h4>
@@ -148,11 +148,11 @@ public class AddServiceImpl implements AddService {
       <p>使用例</p>
       <p>//For JDK1.4 Field Annotations.<br>
         //値は特に問いませんが、service名称をそのまま指定しておきます。<br>
-      <strong>public static final String REMOTING_SERVICE</strong> = &quot;testRemotingService&quot;</p>
+      <strong>public static final String REMOTING_SERVICE</strong> = &quot;testRemotingService&quot;;</p>
       <p> //sessionから取得したデータをセットするとき<br>
-        public static final String <strong>strData_EXPORT = StorageType.SESSION</strong><br>
+        public static final String <strong>strData_EXPORT = StorageType.SESSION;</strong><br>
         //sessionにデータを保存するとき<br>
-        public static final String <strong>strData_IMPORT = StorageType.SESSION</strong><br>
+        public static final String <strong>strData_IMPORT = StorageType.SESSION;</strong><br>
         //sessionデータバインディング対象プロパティ<br>
       private String strData;</p>
 
