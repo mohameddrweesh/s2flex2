@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Language" content="ja" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="keywords" content="The Seasar Foundation, Project Site, OSS, オープンソースソフトウェア, Java, DI, AOP, フレームワーク" />
+<meta name="description" content="私たちSeasarファウンデーションはオープンソースという仕組みの元、開発者のゆとりを実現できるプロダクトの開発と提供を通じて、ユーザと開発者とが共に喜びを分かち合える環境実現をお手伝いすることを目指し活動しています。 " />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>S2Flex2 - AMF3Gateway with DI Container -</title>
+<link rel="stylesheet" type="text/css" href="styles/main.css" media="screen,projection" />
+<link rel="stylesheet" type="text/css" href="styles/print.css" media="print" />
+<style type="text/css">
+<!--
+.style1 {font-size: larger}
+-->
+</style>
+</head>
+<body>
+<div id="wrapper">
+  <div id="header">
+    <div class="line"><span class="hide">spacer</span></div>
+    <div id="logo">
+      <h1 id="h01" class="hide">S2Flex2 ProjectSite</h1>
+    </div>
+    <div id="navi">
+      <!--<p><a href="#">English</a> | Japanese</p> -->
+    </div>
+  </div>
+  <!-- header -->
+
+  <div id="contents_center">
+    <h2 align="center" class="style1">S2Flex2 1.0.1リリースノート</h2>
+    <div align="right">2007/02/17作成<br/>
+  	</div>
+
+      <div class="section">
+        <h3 id="h02">S2Flex2 1.0.0からの変更点</h3>
+        <p>変更点は次のようになります。</p>
+        <ul>
+          <li>メソッド名の検証クラスを外部クラス化しました。</li>
+          <li>パラメータ変換用クラスの名称を変更しました。</li>
+          <li>RemotingGatewayの初期パラメータを追加しました。</li>
+          <li>HotDeployの対応を改善しました。</li>
+          <li>AMF0で利用する際にヘッダ部をスキップしていたのを改善しました。<br>
+          </li>
+          <li>S2Dao1.0.40への対応を改善しました。<br>
+          </li>
+        </ul>
+        <h4>パラメータ変換用クラスの名称を変更しました。</h4>
+        <p>ArrayArgumentConverterImpl -&gt;ObjectToArrayConverterImpl<br>
+          ArrayPropertyConverterImpl   -&gt;ObjectToCollectionConverterImpl<br>
+        MapToBeanConverterImpl       -&gt;ObjectToBeanConverterImpl</p>
+        <h4>RemotingGatewayの初期パラメータの追加</h4>
+        <p>２つの初期パラメータを追加いたしました。<br>
+          <strong>useSession</strong><br>
+        <strong>showGetResponse</strong></p>
+        <p>詳細は<a href="migration101.html#webxml">こちら</a>をご参照ください。</p>
+        <h4>HotDeployの対応改善</h4>
+        <p>これまでは、S2Flex2をHotDeploy環境で利用するにはremoting_amf3.dicon(remoting_amf0.dicon)の設定を変更する必要がありました。</p>
+        <p>変更前：</p>
+        <pre>	&lt;component	class="org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceLocatorImpl&quot;/&gt;</pre>
+		変更後：
+		<pre>
+	&lt;component  class="org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceLocatorOnHotDeployImpl" /&gt;</pre>
+        <p>1.0.1では、上記の変更を行うことなく利用できるようにいたしました。</p>
+        <h4>AMF0接続時の対応改善</h4>
+        <p><br>
+          ・AMF0で利用する際にheaderをスキップしていたのを読み込むようにしました。<br>
+          ・認証情報で利用する定数を追加しました。</p>
+        <h4>S2Dao対応</h4>
+        <p><br>
+          S2Dao1.0.40からEntityがAOPによりエンハンスされるようになったことでFlex2のクラスとマッピングに不整合が出るケースを改善しました。<br>
+          <br>
+        </p>
+        <h3>S2Flex2 1.0.0からの移行 </h3>
+        <p>S2Flex21.0.0から1.0.1に移行するときには<a href="migration101.html">こちら</a>をご参照ください。。</p>
+      </div>
+  </div>
+  <!-- contents_center -->
+  <div id="footer">
+    <address>
+&copy; Copyright The Seasar Foundation and the others 2004-2007, all rights reserved.
+    </address>
+    <div class="line"><span class="hide">spacer</span></div>
+  </div>
+  <!-- footer -->
+</div>
+<!-- wrapper -->
+</body>
+</html>

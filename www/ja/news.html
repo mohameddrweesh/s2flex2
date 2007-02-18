@@ -23,11 +23,11 @@
         </tr>
         <tr>
           <td rowspan="2"><img src="images/top04.gif" alt="" height="49" width="235"></td>
-          <td><a href="http://www.seasar.org/index.html"><img src="images/menu01_b_ja.gif" height="30" width="78" border="0" alt="" id="menu01" onmouseover="swap(1)" onmouseout="restore(1)"></a></td>
-          <td><a href="http://www.seasar.org/projects.html"><img src="images/menu02_b_ja.gif" height="30" width="101" border="0" alt="" id="menu02" onmouseover="swap(2)" onmouseout="restore(2)"></a></td>
-          <td><a href="http://www.seasar.org/products.html"><img src="images/menu03_b_ja.gif" height="30" width="110" border="0" alt="" id="menu03" onmouseover="swap(3)" onmouseout="restore(3)"></a></td>
-          <td><a href="http://www.seasar.org/resources.html"><img src="images/menu04_b_ja.gif" height="30" width="113" border="0" alt="" id="menu04" onmouseover="swap(4)" onmouseout="restore(4)"></a></td>
-          <td><img src="images/menu05_b_ja.gif" height="30" width="109" border="0" alt="" id="menu05" onmouseover="swap(5)" onmouseout="restore(5)"></td>
+          <td><a href="http://www.seasar.org/index.html"><img src="images/menu01_b_ja.gif" height="30" width="78" border="0" alt="" id="menu01" onMouseOver="swap(1)" onMouseOut="restore(1)"></a></td>
+          <td><a href="http://www.seasar.org/projects.html"><img src="images/menu02_b_ja.gif" height="30" width="101" border="0" alt="" id="menu02" onMouseOver="swap(2)" onMouseOut="restore(2)"></a></td>
+          <td><a href="http://www.seasar.org/products.html"><img src="images/menu03_b_ja.gif" height="30" width="110" border="0" alt="" id="menu03" onMouseOver="swap(3)" onMouseOut="restore(3)"></a></td>
+          <td><a href="http://www.seasar.org/resources.html"><img src="images/menu04_b_ja.gif" height="30" width="113" border="0" alt="" id="menu04" onMouseOver="swap(4)" onMouseOut="restore(4)"></a></td>
+          <td><img src="images/menu05_b_ja.gif" height="30" width="109" border="0" alt="" id="menu05" onMouseOver="swap(5)" onMouseOut="restore(5)"></td>
           <td><img height="30" width="34" src="images/menu06.gif" alt=""></td>
         </tr>
         <tr>
@@ -40,6 +40,34 @@
           <td width="740" class="main"><!-- don't edit end -->
             <!-- document start -->
             <h3><a name="news">お知らせ</a></h3>
+            <h5>[2006/10/21]flex2_example rc-3 リリース</h5>
+            <ul>
+              <li>S2Flex2 1.0.0-rc3にベースを変更しました。</li>
+              <li>S2 Container2.4 rc-2ベースに変更しました。</li>
+              <li>JDK5.0 + S2Flex-Tigerベースに変更しました。</li>
+              <li>S2Flex2-components rc-2を同梱して、Flexのコンパイルオプションを変更しました。</li>
+            </ul>
+            <h5>[2006/10/21]s2Flex2 1.0.0-Tiger rc-3 リリース</h5>
+            <ul>
+              <li>S2Flex2-1.0.0-rc3とあわせて利用できるように対応しました。</li>
+              <li>定数アノテーション導入に合わせてImport/Exportアノテーションの取得時のメソッドシグニチャを変更しました。</li>
+            </ul>
+            <h5>[2006/10/18]s2Flex2 1.0.0 rc-3 リリース</h5>
+            <ul>
+              <li>S2 Container 2.4 <span id="st" name="st" class="st">rc</span>-2のcustomizer変更に対応いたしました。</li>
+              <li>JDK1.4用に定数アノテーションを導入しました。</li>
+              <li>SessionIDが正しくないときに新たにSessionを<wbr>取得するように変更しました。</li>
+              <li>AS3 -&gt;JavaObjectのAMF3データ変換部分について改善いたしました。</li>
+              <li>AS3でクラスを生成しなくてもJava側でクラスとして受け取れる機能を追加しました。(オブジェクトマッピング)</li>
+              <li>FieldAnnotaionHandler導入に伴いBas<wbr>icAnnotationHandlerを廃止しました。</li>
+              <li>セッションデータへのImport/Exportについて例外が発生してしまうケースを改善いたしました。</li>
+              <li>上記の変更に伴いdiconファイルの更新をしました。</li>
+            </ul>
+            <h5>[2006/10/18]s2Flex2-components 1.0.0 rc-2 リリース</h5>
+            <ul>
+              <li>サービス呼び出し時にAsyncTokenを返すようにしました。</li>
+              <li>接続するサーバ設定の指定をこれまでのflex-service.xmlから変更し、flexアプリケーションと同一階層にあるgatewayを呼び出すように変更しました。</li>
+            </ul>
             <h5>[2006/09/14]s2Flex2 1.0.0 rc-2 リリース</h5>
             <ul>
               <li>FlexのArrayとJavaへのマッピングの改善しました。</li>
@@ -207,7 +235,7 @@
         </tr>
         <tr>
           <td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td>
-          <td width="766" class="copyright">Copyright&copy; 2004-2006, The Seasar Foundation and the others. All rights reserved.</td>
+          <td width="766" class="copyright">Copyright&copy; 2004-2007, The Seasar Foundation and the others. All rights reserved.</td>
         </tr>
       </table>
     <td class="backright" align="left" valign="top">&nbsp;</td>

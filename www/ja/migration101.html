@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Language" content="ja" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="keywords" content="The Seasar Foundation, Project Site, OSS, オープンソースソフトウェア, Java, DI, AOP, フレームワーク" />
+<meta name="description" content="私たちSeasarファウンデーションはオープンソースという仕組みの元、開発者のゆとりを実現できるプロダクトの開発と提供を通じて、ユーザと開発者とが共に喜びを分かち合える環境実現をお手伝いすることを目指し活動しています。 " />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>S2Flex2 - AMF3Gateway with DI Container -</title>
+<link rel="stylesheet" type="text/css" href="styles/main.css" media="screen,projection" />
+<link rel="stylesheet" type="text/css" href="styles/print.css" media="print" />
+</head>
+<body>
+<div id="wrapper">
+  <div id="header">
+    <div class="line"><span class="hide">spacer</span></div>
+    <div id="logo">
+      <h1 id="h01" class="hide">S2Flex2 ProjectSite</h1>
+      <img src="http://www.seasar.org/images/seasar_logo_blue.gif" alt="The Seasar Foundation" width="390" height="180" /></div>
+    <div id="tool">
+      <h2><a href="http://search.seasar.org/">Site Search</a></h2>
+      <form id="search" name="search" action="http://search.seasar.org/">
+        <div>
+          <input id="search_phrase" type="text" name="phrase" size="20" />
+          <input type="hidden" name="perpage" value="30" />
+          <input type="hidden" name="enc" value="UTF-8" />
+          <input id="search_go" type="submit" value="検索" />
+        </div>
+      </form>
+      <h2>Seasar Banner</h2>
+      <p><a href="images/seasar_banner.gif"><img src="http://www.seasar.org/images/seasar_banner.gif" alt="Seasar Banner" title="Seasar Banner" width="146" height="33" /></a></p>
+    </div>
+    <div id="navi">
+      <p><a href="#">English</a> | Japanese</p>
+    </div>
+  </div>
+  <!-- header -->
+  <div id="contents_center">
+    <div align="right">2007/02/17作成<br/>
+    </div>
+    <div id="article">
+      <div class="section">
+        <h3 id="h02">S2Flex2 1.0.1への移行</h3>
+        <p>S2Flex21.0.0から1.0.1に移行するときには次のようになります。</p>
+      </div>
+      <h4>1.ファイルの入れ替え</h4>
+      まず最初に以下のファイルを入れ替えます。すべてのファイルはリリースファイルに含まれています。
+      <ul>
+        <li>s2flex2-1.0.1.jar</li>
+        <li> amf3.dicon</li>
+        <li>amf3_remoting.dicon</li>
+        <li>amf0.dicon</li>
+        <li>amf0_remoging.dicon</li>
+      </ul>
+      <p>1.0.1では、Flex2クライアントから呼び出し可能なメソッド名を検証するクラスやパラメータ変換用クラスの名称を変更しました。1.0.0で利用していたamf3.diconとamf3_remoting.diconでは、エラーが発生して動作しません。1.0.1で動作するdiconファイルに入れ替えてご利用ください。</p>
+      <p>amf0.dicon,amf0_remoting.diconは、AMF0としてS2Flex2を利用するときに入れ替えます。 </p>
+      <h4><a name="webxml"></a>2.web.xmlの設定追加</h4>
+      <p>1.0.1からサーブレット：RemotingGatewayの初期パラメータを追加しました。初期パラメータを利用しなくても動作はしますがGETでアクセスした場合の表示など、1.0.0と異なる動作をすることがあります。</p>
+      <p> 1.セッションの有効化<br>
+        &lt;init-param&gt;<br>
+        &lt;param-name&gt;<strong>useSession</strong>&lt;/param-name&gt;<br>
+        &lt;param-value&gt;true&lt;/param-value&gt;<br>
+        &lt;/init-param&gt;</p>
+      <p> 2.HTTPのGETメソッドでアクセスした場合の表示の有無<br>
+        &lt;init-param&gt;<br>
+        &lt;param-name&gt;<strong>showGetResponse</strong>&lt;/param-name&gt;<br>
+        &lt;param-value&gt;true&lt;/param-value&gt;<br>
+        &lt;/init-param&gt;</p>
+      <p>web.xmlの記述詳細は、<a href="webxml.html">web.xmlの設定方法</a>をご参照ください。</p>
+    </div>
+    <!-- article -->
+  </div>
+  <!-- contents_center -->
+  <div id="footer">
+    <address>
+    &copy; Copyright The Seasar Foundation and the others 2004-2007, all rights reserved.
+    </address>
+    <div class="line"><span class="hide">spacer</span></div>
+  </div>
+  <!-- footer -->
+</div>
+<!-- wrapper -->
+</body>
+</html>
