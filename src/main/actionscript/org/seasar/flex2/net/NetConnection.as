@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2006 the Seasar Foundation and the Others.
+ * Copyright 2004-2007 the Seasar Foundation and the Others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,10 @@ package org.seasar.flex2.net{
  * 	<li>AppendToGatewayUrl</li>
  * 	<li> ReplaceGatewayUrl</li>
  * </ul>
+ * AMFのヘッダに関する仕様については以下をご参照ください。
+ * <ul><li><a href="http://osflash.org/amf/envelopes/remoting/headers">Predefined headers</li>
+ * </ul>
+ * <!--
  * Flash Player 9のセキュリティに関する仕様については以下をご参照ください。
  * <ul>
  * <li>
@@ -35,6 +39,7 @@ package org.seasar.flex2.net{
  * <a href="http://www.adobe.com/devnet/flashplayer/articles/flash_player_9_security.pdf">Flash Player 9 Secirity</a>
  * </li>
  * </ul>
+ * -->
  */ 
     public class NetConnection extends flash.net.NetConnection{
         /**
@@ -70,6 +75,10 @@ package org.seasar.flex2.net{
             this.connect( uri );
         }
         
+        /**
+        * パラメータで渡されたsessionIDなどを接続するURLに付与した上で再接続をします。これによってセッションの維持をします。
+        * @param append セッションIDを含むURLとして追加する文字列
+        */ 
         public function AppendToGatewayUrl(append:String):void{ 
             this.append = append;
             var url:String=this._originalUrl+ append;
@@ -77,14 +86,27 @@ package org.seasar.flex2.net{
             reconnect(url);
         }
         
+        /**
+        * 指定された値をAMFのヘッダとして追加します。
+        * @param operation ヘッダに追加する名称
+        * @param mustUnderstand サーバに送信された後に必ずこのヘッダを読み取るかどうかの指定。デフォルトはfalse.
+        * @param object ヘッダに追加する値
+        */ 
         public override function addHeader(operation:String,mustUnderstand:Boolean=false,param:Object=null):void{
             super.addHeader(operation,mustUnderstand,param);
         }
         
+       /**
+        * 指定されたURLをGatewayのURLとして、再接続します。
+        * @param url gatewayのURL
+        */  
         public function ReplaceGatewayUrl(url:String):void{
             reconnect(url);
         }
         
+        /**
+        * 接続先のGatewayURLを返します。
+        */ 
         public function get connectedUrl():String{
             if(append!= null){
                 return _originalUrl + append;
