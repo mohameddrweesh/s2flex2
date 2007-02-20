@@ -26,10 +26,20 @@ import org.seasar.framework.util.ClassUtil;
 
 public abstract class AbstractBeanConverterImpl implements Converter {
 
-    private final static void copyProperties(final Map src, final Object dest) {
-        if ((src == null) || (dest == null)) {
-            return;
+    protected static final Object newIncetance(final Class clazz,
+            final Map initProperties) {
+        final Object bean = ClassUtil.newInstance(clazz);
+        copyProperties(initProperties, bean);
+        return bean;
+    }
+
+    private static final void copyProperties(final Map src, final Object dest) {
+        if ((src != null) || (dest != null)) {
+            doCopyProperties(src, dest);
         }
+    }
+
+    private static final void doCopyProperties(final Map src, final Object dest) {
         final BeanDesc beanDesc = BeanDescFactory.getBeanDesc(dest.getClass());
         for (Iterator i = src.keySet().iterator(); i.hasNext();) {
             String key = (String) i.next();
@@ -40,13 +50,6 @@ public abstract class AbstractBeanConverterImpl implements Converter {
                 }
             }
         }
-    }
-
-    protected static final Object newIncetance(final Class clazz,
-            final Map initProperties) {
-        final Object bean = ClassUtil.newInstance(clazz);
-        copyProperties(initProperties, bean);
-        return bean;
     }
 
     public abstract Object convert(Object source, Class distClass);
