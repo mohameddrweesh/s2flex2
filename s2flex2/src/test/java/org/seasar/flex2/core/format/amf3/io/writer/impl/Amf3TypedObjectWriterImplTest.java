@@ -29,7 +29,7 @@ import org.seasar.framework.aop.impl.PointcutImpl;
 import org.seasar.framework.aop.interceptors.TraceInterceptor;
 import org.seasar.framework.aop.proxy.AopProxy;
 
-public class Amf3ClassTypedObjectWriterImplTest extends S2TestCase {
+public class Amf3TypedObjectWriterImplTest extends S2TestCase {
 
     private Amf3TypedObjectWriterImpl amf3TypedObjectWriter;
 

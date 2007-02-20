@@ -6,129 +6,160 @@
 		amf data binder
 	-->
 	<component
-		class="org.seasar.flex2.core.format.amf.binder.impl.BigDecimalDataBinder"/>
+		class="org.seasar.flex2.core.format.amf.binder.impl.BigDecimalDataBinder"
+		autoBinding="none"
+		/>
 	<component
-		class="org.seasar.flex2.core.format.amf.binder.impl.ListDataBinder"/>
+		class="org.seasar.flex2.core.format.amf.binder.impl.ListDataBinder"
+		autoBinding="none"
+		/>
 		
     <!--
         reader/writer share data components
     -->
     <component
     	class="org.seasar.flex2.core.format.amf0.type.impl.Amf0SharedObjectImpl"
-    	instance="request" />
+    	instance="request"
+    	autoBinding="none"
+    	/>
     <component
-    	class="org.seasar.flex2.core.format.amf0.type.factory.impl.Amf0SharedObjectFactoryImpl" />
+    	class="org.seasar.flex2.core.format.amf0.type.factory.impl.Amf0SharedObjectFactoryImpl"
+    	autoBinding="property"
+    	/>
 		
     <!-- 
         amf0 data reader components
     -->
     <component
-    	name="amf0NumberReader"
-    	class="org.seasar.flex2.core.format.amf0.io.reader.impl.Amf0NumberReaderImpl" />
+    	class="org.seasar.flex2.core.format.amf0.io.reader.impl.Amf0NumberReaderImpl"
+    	autoBinding="none"
+    	/>
     <component
-    	name="amf0BooleanReader"
-    	class="org.seasar.flex2.core.format.amf0.io.reader.impl.Amf0BooleanReaderImpl" />
+    	class="org.seasar.flex2.core.format.amf0.io.reader.impl.Amf0BooleanReaderImpl"
+    	autoBinding="none"
+    	/>
     <component
     	name="amf0StringReader" 
-    	class="org.seasar.flex2.core.format.amf0.io.reader.impl.Amf0StringReaderImpl" />
+    	class="org.seasar.flex2.core.format.amf0.io.reader.impl.Amf0StringReaderImpl"
+    	autoBinding="none"
+    	/>
     <component
-    	name="amf0ObjectReader" 
-    	class="org.seasar.flex2.core.format.amf0.io.reader.impl.Amf0ObjectReaderImpl" />
+    	class="org.seasar.flex2.core.format.amf0.io.reader.impl.Amf0ObjectReaderImpl"
+    	autoBinding="property"
+    	/>
     <component
-    	name="amf0MovieClipReader" 
-    	class="org.seasar.flex2.core.format.amf0.io.reader.impl.Amf0UnsupportedReaderImpl" />
+    	class="org.seasar.flex2.core.format.amf0.io.reader.impl.Amf0UnsupportedReaderImpl"
+    	autoBinding="none"
+    	/>
     <component
-    	name="amf0NullReader" 
-    	class="org.seasar.flex2.core.format.amf0.io.reader.impl.Amf0NullReaderImpl" />
+    	class="org.seasar.flex2.core.format.amf0.io.reader.impl.Amf0NullReaderImpl"
+    	autoBinding="none"
+    	/>
     <component
-    	name="amf0UndefinedReader" 
-    	class="org.seasar.flex2.core.format.amf0.io.reader.impl.Amf0UndefinedReaderImpl" />
+    	class="org.seasar.flex2.core.format.amf0.io.reader.impl.Amf0UndefinedReaderImpl"
+    	autoBinding="none"
+    	/>
     <component 
-    	name="amf0ReferenceReader" 
-    	class="org.seasar.flex2.core.format.amf0.io.reader.impl.Amf0ReferenceReaderImpl" />
+    	class="org.seasar.flex2.core.format.amf0.io.reader.impl.Amf0ReferenceReaderImpl"
+    	autoBinding="property"
+    	/>
     <component
-    	name="amf0MixedArrayReader" 
-    	class="org.seasar.flex2.core.format.amf0.io.reader.impl.Amf0UnsupportedReaderImpl" />
+    	class="org.seasar.flex2.core.format.amf0.io.reader.impl.Amf0UnsupportedReaderImpl"
+    	autoBinding="none"
+    	/>
     <component
-    	name="amf0EoMReader" 
-    	class="org.seasar.flex2.core.format.amf0.io.reader.impl.Amf0UnsupportedReaderImpl" />
+    	class="org.seasar.flex2.core.format.amf0.io.reader.impl.Amf0UnsupportedReaderImpl"
+    	autoBinding="none"
+    	/>
     <component
-    	name="amf0ArrayReader" 
-    	class="org.seasar.flex2.core.format.amf0.io.reader.impl.Amf0ArrayReaderImpl" />
+    	class="org.seasar.flex2.core.format.amf0.io.reader.impl.Amf0ArrayReaderImpl"
+    	autoBinding="property"
+    	/>
     <component
-    	name="amf0DateReader" 
-    	class="org.seasar.flex2.core.format.amf0.io.reader.impl.Amf0DateReaderImpl" />
+    	class="org.seasar.flex2.core.format.amf0.io.reader.impl.Amf0DateReaderImpl"
+    	autoBinding="none"
+    	/>
     <component
-    	name="amf0LongStringReader" 
-    	class="org.seasar.flex2.core.format.amf0.io.reader.impl.Amf0UnsupportedReaderImpl" />
+    	class="org.seasar.flex2.core.format.amf0.io.reader.impl.Amf0UnsupportedReaderImpl"
+    	autoBinding="none"
+    	/>
     <component
-    	name="amf0AsObjectReader" 
-    	class="org.seasar.flex2.core.format.amf0.io.reader.impl.Amf0UnsupportedReaderImpl" />
+    	class="org.seasar.flex2.core.format.amf0.io.reader.impl.Amf0UnsupportedReaderImpl"
+    	autoBinding="none"
+    	/>
     <component
-    	name="amf0RecordSetReader" 
-    	class="org.seasar.flex2.core.format.amf0.io.reader.impl.Amf0UnsupportedReaderImpl" />
+    	class="org.seasar.flex2.core.format.amf0.io.reader.impl.Amf0UnsupportedReaderImpl"
+    	autoBinding="none"
+    	/>
     <component
-    	name="amf0XmlReader" 
-    	class="org.seasar.flex2.core.format.amf0.io.reader.impl.Amf0XmlReaderImpl" />
+    	class="org.seasar.flex2.core.format.amf0.io.reader.impl.Amf0XmlReaderImpl"
+    	autoBinding="none"
+    	/>
     <component
-    	name="amf0TypedObjectReader" 
-    	class="org.seasar.flex2.core.format.amf0.io.reader.impl.Amf0TypedObjectReaderImpl" />
+    	class="org.seasar.flex2.core.format.amf0.io.reader.impl.Amf0TypedObjectReaderImpl"
+    	autoBinding="property"
+    	/>
 
     <component
-        class="org.seasar.flex2.core.format.amf0.io.reader.factory.impl.Amf0DataReaderFactoryImpl" />
+        class="org.seasar.flex2.core.format.amf0.io.reader.factory.impl.Amf0DataReaderFactoryImpl"
+    	autoBinding="property"
+    	/>
 
     <!-- 
         amf0 data writer components
     -->
-    <component 
-	    name="amf0NullWriterImpl"
+    <component
 	    class="org.seasar.flex2.core.format.amf0.io.writer.impl.Amf0NullWriterImpl" 
-	    autoBinding="none" />
-    <component 
-	    name="amf0NumberWriter" 
+	    autoBinding="none"
+    	/>
+    <component
 	    class="org.seasar.flex2.core.format.amf0.io.writer.impl.Amf0NumberWriterImpl" 
-	    autoBinding="none" />
+	    autoBinding="none"
+    	/>
     <component
 	    name="amf0StringWriter" 
 	    class="org.seasar.flex2.core.format.amf0.io.writer.impl.Amf0StringWriterImpl"
-	    autoBinding="none" />
-    <component 
-	    name="amf0BooleanWriter" 
+	    autoBinding="none"
+    	/>
+    <component
 	    class="org.seasar.flex2.core.format.amf0.io.writer.impl.Amf0BooleanWriterImpl" 
-	    autoBinding="none" />
-    <component 
-	    name="amf0ArrayWriter" 
+	    autoBinding="none"
+    	/>
+    <component
 	    class="org.seasar.flex2.core.format.amf0.io.writer.impl.Amf0ArrayWriterImpl" 
-	    autoBinding="property" />
-    <component 
-	    name="amf0ObjectWriter" 
+	    autoBinding="property"
+    	/>
+    <component
 	    class="org.seasar.flex2.core.format.amf0.io.writer.impl.Amf0ObjectWriterImpl" 
-	    autoBinding="property" />
-    <component 
-	    name="amf0DateWriter"
+	    autoBinding="property"
+    	/>
+    <component
 	    class="org.seasar.flex2.core.format.amf0.io.writer.impl.Amf0DateWriterImpl" 
-	    autoBinding="none" />
-    <component 
-	    name="amf0XmlStringWriter" 
+	    autoBinding="none"
+    	/>
+    <component
 	    class="org.seasar.flex2.core.format.amf0.io.writer.impl.Amf0XmlStringWriterImpl" 
-	    autoBinding="none" />
-    <component 
-	    name="amf0CollectionWriter" 
+	    autoBinding="none"
+    	/>
+    <component
 	    class="org.seasar.flex2.core.format.amf0.io.writer.impl.Amf0CollectionWriterImpl" 
-	    autoBinding="property" />
-    <component 
-	    name="amf0IteratorWriter" 
+	    autoBinding="property"
+    	/>
+    <component
 	    class="org.seasar.flex2.core.format.amf0.io.writer.impl.Amf0IteratorWriterImpl" 
-	    autoBinding="property" />	    
-    <component 
-	    name="amf0BigNumberWriter" 
+	    autoBinding="property"
+    	/>	    
+    <component
 	    class="org.seasar.flex2.core.format.amf0.io.writer.impl.Amf0BigNumberWriterImpl" 
-	    autoBinding="property" />
-    <component 
-	    name="amf0TypedObjectWriter" 
+	    autoBinding="none"
+    	/>
+    <component
 	    class="org.seasar.flex2.core.format.amf0.io.writer.impl.Amf0TypedObjectWriterImpl" 
-	    autoBinding="property" />
+	    autoBinding="property"
+    	/>
 
     <component
-        class="org.seasar.flex2.core.format.amf0.io.writer.factory.impl.Amf0DataWriterFactoryImpl"/>
+        class="org.seasar.flex2.core.format.amf0.io.writer.factory.impl.Amf0DataWriterFactoryImpl"
+        autoBinding="property"
+        />
 </components>

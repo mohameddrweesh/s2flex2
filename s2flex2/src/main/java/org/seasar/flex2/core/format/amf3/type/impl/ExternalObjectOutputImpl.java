@@ -28,9 +28,6 @@ public class ExternalObjectOutputImpl implements ExternalObjectOutput {
 
     private Amf3DataWriterFactory writerFactory;
 
-    public ExternalObjectOutputImpl() {
-    }
-
     public void close() throws IOException {
         outputStream.close();
     }

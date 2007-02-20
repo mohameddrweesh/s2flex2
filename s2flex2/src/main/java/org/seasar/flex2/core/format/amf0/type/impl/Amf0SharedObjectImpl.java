@@ -24,7 +24,7 @@ public class Amf0SharedObjectImpl implements Amf0SharedObject {
     protected ArrayList sharedObjects;
 
     public Amf0SharedObjectImpl() {
-        sharedObjects = new ArrayList(24);
+        sharedObjects = new ArrayList(12);
     }
 
     public void addSharedObject(final Object o) {

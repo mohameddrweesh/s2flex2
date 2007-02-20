@@ -28,9 +28,6 @@ public class ExternalObjectInputImpl implements ExternalObjectInput {
 
     private Amf3DataReaderFactory readerFactory;
 
-    public ExternalObjectInputImpl() {
-    }
-
     public int available() throws IOException {
         return inputStream.available();
     }
