@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2006 the Seasar Foundation and the Others.
+ * Copyright 2004-2007 the Seasar Foundation and the Others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
 
 public class RemotingGateway extends HttpServlet {
 
-    public static final String VERSION = "1.0.1-snapshot";
+    public static final String VERSION = "1.0.2";
 
     /**
      * 
