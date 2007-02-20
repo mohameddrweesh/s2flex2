@@ -106,7 +106,7 @@
     	class="org.seasar.flex2.core.format.amf0.io.reader.impl.Amf0TypedObjectReaderImpl" />
     <component
     	name="amf0Amf3DataReader" 
-    	class="org.seasar.flex2.core.format.amf3.io.reader.impl.Amf3DataReaderImpl" />
+    	class="org.seasar.flex2.core.format.amf0.io.reader.impl.Amf3DataReaderImpl" />
 	
 	<!--
 		amf3 reader
