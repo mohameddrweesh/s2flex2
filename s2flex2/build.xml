@@ -14,10 +14,6 @@
 			<zipfileset prefix="s2flex2/resources" dir="src/test/resources">
 				<include name="web.xml" />
 				<include name="app.dicon"/>
-				<include name="amf0.dicon"/>
-				<include name="amf3.dicon"/>
-				<include name="remoting_amf0.dicon"/>
-				<include name="remoting_amf3.dicon"/>
 			</zipfileset>
 		</zip>
 	</target>
