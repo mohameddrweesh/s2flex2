@@ -1,4 +1,6 @@
-#Tue Sep 26 14:01:15 JST 2006
+#Wed Feb 14 02:00:51 GMT 2007
 eclipse.preferences.version=1
+encoding//src/main/resources/FLXMessages.properties=UTF-8
+encoding//src/main/resources/FLXMessages_ja.properties=UTF-8
 encoding//src/test/resources/testXml.xml=UTF-8
 encoding/<project>=UTF-8
