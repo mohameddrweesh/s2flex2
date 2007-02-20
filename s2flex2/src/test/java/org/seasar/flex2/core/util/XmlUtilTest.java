@@ -19,7 +19,7 @@ import javax.xml.parsers.DocumentBuilder;
 
 import junit.framework.TestCase;
 
-import org.seasar.flex2.core.format.amf3.io.CharsetType;
+import org.seasar.flex2.core.format.amf3.type.CharsetType;
 import org.seasar.framework.util.DocumentBuilderFactoryUtil;
 import org.seasar.framework.util.DocumentBuilderUtil;
 import org.seasar.framework.util.DomUtil;

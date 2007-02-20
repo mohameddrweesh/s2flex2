@@ -20,8 +20,8 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 import org.seasar.flex2.core.format.amf3.Amf3Constants;
-import org.seasar.flex2.core.format.amf3.io.CharsetType;
 import org.seasar.flex2.core.format.amf3.io.writer.Amf3DataWriter;
+import org.seasar.flex2.core.format.amf3.type.CharsetType;
 
 public abstract class AbstractAmf3UTF8StringWriterImpl extends
         Amf3IntWriterImpl implements Amf3DataWriter {

@@ -19,8 +19,9 @@ import java.io.DataOutputStream;
 import java.io.ObjectOutput;
 
 import org.seasar.extension.unit.S2TestCase;
-import org.seasar.flex2.core.format.amf3.io.ExternalObjectOutput;
-import org.seasar.flex2.core.format.amf3.io.factory.impl.ExternalObjectOutputFactoryImpl;
+import org.seasar.flex2.core.format.amf3.type.ExternalObjectOutput;
+import org.seasar.flex2.core.format.amf3.type.factory.ExternalObjectOutputFactory;
+import org.seasar.flex2.core.format.amf3.type.factory.impl.ExternalObjectOutputFactoryImpl;
 import org.seasar.framework.container.S2Container;
 
 public class ExternalDataOutputFactoryTest extends S2TestCase {

@@ -2,6 +2,14 @@
 <!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN" 
     "http://www.seasar.org/dtd/components24.dtd">
 <components namespace="amf0">
+	<!--
+		amf data binder
+	-->
+	<component
+		class="org.seasar.flex2.core.format.amf.binder.impl.BigDecimalDataBinder"/>
+	<component
+		class="org.seasar.flex2.core.format.amf.binder.impl.ListDataBinder"/>
+		
     <!--
         reader/writer share data components
     -->
@@ -10,14 +18,6 @@
     	instance="request" />
     <component
     	class="org.seasar.flex2.core.format.amf0.type.factory.impl.Amf0SharedObjectFactoryImpl" />
-
-	<!--
-		amf data binder
-	-->
-	<component
-		class="org.seasar.flex2.core.format.amf.binder.impl.BigDecimalDataBinder"/>
-	<component
-		class="org.seasar.flex2.core.format.amf.binder.impl.ListDataBinder"/>
 		
     <!-- 
         amf0 data reader components

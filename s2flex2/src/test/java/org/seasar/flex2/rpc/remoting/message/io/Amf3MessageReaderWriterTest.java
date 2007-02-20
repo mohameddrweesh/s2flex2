@@ -36,8 +36,8 @@ import javax.xml.parsers.DocumentBuilder;
 
 import org.seasar.extension.unit.S2TestCase;
 import org.seasar.flex2.core.format.amf3.Amf3Constants;
-import org.seasar.flex2.core.format.amf3.io.CharsetType;
 import org.seasar.flex2.core.format.amf3.type.ByteArray;
+import org.seasar.flex2.core.format.amf3.type.CharsetType;
 import org.seasar.flex2.core.format.amf3.type.factory.ByteArrayFactory;
 import org.seasar.flex2.rpc.remoting.message.data.Message;
 import org.seasar.flex2.rpc.remoting.message.data.MessageBody;

@@ -13,14 +13,14 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.core.format.amf3.io.impl;
+package org.seasar.flex2.core.format.amf3.type.impl;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.seasar.flex2.core.format.amf3.io.ExternalObjectOutput;
 import org.seasar.flex2.core.format.amf3.io.writer.Amf3DataWriter;
 import org.seasar.flex2.core.format.amf3.io.writer.factory.Amf3DataWriterFactory;
+import org.seasar.flex2.core.format.amf3.type.ExternalObjectOutput;
 
 public class ExternalObjectOutputImpl implements ExternalObjectOutput {
 

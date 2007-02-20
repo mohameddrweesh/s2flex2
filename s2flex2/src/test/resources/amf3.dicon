@@ -3,6 +3,16 @@
 	"http://www.seasar.org/dtd/components24.dtd">
 <components namespace="amf3">
 	<!--
+		amf data binder
+	-->
+	<component
+		class="org.seasar.flex2.core.format.amf.binder.impl.BigDecimalDataBinder"/>
+	<component
+		class="org.seasar.flex2.core.format.amf.binder.impl.ListDataBinder"/>
+	<component
+		class="org.seasar.flex2.core.format.amf.binder.impl.ByteArrayDataBinder"/>
+
+	<!--
 		reader/writer share data components
 	-->
 	<component
@@ -24,22 +34,22 @@
 		amf3 special type factory components
 	-->
 	<component
-		class="org.seasar.flex2.core.format.amf3.io.factory.impl.ExternalObjectInputFactoryImpl" />
+		class="org.seasar.flex2.core.format.amf3.type.impl.ExternalObjectInputImpl"
+		instance="prototype" />
 	<component
-		class="org.seasar.flex2.core.format.amf3.io.factory.impl.ExternalObjectOutputFactoryImpl" />
+		class="org.seasar.flex2.core.format.amf3.type.impl.ExternalObjectOutputImpl"
+		instance="prototype" />
+	<component
+		class="org.seasar.flex2.core.format.amf3.type.factory.impl.ExternalObjectInputFactoryImpl" />
+	<component
+		class="org.seasar.flex2.core.format.amf3.type.factory.impl.ExternalObjectOutputFactoryImpl" />
+
+	<component 
+		class="org.seasar.flex2.core.format.amf3.type.impl.ByteArrayImpl"
+		instance="prototype" />		
 	<component
 		class="org.seasar.flex2.core.format.amf3.type.factory.impl.ByteArrayFactoryImpl" />
-
-	<!--
-		amf data binder
-	-->
-	<component
-		class="org.seasar.flex2.core.format.amf.binder.impl.BigDecimalDataBinder"/>
-	<component
-		class="org.seasar.flex2.core.format.amf.binder.impl.ListDataBinder"/>
-	<component
-		class="org.seasar.flex2.core.format.amf.binder.impl.ByteArrayDataBinder"/>
-
+		
     <!-- 
         amf0 data reader components
     -->
@@ -276,18 +286,4 @@
 	-->
 	<component
 		class="org.seasar.flex2.core.format.amf3.io.writer.factory.impl.Amf3DataWriterFactoryImpl" />
-	
-	<!-- 
-		amf3 special type components
-	-->
-	<component
-		class="org.seasar.flex2.core.format.amf3.io.impl.ExternalObjectInputImpl"
-		instance="prototype" />
-	<component
-		class="org.seasar.flex2.core.format.amf3.io.impl.ExternalObjectOutputImpl"
-		instance="prototype" />
-	<component 
-		class="org.seasar.flex2.core.format.amf3.type.impl.ByteArrayImpl"
-		instance="prototype" />
-
 </components>

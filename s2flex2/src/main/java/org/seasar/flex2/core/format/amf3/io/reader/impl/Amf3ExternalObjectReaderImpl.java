@@ -19,9 +19,9 @@ import java.io.DataInputStream;
 import java.io.Externalizable;
 import java.io.IOException;
 
-import org.seasar.flex2.core.format.amf3.io.ExternalObjectInput;
-import org.seasar.flex2.core.format.amf3.io.factory.ExternalObjectInputFactory;
 import org.seasar.flex2.core.format.amf3.io.reader.ExternalObjectReader;
+import org.seasar.flex2.core.format.amf3.type.ExternalObjectInput;
+import org.seasar.flex2.core.format.amf3.type.factory.ExternalObjectInputFactory;
 import org.seasar.framework.exception.ClassNotFoundRuntimeException;
 import org.seasar.framework.util.ClassUtil;
 

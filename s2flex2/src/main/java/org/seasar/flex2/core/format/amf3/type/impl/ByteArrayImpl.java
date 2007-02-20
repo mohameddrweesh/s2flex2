@@ -24,11 +24,11 @@ import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 
 import org.seasar.flex2.core.format.amf.io.AmfDataReader;
-import org.seasar.flex2.core.format.amf3.io.CharsetType;
 import org.seasar.flex2.core.format.amf3.io.reader.factory.Amf3DataReaderFactory;
 import org.seasar.flex2.core.format.amf3.io.writer.Amf3DataWriter;
 import org.seasar.flex2.core.format.amf3.io.writer.factory.Amf3DataWriterFactory;
 import org.seasar.flex2.core.format.amf3.type.ByteArray;
+import org.seasar.flex2.core.format.amf3.type.CharsetType;
 import org.seasar.flex2.core.format.amf3.type.exception.FailedCompressRuntimeException;
 import org.seasar.flex2.core.format.amf3.type.exception.FailedUnCompressRuntimeException;
 

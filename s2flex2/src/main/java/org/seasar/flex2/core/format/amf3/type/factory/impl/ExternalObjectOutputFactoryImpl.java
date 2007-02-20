@@ -13,26 +13,26 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.core.format.amf3.io.factory.impl;
+package org.seasar.flex2.core.format.amf3.type.factory.impl;
 
-import java.io.DataInputStream;
+import java.io.DataOutputStream;
 
-import org.seasar.flex2.core.format.amf3.io.ExternalObjectInput;
-import org.seasar.flex2.core.format.amf3.io.factory.ExternalObjectInputFactory;
-import org.seasar.flex2.core.format.amf3.io.impl.ExternalObjectInputImpl;
+import org.seasar.flex2.core.format.amf3.type.ExternalObjectOutput;
+import org.seasar.flex2.core.format.amf3.type.factory.ExternalObjectOutputFactory;
+import org.seasar.flex2.core.format.amf3.type.impl.ExternalObjectOutputImpl;
 import org.seasar.framework.container.S2Container;
 
-public class ExternalObjectInputFactoryImpl implements
-        ExternalObjectInputFactory {
+public class ExternalObjectOutputFactoryImpl implements
+        ExternalObjectOutputFactory {
 
     private S2Container container;
 
-    public ExternalObjectInput createObjectInput(
-            final DataInputStream inputStream) {
-        final ExternalObjectInputImpl input = (ExternalObjectInputImpl) container
-                .getComponent(ExternalObjectInput.class);
-        input.setInputStream(inputStream);
-        return input;
+    public ExternalObjectOutput createObjectOutput(
+            final DataOutputStream outputStream) {
+        final ExternalObjectOutputImpl output = (ExternalObjectOutputImpl) container
+                .getComponent(ExternalObjectOutput.class);
+        output.setOutputStream(outputStream);
+        return output;
     }
 
     public S2Container getContainer() {
@@ -42,5 +42,4 @@ public class ExternalObjectInputFactoryImpl implements
     public void setContainer(final S2Container container) {
         this.container = container;
     }
-
 }

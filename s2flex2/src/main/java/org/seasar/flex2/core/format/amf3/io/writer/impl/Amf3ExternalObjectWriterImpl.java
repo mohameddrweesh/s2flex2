@@ -20,8 +20,8 @@ import java.io.Externalizable;
 import java.io.IOException;
 
 import org.seasar.flex2.core.format.amf3.Amf3Constants;
-import org.seasar.flex2.core.format.amf3.io.ExternalObjectOutput;
-import org.seasar.flex2.core.format.amf3.io.factory.ExternalObjectOutputFactory;
+import org.seasar.flex2.core.format.amf3.type.ExternalObjectOutput;
+import org.seasar.flex2.core.format.amf3.type.factory.ExternalObjectOutputFactory;
 import org.seasar.framework.beans.BeanDesc;
 
 public class Amf3ExternalObjectWriterImpl extends Amf3TypedObjectWriterImpl {

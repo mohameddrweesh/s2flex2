@@ -19,7 +19,7 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
-import org.seasar.flex2.core.format.amf3.io.CharsetType;
+import org.seasar.flex2.core.format.amf3.type.CharsetType;
 
 public abstract class AbstractAmf3UTF8StringReaderImpl extends
         AbstractAmf3ObjectReaderImpl {

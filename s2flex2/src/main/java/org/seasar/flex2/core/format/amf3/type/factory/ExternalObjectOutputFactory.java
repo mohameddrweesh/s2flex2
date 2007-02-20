@@ -13,9 +13,12 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.core.format.amf3.io;
+package org.seasar.flex2.core.format.amf3.type.factory;
 
-import java.io.ObjectOutput;
+import java.io.DataOutputStream;
 
-public interface ExternalObjectOutput extends ObjectOutput {
+import org.seasar.flex2.core.format.amf3.type.ExternalObjectOutput;
+
+public interface ExternalObjectOutputFactory {
+    ExternalObjectOutput createObjectOutput(DataOutputStream outputStream);
 }
