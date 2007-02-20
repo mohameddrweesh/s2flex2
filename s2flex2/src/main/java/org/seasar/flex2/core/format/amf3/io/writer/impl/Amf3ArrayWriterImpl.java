@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2006 the Seasar Foundation and the Others.
+ * Copyright 2004-2007 the Seasar Foundation and the Others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,6 +27,15 @@ public class Amf3ArrayWriterImpl extends AbstractAmf3TypedObjectWriterImpl {
         return Amf3TypeDef.ARRAY;
     }
 
+    public boolean isWritableValue(final Object value) {
+        return (value instanceof Object[]);
+    }
+
+    protected void writeInlineObject(final Object object,
+            final DataOutputStream outputStream) throws IOException {
+        writeArrayElements((Object[]) object, outputStream);
+    }
+
     private final void writeArrayElements(final Object[] array,
             final DataOutputStream outputStream) throws IOException {
         addObjectReference(array);
@@ -38,10 +47,5 @@ public class Amf3ArrayWriterImpl extends AbstractAmf3TypedObjectWriterImpl {
         for (int i = 0; i < array.length; i++) {
             writeObjectElement(array[i], outputStream);
         }
-    }
-
-    protected void writeInlineObject(final Object object,
-            final DataOutputStream outputStream) throws IOException {
-        writeArrayElements((Object[]) object, outputStream);
     }
 }

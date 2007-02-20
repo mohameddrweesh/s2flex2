@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2006 the Seasar Foundation and the Others.
+ * Copyright 2004-2007 the Seasar Foundation and the Others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,6 +29,25 @@ public class Amf3ASObjectWriterImpl extends AbstractAmf3ClassObjectWriterImpl {
         return Amf3TypeDef.OBJECT;
     }
 
+    public boolean isWritableValue(final Object value) {
+        return (value instanceof Map);
+    }
+
+    protected final void writeClassReferenceDefine(final Object object,
+            final DataOutputStream outputStream) throws IOException {
+        addClassReference(object.getClass());
+        int classDef = Amf3Constants.OBJECT_INLINE;
+        classDef |= Amf3Constants.CLASS_DEF_INLINE;
+        classDef |= Amf3Constants.OBJECT_NAME_VALUE_ENCODED;
+        writeIntData(classDef, outputStream);
+        outputStream.writeByte(Amf3Constants.EMPTY_STRING_DATA);
+    }
+
+    protected void writeInlineObject(final Object object,
+            final DataOutputStream outputStream) throws IOException {
+        writeObjectData((Map) object, outputStream);
+    }
+
     private final void writeObjectData(final Map value,
             final DataOutputStream outputStream) throws IOException {
         addObjectReference(value);
@@ -46,20 +65,5 @@ public class Amf3ASObjectWriterImpl extends AbstractAmf3ClassObjectWriterImpl {
         final String propertyName = (String) entry.getKey();
         writeTypeString(propertyName, outputStream);
         writeObjectElement(entry.getValue(), outputStream);
-    }
-
-    protected final void writeClassReferenceDefine(final Object object,
-            final DataOutputStream outputStream) throws IOException {
-        addClassReference(object.getClass());
-        int classDef = Amf3Constants.OBJECT_INLINE;
-        classDef |= Amf3Constants.CLASS_DEF_INLINE;
-        classDef |= Amf3Constants.OBJECT_NAME_VALUE_ENCODED;
-        writeIntData(classDef, outputStream);
-        outputStream.writeByte(Amf3Constants.EMPTY_STRING_DATA);
-    }
-
-    protected void writeInlineObject(final Object object,
-            final DataOutputStream outputStream) throws IOException {
-        writeObjectData((Map) object, outputStream);
     }
 }

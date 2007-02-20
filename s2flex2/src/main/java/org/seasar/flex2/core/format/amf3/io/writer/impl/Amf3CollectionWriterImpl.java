@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2006 the Seasar Foundation and the Others.
+ * Copyright 2004-2007 the Seasar Foundation and the Others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,16 +22,20 @@ import java.util.Collection;
 
 public class Amf3CollectionWriterImpl extends Amf3ArrayWriterImpl {
 
+    public boolean isWritableValue(final Object value) {
+        return Collection.class.isAssignableFrom(value.getClass());
+    }
+
+    protected final void writeInlineObject(final Object object,
+            final DataOutputStream outputStream) throws IOException {
+        writeCollection((Collection) object, outputStream);
+    }
+
     private final void writeCollection(final Collection value,
             final DataOutputStream outputStream) throws IOException {
         final ArrayList list = new ArrayList();
         list.addAll(value);
         super.writeInlineObject(list.toArray(new Object[list.size()]),
                 outputStream);
-    }
-
-    protected final void writeInlineObject(final Object object,
-            final DataOutputStream outputStream) throws IOException {
-        writeCollection((Collection) object, outputStream);
     }
 }

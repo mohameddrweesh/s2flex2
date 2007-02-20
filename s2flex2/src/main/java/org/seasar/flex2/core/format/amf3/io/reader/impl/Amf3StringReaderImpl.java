@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2006 the Seasar Foundation and the Others.
+ * Copyright 2004-2007 the Seasar Foundation and the Others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,10 @@ package org.seasar.flex2.core.format.amf3.io.reader.impl;
 import java.io.DataInputStream;
 import java.io.IOException;
 
-public class Amf3StringReaderImpl extends AbstractAmf3UTF8StringReaderImpl {
+import org.seasar.flex2.core.format.amf3.io.reader.Amf3DataReader;
+
+public class Amf3StringReaderImpl extends AbstractAmf3UTF8StringReaderImpl
+        implements Amf3DataReader {
 
     public Object read(final DataInputStream inputStream) throws IOException {
         return readObject(inputStream);

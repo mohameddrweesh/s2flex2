@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2006 the Seasar Foundation and the Others.
+ * Copyright 2004-2007 the Seasar Foundation and the Others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,11 +15,11 @@
  */
 package org.seasar.flex2.core.format.amf3.io.writer.factory;
 
-import org.seasar.flex2.core.format.amf.io.writer.factory.AmfDataWriterFactory;
+import org.seasar.flex2.core.format.amf0.io.writer.factory.Amf0DataWriterFactory;
 import org.seasar.flex2.core.format.amf3.io.writer.Amf3DataWriter;
 
-public interface Amf3DataWriterFactory extends AmfDataWriterFactory {
+public interface Amf3DataWriterFactory extends Amf0DataWriterFactory {
 
-    Amf3DataWriter createDataValueWriter(Object value);
+    Amf3DataWriter createAmf3DataWriter(Object value);
 
 }

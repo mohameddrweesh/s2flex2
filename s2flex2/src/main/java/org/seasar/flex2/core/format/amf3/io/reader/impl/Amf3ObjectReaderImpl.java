@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2006 the Seasar Foundation and the Others.
+ * Copyright 2004-2007 the Seasar Foundation and the Others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,16 +21,18 @@ import java.io.IOException;
 
 import org.seasar.flex2.core.format.amf3.Amf3Constants;
 import org.seasar.flex2.core.format.amf3.io.reader.ASObjectReader;
-import org.seasar.flex2.core.format.amf3.io.reader.ClassTypedObjectReader;
+import org.seasar.flex2.core.format.amf3.io.reader.Amf3DataReader;
 import org.seasar.flex2.core.format.amf3.io.reader.ExternalObjectReader;
+import org.seasar.flex2.core.format.amf3.io.reader.TypedObjectReader;
 import org.seasar.flex2.core.format.amf3.type.Amf3Object;
 import org.seasar.framework.util.ClassUtil;
 
-public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
+public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl
+        implements Amf3DataReader {
 
     private ASObjectReader asobjectReader;
 
-    private ClassTypedObjectReader classTypedObjectReader;
+    private TypedObjectReader classTypedObjectReader;
 
     private ExternalObjectReader externalObjectReader;
 
@@ -43,7 +45,7 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
     }
 
     public void setClassTypedObjectReader(
-            final ClassTypedObjectReader classTypedObjectReader) {
+            final TypedObjectReader classTypedObjectReader) {
         this.classTypedObjectReader = classTypedObjectReader;
     }
 
@@ -55,7 +57,7 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl {
     private final Object readInlineClassObjectData(final int objectDef,
             final DataInputStream inputStream) throws IOException {
         Object object = null;
-        final String className = (String) stringReader.read(inputStream);
+        final String className = (String) amf3StringReader.read(inputStream);
         switch (objectDef & Amf3Constants.OBJECT_ENCODING_TYPE) {
             case Amf3Constants.OBJECT_PROPERTY_LIST_ENCODED: {
                 final Class clazz = ClassUtil.forName(className);

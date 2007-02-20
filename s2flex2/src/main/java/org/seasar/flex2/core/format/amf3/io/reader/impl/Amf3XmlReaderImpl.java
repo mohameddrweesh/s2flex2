@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2006 the Seasar Foundation and the Others.
+ * Copyright 2004-2007 the Seasar Foundation and the Others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,46 +18,22 @@ package org.seasar.flex2.core.format.amf3.io.reader.impl;
 import java.io.DataInputStream;
 import java.io.IOException;
 
-import org.seasar.flex2.core.util.XmlUtil;
-import org.w3c.dom.Document;
+import org.seasar.flex2.core.format.amf3.io.reader.Amf3DataReader;
 
-public class Amf3XmlReaderImpl extends AbstractAmf3UTF8StringReaderImpl {
-
-    private static final String DEFAULT_TAG_PREFIX = "<root>";
-
-    private static final String DEFAULT_TAG_SUFFIX = "</root>";
-
-    private static final String readXmlStringData(final int xmlDef,
-            final DataInputStream inputStream) throws IOException {
-        String xmlStringData = readStringData(xmlDef, inputStream);
-        if ((xmlStringData.indexOf('<') < 0)
-                || (xmlStringData.indexOf('<') > 1)) {
-            xmlStringData = DEFAULT_TAG_PREFIX + xmlStringData
-                    + DEFAULT_TAG_SUFFIX;
-        }
-        return xmlStringData;
-    }
+public class Amf3XmlReaderImpl extends AbstractAmf3UTF8StringReaderImpl
+        implements Amf3DataReader {
 
     public Object read(final DataInputStream inputStream) throws IOException {
-        return readObject(inputStream);
+        throw new RuntimeException("Unsupport XML Data");
     }
 
-    private final Document readXmlData(final int xmlDef,
+    protected Object readInlinedObject(final int reference,
             final DataInputStream inputStream) throws IOException {
-        final Document xml = XmlUtil.getXmlDocument(readXmlStringData(xmlDef,
-                inputStream));
-        addObjectReference(xml);
-
-        return xml;
+        throw new RuntimeException("Unsupport Inlined XML Data");
     }
 
-    protected final Object readInlinedObject(final int reference,
+    protected Object readReferencedObject(final int reference,
             final DataInputStream inputStream) throws IOException {
-        return readXmlData(reference, inputStream);
-    }
-
-    protected final Object readReferencedObject(final int reference,
-            final DataInputStream inputStream) throws IOException {
-        return getObjectAt(reference >>> 1);
+        throw new RuntimeException("Unsupport Referenced XML Data");
     }
 }

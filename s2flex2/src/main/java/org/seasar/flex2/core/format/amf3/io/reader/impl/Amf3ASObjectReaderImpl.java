@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2006 the Seasar Foundation and the Others.
+ * Copyright 2004-2007 the Seasar Foundation and the Others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ public class Amf3ASObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl
         addObjectReference(object);
         String propertyName;
         while (true) {
-            propertyName = (String) stringReader.read(inputStream);
+            propertyName = (String) amf3StringReader.read(inputStream);
             if (propertyName.length() <= 0) {
                 break;
             }

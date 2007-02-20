@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2006 the Seasar Foundation and the Others.
+ * Copyright 2004-2007 the Seasar Foundation and the Others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,9 +21,10 @@ import java.io.UnsupportedEncodingException;
 
 import org.seasar.flex2.core.format.amf3.Amf3Constants;
 import org.seasar.flex2.core.format.amf3.io.CharsetType;
+import org.seasar.flex2.core.format.amf3.io.writer.Amf3DataWriter;
 
 public abstract class AbstractAmf3UTF8StringWriterImpl extends
-        AbstractAmf3IntWriterImpl {
+        Amf3IntWriterImpl implements Amf3DataWriter {
 
     private static final byte[] getUTF8StringBytes(final String string) {
         try {

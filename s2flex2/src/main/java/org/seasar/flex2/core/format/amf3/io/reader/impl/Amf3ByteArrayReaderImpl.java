@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2006 the Seasar Foundation and the Others.
+ * Copyright 2004-2007 the Seasar Foundation and the Others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,28 +18,30 @@ package org.seasar.flex2.core.format.amf3.io.reader.impl;
 import java.io.DataInputStream;
 import java.io.IOException;
 
-import org.seasar.flex2.core.format.amf3.type.ByteArray;
-import org.seasar.flex2.core.format.amf3.type.factory.ByteArrayFactory;
+import org.seasar.flex2.core.format.amf3.io.reader.Amf3DataReader;
 
-public class Amf3ByteArrayReaderImpl extends AbstractAmf3ObjectReaderImpl {
-
-    private ByteArrayFactory byteArrayFactory;
+public class Amf3ByteArrayReaderImpl extends AbstractAmf3ObjectReaderImpl
+        implements Amf3DataReader {
 
     private static final int READ_BUFFER_SIZE = 1024 * 4;
-
-    public ByteArrayFactory getByteArrayFactory() {
-        return byteArrayFactory;
-    }
 
     public Object read(final DataInputStream inputStream) throws IOException {
         return readObject(inputStream);
     }
 
-    public void setByteArrayFactory(final ByteArrayFactory byteArrayFactory) {
-        this.byteArrayFactory = byteArrayFactory;
+    protected final Object readInlinedObject(final int reference,
+            final DataInputStream inputStream) throws IOException {
+        final byte[] byteArray = readByteArrayData(reference, inputStream);
+        addObjectReference(byteArray);
+        return byteArray;
     }
 
-    private final ByteArray readByteArrayData(final int bytearrayDef,
+    protected final Object readReferencedObject(final int reference,
+            final DataInputStream inputStream) throws IOException {
+        return getObjectAt(reference >>> 1);
+    }
+
+    private final byte[] readByteArrayData(final int bytearrayDef,
             final DataInputStream inputStream) throws IOException {
 
         final int bytearrayLength = bytearrayDef >> 1;
@@ -60,18 +62,6 @@ public class Amf3ByteArrayReaderImpl extends AbstractAmf3ObjectReaderImpl {
             totalReadByteLength += readByteLength;
         }
 
-        return byteArrayFactory.createByteArray(bytearrayData);
-    }
-
-    protected final Object readInlinedObject(final int reference,
-            final DataInputStream inputStream) throws IOException {
-        final ByteArray byteArray = readByteArrayData(reference, inputStream);
-        addObjectReference(byteArray);
-        return byteArray;
-    }
-
-    protected final Object readReferencedObject(final int reference,
-            final DataInputStream inputStream) throws IOException {
-        return getObjectAt(reference >>> 1);
+        return bytearrayData;
     }
 }

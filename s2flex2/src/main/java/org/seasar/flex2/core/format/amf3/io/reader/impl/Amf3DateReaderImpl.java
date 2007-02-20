@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2006 the Seasar Foundation and the Others.
+ * Copyright 2004-2007 the Seasar Foundation and the Others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,10 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.Date;
 
-public class Amf3DateReaderImpl extends AbstractAmf3ObjectReaderImpl {
+import org.seasar.flex2.core.format.amf3.io.reader.Amf3DataReader;
+
+public class Amf3DateReaderImpl extends AbstractAmf3ObjectReaderImpl implements
+        Amf3DataReader {
 
     private static final Date getDate(final double ms) {
         return new Date((long) ms);

@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2006 the Seasar Foundation and the Others.
+ * Copyright 2004-2007 the Seasar Foundation and the Others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 
-import org.seasar.flex2.core.format.amf.io.reader.AmfDataReader;
+import org.seasar.flex2.core.io.AmfDataReader;
 import org.seasar.flex2.core.format.amf3.io.CharsetType;
 import org.seasar.flex2.core.format.amf3.io.reader.factory.Amf3DataReaderFactory;
 import org.seasar.flex2.core.format.amf3.io.writer.Amf3DataWriter;
@@ -56,7 +56,7 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
     public void compress() {
         final Deflater deflater = new Deflater(Deflater.DEFAULT_COMPRESSION);
         deflater.setStrategy(Deflater.DEFAULT_STRATEGY);
-        deflater.setInput(this.buf);
+        deflater.setInput(buf);
         deflater.finish();
 
         final byte[] deflatingBuffer = new byte[FLATEING_BUFFER_SIZE];
@@ -82,7 +82,7 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
     public void flush() {
         initBuffer(mergaBuffers());
         outputStream.reset();
-        this.pos = this.count;
+        pos = count;
     }
 
     public byte[] getBufferBytes() {
@@ -95,9 +95,9 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
         if (bytes == null) {
             bytes = EMPTY_BYTES;
         }
-        this.buf = bytes;
-        this.pos = 0;
-        this.count = buf.length;
+        buf = bytes;
+        pos = 0;
+        count = buf.length;
     }
 
     public boolean readBoolean() throws IOException {
@@ -196,7 +196,7 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
 
     public void uncompress() {
         final Inflater inflater = new Inflater(false);
-        inflater.setInput(this.buf);
+        inflater.setInput(buf);
         final byte[] inflatingBuffer = new byte[FLATEING_BUFFER_SIZE];
         outputStream.reset();
         try {
@@ -280,7 +280,7 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
 
     public void writeObject(final Object object) throws IOException {
         final Amf3DataWriter writer = dataWriterFactory
-                .createDataValueWriter(object);
+                .createAmf3DataWriter(object);
         writer.writeData(object, dataOutputStream);
     }
 
@@ -308,10 +308,9 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
 
     private final byte[] mergaBuffers() {
         final byte[] writeBytes = outputStream.toByteArray();
-        final byte[] newInitBytes = new byte[this.pos + writeBytes.length];
-        System.arraycopy(this.buf, 0, newInitBytes, 0, this.pos);
-        System.arraycopy(writeBytes, 0, newInitBytes, this.pos,
-                writeBytes.length);
+        final byte[] newInitBytes = new byte[pos + writeBytes.length];
+        System.arraycopy(buf, 0, newInitBytes, 0, pos);
+        System.arraycopy(writeBytes, 0, newInitBytes, pos, writeBytes.length);
         return newInitBytes;
     }
 }

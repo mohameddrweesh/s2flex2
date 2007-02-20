@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2006 the Seasar Foundation and the Others.
+ * Copyright 2004-2007 the Seasar Foundation and the Others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,9 @@ package org.seasar.flex2.core.format.amf3.type;
 
 import java.util.HashMap;
 
-public class Amf3Object extends HashMap {
+import org.seasar.flex2.core.format.type.AmfObject;
+
+public class Amf3Object extends HashMap implements AmfObject {
 
     private static final long serialVersionUID = 6423442246991792649L;
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2006 the Seasar Foundation and the Others.
+ * Copyright 2004-2007 the Seasar Foundation and the Others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,9 +39,9 @@ public abstract class AbstractAmf3UTF8StringReaderImpl extends
         final int stringBytes = stringDef >> 1;
         final String string;
         if (stringBytes > 0) {
-            final byte[] charArray = new byte[stringBytes];
-            inputStream.readFully(charArray, 0, stringBytes);
-            string = getUTF8String(charArray, stringBytes);
+            final byte[] chars = new byte[stringBytes];
+            inputStream.readFully(chars, 0, stringBytes);
+            string = getUTF8String(chars, stringBytes);
         } else {
             string = EMPTY_STRING;
         }

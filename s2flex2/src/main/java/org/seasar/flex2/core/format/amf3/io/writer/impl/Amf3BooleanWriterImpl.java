@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2006 the Seasar Foundation and the Others.
+ * Copyright 2004-2007 the Seasar Foundation and the Others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,6 +30,10 @@ public class Amf3BooleanWriterImpl implements Amf3DataWriter {
         } else {
             outputStream.writeByte(Amf3TypeDef.BOOLEAN_FALSE);
         }
+    }
+
+    public boolean isWritableValue(final Object value) {
+        return (value instanceof Boolean);
     }
 
     public void write(final Object value, final DataOutputStream outputStream)

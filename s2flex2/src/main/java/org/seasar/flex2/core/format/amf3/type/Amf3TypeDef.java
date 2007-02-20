@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2006 the Seasar Foundation and the Others.
+ * Copyright 2004-2007 the Seasar Foundation and the Others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,103 +15,93 @@
  */
 package org.seasar.flex2.core.format.amf3.type;
 
-public final class Amf3TypeDef {
+public interface Amf3TypeDef {
 
-    public static final byte AMF3_DATA_MARKER = 0x11;
+    byte UNKNOWN = -1;
 
-    public static final byte UNDEFINED = 0x00;
+    byte UNDEFINED = 0x00;
 
-    public static final byte NULL = 0x01;
+    byte NULL = 0x01;
 
-    public static final byte BOOLEAN_FALSE = 0x02;
+    byte BOOLEAN_FALSE = 0x02;
 
-    public static final byte BOOLEAN_TRUE = 0x03;
+    byte BOOLEAN_TRUE = 0x03;
 
-    public static final byte INTEGER = 0x04;
+    byte INTEGER = 0x04;
 
-    public static final byte NUMBER = 0x05;
+    byte NUMBER = 0x05;
 
-    public static final byte STRING = 0x06;
+    byte STRING = 0x06;
 
-    public static final byte DATE = 0x08;
+    byte XML = 0x07;
 
-    public static final byte ARRAY = 0x09;
+    byte DATE = 0x08;
 
-    public static final byte OBJECT = 0x0A;
+    byte ARRAY = 0x09;
 
-    public static final byte XML = 0x0B;
+    byte OBJECT = 0x0A;
 
-    public static final byte BYTEARRAY = 0x0C;
+    byte XML_STRING = 0x0B;
 
-    public static final String TYPE_NULL = "AMF3_NULL";
+    byte BYTEARRAY = 0x0C;
 
-    public static final String TYPE_BOOLEAN = "AMF3_BOOLEAN";
-
-    public static final String TYPE_BOOLEAN_FALSE = "AMF3_BOOLEAN_TRUE";
-
-    public static final String TYPE_BOOLEAN_TRUE = "AMF3_BOOLEAN_FALSE";
-
-    public static final String TYPE_INTEGER = "AMF3_INTEGER";
-
-    public static final String TYPE_NUMBER = "AMF3_NUMBER";
-
-    public static final String TYPE_STRING = "AMF3_STRING";
-
-    public static final String TYPE_OBJECT = "AMF3_OBJECT";
-
-    public static final String TYPE_ARRAY = "AMF3_ARRAY";
-
-    public static final String TYPE_DATE = "AMF3_DATE";
-
-    public static final String TYPE_XML = "AMF3_XML";
-
-    public static final String TYPE_BYTEARRAY = "AMF3_BYTEARRAY";
-
-    public static final String TYPE_AMF3_DATA_MARKER = "AMF3_DATA_MARKER";
-
-    private Amf3TypeDef() {
-    }
-
-    public static final String toString(final byte dataType) {
-        switch (dataType) {
-
-            case BOOLEAN_FALSE:
-                return TYPE_BOOLEAN_FALSE;
-
-            case BOOLEAN_TRUE:
-                return TYPE_BOOLEAN_TRUE;
-
-            case INTEGER:
-                return TYPE_INTEGER;
-
-            case NUMBER:
-                return TYPE_NUMBER;
-
-            case STRING:
-                return TYPE_STRING;
-
-            case DATE:
-                return TYPE_DATE;
-
-            case ARRAY:
-                return TYPE_ARRAY;
-
-            case OBJECT:
-                return TYPE_OBJECT;
-
-            case XML:
-                return TYPE_XML;
-
-            case BYTEARRAY:
-                return TYPE_BYTEARRAY;
-
-            case AMF3_DATA_MARKER:
-                return TYPE_AMF3_DATA_MARKER;
-
-            case NULL:
-            case UNDEFINED:
-            default:
-                return TYPE_NULL;
-        }
-    }
+    /*
+     * 
+     * public static final String TYPE_NULL = "AMF3_NULL";
+     * 
+     * public static final String TYPE_BOOLEAN = "AMF3_BOOLEAN";
+     * 
+     * public static final String TYPE_BOOLEAN_FALSE = "AMF3_BOOLEAN_TRUE";
+     * 
+     * public static final String TYPE_BOOLEAN_TRUE = "AMF3_BOOLEAN_FALSE";
+     * 
+     * public static final String TYPE_INTEGER = "AMF3_INTEGER";
+     * 
+     * public static final String TYPE_NUMBER = "AMF3_NUMBER";
+     * 
+     * public static final String TYPE_BIGNUMBER = "AMF3_BIGNUMBER";
+     * 
+     * public static final String TYPE_STRING = "AMF3_STRING";
+     * 
+     * public static final String TYPE_OBJECT = "AMF3_OBJECT";
+     * 
+     * public static final String TYPE_ARRAY = "AMF3_ARRAY";
+     * 
+     * public static final String TYPE_DATE = "AMF3_DATE";
+     * 
+     * public static final String TYPE_XML = "AMF3_XML";
+     * 
+     * public static final String TYPE_BYTEARRAY = "AMF3_BYTEARRAY";
+     * 
+     * public static final String TYPE_AMF3_DATA_MARKER = "AMF3_DATA_MARKER";
+     * 
+     * private Amf3TypeDef() { }
+     * 
+     * public static final String toString(final byte dataType) { switch
+     * (dataType) {
+     * 
+     * case BOOLEAN_FALSE: return TYPE_BOOLEAN_FALSE;
+     * 
+     * case BOOLEAN_TRUE: return TYPE_BOOLEAN_TRUE;
+     * 
+     * case INTEGER: return TYPE_INTEGER;
+     * 
+     * case NUMBER: return TYPE_NUMBER;
+     * 
+     * case STRING: return TYPE_STRING;
+     * 
+     * case DATE: return TYPE_DATE;
+     * 
+     * case ARRAY: return TYPE_ARRAY;
+     * 
+     * case OBJECT: return TYPE_OBJECT;
+     * 
+     * case XML: return TYPE_XML;
+     * 
+     * case BYTEARRAY: return TYPE_BYTEARRAY;
+     * 
+     * case AMF3_DATA_MARKER: return TYPE_AMF3_DATA_MARKER;
+     * 
+     * case NULL: case UNDEFINED: default: return TYPE_NULL; } }
+     */
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2006 the Seasar Foundation and the Others.
+ * Copyright 2004-2007 the Seasar Foundation and the Others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,14 +24,17 @@ import org.seasar.flex2.core.format.amf3.io.ExternalObjectOutput;
 import org.seasar.flex2.core.format.amf3.io.factory.ExternalObjectOutputFactory;
 import org.seasar.framework.beans.BeanDesc;
 
-public class Amf3ExternalObjectWriterImpl extends
-        Amf3ClassTypedObjectWriterImpl {
+public class Amf3ExternalObjectWriterImpl extends Amf3TypedObjectWriterImpl {
 
     private ExternalObjectOutputFactory externalizeDataOutputFactory;
 
+    public boolean isWritableValue(final Object value) {
+        return (value instanceof Externalizable);
+    }
+
     public void setExternalizeDataOutputFactory(
             final ExternalObjectOutputFactory dataOutputFactory) {
-        this.externalizeDataOutputFactory = dataOutputFactory;
+        externalizeDataOutputFactory = dataOutputFactory;
     }
 
     protected final void writeClassDefine(final BeanDesc beanDesc,
@@ -44,12 +47,10 @@ public class Amf3ExternalObjectWriterImpl extends
 
     protected final void writeClassObjectProperties(final Object value,
             final DataOutputStream outputStream) throws IOException {
-        if (value instanceof Externalizable) {
-            final Externalizable externalObject = (Externalizable) value;
-            final ExternalObjectOutput externalizeDataOutput = externalizeDataOutputFactory
-                    .createObjectOutput(outputStream);
-            externalObject.writeExternal(externalizeDataOutput);
-        }
+        final Externalizable externalObject = (Externalizable) value;
+        final ExternalObjectOutput externalizeDataOutput = externalizeDataOutputFactory
+                .createObjectOutput(outputStream);
+        externalObject.writeExternal(externalizeDataOutput);
     }
 
     protected final void writeClassProperties(final BeanDesc beanDesc,

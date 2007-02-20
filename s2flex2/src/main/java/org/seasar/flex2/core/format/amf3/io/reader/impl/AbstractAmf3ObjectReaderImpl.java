@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2006 the Seasar Foundation and the Others.
+ * Copyright 2004-2007 the Seasar Foundation and the Others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,8 +22,7 @@ import org.seasar.flex2.core.format.amf3.Amf3Constants;
 import org.seasar.flex2.core.format.amf3.type.Amf3References;
 import org.seasar.flex2.core.format.amf3.type.factory.Amf3ReferencesFactory;
 
-public abstract class AbstractAmf3ObjectReaderImpl extends
-        AbstractAmf3IntReaderImpl {
+public abstract class AbstractAmf3ObjectReaderImpl extends Amf3IntReaderImpl {
 
     protected Amf3ReferencesFactory referencesFactory;
 

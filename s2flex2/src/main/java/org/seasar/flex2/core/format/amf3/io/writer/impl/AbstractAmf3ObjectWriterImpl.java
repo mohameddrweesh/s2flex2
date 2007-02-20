@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2006 the Seasar Foundation and the Others.
+ * Copyright 2004-2007 the Seasar Foundation and the Others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,8 +18,8 @@ package org.seasar.flex2.core.format.amf3.io.writer.impl;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import org.seasar.flex2.core.format.amf0.type.Amf0TypeDef;
 import org.seasar.flex2.core.format.amf3.type.Amf3References;
-import org.seasar.flex2.core.format.amf3.type.Amf3TypeDef;
 import org.seasar.flex2.core.format.amf3.type.factory.Amf3ReferencesFactory;
 
 public abstract class AbstractAmf3ObjectWriterImpl extends
@@ -44,15 +44,6 @@ public abstract class AbstractAmf3ObjectWriterImpl extends
             final DataOutputStream outputStream) throws IOException {
         outputStream.writeByte(getDataTypeValue());
         writeObject(value, outputStream);
-    }
-
-    private final Amf3References getReferences() {
-        return referencesFactory.createReferences();
-    }
-
-    private final void writeAMF3DataMaker(final DataOutputStream outputStream)
-            throws IOException {
-        outputStream.writeByte(Amf3TypeDef.AMF3_DATA_MARKER);
     }
 
     protected final void addClassProperties(final Class clazz,
@@ -100,5 +91,14 @@ public abstract class AbstractAmf3ObjectWriterImpl extends
     protected final void writeReferenceIndex(final int index,
             final DataOutputStream outputStream) throws IOException {
         writeIntData(index << 1, outputStream);
+    }
+
+    private final Amf3References getReferences() {
+        return referencesFactory.createReferences();
+    }
+
+    private final void writeAMF3DataMaker(final DataOutputStream outputStream)
+            throws IOException {
+        outputStream.writeByte(Amf0TypeDef.AMF3_DATA_MARKER);
     }
 }
