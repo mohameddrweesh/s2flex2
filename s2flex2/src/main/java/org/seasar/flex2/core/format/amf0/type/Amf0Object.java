@@ -17,7 +17,7 @@ package org.seasar.flex2.core.format.amf0.type;
 
 import java.util.HashMap;
 
-import org.seasar.flex2.core.format.type.AmfObject;
+import org.seasar.flex2.core.format.amf.type.AmfObject;
 
 public class Amf0Object extends HashMap implements AmfObject {
 

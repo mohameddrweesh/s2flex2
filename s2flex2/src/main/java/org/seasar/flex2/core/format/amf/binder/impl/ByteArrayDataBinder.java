@@ -13,20 +13,26 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.core.format.binder.impl;
+package org.seasar.flex2.core.format.amf.binder.impl;
 
-import java.math.BigDecimal;
+import org.seasar.flex2.core.format.amf.binder.DataBinder;
+import org.seasar.flex2.core.format.amf3.type.ByteArray;
+import org.seasar.flex2.core.format.amf3.type.factory.ByteArrayFactory;
 
-import org.seasar.flex2.core.format.binder.DataBinder;
+public class ByteArrayDataBinder implements DataBinder {
 
-public class BigDecimalDataBinder implements DataBinder {
+    private ByteArrayFactory byteArrayFactory;
 
     public Object bind(final Object source) {
-        return new BigDecimal((String) source);
+        return byteArrayFactory.createByteArray((byte[]) source);
     }
 
     public boolean isTarget(final Class sourceClass, final Class bindClass) {
-        return (bindClass == BigDecimal.class) && (sourceClass == String.class);
+        return (bindClass == ByteArray.class) && (sourceClass == byte[].class);
+    }
+
+    public void setByteArrayFactory(ByteArrayFactory byteArrayFactory) {
+        this.byteArrayFactory = byteArrayFactory;
     }
 
 }

@@ -17,7 +17,7 @@ package org.seasar.flex2.core.format.amf0.io;
 
 import java.io.DataInputStream;
 
-import org.seasar.flex2.core.io.AmfDataReader;
+import org.seasar.flex2.core.format.amf.io.AmfDataReader;
 import org.seasar.flex2.core.format.amf0.type.Amf0TypeDef;
 
 public class UndefinedlReaderWriterTest extends AbstractReaderWriterS2TestCase {

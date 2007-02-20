@@ -17,9 +17,9 @@ package org.seasar.flex2.core.format.amf0.io.reader.impl;
 
 import java.util.Iterator;
 
+import org.seasar.flex2.core.format.amf.binder.DataBinder;
 import org.seasar.flex2.core.format.amf0.Amf0Constants;
 import org.seasar.flex2.core.format.amf0.type.Amf0Object;
-import org.seasar.flex2.core.format.binder.DataBinder;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
 import org.seasar.framework.beans.factory.BeanDescFactory;

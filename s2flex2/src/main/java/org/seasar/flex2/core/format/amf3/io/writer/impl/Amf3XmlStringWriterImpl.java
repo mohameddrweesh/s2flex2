@@ -19,7 +19,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.seasar.flex2.core.format.amf3.type.Amf3TypeDef;
-import org.seasar.flex2.core.util.XmlUtil;
+import org.seasar.flex2.core.util.XmlStringUtil;
 import org.w3c.dom.Document;
 
 public class Amf3XmlStringWriterImpl extends AbstractAmf3ObjectWriterImpl {
@@ -40,6 +40,6 @@ public class Amf3XmlStringWriterImpl extends AbstractAmf3ObjectWriterImpl {
     private final void writeXml(final Document document,
             final DataOutputStream outputStream) throws IOException {
         addObjectReference(document);
-        writeUTF8String(XmlUtil.getXmlString(document), outputStream);
+        writeUTF8String(XmlStringUtil.getXmlString(document), outputStream);
     }
 }

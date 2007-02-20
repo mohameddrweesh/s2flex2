@@ -23,7 +23,7 @@ import org.seasar.framework.util.DocumentBuilderUtil;
 import org.seasar.framework.util.DomUtil;
 import org.w3c.dom.Document;
 
-public class XmlUtil {
+public class XmlStringUtil {
     public static final Document getXmlDocument(final String xml) {
         final DocumentBuilder builder = DocumentBuilderFactoryUtil
                 .newDocumentBuilder();

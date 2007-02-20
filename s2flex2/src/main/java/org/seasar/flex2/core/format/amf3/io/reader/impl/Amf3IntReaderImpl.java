@@ -18,13 +18,9 @@ package org.seasar.flex2.core.format.amf3.io.reader.impl;
 import java.io.DataInputStream;
 import java.io.IOException;
 
+import org.seasar.flex2.core.format.amf3.Amf3IntegerConstants;
+
 public class Amf3IntReaderImpl {
-
-    private static final int INTEGER_NAGATIVE_SIGN = 0xC0;
-
-    private static final int INTEGER_DATA_MASK = 0x7F;
-
-    private static final int INTEGER_MAX_DATA_BYTES = 4;
 
     protected static final int readInt(final DataInputStream inputStream)
             throws IOException {
@@ -44,15 +40,15 @@ public class Amf3IntReaderImpl {
     private static final int readIntData(final int firstByte,
             final DataInputStream inputStream) throws IOException {
 
-        final int[] intBytes = new int[INTEGER_MAX_DATA_BYTES];
+        final int[] intBytes = new int[Amf3IntegerConstants.INTEGER_MAX_DATA_BYTES];
 
         final int intByteLength = readIntDataBytes(firstByte, inputStream,
                 intBytes);
 
         int intData = toInt(intBytes, intByteLength);
 
-        if ((intByteLength >= INTEGER_MAX_DATA_BYTES)
-                && (firstByte >= INTEGER_NAGATIVE_SIGN)) {
+        if ((intByteLength >= Amf3IntegerConstants.INTEGER_MAX_DATA_BYTES)
+                && (firstByte >= Amf3IntegerConstants.INTEGER_NAGATIVE_SIGN)) {
             intData |= 0xF0000000;
         }
 
@@ -64,9 +60,9 @@ public class Amf3IntReaderImpl {
             throws IOException {
         int intByteLength = 1;
 
-        intBytes[0] = firstByte & INTEGER_DATA_MASK;
+        intBytes[0] = firstByte & Amf3IntegerConstants.INTEGER_DATA_MASK;
 
-        for (int i = 1; i < INTEGER_MAX_DATA_BYTES; i++) {
+        for (int i = 1; i < Amf3IntegerConstants.INTEGER_MAX_DATA_BYTES; i++) {
             intBytes[i] = inputStream.readUnsignedByte();
             intByteLength++;
             if ((intBytes[i] >>> 7) == 0x00) {
@@ -80,14 +76,14 @@ public class Amf3IntReaderImpl {
         int intValue = list[bytes - 1];
 
         int offset;
-        if (bytes < INTEGER_MAX_DATA_BYTES) {
+        if (bytes < Amf3IntegerConstants.INTEGER_MAX_DATA_BYTES) {
             offset = 7;
         } else {
             offset = 8;
         }
 
         for (int i = bytes - 1; i > 0; i--) {
-            intValue |= (list[i - 1] & INTEGER_DATA_MASK) << offset;
+            intValue |= (list[i - 1] & Amf3IntegerConstants.INTEGER_DATA_MASK) << offset;
             offset += 7;
         }
 

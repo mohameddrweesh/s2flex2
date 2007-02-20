@@ -18,7 +18,7 @@ package org.seasar.flex2.core.format.amf3.io.impl;
 import java.io.DataInputStream;
 import java.io.IOException;
 
-import org.seasar.flex2.core.io.AmfDataReader;
+import org.seasar.flex2.core.format.amf.io.AmfDataReader;
 import org.seasar.flex2.core.format.amf3.io.ExternalObjectInput;
 import org.seasar.flex2.core.format.amf3.io.reader.factory.Amf3DataReaderFactory;
 

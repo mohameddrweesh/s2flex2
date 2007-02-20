@@ -15,7 +15,7 @@
  */
 package org.seasar.flex2.core.format.amf0.io.reader;
 
-import org.seasar.flex2.core.io.AmfDataReader;
+import org.seasar.flex2.core.format.amf.io.AmfDataReader;
 
 public interface Amf0DataReader extends AmfDataReader {
 

@@ -15,7 +15,7 @@
  */
 package org.seasar.flex2.core.format.amf3.io.reader.factory.impl;
 
-import org.seasar.flex2.core.io.AmfDataReader;
+import org.seasar.flex2.core.format.amf.io.AmfDataReader;
 import org.seasar.flex2.core.format.amf0.io.reader.factory.impl.Amf0DataReaderFactoryImpl;
 import org.seasar.flex2.core.format.amf3.io.reader.Amf3DataReader;
 import org.seasar.flex2.core.format.amf3.io.reader.factory.Amf3DataReaderFactory;

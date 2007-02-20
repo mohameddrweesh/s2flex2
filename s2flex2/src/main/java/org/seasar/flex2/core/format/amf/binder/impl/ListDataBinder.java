@@ -13,13 +13,13 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.core.format.binder.impl;
+package org.seasar.flex2.core.format.amf.binder.impl;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.seasar.flex2.core.format.binder.DataBinder;
+import org.seasar.flex2.core.format.amf.binder.DataBinder;
 
 public class ListDataBinder implements DataBinder {
 

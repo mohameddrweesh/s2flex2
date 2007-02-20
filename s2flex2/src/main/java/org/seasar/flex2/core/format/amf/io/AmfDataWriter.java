@@ -1,4 +1,4 @@
-package org.seasar.flex2.core.io;
+package org.seasar.flex2.core.format.amf.io;
 
 import java.io.DataOutputStream;
 import java.io.IOException;

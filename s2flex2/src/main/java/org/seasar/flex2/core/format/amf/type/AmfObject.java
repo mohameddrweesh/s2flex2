@@ -13,10 +13,10 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.core.format.binder;
+package org.seasar.flex2.core.format.amf.type;
 
-public interface DataBinder {
-    Object bind(Object source);
+import java.util.Map;
 
-    boolean isTarget(Class sourceClass, Class bindClass);
+public interface AmfObject extends Map {
+
 }

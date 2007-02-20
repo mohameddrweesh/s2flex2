@@ -39,7 +39,7 @@ public class XmlUtilTest extends TestCase {
      */
     public void testGetXmlDocumentTest() {
         String xml="<document><names><name>どきゅめんと1</name><name>どきゅめんと2</name><name>どきゅめんと3</name><name>どきゅめんと4</name><name>どきゅめんと4</name></names></document>";
-        Document document = XmlUtil.getXmlDocument(xml);
+        Document document = XmlStringUtil.getXmlDocument(xml);
         assertNotNull("1:Ducument is not null",document);
         assertNotNull("2",document.getNodeName());
     }

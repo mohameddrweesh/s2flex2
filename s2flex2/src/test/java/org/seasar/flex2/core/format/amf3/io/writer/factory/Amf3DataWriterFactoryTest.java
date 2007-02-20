@@ -26,6 +26,7 @@ import java.util.HashMap;
 import javax.xml.parsers.DocumentBuilder;
 
 import org.seasar.extension.unit.S2TestCase;
+import org.seasar.flex2.core.format.amf.io.AmfDataWriter;
 import org.seasar.flex2.core.format.amf0.io.writer.factory.Amf0DataWriterFactory;
 import org.seasar.flex2.core.format.amf0.io.writer.impl.Amf0BooleanWriterImpl;
 import org.seasar.flex2.core.format.amf0.io.writer.impl.Amf0NullWriterImpl;
@@ -42,7 +43,6 @@ import org.seasar.flex2.core.format.amf3.io.writer.impl.Amf3NumberWriterImpl;
 import org.seasar.flex2.core.format.amf3.io.writer.impl.Amf3StringWriterImpl;
 import org.seasar.flex2.core.format.amf3.io.writer.impl.Amf3TypedObjectWriterImpl;
 import org.seasar.flex2.core.format.amf3.io.writer.impl.Amf3XmlStringWriterImpl;
-import org.seasar.flex2.core.io.AmfDataWriter;
 import org.seasar.framework.container.S2Container;
 import org.seasar.framework.util.DocumentBuilderFactoryUtil;
 import org.seasar.framework.util.DocumentBuilderUtil;

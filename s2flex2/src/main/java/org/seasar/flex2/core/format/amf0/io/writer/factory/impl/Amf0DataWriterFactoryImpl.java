@@ -15,9 +15,9 @@
  */
 package org.seasar.flex2.core.format.amf0.io.writer.factory.impl;
 
+import org.seasar.flex2.core.format.amf.io.AmfDataWriter;
 import org.seasar.flex2.core.format.amf0.io.writer.Amf0DataWriter;
 import org.seasar.flex2.core.format.amf0.io.writer.factory.Amf0DataWriterFactory;
-import org.seasar.flex2.core.io.AmfDataWriter;
 
 public class Amf0DataWriterFactoryImpl implements Amf0DataWriterFactory {
 

@@ -19,7 +19,7 @@ import java.io.DataInputStream;
 import java.io.IOException;
 
 import org.seasar.flex2.core.format.amf0.io.reader.Amf0DataReader;
-import org.seasar.flex2.core.util.XmlUtil;
+import org.seasar.flex2.core.util.XmlStringUtil;
 import org.w3c.dom.Document;
 
 public class Amf0XmlReaderImpl implements Amf0DataReader {
@@ -38,6 +38,6 @@ public class Amf0XmlReaderImpl implements Amf0DataReader {
 
     protected Document readXML(final DataInputStream inputStream)
             throws IOException {
-        return XmlUtil.getXmlDocument(readXmlStringData(inputStream));
+        return XmlStringUtil.getXmlDocument(readXmlStringData(inputStream));
     }
 }

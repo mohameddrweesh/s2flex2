@@ -18,11 +18,9 @@ package org.seasar.flex2.core.format.amf3.io.writer.impl;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import org.seasar.flex2.core.format.amf3.Amf3IntegerConstants;
+
 public class Amf3IntWriterImpl {
-
-    private static final int INTEGER_DATA_MASK = 0x7F;
-
-    private static final int INTEGER_INCLUDE_NEXT_BYTE = 0x80;
 
     protected static final int[] getIntBytes(final int value) {
         final int intByteLength = getIntByteLength(value);
@@ -33,7 +31,7 @@ public class Amf3IntWriterImpl {
         int offset = 8;
         int mask = 0xFF;
         if (intByteLength < 4) {
-            mask = INTEGER_DATA_MASK;
+            mask = Amf3IntegerConstants.INTEGER_DATA_MASK;
             offset = 7;
         }
 
@@ -41,7 +39,7 @@ public class Amf3IntWriterImpl {
         intValue = intValue >>> offset;
 
         for (int i = 1; i < intByteLength; i++) {
-            list[i] = intValue & INTEGER_DATA_MASK;
+            list[i] = intValue & Amf3IntegerConstants.INTEGER_DATA_MASK;
             intValue = intValue >>> 7;
         }
         return list;
@@ -54,7 +52,7 @@ public class Amf3IntWriterImpl {
         } else {
             final int[] list = getIntBytes(value);
             for (int i = list.length - 1; i >= 1; i--) {
-                outputStream.writeByte(list[i] | INTEGER_INCLUDE_NEXT_BYTE);
+                outputStream.writeByte(list[i] | Amf3IntegerConstants.INTEGER_INCLUDE_NEXT_SIGN);
             }
             outputStream.writeByte(list[0]);
         }

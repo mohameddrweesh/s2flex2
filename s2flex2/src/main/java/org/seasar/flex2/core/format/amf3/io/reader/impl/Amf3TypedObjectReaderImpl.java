@@ -18,9 +18,9 @@ package org.seasar.flex2.core.format.amf3.io.reader.impl;
 import java.io.DataInputStream;
 import java.io.IOException;
 
+import org.seasar.flex2.core.format.amf.binder.DataBinder;
 import org.seasar.flex2.core.format.amf3.Amf3Constants;
 import org.seasar.flex2.core.format.amf3.io.reader.TypedObjectReader;
-import org.seasar.flex2.core.format.binder.DataBinder;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.PropertyDesc;
 import org.seasar.framework.beans.factory.BeanDescFactory;

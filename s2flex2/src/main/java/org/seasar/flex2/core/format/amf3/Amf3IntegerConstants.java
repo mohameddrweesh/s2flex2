@@ -13,12 +13,19 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.core.format.amf0.io.writer.factory;
+package org.seasar.flex2.core.format.amf3;
 
-import org.seasar.flex2.core.format.amf.io.AmfDataWriter;
+public interface Amf3IntegerConstants {
 
-public interface Amf0DataWriterFactory {
+    int INTEGER_MAX_DATA_BYTES = 4;
+    
+    int INTEGER_DATA_MASK = 0x7F;
 
-    AmfDataWriter createDataWriter(Object value);
+    int INTEGER_MAX = 0xFFFFFFF;
 
+    int INTEGER_MIN = -0xFFFFFFF;
+
+    int INTEGER_INCLUDE_NEXT_SIGN = 0x80;
+    
+    int INTEGER_NAGATIVE_SIGN = 0xC0;
 }

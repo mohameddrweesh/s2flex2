@@ -19,7 +19,7 @@ import java.io.DataInputStream;
 import java.io.IOException;
 
 import org.seasar.flex2.core.format.amf3.io.reader.Amf3DataReader;
-import org.seasar.flex2.core.util.XmlUtil;
+import org.seasar.flex2.core.util.XmlStringUtil;
 import org.w3c.dom.Document;
 
 public class Amf3XmlStringReaderImpl extends AbstractAmf3UTF8StringReaderImpl
@@ -46,7 +46,7 @@ public class Amf3XmlStringReaderImpl extends AbstractAmf3UTF8StringReaderImpl
 
     private final Document readXmlData(final int xmlDef,
             final DataInputStream inputStream) throws IOException {
-        final Document xml = XmlUtil.getXmlDocument(readXmlStringData(xmlDef,
+        final Document xml = XmlStringUtil.getXmlDocument(readXmlStringData(xmlDef,
                 inputStream));
         addObjectReference(xml);
 
