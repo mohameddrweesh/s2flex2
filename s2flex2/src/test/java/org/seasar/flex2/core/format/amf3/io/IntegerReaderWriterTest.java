@@ -15,7 +15,7 @@
  */
 package org.seasar.flex2.core.format.amf3.io;
 
-import org.seasar.flex2.core.format.amf3.Amf3Constants;
+import org.seasar.flex2.core.format.amf3.Amf3IntegerConstants;
 
 public class IntegerReaderWriterTest extends AbstractReaderWriterS2TestCase {
 
@@ -31,46 +31,46 @@ public class IntegerReaderWriterTest extends AbstractReaderWriterS2TestCase {
         assertEquals("4", new Double(value1.intValue()),
                 getWriteReadData(value1));
     }
-    
+
     public void testAmf3Integer() throws Exception {
 
-        Integer value1 = new Integer(Amf3Constants.INTEGER_MAX);
+        Integer value1 = new Integer(Amf3IntegerConstants.INTEGER_MAX);
 
         assertEquals("3", new Integer(value1.intValue()),
                 getWriteReadData(value1));
 
-        value1 = new Integer(Amf3Constants.INTEGER_MIN);
+        value1 = new Integer(Amf3IntegerConstants.INTEGER_MIN);
 
         assertEquals("4", new Integer(value1.intValue()),
                 getWriteReadData(value1));
     }
-    
+
     public void testNegativeIntegers() throws Exception {
         Integer[] values = new Integer[29];
 
         for (int i = 0; i < 29; i++) {
-            values[i] = new Integer(Amf3Constants.INTEGER_MIN >> i);
+            values[i] = new Integer(Amf3IntegerConstants.INTEGER_MIN >> i);
         }
 
         Object[] values1 = (Object[]) getWriteReadData(values);
         assertEquals("2", values.length, values1.length);
-        
+
         for (int i = 0; i < values1.length; i++) {
             assertEquals("2", ((Integer) values[i]).intValue(),
                     ((Integer) values1[i]).intValue());
         }
     }
-    
+
     public void testIntegers() throws Exception {
         Integer[] values = new Integer[29];
 
         for (int i = 0; i < 29; i++) {
-            values[i] = new Integer(Amf3Constants.INTEGER_MAX >>> i);
+            values[i] = new Integer(Amf3IntegerConstants.INTEGER_MAX >>> i);
         }
 
         Object[] values1 = (Object[]) getWriteReadData(values);
         assertEquals("2", values.length, values1.length);
-        
+
         for (int i = 0; i < values1.length; i++) {
             assertEquals("2", ((Integer) values[i]).intValue(),
                     ((Integer) values1[i]).intValue());

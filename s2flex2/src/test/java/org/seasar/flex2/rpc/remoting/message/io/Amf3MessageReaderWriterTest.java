@@ -35,7 +35,7 @@ import java.util.Map;
 import javax.xml.parsers.DocumentBuilder;
 
 import org.seasar.extension.unit.S2TestCase;
-import org.seasar.flex2.core.format.amf3.Amf3Constants;
+import org.seasar.flex2.core.format.amf3.Amf3IntegerConstants;
 import org.seasar.flex2.core.format.amf3.type.ByteArray;
 import org.seasar.flex2.core.format.amf3.type.CharsetType;
 import org.seasar.flex2.core.format.amf3.type.factory.ByteArrayFactory;
@@ -267,8 +267,8 @@ public class Amf3MessageReaderWriterTest extends S2TestCase {
         List value = new ArrayList();
         
         for( int i = 0; i < 29; i++ ) {
-            value.add(new Integer(Amf3Constants.INTEGER_MAX >>>i));
-            value.add(new Integer(Amf3Constants.INTEGER_MIN >> i));
+            value.add(new Integer(Amf3IntegerConstants.INTEGER_MAX >>>i));
+            value.add(new Integer(Amf3IntegerConstants.INTEGER_MIN >> i));
         }
 
         Object[] value2 = (Object[]) convertData(value);
