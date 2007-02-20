@@ -20,6 +20,7 @@ import java.util.Enumeration;
 import javax.servlet.http.HttpSession;
 
 import org.seasar.flex2.util.data.storage.Storage;
+import org.seasar.framework.container.hotdeploy.HotdeployUtil;
 
 public class HttpSessionDataStorage implements Storage {
 
@@ -36,11 +37,14 @@ public class HttpSessionDataStorage implements Storage {
     }
 
     public Object getProperty(final String name) {
-        return session.getAttribute(name);
+        Object value = session.getAttribute(name);
+        if (HotdeployUtil.isHotdeploy()) {
+            value = HotdeployUtil.rebuildValue(value);
+        }
+        return value;
     }
 
     public Enumeration getPropertyNames() {
-
         return session.getAttributeNames();
     }
 

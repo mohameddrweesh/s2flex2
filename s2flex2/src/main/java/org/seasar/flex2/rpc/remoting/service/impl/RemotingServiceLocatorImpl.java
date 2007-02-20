@@ -59,7 +59,7 @@ public class RemotingServiceLocatorImpl implements RemotingServiceLocator {
     protected RemotingServiceRepository repository;
 
     public S2Container getContainer() {
-        return this.container;
+        return container;
     }
 
     public RemotingServiceRepository getRepository() {
