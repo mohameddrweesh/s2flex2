@@ -18,7 +18,7 @@ package org.seasar.flex2.core.format.amf3.io.writer.impl;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.seasar.flex2.core.format.amf3.Amf3Constants;
+import org.seasar.flex2.core.format.amf3.Amf3IntegerConstants;
 import org.seasar.flex2.core.format.amf3.io.writer.Amf3DataWriter;
 import org.seasar.flex2.core.format.amf3.type.Amf3TypeDef;
 
@@ -30,8 +30,8 @@ public class Amf3IntegerWriterImpl extends Amf3IntWriterImpl implements
         if ((value instanceof Integer) || (value instanceof Byte)
                 || (value instanceof Short)) {
             final int data = ((Number) value).intValue();
-            if ((data <= Amf3Constants.INTEGER_MAX)
-                    && (data >= Amf3Constants.INTEGER_MIN)) {
+            if ((data <= Amf3IntegerConstants.INTEGER_MAX)
+                    && (data >= Amf3IntegerConstants.INTEGER_MIN)) {
                 isWritableValue = true;
             }
         }

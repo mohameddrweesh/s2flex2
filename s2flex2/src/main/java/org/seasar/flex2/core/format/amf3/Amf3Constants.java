@@ -17,15 +17,11 @@ package org.seasar.flex2.core.format.amf3;
 
 public interface Amf3Constants {
 
+    byte EMPTY_STRING_DATA = 0x01;
+    
     byte CLASS_DEF_INLINE = 0x02;
 
     byte CLASS_DEF_REFERENCE = 0x00;
-
-    byte EMPTY_STRING_DATA = 0x01;
-
-    int INTEGER_MAX = 0xFFFFFFF;
-
-    int INTEGER_MIN = -0xFFFFFFF;
 
     byte OBJECT_INLINE = 0x01;
 
