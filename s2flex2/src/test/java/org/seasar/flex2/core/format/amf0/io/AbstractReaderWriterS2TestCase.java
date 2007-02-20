@@ -21,8 +21,8 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 
 import org.seasar.extension.unit.S2TestCase;
-import org.seasar.flex2.core.format.amf.io.AmfDataReader;
-import org.seasar.flex2.core.format.amf.io.AmfDataWriter;
+import org.seasar.flex2.core.format.amf.io.reader.AmfDataReader;
+import org.seasar.flex2.core.format.amf.io.writer.AmfDataWriter;
 import org.seasar.flex2.core.format.amf0.io.reader.factory.Amf0DataReaderFactory;
 import org.seasar.flex2.core.format.amf0.io.writer.factory.Amf0DataWriterFactory;
 

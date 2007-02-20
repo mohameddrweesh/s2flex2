@@ -15,16 +15,13 @@
  */
 package org.seasar.flex2.core.format.amf0.io.reader.factory.impl;
 
-import org.seasar.flex2.core.format.amf.io.AmfDataReader;
+import org.seasar.flex2.core.format.amf.io.reader.AmfDataReader;
 import org.seasar.flex2.core.format.amf0.io.reader.Amf0DataReader;
 import org.seasar.flex2.core.format.amf0.io.reader.factory.Amf0DataReaderFactory;
 
 public class Amf0DataReaderFactoryImpl implements Amf0DataReaderFactory {
 
     protected Amf0DataReader[] amf0DataReaders;
-
-    public Amf0DataReaderFactoryImpl() {
-    }
 
     public AmfDataReader createDataReader(final byte dataType) {
         if (isAmf0DataTypeValidation(dataType)) {

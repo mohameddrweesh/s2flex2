@@ -13,9 +13,13 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.core.format.amf0.io.reader.factory;
+package org.seasar.flex2.core.format.amf.io.reader;
 
-import org.seasar.flex2.core.format.amf.io.reader.factory.AmfDataReaderFactory;
+import java.io.DataInputStream;
+import java.io.IOException;
 
-public interface Amf0DataReaderFactory extends AmfDataReaderFactory{
+public interface AmfDataReader {
+
+    Object read(DataInputStream inputStream) throws IOException;
+
 }

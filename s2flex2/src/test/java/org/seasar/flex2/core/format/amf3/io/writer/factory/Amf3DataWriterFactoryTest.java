@@ -19,15 +19,17 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.math.BigDecimal;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
 import javax.xml.parsers.DocumentBuilder;
 
 import org.seasar.extension.unit.S2TestCase;
-import org.seasar.flex2.core.format.amf.io.AmfDataWriter;
-import org.seasar.flex2.core.format.amf0.io.writer.factory.Amf0DataWriterFactory;
+import org.seasar.flex2.core.format.amf.io.writer.AmfDataWriter;
+import org.seasar.flex2.core.format.amf.io.writer.factory.AmfDataWriterFactory;
 import org.seasar.flex2.core.format.amf0.io.writer.impl.Amf0BooleanWriterImpl;
 import org.seasar.flex2.core.format.amf0.io.writer.impl.Amf0NullWriterImpl;
 import org.seasar.flex2.core.format.amf0.io.writer.impl.Amf0NumberWriterImpl;
@@ -35,9 +37,12 @@ import org.seasar.flex2.core.format.amf0.io.writer.impl.Amf0StringWriterImpl;
 import org.seasar.flex2.core.format.amf3.io.writer.factory.impl.Amf3DataWriterFactoryImpl;
 import org.seasar.flex2.core.format.amf3.io.writer.impl.Amf3ASObjectWriterImpl;
 import org.seasar.flex2.core.format.amf3.io.writer.impl.Amf3ArrayWriterImpl;
+import org.seasar.flex2.core.format.amf3.io.writer.impl.Amf3BigNumberWriterImpl;
 import org.seasar.flex2.core.format.amf3.io.writer.impl.Amf3BooleanWriterImpl;
+import org.seasar.flex2.core.format.amf3.io.writer.impl.Amf3CollectionWriterImpl;
 import org.seasar.flex2.core.format.amf3.io.writer.impl.Amf3DateWriterImpl;
 import org.seasar.flex2.core.format.amf3.io.writer.impl.Amf3IntegerWriterImpl;
+import org.seasar.flex2.core.format.amf3.io.writer.impl.Amf3IteratorWriterImpl;
 import org.seasar.flex2.core.format.amf3.io.writer.impl.Amf3NullWriterImpl;
 import org.seasar.flex2.core.format.amf3.io.writer.impl.Amf3NumberWriterImpl;
 import org.seasar.flex2.core.format.amf3.io.writer.impl.Amf3StringWriterImpl;
@@ -55,15 +60,15 @@ public class Amf3DataWriterFactoryTest extends S2TestCase {
 
     public void testCreateDataWriterFactory() throws Exception {
         S2Container container = getContainer();
-        Object factory = container.getComponent(Amf0DataWriterFactory.class);
+        Object factory = container.getComponent(AmfDataWriterFactory.class);
         assertNotNull("1", factory);
         assertTrue("2", factory instanceof Amf3DataWriterFactoryImpl);
     }
 
     public void testCreateDataWriter() throws Exception {
         S2Container container = getContainer();
-        Amf0DataWriterFactory factory = (Amf0DataWriterFactory) container
-                .getComponent(Amf0DataWriterFactory.class);
+        Amf3DataWriterFactory factory = (Amf3DataWriterFactory) container
+                .getComponent(AmfDataWriterFactory.class);
 
         AmfDataWriter writer = factory.createDataWriter(null);
 
@@ -72,8 +77,8 @@ public class Amf3DataWriterFactoryTest extends S2TestCase {
         writer = factory.createDataWriter(new String());
         assertTrue("2", writer instanceof Amf0StringWriterImpl);
 
-        // writer = factory.createDataWriter(BigDecimal.valueOf(1));
-        // assertTrue("3", writer instanceof Amf3BigNumberWriterImpl);
+        writer = factory.createDataWriter(BigDecimal.valueOf(1));
+        assertTrue("3", writer instanceof Amf3BigNumberWriterImpl);
 
         writer = factory.createDataWriter(new Double(0.0));
         assertTrue("4", writer instanceof Amf0NumberWriterImpl);
@@ -87,11 +92,11 @@ public class Amf3DataWriterFactoryTest extends S2TestCase {
         writer = factory.createDataWriter(new String[1]);
         assertTrue("7", writer instanceof Amf3ArrayWriterImpl);
 
-        // writer = factory.createDataWriter((new ArrayList()).iterator());
-        // assertTrue("8", writer instanceof Amf3IteratorWriterImpl);
+        writer = factory.createDataWriter((new ArrayList()).iterator());
+        assertTrue("8", writer instanceof Amf3IteratorWriterImpl);
 
-        // writer = factory.createDataWriter(new ArrayList());
-        // assertTrue("9", writer instanceof Amf3CollectionWriterImpl);
+        writer = factory.createDataWriter(new ArrayList());
+        assertTrue("9", writer instanceof Amf3CollectionWriterImpl);
 
         writer = factory.createDataWriter(new HashMap());
         assertTrue("10", writer instanceof Amf3ASObjectWriterImpl);
@@ -106,7 +111,7 @@ public class Amf3DataWriterFactoryTest extends S2TestCase {
     public void testCreateDataValueWriter() throws Exception {
         S2Container container = getContainer();
         Amf3DataWriterFactory factory = (Amf3DataWriterFactory) container
-                .getComponent(Amf0DataWriterFactory.class);
+                .getComponent(AmfDataWriterFactory.class);
 
         AmfDataWriter writer = factory.createAmf3DataWriter(null);
 
@@ -115,8 +120,8 @@ public class Amf3DataWriterFactoryTest extends S2TestCase {
         writer = factory.createAmf3DataWriter("");
         assertTrue("2", writer instanceof Amf3StringWriterImpl);
 
-        // writer = factory.createAmf3DataWriter(BigDecimal.valueOf(1));
-        // assertTrue("3", writer instanceof Amf3BigNumberWriterImpl);
+        writer = factory.createAmf3DataWriter(BigDecimal.valueOf(1));
+        assertTrue("3", writer instanceof Amf3BigNumberWriterImpl);
 
         writer = factory.createAmf3DataWriter(new Integer(0));
         assertTrue("4", writer instanceof Amf3IntegerWriterImpl);
@@ -133,11 +138,11 @@ public class Amf3DataWriterFactoryTest extends S2TestCase {
         writer = factory.createAmf3DataWriter(new String[1]);
         assertTrue("8", writer instanceof Amf3ArrayWriterImpl);
 
-        // writer = factory.createAmf3DataWriter((new ArrayList()).iterator());
-        // assertTrue("9", writer instanceof Amf3IteratorWriterImpl);
+        writer = factory.createAmf3DataWriter((new ArrayList()).iterator());
+        assertTrue("9", writer instanceof Amf3IteratorWriterImpl);
 
-        // writer = factory.createAmf3DataWriter(new ArrayList());
-        // assertTrue("10", writer instanceof Amf3CollectionWriterImpl);
+        writer = factory.createAmf3DataWriter(new ArrayList());
+        assertTrue("10", writer instanceof Amf3CollectionWriterImpl);
 
         writer = factory.createAmf3DataWriter(new HashMap());
         assertTrue("11", writer instanceof Amf3ASObjectWriterImpl);

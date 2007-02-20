@@ -18,7 +18,7 @@ package org.seasar.flex2.core.format.amf3.io.writer;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.seasar.flex2.core.format.amf.io.AmfDataWriter;
+import org.seasar.flex2.core.format.amf.io.writer.AmfDataWriter;
 
 public interface Amf3DataWriter extends AmfDataWriter {
 

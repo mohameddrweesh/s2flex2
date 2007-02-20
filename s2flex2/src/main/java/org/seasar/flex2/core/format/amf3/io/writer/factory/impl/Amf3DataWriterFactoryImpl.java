@@ -15,7 +15,7 @@
  */
 package org.seasar.flex2.core.format.amf3.io.writer.factory.impl;
 
-import org.seasar.flex2.core.format.amf.io.AmfDataWriter;
+import org.seasar.flex2.core.format.amf.io.writer.AmfDataWriter;
 import org.seasar.flex2.core.format.amf0.io.writer.Amf0DataWriter;
 import org.seasar.flex2.core.format.amf3.io.writer.Amf3DataWriter;
 import org.seasar.flex2.core.format.amf3.io.writer.factory.Amf3DataWriterFactory;

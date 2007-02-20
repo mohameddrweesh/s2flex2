@@ -15,7 +15,7 @@
  */
 package org.seasar.flex2.core.format.amf3.io.reader.factory.impl;
 
-import org.seasar.flex2.core.format.amf.io.AmfDataReader;
+import org.seasar.flex2.core.format.amf.io.reader.AmfDataReader;
 import org.seasar.flex2.core.format.amf0.io.reader.factory.impl.Amf0DataReaderFactoryImpl;
 import org.seasar.flex2.core.format.amf3.io.reader.Amf3DataReader;
 import org.seasar.flex2.core.format.amf3.io.reader.factory.Amf3DataReaderFactory;
@@ -24,9 +24,6 @@ public class Amf3DataReaderFactoryImpl extends Amf0DataReaderFactoryImpl
         implements Amf3DataReaderFactory {
 
     protected Amf3DataReader[] amf3DataReaders;
-
-    public Amf3DataReaderFactoryImpl() {
-    }
 
     public AmfDataReader createAmf3DataReader(final byte dataType) {
         if (isAmf3DataTypeValidation(dataType)) {
@@ -46,4 +43,5 @@ public class Amf3DataReaderFactoryImpl extends Amf0DataReaderFactoryImpl
     private AmfDataReader getAmf3DataReader(final byte dataType) {
         return amf3DataReaders[dataType];
     }
+
 }

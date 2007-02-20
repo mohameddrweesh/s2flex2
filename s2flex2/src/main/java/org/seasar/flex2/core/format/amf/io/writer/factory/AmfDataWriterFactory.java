@@ -13,13 +13,12 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.core.format.amf.io;
+package org.seasar.flex2.core.format.amf.io.writer.factory;
 
-import java.io.DataInputStream;
-import java.io.IOException;
+import org.seasar.flex2.core.format.amf.io.writer.AmfDataWriter;
 
-public interface AmfDataReader {
+public interface AmfDataWriterFactory{
 
-    Object read(DataInputStream inputStream) throws IOException;
+    AmfDataWriter createDataWriter(Object value);
 
 }
