@@ -23,7 +23,7 @@ public abstract class AbstractArrayConverterImpl extends
 
     protected static final Object convertToArray(final Object source,
             final Class distClass) {
-        Object[] result = null;
+        Object result = source;
         if (source != null && distClass != Object[].class
                 && source.getClass().isArray()) {
             result = doConvertToArray((Object[]) source, distClass);
