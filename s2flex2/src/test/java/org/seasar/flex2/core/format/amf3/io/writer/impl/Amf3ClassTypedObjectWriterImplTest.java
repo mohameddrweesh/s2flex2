@@ -31,7 +31,7 @@ import org.seasar.framework.aop.proxy.AopProxy;
 
 public class Amf3ClassTypedObjectWriterImplTest extends S2TestCase {
 
-    private Amf3ClassTypedObjectWriterImpl amf3TypedClassObjectWriterImpl;
+    private Amf3TypedObjectWriterImpl amf3TypedObjectWriter;
 
     private DataOutputStream out;
 
@@ -46,7 +46,7 @@ public class Amf3ClassTypedObjectWriterImplTest extends S2TestCase {
         Aspect aspect = new AspectImpl(interceptor, pointcut);
         AopProxy aopProxy = new AopProxy(Date.class, new Aspect[] { aspect });
         Date proxy = (Date) aopProxy.create();
-        amf3TypedClassObjectWriterImpl.writeClassName(proxy, out);
+        amf3TypedObjectWriter.writeClassName(proxy, out);
         Amf3ReferencesFactory referencesFactory = (Amf3ReferencesFactory) getComponent(Amf3ReferencesFactory.class);
         assertEquals("java.util.Date", referencesFactory.createReferences()
                 .getStringAt(0));

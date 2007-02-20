@@ -17,14 +17,14 @@ package org.seasar.flex2.core.util;
 
 import javax.xml.parsers.DocumentBuilder;
 
+import junit.framework.TestCase;
+
 import org.seasar.flex2.core.format.amf3.io.CharsetType;
 import org.seasar.framework.util.DocumentBuilderFactoryUtil;
 import org.seasar.framework.util.DocumentBuilderUtil;
 import org.seasar.framework.util.DomUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-
-import junit.framework.TestCase;
 
 
 /**

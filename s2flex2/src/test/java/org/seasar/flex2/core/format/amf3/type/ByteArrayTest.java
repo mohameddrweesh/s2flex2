@@ -19,7 +19,6 @@ import java.io.IOException;
 import java.util.Date;
 
 import org.seasar.extension.unit.S2TestCase;
-import org.seasar.flex2.core.format.amf3.type.ByteArray;
 import org.seasar.flex2.core.format.amf3.type.factory.ByteArrayFactory;
 import org.seasar.flex2.core.format.amf3.type.factory.impl.ByteArrayFactoryImpl;
 import org.seasar.flex2.core.format.amf3.type.impl.ByteArrayImpl;
