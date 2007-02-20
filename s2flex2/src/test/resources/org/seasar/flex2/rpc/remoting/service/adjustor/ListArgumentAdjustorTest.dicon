@@ -3,7 +3,7 @@
     "http://www.seasar.org/dtd/components24.dtd">
 <components>
     <component
-        class="org.seasar.flex2.rpc.remoting.service.adjustor.impl.ArrayArgumentAdjustorImpl">
+        class="org.seasar.flex2.rpc.remoting.service.adjustor.impl.CollectionArgumentAdjustorImpl">
         <property name="converter">
             <component class="org.seasar.flex2.util.converter.impl.CollectionConverterImpl"/>
         </property>

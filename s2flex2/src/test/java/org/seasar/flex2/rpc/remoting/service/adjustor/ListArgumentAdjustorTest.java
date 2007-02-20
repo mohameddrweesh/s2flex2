@@ -26,9 +26,9 @@ import java.util.Map;
 import org.seasar.extension.unit.S2TestCase;
 import org.seasar.flex2.core.format.amf3.type.Amf3Object;
 
-public class ArrayArgumentAdjustorListConvertTest extends S2TestCase {
+public class ListArgumentAdjustorTest extends S2TestCase {
 
-    private static String PATH = "ArrayArgumentAdjustorListConvertTest.dicon";
+    private static String PATH = "ListArgumentAdjustorTest.dicon";
 
     private ArgumentAdjustor argumentAdjustor;
 
@@ -37,7 +37,7 @@ public class ArrayArgumentAdjustorListConvertTest extends S2TestCase {
         Map map = new HashMap();
         TestBean[] ts = new TestBean[] {};
         assertFalse("1", argumentAdjustor.isTarget(TestBean[].class, map));
-        assertTrue("2", argumentAdjustor.isTarget(TestBean[].class, ts));
+        assertFalse("2", argumentAdjustor.isTarget(TestBean[].class, ts));
         assertFalse("3", argumentAdjustor.isTarget(List.class, map));
         assertTrue("4", argumentAdjustor.isTarget(List.class, ts));
         assertTrue("5", argumentAdjustor.isTarget(ArrayList.class, ts));

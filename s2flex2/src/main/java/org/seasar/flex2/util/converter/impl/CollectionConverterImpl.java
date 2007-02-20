@@ -30,10 +30,6 @@ public class CollectionConverterImpl extends AbstractArrayConverterImpl {
         Object result = source;
 
         do {
-            if (distClass.isArray() && (distClass != Object[].class)) {
-                result = convertToArray(source, distClass);
-                break;
-            }
             if (List.class.isAssignableFrom(distClass)) {
                 result = new ArrayList(Arrays.asList((Object[]) result));
                 break;

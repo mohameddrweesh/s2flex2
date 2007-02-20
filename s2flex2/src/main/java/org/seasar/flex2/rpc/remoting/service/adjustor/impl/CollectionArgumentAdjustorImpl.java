@@ -29,8 +29,8 @@ public class CollectionArgumentAdjustorImpl implements ArgumentAdjustor {
     }
 
     public boolean isTarget(final Class clazz, final Object arg) {
-        return (arg != null) && (arg instanceof Collection)
-                && !(Collection.class.isAssignableFrom(clazz));
+        return (arg != null) && (arg.getClass().isArray())
+                && (Collection.class.isAssignableFrom(clazz));
     }
 
     public void setConverter(final Converter converter) {

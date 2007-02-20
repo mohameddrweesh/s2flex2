@@ -21,12 +21,12 @@ import org.seasar.flex2.core.format.amf.binder.DataBinder;
 
 public class BigDecimalDataBinder implements DataBinder {
 
-    public Object bind(final Object source) {
+    public Object bind(final Object source, final Class bindClass) {
         return new BigDecimal((String) source);
     }
 
-    public boolean isTarget(final Class sourceClass, final Class bindClass) {
-        return (bindClass == BigDecimal.class) && (sourceClass == String.class);
+    public boolean isTarget(final Object value, final Class bindClass) {
+        return (bindClass == BigDecimal.class) && (value.getClass() == String.class);
     }
 
 }

@@ -23,12 +23,12 @@ public class ByteArrayDataBinder implements DataBinder {
 
     private ByteArrayFactory byteArrayFactory;
 
-    public Object bind(final Object source) {
+    public Object bind(final Object source, final Class bindClass) {
         return byteArrayFactory.createByteArray((byte[]) source);
     }
 
-    public boolean isTarget(final Class sourceClass, final Class bindClass) {
-        return (bindClass == ByteArray.class) && (sourceClass == byte[].class);
+    public boolean isTarget(final Object value, final Class bindClass) {
+        return (bindClass == ByteArray.class) && (value.getClass() == byte[].class);
     }
 
     public void setByteArrayFactory(ByteArrayFactory byteArrayFactory) {

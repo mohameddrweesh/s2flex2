@@ -15,23 +15,27 @@
  */
 package org.seasar.flex2.core.format.amf.binder.impl;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import org.seasar.flex2.core.format.amf.binder.DataBinder;
+import org.seasar.flex2.util.converter.Converter;
 
-public class ListDataBinder implements DataBinder {
+public class ArrayDataBinder implements DataBinder {
 
-    public Object bind(final Object source) {
-        List arrayList = new ArrayList();
-        Collections.addAll(arrayList, (Object[]) source);
-        return arrayList;
+    private Converter converter;
+
+    public final Object bind(final Object source, final Class bindClass) {
+        return converter.convert(source, bindClass);
     }
 
-    public boolean isTarget(final Class sourceClass, final Class bindClass) {
-        return (sourceClass.isArray())
-                && (List.class.isAssignableFrom(bindClass));
+    public boolean isTarget(final Class clazz, final Object arg) {
+        return (arg != null) && arg.getClass().isArray() && clazz.isArray();
     }
 
+    public void setConverter(final Converter converter) {
+        this.converter = converter;
+    }
+
+    public boolean isTarget(final Object value, final Class bindClass) {
+        return (value != null) && value.getClass().isArray()
+                && bindClass.isArray();
+    }
 }

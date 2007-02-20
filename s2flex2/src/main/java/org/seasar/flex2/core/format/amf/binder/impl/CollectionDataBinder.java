@@ -13,21 +13,23 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.rpc.remoting.service.adjustor.impl;
+package org.seasar.flex2.core.format.amf.binder.impl;
 
-import org.seasar.flex2.rpc.remoting.service.adjustor.ArgumentAdjustor;
+import java.util.Collection;
+
+import org.seasar.flex2.core.format.amf.binder.DataBinder;
 import org.seasar.flex2.util.converter.Converter;
 
-public class ArrayArgumentAdjustorImpl implements ArgumentAdjustor {
-
+public class CollectionDataBinder implements DataBinder {
     private Converter converter;
 
-    public final Object adjust(final Class clazz, final Object arg) {
-        return converter.convert(arg, clazz);
+    public final Object bind(final Object source, final Class bindClass) {
+        return converter.convert(source, bindClass);
     }
 
-    public boolean isTarget(final Class clazz, final Object arg) {
-        return (arg != null) && arg.getClass().isArray() && clazz.isArray();
+    public boolean isTarget(final Object value, final Class bindClass) {
+        return (value != null) && (value.getClass().isArray())
+                && (Collection.class.isAssignableFrom(bindClass));
     }
 
     public void setConverter(final Converter converter) {

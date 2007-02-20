@@ -10,9 +10,21 @@
 		autoBinding="none"
 		/>
 	<component
-		class="org.seasar.flex2.core.format.amf.binder.impl.ListDataBinder"
-		autoBinding="none"
-		/>
+		class="org.seasar.flex2.core.format.amf.binder.impl.CollectionDataBinder"
+		autoBinding="property"
+		>
+        <property name="converter">
+            <component class="org.seasar.flex2.util.converter.impl.CollectionConverterImpl"/>
+        </property>
+    </component>
+	<component
+		class="org.seasar.flex2.core.format.amf.binder.impl.ArrayDataBinder"
+		autoBinding="property"
+		>
+        <property name="converter">
+            <component class="org.seasar.flex2.util.converter.impl.ArrayConverterImpl"/>
+        </property>
+    </component>
 	<component
 		class="org.seasar.flex2.core.format.amf.binder.impl.ByteArrayDataBinder"
 		autoBinding="property"
