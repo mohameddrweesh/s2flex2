@@ -48,7 +48,7 @@
     	class="org.seasar.flex2.core.format.amf0.io.reader.impl.Amf0ReferenceReaderImpl" />
     <component
     	name="amf0MixedArrayReader" 
-    	class="org.seasar.flex2.core.format.amf0.io.reader.impl.Amf0MixedArrayReaderImpl" />
+    	class="org.seasar.flex2.core.format.amf0.io.reader.impl.Amf0UnsupportedReaderImpl" />
     <component
     	name="amf0EoMReader" 
     	class="org.seasar.flex2.core.format.amf0.io.reader.impl.Amf0UnsupportedReaderImpl" />

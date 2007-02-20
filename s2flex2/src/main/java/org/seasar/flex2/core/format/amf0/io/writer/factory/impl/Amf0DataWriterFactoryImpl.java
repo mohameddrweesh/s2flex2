@@ -39,9 +39,8 @@ public class Amf0DataWriterFactoryImpl implements Amf0DataWriterFactory {
     private final Amf0DataWriter getAmf0DataWriter(final Object value) {
         Amf0DataWriter targetWriter = null;
         for (int i = 0; i < amf0DataWriters.length; i++) {
-            Amf0DataWriter writer = amf0DataWriters[i];
-            if (writer.isWritableValue(value)) {
-                targetWriter = writer;
+            if (amf0DataWriters[i].isWritableValue(value)) {
+                targetWriter = amf0DataWriters[i];
                 break;
             }
         }

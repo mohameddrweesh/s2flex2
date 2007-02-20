@@ -17,12 +17,10 @@ package org.seasar.flex2.core.format.amf0.io.reader.factory;
 
 import org.seasar.extension.unit.S2TestCase;
 import org.seasar.flex2.core.format.amf.io.reader.AmfDataReader;
-import org.seasar.flex2.core.format.amf0.io.reader.factory.Amf0DataReaderFactory;
 import org.seasar.flex2.core.format.amf0.io.reader.factory.impl.Amf0DataReaderFactoryImpl;
 import org.seasar.flex2.core.format.amf0.io.reader.impl.Amf0ArrayReaderImpl;
 import org.seasar.flex2.core.format.amf0.io.reader.impl.Amf0BooleanReaderImpl;
 import org.seasar.flex2.core.format.amf0.io.reader.impl.Amf0DateReaderImpl;
-import org.seasar.flex2.core.format.amf0.io.reader.impl.Amf0MixedArrayReaderImpl;
 import org.seasar.flex2.core.format.amf0.io.reader.impl.Amf0NullReaderImpl;
 import org.seasar.flex2.core.format.amf0.io.reader.impl.Amf0NumberReaderImpl;
 import org.seasar.flex2.core.format.amf0.io.reader.impl.Amf0ObjectReaderImpl;
@@ -75,7 +73,7 @@ public class AmfDataReaderFactoryTest extends S2TestCase {
         assertTrue("7", reader instanceof Amf0ReferenceReaderImpl);
 
         reader = factory.createDataReader(Amf0TypeDef.MIXEDARRAY);
-        assertTrue("8", reader instanceof Amf0MixedArrayReaderImpl);
+        assertTrue("8", reader instanceof Amf0UnsupportedReaderImpl);
 
         reader = factory.createDataReader(Amf0TypeDef.EOO);
         assertTrue("9", reader instanceof Amf0UnsupportedReaderImpl);

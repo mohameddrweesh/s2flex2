@@ -58,9 +58,8 @@ public class Amf3DataWriterFactoryImpl implements Amf3DataWriterFactory {
     private final Amf0DataWriter getAmf0DataWriter(final Object value) {
         Amf0DataWriter targetWriter = null;
         for (int i = 0; i < amf0DataWriters.length; i++) {
-            Amf0DataWriter writer = amf0DataWriters[i];
-            if (writer.isWritableValue(value)) {
-                targetWriter = writer;
+            if (amf0DataWriters[i].isWritableValue(value)) {
+                targetWriter = amf0DataWriters[i];
                 break;
             }
         }
@@ -70,9 +69,8 @@ public class Amf3DataWriterFactoryImpl implements Amf3DataWriterFactory {
     private final Amf3DataWriter getAmf3DataWriter(final Object value) {
         Amf3DataWriter targetWriter = null;
         for (int i = 0; i < amf3DataWriters.length; i++) {
-            Amf3DataWriter writer = amf3DataWriters[i];
-            if (writer.isWritableValue(value)) {
-                targetWriter = writer;
+            if (amf3DataWriters[i].isWritableValue(value)) {
+                targetWriter = amf3DataWriters[i];
                 break;
             }
         }
