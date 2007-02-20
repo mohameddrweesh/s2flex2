@@ -26,9 +26,6 @@ public class Amf3MessageReaderImpl extends AmfMessageReaderImpl implements
 
     private Amf3References references;
 
-    public Amf3MessageReaderImpl() {
-    }
-
     public Amf3References getReferences() {
         return references;
     }
@@ -59,10 +56,8 @@ public class Amf3MessageReaderImpl extends AmfMessageReaderImpl implements
                     readData(), isRequired));
         }
     }
-/*
-AmfMessageReaderImplへ移動
-    protected final void readVersion() throws IOException {
-        message.setVersion(inputStream.readUnsignedShort());
-    }
-    */
+    /*
+     * AmfMessageReaderImplへ移動 protected final void readVersion() throws
+     * IOException { message.setVersion(inputStream.readUnsignedShort()); }
+     */
 }

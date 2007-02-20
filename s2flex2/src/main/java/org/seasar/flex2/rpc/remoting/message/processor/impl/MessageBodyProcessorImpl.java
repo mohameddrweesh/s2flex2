@@ -84,15 +84,12 @@ public class MessageBodyProcessorImpl implements MessageBodyProcessor {
         this.serviceInvokerChooser = serviceInvokerChooser;
     }
 
-    private final MessageBody createResponseBody(final String target,
-            final Object result) {
-        return bodyFactory.createBody(target, null, result);
-    }
-
     protected final MessageBody processBody(final MessageBody requestBody) {
         String responseTarget;
         Object result;
         try {
+            logger.log("DFLX0002",new Object[]{requestBody.getServiceName(),requestBody.getServiceMethodName()});
+            
             final RemotingServiceInvoker invoker = serviceInvokerChooser
                     .chooseInvoker(requestBody);
 
@@ -103,9 +100,14 @@ public class MessageBodyProcessorImpl implements MessageBodyProcessor {
         } catch (final Throwable throwable) {
             result = faultFactory.createFault(throwable);
             responseTarget = requestBody.getResponse() + RESPONSE_STATUS;
-            logger.log(throwable);
+            logger.log("DFLX0003",new Object[]{requestBody.getServiceName(),requestBody.getServiceMethodName()},throwable);
         }
 
         return createResponseBody(responseTarget, result);
+    }
+
+    private final MessageBody createResponseBody(final String target,
+            final Object result) {
+        return bodyFactory.createBody(target, null, result);
     }
 }

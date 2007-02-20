@@ -16,8 +16,7 @@
 package org.seasar.flex2.rpc.remoting.message.io.reader.factory;
 
 import org.seasar.extension.unit.S2TestCase;
-import org.seasar.flex2.core.format.amf.io.reader.factory.AmfDataReaderFactory;
-import org.seasar.flex2.rpc.remoting.message.io.reader.factory.MessageReaderFactory;
+import org.seasar.flex2.core.format.amf0.io.reader.factory.Amf0DataReaderFactory;
 import org.seasar.flex2.rpc.remoting.message.io.reader.factory.impl.MessageReaderFactoryImpl;
 import org.seasar.flex2.rpc.remoting.message.io.reader.impl.AmfMessageReaderImpl;
 import org.seasar.framework.container.S2Container;
@@ -40,9 +39,9 @@ public class AmfMessageReaderFactoryTest extends S2TestCase {
         assertTrue("1", object instanceof AmfMessageReaderImpl);
 
         AmfMessageReaderImpl reader = (AmfMessageReaderImpl) object;
-        AmfDataReaderFactory dataFactory = reader.getDataReaderFactory();
+        Amf0DataReaderFactory dataFactory = reader.getDataReaderFactory();
         assertNotNull("2", dataFactory);
-        assertTrue("3", dataFactory instanceof AmfDataReaderFactory);
+        assertTrue("3", dataFactory instanceof Amf0DataReaderFactory);
 
     }
 

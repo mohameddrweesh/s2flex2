@@ -24,9 +24,9 @@ import org.seasar.framework.container.S2Container;
 
 public class MessageReaderFactoryImpl implements MessageReaderFactory {
 
-    private Class messageReaderClass;
-
     private S2Container container;
+
+    private Class messageReaderClass;
 
     public MessageReader createMessageReader(
             final DataInputStream dataInputStream) {

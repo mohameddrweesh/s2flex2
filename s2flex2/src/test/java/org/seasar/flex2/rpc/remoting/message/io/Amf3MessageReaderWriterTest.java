@@ -104,12 +104,11 @@ public class Amf3MessageReaderWriterTest extends S2TestCase {
     }
 
     public void testByteArray() throws Exception {
-        final byte[] bs = new byte[] { 1, 2, 3, 4, 5 };
-        ByteArray bytearray = createByteArrayOf(bs);
+        final byte[] bytearray = new byte[] { 1, 2, 3, 4, 5 };
 
-        ByteArray bytearray1 = (ByteArray) convertData(bytearray);
+        byte[] bytearray1 = (byte[]) convertData(bytearray);
 
-        assertTrue("1", Arrays.equals(bs, bytearray1.getBufferBytes()));
+        assertTrue("1", Arrays.equals(bytearray, bytearray1));
     }
 
     public void testCustomClass() throws Exception {

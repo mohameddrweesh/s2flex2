@@ -28,24 +28,26 @@ public class DataTransferSupportedRemotingServiceInvokerImpl extends
 
     private Transfer transfer;
 
+    public Object doInvoke(final Object service, final String methodName,
+            final Object[] args) throws Throwable {
+
+        final Storage storage = storageLocator.getStorage(SERVICE_DATA_STORAGE);
+        logger.log("DFLX0006", new Object[]{storage.getName()});
+        transfer.importToComponent(storage, service);
+        try {
+            return invokeServiceMethod(service, methodName, args);
+        } finally {
+            logger.log("DFLX0007", new Object[]{storage.getName()});
+            transfer.exportToStorage(service, storage);
+        }
+    }
+
     public StorageLocator getStorageLocator() {
         return storageLocator;
     }
 
     public Transfer getTransfer() {
         return transfer;
-    }
-
-    public Object doInvoke(final Object service, final String methodName,
-            final Object[] args) throws Throwable {
-
-        final Storage storage = storageLocator.getStorage(SERVICE_DATA_STORAGE);
-        transfer.importToComponent(storage, service);
-        try {
-            return invokeServiceMethod(service, methodName, args);
-        } finally {
-            transfer.exportToStorage(service, storage);
-        }
     }
 
     public void setStorageLocator(final StorageLocator storageLocator) {

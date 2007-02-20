@@ -7,6 +7,8 @@ import java.io.ObjectOutput;
 
 public class TestExternalizeObject implements Externalizable {
 
+    private static final long serialVersionUID = 6175616224696096635L;
+    
     private MyBean myBean;
 
     public TestExternalizeObject() {

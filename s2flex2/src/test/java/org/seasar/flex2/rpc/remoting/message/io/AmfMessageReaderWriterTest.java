@@ -155,30 +155,30 @@ public class AmfMessageReaderWriterTest extends S2TestCase {
 
     public void testArrayForArray() throws Exception {
         Object[] value = new Object[] { "111", "222" };
-        List value2 = (List) convertData(value);
-        assertEquals("1", 2, value2.size());
-        assertEquals("2", "111", value2.get(0));
-        assertEquals("3", "222", value2.get(1));
+        Object[] value2 = (Object[]) convertData(value);
+        assertEquals("1", 2, value2.length);
+        assertEquals("2", "111", value2[0]);
+        assertEquals("3", "222", value2[1]);
     }
 
     public void testArrayForArrayList() throws Exception {
         List value = new ArrayList();
         value.add("111");
         value.add("222");
-        List value2 = (List) convertData(value);
-        assertEquals("1", 2, value2.size());
-        assertEquals("2", "111", value2.get(0));
-        assertEquals("3", "222", value2.get(1));
+        Object[] value2 = (Object[]) convertData(value);
+        assertEquals("1", 2, value2.length);
+        assertEquals("2", "111", value2[0]);
+        assertEquals("3", "222", value2[1]);
     }
 
     public void testArrayForIterator() throws Exception {
         List value = new ArrayList();
         value.add("111");
         value.add("222");
-        List value2 = (List) convertData(value.iterator());
-        assertEquals("1", 2, value2.size());
-        assertEquals("2", "111", value2.get(0));
-        assertEquals("3", "222", value2.get(1));
+        Object[] value2 = (Object[]) convertData(value);
+        assertEquals("1", 2, value2.length);
+        assertEquals("2", "111", value2[0]);
+        assertEquals("3", "222", value2[1]);
     }
 
     public void testBoolean() throws Exception {

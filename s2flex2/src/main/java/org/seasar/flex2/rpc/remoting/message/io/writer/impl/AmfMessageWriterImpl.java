@@ -18,21 +18,21 @@ package org.seasar.flex2.rpc.remoting.message.io.writer.impl;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.seasar.flex2.core.format.amf.io.writer.factory.AmfDataWriterFactory;
-import org.seasar.flex2.core.format.amf.type.AmfSharedObject;
+import org.seasar.flex2.core.format.amf0.io.writer.factory.Amf0DataWriterFactory;
+import org.seasar.flex2.core.format.amf0.type.Amf0SharedObject;
 import org.seasar.flex2.rpc.remoting.message.data.Message;
 import org.seasar.flex2.rpc.remoting.message.data.MessageBody;
 import org.seasar.flex2.rpc.remoting.message.io.writer.MessageWriter;
 
 public class AmfMessageWriterImpl implements MessageWriter {
 
-    private AmfDataWriterFactory dataWriterFactory;
-
-    private AmfSharedObject sharedObject;
-
     protected Message message;
 
     protected DataOutputStream outputStream;
+
+    private Amf0DataWriterFactory dataWriterFactory;
+
+    private Amf0SharedObject sharedObject;
 
     public void config(final Message message,
             final DataOutputStream outputStream) {
@@ -40,19 +40,19 @@ public class AmfMessageWriterImpl implements MessageWriter {
         this.outputStream = outputStream;
     }
 
-    public AmfDataWriterFactory getDataWriterFactory() {
+    public Amf0DataWriterFactory getDataWriterFactory() {
         return dataWriterFactory;
     }
 
-    public AmfSharedObject getSharedObject() {
+    public Amf0SharedObject getSharedObject() {
         return sharedObject;
     }
 
-    public void setDataWriterFactory(final AmfDataWriterFactory writerFactory) {
+    public void setDataWriterFactory(final Amf0DataWriterFactory writerFactory) {
         this.dataWriterFactory = writerFactory;
     }
 
-    public void setSharedObject(final AmfSharedObject sharedObject) {
+    public void setSharedObject(final Amf0SharedObject sharedObject) {
         this.sharedObject = sharedObject;
     }
 

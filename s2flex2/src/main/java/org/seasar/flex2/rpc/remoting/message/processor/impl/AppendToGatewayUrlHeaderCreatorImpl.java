@@ -53,12 +53,20 @@ public class AppendToGatewayUrlHeaderCreatorImpl implements
         return header;
     }
 
+    public S2Container getContainer() {
+        return container;
+    }
+
     public MessageHeaderFactory getMessageHeaderFactory() {
         return messageHeaderFactory;
     }
 
     public SessionDecorator getSessionDecorator() {
         return sessionDecorator;
+    }
+
+    public void setContainer(final S2Container container) {
+        this.container = container;
     }
 
     public void setMessageHeaderFactory(
@@ -68,13 +76,5 @@ public class AppendToGatewayUrlHeaderCreatorImpl implements
 
     public void setSessionDecorator(final SessionDecorator sessionDecorator) {
         this.sessionDecorator = sessionDecorator;
-    }
-
-    public S2Container getContainer() {
-        return container;
-    }
-
-    public void setContainer(final S2Container container) {
-        this.container = container;
     }
 }

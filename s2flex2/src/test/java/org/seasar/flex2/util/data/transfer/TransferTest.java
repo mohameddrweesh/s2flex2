@@ -20,7 +20,6 @@ import javax.servlet.http.HttpSession;
 import org.seasar.extension.unit.S2TestCase;
 import org.seasar.flex2.util.data.storage.Storage;
 import org.seasar.flex2.util.data.storage.impl.HttpSessionDataStorage;
-import org.seasar.flex2.util.data.transfer.Transfer;
 import org.seasar.framework.container.S2Container;
 
 public class TransferTest extends S2TestCase {

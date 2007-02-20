@@ -16,7 +16,7 @@
 package org.seasar.flex2.util;
 
 public class BooleanUtil {
-    public static boolean toBoolean(String name) { 
+    public static boolean toBoolean(final String name) {
         return ((name != null) && name.equalsIgnoreCase("true"));
     }
 }

@@ -49,7 +49,7 @@ public class RemotingGateway extends HttpServlet {
     private boolean isShowGetResponse;
 
     private boolean isUseSession;
-    
+
     protected RemotingMessageProcessor processor;
 
     public void doGet(final HttpServletRequest request,
@@ -97,8 +97,8 @@ public class RemotingGateway extends HttpServlet {
     private final void showGetResponse(final HttpServletResponse response)
             throws IOException {
         if (isShowGetResponse) {
-            response.getWriter()
-                    .write("RemotingGateway " + VERSION + " is running ...");
+            response.getWriter().write(
+                    "RemotingGateway " + VERSION + " is running ...");
         }
     }
 }

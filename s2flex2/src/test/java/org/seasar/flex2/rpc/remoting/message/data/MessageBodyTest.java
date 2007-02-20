@@ -15,13 +15,7 @@
  */
 package org.seasar.flex2.rpc.remoting.message.data;
 
-import java.util.ArrayList;
-
 import junit.framework.TestCase;
-
-import org.seasar.flex2.rpc.remoting.message.data.MessageBody;
-
-;
 
 public class MessageBodyTest extends TestCase {
 
@@ -45,14 +39,13 @@ public class MessageBodyTest extends TestCase {
         body = createMessageBody();
     }
 
-    private final MessageBody createMessageBody(){
+    private final MessageBody createMessageBody() {
         MessageBody body = new MessageBody();
         body.setTarget("abc.def.Hoge.foo");
         body.setResponse("aaa");
-        ArrayList data = new ArrayList();
-        data.add("111");
+        Object[] data = new Object[] { "111" };
         body.setData(data);
-        
+
         return body;
     }
 }

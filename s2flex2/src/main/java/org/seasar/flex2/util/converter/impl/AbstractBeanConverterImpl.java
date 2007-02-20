@@ -26,8 +26,8 @@ import org.seasar.framework.util.ClassUtil;
 
 public abstract class AbstractBeanConverterImpl implements Converter {
 
-    private final static void copyProperties( final Map src, final Object dest) {
-        if (src == null || dest == null) {
+    private final static void copyProperties(final Map src, final Object dest) {
+        if ((src == null) || (dest == null)) {
             return;
         }
         final BeanDesc beanDesc = BeanDescFactory.getBeanDesc(dest.getClass());

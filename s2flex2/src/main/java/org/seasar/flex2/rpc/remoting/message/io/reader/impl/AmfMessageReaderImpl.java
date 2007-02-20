@@ -18,8 +18,8 @@ package org.seasar.flex2.rpc.remoting.message.io.reader.impl;
 import java.io.DataInputStream;
 import java.io.IOException;
 
-import org.seasar.flex2.core.format.amf.io.reader.factory.AmfDataReaderFactory;
-import org.seasar.flex2.core.format.amf.type.AmfSharedObject;
+import org.seasar.flex2.core.format.amf0.io.reader.factory.Amf0DataReaderFactory;
+import org.seasar.flex2.core.format.amf0.type.Amf0SharedObject;
 import org.seasar.flex2.rpc.remoting.message.data.Message;
 import org.seasar.flex2.rpc.remoting.message.data.MessageBody;
 import org.seasar.flex2.rpc.remoting.message.data.factory.MessageBodyFactory;
@@ -29,9 +29,7 @@ import org.seasar.flex2.rpc.remoting.message.io.reader.MessageReader;
 
 public class AmfMessageReaderImpl implements MessageReader {
 
-    private AmfSharedObject sharedObject;
-
-    protected AmfDataReaderFactory dataReaderFactory;
+    protected Amf0DataReaderFactory dataReaderFactory;
 
     protected DataInputStream inputStream;
 
@@ -43,15 +41,14 @@ public class AmfMessageReaderImpl implements MessageReader {
 
     protected MessageHeaderFactory messageHeaderFactory;
 
-    public AmfMessageReaderImpl() {
-    }
+    private Amf0SharedObject sharedObject;
 
     public void config(final DataInputStream inputStream) {
         this.inputStream = inputStream;
         this.message = createMessage();
     }
 
-    public AmfDataReaderFactory getDataReaderFactory() {
+    public Amf0DataReaderFactory getDataReaderFactory() {
         return dataReaderFactory;
     }
 
@@ -66,17 +63,21 @@ public class AmfMessageReaderImpl implements MessageReader {
     public MessageHeaderFactory getMessageHeaderFactory() {
         return messageHeaderFactory;
     }
+
     /**
      * AMFデータを読み込み、Messageを返します。
      */
     public Message read() throws IOException {
-        readVersion();  //versionの読み込み
-        readHeader();   //Header の読み込み
-        readBodies();   //Body部のの読み込み
+        // versionの読み込み
+        readVersion();
+        // Header の読み込み
+        readHeader();
+        // Body部のの読み込み
+        readBodies();
         return message;
     }
 
-    public void setDataReaderFactory(final AmfDataReaderFactory readerFactory) {
+    public void setDataReaderFactory(final Amf0DataReaderFactory readerFactory) {
         this.dataReaderFactory = readerFactory;
     }
 
@@ -93,39 +94,10 @@ public class AmfMessageReaderImpl implements MessageReader {
         this.messageHeaderFactory = messageHeaderFactory;
     }
 
-    public void setSharedObject(final AmfSharedObject sharedObject) {
+    public void setSharedObject(final Amf0SharedObject sharedObject) {
         this.sharedObject = sharedObject;
     }
 
-    /**
-     * @deprecated
-     * @throws IOException
-     */
-    private final void skipHeaders() throws IOException {
-        inputStream.readUnsignedShort();
-        final int headerCount = inputStream.readUnsignedShort();
-        for (int i = 0; i < headerCount; ++i) {
-            inputStream.readUTF();
-            inputStream.readByte();
-            inputStream.readInt();
-            readData();
-        }
-    }
-
-    protected void readHeader() throws IOException {
-        final int headerCount = inputStream.readUnsignedShort();
-        for (int i = 0; i < headerCount; ++i) {
-            final String name = inputStream.readUTF();
-            final boolean isRequired = inputStream.readBoolean();
-            inputStream.readInt(); // length
-            message.addHeader(messageHeaderFactory.createHeader(name,
-                    readData(), isRequired));
-        }
-    }
-    protected final void readVersion() throws IOException {
-        message.setVersion(inputStream.readUnsignedShort());
-    }
-    
     protected void clean() {
         sharedObject.initialize();
     }
@@ -153,5 +125,20 @@ public class AmfMessageReaderImpl implements MessageReader {
     protected final Object readData() throws IOException {
         final byte dataType = inputStream.readByte();
         return dataReaderFactory.createDataReader(dataType).read(inputStream);
+    }
+
+    protected void readHeader() throws IOException {
+        final int headerCount = inputStream.readUnsignedShort();
+        for (int i = 0; i < headerCount; ++i) {
+            final String name = inputStream.readUTF();
+            final boolean isRequired = inputStream.readBoolean();
+            inputStream.readInt(); // length
+            message.addHeader(messageHeaderFactory.createHeader(name,
+                    readData(), isRequired));
+        }
+    }
+
+    protected final void readVersion() throws IOException {
+        message.setVersion(inputStream.readUnsignedShort());
     }
 }

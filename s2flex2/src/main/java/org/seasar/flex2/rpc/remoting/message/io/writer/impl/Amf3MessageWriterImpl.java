@@ -24,9 +24,6 @@ public class Amf3MessageWriterImpl extends AmfMessageWriterImpl {
 
     protected Amf3References references;
 
-    public Amf3MessageWriterImpl() {
-    }
-
     public Amf3References getReferences() {
         return references;
     }

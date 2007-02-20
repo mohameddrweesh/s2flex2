@@ -24,7 +24,7 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-public class ObjectToCollectionConverterImpl extends AbstractArrayConverterImpl {
+public class CollectionConverterImpl extends AbstractArrayConverterImpl {
 
     public Object convert(final Object source, final Class distClass) {
         Object result = source;

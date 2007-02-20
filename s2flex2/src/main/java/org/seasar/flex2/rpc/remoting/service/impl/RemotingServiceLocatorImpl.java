@@ -31,6 +31,17 @@ public class RemotingServiceLocatorImpl implements RemotingServiceLocator {
     private static final AnnotationHandler annotationHandler = AnnotationHandlerFactory
             .getAnnotationHandler();
 
+    protected static final boolean canRegisterService(
+            final ComponentDef componentDef) {
+        boolean canRegisterService = true;
+        if (!hasRemotingServiceMetadata(componentDef)) {
+            if (!hasRemotingServiceAnnotation(componentDef)) {
+                canRegisterService = false;
+            }
+        }
+        return canRegisterService;
+    }
+
     private static final boolean hasRemotingServiceAnnotation(
             final ComponentDef componentDef) {
         return annotationHandler.hasRemotingService(componentDef);
@@ -41,17 +52,6 @@ public class RemotingServiceLocatorImpl implements RemotingServiceLocator {
 
         return componentDef
                 .getMetaDef(RemotingServiceConstants.REMOTING_SERVICE) != null;
-    }
-
-    protected static final boolean canRegisterService(
-            final ComponentDef componentDef) {
-        boolean canRegisterService = true;
-        if (!hasRemotingServiceMetadata(componentDef)) {
-            if (!hasRemotingServiceAnnotation(componentDef)) {
-                canRegisterService = false;
-            }
-        }
-        return canRegisterService;
     }
 
     protected S2Container container;
@@ -117,6 +117,18 @@ public class RemotingServiceLocatorImpl implements RemotingServiceLocator {
         this.repository = repository;
     }
 
+    protected final ComponentDef getServiceComponentDef(final String serviceName) {
+        final S2Container root = container;
+        final ComponentDef componentDef;
+        if (root.hasComponentDef(serviceName)) {
+            componentDef = root.getComponentDef(serviceName);
+        } else {
+            final Class clazz = ClassUtil.forName(serviceName);
+            componentDef = root.getComponentDef(clazz);
+        }
+        return componentDef;
+    }
+
     private final boolean hasServiceComponentByName(final String serviceName) {
         final S2Container root = container;
         boolean isSupport = root.hasComponentDef(serviceName);
@@ -129,17 +141,5 @@ public class RemotingServiceLocatorImpl implements RemotingServiceLocator {
         }
 
         return isSupport;
-    }
-
-    protected final ComponentDef getServiceComponentDef(final String serviceName) {
-        final S2Container root = container;
-        final ComponentDef componentDef;
-        if (root.hasComponentDef(serviceName)) {
-            componentDef = root.getComponentDef(serviceName);
-        } else {
-            final Class clazz = ClassUtil.forName(serviceName);
-            componentDef = root.getComponentDef(clazz);
-        }
-        return componentDef;
     }
 }

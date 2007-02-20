@@ -25,7 +25,7 @@ public class RemotingServiceAutoRegister extends
     private RemotingServiceRegister remotingServiceRegister;
 
     public void setRemotingServiceRegister(
-            RemotingServiceRegister remotingServiceRegister) {
+            final RemotingServiceRegister remotingServiceRegister) {
         this.remotingServiceRegister = remotingServiceRegister;
     }
 

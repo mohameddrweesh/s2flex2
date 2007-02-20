@@ -24,7 +24,7 @@ public abstract class AbstractArrayConverterImpl extends
     protected static final Object convertToArray(final Object source,
             final Class distClass) {
         Object[] result = (Object[]) source;
-        if (distClass != Object[].class) {
+        if (result != null && distClass != Object[].class) {
             if ((result.length > 0)
                     && (result[0] instanceof Map)
                     && !(Map.class.isAssignableFrom(distClass
@@ -34,7 +34,9 @@ public abstract class AbstractArrayConverterImpl extends
             } else {
                 result = convertToTypedArray(distClass.getComponentType(),
                         result);
-            }
+            } 
+        } else {
+            result = null;
         }
         return result;
     }

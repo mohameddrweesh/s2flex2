@@ -25,9 +25,9 @@ import org.seasar.framework.container.S2Container;
 
 public class MessageWriterFactoryImpl implements MessageWriterFactory {
 
-    private Class messageWriterClass;
-
     private S2Container container;
+
+    private Class messageWriterClass;
 
     public MessageWriter createMessageWriter(
             final DataOutputStream dataOutputStream, final Message message) {
@@ -37,11 +37,11 @@ public class MessageWriterFactoryImpl implements MessageWriterFactory {
         return writer;
     }
 
-    public void setMessageWriterClass(final Class amfMessageWriterClass) {
-        this.messageWriterClass = amfMessageWriterClass;
-    }
-
     public void setContainer(final S2Container container) {
         this.container = container;
+    }
+
+    public void setMessageWriterClass(final Class amfMessageWriterClass) {
+        this.messageWriterClass = amfMessageWriterClass;
     }
 }

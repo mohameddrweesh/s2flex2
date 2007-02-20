@@ -29,30 +29,28 @@ import org.seasar.flex2.core.format.amf3.type.Amf3Object;
 public class ArrayArgumentAdjustorListConvertTest extends S2TestCase {
 
     private static String PATH = "ArrayArgumentAdjustorListConvertTest.dicon";
-    
 
     private ArgumentAdjustor argumentAdjustor;
 
     public void testIsTarget() throws Exception {
         assertNotNull(argumentAdjustor);
         Map map = new HashMap();
-        TestBean[] ts = new TestBean[]{};
-        List l = new ArrayList();
+        TestBean[] ts = new TestBean[] {};
         assertFalse("1", argumentAdjustor.isTarget(TestBean[].class, map));
         assertTrue("2", argumentAdjustor.isTarget(TestBean[].class, ts));
-        assertFalse("3",argumentAdjustor.isTarget(List.class, map));
-        assertTrue("4",argumentAdjustor.isTarget(List.class, ts));
-        assertTrue("5",argumentAdjustor.isTarget(ArrayList.class, ts));
-        assertTrue("6",argumentAdjustor.isTarget(LinkedList.class, ts));
-        //assertTrue("7",argumentAdjustor.isTarget(Sin.class, ts));
+        assertFalse("3", argumentAdjustor.isTarget(List.class, map));
+        assertTrue("4", argumentAdjustor.isTarget(List.class, ts));
+        assertTrue("5", argumentAdjustor.isTarget(ArrayList.class, ts));
+        assertTrue("6", argumentAdjustor.isTarget(LinkedList.class, ts));
+        // assertTrue("7",argumentAdjustor.isTarget(Sin.class, ts));
     }
-    
+
     public void testAdjustList() throws Exception {
 
         List l = new ArrayList(5);
-               
+
         for (int i = 0; i < l.size(); i++) {
-            l.add(i,"name" + i);
+            l.add(i, "name" + i);
         }
 
         Object o = argumentAdjustor.adjust(Map.class, l);
@@ -61,31 +59,29 @@ public class ArrayArgumentAdjustorListConvertTest extends S2TestCase {
         List l2 = (List) o;
 
         for (int i = 0; i < l.size(); i++) {
-             assertEquals("2", l2.get(i), l.get(i));
+            assertEquals("2", l2.get(i), l.get(i));
         }
     }
 
     public void testAdjustList2() throws Exception {
-        Object[] objs = new Object[5];
         List l = new ArrayList(5);
         for (int i = 0; i < l.size(); i++) {
             TestBean tb = new TestBean();
-            tb.setName("name"+i);
-            l.add(i,tb);
-            
+            tb.setName("name" + i);
+            l.add(i, tb);
         }
 
         Object o = argumentAdjustor.adjust(Map.class, l);
         assertTrue("1", o instanceof List);
 
-         List l2 = (List)o;
-         for(int i= 0; i<l2.size(); i++) {
-             TestBean t =(TestBean)l2.get(i);
-             assertEquals("2", t.getName(), "name"+i);
-         }
+        List l2 = (List) o;
+        for (int i = 0; i < l2.size(); i++) {
+            TestBean t = (TestBean) l2.get(i);
+            assertEquals("2", t.getName(), "name" + i);
+        }
 
     }
-    
+
     public void testAdjustList3() throws Exception {
         Object[] strs = new Object[5];
         for (int i = 0; i < strs.length; i++) {
@@ -97,29 +93,29 @@ public class ArrayArgumentAdjustorListConvertTest extends S2TestCase {
         List l2 = (List) o;
 
         for (int i = 0; i < strs.length; i++) {
-             assertEquals("2", l2.get(i), strs[i]);
+            assertEquals("2", l2.get(i), strs[i]);
         }
     }
-    
+
     public void testAdjustCustomArray() throws Exception {
         Object[] objs = new Object[5];
         for (int i = 0; i < objs.length; i++) {
             TestBean tb = new TestBean();
-            tb.setName("name"+i);
+            tb.setName("name" + i);
             objs[i] = tb;
         }
 
         Object o = argumentAdjustor.adjust(List.class, objs);
         assertTrue("1", o instanceof List);
 
-        List l = (List)o;
-        
-        for ( int i = 0; i < l.size(); i++) {
-            TestBean t = (TestBean)l.get(i);
-            assertEquals("2", t.getName(), "name"+i);
+        List l = (List) o;
+
+        for (int i = 0; i < l.size(); i++) {
+            TestBean t = (TestBean) l.get(i);
+            assertEquals("2", t.getName(), "name" + i);
         }
     }
-    
+
     public void testAdjustMapArrayToBean() throws Exception {
         Map[] maps = new Map[5];
         for (int i = 0; i < maps.length; i++) {
@@ -132,17 +128,17 @@ public class ArrayArgumentAdjustorListConvertTest extends S2TestCase {
         }
         Object o = argumentAdjustor.adjust(List.class, maps);
         assertTrue("1", o instanceof List);
-        
-        List l = (List)o;
+
+        List l = (List) o;
         for (int i = 0; i < maps.length; i++) {
             Map map = maps[i];
-            Amf3Object t = (Amf3Object)l.get(i);
-            
+            Amf3Object t = (Amf3Object) l.get(i);
 
             assertEquals("2", t.get("name"), (String) map.get("name"));
-            assertEquals("3", (Integer)t.get("age"), (Integer)map.get("age"));
-            assertEquals("4", (Boolean)t.get("flag"), Boolean.TRUE);
-            assertEquals("5", (Date)t.get("birthday"), (Date) map.get("birthday"));
+            assertEquals("3", (Integer) t.get("age"), (Integer) map.get("age"));
+            assertEquals("4", (Boolean) t.get("flag"), Boolean.TRUE);
+            assertEquals("5", (Date) t.get("birthday"), (Date) map
+                    .get("birthday"));
         }
     }
 

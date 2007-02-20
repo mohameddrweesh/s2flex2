@@ -24,12 +24,12 @@ public class DefaultRemotingServiceValidatorImpl implements
 
     private Map forbiddenMethodMap;
 
-    public boolean isValidate(String serviceName, String methodName,
-            Object[] args) {
+    public boolean isValidate(final String serviceName,
+            final String methodName, final Object[] args) {
         return !isForbiddenMethod(methodName);
     }
 
-    public void setForbiddenMethodMap(Map forbiddenMethodMap) {
+    public void setForbiddenMethodMap(final Map forbiddenMethodMap) {
         this.forbiddenMethodMap = forbiddenMethodMap;
     }
 

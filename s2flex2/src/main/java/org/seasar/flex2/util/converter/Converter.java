@@ -16,5 +16,6 @@
 package org.seasar.flex2.util.converter;
 
 public interface Converter {
+
     Object convert(Object source, Class convertClass);
 }

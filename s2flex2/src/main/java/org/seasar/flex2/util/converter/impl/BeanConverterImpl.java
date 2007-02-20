@@ -15,9 +15,10 @@
  */
 package org.seasar.flex2.util.converter.impl;
 
-public class ObjectToArrayConverterImpl extends AbstractArrayConverterImpl {
+import java.util.Map;
 
+public class BeanConverterImpl extends AbstractBeanConverterImpl {
     public Object convert(final Object source, final Class distClass) {
-        return convertToArray(source, distClass);
+        return newIncetance(distClass, (Map) source);
     }
 }

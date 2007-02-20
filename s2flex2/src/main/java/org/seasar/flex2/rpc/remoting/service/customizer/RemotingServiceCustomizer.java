@@ -15,22 +15,14 @@
  */
 package org.seasar.flex2.rpc.remoting.service.customizer;
 
-import org.seasar.flex2.rpc.remoting.service.RemotingServiceRegister;
 import org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceRegisterImpl;
 import org.seasar.framework.container.ComponentCustomizer;
 import org.seasar.framework.container.ComponentDef;
 
 public class RemotingServiceCustomizer extends RemotingServiceRegisterImpl
         implements ComponentCustomizer {
-    
-    private RemotingServiceRegister remotingServiceRegister;
-
-    public void setRemotingServiceRegister(
-            RemotingServiceRegister remotingServiceRegister) {
-        this.remotingServiceRegister = remotingServiceRegister;
-    }
 
     public void customize(final ComponentDef componentDef) {
-        remotingServiceRegister.register(componentDef);
+        register(componentDef);
     }
 }

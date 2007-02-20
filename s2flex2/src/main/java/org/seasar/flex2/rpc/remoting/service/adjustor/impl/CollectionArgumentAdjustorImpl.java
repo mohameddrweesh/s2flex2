@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2007 the Seasar Foundation and the Others.
+ * Copyright 2004-2006 the Seasar Foundation and the Others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,12 +15,12 @@
  */
 package org.seasar.flex2.rpc.remoting.service.adjustor.impl;
 
-import java.util.List;
+import java.util.Collection;
 
 import org.seasar.flex2.rpc.remoting.service.adjustor.ArgumentAdjustor;
 import org.seasar.flex2.util.converter.Converter;
 
-public class ArrayArgumentAdjustorImpl implements ArgumentAdjustor {
+public class CollectionArgumentAdjustorImpl implements ArgumentAdjustor {
 
     private Converter converter;
 
@@ -29,8 +29,8 @@ public class ArrayArgumentAdjustorImpl implements ArgumentAdjustor {
     }
 
     public boolean isTarget(final Class clazz, final Object arg) {
-        return (arg != null) && arg.getClass().isArray()
-                && (clazz.isArray() || List.class.isAssignableFrom(clazz));
+        return (arg != null) && (arg instanceof Collection)
+                && !(Collection.class.isAssignableFrom(clazz));
     }
 
     public void setConverter(final Converter converter) {

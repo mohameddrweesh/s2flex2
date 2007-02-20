@@ -21,7 +21,7 @@ import org.seasar.flex2.rpc.remoting.service.RemotingServiceRepository;
 import org.seasar.framework.container.ComponentDef;
 import org.seasar.framework.container.S2Container;
 
-public class RemotingServiceRegisterImpl implements RemotingServiceRegister{
+public class RemotingServiceRegisterImpl implements RemotingServiceRegister {
 
     private S2Container container;
 

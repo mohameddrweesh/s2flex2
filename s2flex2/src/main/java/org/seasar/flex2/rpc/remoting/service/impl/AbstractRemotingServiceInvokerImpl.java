@@ -29,14 +29,14 @@ import org.seasar.framework.log.Logger;
 public abstract class AbstractRemotingServiceInvokerImpl implements
         RemotingServiceInvoker {
 
-    private static final Logger logger = Logger
+    protected static final Logger logger = Logger
             .getLogger(RemotingServiceInvoker.class);
+
+    protected RemotingServiceLocator remotingServiceLocator;
 
     private ArgumentAdjustor[] argumentAdjustors;
 
     private RemotingServiceValidator[] remotingServiceValidators;
-
-    protected RemotingServiceLocator remotingServiceLocator;
 
     public abstract Object doInvoke(Object service, String methodName,
             Object[] args) throws Throwable;
@@ -60,7 +60,7 @@ public abstract class AbstractRemotingServiceInvokerImpl implements
     }
 
     public void setRemotingServiceValidators(
-            RemotingServiceValidator[] remotingServiceValidators) {
+            final RemotingServiceValidator[] remotingServiceValidators) {
         this.remotingServiceValidators = remotingServiceValidators;
     }
 
@@ -72,6 +72,19 @@ public abstract class AbstractRemotingServiceInvokerImpl implements
             final Object[] args) {
         return canServiceCallValidation(serviceName, methodName, args)
                 && remotingServiceLocator.isSupportService(serviceName);
+    }
+
+    protected final Object invokeServiceMethod(final Object service,
+            final String methodName, final Object[] args) throws Throwable {
+        final BeanDesc beanDesc = BeanDescFactory.getBeanDesc(service
+                .getClass());
+        try {
+            logger.log("DFLX0004",new Object[]{this.getClass().getName(),service.getClass().getName(),methodName});
+            return beanDesc.invoke(service, methodName, args);
+        } catch (final Throwable throwable) {
+            logger.log("DFLX0005",new Object[]{this.getClass().getName(),service.getClass().getName(),methodName},throwable);
+            throw throwable;
+        }
     }
 
     private final Object adjustArgument(final Class clazz, final Object arg) {
@@ -123,17 +136,5 @@ public abstract class AbstractRemotingServiceInvokerImpl implements
         }
 
         return isValid;
-    }
-
-    protected final Object invokeServiceMethod(final Object service,
-            final String methodName, final Object[] args) throws Throwable {
-        final BeanDesc beanDesc = BeanDescFactory.getBeanDesc(service
-                .getClass());
-        try {
-            return beanDesc.invoke(service, methodName, args);
-        } catch (final Throwable throwable) {
-            logger.debug("invoke service method exception", throwable);
-            throw throwable;
-        }
     }
 }

@@ -25,10 +25,6 @@ public class RemotingServiceInvokerChooserImpl implements
 
     private RemotingServiceInvoker[] invokers;
 
-    public void setInvokers(final RemotingServiceInvoker[] invokers) {
-        this.invokers = invokers;
-    }
-
     public RemotingServiceInvoker chooseInvoker(final MessageBody requestBody) {
         RemotingServiceInvoker invoker;
         for (int i = 0; i < invokers.length; ++i) {
@@ -39,5 +35,9 @@ public class RemotingServiceInvokerChooserImpl implements
             }
         }
         throw new InvokerNotFoundRuntimeException(requestBody.getServiceName());
+    }
+
+    public void setInvokers(final RemotingServiceInvoker[] invokers) {
+        this.invokers = invokers;
     }
 }

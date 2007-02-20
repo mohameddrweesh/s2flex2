@@ -16,8 +16,7 @@
 package org.seasar.flex2.rpc.remoting.message.io.writer.factory;
 
 import org.seasar.extension.unit.S2TestCase;
-import org.seasar.flex2.core.format.amf.io.writer.factory.AmfDataWriterFactory;
-import org.seasar.flex2.rpc.remoting.message.io.writer.factory.MessageWriterFactory;
+import org.seasar.flex2.core.format.amf0.io.writer.factory.Amf0DataWriterFactory;
 import org.seasar.flex2.rpc.remoting.message.io.writer.factory.impl.MessageWriterFactoryImpl;
 import org.seasar.flex2.rpc.remoting.message.io.writer.impl.AmfMessageWriterImpl;
 import org.seasar.framework.container.S2Container;
@@ -40,9 +39,9 @@ public class AmfWriterFactoryTest extends S2TestCase {
         assertTrue("1", object instanceof AmfMessageWriterImpl);
 
         AmfMessageWriterImpl writer = (AmfMessageWriterImpl) object;
-        AmfDataWriterFactory dataFactory = writer.getDataWriterFactory();
+        Amf0DataWriterFactory dataFactory = writer.getDataWriterFactory();
         assertNotNull("2", dataFactory);
-        assertTrue("3", dataFactory instanceof AmfDataWriterFactory);
+        assertTrue("3", dataFactory instanceof Amf0DataWriterFactory);
 
     }
 

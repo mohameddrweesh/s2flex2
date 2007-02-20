@@ -15,8 +15,6 @@
  */
 package org.seasar.flex2.rpc.remoting.message.data;
 
-import java.util.List;
-
 public class MessageBody {
 
     private final static Object[] EMPTY_ARGS = new Object[0];
@@ -77,9 +75,10 @@ public class MessageBody {
         return buf.toString();
     }
 
+    // TODO みなおし
     protected void setupData() {
-        if ((data != null) && (data instanceof List)) {
-            args = ((List) data).toArray();
+        if ((data != null) && (data instanceof Object[])) {
+            args = (Object[]) data;
         } else {
             args = EMPTY_ARGS;
         }
