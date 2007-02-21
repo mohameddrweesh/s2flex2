@@ -5,9 +5,21 @@
 	<!--
 		data converter
 	-->
-    <component name="arrayConverter" class="org.seasar.flex2.util.converter.impl.ArrayConverterImpl"/>
-    <component name="collectionConverter" class="org.seasar.flex2.util.converter.impl.CollectionConverterImpl"/>
-    <component name="beanConverter" class="org.seasar.flex2.util.converter.impl.BeanConverterImpl"/>
+    <component
+    	name="arrayConverter"
+    	class="org.seasar.flex2.util.converter.impl.ArrayConverterImpl"
+    	autoBinding="none"
+    	/>
+    <component
+    	name="collectionConverter"
+    	class="org.seasar.flex2.util.converter.impl.CollectionConverterImpl"
+    	autoBinding="none"
+    	/>
+    <component
+    	name="beanConverter"
+    	class="org.seasar.flex2.util.converter.impl.BeanConverterImpl"
+    	autoBinding="none"
+    	/>
 
 	<!--
 		amf data binder
