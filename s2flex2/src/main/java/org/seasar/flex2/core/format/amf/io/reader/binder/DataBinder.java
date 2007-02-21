@@ -13,20 +13,10 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.core.format.amf.binder.impl;
+package org.seasar.flex2.core.format.amf.io.reader.binder;
 
-import java.math.BigDecimal;
+public interface DataBinder {
+    Object bind(Object source, Class bindClass);
 
-import org.seasar.flex2.core.format.amf.binder.DataBinder;
-
-public class BigDecimalDataBinder implements DataBinder {
-
-    public Object bind(final Object source, final Class bindClass) {
-        return new BigDecimal((String) source);
-    }
-
-    public boolean isTarget(final Object value, final Class bindClass) {
-        return (bindClass == BigDecimal.class) && (value.getClass() == String.class);
-    }
-
+    boolean isTarget(Object value, Class bindClass);
 }

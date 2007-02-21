@@ -13,9 +13,9 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.core.format.amf.binder.impl;
+package org.seasar.flex2.core.format.amf.io.reader.binder.impl;
 
-import org.seasar.flex2.core.format.amf.binder.DataBinder;
+import org.seasar.flex2.core.format.amf.io.reader.binder.DataBinder;
 import org.seasar.flex2.core.format.amf3.type.ByteArray;
 import org.seasar.flex2.core.format.amf3.type.factory.ByteArrayFactory;
 

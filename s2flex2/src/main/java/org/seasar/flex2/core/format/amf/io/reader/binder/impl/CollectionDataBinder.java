@@ -13,29 +13,27 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.flex2.core.format.amf.binder.impl;
+package org.seasar.flex2.core.format.amf.io.reader.binder.impl;
 
-import org.seasar.flex2.core.format.amf.binder.DataBinder;
+import java.util.Collection;
+
+import org.seasar.flex2.core.format.amf.io.reader.binder.DataBinder;
 import org.seasar.flex2.util.converter.Converter;
 
-public class ArrayDataBinder implements DataBinder {
-
-    private Converter converter;
+public class CollectionDataBinder implements DataBinder {
+    
+    private Converter collectionConverter;
 
     public final Object bind(final Object source, final Class bindClass) {
-        return converter.convert(source, bindClass);
-    }
-
-    public boolean isTarget(final Class clazz, final Object arg) {
-        return (arg != null) && arg.getClass().isArray() && clazz.isArray();
-    }
-
-    public void setConverter(final Converter converter) {
-        this.converter = converter;
+        return collectionConverter.convert(source, bindClass);
     }
 
     public boolean isTarget(final Object value, final Class bindClass) {
-        return (value != null) && value.getClass().isArray()
-                && bindClass.isArray();
+        return (value != null) && (value.getClass().isArray())
+                && (Collection.class.isAssignableFrom(bindClass));
+    }
+
+    public void setCollectionConverter(final Converter collectionConverter) {
+        this.collectionConverter = collectionConverter;
     }
 }
