@@ -62,7 +62,7 @@
     -->
     <component class="org.seasar.flex2.rpc.remoting.message.processor.impl.AppendToGatewayUrlHeaderCreatorImpl">
         <property name="sessionDecorator">
-            <component class="org.seasar.flex2.util.session.impl.TomcatSessionDecoratorImpl" />
+            <component class="org.seasar.flex2.util.http.impl.TomcatSessionDecoratorImpl" />
         </property>
     </component>
     <component
