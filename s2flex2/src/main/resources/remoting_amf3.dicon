@@ -135,23 +135,14 @@
         arguments adjustor
     -->
     <component
-        class="org.seasar.flex2.rpc.remoting.service.adjustor.impl.CollectionArgumentAdjustorImpl">
-        <property name="converter">
-            <component class="org.seasar.flex2.util.converter.impl.CollectionConverterImpl"/>
-        </property>
-    </component>
+        class="org.seasar.flex2.rpc.remoting.service.adjustor.impl.CollectionArgumentAdjustorImpl"
+        />
     <component
-        class="org.seasar.flex2.rpc.remoting.service.adjustor.impl.ArrayArgumentAdjustorImpl">
-        <property name="converter">
-            <component class="org.seasar.flex2.util.converter.impl.ArrayConverterImpl"/>
-        </property>
-    </component>
+        class="org.seasar.flex2.rpc.remoting.service.adjustor.impl.ArrayArgumentAdjustorImpl"
+        />
     <component
-        class="org.seasar.flex2.rpc.remoting.service.adjustor.impl.MapArgumentAdjustorImpl">
-        <property name="converter">
-            <component class="org.seasar.flex2.util.converter.impl.BeanConverterImpl"/>
-        </property>
-    </component>
+        class="org.seasar.flex2.rpc.remoting.service.adjustor.impl.MapArgumentAdjustorImpl"
+        />
 
     <!--
         remoting service invoker

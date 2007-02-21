@@ -3,28 +3,31 @@
     "http://www.seasar.org/dtd/components24.dtd">
 <components namespace="amf0">
 	<!--
+		data converter
+	-->
+    <component name="arrayConverter" class="org.seasar.flex2.util.converter.impl.ArrayConverterImpl"/>
+    <component name="collectionConverter" class="org.seasar.flex2.util.converter.impl.CollectionConverterImpl"/>
+    <component name="beanConverter" class="org.seasar.flex2.util.converter.impl.BeanConverterImpl"/>
+
+	<!--
 		amf data binder
 	-->
 	<component
-		class="org.seasar.flex2.core.format.amf.binder.impl.BigDecimalDataBinder"
+		class="org.seasar.flex2.core.format.amf.io.reader.binder.impl.BigDecimalDataBinder"
 		autoBinding="none"
 		/>
 	<component
-		class="org.seasar.flex2.core.format.amf.binder.impl.CollectionDataBinder"
+		class="org.seasar.flex2.core.format.amf.io.reader.binder.impl.CollectionDataBinder"
 		autoBinding="property"
-		>
-        <property name="converter">
-            <component class="org.seasar.flex2.util.converter.impl.CollectionConverterImpl"/>
-        </property>
-    </component>
+		/>
 	<component
-		class="org.seasar.flex2.core.format.amf.binder.impl.ArrayDataBinder"
+		class="org.seasar.flex2.core.format.amf.io.reader.binder.impl.ArrayDataBinder"
 		autoBinding="property"
-		>
-        <property name="converter">
-            <component class="org.seasar.flex2.util.converter.impl.ArrayConverterImpl"/>
-        </property>
-    </component>
+		/>
+	<component
+		class="org.seasar.flex2.core.format.amf.io.reader.binder.impl.MapDataBinder"
+		autoBinding="property"
+		/>
 
     <!--
         reader/writer share data components

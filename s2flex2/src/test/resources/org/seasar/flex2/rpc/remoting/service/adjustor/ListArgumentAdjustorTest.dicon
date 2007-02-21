@@ -4,7 +4,7 @@
 <components>
     <component
         class="org.seasar.flex2.rpc.remoting.service.adjustor.impl.CollectionArgumentAdjustorImpl">
-        <property name="converter">
+        <property name="collectionConverter">
             <component class="org.seasar.flex2.util.converter.impl.CollectionConverterImpl"/>
         </property>
     </component>

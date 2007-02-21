@@ -22,10 +22,10 @@ import org.seasar.flex2.util.converter.Converter;
 
 public class CollectionArgumentAdjustorImpl implements ArgumentAdjustor {
 
-    private Converter converter;
+    private Converter collectionConverter;
 
     public final Object adjust(final Class clazz, final Object arg) {
-        return converter.convert(arg, clazz);
+        return collectionConverter.convert(arg, clazz);
     }
 
     public boolean isTarget(final Class clazz, final Object arg) {
@@ -33,7 +33,7 @@ public class CollectionArgumentAdjustorImpl implements ArgumentAdjustor {
                 && (Collection.class.isAssignableFrom(clazz));
     }
 
-    public void setConverter(final Converter converter) {
-        this.converter = converter;
+    public void setCollectionConverter(final Converter collectionConverter) {
+        this.collectionConverter = collectionConverter;
     }
 }

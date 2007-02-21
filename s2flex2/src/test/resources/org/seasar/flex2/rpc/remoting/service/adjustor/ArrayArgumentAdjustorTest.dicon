@@ -4,7 +4,7 @@
 <components>
     <component
         class="org.seasar.flex2.rpc.remoting.service.adjustor.impl.ArrayArgumentAdjustorImpl">
-        <property name="converter">
+        <property name="arrayConverter">
             <component class="org.seasar.flex2.util.converter.impl.ArrayConverterImpl"/>
         </property>
     </component>

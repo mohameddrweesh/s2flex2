@@ -20,33 +20,31 @@ import org.seasar.flex2.rpc.remoting.service.RemotingServiceRegister;
 import org.seasar.flex2.rpc.remoting.service.RemotingServiceRepository;
 import org.seasar.framework.container.ComponentDef;
 import org.seasar.framework.container.S2Container;
+import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
+import org.seasar.framework.container.hotdeploy.HotdeployUtil;
 
 public class RemotingServiceRegisterImpl implements RemotingServiceRegister {
-
-    private S2Container container;
 
     private RemotingServiceLocator remotingServiceLocator;
 
     private RemotingServiceRepository remotingServiceRepository;
 
     public void register(final ComponentDef componentDef) {
+        if (HotdeployUtil.isHotdeploy()) {
+            return;
+        }
         if ((remotingServiceLocator == null)
                 && (remotingServiceRepository == null)) {
             setupRemotingServiceComponents();
         }
-
         if (remotingServiceLocator.isSupportService(componentDef)) {
             remotingServiceRepository.addService(componentDef
                     .getComponentName(), componentDef);
         }
     }
 
-    public void setContainer(final S2Container container) {
-        this.container = container;
-    }
-
     private final void setupRemotingServiceComponents() {
-        final S2Container container = this.container.getRoot();
+        S2Container container = SingletonS2ContainerFactory.getContainer();
         remotingServiceLocator = (RemotingServiceLocator) container
                 .getComponent(RemotingServiceLocator.class);
         remotingServiceRepository = (RemotingServiceRepository) container

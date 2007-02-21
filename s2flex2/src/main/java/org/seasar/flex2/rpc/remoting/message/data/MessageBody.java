@@ -75,7 +75,6 @@ public class MessageBody {
         return buf.toString();
     }
 
-    // TODO みなおし
     protected void setupData() {
         if ((data != null) && (data instanceof Object[])) {
             args = (Object[]) data;

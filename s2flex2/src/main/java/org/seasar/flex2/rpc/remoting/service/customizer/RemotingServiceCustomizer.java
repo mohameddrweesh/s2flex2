@@ -21,7 +21,7 @@ import org.seasar.framework.container.ComponentDef;
 
 public class RemotingServiceCustomizer extends RemotingServiceRegisterImpl
         implements ComponentCustomizer {
-
+    
     public void customize(final ComponentDef componentDef) {
         register(componentDef);
     }
