@@ -56,7 +56,7 @@
   <scm>
     <connection>scm:svn:https://www.seasar.org/svn/sandbox/s2flex2/trunk/s2flex2/</connection>
     <developerConnection>scm:svn:https://www.seasar.org/svn/sandbox/s2flex2/trunk/s2flex2/</developerConnection>
-    <url>http://www.seasar.org/websvn/listing.php?repname=s2flex2</url>
+    <url>http://svn.seasar.org/browse/?root=sandbox.s2flex2</url>
   </scm>
   <organization>
     <name>The Seasar Foundation</name>
