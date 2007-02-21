@@ -22,8 +22,8 @@ import org.seasar.flex2.rpc.remoting.message.data.Message;
 import org.seasar.flex2.rpc.remoting.message.data.MessageHeader;
 import org.seasar.flex2.rpc.remoting.message.data.factory.MessageHeaderFactory;
 import org.seasar.flex2.rpc.remoting.message.processor.MessageHeaderCreator;
-import org.seasar.flex2.util.session.HttpSessionUtil;
-import org.seasar.flex2.util.session.SessionDecorator;
+import org.seasar.flex2.util.http.HttpSessionUtil;
+import org.seasar.flex2.util.http.SessionDecorator;
 import org.seasar.framework.container.S2Container;
 
 public class AppendToGatewayUrlHeaderCreatorImpl implements
