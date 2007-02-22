@@ -1,6 +1,8 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
 <web-app>
+    <display-name>S2Flex2</display-name>
+    <description>S2Flex2 Application</description>
 	<filter>
 		<filter-name>s2filter</filter-name>
 		<filter-class>org.seasar.framework.container.filter.S2ContainerFilter</filter-class>
@@ -18,6 +20,14 @@
     <servlet>
         <servlet-name>gateway</servlet-name>
         <servlet-class>org.seasar.flex2.rpc.remoting.RemotingGateway</servlet-class>
+		<init-param>
+			<param-name>showGetResponse</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>useSession</param-name>
+			<param-value>true</param-value>
+		</init-param>
         <load-on-startup>2</load-on-startup>
     </servlet>
     <servlet-mapping>
