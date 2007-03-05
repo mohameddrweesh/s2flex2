@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="398" height="370" xmlns:seasar="http://www.seasar.org/s2flex2/mxml" xmlns:emp="s2flex2.tutorial.web.emp.*">
+    <mx:Binding source="empName.text" destination="page.model.empName"/>
+<mx:Binding source="page.model.empName" destination="empName.text"/>
+<mx:Binding source="empNo.text" destination="page.model.empNo"/>
+<mx:Binding source="page.model.empNo" destination="empNo.text"/>
+<mx:Binding source="sal.text" destination="page.model.sal"/>
+<mx:Binding source="page.model.sal" destination="sal.text"/>
+<emp:EmployeeAppPage id="page"/>
+<seasar:S2Flex2Service id="service" destination="emp_employeeAppService" showBusyCursor="true"/>
+<mx:DataGrid x="49" y="55" dataProvider="{page.models}" id="dg">
+        <mx:columns>
+            <mx:DataGridColumn headerText="No" dataField="empNo"/>
+            <mx:DataGridColumn headerText="Name" dataField="empName"/>
+            <mx:DataGridColumn headerText="Salary" dataField="sal"/>
+        </mx:columns>
+    </mx:DataGrid>
+    <mx:Form x="49" y="219">
+        <mx:FormItem label="No">
+            <mx:TextInput id="empNo"/>
+        </mx:FormItem>
+        <mx:FormItem label="Name">
+            <mx:TextInput id="empName"/>
+        </mx:FormItem>
+        <mx:FormItem label="Salary">
+            <mx:TextInput id="sal"/>
+        </mx:FormItem>
+    </mx:Form>
+    <mx:Button x="286" y="338" label="Update" id="doUpdate"/>
+    
+</mx:Canvas>

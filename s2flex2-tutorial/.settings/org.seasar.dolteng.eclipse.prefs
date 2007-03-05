@@ -1,0 +1,14 @@
+#Sun Mar 04 12:11:25 JST 2007
+DaoType=S2Dao
+DefaultDaoPackage=s2flex2.tutorial.dao
+DefaultDtoPackage=s2flex2.tutorial.dto
+DefaultEntityPackage=s2flex2.tutorial.entity
+DefaultResourcePath=/s2flex2-tutorial/WEB-INF/src/main/resources
+DefaultSrcPath=/s2flex2-tutorial/WEB-INF/src/main/java
+DefaultWebPackage=s2flex2.tutorial.web
+ServletPath=/s2flex2-tutorial
+UsePageMarker=false
+ViewType=Flex2
+WebContentsRoot=/
+eclipse.preferences.version=1
+flexSrcPath=/s2flex2-tutorial/WEB-INF/src/main/flex
