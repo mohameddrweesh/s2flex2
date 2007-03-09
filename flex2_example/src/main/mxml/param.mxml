@@ -97,9 +97,9 @@
 	<mx:Panel x="25" y="30" width="402" height="275" layout="absolute" title="paramcheckService">
 		<mx:TextArea x="5" y="7" height="188" width="372" id="ret_text"/>
 		<mx:ControlBar>
-			<mx:Button label="paramCheckService" click="doService()"/>
-			<mx:Button label="getTypeCDto" click="getTypeADto()"/>
-			<mx:Button label="getTypeCDto" click="getTypeBDto()"/>
+			<mx:Button label="getTypeCDto" click="doService()"/>
+			<mx:Button label="getTypeADto" click="getTypeADto()"/>
+			<mx:Button label="getTypeBDto" click="getTypeBDto()"/>
 		</mx:ControlBar>
 	</mx:Panel>
 	
