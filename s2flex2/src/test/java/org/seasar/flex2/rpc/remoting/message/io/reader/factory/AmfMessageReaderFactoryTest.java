@@ -40,7 +40,7 @@ public class AmfMessageReaderFactoryTest extends S2TestCase {
         assertTrue("1", object instanceof AmfMessageReaderImpl);
 
         AmfMessageReaderImpl reader = (AmfMessageReaderImpl) object;
-        AmfDataReaderFactory dataFactory = reader.getDataReaderFactory();
+        AmfDataReaderFactory dataFactory = reader.getAmfDataReaderFactory();
         assertNotNull("2", dataFactory);
         assertTrue("3", dataFactory instanceof Amf0DataReaderFactory);
 

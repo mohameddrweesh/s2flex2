@@ -30,7 +30,7 @@ public class AmfMessageWriterImpl implements MessageWriter {
 
     protected DataOutputStream outputStream;
 
-    private AmfDataWriterFactory dataWriterFactory;
+    private AmfDataWriterFactory amfDataWriterFactory;
 
     private Amf0SharedObject sharedObject;
 
@@ -40,16 +40,16 @@ public class AmfMessageWriterImpl implements MessageWriter {
         this.outputStream = outputStream;
     }
 
-    public AmfDataWriterFactory getDataWriterFactory() {
-        return dataWriterFactory;
+    public AmfDataWriterFactory getAmfDataWriterFactory() {
+        return amfDataWriterFactory;
     }
 
     public Amf0SharedObject getSharedObject() {
         return sharedObject;
     }
 
-    public void setDataWriterFactory(final AmfDataWriterFactory writerFactory) {
-        this.dataWriterFactory = writerFactory;
+    public void setAmfDataWriterFactory(final AmfDataWriterFactory writerFactory) {
+        this.amfDataWriterFactory = writerFactory;
     }
 
     public void setSharedObject(final Amf0SharedObject sharedObject) {
@@ -83,6 +83,6 @@ public class AmfMessageWriterImpl implements MessageWriter {
     }
 
     protected final void writeData(final Object value) throws IOException {
-        dataWriterFactory.createDataWriter(value).write(value, outputStream);
+        amfDataWriterFactory.createDataWriter(value).write(value, outputStream);
     }
 }

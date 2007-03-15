@@ -40,7 +40,7 @@ public class AmfWriterFactoryTest extends S2TestCase {
         assertTrue("1", object instanceof AmfMessageWriterImpl);
 
         AmfMessageWriterImpl writer = (AmfMessageWriterImpl) object;
-        AmfDataWriterFactory dataFactory = writer.getDataWriterFactory();
+        AmfDataWriterFactory dataFactory = writer.getAmfDataWriterFactory();
         assertNotNull("2", dataFactory);
         assertTrue("3", dataFactory instanceof Amf0DataWriterFactory);
 

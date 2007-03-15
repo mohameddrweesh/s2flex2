@@ -29,7 +29,7 @@ import org.seasar.flex2.rpc.remoting.message.io.reader.MessageReader;
 
 public class AmfMessageReaderImpl implements MessageReader {
 
-    protected AmfDataReaderFactory dataReaderFactory;
+    protected AmfDataReaderFactory amfDataReaderFactory;
 
     protected DataInputStream inputStream;
 
@@ -48,8 +48,8 @@ public class AmfMessageReaderImpl implements MessageReader {
         this.message = createMessage();
     }
 
-    public AmfDataReaderFactory getDataReaderFactory() {
-        return dataReaderFactory;
+    public AmfDataReaderFactory getAmfDataReaderFactory() {
+        return amfDataReaderFactory;
     }
 
     public MessageBodyFactory getMessageBodyFactory() {
@@ -77,8 +77,8 @@ public class AmfMessageReaderImpl implements MessageReader {
         return message;
     }
 
-    public void setDataReaderFactory(final AmfDataReaderFactory readerFactory) {
-        this.dataReaderFactory = readerFactory;
+    public void setDataReaderFactory(final AmfDataReaderFactory amfDataReaderFactory) {
+        this.amfDataReaderFactory = amfDataReaderFactory;
     }
 
     public void setMessageBodyFactory(final MessageBodyFactory bodyFactory) {
@@ -124,7 +124,7 @@ public class AmfMessageReaderImpl implements MessageReader {
 
     protected final Object readData() throws IOException {
         final byte dataType = inputStream.readByte();
-        return dataReaderFactory.createDataReader(dataType).read(inputStream);
+        return amfDataReaderFactory.createDataReader(dataType).read(inputStream);
     }
 
     protected void readHeader() throws IOException {

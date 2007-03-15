@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN" 
 	"http://www.seasar.org/dtd/components24.dtd">
-<components namespace="amf3">
+<components namespace="amf">
 	<!--
 		data converter
 	-->
@@ -361,6 +361,7 @@
 		data writer factory components
 	-->
 	<component
+		name="amfDataWriterFactory"
 		class="org.seasar.flex2.core.format.amf3.io.writer.factory.impl.Amf3DataWriterFactoryImpl"
 		autoBinding="property"
 	    />
