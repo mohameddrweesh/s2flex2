@@ -1,6 +1,81 @@
 <project name="flex2-example" default="dist" basedir=".">
 
 	<property name="ver" value="1.0.1"/>
+    <taskdef resource="flexTasks.tasks" classpath="${basedir}/WEB-INF/lib/flexTasks.jar" />        
+    <property name="FLEX_HOME" value="C:/dev/FlexSDK2"/>
+    <property name="APP_ROOT" value="src/main/mxml"/>
+    <property name="DEPLOY_DIR" value="bin"/>
+	<macrodef name="call-mxmlc">
+		<attribute name="appName" default="Main"/>
+		<sequential>
+	    <mxmlc 
+	            file="${APP_ROOT}/@{appName}.mxml" 
+	            output="${DEPLOY_DIR}/@{appName}.swf"
+	            actionscript-file-encoding="UTF-8"
+	        	keep-generated-actionscript="true"
+	        	locale="ja_JP"
+	        	incremental="true">
+	            <!-- Get default compiler options. -->
+	            <load-config filename="${FLEX_HOME}/frameworks/flex-config.xml"/>          
+	            <!-- List of path elements that form the roots of ActionScript class hierarchies. -->
+	            <source-path path-element="${FLEX_HOME}/frameworks"/>
+	            <!-- List of SWC files or directories that contain SWC files. -->
+	            <compiler.library-path dir="${FLEX_HOME}/frameworks" append="true">
+	                <include name="libs" />
+	                <include name="../bundles/{locale}" />
+	            </compiler.library-path>
+	        	<compiler.source-path path-element="src/main/actionscript" />
+	            <compiler.library-path dir="src/lib" append="true">
+	                <include name="swc" />
+	            </compiler.library-path>        	
+	            <!-- Set size of output SWF file. -->
+	            <default-size width="500" height="600" />
+	        </mxmlc>
+			</sequential>
+	</macrodef>
+	<macrodef name="call-wrapper">
+		<attribute name="appName" default="Main"/>
+		<sequential>
+		  	<html-wrapper 
+	              title="@{appName}"
+	              height="100%"
+	              width="100%"
+	              bgcolor="red"
+	              application="app"
+	              swf="@{appName}"
+	              version-major="9"
+	              version-minor="0"
+	              version-revision="0"
+	              history="true"              
+	              template="express-installation"
+	              output="${DEPLOY_DIR}"/>
+			<move file="${DEPLOY_DIR}/index.html" tofile="${DEPLOY_DIR}/@{appName}.html" />
+		</sequential>
+	</macrodef>
+<!-- ================================= 
+          target: main              
+     ================================= -->
+    <target name="mxmlc" depends="" description="--> make a swf">
+    	<call-mxmlc appname="add"/>
+    	<call-mxmlc appname="check"/>
+    	<call-mxmlc appname="exception_example"/>
+    	<call-mxmlc appname="param"/>
+    	<call-mxmlc appname="PerFormanceTest"/>
+    	<call-mxmlc appname="CameraSnapShotMain"/>
+        
+    </target>
+
+<!-- ================================= 
+          target: wrapper              
+     ================================= -->
+    <target name="wrapper" depends="" description="--> make a wrapper html">
+	  	<call-wrapper appname="add"/>
+	  	<call-wrapper appname="check"/>
+	  	<call-wrapper appname="exception_example"/>
+	  	<call-wrapper appname="PerformanceTest"/>
+	  	<call-wrapper appname="param"/>
+	  	<call-wrapper appname="CameraSnapShotMain"/>        
+    </target>
 
 	<target name="dist">
 		<delete includeemptydirs="true" failonerror="false">
@@ -22,29 +97,5 @@
 				<include name="*" />
 			</zipfileset>
 		</zip>
-	</target>
-	
-    <path id="project.class.path">
-        <pathelement path="${basedir}/WEB-INF/lib/backport175-1.0.jar" />
-    </path>
-    <!-- ================================= 
-          target: build for backport175          
-         ================================= -->
-<!--	
-    <target name="build" depends="" description="build and annotaionc..">
-        <taskdef
-            name="annotationc"
-            classname="org.codehaus.backport175.compiler.task.AnnotationCTask"
-            classpathref="project.class.path"
-        />
-
-        <annotationc verbose="true" destdir="${basedir}/WEB-INF/classes">
-            <src path="${basedir}/src/main/java" />
-            <classpath path="${basedir}/WEB-INF/classes"/>
-            <fileset dir="src">
-                <include name="**/*.java" />
-            </fileset>
-        </annotationc>
-    </target>
--->
+	</target>	
 </project>
