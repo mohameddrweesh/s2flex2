@@ -1,0 +1,112 @@
+<project name="s2flex2-tutorial" default="dist" basedir=".">
+
+	<property name="ver" value="1.0"/>
+    <taskdef resource="flexTasks.tasks" classpath="${basedir}/lib/flexTasks.jar" />        
+    <property name="FLEX_HOME" value="/Developer/SDKs/Flex/"/>
+    <property name="APP_ROOT" value="src/main/mxml"/>
+    <property name="DEPLOY_DIR" value="src/main/webapp/bin"/>
+    <target name="main">
+        <mxmlc 
+            file="${APP_ROOT}/param.mxml" 
+            output="${DEPLOY_DIR}/param.swf"
+            actionscript-file-encoding="UTF-8"
+        	keep-generated-actionscript="true"
+        	locale="ja_JP"
+        	incremental="true">
+            <!-- Get default compiler options. -->
+            <load-config filename="${FLEX_HOME}/frameworks/flex-config.xml"/>          
+            <!-- List of path elements that form the roots of ActionScript class hierarchies. -->
+            <source-path path-element="${FLEX_HOME}/frameworks"/>
+            <!-- List of SWC files or directories that contain SWC files. -->
+            <compiler.library-path dir="${FLEX_HOME}/frameworks" append="true">
+                <include name="libs" />
+                <include name="../bundles/{locale}" />
+            </compiler.library-path>
+            <compiler.library-path dir="${basedir}/lib" append="true">
+                <include name="swc" />
+            </compiler.library-path>
+        	<compiler.source-path path-element="src/main/actionscript3"/>
+            <!-- Set size of output SWF file. -->
+            <default-size width="800" height="600" />
+        </mxmlc>
+        <mxmlc 
+            file="${APP_ROOT}/index.mxml" 
+            output="${DEPLOY_DIR}/index.swf"
+            actionscript-file-encoding="UTF-8"
+        	keep-generated-actionscript="true"
+        	locale="ja_JP"
+        	incremental="true">
+            <!-- Get default compiler options. -->
+            <load-config filename="${FLEX_HOME}/frameworks/flex-config.xml"/>          
+            <!-- List of path elements that form the roots of ActionScript class hierarchies. -->
+            <source-path path-element="${FLEX_HOME}/frameworks"/>
+            <!-- List of SWC files or directories that contain SWC files. -->
+            <compiler.library-path dir="${FLEX_HOME}/frameworks" append="true">
+                <include name="libs" />
+                <include name="../bundles/{locale}" />
+            </compiler.library-path>
+            <compiler.library-path dir="${basedir}/lib" append="true">
+                <include name="swc" />
+            </compiler.library-path>
+        	<compiler.source-path path-element="src/main/actionscript3"/>
+            <!-- Set size of output SWF file. -->
+            <default-size width="800" height="600" />
+        </mxmlc>
+    </target>
+	  <target name="wrapper">
+	        <html-wrapper 
+	              title="Chura"
+	              height="100%"
+	              width="100%"
+	              bgcolor="red"
+	              application="app"
+	              swf="Main"
+	              version-major="9"
+	              version-minor="0"
+	              version-revision="0"
+	              history="true"              
+	              template="express-installation"
+	              output="${DEPLOY_DIR}"/>
+	        <html-wrapper 
+	              title="index"
+	              height="100%"
+	              width="100%"
+	              bgcolor="red"
+	              application="app"
+	              swf="index"
+	              version-major="9"
+	              version-minor="0"
+	              version-revision="0"
+	              history="true"              
+	              template="express-installation"
+	              output="${DEPLOY_DIR}"/>	  	
+	    </target>
+    <target name="clean">
+        <delete dir="${DEPLOY_DIR}/generated"/>
+        <delete>
+            <fileset dir="${DEPLOY_DIR}" includes="Main.swf"/>
+        </delete>    
+    </target>
+	<target name="dist">
+		<delete includeemptydirs="true" failonerror="false">
+			<fileset dir="target"/>
+		</delete>
+		<mkdir dir="target"/>
+		<zip zipfile="target/s2flex2-example-${ver}.zip">
+			<zipfileset prefix="s2flex2-tutorial" dir=".">
+				<include name=".settings"/>
+				<include name=".settings/**"/>
+				<include name="WEB-INF"/>
+				<include name="WEB-INF/**"/>
+				<include name="work"/>
+				<include name="src"/>
+				<include name="src/**"/>
+				<include name="html-template"/>
+				<include name="html-template/**"/>
+				<include name="bin"/>
+				<include name=".*"/>
+				<include name="*" />
+			</zipfileset>
+		</zip>
+	</target>
+</project>

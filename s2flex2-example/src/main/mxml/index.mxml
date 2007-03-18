@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" 
+	applicationComplete="init()" layout="absolute" xmlns:s2="http://www.seasar.org/s2flex2/mxml">
+	<s2:S2Flex2Service id="srv" destination="xmlService" />
+	<mx:Script>
+		<![CDATA[
+			import mx.rpc.http.mxml.HTTPService;
+			import mx.controls.Alert;
+			import mx.rpc.events.FaultEvent;
+			import mx.rpc.events.ResultEvent;
+			import mx.rpc.AsyncToken;
+			import samples.dto.TestDto;
+			private function init():void {
+				srv.showBusyCursor=true;
+			}
+			private var hsrv:HTTPService;
+			[Bindable] public var XMLDATA:XML;
+		public function getTestXml():void {
+
+		   	hsrv = new HTTPService();
+		    hsrv.resultFormat = "e4x";
+		    hsrv.showBusyCursor = true;
+		    hsrv.url = "../testXml.xml";
+		    hsrv.addEventListener(ResultEvent.RESULT,resultHandler);
+		    hsrv.addEventListener(FaultEvent.FAULT,onFault);
+		    hsrv.send();    	      	
+     	
+		}
+		public function resultHandler(e:ResultEvent):void{
+			XMLDATA = (XML(e.result));
+		        
+			imp_txt.text=XMLDATA.toString();
+		
+		}	
+			public function doTest():void {
+				var testDto:TestDto = new TestDto();
+				//testDto.xmlData=XMLDATA;
+				var xmlData:XML = new XML(imp_txt.text);
+				testDto.xmlData = xmlData;
+				var token:AsyncToken =srv.doTest(testDto);	
+				token.addResponder(new mx.rpc.Responder(onDoTest,onFault));
+			}
+			
+			public function onDoTest(result:ResultEvent):void{
+				out_txt.text=result.result.toString();
+			}
+			public function onFault(fault:FaultEvent):void {
+				Alert.show(fault.toString());
+			}
+		]]>
+	</mx:Script>
+	<mx:Button x="291" label="XmlService.doTest Call" click="doTest()" id="do_btn" verticalCenter="9.5"/>
+	<mx:TextArea height="155" width="256" id="out_txt" left="27" verticalCenter="77"/>
+	<mx:TextArea width="256" height="153" id="imp_txt" left="27" top="32"/>
+	<mx:Button x="291" y="31" label="getXML" id="getxml_btn" click="getTestXml()"/>
+</mx:Application>
+<!--
+[Bindable] public var XMLDATA:XML;
+public function getTestXml():void {
+
+	    srv = new HTTPService();
+	    srv.resultFormat = "e4x";
+	    srv.showBusyCursor = true;
+	    srv.url = "test.xml";
+	    srv.addEventListener(ResultEvent.RESULT,resultHandler);
+	    srv.addEventListener(FaultEvent.FAULT,faultHandler);
+	    srv.send();    	      	
+     	
+}
+public function resultHandler(e:ResultEvent):void{
+	XMLDATA = (XML(e.result));
+        
+        var dto:TestDto = new TestDto;
+	dto.xmlData = XMLDATA;
+	xxxx.doTest(dto);
+}	
+-->
