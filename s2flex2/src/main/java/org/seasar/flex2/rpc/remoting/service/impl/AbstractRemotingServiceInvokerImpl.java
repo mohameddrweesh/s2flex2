@@ -20,7 +20,7 @@ import java.lang.reflect.Method;
 import org.seasar.flex2.rpc.remoting.service.RemotingServiceInvoker;
 import org.seasar.flex2.rpc.remoting.service.RemotingServiceLocator;
 import org.seasar.flex2.rpc.remoting.service.adjustor.ArgumentAdjustor;
-import org.seasar.flex2.rpc.remoting.service.exception.InvaildServiceArgumentException;
+import org.seasar.flex2.rpc.remoting.service.exception.InvaildServiceArgumentRuntimeException;
 import org.seasar.flex2.rpc.remoting.service.validator.RemotingServiceValidator;
 import org.seasar.framework.beans.BeanDesc;
 import org.seasar.framework.beans.factory.BeanDescFactory;
@@ -50,7 +50,7 @@ public abstract class AbstractRemotingServiceInvokerImpl implements
 
         final Object service = remotingServiceLocator.getService(serviceName);
         if (!checkMethodArgumentsValidation(service, methodName, args)) {
-            throw new InvaildServiceArgumentException(serviceName, methodName);
+            throw new InvaildServiceArgumentRuntimeException(serviceName, methodName);
         }
         return doInvoke(service, methodName, args);
     }
@@ -79,10 +79,10 @@ public abstract class AbstractRemotingServiceInvokerImpl implements
         final BeanDesc beanDesc = BeanDescFactory.getBeanDesc(service
                 .getClass());
         try {
-            logger.log("DFLX0004",new Object[]{this.getClass().getName(),service.getClass().getName(),methodName});
+            logger.log("DFLX0201",new Object[]{this.getClass().getName(),service.getClass().getName(),methodName});
             return beanDesc.invoke(service, methodName, args);
         } catch (final Throwable throwable) {
-            logger.log("DFLX0005",new Object[]{this.getClass().getName(),service.getClass().getName(),methodName},throwable);
+            logger.log("EFLX0201",new Object[]{this.getClass().getName(),service.getClass().getName(),methodName},throwable);
             throw throwable;
         }
     }

@@ -88,7 +88,7 @@ public class MessageBodyProcessorImpl implements MessageBodyProcessor {
         String responseTarget;
         Object result;
         try {
-            logger.log("DFLX0002",new Object[]{requestBody.getServiceName(),requestBody.getServiceMethodName()});
+            logger.log("DFLX0101",new Object[]{requestBody.getServiceName(),requestBody.getServiceMethodName()});
             
             final RemotingServiceInvoker invoker = serviceInvokerChooser
                     .chooseInvoker(requestBody);
@@ -100,7 +100,7 @@ public class MessageBodyProcessorImpl implements MessageBodyProcessor {
         } catch (final Throwable throwable) {
             result = faultFactory.createFault(throwable);
             responseTarget = requestBody.getResponse() + RESPONSE_STATUS;
-            logger.log("DFLX0003",new Object[]{requestBody.getServiceName(),requestBody.getServiceMethodName()},throwable);
+            logger.log("EFLX0101",new Object[]{requestBody.getServiceName(),requestBody.getServiceMethodName()},throwable);
         }
 
         return createResponseBody(responseTarget, result);

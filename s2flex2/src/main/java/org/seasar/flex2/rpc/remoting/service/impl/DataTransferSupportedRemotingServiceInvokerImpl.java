@@ -32,12 +32,12 @@ public class DataTransferSupportedRemotingServiceInvokerImpl extends
             final Object[] args) throws Throwable {
 
         final Storage storage = storageLocator.getStorage(SERVICE_DATA_STORAGE);
-        logger.log("DFLX0006", new Object[]{storage.getName()});
+        logger.log("DFLX0301", new Object[]{storage.getName()});
         transfer.importToComponent(storage, service);
         try {
             return invokeServiceMethod(service, methodName, args);
         } finally {
-            logger.log("DFLX0007", new Object[]{storage.getName()});
+            logger.log("DFLX0302", new Object[]{storage.getName()});
             transfer.exportToStorage(service, storage);
         }
     }
