@@ -44,7 +44,8 @@ public class RemotingServiceRegisterImpl implements RemotingServiceRegister {
     }
 
     private final void setupRemotingServiceComponents() {
-        S2Container container = SingletonS2ContainerFactory.getContainer();
+        final S2Container container = SingletonS2ContainerFactory
+                .getContainer();
         remotingServiceLocator = (RemotingServiceLocator) container
                 .getComponent(RemotingServiceLocator.class);
         remotingServiceRepository = (RemotingServiceRepository) container
