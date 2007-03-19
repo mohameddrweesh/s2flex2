@@ -38,7 +38,7 @@ public class Amf0XmlStringWriterImpl implements Amf0DataWriter {
         return (value instanceof Document);
     }
 
-    public void write(final Object value, final DataOutputStream outputStream)
+    public void writeAmfData(final Object value, final DataOutputStream outputStream)
             throws IOException {
         write((Document) value, outputStream);
     }

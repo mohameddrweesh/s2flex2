@@ -38,7 +38,7 @@ public class Amf0DateWriterImpl implements Amf0DataWriter {
         return (value instanceof Date);
     }
 
-    public void write(final Object value, final DataOutputStream outputStream)
+    public void writeAmfData(final Object value, final DataOutputStream outputStream)
             throws IOException {
         write((Date) value, outputStream);
     }

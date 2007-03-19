@@ -18,62 +18,46 @@ package org.seasar.flex2.core.format.amf3.io.writer.impl;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import org.seasar.flex2.core.format.amf3.Amf3IntegerConstants;
-
 public class Amf3IntWriterImpl {
+    private static final int INTEGER_DATA_MASK = 0x7F;
 
-    protected static final int[] getIntBytes(final int value) {
-        final int intByteLength = getIntByteLength(value);
-        final int[] list = new int[intByteLength];
-
-        int intValue = value;
-
-        int offset = 8;
-        int mask = 0xFF;
-        if (intByteLength < 4) {
-            mask = Amf3IntegerConstants.INTEGER_DATA_MASK;
-            offset = 7;
-        }
-
-        list[0] = intValue & mask;
-        intValue = intValue >>> offset;
-
-        for (int i = 1; i < intByteLength; i++) {
-            list[i] = intValue & Amf3IntegerConstants.INTEGER_DATA_MASK;
-            intValue = intValue >>> 7;
-        }
-        return list;
-    }
+    private static final int INTEGER_INCLUDE_NEXT_SIGN = 0x80;
 
     protected static final void writeIntData(final int value,
             final DataOutputStream outputStream) throws IOException {
-        if ((value >= 0) && (value < 0x80)) {
-            outputStream.writeByte(value);
-        } else {
-            final int[] list = getIntBytes(value);
-            for (int i = list.length - 1; i >= 1; i--) {
-                outputStream.writeByte(list[i] | Amf3IntegerConstants.INTEGER_INCLUDE_NEXT_SIGN);
-            }
-            outputStream.writeByte(list[0]);
-        }
-    }
 
-    private static final int getIntByteLength(final int value) {
+        int maskedInt = value & 0x1fffffff;
+
         if (value < 0) {
-            return 4;
+            outputStream.writeByte(value >> 22 & INTEGER_DATA_MASK
+                    | INTEGER_INCLUDE_NEXT_SIGN);
+            outputStream.writeByte(value >> 15 & INTEGER_DATA_MASK
+                    | INTEGER_INCLUDE_NEXT_SIGN);
+            outputStream.writeByte(value >> 8 & INTEGER_DATA_MASK
+                    | INTEGER_INCLUDE_NEXT_SIGN);
+            outputStream.writeByte(value & 0xFF);
+        } else {
+            if (maskedInt < 0x80) {
+                outputStream.writeByte(maskedInt);
+            } else if (maskedInt < 0x4000) {
+                outputStream.writeByte(value >> 7 & INTEGER_DATA_MASK
+                        | INTEGER_INCLUDE_NEXT_SIGN);
+                outputStream.writeByte(value & INTEGER_DATA_MASK);
+            } else if (maskedInt < 0x200000) {
+                outputStream.writeByte(value >> 14 & INTEGER_DATA_MASK
+                        | INTEGER_INCLUDE_NEXT_SIGN);
+                outputStream.writeByte(value >> 7 & INTEGER_DATA_MASK
+                        | INTEGER_INCLUDE_NEXT_SIGN);
+                outputStream.writeByte(value & INTEGER_DATA_MASK);
+            } else {
+                outputStream.writeByte(value >> 22 & INTEGER_DATA_MASK
+                        | INTEGER_INCLUDE_NEXT_SIGN);
+                outputStream.writeByte(value >> 15 & INTEGER_DATA_MASK
+                        | INTEGER_INCLUDE_NEXT_SIGN);
+                outputStream.writeByte(value >> 8 & INTEGER_DATA_MASK
+                        | INTEGER_INCLUDE_NEXT_SIGN);
+                outputStream.writeByte(value & 0xFF);
+            }
         }
-        if (value >= 0x200000) {
-            return 4;
-        }
-        if (value >= 0x4000) {
-            return 3;
-        }
-        if (value >= 0x80) {
-            return 2;
-        }
-        if (value >= 0x0) {
-            return 1;
-        }
-        return -1;
     }
 }

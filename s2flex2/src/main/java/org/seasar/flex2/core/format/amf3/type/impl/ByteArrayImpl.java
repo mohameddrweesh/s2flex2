@@ -281,7 +281,7 @@ public class ByteArrayImpl extends ByteArrayInputStream implements ByteArray {
     public void writeObject(final Object object) throws IOException {
         final Amf3DataWriter writer = dataWriterFactory
                 .createAmf3DataWriter(object);
-        writer.writeData(object, dataOutputStream);
+        writer.writeAmf3Data(object, dataOutputStream);
     }
 
     public void writeShort(final int value) throws IOException {

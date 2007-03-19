@@ -33,7 +33,7 @@ public class Amf0BooleanWriterImpl implements Amf0DataWriter {
         return (value instanceof Boolean);
     }
 
-    public void write(final Object value, final DataOutputStream outputStream)
+    public void writeAmfData(final Object value, final DataOutputStream outputStream)
             throws IOException {
         write((Boolean) value, outputStream);
     }

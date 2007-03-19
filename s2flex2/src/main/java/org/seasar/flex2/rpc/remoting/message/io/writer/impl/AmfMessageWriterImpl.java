@@ -83,6 +83,6 @@ public class AmfMessageWriterImpl implements MessageWriter {
     }
 
     protected final void writeData(final Object value) throws IOException {
-        amfDataWriterFactory.createDataWriter(value).write(value, outputStream);
+        amfDataWriterFactory.createDataWriter(value).writeAmfData(value, outputStream);
     }
 }

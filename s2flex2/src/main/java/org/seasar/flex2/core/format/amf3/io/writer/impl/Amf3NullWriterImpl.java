@@ -27,13 +27,13 @@ public class Amf3NullWriterImpl implements Amf3DataWriter {
         return (value == null);
     }
 
-    public void write(final Object value, final DataOutputStream outputStream)
+    public void writeAmfData(final Object value, final DataOutputStream outputStream)
             throws IOException {
         outputStream.writeByte(Amf3TypeDef.NULL);
     }
 
-    public void writeData(final Object value,
+    public void writeAmf3Data(final Object value,
             final DataOutputStream outputStream) throws IOException {
-        write(value, outputStream);
+        writeAmfData(value, outputStream);
     }
 }

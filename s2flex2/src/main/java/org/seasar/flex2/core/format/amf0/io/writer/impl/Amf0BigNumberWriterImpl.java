@@ -26,7 +26,7 @@ public class Amf0BigNumberWriterImpl extends Amf0StringWriterImpl {
         return (value instanceof BigDecimal) || (value instanceof BigInteger);
     }
 
-    public void write(final Object value, final DataOutputStream outputStream)
+    public void writeAmfData(final Object value, final DataOutputStream outputStream)
             throws IOException {
         write(value.toString(), outputStream);
     }

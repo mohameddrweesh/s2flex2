@@ -36,12 +36,12 @@ public class Amf3BooleanWriterImpl implements Amf3DataWriter {
         return (value instanceof Boolean);
     }
 
-    public void write(final Object value, final DataOutputStream outputStream)
+    public void writeAmfData(final Object value, final DataOutputStream outputStream)
             throws IOException {
         writeBoolean((Boolean) value, outputStream);
     }
 
-    public void writeData(final Object value,
+    public void writeAmf3Data(final Object value,
             final DataOutputStream outputStream) throws IOException {
         writeBoolean((Boolean) value, outputStream);
     }

@@ -27,7 +27,7 @@ public class Amf0StringWriterImpl implements Amf0DataWriter {
         return (value instanceof String);
     }
 
-    public void write(final Object value, final DataOutputStream outputStream)
+    public void writeAmfData(final Object value, final DataOutputStream outputStream)
             throws IOException {
         write((String) value, outputStream);
     }

@@ -97,7 +97,7 @@ public class ExternalObjectOutputImpl implements ExternalObjectOutput {
     public void writeObject(final Object object) throws IOException {
         final Amf3DataWriter dataWriter = writerFactory
                 .createAmf3DataWriter(object);
-        dataWriter.writeData(object, outputStream);
+        dataWriter.writeAmf3Data(object, outputStream);
     }
 
     public void writeShort(final int v) throws IOException {

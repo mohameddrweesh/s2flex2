@@ -28,7 +28,7 @@ public class Amf0NumberWriterImpl implements Amf0DataWriter {
                 || (value instanceof Byte) || (value instanceof Short);
     }
 
-    public void write(final Object value, final DataOutputStream outputStream)
+    public void writeAmfData(final Object value, final DataOutputStream outputStream)
             throws IOException {
         write((Number) value, outputStream);
     }

@@ -38,12 +38,12 @@ public class Amf3IntegerWriterImpl extends Amf3IntWriterImpl implements
         return isWritableValue;
     }
 
-    public void write(final Object value, final DataOutputStream outputStream)
+    public void writeAmfData(final Object value, final DataOutputStream outputStream)
             throws IOException {
         writeInteger((Integer) value, outputStream);
     }
 
-    public void writeData(final Object value,
+    public void writeAmf3Data(final Object value,
             final DataOutputStream outputStream) throws IOException {
         outputStream.writeByte(Amf3TypeDef.INTEGER);
         writeInteger((Integer) value, outputStream);

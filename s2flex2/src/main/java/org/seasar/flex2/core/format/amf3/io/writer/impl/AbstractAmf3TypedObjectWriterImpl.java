@@ -34,6 +34,6 @@ public abstract class AbstractAmf3TypedObjectWriterImpl extends
             final DataOutputStream outputStream) throws IOException {
         final Amf3DataWriter dataWriter = writerFactory
                 .createAmf3DataWriter(value);
-        dataWriter.writeData(value, outputStream);
+        dataWriter.writeAmf3Data(value, outputStream);
     }
 }

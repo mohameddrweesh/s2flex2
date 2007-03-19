@@ -27,7 +27,7 @@ public class Amf0NullWriterImpl implements Amf0DataWriter {
         return (value == null);
     }
 
-    public void write(final Object value, final DataOutputStream outputStream)
+    public void writeAmfData(final Object value, final DataOutputStream outputStream)
             throws IOException {
         outputStream.writeByte(Amf0TypeDef.NULL);
     }

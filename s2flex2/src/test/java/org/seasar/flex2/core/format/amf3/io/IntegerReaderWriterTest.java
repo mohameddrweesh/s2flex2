@@ -35,21 +35,15 @@ public class IntegerReaderWriterTest extends AbstractReaderWriterS2TestCase {
     public void testAmf3Integer() throws Exception {
 
         Integer value1 = new Integer(Amf3IntegerConstants.INTEGER_MAX);
-
-        assertEquals("3", new Integer(value1.intValue()),
-                getWriteReadData(value1));
-
-        value1 = new Integer(Amf3IntegerConstants.INTEGER_MIN);
-
-        assertEquals("4", new Integer(value1.intValue()),
-                getWriteReadData(value1));
+        Integer value2 = (Integer) getWriteReadData(value1);
+        assertEquals("3", value1, value2);
     }
 
-    public void testNegativeIntegers() throws Exception {
+    public void testIntegers() throws Exception {
         Integer[] values = new Integer[29];
 
         for (int i = 0; i < 29; i++) {
-            values[i] = new Integer(Amf3IntegerConstants.INTEGER_MIN >> i);
+            values[i] = new Integer(Amf3IntegerConstants.INTEGER_MAX >>> i);
         }
 
         Object[] values1 = (Object[]) getWriteReadData(values);
@@ -61,11 +55,18 @@ public class IntegerReaderWriterTest extends AbstractReaderWriterS2TestCase {
         }
     }
 
-    public void testIntegers() throws Exception {
+    public void testsNegativeInteger() throws Exception {
+
+        Integer value1 = new Integer(Amf3IntegerConstants.INTEGER_MIN);
+        Integer value2 = (Integer) getWriteReadData(value1);
+        assertEquals("4", value1, value2);
+    }
+
+    public void testNegativeIntegers() throws Exception {
         Integer[] values = new Integer[29];
 
         for (int i = 0; i < 29; i++) {
-            values[i] = new Integer(Amf3IntegerConstants.INTEGER_MAX >>> i);
+            values[i] = new Integer(Amf3IntegerConstants.INTEGER_MIN >> i);
         }
 
         Object[] values1 = (Object[]) getWriteReadData(values);

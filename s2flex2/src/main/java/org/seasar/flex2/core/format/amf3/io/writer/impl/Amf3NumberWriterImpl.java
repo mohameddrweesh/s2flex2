@@ -33,12 +33,12 @@ public class Amf3NumberWriterImpl implements Amf3DataWriter {
                 || (value instanceof Float) || (value instanceof Long);
     }
 
-    public void write(final Object value, final DataOutputStream outputStream)
+    public void writeAmfData(final Object value, final DataOutputStream outputStream)
             throws IOException {
         writeNumber((Number) value, outputStream);
     }
 
-    public void writeData(final Object value,
+    public void writeAmf3Data(final Object value,
             final DataOutputStream outputStream) throws IOException {
         outputStream.writeByte(Amf3TypeDef.NUMBER);
         writeNumber((Number) value, outputStream);

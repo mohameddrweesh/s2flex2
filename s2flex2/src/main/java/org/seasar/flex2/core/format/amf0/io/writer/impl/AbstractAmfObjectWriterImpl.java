@@ -39,7 +39,7 @@ public abstract class AbstractAmfObjectWriterImpl implements Amf0DataWriter {
         this.writerFactory = writerFactory;
     }
 
-    public void write(final Object value, final DataOutputStream outputStream)
+    public void writeAmfData(final Object value, final DataOutputStream outputStream)
             throws IOException {
         final int index = getSharedObject().getSharedIndex(value);
         if (index >= 0) {
@@ -55,7 +55,7 @@ public abstract class AbstractAmfObjectWriterImpl implements Amf0DataWriter {
 
     protected final void writeData(final Object value,
             final DataOutputStream outputStream) throws IOException {
-        writerFactory.createDataWriter(value).write(value, outputStream);
+        writerFactory.createDataWriter(value).writeAmfData(value, outputStream);
     }
 
     protected abstract void writeObjectData(Object value,

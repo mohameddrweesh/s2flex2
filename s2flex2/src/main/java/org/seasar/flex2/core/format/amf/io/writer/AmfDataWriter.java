@@ -7,6 +7,6 @@ public interface AmfDataWriter {
 
     boolean isWritableValue(Object value);
 
-    void write(Object value, DataOutputStream outputStream) throws IOException;
+    void writeAmfData(Object value, DataOutputStream outputStream) throws IOException;
 
 }

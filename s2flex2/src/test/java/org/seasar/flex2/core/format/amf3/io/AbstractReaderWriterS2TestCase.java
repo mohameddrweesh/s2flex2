@@ -55,7 +55,7 @@ public class AbstractReaderWriterS2TestCase extends S2TestCase {
         DataOutputStream outputStream = createOutputStream();
 
         Amf3DataWriter writer = writerFactory.createAmf3DataWriter(value);
-        writer.writeData(value, outputStream);
+        writer.writeAmf3Data(value, outputStream);
 
         DataInputStream inputStream = createInputStream(out.toByteArray());
         byte dataType = inputStream.readByte();

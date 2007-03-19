@@ -34,13 +34,13 @@ public abstract class AbstractAmf3ObjectWriterImpl extends
         this.referencesFactory = referencesFactory;
     }
 
-    public void write(final Object value, final DataOutputStream outputStream)
+    public void writeAmfData(final Object value, final DataOutputStream outputStream)
             throws IOException {
         writeAMF3DataMaker(outputStream);
-        writeData(value, outputStream);
+        writeAmf3Data(value, outputStream);
     }
 
-    public void writeData(final Object value,
+    public void writeAmf3Data(final Object value,
             final DataOutputStream outputStream) throws IOException {
         outputStream.writeByte(getDataTypeValue());
         writeObject(value, outputStream);

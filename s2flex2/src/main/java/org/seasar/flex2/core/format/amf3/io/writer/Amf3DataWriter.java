@@ -22,6 +22,6 @@ import org.seasar.flex2.core.format.amf.io.writer.AmfDataWriter;
 
 public interface Amf3DataWriter extends AmfDataWriter {
 
-    void writeData(Object value, DataOutputStream outputStream)
+    void writeAmf3Data(Object value, DataOutputStream outputStream)
             throws IOException;
 }
