@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Content-Language" content="ja" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<title>S2Flex2 - ソースリポジトリ</title>
+<link rel="stylesheet" type="text/css" href="http://www.seasar.org/theme/main.css" media="screen,projection" />
+<link rel="stylesheet" type="text/css" href="http://www.seasar.org/theme/print.css" media="print" />
+<link href="./css/maven-base.css" type="text/css" rel="stylesheet" media="screen" />
+<link href="./css/maven-theme.css" type="text/css" rel="stylesheet" media="screen" />
+</head>
+<body>
+<div id="wrapper">
+  <div id="header">
+    <div class="line"><span class="hide">spacer</span></div>
+    <div id="logo">
+      <h1 id="h01" class="hide">The Seasar Foundation Project Site</h1>
+      <img align="LEFT" alt="S2Flex2 - Amf3gateway" src="images/s2flex2-logo.gif"  /><img align="RIGHT"  alt="S2Flex2 Project" height="110" src="images/seasar-logo.png" width="254"/></div>
+    <div id="tool">
+      <!--
+<h2><a href="http://search.seasar.org/">Site Search</a></h2>
+
+<form id="search" action="http://search.seasar.org/">
+<div>
+	<input id="search_phrase" type="text" name="phrase" size="20" />
+	<input type="hidden" name="perpage" value="30" />
+	<input type="hidden" name="enc" value="UTF-8" />
+	<input id="search_go" type="submit" value="Search" />
+</div>
+</form>
+
+<h2>Seasar Banner</h2>
+
+<p><a href="http://www.seasar.org/images/seasar_banner.gif"><img src="http://www.seasar.org/images/seasar_banner.gif" alt="Seasar Banner" title="Seasar Banner" width="146" height="33" /></a></p>
+-->
+    </div>
+    <div id="navi">
+      <p><a href="../en/">English</a> | <a href="../ja/">Japanese</a></p>
+    </div>
+  </div>
+  <!-- header -->
+  <div id="contents_left">
+    <h2>Menu</h2>
+    <ul>
+      <li class="none"> <a href="index.html">Introduction</a> </li>
+      <li class="none"> <a href="http://akabana.sandbox.seasar.org/ja/downloads/">Download</a> </li>
+	  <!--
+      <li class="none"> <a href="documentation/tutorials.html">Tutorials</a> </li>
+      <li class="none"> <a href="documentation/examples.html">Examples</a> </li>
+      <li class="none"> <a href="documentation/user_guide.html">User's Guide</a> </li>
+      <li class="none"> <a href="documentation/developer_guide.html">Development's Guide</a> </li>
+      <li class="none"> <a href="apidocs/">API Javadoc</a> </li>
+      <li class="none"> <a href="faq.html">FAQ</a> </li>
+	  -->
+    </ul>
+    <h2>プロジェクト文書</h2>
+    <ul>
+      <li class="expanded"> <a href="project-info.html">プロジェクト情報</a>
+        <ul>
+          <li class="none"> <a href="index.html">このプロジェクトについて</a> </li>
+          <li class="none"> <strong>ソースリポジトリ</strong> </li>
+          <li class="none"> <a href="mail-lists.html">メーリングリスト</a> </li>
+          <li class="none"> <a href="issue-tracking.html">課題追跡</a> </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <!-- contents_left -->
+  <div id="contents_center">
+    <div id="article">
+      <div class="section">
+        <h2>概要</h2>
+        ここでは、S2Flex2を使った開発をする上で必要な環境を作成する方法を説明いたします。</div>
+      <div class="section">
+        <h2>開発環境の構築</h2>
+		<h3>1.eclipseを download</h3>
+<p>各環境に合わせたEclipse 3.2.2をdownloadして解凍します。<br />
+  <a href="http://www.eclipse.org/downloads/">http://www.eclipse.org/downloads/</a></p>
+<p>downloadしたzipファイルをc:\devに解凍します。</p>
+<p>c:\dev\eclipse<br />
+c:\dev\eclipse\workspace<br />
+</p>
+<h3>2.tomcatをdownload</h3>
+<p><br />
+  <a href="http://tomcat.apache.org/download-55.cgi">http://tomcat.apache.org/download-55.cgi</a><br />
+  よりdownloadして解凍します。<br />
+  解凍後は以下のようになります。
+</p>
+<p>c:\dev\apache-tomcat-5.5.23</p>
+<h3>3.tomcat pluginをdownloadして展開</h3>
+<p><br />
+　
+  EclipseからTomcatを起動する為のpluginであるtomcat pluginをdownloadしてeclipseのpluginsフォルダに展開します。  </p>
+<p><a href="http://www.sysdeo.com/eclipse/tomcatplugin">http://www.sysdeo.com/eclipse/tomcatplugin</a></p>
+<p>c:\dev\eclipse\plugins\com.sysdeo.eclipse.tomcat_3.2.0.beta3<br />
+</p>
+<h3>4.tomcat pluginの設定</h3>
+<p><br />
+  Eclipseのメニューからwindow-&gt;Preferences... -&gt;Tomcatを選択して必要な項目を設定します。<br />
+  Tomcat バージョン<br />
+  <strong>バージョン5.x</strong><br />
+  Tomcatホーム<br />
+  <strong>C:\dev\apache-tomcat-5.5.23</strong><br />
+  コンテキスト宣言モード<br />
+  <strong>コンテキストファイル</strong></p>
+<p>Tomcat Webアプリケーションマネージャを選択してアプリケーションマネージャユーザ名、アプリケーションマネージャパスワード欄を入力します。&quot;tomcat-users.xml&quot;にユーザを追加ボタンをクリックします。</p>
+<p> &quot;Apply&quot;ボタンをクリックしたあと、&quot;OK&quot;ボタンをクリックして設定画面を閉じます。</p>
+<h3>5.Eclipse経由でtomcatの起動</h3>
+<p><br />
+  EclipseメニューのTomcat-&gt;Tomcat起動を選択してTomcatを起動します。<br />
+</p>
+<h3>6.不要なアプリケーションを削除</h3>
+<p><br />
+  EclipseからTomcatが起動できたら、以下のURLにアクセスします。<br />
+  <a href="http://localhost:8080/manager/html">http://localhost:8080/manager/html</a><br />
+  基本認証のダイアログが表示されるので、4.で入力したユーザ/パスワードを入力します。</p>
+<p>/とmanagerを残してすべて削除します。<br />
+  これで、不要なアプリケーションが起動されることなく、Tomcatが起動できるようになります。</p>
+<h3>7.s2flex2のexampleをdownload</h3>
+<p><br />
+  <a href="http://s2flex2.sandbox.seasar.org/">s2flex2のサイト</a>からs2flex2のexampleである、flex2_exampleをdownloadします。<br />
+downloadしたファイルをworkspace以下に展開します。</p>
+<p><br />
+  c:\dev\eclipse\workspace\flex2_example<br />
+</p>
+<h3>8.プロジェクトのimport<a name="8" id="8"></a></h3>
+<p><br />
+  展開したプロジェクトをEclipseのworkspaceに表示して利用できるようにします。<br />
+  メニューよりFile -&gt;Import ... -&gt;General -&gt;Existing Projects into Workspaceを指定します。</p>
+<p>Importするプロジェクトを指定する画面が表示されるので、Select root directory:欄で、7で展開した<br />
+  flex2_exampleのフォルダ(c:\dev\eclipse\workspace\flex2_example)を指定します。</p>
+<p>Projectsnにflex2_exampleと表示されるのを確認してFinishボタンをクリックします。</p>
+<h3>9.Actionscriptのフォルダ設定を変更</h3>
+<p><br />
+  .projectファイルを表示して、linkedResourcesの設定を変更します。</p>
+<p>変更後は以下のようになります。</p>
+<pre> &lt;linkedResources&gt;
+ &lt;link&gt;
+ &lt;name&gt;[source path] actionscript&lt;/name&gt;
+ &lt;type&gt;2&lt;/type&gt;
+ &lt;location&gt;<strong>c:/dev/eclipse/workspace/flex2_example</strong>/src/main/actionscript&lt;/location&gt;
+ &lt;/link&gt;
+ &lt;/linkedResources&gt;</pre>
+<h3>10.TomcatのContext更新</h3>
+<p><br />
+  flex2_exampleプロジェクトを選択して右クリック-&gt;Tomcatプロジェクト-&gt;Tomcatのコンテキストを更新を選択します。<br />
+  $TOMCAT_HOME/conf/Catalina/localhost以下にflex2_example.xmlが作成されます。<br />
+  <a href="http://localhost:8080/flex2_example/">http://localhost:8080/flex2_example/</a>にアクセスすると、サンプルの一覧が表示されます。</p>
+      </div>
+      <div class="section"><div class="source"> </div>
+      </div>
+    </div>
+    <!-- article -->
+  </div>
+  <!-- contents_center -->
+  <div id="footer">
+    <address>
+&copy; Copyright 2006, The Seasar Foundation and the others. All rights reserved.
+    </address>
+    <div class="line"><span class="hide">spacer</span></div>
+  </div>
+  <!-- footer -->
+</div>
+<!-- wrapper -->
+</body>
+</html>
