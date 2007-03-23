@@ -8,6 +8,7 @@
 <classEntry path="org.seasar.flex2.rpc.remoting.RemoteService"/>
 <classEntry path="org.seasar.flex2.rpc.remoting.S2Flex2Service"/>
 <classEntry path="org.seasar.flex2.rpc.remoting.S2Flex2ServiceConstants"/>
+<classEntry path="org.seasar.flex2.rpc.responder.DelegateResponder"/>
 </includeClasses>
 <includeResources/>
 <namespaceManifests>
