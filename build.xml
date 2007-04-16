@@ -1,6 +1,6 @@
 <project name="s2flex2-components" default="build" basedir=".">
 	<property file="build.properties"/>
-	<property name="ver" value="1.0.0"/>
+	<property name="ver" value="1.0.1"/>
 
 
     <!-- ================================= 
@@ -13,16 +13,16 @@
 	  		maxmemory="128m"
 	  	>
 	  		<arg value="-library-path"/>
-			<arg value="${frameworks.dir}"/>
-			<arg value="${frameworks.dir}/playerglobal.swc"/>
-			<arg value="${frameworks.dir}/utilities.swc"/>
-			<arg value="${frameworks.dir}/framework.swc"/>				
-			<arg value="${frameworks.dir}/rpc.swc"/>
+			<arg value="${frameworks.lib.dir}"/>
+			<arg value="${frameworks.lib.dir}/playerglobal.swc"/>
+			<arg value="${frameworks.lib.dir}/utilities.swc"/>
+			<arg value="${frameworks.lib.dir}/framework.swc"/>				
+			<arg value="${frameworks.lib.dir}/rpc.swc"/>
 			<arg value="lib/flexunit.swc"/>
 	  		<arg value="lib/FlexUnitOptional.swc"/>
-	  		<arg value="${frameworks.dir}/../locale/ja_JP"/>
+	  		<arg value="${frameworks.lib.dir}/../locale/ja_JP"/>
 	  		<arg value="-include-libraries" />
-	        <arg value="${frameworks.dir}/../locale/ja_JP/framework_rb.swc"/>
+	        <arg value="${frameworks.lib.dir}/../locale/ja_JP/framework_rb.swc"/>
 	  		<arg value="-load-config" />
 	  		<arg value="flex-config.xml"/>
 	  		<arg value="-locale" />
@@ -41,16 +41,16 @@
 	  		maxmemory="128m"
 	  	>
 	  		<arg value="-library-path"/>
-			<arg value="${frameworks.dir}"/>
-			<arg value="${frameworks.dir}/playerglobal.swc"/>
-			<arg value="${frameworks.dir}/utilities.swc"/>
-			<arg value="${frameworks.dir}/framework.swc"/>				
-			<arg value="${frameworks.dir}/rpc.swc"/>
+			<arg value="${frameworks.lib.dir}"/>
+			<arg value="${frameworks.lib.dir}/playerglobal.swc"/>
+			<arg value="${frameworks.lib.dir}/utilities.swc"/>
+			<arg value="${frameworks.lib.dir}/framework.swc"/>				
+			<arg value="${frameworks.lib.dir}/rpc.swc"/>
 			<arg value="lib/flexunit.swc"/>
 	  		<arg value="lib/FlexUnitOptional.swc"/>
 	  		<arg value="${frameworks.dir}/../locale/ja_JP"/>
 	  		<arg value="-include-libraries" />
-	        <arg value="${frameworks.dir}/../locale/ja_JP/framework_rb.swc"/>
+	        <arg value="${frameworks.lib.dir}/../locale/ja_JP/framework_rb.swc"/>
 	  		<arg value="-locale" />
 	  		<arg value="ja_JP"/>
 	  		<arg value="-load-config" />
@@ -92,13 +92,13 @@
         >
 		<arg value="-keep-generated-actionscript=false"/>
 		<arg value="-library-path"/>
-		<arg value="${frameworks.dir}"/>
+		<arg value="${frameworks.lib.dir}"/>
 		<arg value="-source-path"/>
 		<arg value="src/main/actionscript"/>
 		<arg value="-library-path"/>
-		<arg value="${frameworks.dir}"/>
-		<arg value="${frameworks.dir}/framework.swc"/>
-		<arg value="${frameworks.dir}/rpc.swc"/>
+		<arg value="${frameworks.lib.dir}"/>
+		<arg value="${frameworks.lib.dir}/framework.swc"/>
+		<arg value="${frameworks.lib.dir}/rpc.swc"/>
 		<arg value="-o"/>
 		<arg value="target/swc/s2flex2-components.swc"/>
     	<arg value="-namespace" />
