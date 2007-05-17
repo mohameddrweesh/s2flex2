@@ -96,7 +96,7 @@
         remoting service validator
     -->
     <component
-        class="org.seasar.flex2.rpc.remoting.service.validator.impl.DefaultRemotingServiceValidatorImpl">
+        class="org.seasar.flex2.rpc.remoting.service.validator.impl.RemotingServiceMethodNameValidatorImpl">
 		<property name="forbiddenMethodMap">
             <component class="java.util.HashMap">
                 <initMethod name="put">

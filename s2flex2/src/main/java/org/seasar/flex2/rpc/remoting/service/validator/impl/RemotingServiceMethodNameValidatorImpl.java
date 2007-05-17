@@ -19,7 +19,7 @@ import java.util.Map;
 
 import org.seasar.flex2.rpc.remoting.service.validator.RemotingServiceValidator;
 
-public class DefaultRemotingServiceValidatorImpl implements
+public class RemotingServiceMethodNameValidatorImpl implements
         RemotingServiceValidator {
 
     private Map forbiddenMethodMap;
