@@ -21,7 +21,9 @@ package org.seasar.flex2.rpc.remoting {
     import flash.net.ObjectEncoding;
     
     /**
+     * <h4>RemoteServiceクラス<h4>
      * 
+     * データフォーマットをAMF0とAMF3を選択する事ができます。
      * 
      */
     public dynamic class RemoteService extends S2Flex2Service {
