@@ -19,7 +19,6 @@
 </compiler>
 <applications>
 <application path="src/main/mxml/index.mxml"/>
-<application path="s2flex2-example.mxml"/>
 </applications>
 <buildCSSFiles/>
 </actionScriptProperties>
