@@ -292,7 +292,13 @@ package org.seasar.flex2.rpc.remoting {
         }
 
         flash_proxy override function callProperty(methodName:*, ...args):*{
+        	var operation:RpcOperation= getProperty(methodName);
+        	if(operation){
+        		args.unshift(operation.name);
+        	}else
+        	{
              args.unshift(methodName);
+         	}
              return remoteCall.apply(null,args);
         }
         
@@ -508,7 +514,7 @@ package org.seasar.flex2.rpc.remoting {
             }
         }
         /**
-        * 指定されたパラメータに対する値を取得する。
+        * 指定されたパラメータに対する値を取得します。
         * @private
         * @param prameterName パラメータ名
         * @return parameterValue パラメータの値 
