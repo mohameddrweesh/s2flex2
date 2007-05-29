@@ -25,11 +25,7 @@
 		amf data binder
 	-->
 	<component
-		class="org.seasar.flex2.core.format.amf.io.reader.binder.impl.BigDecimalDataBinder"
-		autoBinding="none"
-		/>
-	<component
-		class="org.seasar.flex2.core.format.amf.io.reader.binder.impl.CollectionDataBinder"
+		class="org.seasar.flex2.core.format.amf.io.reader.binder.impl.IntegerDataBinder"
 		autoBinding="property"
 		/>
 	<component
@@ -37,12 +33,20 @@
 		autoBinding="property"
 		/>
 	<component
+		class="org.seasar.flex2.core.format.amf.io.reader.binder.impl.MapDataBinder"
+		autoBinding="property"
+		/>
+	<component
+		class="org.seasar.flex2.core.format.amf.io.reader.binder.impl.CollectionDataBinder"
+		autoBinding="property"
+		/>
+	<component
 		class="org.seasar.flex2.core.format.amf.io.reader.binder.impl.ByteArrayDataBinder"
 		autoBinding="property"
 		/>
 	<component
-		class="org.seasar.flex2.core.format.amf.io.reader.binder.impl.MapDataBinder"
-		autoBinding="property"
+		class="org.seasar.flex2.core.format.amf.io.reader.binder.impl.BigDecimalDataBinder"
+		autoBinding="none"
 		/>
 
 	<!--

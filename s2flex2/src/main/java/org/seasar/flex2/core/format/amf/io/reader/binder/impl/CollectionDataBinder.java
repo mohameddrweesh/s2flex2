@@ -28,8 +28,8 @@ public class CollectionDataBinder implements DataBinder {
         return collectionConverter.convert(source, bindClass);
     }
 
-    public boolean isTarget(final Object value, final Class bindClass) {
-        return (value != null) && (value.getClass().isArray())
+    public boolean isTarget(final Object targetValue, final Class bindClass) {
+        return (targetValue != null) && (targetValue.getClass().isArray())
                 && (Collection.class.isAssignableFrom(bindClass));
     }
 

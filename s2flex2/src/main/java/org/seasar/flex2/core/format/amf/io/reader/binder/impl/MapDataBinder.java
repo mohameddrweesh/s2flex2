@@ -28,8 +28,8 @@ public class MapDataBinder implements DataBinder {
         return beanConverter.convert(source, bindClass);
     }
 
-    public boolean isTarget(final Object value, final Class bindClass) {
-        return (value != null) && (value instanceof Map)
+    public boolean isTarget(final Object targetValue, final Class bindClass) {
+        return (targetValue != null) && (targetValue instanceof Map)
                 && !(Map.class.isAssignableFrom(bindClass));
     }
 

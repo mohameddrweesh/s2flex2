@@ -19,7 +19,7 @@ import org.seasar.extension.unit.S2TestCase;
 
 public class DefaultRemotingServiceValidatorTest extends S2TestCase {
 
-    private static String PATH = "DefaultRemotingServiceValidatorTest.dicon";
+    private static String PATH = "RemotingServiceMethodNameValidatorTest.dicon";
 
     private RemotingServiceValidator remotingServiceValidator;
 

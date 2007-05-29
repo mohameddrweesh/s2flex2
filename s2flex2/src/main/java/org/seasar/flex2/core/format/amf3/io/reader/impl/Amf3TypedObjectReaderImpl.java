@@ -127,8 +127,9 @@ public class Amf3TypedObjectReaderImpl extends
             final PropertyDesc propertyDef, final Object propertyValue) {
         if (propertyValue != null) {
             Object setValue = propertyValue;
+            DataBinder binder;
             for (int i = 0; i < dataBinders.length; i++) {
-                DataBinder binder = dataBinders[i];
+                binder = dataBinders[i];
                 if (binder.isTarget(propertyValue, propertyDef
                         .getPropertyType())) {
                     setValue = binder.bind(propertyValue, propertyDef

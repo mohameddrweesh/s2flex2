@@ -34,8 +34,8 @@ public class ArrayDataBinder implements DataBinder {
         this.arrayConverter = arrayConverter;
     }
 
-    public boolean isTarget(final Object value, final Class bindClass) {
-        return (value != null) && value.getClass().isArray()
+    public boolean isTarget(final Object targetValue, final Class bindClass) {
+        return (targetValue != null) && targetValue.getClass().isArray()
                 && bindClass.isArray();
     }
 }

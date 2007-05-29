@@ -25,8 +25,9 @@ public class BigDecimalDataBinder implements DataBinder {
         return new BigDecimal((String) source);
     }
 
-    public boolean isTarget(final Object value, final Class bindClass) {
-        return (bindClass == BigDecimal.class) && (value.getClass() == String.class);
+    public boolean isTarget(final Object targetValue, final Class bindClass) {
+        return (bindClass == BigDecimal.class)
+                && (targetValue.getClass() == String.class);
     }
 
 }

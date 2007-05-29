@@ -18,5 +18,5 @@ package org.seasar.flex2.core.format.amf.io.reader.binder;
 public interface DataBinder {
     Object bind(Object source, Class bindClass);
 
-    boolean isTarget(Object value, Class bindClass);
+    boolean isTarget(Object targetValue, Class bindClass);
 }

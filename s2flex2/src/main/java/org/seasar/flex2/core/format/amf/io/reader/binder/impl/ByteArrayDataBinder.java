@@ -27,8 +27,9 @@ public class ByteArrayDataBinder implements DataBinder {
         return byteArrayFactory.createByteArray((byte[]) source);
     }
 
-    public boolean isTarget(final Object value, final Class bindClass) {
-        return (bindClass == ByteArray.class) && (value.getClass() == byte[].class);
+    public boolean isTarget(final Object targetValue, final Class bindClass) {
+        return (bindClass == ByteArray.class)
+                && (targetValue.getClass() == byte[].class);
     }
 
     public void setByteArrayFactory(ByteArrayFactory byteArrayFactory) {
