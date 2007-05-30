@@ -1,33 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN" 
     "http://www.seasar.org/dtd/components24.dtd">
-<components namespace="amf">
-	<!--
-		data converter
-	-->
-    <component name="arrayConverter" class="org.seasar.flex2.util.converter.impl.ArrayConverterImpl"/>
-    <component name="collectionConverter" class="org.seasar.flex2.util.converter.impl.CollectionConverterImpl"/>
-    <component name="beanConverter" class="org.seasar.flex2.util.converter.impl.BeanConverterImpl"/>
-
-	<!--
-		amf data binder
-	-->
-	<component
-		class="org.seasar.flex2.core.format.amf.io.reader.binder.impl.BigDecimalDataBinder"
-		autoBinding="none"
-		/>
-	<component
-		class="org.seasar.flex2.core.format.amf.io.reader.binder.impl.CollectionDataBinder"
-		autoBinding="property"
-		/>
-	<component
-		class="org.seasar.flex2.core.format.amf.io.reader.binder.impl.ArrayDataBinder"
-		autoBinding="property"
-		/>
-	<component
-		class="org.seasar.flex2.core.format.amf.io.reader.binder.impl.MapDataBinder"
-		autoBinding="property"
-		/>
+<components namespace="amf"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+>
+	<xi:include href="/dataconverter.dicon"/>
+	<xi:include href="/amf_binder.dicon"/>
 
     <!--
         reader/writer share data components

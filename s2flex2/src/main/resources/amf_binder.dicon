@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN" 
+	"http://www.seasar.org/dtd/components24.dtd">
+<components namespace="amfbinder">
+	<!--
+		amf data binder
+	-->
+	<component
+		class="org.seasar.flex2.core.format.amf.io.reader.binder.impl.IntegerDataBinder"
+		autoBinding="property"
+		/>
+	<component
+		class="org.seasar.flex2.core.format.amf.io.reader.binder.impl.ArrayDataBinder"
+		autoBinding="property"
+		/>
+	<component
+		class="org.seasar.flex2.core.format.amf.io.reader.binder.impl.MapDataBinder"
+		autoBinding="property"
+		/>
+	<component
+		class="org.seasar.flex2.core.format.amf.io.reader.binder.impl.CollectionDataBinder"
+		autoBinding="property"
+		/>
+	<component
+		class="org.seasar.flex2.core.format.amf.io.reader.binder.impl.ByteArrayDataBinder"
+		autoBinding="property"
+		/>
+	<component
+		class="org.seasar.flex2.core.format.amf.io.reader.binder.impl.BigDecimalDataBinder"
+		autoBinding="none"
+		/>
+</components>

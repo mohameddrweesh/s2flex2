@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN" 
+	"http://www.seasar.org/dtd/components24.dtd">
+<components namespace="amfconverter">
+	<!--
+		data converter
+	-->
+    <component
+    	name="arrayConverter"
+    	class="org.seasar.flex2.util.converter.impl.ArrayConverterImpl"
+    	autoBinding="none"
+    	/>
+    <component
+    	name="collectionConverter"
+    	class="org.seasar.flex2.util.converter.impl.CollectionConverterImpl"
+    	autoBinding="none"
+    	/>
+    <component
+    	name="beanConverter"
+    	class="org.seasar.flex2.util.converter.impl.BeanConverterImpl"
+    	autoBinding="none"
+    	/>
+</components>
