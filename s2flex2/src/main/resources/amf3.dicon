@@ -33,39 +33,6 @@
 		class="org.seasar.flex2.core.format.amf3.type.factory.impl.Amf3ReferencesFactoryImpl"
 		autoBinding="property"
 		/>
-
-	<!-- 
-		amf3 special type factory components
-
-	<component
-		class="org.seasar.flex2.core.format.amf3.type.impl.ExternalObjectInputImpl"
-		instance="prototype"
-		autoBinding="property"
-		/>
-	<component
-		class="org.seasar.flex2.core.format.amf3.type.impl.ExternalObjectOutputImpl"
-		instance="prototype"
-		autoBinding="property"
-		/>
-	<component
-		class="org.seasar.flex2.core.format.amf3.type.factory.impl.ExternalObjectInputFactoryImpl"
-		autoBinding="property"
-		/>
-	<component
-		class="org.seasar.flex2.core.format.amf3.type.factory.impl.ExternalObjectOutputFactoryImpl"
-		autoBinding="property"
-		/>
-
-	<component 
-		class="org.seasar.flex2.core.format.amf3.type.impl.ByteArrayImpl"
-		instance="prototype"
-		autoBinding="property"
-		/>		
-	<component
-		class="org.seasar.flex2.core.format.amf3.type.factory.impl.ByteArrayFactoryImpl"
-		autoBinding="property"
-		/>
-	-->
 		
     <!-- 
         amf0 data reader components
