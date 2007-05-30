@@ -38,9 +38,6 @@ public abstract class AbstractRemotingServiceInvokerImpl implements
 
     private RemotingServiceValidator[] remotingServiceValidators;
 
-    public abstract Object doInvoke(Object service, String methodName,
-            Object[] args) throws Throwable;
-
     public RemotingServiceLocator getServiceLocator() {
         return remotingServiceLocator;
     }
@@ -74,15 +71,18 @@ public abstract class AbstractRemotingServiceInvokerImpl implements
                 && remotingServiceLocator.isSupportService(serviceName);
     }
 
+    protected abstract Object doInvoke(Object service, String methodName,
+            Object[] args) throws Throwable;
+
     protected final Object invokeServiceMethod(final Object service,
             final String methodName, final Object[] args) throws Throwable {
         final BeanDesc beanDesc = BeanDescFactory.getBeanDesc(service
                 .getClass());
         try {
-            logger.log("DFLX0201",new Object[]{this.getClass().getName(),service.getClass().getName(),methodName});
+            logger.log("DFLX0201",new Object[]{service.getClass().getName(),methodName});
             return beanDesc.invoke(service, methodName, args);
         } catch (final Throwable throwable) {
-            logger.log("EFLX0201",new Object[]{this.getClass().getName(),service.getClass().getName(),methodName},throwable);
+            logger.log("EFLX0201",new Object[]{service.getClass().getName(),methodName},throwable);
             throw throwable;
         }
     }
