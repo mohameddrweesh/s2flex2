@@ -37,6 +37,16 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Al
 <th>&nbsp;</th><th width="20%">Class</th><th width="20%">Package</th><th width="60%">Description</th>
 </tr>
 <tr class="prow1">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/seasar/flex2/utils/ApplicationUtil.html">ApplicationUtil</a>
+<br>
+</td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/seasar/flex2/utils/class-list.html');" href="org/seasar/flex2/utils/package-detail.html">org.seasar.flex2.utils</a></td><td class="summaryTableLastCol">&nbsp;</td>
+</tr>
+<tr class="prow0">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/seasar/flex2/rpc/responder/DelegateResponder.html">DelegateResponder</a>
+<br>
+</td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/seasar/flex2/rpc/responder/class-list.html');" href="org/seasar/flex2/rpc/responder/package-detail.html">org.seasar.flex2.rpc.responder</a></td><td class="summaryTableLastCol">&nbsp;</td>
+</tr>
+<tr class="prow1">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/seasar/flex2/net/NetConnection.html">NetConnection</a>
 <br>
 </td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/seasar/flex2/net/class-list.html');" href="org/seasar/flex2/net/package-detail.html">org.seasar.flex2.net</a></td><td class="summaryTableLastCol">
@@ -46,6 +56,10 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Al
   <li>AppendToGatewayUrl</li>
   <li> ReplaceGatewayUrl</li>
  </ul>
+ AMFのヘッダに関する仕様については以下をご参照ください。
+ <ul><li><a href="http://osflash.org/amf/envelopes/remoting/headers">Predefined headers</li>
+ </ul>
+ <!--
  Flash Player 9のセキュリティに関する仕様については以下をご参照ください。
  <ul>
  <li>
@@ -55,6 +69,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Al
  <a href="http://www.adobe.com/devnet/flashplayer/articles/flash_player_9_security.pdf">Flash Player 9 Secirity</a>
  </li>
  </ul>
+ -->
  </td>
 </tr>
 <tr class="prow0">
@@ -73,7 +88,12 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Al
 <tr class="prow0">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/seasar/flex2/rpc/remoting/RemoteService.html">RemoteService</a>
 <br>
-</td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/seasar/flex2/rpc/remoting/class-list.html');" href="org/seasar/flex2/rpc/remoting/package-detail.html">org.seasar.flex2.rpc.remoting</a></td><td class="summaryTableLastCol">&nbsp;</td>
+</td><td class="summaryTableCol"><a onclick="javascript:loadClassListFrame('org/seasar/flex2/rpc/remoting/class-list.html');" href="org/seasar/flex2/rpc/remoting/package-detail.html">org.seasar.flex2.rpc.remoting</a></td><td class="summaryTableLastCol">
+     <h4>RemoteServiceクラス<h4>
+     
+     データフォーマットをAMF0とAMF3を選択する事ができます。
+     
+     </td>
 </tr>
 <tr class="prow1">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="org/seasar/flex2/rpc/RpcOperation.html">RpcOperation</a>
@@ -102,7 +122,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Al
     <code>&lt;s2:S2Flex2Service gatewayUrl="http://127.0.0.1:8080/flex/gateway" ...</code>
     この方法を使うと明示的に接続先を指定することができますが、接続先が変更になると、再度コンパイルする必要があります。</p>
     
-    <h5>configType="url"で指定する方法<</h5>
+    <h5>configType="url"で指定する方法</h5>
     <p>接続先の設定としてデフォルト設定になっているのは、このurlで指定する方法です。
     systemManager.loaderInfo.urlの値を使って処理します。
     例)
