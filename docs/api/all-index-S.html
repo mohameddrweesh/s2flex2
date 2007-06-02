@@ -39,8 +39,41 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("S�
 </tr>
 <tr>
 <td width="20"></td><td>
-    S2Flex2Serviceは、S2Flex2のgatewayに接続する為のコンポーネントクラスです。<br />
+    
+    <p>S2Flex2Serviceは、S2Flex2のgatewayに接続する為のコンポーネントクラスです。<br />
+    S2Container(Seasar2)に登録されたコンポーネントにアクセスして、メソッド実行を可能にします。</p>
+    <!--
     S2Flex2Service is ...(TBD)
+     -->
+    <h4>Gatewayの指定</h4>
+    <p>このサービスの接続先であるGatewayを指定する方法は、３パターンあります。</p>
+    <ul>
+    <li>gatewayUrlプロパティで指定する方法</li>
+    <li>configType="url"で指定する方法</li>
+    <li>configType="flashvars"で指定する方法</li>
+    </ul>
+    <h5>gatewayUrlプロパティで指定する方法</h5>
+    <p>接続先の指定としてgatewayURLプロパティに指定する方法があります。<br/>
+    <code>&lt;s2:S2Flex2Service gatewayUrl="http://127.0.0.1:8080/flex/gateway" ...</code>
+    この方法を使うと明示的に接続先を指定することができますが、接続先が変更になると、再度コンパイルする必要があります。</p>
+    
+    <h5>configType="url"で指定する方法</h5>
+    <p>接続先の設定としてデフォルト設定になっているのは、このurlで指定する方法です。
+    systemManager.loaderInfo.urlの値を使って処理します。
+    例)
+    http://127.0.0.1/test/test.swfだった場合は、
+    http://127.0.0.1/test/gatewayとしてます。
+    
+    同じ階層のgatewayというURLをGatewayURLに指定します。</p>
+     <p>Flex Builder 2 などでデバッグしているときは、flashvarsでdefaultGatewayを指定することで
+    　接続することができるようになります。</p>
+      <code>&lt;param name=&quot;FlashVars&quot; value=&quot;defaultGateway=http://127.0.0.1/flex2/gateway&quot; /&gt;</code>
+    <p />
+    <h5>configType=&quot;flashvars&quot;で指定する方法</h5>
+    <p>configType=&quot;flashvars&quot;を指定したときには、htmlファイルの中でflashvarsに<strong>defaultGateway</strong>を指定します。
+    サービス単位で接続先を変更するときには、destination名でgatewayUrlを指定します。
+    以下は、addServiceの接続先を指定する例です。addSevrice意外のサービスは、defaultGatewayに接続する事になります。</p>
+    <code>&lt;param name=&quot;FlashVars&quot; value=&quot;addService="http://127.0.0.1/flexservice/gateway"&amp;&quot;defaultGateway=http://127.0.0.1/flex2/gateway&quot; /&gt;</code>
     </td>
 </tr>
 <tr>
@@ -48,12 +81,13 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("S�
 </tr>
 <tr>
 <td width="20"></td><td>
-         コンストラクタ<br/>
-         destinationをセットしたうえでResponderの配列を初期化します。
+         コンストラクタ.<br/>
+         <p>destinationをセットしたうえでResponderの配列を初期化します。</p>
+         
          </td>
 </tr>
 <tr>
-<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/seasar/flex2/rpc/remoting/class-list.html');" href="org/seasar/flex2/rpc/remoting/S2Flex2ServiceConstants.html">S2Flex2ServiceConstants</a> &mdash; Dynamic class in package <a onclick="javascript:loadClassListFrame('org/seasar/flex2/rpc/remoting/class-list.html');" href="org/seasar/flex2/rpc/remoting/package-detail.html">org.seasar.flex2.rpc.remoting</a></td>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/seasar/flex2/rpc/remoting/class-list.html');" href="org/seasar/flex2/rpc/remoting/S2Flex2ServiceConstants.html">S2Flex2ServiceConstants</a> &mdash; Final class in package <a onclick="javascript:loadClassListFrame('org/seasar/flex2/rpc/remoting/class-list.html');" href="org/seasar/flex2/rpc/remoting/package-detail.html">org.seasar.flex2.rpc.remoting</a></td>
 </tr>
 <tr>
 <td width="20"></td><td></td>
@@ -63,6 +97,15 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("S�
 </tr>
 <tr>
 <td width="20"></td><td></td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/seasar/flex2/rpc/remoting/class-list.html');" href="org/seasar/flex2/rpc/remoting/S2Flex2Service.html#setCredentials()">setCredentials</a>(username, password) &mdash; Method in class org.seasar.flex2.rpc.remoting.<a onclick="javascript:loadClassListFrame('org/seasar/flex2/rpc/remoting/class-list.html');" href="org/seasar/flex2/rpc/remoting/S2Flex2Service.html">S2Flex2Service</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+        認証が必要なサービスを呼び出す際に必要な認証情報をセットします。
+        
+        </td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/seasar/flex2/rpc/remoting/class-list.html');" href="org/seasar/flex2/rpc/remoting/S2Flex2Service.html#setProperty()">setProperty</a>(name, value) &mdash; Method in class org.seasar.flex2.rpc.remoting.<a onclick="javascript:loadClassListFrame('org/seasar/flex2/rpc/remoting/class-list.html');" href="org/seasar/flex2/rpc/remoting/S2Flex2Service.html">S2Flex2Service</a></td>
@@ -76,7 +119,18 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("S�
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/seasar/flex2/rpc/remoting/class-list.html');" href="org/seasar/flex2/rpc/remoting/S2Flex2Service.html#setRemoteCredentials()">setRemoteCredentials</a>(remoteUsername, remotePassword) &mdash; Method in class org.seasar.flex2.rpc.remoting.<a onclick="javascript:loadClassListFrame('org/seasar/flex2/rpc/remoting/class-list.html');" href="org/seasar/flex2/rpc/remoting/S2Flex2Service.html">S2Flex2Service</a></td>
 </tr>
 <tr>
-<td width="20"></td><td></td>
+<td width="20"></td><td>
+        認証が必要な外部サービスを呼び出す際に必要な認証情報をセットします。
+        (TBD.)
+        <br/>
+        <small>このメソッドは呼び出しても、S2Flex2 1.0.xでは認識しません。</small>
+        </td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/seasar/flex2/rpc/remoting/class-list.html');" href="org/seasar/flex2/rpc/remoting/S2Flex2Service.html#showBusyCursor">showBusyCursor</a> &mdash; Property in class org.seasar.flex2.rpc.remoting.<a onclick="javascript:loadClassListFrame('org/seasar/flex2/rpc/remoting/class-list.html');" href="org/seasar/flex2/rpc/remoting/S2Flex2Service.html">S2Flex2Service</a></td>
+</tr>
+<tr>
+<td width="20"></td><td> サーバロジックを呼び出している間、カーソルをBusyCursorにするかどうかを決定します。 デフォルトはtrueです。</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/seasar/flex2/rpc/remoting/class-list.html');" href="org/seasar/flex2/rpc/remoting/S2Flex2Service.html#showBusyCursor">showBusyCursor</a> &mdash; Property in class org.seasar.flex2.rpc.remoting.<a onclick="javascript:loadClassListFrame('org/seasar/flex2/rpc/remoting/class-list.html');" href="org/seasar/flex2/rpc/remoting/S2Flex2Service.html">S2Flex2Service</a></td>
