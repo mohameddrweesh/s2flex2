@@ -39,12 +39,50 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Pa
 <th>&nbsp;</th><th width="30%">Class</th><th width="70%">Description</th>
 </tr>
 <tr class="prow1">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="RemoteService.html">RemoteService</a></td><td class="summaryTableLastCol">&nbsp;</td>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="RemoteService.html">RemoteService</a></td><td class="summaryTableLastCol">
+     <h4>RemoteServiceクラス<h4>
+     
+     データフォーマットをAMF0とAMF3を選択する事ができます。
+     
+     </td>
 </tr>
 <tr class="prow0">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="S2Flex2Service.html">S2Flex2Service</a></td><td class="summaryTableLastCol">
-    S2Flex2Serviceは、S2Flex2のgatewayに接続する為のコンポーネントクラスです。<br />
+    
+    <p>S2Flex2Serviceは、S2Flex2のgatewayに接続する為のコンポーネントクラスです。<br />
+    S2Container(Seasar2)に登録されたコンポーネントにアクセスして、メソッド実行を可能にします。</p>
+    <!--
     S2Flex2Service is ...(TBD)
+     -->
+    <h4>Gatewayの指定</h4>
+    <p>このサービスの接続先であるGatewayを指定する方法は、３パターンあります。</p>
+    <ul>
+    <li>gatewayUrlプロパティで指定する方法</li>
+    <li>configType="url"で指定する方法</li>
+    <li>configType="flashvars"で指定する方法</li>
+    </ul>
+    <h5>gatewayUrlプロパティで指定する方法</h5>
+    <p>接続先の指定としてgatewayURLプロパティに指定する方法があります。<br/>
+    <code>&lt;s2:S2Flex2Service gatewayUrl="http://127.0.0.1:8080/flex/gateway" ...</code>
+    この方法を使うと明示的に接続先を指定することができますが、接続先が変更になると、再度コンパイルする必要があります。</p>
+    
+    <h5>configType="url"で指定する方法</h5>
+    <p>接続先の設定としてデフォルト設定になっているのは、このurlで指定する方法です。
+    systemManager.loaderInfo.urlの値を使って処理します。
+    例)
+    http://127.0.0.1/test/test.swfだった場合は、
+    http://127.0.0.1/test/gatewayとしてます。
+    
+    同じ階層のgatewayというURLをGatewayURLに指定します。</p>
+     <p>Flex Builder 2 などでデバッグしているときは、flashvarsでdefaultGatewayを指定することで
+    　接続することができるようになります。</p>
+      <code>&lt;param name=&quot;FlashVars&quot; value=&quot;defaultGateway=http://127.0.0.1/flex2/gateway&quot; /&gt;</code>
+    <p />
+    <h5>configType=&quot;flashvars&quot;で指定する方法</h5>
+    <p>configType=&quot;flashvars&quot;を指定したときには、htmlファイルの中でflashvarsに<strong>defaultGateway</strong>を指定します。
+    サービス単位で接続先を変更するときには、destination名でgatewayUrlを指定します。
+    以下は、addServiceの接続先を指定する例です。addSevrice意外のサービスは、defaultGatewayに接続する事になります。</p>
+    <code>&lt;param name=&quot;FlashVars&quot; value=&quot;addService="http://127.0.0.1/flexservice/gateway"&amp;&quot;defaultGateway=http://127.0.0.1/flex2/gateway&quot; /&gt;</code>
     </td>
 </tr>
 <tr class="prow1">
