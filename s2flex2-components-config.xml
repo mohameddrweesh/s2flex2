@@ -3,42 +3,15 @@
       <accessible>false</accessible>
       <show-actionscript-warnings>true</show-actionscript-warnings>
       <debug>false</debug>
-      <external-library-path>
-         <path-element>C:/Program Files/Adobe/Flex Builder 2/Flex SDK 2/frameworks/libs/playerglobal.swc</path-element>
-      </external-library-path>
       <keep-generated-actionscript>false</keep-generated-actionscript>
-      <!--
-      <include-libraries>
-         <library>string</library>
-      </include-libraries>
-      -->
-      <library-path>
-         <path-element>C:/Program Files/Adobe/Flex Builder 2/Flex SDK 2/frameworks/libs</path-element>
-         <path-element>C:/Program Files/Adobe/Flex Builder 2/Flex SDK 2/frameworks/locale/{locale}</path-element>
-      </library-path>
-      <namespaces>
-         <namespace>
-            <uri>http://www.adobe.com/2006/mxml</uri>
-            <manifest>C:/Program Files/Adobe/Flex Builder 2/Flex SDK 2/frameworks/mxml-manifest.xml</manifest>
-         </namespace>
-      </namespaces>
       <optimize>true</optimize>
       <show-binding-warnings>true</show-binding-warnings>
       <show-dependency-warnings>false</show-dependency-warnings>
       <show-deprecation-warnings>true</show-deprecation-warnings>
       <strict>true</strict>
       <as3>true</as3>
-      
       <es>false</es>
-      <!--
-      <theme>
-         <filename>string</filename>
-         <filename>string</filename>
-      </theme>
-      -->
-      <fonts>
-      <local-fonts-snapshot>C:/Program Files/Adobe/Flex Builder 2/Flex SDK 2/frameworks/WinFonts.ser</local-fonts-snapshot>
-      </fonts>
+
       <verbose-stacktraces>false</verbose-stacktraces>
       <warn-array-tostring-changes>false</warn-array-tostring-changes>
       <warn-assignment-within-conditional>true</warn-assignment-within-conditional>
@@ -116,18 +89,13 @@
       <!-- Possible usage of the ActionScript 2.0 XML class. -->
       <warn-xml-class-has-changed>false</warn-xml-class-has-changed>
    </compiler>
-   <!--
-   <runtime-shared-libraries>
-      <url>string</url>
-      <url>string</url>
-   </runtime-shared-libraries>
-   -->
+
    <use-network>true</use-network>
    <metadata>
       <title>S2Flex2-components</title>
       <description>http://s2flex2.sandbox.seasar.org/</description>
       <publisher>Seasar Foundation</publisher>
       <creator>e1arkw,nod</creator>
-      <language>JA</language>
+      <language>ja_JP</language>
    </metadata>
 </flex-config>
