@@ -127,6 +127,7 @@
 				<exclude name="**/generated/**"/>
 				<exclude name="**/AMF0Connection.as"/>
 				<exclude name="**/*old.as"/>
+				<exclude name="**/*old.fb"/>
 			</zipfileset>
 		</zip>
 	</target>
