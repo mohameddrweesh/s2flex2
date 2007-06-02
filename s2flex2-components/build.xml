@@ -12,6 +12,7 @@
 	  		failonerror="true"
 	  		maxmemory="128m"
 	  	>
+			<jvmarg value="-Dapplication.home=${flex.sdk.home}"/>
 	  		<arg value="-library-path"/>
 			<arg value="${frameworks.lib.dir}"/>
 			<arg value="${frameworks.lib.dir}/playerglobal.swc"/>
@@ -23,8 +24,7 @@
 	  		<arg value="${frameworks.lib.dir}/../locale/ja_JP"/>
 	  		<arg value="-include-libraries" />
 	        <arg value="${frameworks.lib.dir}/../locale/ja_JP/framework_rb.swc"/>
-	  		<arg value="-load-config" />
-	  		<arg value="flex-config.xml"/>
+		   	<arg value="-load-config+=${basedir}/s2flex2-components-config.xml"/>
 	  		<arg value="-locale" />
 	  		<arg value="ja_JP"/>
 	  		<arg value="-source-path" />
@@ -40,6 +40,7 @@
 	  		failonerror="true"
 	  		maxmemory="128m"
 	  	>
+			<jvmarg value="-Dapplication.home=${flex.sdk.home}"/>
 	  		<arg value="-library-path"/>
 			<arg value="${frameworks.lib.dir}"/>
 			<arg value="${frameworks.lib.dir}/playerglobal.swc"/>
@@ -53,8 +54,7 @@
 	        <arg value="${frameworks.lib.dir}/../locale/ja_JP/framework_rb.swc"/>
 	  		<arg value="-locale" />
 	  		<arg value="ja_JP"/>
-	  		<arg value="-load-config" />
-	  		<arg value="flex-config.xml"/>
+		   	<arg value="+configname=${basedir}/s2flex2-components"/>
 	  		<arg value="-source-path" />
 	  		<arg value="src/actionscript3" />
 	  		<arg value="src/test/actionscript3" />
@@ -90,6 +90,8 @@
         failonerror="true"
         maxmemory="128m"
         >
+		<jvmarg value="-Dapplication.home=${flex.sdk.home}"/>
+	   	<arg value="-load-config+=${basedir}/s2flex2-components-config.xml"/>
 		<arg value="-keep-generated-actionscript=false"/>
 		<arg value="-library-path"/>
 		<arg value="${frameworks.lib.dir}"/>
@@ -108,7 +110,8 @@
     	<arg value="http://www.seasar.org/s2flex2/mxml" />
 		<arg value="-include-classes"/> 	
 		<arg value="org.seasar.flex2.rpc.remoting.S2Flex2Service"/>
-		<arg value="org.seasar.flex2.rpc.remoting.RemoteService"/> 
+		<arg value="org.seasar.flex2.rpc.remoting.RemoteService"/>
+ 
 	  </java>
   </target>
 
