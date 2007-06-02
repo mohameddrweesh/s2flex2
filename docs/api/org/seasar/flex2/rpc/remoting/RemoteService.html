@@ -42,7 +42,11 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 </table>
 <p></p>
-<p></p>
+     <h4>RemoteServiceクラス<h4>
+     
+     データフォーマットをAMF0とAMF3を選択する事ができます。
+     
+     <p></p>
 <br>
 <hr>
 </div>
@@ -62,6 +66,10 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
 </tr>
 <tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="S2Flex2Service.html#concurrency">concurrency</a> : String<div class="summaryTableDescription"> このプロパティについては、実装には反映されていません。(TBD)<br/>将来のリリースで改善される可能性はあります。 </div>
+</td><td class="summaryTableOwnerCol"><a href="S2Flex2Service.html">S2Flex2Service</a></td>
+</tr>
+<tr class="hideInheritedProperty">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="S2Flex2Service.html#concurrency">concurrency</a> : String<div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol"><a href="S2Flex2Service.html">S2Flex2Service</a></td>
 </tr>
@@ -70,11 +78,23 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </td><td class="summaryTableOwnerCol"><a href="S2Flex2Service.html">S2Flex2Service</a></td>
 </tr>
 <tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="S2Flex2Service.html#gatewayUrl">gatewayUrl</a> : String<div class="summaryTableDescription"> サーバ接続する際のURLです。 AMFのGatewayを指定します。 </div>
+</td><td class="summaryTableOwnerCol"><a href="S2Flex2Service.html">S2Flex2Service</a></td>
+</tr>
+<tr class="hideInheritedProperty">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="S2Flex2Service.html#gatewayUrl">gatewayUrl</a> : String<div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol"><a href="S2Flex2Service.html">S2Flex2Service</a></td>
 </tr>
 <tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="S2Flex2Service.html#id">id</a> : String<div class="summaryTableDescription"> mxml内部ドキュメント内部で管理されるこの S2Flex2Sericeインスタンスを特定するID です。 </div>
+</td><td class="summaryTableOwnerCol"><a href="S2Flex2Service.html">S2Flex2Service</a></td>
+</tr>
+<tr class="hideInheritedProperty">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="S2Flex2Service.html#id">id</a> : String<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol"><a href="S2Flex2Service.html">S2Flex2Service</a></td>
+</tr>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="S2Flex2Service.html#showBusyCursor">showBusyCursor</a> : Boolean<div class="summaryTableDescription"> サーバロジックを呼び出している間、カーソルをBusyCursorにするかどうかを決定します。 デフォルトはtrueです。</div>
 </td><td class="summaryTableOwnerCol"><a href="S2Flex2Service.html">S2Flex2Service</a></td>
 </tr>
 <tr class="hideInheritedProperty">
@@ -104,7 +124,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 <tr class="hideInheritedProtectedProperty">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="S2Flex2Service.html#_con">_con</a> : <a href="../../net/NetConnection.html">NetConnection</a>
-<div class="summaryTableDescription"></div>
+<div class="summaryTableDescription"> サーバ接続の際に利用されるNetConnectionのインスタンスです。</div>
 </td><td class="summaryTableOwnerCol"><a href="S2Flex2Service.html">S2Flex2Service</a></td>
 </tr>
 </table>
@@ -128,28 +148,53 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="S2Flex2Service.html#initialized()">initialized</a>(document:Object, id:String):void</div>
-<div class="summaryTableDescription"></div>
+<div class="summaryTableDescription">
+   mxmlファイル内でS2Flex2Serviceをタグとして設定したときにMXMLコンパイラ(mxmlc)によって自動的に呼び出されます。<br/>
+   <!--ActionScriptでインスタンスを生成した場合は、このメソッドを呼び出す事で、GatewayURLを自動的にセットすることが可能になります。-->
+   このクラスを ActionScript で作成し、検証で機能させるには、このメソッドを呼び出して、MXML ドキュメントと S2Flex2Service の id を渡す必要があります。
+   正しく指定しないと、Gatewayの指定が正しく行われない可能性があります。
+   
+   </div>
 </td><td class="summaryTableOwnerCol"><a href="S2Flex2Service.html">S2Flex2Service</a></td>
 </tr>
 <tr class="hideInheritedMethod">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="S2Flex2Service.html#onFault()">onFault</a>(operation:String, result:*):void</div>
-<div class="summaryTableDescription"></div>
+<div class="summaryTableDescription">
+   呼び出したリモートサービスが何らかのエラーを返してきたときに呼ばれます
+   </div>
 </td><td class="summaryTableOwnerCol"><a href="S2Flex2Service.html">S2Flex2Service</a></td>
 </tr>
 <tr class="hideInheritedMethod">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="S2Flex2Service.html#onResult()">onResult</a>(operation:String, result:*):void</div>
-<div class="summaryTableDescription"></div>
+<div class="summaryTableDescription">
+   呼び出したリモートサービスが正常に終了したときに呼ばれます
+   </div>
+</td><td class="summaryTableOwnerCol"><a href="S2Flex2Service.html">S2Flex2Service</a></td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="S2Flex2Service.html#setCredentials()">setCredentials</a>(username:String, password:String):void</div>
+<div class="summaryTableDescription">
+        認証が必要なサービスを呼び出す際に必要な認証情報をセットします。
+        
+        </div>
 </td><td class="summaryTableOwnerCol"><a href="S2Flex2Service.html">S2Flex2Service</a></td>
 </tr>
 <tr class="hideInheritedMethod">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="S2Flex2Service.html#setRemoteCredentials()">setRemoteCredentials</a>(remoteUsername:String, remotePassword:String):void</div>
-<div class="summaryTableDescription"></div>
+<div class="summaryTableDescription">
+        認証が必要な外部サービスを呼び出す際に必要な認証情報をセットします。
+        (TBD.)
+        <br/>
+        <small>このメソッドは呼び出しても、S2Flex2 1.0.xでは認識しません。</small>
+        </div>
 </td><td class="summaryTableOwnerCol"><a href="S2Flex2Service.html">S2Flex2Service</a></td>
 </tr>
 </table>
@@ -183,7 +228,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summaryTableDescription">
          NetConnectionにEventListenerの設定を行います。
          
-         </div>
+        </div>
 </td><td class="summaryTableOwnerCol"><a href="S2Flex2Service.html">S2Flex2Service</a></td>
 </tr>
 <tr class="">
@@ -243,14 +288,17 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="S2Flex2Service.html#event:fault">fault</a>
 </div>
-</td><td class="summaryTableDescription summaryTableCol">&nbsp;</td><td class="summaryTableOwnerCol"><a href="S2Flex2Service.html">S2Flex2Service</a></td>
+</td><td class="summaryTableDescription summaryTableCol"> 
+           The fault event is dispatched when a service call fails and isn't handled by the Operation itself.</td><td class="summaryTableOwnerCol"><a href="S2Flex2Service.html">S2Flex2Service</a></td>
 </tr>
 <tr class="hideInheritedEvent">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="S2Flex2Service.html#event:ioError">ioError</a>
 </div>
-</td><td class="summaryTableDescription summaryTableCol">&nbsp;</td><td class="summaryTableOwnerCol"><a href="S2Flex2Service.html">S2Flex2Service</a></td>
+</td><td class="summaryTableDescription summaryTableCol"> 
+ 　　IOErrorはNetwork接続時に入出力エラーが発生したときに送出されます。
+      </td><td class="summaryTableOwnerCol"><a href="S2Flex2Service.html">S2Flex2Service</a></td>
 </tr>
 <tr class="hideInheritedEvent">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
@@ -264,7 +312,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="S2Flex2Service.html#event:result">result</a>
 </div>
-</td><td class="summaryTableDescription summaryTableCol">&nbsp;</td><td class="summaryTableOwnerCol"><a href="S2Flex2Service.html">S2Flex2Service</a></td>
+</td><td class="summaryTableDescription summaryTableCol"> 
+     The result event is dispatched when a service call successfully returns and isn't handled by the Operation itself.</td><td class="summaryTableOwnerCol"><a href="S2Flex2Service.html">S2Flex2Service</a></td>
 </tr>
 <tr class="hideInheritedEvent">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">

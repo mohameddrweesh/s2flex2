@@ -42,7 +42,27 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 </table>
 <p></p>
-<p></p>
+ NetConnectionは、flash.net.Connectionクラスに、サーバロジック呼び出し時のcallBack関数を追加したクラスです。
+ CallBack関数には以下のものがあります。
+ <ul>
+  <li>AppendToGatewayUrl</li>
+  <li> ReplaceGatewayUrl</li>
+ </ul>
+ AMFのヘッダに関する仕様については以下をご参照ください。
+ <ul><li><a href="http://osflash.org/amf/envelopes/remoting/headers">Predefined headers</li>
+ </ul>
+ <!--
+ Flash Player 9のセキュリティに関する仕様については以下をご参照ください。
+ <ul>
+ <li>
+ <a href="http://livedocs.macromedia.com/flex/2_jp/docs/wwhelp/wwhimpl/js/html/wwhelp.htm?href=00001950.html">Flash Player セキュリティ</a>
+ </li>
+ <li>
+ <a href="http://www.adobe.com/devnet/flashplayer/articles/flash_player_9_security.pdf">Flash Player 9 Secirity</a>
+ </li>
+ </ul>
+ -->
+ <p></p>
 <br>
 <hr>
 </div>
@@ -54,7 +74,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#connectedUrl">connectedUrl</a> : String<div class="summaryTableDescription">[read-only]</div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#connectedUrl">connectedUrl</a> : String<div class="summaryTableDescription">[read-only]
+        接続先のGatewayURLを返します。
+        </div>
 </td><td class="summaryTableOwnerCol">NetConnection</td>
 </tr>
 </table>
@@ -70,28 +92,36 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="#addHeader()">addHeader</a>(operation:String, mustUnderstand:Boolean = false, param:Object = null):void</div>
-<div class="summaryTableDescription"></div>
+<div class="summaryTableDescription">
+        指定された値をAMFのヘッダとして追加します。
+        </div>
 </td><td class="summaryTableOwnerCol">NetConnection</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="#AppendToGatewayUrl()">AppendToGatewayUrl</a>(append:String):void</div>
-<div class="summaryTableDescription"></div>
+<div class="summaryTableDescription">
+        パラメータで渡されたsessionIDなどを接続するURLに付与した上で再接続をします。これによってセッションの維持をします。
+        </div>
 </td><td class="summaryTableOwnerCol">NetConnection</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="#connect()">connect</a>(command:String, ... rest):void</div>
-<div class="summaryTableDescription"></div>
+<div class="summaryTableDescription">
+        引数で指定されたサーバに接続します。
+        </div>
 </td><td class="summaryTableOwnerCol">NetConnection</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="#ReplaceGatewayUrl()">ReplaceGatewayUrl</a>(url:String):void</div>
-<div class="summaryTableDescription"></div>
+<div class="summaryTableDescription">
+        指定されたURLをGatewayのURLとして、再接続します。
+        </div>
 </td><td class="summaryTableOwnerCol">NetConnection</td>
 </tr>
 </table>
@@ -110,7 +140,9 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>connectedUrl:String</code>&nbsp;&nbsp;[read-only]<span class="label">Implementation</span>
+<code>connectedUrl:String</code>&nbsp;&nbsp;[read-only]<p>
+        接続先のGatewayURLを返します。
+        </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get connectedUrl():String</code>
 <br>
@@ -124,22 +156,27 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public override function addHeader(operation:String, mustUnderstand:Boolean = false, param:Object = null):void</code><span class="label">Parameters</span>
+<code>public override function addHeader(operation:String, mustUnderstand:Boolean = false, param:Object = null):void</code><p>
+        指定された値をAMFのヘッダとして追加します。
+        </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">operation</span>:String</code></td>
+<td width="20px"></td><td><code><span class="label">operation</span>:String</code> &mdash; ヘッダに追加する名称
+        </td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">mustUnderstand</span>:Boolean</code> (default = <code>false</code>)<code></code></td>
+<td width="20px"></td><td><code><span class="label">mustUnderstand</span>:Boolean</code> (default = <code>false</code>)<code></code> &mdash; サーバに送信された後に必ずこのヘッダを読み取るかどうかの指定。デフォルトはfalse.
+        </td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">param</span>:Object</code> (default = <code>null</code>)<code></code></td>
+<td width="20px"></td><td><code><span class="label">param</span>:Object</code> (default = <code>null</code>)<code></code> &mdash; ヘッダに追加する値
+        </td>
 </tr>
 </table>
 </div>
@@ -150,10 +187,13 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function AppendToGatewayUrl(append:String):void</code><span class="label">Parameters</span>
+<code>public function AppendToGatewayUrl(append:String):void</code><p>
+        パラメータで渡されたsessionIDなどを接続するURLに付与した上で再接続をします。これによってセッションの維持をします。
+        </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">append</span>:String</code></td>
+<td width="20px"></td><td><code><span class="label">append</span>:String</code> &mdash; セッションIDを含むURLとして追加する文字列
+        </td>
 </tr>
 </table>
 </div>
@@ -164,16 +204,20 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public override function connect(command:String, ... rest):void</code><span class="label">Parameters</span>
+<code>public override function connect(command:String, ... rest):void</code><p>
+        引数で指定されたサーバに接続します。
+        </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">command</span>:String</code></td>
+<td width="20px"></td><td><code><span class="label">command</span>:String</code> &mdash; 接続先URL
+        </td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code>... <span class="label">rest</span></code></td>
+<td width="20px"></td><td><code>... <span class="label">rest</span></code> &mdash; 接続時のパラメータ
+        </td>
 </tr>
 </table>
 </div>
@@ -184,10 +228,13 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function ReplaceGatewayUrl(url:String):void</code><span class="label">Parameters</span>
+<code>public function ReplaceGatewayUrl(url:String):void</code><p>
+        指定されたURLをGatewayのURLとして、再接続します。
+        </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">url</span>:String</code></td>
+<td width="20px"></td><td><code><span class="label">url</span>:String</code> &mdash; gatewayのURL
+        </td>
 </tr>
 </table>
 </div>
