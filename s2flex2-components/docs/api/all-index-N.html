@@ -38,7 +38,28 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("N�
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/seasar/flex2/net/class-list.html');" href="org/seasar/flex2/net/NetConnection.html">NetConnection</a> &mdash; Class in package <a onclick="javascript:loadClassListFrame('org/seasar/flex2/net/class-list.html');" href="org/seasar/flex2/net/package-detail.html">org.seasar.flex2.net</a></td>
 </tr>
 <tr>
-<td width="20"></td><td></td>
+<td width="20"></td><td>
+ NetConnectionは、flash.net.Connectionクラスに、サーバロジック呼び出し時のcallBack関数を追加したクラスです。
+ CallBack関数には以下のものがあります。
+ <ul>
+  <li>AppendToGatewayUrl</li>
+  <li> ReplaceGatewayUrl</li>
+ </ul>
+ AMFのヘッダに関する仕様については以下をご参照ください。
+ <ul><li><a href="http://osflash.org/amf/envelopes/remoting/headers">Predefined headers</li>
+ </ul>
+ <!--
+ Flash Player 9のセキュリティに関する仕様については以下をご参照ください。
+ <ul>
+ <li>
+ <a href="http://livedocs.macromedia.com/flex/2_jp/docs/wwhelp/wwhimpl/js/html/wwhelp.htm?href=00001950.html">Flash Player セキュリティ</a>
+ </li>
+ <li>
+ <a href="http://www.adobe.com/devnet/flashplayer/articles/flash_player_9_security.pdf">Flash Player 9 Secirity</a>
+ </li>
+ </ul>
+ -->
+ </td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/seasar/flex2/rpc/remoting/class-list.html');" href="org/seasar/flex2/rpc/remoting/S2Flex2Service.html#event:netStatus">netStatus</a> &mdash; Event in class org.seasar.flex2.rpc.remoting.<a onclick="javascript:loadClassListFrame('org/seasar/flex2/rpc/remoting/class-list.html');" href="org/seasar/flex2/rpc/remoting/S2Flex2Service.html">S2Flex2Service</a></td>

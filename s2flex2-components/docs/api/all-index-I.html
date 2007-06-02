@@ -38,6 +38,12 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("I�
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/seasar/flex2/rpc/remoting/class-list.html');" href="org/seasar/flex2/rpc/remoting/S2Flex2Service.html#id">id</a> &mdash; Property in class org.seasar.flex2.rpc.remoting.<a onclick="javascript:loadClassListFrame('org/seasar/flex2/rpc/remoting/class-list.html');" href="org/seasar/flex2/rpc/remoting/S2Flex2Service.html">S2Flex2Service</a></td>
 </tr>
 <tr>
+<td width="20"></td><td> mxml内部ドキュメント内部で管理されるこの S2Flex2Sericeインスタンスを特定するID です。 </td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/seasar/flex2/rpc/remoting/class-list.html');" href="org/seasar/flex2/rpc/remoting/S2Flex2Service.html#id">id</a> &mdash; Property in class org.seasar.flex2.rpc.remoting.<a onclick="javascript:loadClassListFrame('org/seasar/flex2/rpc/remoting/class-list.html');" href="org/seasar/flex2/rpc/remoting/S2Flex2Service.html">S2Flex2Service</a></td>
+</tr>
+<tr>
 <td width="20"></td><td></td>
 </tr>
 <tr>
@@ -53,13 +59,21 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("I�
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/seasar/flex2/rpc/remoting/class-list.html');" href="org/seasar/flex2/rpc/remoting/S2Flex2Service.html#initialized()">initialized</a>(document, id) &mdash; Method in class org.seasar.flex2.rpc.remoting.<a onclick="javascript:loadClassListFrame('org/seasar/flex2/rpc/remoting/class-list.html');" href="org/seasar/flex2/rpc/remoting/S2Flex2Service.html">S2Flex2Service</a></td>
 </tr>
 <tr>
-<td width="20"></td><td></td>
+<td width="20"></td><td>
+   mxmlファイル内でS2Flex2Serviceをタグとして設定したときにMXMLコンパイラ(mxmlc)によって自動的に呼び出されます。<br/>
+   <!--ActionScriptでインスタンスを生成した場合は、このメソッドを呼び出す事で、GatewayURLを自動的にセットすることが可能になります。-->
+   このクラスを ActionScript で作成し、検証で機能させるには、このメソッドを呼び出して、MXML ドキュメントと S2Flex2Service の id を渡す必要があります。
+   正しく指定しないと、Gatewayの指定が正しく行われない可能性があります。
+   
+   </td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/seasar/flex2/rpc/remoting/class-list.html');" href="org/seasar/flex2/rpc/remoting/S2Flex2Service.html#event:ioError">ioError</a> &mdash; Event in class org.seasar.flex2.rpc.remoting.<a onclick="javascript:loadClassListFrame('org/seasar/flex2/rpc/remoting/class-list.html');" href="org/seasar/flex2/rpc/remoting/S2Flex2Service.html">S2Flex2Service</a></td>
 </tr>
 <tr>
-<td width="20"></td><td></td>
+<td width="20"></td><td> 
+ 　　IOErrorはNetwork接続時に入出力エラーが発生したときに送出されます。
+      </td>
 </tr>
 <tr>
 <td style="padding-bottom:20px" colspan="2"></td>
