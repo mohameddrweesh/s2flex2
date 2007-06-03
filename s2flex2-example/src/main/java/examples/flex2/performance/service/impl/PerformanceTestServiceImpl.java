@@ -13,10 +13,10 @@ public class PerformanceTestServiceImpl implements PerformanceTestService {
 
     public ArrayList getArray(int size) {
         ArrayList list = new ArrayList();
-        Map data;
+        Map<String,String> data;
         long start = System.currentTimeMillis();
         for (int i = 0; i < size; i++) {
-            data = new HashMap();
+            data = new HashMap<String,String>();
             data.put("col1", "This is row " + i);
             data.put("col2", "10000000");
             data.put("col3", "More text to add to this row.");
