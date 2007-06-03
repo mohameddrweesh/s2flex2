@@ -12,7 +12,6 @@
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/log4j-1.2.13.jar" sourcepath="src/main/webapp/WEB-INF/lib/sources/log4j-1.2.13-sources.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/ognl-2.6.7.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/s2-flex2-tiger-1.0.0.jar"/>
-	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/s2-flex2-1.0.2-SNAPSHOT.jar" sourcepath="/s2flex2"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/s2-tiger-2.4.13.jar" sourcepath="src/main/webapp/WEB-INF/lib/sources/s2-tiger-2.4.13-sources.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/s2-framework-2.4.13.jar" sourcepath="src/main/webapp/WEB-INF/lib/sources/s2-framework-2.4.13-sources.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/s2-flex2-service-browser-B1.jar"/>
@@ -24,5 +23,6 @@
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/geronimo-jta_1.1_spec-1.0.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/geronimo-ejb_3.0_spec-1.0.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/commons-logging-1.1.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/s2-flex2-1.1.0-SNAPSHOT.jar" sourcepath="src/main/webapp/WEB-INF/lib/sources/s2-flex2-1.1.0-SNAPSHOT-sources.jar"/>
 	<classpathentry kind="output" path="target/test-classes"/>
 </classpath>
