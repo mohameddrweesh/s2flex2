@@ -10,11 +10,13 @@
 <libraryPathEntry kind="3" linkType="1" path="${FRAMEWORKS}/libs/rpc.swc"/>
 <libraryPathEntry kind="3" linkType="1" path="${FRAMEWORKS}/libs/charts.swc" sourcepath="${FRAMEWORKS}/source"/>
 <libraryPathEntry kind="1" linkType="1" path="${FRAMEWORKS}/locale/{locale}"/>
+<libraryPathEntry kind="3" linkType="1" path="${DOCUMENTS}/s2flex2-example/lib/swc/s2flex2-components.swc" sourcepath="${DOCUMENTS}/s2flex2-components/src/main/actionscript"/>
 </libraryPath>
 <sourceAttachmentPath>
 <sourceAttachmentPathEntry kind="3" linkType="1" path="${FRAMEWORKS}/libs/flex.swc" sourcepath="${FRAMEWORKS}/source"/>
 <sourceAttachmentPathEntry kind="3" linkType="1" path="${FRAMEWORKS}/libs/framework.swc" sourcepath="${FRAMEWORKS}/source"/>
 <sourceAttachmentPathEntry kind="3" linkType="1" path="${FRAMEWORKS}/libs/charts.swc" sourcepath="${FRAMEWORKS}/source"/>
+<sourceAttachmentPathEntry kind="3" linkType="1" path="${DOCUMENTS}/s2flex2-example/lib/swc/s2flex2-components.swc" sourcepath="${DOCUMENTS}/s2flex2-components/src/main/actionscript"/>
 </sourceAttachmentPath>
 </compiler>
 <applications>

@@ -1,10 +1,23 @@
 <project name="s2flex2-example" default="dist" basedir=".">
 
-	<property name="ver" value="1.1.0"/>
+	<property name="ver" value="1.1.0-SNAPSHOT"/>
     <taskdef resource="flexTasks.tasks" classpath="${basedir}/lib/flexTasks.jar" />        
     <property name="FLEX_HOME" value="/Developer/SDKs/Flex/"/>
     <property name="APP_ROOT" value="src/main/mxml"/>
     <property name="DEPLOY_DIR" value="src/main/webapp/bin"/>
+    <target name="os-props">
+        <condition property="windows">
+            <os family="windows" />
+        </condition>
+    </target>
+    <target name="setup" depends="os-props,win,not-win" />
+    <target name="win" if="windows">
+        <property name="adl.exe" value="adl.exe" />
+    </target>
+
+    <target name="not-win" unless="windows">
+        <property name="adl.exe" value="adl" />
+    </target>	
 	<macrodef name="call-mxmlc">
 		<attribute name="appName" default="Main"/>
 		<attribute name="locale" default="ja_JP"/>
@@ -34,6 +47,35 @@
         	</mxmlc>
 		</sequential>
 	</macrodef>
+	<macrodef name="call-amxmlc">
+		<attribute name="appName" default="Main"/>
+		<attribute name="locale" default="ja_JP"/>
+		<sequential>
+	    	<mxmlc 
+	            file="${APP_ROOT}/@{appName}.mxml" 
+	            output="${DEPLOY_DIR}/@{appName}.swf"
+	            actionscript-file-encoding="UTF-8"
+	        	keep-generated-actionscript="true"
+	        	locale="@{locale}"
+	        	incremental="true">
+	            <!-- Get default compiler options. -->
+	            <load-config filename="${FLEX_HOME}/frameworks/apollo-config.xml"/>          
+	            <!-- List of path elements that form the roots of ActionScript class hierarchies. -->
+	            <source-path path-element="${FLEX_HOME}/frameworks"/>
+	            <!-- List of SWC files or directories that contain SWC files. -->
+	            <compiler.library-path dir="${FLEX_HOME}/frameworks" append="true">
+	                <include name="libs" />
+	                <include name="../bundles/{locale}" />
+	            </compiler.library-path>
+	        	<compiler.source-path path-element="src/main/actionscript3" />
+	            <compiler.library-path dir="${basedir}/lib" append="true">
+	                <include name="swc" />
+	            </compiler.library-path>       	
+	            <!-- Set size of output SWF file. -->
+	            <default-size width="800" height="600" />
+        	</mxmlc>
+		</sequential>
+	</macrodef>	
 	<macrodef name="call-wrapper">
 		<attribute name="appName" default="Main"/>
 		<sequential>
@@ -56,30 +98,17 @@
     <target name="main">
     	<call-mxmlc appname="index" locale="ja_JP"/>
     	<call-mxmlc appname="param"/>
-        <mxmlc 
-            file="${APP_ROOT}/index.mxml" 
-            output="${DEPLOY_DIR}/index.swf"
-            actionscript-file-encoding="UTF-8"
-        	keep-generated-actionscript="true"
-        	locale="ja_JP"
-        	incremental="true">
-            <!-- Get default compiler options. -->
-            <load-config filename="${FLEX_HOME}/frameworks/flex-config.xml"/>          
-            <!-- List of path elements that form the roots of ActionScript class hierarchies. -->
-            <source-path path-element="${FLEX_HOME}/frameworks"/>
-            <!-- List of SWC files or directories that contain SWC files. -->
-            <compiler.library-path dir="${FLEX_HOME}/frameworks" append="true">
-                <include name="libs" />
-                <include name="../bundles/{locale}" />
-            </compiler.library-path>
-            <compiler.library-path dir="${basedir}/lib" append="true">
-                <include name="swc" />
-            </compiler.library-path>
-        	<compiler.source-path path-element="src/main/actionscript3"/>
-            <!-- Set size of output SWF file. -->
-            <default-size width="800" height="600" />
-        </mxmlc>
+    	<call-mxmlc appname="add"/>
+<!--
+    	<call-amxmlc appname="addApollo"/>
+-->
+
     </target>
+	  <target name="run" depends="main,setup">
+	    <exec executable="${FLEX_HOME}/bin/${adl.exe}">
+	      <arg value="src/main/webapp/bin/application.xml"/>
+	    </exec>
+	  </target>
     <target name="wrapper">
   		<call-wrapper appname="index"/>
 		<call-wrapper appname="param"/>
@@ -89,6 +118,7 @@
         <delete>
             <fileset dir="${DEPLOY_DIR}" includes="param.swf"/>
             <fileset dir="${DEPLOY_DIR}" includes="index.swf"/>
+        	<fileset dir="${DEPLOY_DIR}" includes="add.swf"/>
         </delete>    
     </target>
 	<target name="dist">
@@ -97,7 +127,8 @@
 		</delete>
 		<mkdir dir="target"/>
 		<zip zipfile="target/s2flex2-example-${ver}.zip">
-			<zipfileset prefix="s2flex2-tutorial" dir=".">
+			<zipfileset prefix="s2flex2-example" dir=".">
+				<exclude name="**/.DS_Store"/>
 				<include name=".settings"/>
 				<include name=".settings/**"/>
 				<include name="WEB-INF"/>

@@ -18,7 +18,7 @@
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/s2-flex2-service-browser-B1.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/s2-extension-2.4.13.jar" sourcepath="src/main/webapp/WEB-INF/lib/sources/s2-extension-2.4.13-sources.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/s2-dao-tiger-1.0.42.jar" sourcepath="src/main/webapp/WEB-INF/lib/sources/s2-dao-tiger-1.0.42-sources.jar"/>
-	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/s2-dao-1.0.42.jar" sourcepath="src/main/webapp/WEB-INF/lib/sources/s2-dao-1.0.42-sources.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/s2-dao-1.0.43.jar" sourcepath="src/main/webapp/WEB-INF/lib/sources/s2-dao-1.0.43-sources.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/poi-3.0-FINAL.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/h2-2007-04-29.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/geronimo-jta_1.1_spec-1.0.jar"/>
