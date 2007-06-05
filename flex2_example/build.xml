@@ -83,7 +83,8 @@
 		</delete>
 		<mkdir dir="target"/>
 		<zip zipfile="target/flex2-example-${ver}.zip">
-			<zipfileset prefix="flex2_example" dir=".">				
+			<zipfileset prefix="flex2_example" dir=".">
+				<exclude name=".*~"/>
 				<include name="WEB-INF"/>
 				<include name="WEB-INF/**"/>
 				<include name="work"/>
@@ -95,6 +96,7 @@
 				<include name="bin/**"/>
 				<include name=".*"/>
 				<include name="*" />
+				
 			</zipfileset>
 		</zip>
 	</target>	
