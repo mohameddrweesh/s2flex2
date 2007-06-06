@@ -6,6 +6,11 @@
 		data converter
 	-->
     <component
+    	name="stringIntegerConverter"
+    	class="org.seasar.flex2.util.converter.impl.StringIntegerConverter"
+    	autoBinding="none"
+    	/>
+    <component
     	name="arrayConverter"
     	class="org.seasar.flex2.util.converter.impl.ArrayConverterImpl"
     	autoBinding="none"

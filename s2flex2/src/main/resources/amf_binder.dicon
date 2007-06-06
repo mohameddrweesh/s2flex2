@@ -6,7 +6,7 @@
 		amf data binder
 	-->
 	<component
-		class="org.seasar.flex2.core.format.amf.io.reader.binder.impl.IntegerDataBinder"
+		class="org.seasar.flex2.core.format.amf.io.reader.binder.impl.StringIntegerDataBinder"
 		autoBinding="property"
 		/>
 	<component

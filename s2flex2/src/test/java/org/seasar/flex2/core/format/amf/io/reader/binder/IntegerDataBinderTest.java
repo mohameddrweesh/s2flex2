@@ -17,14 +17,14 @@ package org.seasar.flex2.core.format.amf.io.reader.binder;
 
 import junit.framework.TestCase;
 
-import org.seasar.flex2.core.format.amf.io.reader.binder.impl.IntegerDataBinder;
+import org.seasar.flex2.core.format.amf.io.reader.binder.impl.StringIntegerDataBinder;
 
 public class IntegerDataBinderTest extends TestCase {
 
     private DataBinder binder;
     
     protected void setUp() throws Exception {
-        binder = new IntegerDataBinder();
+        binder = new StringIntegerDataBinder();
     }
     
     public void testStringToInt() {

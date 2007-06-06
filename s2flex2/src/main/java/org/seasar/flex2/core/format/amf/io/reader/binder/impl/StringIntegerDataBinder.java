@@ -16,10 +16,11 @@
 package org.seasar.flex2.core.format.amf.io.reader.binder.impl;
 
 import org.seasar.flex2.core.format.amf.io.reader.binder.DataBinder;
+import org.seasar.flex2.util.converter.Converter;
 
-public class IntegerDataBinder implements DataBinder {
+public class StringIntegerDataBinder implements DataBinder {
 
-    private static final String HEX_SIGN = "0x";
+    private Converter stringIntegerConverter;
 
     private final static boolean isBindClass(final Class bindClass) {
         return (bindClass == Integer.class) || (bindClass == int.class);
@@ -31,30 +32,18 @@ public class IntegerDataBinder implements DataBinder {
     }
 
     public Object bind(final Object source, final Class bindClass) {
-        return doBind((String) source);
+        return stringIntegerConverter.convert(source, bindClass);
     }
 
     public boolean isTarget(final Object targetValue, final Class bindClass) {
         return isBindClass(bindClass) && isTarget(targetValue);
     }
 
-    private final Integer doBind(final String number) {
-        int returnValue = 0;
-        do {
-            if (number == null || number.length() == 0) {
-                break;
-            }
-            try {
-                if (number.indexOf(HEX_SIGN) == 0) {
-                    returnValue = Integer.parseInt(number.substring(2), 16);
-                } else {
-                    returnValue = Integer.parseInt(number, 10);
-                }
-            } catch (NumberFormatException e) {
-                returnValue = 0;
-            }
-        } while (false);
+    public Converter getStringIntegerConverter() {
+        return stringIntegerConverter;
+    }
 
-        return new Integer(returnValue);
+    public void setStringIntegerConverter(Converter stringIntegerConverter) {
+        this.stringIntegerConverter = stringIntegerConverter;
     }
 }
