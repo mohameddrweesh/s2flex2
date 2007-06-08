@@ -111,7 +111,7 @@
 		<arg value="-include-classes"/> 	
 		<arg value="org.seasar.flex2.rpc.remoting.S2Flex2Service"/>
 		<arg value="org.seasar.flex2.rpc.remoting.RemoteService"/>
- 
+		<arg value="org.seasar.flex2.rpc.responder.DelegateResponder"/>
 	  </java>
   </target>
 
