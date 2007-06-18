@@ -15,16 +15,15 @@
  */
 package org.seasar.flex2.core.format.amf.io.reader.binder;
 
-import junit.framework.TestCase;
+import org.seasar.extension.unit.S2TestCase;
 
-import org.seasar.flex2.core.format.amf.io.reader.binder.impl.StringIntegerDataBinder;
+public class StringIntegerDataBinderTest extends S2TestCase {
 
-public class IntegerDataBinderTest extends TestCase {
-
-    private DataBinder binder;
+    private DataBinder stringIntegerDataBinder;
     
     protected void setUp() throws Exception {
-        binder = new StringIntegerDataBinder();
+        super.setUp();
+        include(getClass().getName().replace('.', '/') + ".dicon");
     }
     
     public void testStringToInt() {
@@ -33,18 +32,20 @@ public class IntegerDataBinderTest extends TestCase {
 
         String expectIntStr = "" + expectInt;
 
-        Integer bindedInteger = (Integer) binder.bind(expectIntStr, int.class);
+        Integer bindedInteger = (Integer) stringIntegerDataBinder.bind(
+                expectIntStr, int.class);
 
         assertEquals("1", expectInt, bindedInteger.intValue());
     }
-    
+
     public void testStringToInteger() {
 
         int expectInt = 100000;
 
         String expectIntStr = "" + expectInt;
 
-        Integer bindedInteger = (Integer) binder.bind(expectIntStr, Integer.class);
+        Integer bindedInteger = (Integer) stringIntegerDataBinder.bind(
+                expectIntStr, Integer.class);
 
         assertEquals("1", expectInt, bindedInteger.intValue());
     }
@@ -55,8 +56,23 @@ public class IntegerDataBinderTest extends TestCase {
 
         String expectIntStr = "0x" + Integer.toHexString(expectInt);
 
-        Integer bindedInteger = (Integer) binder.bind(expectIntStr, Integer.class);
+        Integer bindedInteger = (Integer) stringIntegerDataBinder.bind(
+                expectIntStr, Integer.class);
 
         assertEquals("1", expectInt, bindedInteger.intValue());
+    }
+
+    /**
+     * @return Returns the stringIntegerDataBinder.
+     */
+    public DataBinder getStringIntegerDataBinder() {
+        return stringIntegerDataBinder;
+    }
+
+    /**
+     * @param stringIntegerDataBinder The stringIntegerDataBinder to set.
+     */
+    public void setStringIntegerDataBinder(DataBinder stringIntegerDataBinder) {
+        this.stringIntegerDataBinder = stringIntegerDataBinder;
     }
 }

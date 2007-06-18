@@ -6,26 +6,32 @@
 		amf data binder
 	-->
 	<component
+		name="stringIntegerDataBinder"
 		class="org.seasar.flex2.core.format.amf.io.reader.binder.impl.StringIntegerDataBinder"
 		autoBinding="property"
 		/>
 	<component
+		name="arrayDataBinder"
 		class="org.seasar.flex2.core.format.amf.io.reader.binder.impl.ArrayDataBinder"
 		autoBinding="property"
 		/>
 	<component
+		name="mapDataBinder"
 		class="org.seasar.flex2.core.format.amf.io.reader.binder.impl.MapDataBinder"
 		autoBinding="property"
 		/>
 	<component
+		name="collectionDataBinder"
 		class="org.seasar.flex2.core.format.amf.io.reader.binder.impl.CollectionDataBinder"
 		autoBinding="property"
 		/>
 	<component
+		name="byteArrayDataBinder"
 		class="org.seasar.flex2.core.format.amf.io.reader.binder.impl.ByteArrayDataBinder"
 		autoBinding="property"
 		/>
 	<component
+		name="bigDecimalDataBinder"
 		class="org.seasar.flex2.core.format.amf.io.reader.binder.impl.BigDecimalDataBinder"
 		autoBinding="none"
 		/>
