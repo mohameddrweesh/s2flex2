@@ -15,13 +15,10 @@
  */
 package org.seasar.flex2.util.converter.impl;
 
-import java.util.Iterator;
 import java.util.Map;
 
 import org.seasar.flex2.util.converter.Converter;
-import org.seasar.framework.beans.BeanDesc;
-import org.seasar.framework.beans.PropertyDesc;
-import org.seasar.framework.beans.factory.BeanDescFactory;
+import org.seasar.framework.beans.util.BeanUtil;
 import org.seasar.framework.util.ClassUtil;
 
 public abstract class AbstractBeanConverterImpl implements Converter {
@@ -29,27 +26,8 @@ public abstract class AbstractBeanConverterImpl implements Converter {
     protected static final Object newIncetance(final Class clazz,
             final Map initProperties) {
         final Object bean = ClassUtil.newInstance(clazz);
-        copyProperties(initProperties, bean);
+        BeanUtil.copyProperties(initProperties, bean);
         return bean;
-    }
-
-    private static final void copyProperties(final Map src, final Object dest) {
-        if ((src != null) || (dest != null)) {
-            doCopyProperties(src, dest);
-        }
-    }
-
-    private static final void doCopyProperties(final Map src, final Object dest) {
-        final BeanDesc beanDesc = BeanDescFactory.getBeanDesc(dest.getClass());
-        for (Iterator i = src.keySet().iterator(); i.hasNext();) {
-            String key = (String) i.next();
-            if (beanDesc.hasPropertyDesc(key)) {
-                PropertyDesc pd = beanDesc.getPropertyDesc(key);
-                if (pd.hasWriteMethod()) {
-                    pd.setValue(dest, src.get(key));
-                }
-            }
-        }
     }
 
     public abstract Object convert(Object source, Class distClass);

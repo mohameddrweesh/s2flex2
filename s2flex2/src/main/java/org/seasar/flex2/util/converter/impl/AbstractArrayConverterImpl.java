@@ -44,16 +44,17 @@ public abstract class AbstractArrayConverterImpl extends
                 result = convertToTypedArray(distClass.getComponentType(),
                         result);
             }
+        } else {
+            result = (Object[]) Array.newInstance(distClass.getComponentType(), 0);
         }
         return result;
     }
 
     protected static final Object[] convertToBeanArray(final Class clazz,
             final Object[] targetArray) {
-        final Object[] newArray = (Object[]) Array.newInstance(clazz,
-                targetArray.length);
-        final int arrayLength = targetArray.length;
-        for (int i = 0; i < arrayLength; i++) {
+        final int length = targetArray.length;
+        final Object[] newArray = (Object[]) Array.newInstance(clazz, length);
+        for (int i = 0; i < length; i++) {
             newArray[i] = newIncetance(clazz, (Map) targetArray[i]);
         }
         return newArray;
@@ -61,10 +62,9 @@ public abstract class AbstractArrayConverterImpl extends
 
     protected static final Object[] convertToTypedArray(final Class clazz,
             final Object[] targetArray) {
-        final Object newArray = Array.newInstance(clazz, targetArray.length);
-        if (targetArray.length > 0) {
-            System.arraycopy(targetArray, 0, newArray, 0, targetArray.length);
-        }
-        return (Object[]) newArray;
+        final int length = targetArray.length;
+        final Object[] newArray = (Object[])Array.newInstance(clazz, length);
+        System.arraycopy(targetArray, 0, newArray, 0, length);
+        return newArray;
     }
 }
