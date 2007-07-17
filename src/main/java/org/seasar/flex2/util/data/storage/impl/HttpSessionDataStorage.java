@@ -15,13 +15,19 @@
  */
 package org.seasar.flex2.util.data.storage.impl;
 
+import java.io.Serializable;
 import java.util.Enumeration;
 
 import javax.servlet.http.HttpSession;
 
 import org.seasar.flex2.util.data.storage.Storage;
 
-public class HttpSessionDataStorage implements Storage {
+public class HttpSessionDataStorage implements Storage, Serializable {
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
 
     private final static String SESSION = "session";
 
