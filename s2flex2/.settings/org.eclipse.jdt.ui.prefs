@@ -1,7 +1,7 @@
-#Tue Feb 13 10:46:38 GMT 2007
+#Tue Jul 17 12:58:32 GMT+09:00 2007
 eclipse.preferences.version=1
 formatter_profile=_s2flex2
-formatter_settings_version=10
+formatter_settings_version=11
 internal.default.compliance=user
 org.eclipse.jdt.ui.exception.name=e
 org.eclipse.jdt.ui.gettersetter.use.is=true
