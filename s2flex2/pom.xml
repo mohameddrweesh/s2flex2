@@ -89,14 +89,13 @@
           </execution>
         </executions>
       </plugin>
-      
     </plugins>
     <extensions>
      <extension>
        <groupId>org.apache.maven.wagon</groupId>
        <artifactId>wagon-webdav</artifactId>
      </extension>
-   </extensions>    
+   </extensions>
   </build>
   <repositories>
     <repository>
