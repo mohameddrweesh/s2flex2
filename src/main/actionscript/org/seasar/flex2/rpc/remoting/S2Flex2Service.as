@@ -39,6 +39,8 @@ package org.seasar.flex2.rpc.remoting {
     import org.seasar.flex2.net.NetConnection;
     import org.seasar.flex2.rpc.RelayResponder;
     import org.seasar.flex2.rpc.RpcOperation;
+    import org.seasar.flex2.utils.ApplicationUtil;
+    import org.seasar.flex2.utils.HttpUtil;
     
     use namespace flash_proxy;
     
@@ -487,11 +489,14 @@ package org.seasar.flex2.rpc.remoting {
         private function resolveGatewayUrl():void{
             if(this.gatewayUrl == null ){
                 if( this.configType == "flashvars" && this.destination != null){
-                    this.gatewayUrl = getApplicationParameterValue( this.destination );                    
+                    
+                    var gatewayUrl_:String = ApplicationUtil.getParameterValue( this.destination );                    
                     //destination単位でURLが指定されていないときには、defaultGatewayを指定する。
-                    if(this.gatewayUrl==null){
-                    	this.gatewayUrl = getApplicationParameterValue( "defaultGateway" );
+                    if( gatewayUrl_ == null ){
+                    	gatewayUrl_ = ApplicationUtil.getParameterValue( "defaultGateway" );
                     }
+                    this.gatewayUrl = HttpUtil.getUri(gatewayUrl_);
+                    
                 } else if(this.configType == "xml"){
                     //It has not implemented yet. 
                 } else {
@@ -506,36 +511,15 @@ package org.seasar.flex2.rpc.remoting {
         */
         private function resolveDefaultGatewayUrl():void{
             const url:String = document.systemManager.loaderInfo.url;
+            var gatewayUrl_:String = null;
             if( URLUtil.isHttpURL(url) || URLUtil.isHttpsURL(url)){
                 const lashSlash:int = url.lastIndexOf("/");
-                this.gatewayUrl = url.substring(0, lashSlash+1 ) + "gateway";
+                gatewayUrl_ = url.substring(0, lashSlash+1 ) + "gateway";
             } else {
-                this.gatewayUrl = getApplicationParameterValue( "defaultGateway" );
-            }
-        }
-        /**
-        * 指定されたパラメータに対する値を取得します。
-        * @private
-        * @param prameterName パラメータ名
-        * @return parameterValue パラメータの値 
-        */
-        private function getApplicationParameterValue( parameterName:String ):String{
-            var parameterValue:String = null;
-            
-            if( document != null ){
-                
-                var application:Application = document.parentApplication as Application;
-                if( application != null ){
-                    parameterValue = application.parameters[ parameterName ];
-                } else {
-                    application = document.parentDocument as Application;
-                    if( application != null ){
-                        parameterValue = application.parameters[ parameterName ];
-                    }
-                }
+                gatewayUrl_ = ApplicationUtil.getParameterValue( "defaultGateway" );
             }
             
-            return parameterValue;
+            this.gatewayUrl = HttpUtil.getUri(gatewayUrl_);
         }
     }
 }

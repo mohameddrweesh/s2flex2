@@ -1,6 +1,7 @@
 package org.seasar.flex2.utils
 {
     import mx.core.Application;
+    import mx.core.ApplicationGlobals;
     
 	public final class ApplicationUtil {
 	    
@@ -11,8 +12,13 @@ package org.seasar.flex2.utils
          * @param prameterName パラメータ名
          * @return parameterValue パラメータの値 
          */
-        public static function getParameterValue( application:Application, parameterName:String ):String{
-            return application.parameters[ parameterName ];
+        public static function getParameterValue( parameterName:String, application:Application=null):String{
+            var curretApplication:Application = application;
+            if( curretApplication == null ){
+                curretApplication = ApplicationGlobals.application as Application;
+            }
+            
+            return curretApplication.parameters[ parameterName ];
         }
     }
 }
