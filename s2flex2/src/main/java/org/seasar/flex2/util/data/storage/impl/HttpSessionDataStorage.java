@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2006 the Seasar Foundation and the Others.
+ * Copyright 2004-2007 the Seasar Foundation and the Others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
  */
 package org.seasar.flex2.util.data.storage.impl;
 
+import java.io.Serializable;
 import java.util.Enumeration;
 
 import javax.servlet.http.HttpSession;
@@ -22,7 +23,9 @@ import javax.servlet.http.HttpSession;
 import org.seasar.flex2.util.data.storage.Storage;
 import org.seasar.framework.container.hotdeploy.HotdeployUtil;
 
-public class HttpSessionDataStorage implements Storage {
+public class HttpSessionDataStorage implements Storage ,Serializable{
+
+    private static final long serialVersionUID = -5306475678041366134L;
 
     private final static String SESSION = "session";
 
@@ -37,11 +40,7 @@ public class HttpSessionDataStorage implements Storage {
     }
 
     public Object getProperty(final String name) {
-        Object value = session.getAttribute(name);
-        if (HotdeployUtil.isHotdeploy()) {
-            value = HotdeployUtil.rebuildValue(value);
-        }
-        return value;
+      return session.getAttribute(name);
     }
 
     public Enumeration getPropertyNames() {
