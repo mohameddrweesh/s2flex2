@@ -129,6 +129,15 @@
 		<zip zipfile="target/s2flex2-example-${ver}.zip">
 			<zipfileset prefix="s2flex2-example" dir=".">
 				<exclude name="**/.DS_Store"/>
+				<exclude name="bin/**-debug.swf"/>
+				<exclude name="bin/**-debug.html"/>
+				<exclude name=".*~"/>
+				<exclude name="**/generated"/>
+				<exclude name="**/generated/**"/>
+				<exclude name="**/Copy*"/>
+				<exclude name="**/flexTasks.jar"/>
+				<exclude name="**/application.xml"/>
+				<exclude name="**/addApollo.mxml"/>
 				<include name=".settings"/>
 				<include name=".settings/**"/>
 				<include name="WEB-INF"/>
@@ -138,7 +147,10 @@
 				<include name="src/**"/>
 				<include name="html-template"/>
 				<include name="html-template/**"/>
-				<include name="bin"/>
+				<include name="bin/**.html"/>
+				<include name="bin/**.swf"/>
+				<exclude name="bin/**-debug.swf"/>
+				<include name="licenses/**"/>
 				<include name=".*"/>
 				<include name="*" />
 			</zipfileset>

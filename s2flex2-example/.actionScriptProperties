@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <actionScriptProperties mainApplicationPath="s2flex2-example.mxml" version="1">
-<compiler additionalCompilerArguments="-locale ja_JP" copyDependentFiles="true" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="true" htmlHistoryManagement="true" htmlPlayerVersion="9.0.0" htmlPlayerVersionCheck="true" outputFolderPath="bin" sourceFolderPath="src/main/webapp" strict="true" warn="true">
-<compilerSourcePath/>
+<compiler additionalCompilerArguments="-locale ja_JP" copyDependentFiles="true" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="true" htmlHistoryManagement="true" htmlPlayerVersion="9.0.0" htmlPlayerVersionCheck="true" outputFolderPath="src/main/webapp/bin" sourceFolderPath="src/main/mxml" strict="true" warn="true">
+<compilerSourcePath>
+<compilerSourcePathEntry kind="1" linkType="1" path="${DOCUMENTS}/s2flex2-example/src/main/actionscript3"/>
+</compilerSourcePath>
 <libraryPath>
 <libraryPathEntry kind="3" linkType="2" path="${FRAMEWORKS}/libs/playerglobal.swc"/>
 <libraryPathEntry kind="3" linkType="1" path="${FRAMEWORKS}/libs/utilities.swc"/>
@@ -20,7 +22,10 @@
 </sourceAttachmentPath>
 </compiler>
 <applications>
+<application path="add.mxml"/>
 <application path="src/main/mxml/index.mxml"/>
+<application path="param.mxml"/>
+<application path="index.mxml"/>
 </applications>
 <buildCSSFiles/>
 </actionScriptProperties>
