@@ -101,6 +101,10 @@
     -->
     <component
         class="org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceInvokerImpl"/>
+    <!--
+    <component
+        class="org.seasar.flex2.rpc.remoting.service.impl.DataTransferSupportedRemotingServiceInvokerImpl"/>
+	-->
     <component
         class="org.seasar.flex2.rpc.remoting.service.impl.RemotingServiceInvokerChooserImpl"/>
     
