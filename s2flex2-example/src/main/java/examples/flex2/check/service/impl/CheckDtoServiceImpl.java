@@ -51,5 +51,9 @@ public class CheckDtoServiceImpl implements CheckDtoService {
 		checkDto.setList(list);
 		return checkDto;		
 	}
+	public int sum(Number[] l) {
+		
+		return l.length;
+	}
 
 }

@@ -7,4 +7,5 @@ import examples.flex2.check.dto.CheckDto;
 public interface CheckDtoService {
 	public CheckDto getCheckDto();
 	public List getCheckDtoList();
+	public int sum(Number[] l);
 }

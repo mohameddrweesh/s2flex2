@@ -79,6 +79,17 @@
 				ar[1]="dei";
 				paramCheckService3.getTypeBDto(ar);
 			}
+			public function sumCall():void{
+				Alert.show("call");
+				var data:Array = [//1,2,2,3,4];
+				new Number(725536),2345676543456,new Number(2222),new Number(3),new Number(4),new Number(5)];
+   				//remoteCall(service.sum(data), success, fault);
+				checkService.sum(data);
+			}
+			public function onSum(result:ResultEvent):void
+			{
+				ret_text.text=result.result.toString();
+			}
 		]]>
 	</mx:Script>
 	<s2:S2Flex2Service id="paramCheckService2" 
@@ -86,7 +97,8 @@
 	<s2:S2Flex2Service id="paramCheckService" 
 		destination="paramCheckService" result="onGetTypeCDtoResultHandler(event)" fault="onFault(event)" />
 		<s2:S2Flex2Service id="paramCheckService3" 
-		destination="paramCheckService" result="onGetTypeBDtoResultHandler(event)" fault="onFault(event)" />	
+		destination="paramCheckService" result="onGetTypeBDtoResultHandler(event)" fault="onFault(event)" />
+	<s2:S2Flex2Service id="checkService" destination="checkDtoService" result="onSum(event)" fault="onFault(event)" />	
 	<mx:Panel x="435" y="30" width="198" height="167" layout="absolute" title="AddDto(from Session)">
 		<mx:TextInput x="10" y="10" id="arg1_txt"/>
 		<mx:TextInput x="10" y="40" id="arg2_txt"/>
@@ -100,6 +112,7 @@
 			<mx:Button label="getTypeCDto" click="doService()"/>
 			<mx:Button label="getTypeADto" click="getTypeADto()"/>
 			<mx:Button label="getTypeBDto" click="getTypeBDto()"/>
+			<mx:Button label="sum" click="sumCall()" />
 		</mx:ControlBar>
 	</mx:Panel>
 	
