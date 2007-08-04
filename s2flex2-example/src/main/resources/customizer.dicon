@@ -27,11 +27,30 @@
 		</initMethod>
 	</component>
 
+	<component name="remotingServiceCustomizer"
+		class="org.seasar.flex2.rpc.remoting.service.customizer.RemotingServiceCustomizer">
+	</component>
+	
+	<!--
 	<component name="serviceCustomizer" class="org.seasar.framework.container.customizer.CustomizerChain">
 		<initMethod name="addCustomizer">
 			<arg>defaultCustomizer</arg>
 		</initMethod>
 	</component>
+	-->
+	<component name="serviceCustomizer" class="org.seasar.framework.container.customizer.CustomizerChain">
+		<initMethod name="addCustomizer">
+			<arg>traceCustomizer</arg>
+		</initMethod>
+	
+		<initMethod name="addCustomizer">
+			<arg>remotingServiceCustomizer</arg>
+		</initMethod>
+		<initMethod name="addCustomizer">
+			<arg>requiredTxCustomizer</arg>
+		</initMethod>
+	</component>	
+	
 	<component name="configCustomizer" class="org.seasar.framework.container.customizer.CustomizerChain">
 	</component>
 	<component name="resolverCustomizer" class="org.seasar.framework.container.customizer.CustomizerChain">
