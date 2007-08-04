@@ -38,9 +38,17 @@ public class HttpSessionDataStorage implements Storage ,Serializable{
     public String getName() {
         return SESSION;
     }
-
+    /*　HotDeploy対応
     public Object getProperty(final String name) {
-      return session.getAttribute(name);
+        return session.getAttribute(name);
+    }
+    */
+    public Object getProperty(final String name) {
+        Object value = session.getAttribute(name);
+        if (HotdeployUtil.isHotdeploy()) {
+            value = HotdeployUtil.rebuildValue(value);
+        }
+        return value;
     }
 
     public Enumeration getPropertyNames() {
