@@ -1,9 +1,10 @@
 package examples.flex2.add.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
 
-public class AddDto {
+public class AddDto implements Serializable{
 
     private int arg1;
     private int arg2;
