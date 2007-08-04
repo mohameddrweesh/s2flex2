@@ -1,5 +1,5 @@
 <project name="s2flex2" default="dist" basedir=".">
-	<property name="ver" value="1.1.0-SNAPSHOT"/>
+	<property name="ver" value="1.1.0"/>
 
 	<target name="dist">
 		<zip zipfile="target/S2Flex2-${ver}.zip">
@@ -15,6 +15,7 @@
 			<zipfileset prefix="s2flex2/resources" dir="src/test/resources">
 				<include name="web.xml" />
 				<include name="app.dicon"/>
+				<include name="customizer.dicon"/>
 			</zipfileset>
 		</zip>
 	</target>
