@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2006 the Seasar Foundation and the Others.
+ * Copyright 2004-2007 the Seasar Foundation and the Others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,16 +23,16 @@ import java.io.InputStream;
 public class InputStreamUtil {
 
     public static final DataInputStream toBufferedDataInputStream(
-            final InputStream outputStream) throws IOException {
-        return new DataInputStream(toBufferedInputStream(outputStream));
+            final InputStream inputStream) throws IOException {
+        return new DataInputStream(toBufferedInputStream(inputStream));
     }
 
     public static final InputStream toBufferedInputStream(
-            InputStream outputStream) throws IOException {
-        if (!(outputStream instanceof BufferedInputStream)) {
-            outputStream = new BufferedInputStream(outputStream);
+            InputStream inputStream) throws IOException {
+        if (!(inputStream instanceof BufferedInputStream)) {
+            inputStream = new BufferedInputStream(inputStream);
         }
 
-        return outputStream;
+        return inputStream;
     }
 }
