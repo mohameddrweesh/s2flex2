@@ -14,14 +14,12 @@
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/h2-2006-11-03.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/javassist-3.4.ga.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/log4j-1.2.13.jar" sourcepath="src/main/webapp/WEB-INF/lib/sources/log4j-1.2.13-sources.jar"/>
-	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/ognl-2.6.7.jar"/>
-	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/poi-2.5.1-final-20040804.jar"/>
-	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/s2-flex2-tiger-1.0.0.jar"/>
-	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/s2-flex2-1.0.2.jar"/>
-	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/s2-tiger-2.4.15.jar" sourcepath="src/main/webapp/WEB-INF/lib/sources/s2-tiger-2.4.15-sources.jar"/>
-	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/s2-framework-2.4.15.jar" sourcepath="src/main/webapp/WEB-INF/lib/sources/s2-framework-2.4.15-sources.jar"/>
-	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/s2-extension-2.4.15.jar" sourcepath="src/main/webapp/WEB-INF/lib/sources/s2-extension-2.4.15-sources.jar"/>
-	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/s2-dao-tiger-1.0.44.jar" sourcepath="src/main/webapp/WEB-INF/lib/sources/s2-dao-tiger-1.0.44-sources.jar"/>
-	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/s2-dao-1.0.44.jar" sourcepath="src/main/webapp/WEB-INF/lib/sources/s2-dao-1.0.44-sources.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/s2-flex2-tiger-1.0.0.jar" sourcepath="src/main/webapp/WEB-INF/lib/sources/s2-flex2-tiger-1.0.0-sources.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/s2-tiger-2.4.16.jar" sourcepath="src/main/webapp/WEB-INF/lib/sources/s2-tiger-2.4.16-sources.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/s2-framework-2.4.16.jar" sourcepath="src/main/webapp/WEB-INF/lib/sources/s2-framework-2.4.16-sources.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/s2-flex2-1.1.0.jar" sourcepath="src/main/webapp/WEB-INF/lib/sources/s2-flex2-1.1.0-sources.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/s2-extension-2.4.16.jar" sourcepath="src/main/webapp/WEB-INF/lib/sources/s2-extension-2.4.16-sources.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/s2-dao-tiger-1.0.45.jar" sourcepath="src/main/webapp/WEB-INF/lib/sources/s2-dao-tiger-1.0.45-sources.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/s2-dao-1.0.45.jar" sourcepath="src/main/webapp/WEB-INF/lib/sources/s2-dao-1.0.45-sources.jar"/>
 	<classpathentry kind="output" path="target/test-classes"/>
 </classpath>
