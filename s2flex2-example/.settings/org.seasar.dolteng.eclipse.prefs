@@ -1,0 +1,8 @@
+#Sat Aug 04 12:43:39 JST 2007
+DefaultResourcePath=/s2flex2-example/src/main/resources
+DefaultRootPackage=samples
+DefaultSrcPath=/s2flex2-example/src/main/java
+ServletPath=/s2flex2-example
+WebContentsRoot=src/main/webapp/
+eclipse.preferences.version=1
+flexSrcPath=/s2flex2-example/src/main/mxml
