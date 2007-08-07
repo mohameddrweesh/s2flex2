@@ -9,8 +9,6 @@
 	<classpathentry kind="lib" path="lib/junit-addons-1.4.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/aopalliance-1.0.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/commons-logging-1.0.4.jar" sourcepath="src/main/webapp/WEB-INF/lib/sources/commons-logging-1.0.4-sources.jar"/>
-	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/geronimo-ejb_2.1_spec-1.0.jar"/>
-	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/geronimo-jta_1.0.1B_spec-1.0.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/h2-2006-11-03.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/javassist-3.4.ga.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/log4j-1.2.13.jar" sourcepath="src/main/webapp/WEB-INF/lib/sources/log4j-1.2.13-sources.jar"/>
