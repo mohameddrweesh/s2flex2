@@ -1,0 +1,159 @@
+<project name="s2flex2-blank" default="dist" basedir=".">
+
+	<property name="ver" value="1.1.0"/>
+    <taskdef resource="flexTasks.tasks" classpath="${basedir}/lib/flexTasks.jar" />        
+    <property name="FLEX_HOME" value="/Developer/SDKs/Flex/"/>
+    <property name="APP_ROOT" value="src/main/mxml"/>
+    <property name="DEPLOY_DIR" value="src/main/webapp/bin"/>
+    <target name="os-props">
+        <condition property="windows">
+            <os family="windows" />
+        </condition>
+    </target>
+    <target name="setup" depends="os-props,win,not-win" />
+    <target name="win" if="windows">
+        <property name="adl.exe" value="adl.exe" />
+    </target>
+
+    <target name="not-win" unless="windows">
+        <property name="adl.exe" value="adl" />
+    </target>	
+	<macrodef name="call-mxmlc">
+		<attribute name="appName" default="Main"/>
+		<attribute name="locale" default="ja_JP"/>
+		<sequential>
+	    	<mxmlc 
+	            file="${APP_ROOT}/@{appName}.mxml" 
+	            output="${DEPLOY_DIR}/@{appName}.swf"
+	            actionscript-file-encoding="UTF-8"
+	        	keep-generated-actionscript="true"
+	        	locale="@{locale}"
+	        	incremental="true">
+	            <!-- Get default compiler options. -->
+	            <load-config filename="${FLEX_HOME}/frameworks/flex-config.xml"/>          
+	            <!-- List of path elements that form the roots of ActionScript class hierarchies. -->
+	            <source-path path-element="${FLEX_HOME}/frameworks"/>
+	            <!-- List of SWC files or directories that contain SWC files. -->
+	            <compiler.library-path dir="${FLEX_HOME}/frameworks" append="true">
+	                <include name="libs" />
+	                <include name="../bundles/{locale}" />
+	            </compiler.library-path>
+	        	<compiler.source-path path-element="src/main/actionscript3" />
+	            <compiler.library-path dir="${basedir}/lib" append="true">
+	                <include name="swc" />
+	            </compiler.library-path>       	
+	            <!-- Set size of output SWF file. -->
+	            <default-size width="800" height="600" />
+        	</mxmlc>
+		</sequential>
+	</macrodef>
+	<macrodef name="call-amxmlc">
+		<attribute name="appName" default="Main"/>
+		<attribute name="locale" default="ja_JP"/>
+		<sequential>
+	    	<mxmlc 
+	            file="${APP_ROOT}/@{appName}.mxml" 
+	            output="${DEPLOY_DIR}/@{appName}.swf"
+	            actionscript-file-encoding="UTF-8"
+	        	keep-generated-actionscript="true"
+	        	locale="@{locale}"
+	        	incremental="true">
+	            <!-- Get default compiler options. -->
+	            <load-config filename="${FLEX_HOME}/frameworks/apollo-config.xml"/>          
+	            <!-- List of path elements that form the roots of ActionScript class hierarchies. -->
+	            <source-path path-element="${FLEX_HOME}/frameworks"/>
+	            <!-- List of SWC files or directories that contain SWC files. -->
+	            <compiler.library-path dir="${FLEX_HOME}/frameworks" append="true">
+	                <include name="libs" />
+	                <include name="../bundles/{locale}" />
+	            </compiler.library-path>
+	        	<compiler.source-path path-element="src/main/actionscript3" />
+	            <compiler.library-path dir="${basedir}/lib" append="true">
+	                <include name="swc" />
+	            </compiler.library-path>       	
+	            <!-- Set size of output SWF file. -->
+	            <default-size width="800" height="600" />
+        	</mxmlc>
+		</sequential>
+	</macrodef>	
+	<macrodef name="call-wrapper">
+		<attribute name="appName" default="Main"/>
+		<sequential>
+		  	<html-wrapper 
+	              title="@{appName}"
+	              height="100%"
+	              width="100%"
+	              bgcolor="red"
+	              application="app"
+	              swf="@{appName}"
+	              version-major="9"
+	              version-minor="0"
+	              version-revision="0"
+	              history="true"              
+	              template="express-installation"
+	              output="${DEPLOY_DIR}"/>
+			<move file="${DEPLOY_DIR}/index.html" tofile="${DEPLOY_DIR}/@{appName}.html" />
+		</sequential>
+	</macrodef>	
+    <target name="main">
+    	<call-mxmlc appname="index" locale="ja_JP"/>
+    	<call-mxmlc appname="param"/>
+    	<call-mxmlc appname="add"/>
+<!--
+    	<call-amxmlc appname="addApollo"/>
+-->
+
+    </target>
+	  <target name="run" depends="main,setup">
+	    <exec executable="${FLEX_HOME}/bin/${adl.exe}">
+	      <arg value="src/main/webapp/bin/application.xml"/>
+	    </exec>
+	  </target>
+    <target name="wrapper">
+  		<call-wrapper appname="index"/>
+		<call-wrapper appname="param"/>
+    </target>
+    <target name="clean">
+        <delete dir="${DEPLOY_DIR}/generated"/>
+        <delete>
+            <fileset dir="${DEPLOY_DIR}" includes="param.swf"/>
+            <fileset dir="${DEPLOY_DIR}" includes="index.swf"/>
+        	<fileset dir="${DEPLOY_DIR}" includes="add.swf"/>
+        </delete>    
+    </target>
+	<target name="dist">
+		<delete includeemptydirs="true" failonerror="false">
+			<fileset dir="target"/>
+		</delete>
+		<mkdir dir="target"/>
+		<zip zipfile="target/s2flex2-blank-${ver}.zip">
+			<zipfileset prefix="s2flex2-example" dir=".">
+				<exclude name="**/.DS_Store"/>
+				<exclude name="bin/**-debug.swf"/>
+				<exclude name="bin/**-debug.html"/>
+				<exclude name=".*~"/>
+				<exclude name="**/generated"/>
+				<exclude name="**/generated/**"/>
+				<exclude name="**/Copy*"/>
+				<exclude name="**/flexTasks.jar"/>
+				<exclude name="**/application.xml"/>
+				<exclude name="**/addApollo.mxml"/>
+				<include name=".settings"/>
+				<include name=".settings/**"/>
+				<include name="WEB-INF"/>
+				<include name="WEB-INF/**"/>
+				<include name="work"/>
+				<include name="src"/>
+				<include name="src/**"/>
+				<include name="html-template"/>
+				<include name="html-template/**"/>
+				<include name="bin/**.html"/>
+				<include name="bin/**.swf"/>
+				<exclude name="bin/**-debug.swf"/>
+				<include name="licenses/**"/>
+				<include name=".*"/>
+				<include name="*" />
+			</zipfileset>
+		</zip>
+	</target>
+</project>
