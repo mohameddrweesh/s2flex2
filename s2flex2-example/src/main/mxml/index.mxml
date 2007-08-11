@@ -54,24 +54,3 @@
 	<mx:TextArea width="256" height="153" id="imp_txt" left="27" top="32"/>
 	<mx:Button x="291" y="31" label="getXML" id="getxml_btn" click="getTestXml()"/>
 </mx:Application>
-<!--
-[Bindable] public var XMLDATA:XML;
-public function getTestXml():void {
-
-	    srv = new HTTPService();
-	    srv.resultFormat = "e4x";
-	    srv.showBusyCursor = true;
-	    srv.url = "test.xml";
-	    srv.addEventListener(ResultEvent.RESULT,resultHandler);
-	    srv.addEventListener(FaultEvent.FAULT,faultHandler);
-	    srv.send();    	      	
-     	
-}
-public function resultHandler(e:ResultEvent):void{
-	XMLDATA = (XML(e.result));
-        
-        var dto:TestDto = new TestDto;
-	dto.xmlData = XMLDATA;
-	xxxx.doTest(dto);
-}	
--->
