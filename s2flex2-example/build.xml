@@ -1,6 +1,6 @@
 <project name="s2flex2-example" default="dist" basedir=".">
 
-	<property name="ver" value="1.1.0-SNAPSHOT"/>
+	<property name="ver" value="1.1.0"/>
     <taskdef resource="flexTasks.tasks" classpath="${basedir}/lib/flexTasks.jar" />        
     <property name="FLEX_HOME" value="/Developer/SDKs/Flex/"/>
     <property name="APP_ROOT" value="src/main/mxml"/>
