@@ -22,10 +22,13 @@
 </sourceAttachmentPath>
 </compiler>
 <applications>
-<application path="add.mxml"/>
 <application path="src/main/mxml/index.mxml"/>
+<application path="exception_example.mxml"/>
+<application path="PerformanceTest.mxml"/>
 <application path="param.mxml"/>
+<application path="check.mxml"/>
 <application path="index.mxml"/>
+<application path="add.mxml"/>
 </applications>
 <buildCSSFiles/>
 </actionScriptProperties>
