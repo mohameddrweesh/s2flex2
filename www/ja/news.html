@@ -39,7 +39,57 @@
           <td width="14"><img height="14" width="14" src="images/spacer.gif" alt=""></td>
           <td width="740" class="main"><!-- don't edit end -->
             <!-- document start -->
-            <h3><a name="news">お知らせ</a></h3>
+            <h3><a name="news">お知らせ</a></h3>     <h5>[2007/03/21]flex2_example 1.0.1リリース</h5>
+      <p>S2Flex2のサンプルプロジェクトである、flex2_example 1.0.1をリリースしました。 </p>
+      <ul>
+        <li>s2flex2を1.0.1 ベースにしました。</li>
+        <li>web.xmlの記述について、servletの初期化パラメータを追加しました。</li>
+        <li>seasar2.4.0-&gt;seasar2.4.10にライブラリを更新しました。</li>
+        <li>cameraアプリケーションで、S2Flex3Serviceの初期化をするようにしました。</li>
+        <li>checkのサービス側ロジックをjava5に対応してGenericsを使うようしました。</li>
+        <li>parameterの受け渡し部分について、配列-&gt;Listの変換をできるようにdiconファイルを変更しました。</li>
+        <li>paramのサービス側ロジックを追加して、配列、Listのパラメータ受け渡しをサンプルを追加しました。</li>
+      </ul>
+      <p>ダウンロードは<a href="#download">こちら</a>から</p>
+      <h5>[2007/03/05]S2flex2-tutorialリリース </h5>
+      <p>Donteng0.17.0で作成したプロジェクトを<a href="../download/2007-03-05/s2flex2-tutorial-1.0.zip">サンプル</a>として公開しました。</p>
+      
+      <p>ダウンロードは<a href="#download">こちら</a>から</p>      
+      <h5>[2007/02/17]S2Flex2 1.0.1リリース </h5>
+      <p>S2Flex2 1.0.1を<a href="releasenotes101.html">リリース</a>しました。</p><p><strong>S2Flex 2 1.0.1の変更点</strong> </p>
+      <ul>
+        
+        <li>メソッド名の検証クラスを外部クラス化しました。</li>
+          <li>パラメータ変換用クラスの名称を変更しました。</li>
+          <li>RemotingGatewayの初期パラメータを追加しました。</li>
+          <li>HotDeployの対応を改善しました。</li>
+          <li>AMF0で利用する際にヘッダ部をスキップしていたのを改善しました。<br>
+          </li>
+          <li>S2Dao1.0.40への対応を改善しました。</li>
+      </ul>
+      <p>ダウンロードは<a href="#download">こちら</a>から</p>
+      
+      <h5>[2007/02/12]web.xmlの説明追加</h5>
+      <p>S2Flex2を利用する上で必要なweb.xmlの設定方法の<a href="webxml.html">ドキュメント</a>を追加しました。<br>
+      一部S2Flex2 1.0.1からの設定を含んでいます。 <strong></strong>      </p>
+      <h5>[2006/11/11]s2flex2 1.0.0 リリース</h5>
+      <strong>S2Flex 2 1.0.0</strong>
+      <ul>
+      	<li>ActionScript3とJavaのデータ変換で正しく変換されないケースがあったのを修正しました。</li>
+		<li>flex2 クライアントから渡される認証情報のヘッダ取得部分をs2flex2-componentsの変更とあわせました。</li>
+		<li>S2 Container 2.3系でのサポートを改善しました。</li>
+		<li>S2 Container 2.4との組み合わせで動作することを確認いたしました。</li>
+	  </ul>
+	  <p><strong>S2Flex 2 Tiger 1.0.0</strong></p>
+	        <ul>
+      	<li>・S2Flex2 1.0.0との組みあわせで動作することを確認いたしました。</li>
+	  </ul>
+      <p><strong>S2Flex 2 Components 1.0.0</strong></p>
+            <ul>
+      	<li>認証情報をサーバ側に渡す際にセットするヘッダを改善しました。</li>
+	  </ul>
+            
+            
             <h5>[2006/10/21]flex2_example rc-3 リリース</h5>
             <ul>
               <li>S2Flex2 1.0.0-rc3にベースを変更しました。</li>
