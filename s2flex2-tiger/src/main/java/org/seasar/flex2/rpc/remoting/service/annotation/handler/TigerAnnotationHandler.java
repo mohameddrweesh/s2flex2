@@ -21,6 +21,7 @@ import org.seasar.framework.container.ComponentDef;
 
 public class TigerAnnotationHandler implements AnnotationHandler {
 
+    @SuppressWarnings("unchecked")
     public boolean hasRemotingService(ComponentDef componentDef) {
         Class<Object> clazz = componentDef.getComponentClass();
 
