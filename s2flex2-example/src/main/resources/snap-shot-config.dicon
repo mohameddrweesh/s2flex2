@@ -6,7 +6,7 @@
 		name="snapshotServiceConfig"
 		class="examples.flex2.camera.snapshot.config.SnapshotServiceConfig">
         <property name="rootPath">application.getRealPath(".") + "/snapshot/"</property>
-        <property name="rootUri">"http://127.0.0.1:8080/flex2_example/snapshot/"</property>
+        <property name="rootUri">"http://localhost:8080/s2flex2-example/snapshot/"</property>
         <property name="prefix">"snapshot_"</property>
         <property name="suffix">".png"</property>
     </component>
