@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2006 the Seasar Foundation and the Others.
+ * Copyright 2004-2008 the Seasar Foundation and the Others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,14 +21,11 @@ package org.seasar.flex2.rpc.remoting {
     import flash.events.NetStatusEvent;
     import flash.events.SecurityErrorEvent;
     import flash.net.ObjectEncoding;
-    import flash.net.Responder;
     import flash.utils.flash_proxy;
     
-    import mx.core.Application;
     import mx.core.IMXMLObject;
     import mx.core.UIComponent;
     import mx.managers.CursorManager;
-    import mx.messaging.config.ServerConfig;
     import mx.rpc.AbstractService;
     import mx.rpc.AsyncToken;
     import mx.rpc.Fault;
@@ -244,11 +241,12 @@ package org.seasar.flex2.rpc.remoting {
 
         /**
         * 認証が必要なサービスを呼び出す際に必要な認証情報をセットします。
-        * 
+        * @since Flex 3 Beta3
         * @param username 認証に利用するユーザID
         * @param password 認証に利用するパスワード
+        * @param charset charsetのエンコーディングを指定します。defaultはnullで、このコンポーネントでは渡されたcharsetを利用しません。
         */
-        public override function setCredentials(username:String, password:String):void{
+        public override function setCredentials(username:String, password:String,charset:String=null):void{
             this.credentialsUsername = username;
             this.credentialsPassword = password;
         }
@@ -260,8 +258,9 @@ package org.seasar.flex2.rpc.remoting {
         * <small>このメソッドは呼び出しても、S2Flex2 1.0.xでは認識しません。</small>
         * @param username 認証に利用するユーザID
         * @param password 認証に利用するパスワード
+        * @param charset charsetのエンコーディングを指定します。defaultはnullで、このコンポーネントでは渡されたcharsetを利用しません
         */         
-        public override function setRemoteCredentials(remoteUsername:String, remotePassword:String):void{
+        public override function setRemoteCredentials(remoteUsername:String, remotePassword:String,charset:String=null):void{
             this.remoteCredentialsUsername = remoteUsername;
             this.remoteCredentialsPassword = remotePassword;
         }
@@ -427,7 +426,7 @@ package org.seasar.flex2.rpc.remoting {
         * @private
         */
         private function setupConnection():void{
-            if(_con==null||!_con.connected){
+            if(_con==null){
                 initConnection();
             }           
         }
