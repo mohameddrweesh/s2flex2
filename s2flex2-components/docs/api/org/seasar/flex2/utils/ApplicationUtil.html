@@ -10,7 +10,7 @@
 <body>
 <script type="text/javascript" language="javascript" src="../../../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../../../cookies.js"></script><script type="text/javascript" language="javascript">
 <!--
-				asdocTitle = 'ApplicationUtil - S2Flex2-Components API';
+				asdocTitle = 'ApplicationUtil - API Documentation';
 				var baseRef = '../../../../';
 				window.onload = configPage;
 			--></script>
@@ -53,7 +53,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#getParameterValue()">getParameterValue</a>(application:Application, parameterName:String):String</div>
+<a class="signatureLink" href="#getParameterValue()">getParameterValue</a>(parameterName:String, application:Application = null):String</div>
 <div class="summaryTableDescription">[static]
          指定されたパラメータに対する値を取得する。
          
@@ -76,20 +76,20 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public static function getParameterValue(application:Application, parameterName:String):String</code><p>
+<code>public static function getParameterValue(parameterName:String, application:Application = null):String</code><p>
          指定されたパラメータに対する値を取得する。
          
          </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">application</span>:Application</code> &mdash; アプリケーション
+<td width="20px"></td><td><code><span class="label">parameterName</span>:String</code> &mdash; アプリケーション
          </td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">parameterName</span>:String</code> &mdash; パラメータ名
+<td width="20px"></td><td><code><span class="label">application</span>:Application</code> (default = <code>null</code>)<code></code> &mdash; パラメータ名
          </td>
 </tr>
 </table>
