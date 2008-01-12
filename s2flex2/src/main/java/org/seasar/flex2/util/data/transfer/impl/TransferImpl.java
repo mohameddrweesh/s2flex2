@@ -39,7 +39,7 @@ public class TransferImpl implements Transfer {
 
         for (int i = 0; i < beanDesc.getPropertyDescSize(); ++i) {
             final PropertyDesc propertyDesc = beanDesc.getPropertyDesc(i);
-            if (propertyDesc.hasReadMethod()) {
+            if (propertyDesc.isReadable()) {
                 final String type = annotationHandler.getExportStorageType(
                         beanDesc, propertyDesc);
                 if (isTransferTarget(storage, type)) {
@@ -55,7 +55,7 @@ public class TransferImpl implements Transfer {
                 .getBeanDesc(target.getClass());
         for (int i = 0; i < beanDesc.getPropertyDescSize(); ++i) {
             final PropertyDesc propertyDesc = beanDesc.getPropertyDesc(i);
-            if (propertyDesc.hasWriteMethod()) {
+            if (propertyDesc.isWritable()) {
                 final String type = annotationHandler.getImportStorageType(
                         beanDesc, propertyDesc);
                 if (isTransferTarget(storage, type)) {

@@ -70,7 +70,7 @@ public abstract class AbstractAmf0TypedObjectReaderImpl extends
             final Object bean, final String key, final Amf0Object amfObject) {
         if (beanDesc.hasPropertyDesc(key)) {
             final PropertyDesc pd = beanDesc.getPropertyDesc(key);
-            if (pd.hasWriteMethod()) {
+            if (pd.isWritable()) {
                 setupProperty(bean, pd, amfObject.get(key));
             }
         }

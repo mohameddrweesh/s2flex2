@@ -116,7 +116,7 @@ public class Amf3TypedObjectReaderImpl extends
         for (int i = 0; i < propertiesNumber; i++) {
             if (beanDesc.hasPropertyDesc(propertyNames[i])) {
                 propertyDef = beanDesc.getPropertyDesc(propertyNames[i]);
-                if (propertyDef.hasWriteMethod()) {
+                if (propertyDef.isWritable()) {
                     setupProperty(object, propertyDef, propertyValues[i]);
                 }
             }

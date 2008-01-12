@@ -56,7 +56,7 @@ public class Amf0TypedObjectReaderImpl extends
             }
             if (beanDesc.hasPropertyDesc(key)) {
                 final PropertyDesc pd = beanDesc.getPropertyDesc(key);
-                if (pd.hasWriteMethod()) {
+                if (pd.isWritable()) {
                     setupProperty(bean, pd, readData(dataType, inputStream));
                 }
             }

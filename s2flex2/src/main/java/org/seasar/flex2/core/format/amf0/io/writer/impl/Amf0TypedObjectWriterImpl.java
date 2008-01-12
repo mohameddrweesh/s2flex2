@@ -55,7 +55,7 @@ public class Amf0TypedObjectWriterImpl extends AbstractAmfObjectWriterImpl
         final BeanDesc beanDesc = BeanDescFactory.getBeanDesc(value.getClass());
         for (int i = 0; i < beanDesc.getPropertyDescSize(); ++i) {
             final PropertyDesc pd = beanDesc.getPropertyDesc(i);
-            if (pd.hasReadMethod()) {
+            if (pd.isReadable()) {
                 outputStream.writeUTF(pd.getPropertyName());
                 writeData(pd.getValue(value), outputStream);
             }
