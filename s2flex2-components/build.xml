@@ -1,10 +1,63 @@
-<project name="s2flex2-components" default="build" basedir=".">
+<project name="s2flex2-components" default="compc" basedir=".">
 	<property file="build.properties"/>
-	<property name="ver" value="2.0.0-Beta1"/>
-
+	<property name="ver" value="2.0.0-Beta2"/>
+	<taskdef resource="flexTasks.tasks" classpath="${flex.sdk.home}/ant/lib/flexTasks.jar" />
+   <!-- ================================= 
+          target: compc(use flex ant task)              
+         ================================= -->	
+  <target name="compc" depends="" description="creating a swc.."> 
+         <compc 
+           output="target/swc/s2flex2-components.swc"
+           include-classes="org.seasar.flex2.rpc.remoting.S2Flex2Service 
+           org.seasar.flex2.rpc.remoting.RemoteService 
+           org.seasar.flex2.rpc.responder.DelegateResponder"
+       >
+	       <!--load-config filename="${basedir}/s2flex2-components-config.xml" append="true"/-->
+	       <source-path path-element="src/main/actionscript"/>	
+	       <compiler.library-path dir="${flex.sdk.home}/frameworks" append="true">
+				<include name="${frameworks.lib.dir}"/>
+				<include name="${frameworks.lib.dir}/flex.swc"/>
+				<include name="${frameworks.lib.dir}/framework.swc"/>
+				<include name="${frameworks.lib.dir}/rpc.swc"/>
+	        </compiler.library-path>
+	        <include-namespaces uri="http://www.seasar.org/s2flex2/mxml"/>
+			<namespace uri="http://www.seasar.org/s2flex2/mxml" manifest="src/main/resources/Manifest.xml"/>
+			<metadata description="S2Flex2-Components">
+				<publisher name="Seasar Foundation" />
+         		<contributor name="e1arkw" />
+				<contributor name="nod" />
+			</metadata>
+       </compc>
+  </target>      
 
     <!-- ================================= 
-          target: mxmlc              
+          target: dist              
+         ================================= -->	
+	<target name="dist" description="dist the project..">
+		<zip zipfile="target/S2Flex2-components-${ver}.zip">
+			<zipfileset prefix="s2flex2-components" dir=".">
+				<exclude name="**/target/**.zip"/>
+				<exclude name="**/lib/**"/>
+				<exclude name="**/generated/**"/>
+				<exclude name="**/AMF0Connection.as"/>
+				<exclude name="**/*old.as"/>
+				<exclude name="**/*old.fb"/>
+			</zipfileset>
+		</zip>
+	</target>
+    <!-- ================================= 
+          target: clean             
+         ================================= -->	
+     <target name="clean">
+     	<delete>
+     		<fileset dir="target">
+     			<include name="*" />
+     		</fileset>
+     	</delete>
+     </target>
+     
+    <!-- ================================= 
+          target: mxmlc (make a test runner)          
          ================================= -->
     <target name="mxmlc" description="make a test runner">
 	  	<java jar="${mxmlc}"
@@ -66,7 +119,7 @@
     </target>
 
     <!-- ================================= 
-          target: test              
+          target: test   (flexunit)           
          ================================= -->
 	<target name="test" depends="mxmlc"  description="flex unit test with reports">	
 		<property name="report.dir" value="${basedir}/reports" />
@@ -82,7 +135,7 @@
 		</junitreport>
 	</target>
     <!-- ================================= 
-          target: build              
+          target: build(obsolute)              
          ================================= -->
 	<target name="build" depends="" description="creating a swc..">
     	<java jar="${compc}"
@@ -114,31 +167,5 @@
 		<arg value="org.seasar.flex2.rpc.responder.DelegateResponder"/>
 	  </java>
   </target>
-
-
-    <!-- ================================= 
-          target: dist              
-         ================================= -->	
-	<target name="dist" description="dist the project..">
-		<zip zipfile="target/S2Flex2-components-${ver}.zip">
-			<zipfileset prefix="s2flex2-components" dir=".">
-				<exclude name="**/target/**.zip"/>
-				<exclude name="**/lib/**"/>
-				<exclude name="**/generated/**"/>
-				<exclude name="**/AMF0Connection.as"/>
-				<exclude name="**/*old.as"/>
-				<exclude name="**/*old.fb"/>
-			</zipfileset>
-		</zip>
-	</target>
-    <!-- ================================= 
-          target: clean             
-         ================================= -->	
-     <target name="clean">
-     	<delete>
-     		<fileset dir="target">
-     			<include name="*" />
-     		</fileset>
-     	</delete>
-     </target>
+ 
 </project>
