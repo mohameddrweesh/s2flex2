@@ -6,22 +6,23 @@
           target: compc(use flex ant task)              
          ================================= -->	
   <target name="compc" depends="" description="creating a swc.."> 
-         <compc 
-           output="target/swc/s2flex2-components.swc"
-           include-classes="org.seasar.flex2.rpc.remoting.S2Flex2Service 
-           org.seasar.flex2.rpc.remoting.RemoteService 
-           org.seasar.flex2.rpc.responder.DelegateResponder"
+         <compc accessible="true"
+           output="target/swc/s2flex2-components.swc" 	
+         	locale="ja_JP"
        >
-	       <!--load-config filename="${basedir}/s2flex2-components-config.xml" append="true"/-->
-	       <source-path path-element="src/main/actionscript"/>	
+	       <!-- load-config filename="${basedir}/s2flex2-components-config.xml" /-->
 	       <compiler.library-path dir="${flex.sdk.home}/frameworks" append="true">
 				<include name="${frameworks.lib.dir}"/>
 				<include name="${frameworks.lib.dir}/flex.swc"/>
 				<include name="${frameworks.lib.dir}/framework.swc"/>
 				<include name="${frameworks.lib.dir}/rpc.swc"/>
+		    	<include name="${frameworks.lib.dir}/utilities.swc"/>
+		    	<include name="${frameworks.lib.dir}/{locale}"/>
 	        </compiler.library-path>
+      
 	        <include-namespaces uri="http://www.seasar.org/s2flex2/mxml"/>
 			<namespace uri="http://www.seasar.org/s2flex2/mxml" manifest="src/main/resources/Manifest.xml"/>
+            <source-path path-element="src/main/actionscript" />
 			<metadata description="S2Flex2-Components">
 				<publisher name="Seasar Foundation" />
          		<contributor name="e1arkw" />
