@@ -285,10 +285,10 @@ package org.seasar.flex2.rpc.remoting {
 		 * @param operation 呼び出したサービスのメソッド名
 		 * @param result 呼び出したエラー結果
 		 */ 
-        public function onFault(operation:String,result:*):void{
+        public function onFault(operation:String,result:Object):void{
             var responder:RelayResponder=this._opResponderArray[operation];
-            
-            var fault:Fault = new Fault(result.code,result.description,result.details);
+            var fault:Fault = new Fault(result.faultCode,result.faultString,result.faultDetail);
+            fault.rootCause=result.rootCause;	//2008.04. rootCause added.
             var faultEvent:FaultEvent = new FaultEvent("fault",false,false,fault,responder.asyncToken,responder.asyncToken.message);
             dispatchEvent(faultEvent);
         }
