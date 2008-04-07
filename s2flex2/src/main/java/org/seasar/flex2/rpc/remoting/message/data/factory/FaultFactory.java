@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2006 the Seasar Foundation and the Others.
+ * Copyright 2004-2008 the Seasar Foundation and the Others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,17 @@ package org.seasar.flex2.rpc.remoting.message.data.factory;
 
 import org.seasar.flex2.rpc.remoting.message.data.Fault;
 
+/**
+ *  FaultのFactoryインターフェースです
+ * @author e1.arkw
+ * @author nod
+ *　例外を元に{@link Fault}を生成します
+ */
 public interface FaultFactory {
+    /**
+     * AMFMessageを処理中に発生した例外からFaultを生成します
+     * @param throwable 例外
+     * @return Faultのインスタンス
+     */
     Fault createFault(Throwable throwable);
 }

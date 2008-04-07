@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2006 the Seasar Foundation and the Others.
+ * Copyright 2004-2008 the Seasar Foundation and the Others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,28 +15,67 @@
  */
 package org.seasar.flex2.rpc.remoting.message.data;
 
+/**
+ * RemotingMessageを処理している際に例外が発生したときに生成されるクラスです
+ * @author arkw
+ * @author nod
+ */
 public class Fault {
 
-    private static final String code = "SERVER.PROCESSING";
+    private static final String faultCode = "SERVER.PROCESSING";
 
-    private String description;
+    /**
+     * @deprecated Use {@link #faultCode} instead
+     */
+    private static final String code = faultCode;
 
-    private String details;
+    private String faultString;
+
+    private String faultDetail;
 
     private final String level = "error";
 
     private String type;
+    
+    private Object rootCause;
 
+/*
+ * 
+    public String faultString;
+    public String faultDetail;
+
+ */    
+    /**
+     * @return Returns the rootCause.
+     */
+    public Object getRootCause() {
+        return rootCause;
+    }
+
+    /**
+     * @param rootCause The rootCause to set.
+     */
+    public void setRootCause(Object rootCause) {
+        this.rootCause = rootCause;
+    }
+
+    /**
+     * @deprecated Use {@link #getFaultCode()} instead
+     */
     public String getCode() {
-        return code;
+        return getFaultCode();
     }
 
-    public String getDescription() {
-        return description;
+    public String getFaultCode() {
+        return faultCode;
     }
 
-    public String getDetails() {
-        return details;
+    public String getFaultString() {
+        return faultString;
+    }
+
+    public String getFaultDetail() {
+        return faultDetail;
     }
 
     public String getLevel() {
@@ -47,12 +86,12 @@ public class Fault {
         return type;
     }
 
-    public void setDescription(final String description) {
-        this.description = description;
+    public void setFaultString(final String description) {
+        this.faultString = description;
     }
 
-    public void setDetails(final String details) {
-        this.details = details;
+    public void setFaultDetail(final String details) {
+        this.faultDetail = details;
     }
 
     public void setType(final String type) {
