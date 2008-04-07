@@ -34,7 +34,7 @@ public class TransferImpl implements Transfer {
     private static final AnnotationHandler annotationHandler = AnnotationHandlerFactory
             .getAnnotationHandler();
     /**
-     * 
+     * 指定されたstorageの名称とtypeが一致するかどうかチェックします
      * @param storage 保存対象のStorage
      * @param type ストレージのタイプ.{@link Storage}によって定義されている値
      * @return 転送対象のときはtrue,それ以外はfalse.
