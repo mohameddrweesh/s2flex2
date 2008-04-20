@@ -99,7 +99,13 @@ public class Amf3TypedObjectWriterImpl extends
     private final void writeClassObjectProperty(final PropertyDesc propertyDef,
             final Object value, final DataOutputStream outputStream)
             throws IOException {
-        if (propertyDef.isReadable()) {
+
+        if("stackTrace".equals(propertyDef.getPropertyName())){
+            return;
+        }
+        if (propertyDef.isReadable() ) {
+            writeObjectElement(propertyDef.getValue(value), outputStream);
+        }else if(propertyDef.hasReadMethod()){
             writeObjectElement(propertyDef.getValue(value), outputStream);
         }
     }

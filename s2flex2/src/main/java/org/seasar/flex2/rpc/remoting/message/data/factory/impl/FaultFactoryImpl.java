@@ -15,8 +15,14 @@
  */
 package org.seasar.flex2.rpc.remoting.message.data.factory.impl;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.seasar.flex2.rpc.remoting.message.data.Fault;
 import org.seasar.flex2.rpc.remoting.message.data.factory.FaultFactory;
+import org.seasar.framework.beans.BeanDesc;
+import org.seasar.framework.beans.PropertyDesc;
+import org.seasar.framework.beans.factory.BeanDescFactory;
 import org.seasar.framework.container.S2Container;
 
 /**
@@ -62,8 +68,33 @@ public class FaultFactoryImpl implements FaultFactory {
         fault.setType(type);
         fault.setFaultDetail(details);
         fault.setFaultString(description);
-        fault.setRootCause(rootCause);
+        if(rootCause!= null){
+            fault.setRootCause(createMap(rootCause));
+//            fault.setExtendedData(createMap(rootCause));
+        }
         return fault;
+    }
+    private Map createMap(Throwable t) {
+        Map m = new HashMap();
+        final BeanDesc beanDesc = BeanDescFactory.getBeanDesc(t.getClass());
+        PropertyDesc propertyDesc = null;
+
+        for (int i = 0; i < beanDesc.getPropertyDescSize(); ++i) {
+            propertyDesc = beanDesc.getPropertyDesc(i);
+            if ("stackTrace".equals(propertyDesc.getPropertyName())) {
+                continue;
+            }
+            if("cause".equals(propertyDesc.getPropertyName())){
+                m.put(propertyDesc.getPropertyName(),createFault(t));
+            }
+            if (propertyDesc.isReadable() && propertyDesc.isWritable()) {
+                m.put(propertyDesc.getPropertyName(), propertyDesc.getValue(t));
+            } else if (propertyDesc.hasReadMethod()
+                    && propertyDesc.hasWriteMethod()) {
+                m.put(propertyDesc.getPropertyName(), propertyDesc.getValue(t));
+            }
+        }
+        return m;
     }
     
     /**
@@ -73,7 +104,7 @@ public class FaultFactoryImpl implements FaultFactory {
      */
     public Fault createFault(final Throwable throwable) {
         return createFault(throwable.getClass().getName(),
-                getStackTraceString(throwable), throwable.getMessage(),throwable);
+                getStackTraceString(throwable), throwable.getMessage(),throwable.getCause());
     }
 
 
