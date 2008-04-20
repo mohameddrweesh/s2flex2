@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2006 the Seasar Foundation and the Others.
+ * Copyright 2004-2008 the Seasar Foundation and the Others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,15 +35,21 @@ public class Amf3ClassTypedObjectWriterImpl extends
     private final void writeClassObjectProperty(final PropertyDesc propertyDef,
             final Object value, final DataOutputStream outputStream)
             throws IOException {
+        if("stackTrace".equals(propertyDef.getPropertyName())){
+            return;
+        }
         if (propertyDef.hasReadMethod()) {
             writeObjectElement(propertyDef.getValue(value), outputStream);
         }
+
+        
     }
 
     private final void writeClassPropertyName(
             final DataOutputStream outputStream, final PropertyDesc propertyDef)
             throws IOException {
-        if (propertyDef.hasReadMethod()) {
+//        if (propertyDef.isReadable()) {
+          if (propertyDef.hasReadMethod()) {
             writeTypeString(propertyDef.getPropertyName(), outputStream);
         }
     }
