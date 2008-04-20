@@ -15,8 +15,10 @@
  */
 package org.seasar.flex2.rpc.remoting.message.data;
 
+import java.util.Map;
+
 /**
- * Messageを処理している際に例外が発生したときに生成されるクラスです
+ * RemotingMessageを処理している際に例外が発生したときに生成されるクラスです
  * @author arkw
  * @author nod
  */
@@ -38,7 +40,14 @@ public class Fault {
     private String type;
     
     private Object rootCause;
+    private Map extendedData;
 
+/*
+ * 
+    public String faultString;
+    public String faultDetail;
+
+ */    
     /**
      * @return Returns the rootCause.
      */
@@ -106,5 +115,18 @@ public class Fault {
      */
     public String getDetails() {
         return getFaultDetail();
-    }   
+    } 
+    /**
+     * @return Returns the extendedData.
+     */
+    public Map getExtendedData() {
+        return extendedData;
+    }
+
+    /**
+     * @param extendedData The extendedData to set.
+     */
+    public void setExtendedData(Map extendedData) {
+        this.extendedData = extendedData;
+    }
 }
