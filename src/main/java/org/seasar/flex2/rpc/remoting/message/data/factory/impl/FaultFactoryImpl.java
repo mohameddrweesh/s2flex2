@@ -87,9 +87,7 @@ public class FaultFactoryImpl implements FaultFactory {
             if("cause".equals(propertyDesc.getPropertyName())){
                 m.put(propertyDesc.getPropertyName(),createFault(t));
             }
-            if (propertyDesc.isReadable() && propertyDesc.isWritable()) {
-                m.put(propertyDesc.getPropertyName(), propertyDesc.getValue(t));
-            } else if (propertyDesc.hasReadMethod()
+            if (propertyDesc.hasReadMethod()
                     && propertyDesc.hasWriteMethod()) {
                 m.put(propertyDesc.getPropertyName(), propertyDesc.getValue(t));
             }
