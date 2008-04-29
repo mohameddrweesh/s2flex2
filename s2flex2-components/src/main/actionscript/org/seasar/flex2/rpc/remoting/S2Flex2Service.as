@@ -285,6 +285,7 @@ package org.seasar.flex2.rpc.remoting {
 		 * @param result 呼び出したエラー結果
 		 */ 
         public function onFault(operation:String,result:Object):void{
+        	hiddenBusyCursor();
             var responder:RelayResponder=this._opResponderArray[operation];
             var fault:Fault = new Fault(result.faultCode,result.faultString,result.faultDetail);
             fault.rootCause=result.rootCause;	//2008.04. rootCause added.

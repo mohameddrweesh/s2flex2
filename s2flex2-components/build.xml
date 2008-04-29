@@ -10,7 +10,7 @@
            output="target/swc/s2flex2-components.swc" 	
          	locale="ja_JP"
        >
-	       <!-- load-config filename="${basedir}/s2flex2-components-config.xml" /-->
+	       <!--load-config filename="${basedir}/s2flex2-components-config.xml" /-->
 	       <compiler.library-path dir="${flex.sdk.home}/frameworks" append="true">
 				<include name="${frameworks.lib.dir}"/>
 				<include name="${frameworks.lib.dir}/flex.swc"/>

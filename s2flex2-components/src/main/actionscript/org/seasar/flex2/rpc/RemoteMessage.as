@@ -20,7 +20,7 @@ package org.seasar.flex2.rpc {
 	import mx.messaging.messages.IMessage;
 	import mx.messaging.messages.AbstractMessage;
 
-	public class RemoteMessage extends AbstractMessage implements IMessage {
+	public dynamic class RemoteMessage extends AbstractMessage implements IMessage {
 		
 		/**
 		 * @private
