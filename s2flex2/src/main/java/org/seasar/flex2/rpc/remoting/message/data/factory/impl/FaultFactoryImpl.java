@@ -63,29 +63,41 @@ public class FaultFactoryImpl implements FaultFactory {
      * @return　Faultのインスタンス
      */
     public Fault createFault(final String type, final String details,
-            final String description,final Throwable rootCause) {
+            final String description,final Throwable throwable) {
         final Fault fault = (Fault) container.getComponent(Fault.class);
         fault.setType(type);
         fault.setFaultDetail(details);
         fault.setFaultString(description);
-        if(rootCause!= null){
+        Throwable rootCause = throwable.getCause();
+        if(rootCause!= null && !throwable.equals(rootCause)){
             fault.setRootCause(createMap(rootCause));
-//            fault.setExtendedData(createMap(rootCause));
+        }else{
+            fault.setRootCause(createMap(throwable));
         }
         return fault;
     }
-    private Map createMap(Throwable t) {
+    /**
+     * 例外クラスからMapを作成して返します
+     * @param t 例外クラス
+     * @return　例外クラスのプロパティをセットしたMapクラス
+     */
+    private Map createMap(final Throwable t) {
         Map m = new HashMap();
         final BeanDesc beanDesc = BeanDescFactory.getBeanDesc(t.getClass());
         PropertyDesc propertyDesc = null;
-
+        
         for (int i = 0; i < beanDesc.getPropertyDescSize(); ++i) {
             propertyDesc = beanDesc.getPropertyDesc(i);
             if ("stackTrace".equals(propertyDesc.getPropertyName())) {
+                m.put("faultDetail",getStackTraceString(t));
+                m.put("faultString",t.getMessage());
                 continue;
             }
-            if("cause".equals(propertyDesc.getPropertyName())){
-                m.put(propertyDesc.getPropertyName(),createFault(t));
+            if("cause".equals(propertyDesc.getPropertyName())  ){
+                Throwable cause = (Throwable)propertyDesc.getValue(t);
+                if(cause!=null){
+                    m.put(propertyDesc.getPropertyName(),createMap(cause));
+                }
             }
             if (propertyDesc.isReadable() && propertyDesc.isWritable()) {
                 m.put(propertyDesc.getPropertyName(), propertyDesc.getValue(t));
@@ -104,7 +116,7 @@ public class FaultFactoryImpl implements FaultFactory {
      */
     public Fault createFault(final Throwable throwable) {
         return createFault(throwable.getClass().getName(),
-                getStackTraceString(throwable), throwable.getMessage(),throwable.getCause());
+                getStackTraceString(throwable), throwable.getMessage(),throwable);
     }
 
 
