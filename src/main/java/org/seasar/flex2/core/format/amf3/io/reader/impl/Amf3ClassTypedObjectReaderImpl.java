@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2006 the Seasar Foundation and the Others.
+ * Copyright 2004-2008 the Seasar Foundation and the Others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -106,7 +106,8 @@ public class Amf3ClassTypedObjectReaderImpl extends
         for (int i = 0; i < propertiesNumber; i++) {
             if (beanDesc.hasPropertyDesc(propertyNames[i])) {
                 propertyDef = beanDesc.getPropertyDesc(propertyNames[i]);
-                if (propertyDef.hasWriteMethod()) {
+//                if (propertyDef.isWritable()) {// public fieldのとき　Seasar2.4.17以降が必要
+                  if (propertyDef.hasWriteMethod()) {
                     setupProperty(object, propertyDef, propertyValues[i]);
                 }
             }

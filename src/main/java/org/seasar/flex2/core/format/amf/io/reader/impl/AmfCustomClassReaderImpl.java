@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2006 the Seasar Foundation and the Others.
+ * Copyright 2004-2008 the Seasar Foundation and the Others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -55,6 +55,7 @@ public class AmfCustomClassReaderImpl extends AbstractAmfClassObjectReaderImpl {
             }
             if (beanDesc.hasPropertyDesc(key)) {
                 final PropertyDesc pd = beanDesc.getPropertyDesc(key);
+//              if (pd.isWritable()) {//public fieldに対応するときには、こちら。s2 2.4.17以降が条件。
                 if (pd.hasWriteMethod()) {
                     pd.setValue(bean, readData(dataType, inputStream));
                 }

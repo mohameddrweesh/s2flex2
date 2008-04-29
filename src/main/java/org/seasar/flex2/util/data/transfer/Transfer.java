@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2006 the Seasar Foundation and the Others.
+ * Copyright 2004-2008 the Seasar Foundation and the Others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,9 +17,23 @@ package org.seasar.flex2.util.data.transfer;
 
 import org.seasar.flex2.util.data.storage.Storage;
 
+/**
+ * データを転送するためのインターフェースです。
+ * @author e1.arkw
+ *
+ */
 public interface Transfer {
-
+    /**
+     * Storageにオブジェクトを保存します。
+     * @param target　出力対象のObject
+     * @param storage  保存先ストレージ
+     */
     void exportToStorage(Object target, Storage storage);
 
+    /**
+     * Storageからコンポーネントを取り出します。
+     * @param storage 保存先ストレージ
+     * @param target　取り出すコンポーネント
+     */
     void importToComponent(Storage storage, Object target);
 }
