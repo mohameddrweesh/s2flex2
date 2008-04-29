@@ -1,6 +1,6 @@
 <project name="s2flex2-components" default="build" basedir=".">
 	<property file="build.properties"/>
-	<property name="ver" value="1.0.3"/>
+	<property name="ver" value="1.0.4-rc1"/>
 
 
     <!-- ================================= 
@@ -28,7 +28,7 @@
 	  		<arg value="-locale" />
 	  		<arg value="ja_JP"/>
 	  		<arg value="-source-path" />
-	  		<arg value="src/actionscript3" />
+	  		<arg value="src/main/actionscript3" />
 	  		<arg value="src/test/actionscript3" />
 			<arg value="-file-specs" />
 	  		<arg value="src/test/mxml/AntTestRunner.mxml" />
@@ -123,6 +123,8 @@
 		<zip zipfile="target/S2Flex2-components-${ver}.zip">
 			<zipfileset prefix="s2flex2-components" dir=".">
 				<exclude name="**/target/**.zip"/>
+				<exclude name="**/target/old/**"/>
+				<exclude name="**/target/swc/old/**"/>
 				<exclude name="**/lib/**"/>
 				<exclude name="**/generated/**"/>
 				<exclude name="**/AMF0Connection.as"/>
