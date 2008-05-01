@@ -104,13 +104,32 @@
           <ul>
             <li> Backport175 アノテーションを利用して、メタデータ定義、セッションデータのバインディングをJavaソースに記述する為のアドオン </li>
             <li>Java実行環境がJ2SDK1.4のときに利用します。</li>
-          <li>AOPを利用することができない制限があります。(各種AOPを利用するときには、定数アノテーションを利用してください。</li>
+            <li>AOPを利用することができない制限があります。(各種AOPを利用するときには、定数アノテーションを利用してください。</li>
           </ul>
         </li>
         -->
       </ul>
 	  	  <div id="outline-pic" align="center"><img src="images/s2flex2-ontline-picture.jpg" /></div>
       <h3><a name="news">お知らせ</a></h3>
+   	　<h5>[2008/05/01]S2flex2-1.1.1-rc1リリース</h5>
+      <p>S2Flex2-1.1.1-rc1をリリースしました。主な変更点は以下の通りです。</p>
+   	  <ul>
+		<li>Seasar2.4.17以降に導入されたpublicフィールドに対応しました。</li>
+		<li>サービス実行時に例外が発生した際に、例外内容をFaultクラスrootCause経由で取得できるようにしました。</li>
+   	  </ul>
+   	  <p>Flex側は、S2Flex2-Components-1.0.4-rc1かS2Flex2-Components-2.0.0-beta2(Flex3の時)との組み合わせにする必要があります。<br/>Seasar2.4.17以降が必要になります。<br/>ダウンロードは<a href="#download">こちら</a>から</p>
+   	　<h5>[2008/05/01]S2flex2-1.0.3-rc1リリース</h5>
+      <p>S2Flex2-1.0.3-rc1をリリースしました。主な変更点は以下の通りです。</p>
+   	  <ul>
+		<li>サービス実行時に例外が発生した際に、例外内容をFaultクラスrootCause経由で取得できるようにしました。</li>
+   	  </ul>
+   	  <p>Flex側は、S2Flex2-Components-1.0.4-rc1かS2Flex2-Components-2.0.0-beta2(Flex3の時)との組み合わせにする必要があります。<br/>ダウンロードは<a href="#download">こちら</a>から</p>
+   	　<h5>[2008/05/01]S2flex2-Components-1.0.4-rc1/2.0.0-Beta2リリース</h5>
+      <p>Flex2から各種AMF3gatewayに接続するComponentsである、S2Flex2-components-1.0.4-rc1/2.0.0-Beta2をリリースしました。</p>
+   	  <ul>
+		<li>サーバで発生した例外内容を受け取れるようにしました。</li>
+		<li>Faultイベント発生時にbusyCursorを削除するようにしました</li>
+   	  </ul><p>S2Flex2側(サーバ側)は、1.1.1-rc1または、1.0.4-rc1以降にする必要があります。<br/>ダウンロードは<a href="#download">こちら</a>から</p>    
    	　<h5>[2007/12/28]S2flex2-Components-1.0.3/2.0.0-Beta1リリース</h5>
       <p>Flex2から各種AMF3gatewayに接続するComponentsである、S2Flex2-components-1.0.3/2.0.0-Beta1をリリースしました。</p>
    	  <ul>
@@ -193,18 +212,22 @@
       <h3><a name="download">ダウンロード</a></h3>
 	  <h5>S2Flex2</h5>
       <ul>
+		<li><span class="style1"><a href="../download/2008-04-30/S2Flex2-1.1.1-rc1.zip">S2Flex2 1.1.1-rc1</a>(2008/05/01 update)</span></li>
 		<li><span class="style1"><a href="../download/2007-08-04/S2Flex2-1.1.0.zip">S2Flex2 1.1.0</a>(2007/08/12 update)</span></li>
 		<li><span class="style1"><a href="../download/2007-08-12/s2flex2-example-1.1.0.zip">S2Flex2 Example S2Flex2-1.1.0対応</a>(2007/08/12 update) </span></li>
 		<li><span class="style1"><a href="../download/2007-08-11/s2flex2-blank-1.1.0.zip">S2Flex2 Blank プロジェクト</a>(2007/08/19 update) </span></li>
 		<li><span class="style1"><a href="../download/2007-08-11/s2-flex2-blank-1.1.0.war">S2Flex2 Blank warファイル</a>(2007/08/19 update) </span></li>
+        <li><span class="style1"><a href="../download/2008-04-30/S2Flex2-1.0.3-rc1.zip">S2Flex2 1.0.3-rc1</a>(2008/05/01 update)</span></li>
         <li><span class="style1"><a href="../download/2007-07-20/S2Flex2-1.0.2.zip">S2Flex2 1.0.2</a>(2007/07/20 update)</span></li>
 		<li><span class="style1"><a href="../download/2007-03-18/flex2-example-1.0.1.zip">S2Flex2 Example S2Flex2-1.0.1対応 </a>(2007/03/18 update) </span></li>
         <li><span class="style1"><a href="../download/2007-03-05/s2flex2-tutorial-1.0.zip">s2flex2-tutorial-1.0.zip</a>(2007/03/05 update)</span></li>
 	  </ul>
 	  <h5>S2Flex2-components</h5>
 		<ul>
-			<li><span class="style1"><a href="../download/2007-06-09/S2Flex2-components-1.0.2.zip">S2Flex2 components 1.0.2</a>(2007/06/10 update)</span></li>
+			<li><span class="style1"><a href="../download/2008-04-30/S2Flex2-components-1.0.4-rc1.zip">S2Flex2 components 1.0.4-rc1</a>(2007/05/01 update)</span></li>
 			<li><span class="style1"><a href="../download/2007-12-28/S2Flex2-components-1.0.3.zip">S2Flex2 components 1.0.3</a>(2007/12/28 update)</span></li>
+			<li><span class="style1"><a href="../download/2007-06-09/S2Flex2-components-1.0.2.zip">S2Flex2 components 1.0.2</a>(2007/06/10 update)</span></li>
+			<li><span class="style1"><a href="../download/2008-04-30/S2Flex2-components-2.0.0-Beta2.zip">S2Flex2 components 2.0.0-Beta2</a>(2007/05/01 update)</span></li>
 			<li><span class="style1"><a href="../download/2007-12-28/S2Flex2-components-2.0.0-Beta1.zip">S2Flex2 components 2.0.0-Beta1</a>(2007/12/28 update)</span></li>
 		</ul>
 	  <h5>S2Flex2-tiger</h5>
