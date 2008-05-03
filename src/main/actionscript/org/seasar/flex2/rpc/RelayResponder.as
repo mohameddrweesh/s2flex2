@@ -99,6 +99,7 @@ package org.seasar.flex2.rpc {
 	        _remoteMessage.body = "fault";
         	_statusFunction( RemoteMessage( asyncToken.message ).operation, status );
         	var fault:Fault = new Fault(status.code,status.description,status.details);
+            fault.rootCause=status.rootCause;	//2008.04. rootCause added.
 			var faultEvent:FaultEvent=new FaultEvent("fault",false,false,fault,asyncToken,_remoteMessage);
 	        if( _asyncToken.hasResponder() ) {
 	            for( var i:int = 0; i < asyncToken.responders.length; i++ )
