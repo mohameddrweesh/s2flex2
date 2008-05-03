@@ -1,6 +1,6 @@
 <project name="s2flex2-components" default="compc" basedir=".">
 	<property file="build.properties"/>
-	<property name="ver" value="2.0.0-Beta2"/>
+	<property name="ver" value="2.0.0-Beta2a"/>
 	<taskdef resource="flexTasks.tasks" classpath="${flex.sdk.home}/ant/lib/flexTasks.jar" />
    <!-- ================================= 
           target: compc(use flex ant task)              

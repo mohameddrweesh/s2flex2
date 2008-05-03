@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2006 the Seasar Foundation and the Others.
+ * Copyright 2004-2008 the Seasar Foundation and the Others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -99,6 +99,7 @@ package org.seasar.flex2.rpc {
 	        _remoteMessage.body = "fault";
         	_statusFunction( RemoteMessage( asyncToken.message ).operation, status );
         	var fault:Fault = new Fault(status.code,status.description,status.details);
+        	fault.rootCause=status.rootCause;
 			var faultEvent:FaultEvent=new FaultEvent("fault",false,false,fault,asyncToken,_remoteMessage);
 	        if( _asyncToken.hasResponder() ) {
 	            for( var i:int = 0; i < asyncToken.responders.length; i++ )
