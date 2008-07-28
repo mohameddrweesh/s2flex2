@@ -18,6 +18,7 @@
 package org.seasar.flex2.net{
     
     import flash.net.NetConnection;
+    import flash.net.Responder;
 
 /**
  * NetConnectionは、flash.net.Connectionクラスに、サーバロジック呼び出し時のcallBack関数を追加したクラスです。
@@ -53,6 +54,21 @@ package org.seasar.flex2.net{
         */ 
         private var append:String =null;
         
+        public function NetConnection(){
+        	super();
+        	client = new NetConnectionProxy(this);
+        }
+        
+        public override function call(command:String, responder:Responder, ...parameters):void{
+        	if( append != null ){
+	            var url:String=this._originalUrl+ append;
+	            
+	            reconnect(url);
+            	append = null;
+        	}
+        	super.call.apply(this,[command,responder].concat(parameters));
+        }
+        
         /**
         * 引数で指定されたサーバに接続します。
         * @param command 接続先URL
@@ -81,9 +97,6 @@ package org.seasar.flex2.net{
         */ 
         public function AppendToGatewayUrl(append:String):void{ 
             this.append = append;
-            var url:String=this._originalUrl+ append;
-            
-            reconnect(url);
         }
         
         /**
@@ -113,5 +126,37 @@ package org.seasar.flex2.net{
             }
             return _originalUrl;
         }
+    }
+}
+
+import flash.utils.Proxy;
+import flash.utils.flash_proxy;
+import org.seasar.flex2.net.NetConnection;
+
+dynamic class NetConnectionProxy extends Proxy{
+	
+	private static const APPEND_TO_GATEWAYURL:String = "AppendToGatewayUrl";
+	
+	private var nc:NetConnection;
+	
+	public function NetConnectionProxy( nc:NetConnection ){
+		this.nc = nc;	
+	}
+	
+	override flash_proxy function hasProperty(name:*):Boolean{
+		if( name == APPEND_TO_GATEWAYURL ){
+			return true;
+		}
+		return false;
+	}
+
+    override flash_proxy function callProperty(methodName:*, ... args):* {
+    }
+
+    override flash_proxy function getProperty(name:*):* {
+    	if( QName(name).localName == APPEND_TO_GATEWAYURL ){
+			return nc.AppendToGatewayUrl as Function;
+    	}
+    	return undefined;
     }
 }
