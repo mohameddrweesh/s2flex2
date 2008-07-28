@@ -26,7 +26,7 @@ import org.seasar.flex2.core.format.amf3.io.reader.factory.Amf3DataReaderFactory
 import org.seasar.flex2.core.format.amf3.io.writer.Amf3DataWriter;
 import org.seasar.flex2.core.format.amf3.io.writer.factory.Amf3DataWriterFactory;
 
-public class AbstractReaderWriterS2TestCase extends S2TestCase {
+abstract class AbstractReaderWriterS2TestCase extends S2TestCase {
 
     protected final static String PATH = "amf3.dicon";
 

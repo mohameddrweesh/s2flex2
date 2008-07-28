@@ -33,6 +33,27 @@ public class BeanReaderWriterTest extends AbstractReaderWriterS2TestCase {
         assertEquals("2", value.getBbb(), result.getBbb());
         assertEquals("3", value.getCcc(), result.getCcc(),0);
         assertEquals("4", value.getDdd(), result.getDdd());
+        assertEquals("5", value.isEee(),  result.isEee());
+        assertEquals("6", value.getFff(), result.getFff());
+        
+    }
+
+    public void testBeanPublicFieldOnly() throws Exception {
+        MyBean2 value = new MyBean2();
+        value.aaa = 1;
+        value.bbb = 2;
+        value.ccc = 3;
+        value.ddd = "4";
+        value.eee = true;
+        value.fff = new Date(5);
+        
+        MyBean2 result = (MyBean2)getWriteReadData(value);
+        assertEquals("1", value.aaa, result.aaa);
+        assertEquals("2", value.bbb, result.bbb);
+        assertEquals("3", value.ccc, result.ccc,0);
+        assertEquals("4", value.ddd, result.ddd);
+        assertEquals("5", value.eee, result.eee);
+        assertEquals("6", value.fff, result.fff);
         
     }
 }

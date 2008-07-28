@@ -31,13 +31,18 @@ public class DataTransferSupportedRemotingServiceInvokerImpl extends
     public Object doInvoke(final Object service, final String methodName,
             final Object[] args) throws Throwable {
 
-        final Storage storage = storageLocator.getStorage(SERVICE_DATA_STORAGE);
-        processDataImport(service, storage);
+        Object result = null;
+
+        processImport(service);
+        processImport(args);
         try {
-            return invokeServiceMethod(service, methodName, args);
+            result = invokeServiceMethod(service, methodName, args);
         } finally {
-            processDataExport(service, storage);
+            processExport(service);
+            processExport(result);
         }
+
+        return result;
     }
 
     public StorageLocator getStorageLocator() {
@@ -56,17 +61,19 @@ public class DataTransferSupportedRemotingServiceInvokerImpl extends
         this.transfer = transfer;
     }
 
-    private final void processDataExport(final Object service, final Storage storage) {
-        final Object[] logArgs = new Object[]{storage.getName()};
+    private final void processExport(final Object target) {
+        final Storage storage = storageLocator.getStorage(SERVICE_DATA_STORAGE);
+        final Object[] logArgs = new Object[] { storage.getName() };
         logger.log("DFLX0303", logArgs);
-        transfer.exportToStorage(service, storage);
+        transfer.exportToStorage(target, storage);
         logger.log("DFLX0304", logArgs);
     }
 
-    private final void processDataImport(final Object service, final Storage storage) {
-        final Object[] logArgs = new Object[]{storage.getName()};
+    private final void processImport(final Object target) {
+        final Storage storage = storageLocator.getStorage(SERVICE_DATA_STORAGE);
+        final Object[] logArgs = new Object[] { storage.getName() };
         logger.log("DFLX0301", logArgs);
-        transfer.importToComponent(storage, service);
+        transfer.importToComponent(storage, target);
         logger.log("DFLX0302", logArgs);
     }
 }

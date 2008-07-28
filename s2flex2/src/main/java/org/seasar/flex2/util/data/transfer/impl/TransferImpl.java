@@ -15,6 +15,10 @@
  */
 package org.seasar.flex2.util.data.transfer.impl;
 
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.Map;
+
 import org.seasar.flex2.util.data.storage.Storage;
 import org.seasar.flex2.util.data.transfer.Transfer;
 import org.seasar.flex2.util.data.transfer.annotation.factory.AnnotationHandlerFactory;
@@ -24,19 +28,26 @@ import org.seasar.framework.beans.PropertyDesc;
 import org.seasar.framework.beans.factory.BeanDescFactory;
 
 /**
- *  {@link Tranfer}Tranferの実装クラス
+ * {@link Tranfer}Tranferの実装クラス
+ * 
  * @author e1.arkw
  * @author nod
- *
+ * 
  */
 public class TransferImpl implements Transfer {
-    /** アノテーションハンドラ. 実行環境によって定数アノテーションかjava5.0のアノテーションのいづれかのハンドラがセットされます。*/
+
+    /**
+     * アノテーションハンドラ. 実行環境によって定数アノテーションかjava5.0のアノテーションのいづれかのハンドラがセットされます.
+     */
     private static final AnnotationHandler annotationHandler = AnnotationHandlerFactory
             .getAnnotationHandler();
+
     /**
      * 指定されたstorageの名称とtypeが一致するかどうかチェックします
-     * @param storage 保存対象のStorage
-     * @param type ストレージのタイプ.{@link Storage}によって定義されている値
+     * @param storage
+     *            保存対象のStorage
+     * @param type
+     *            ストレージのタイプ.{@link Storage}によって定義されている値
      * @return 転送対象のときはtrue,それ以外はfalse.
      */
     private static final boolean isTransferTarget(final Storage storage,
@@ -45,28 +56,52 @@ public class TransferImpl implements Transfer {
     }
 
     /**
-     * targetになるObjectのreadMethodにExportアノテーションが存在するとき
-     * ComponentsをStorageに保存します。
-     *  
-     *  @param target Storageに保存するオブジェクト
-     *  @param storage 保存先のストレージ
+     * targetのExportアノテーションが指定されているプロパティをStorageにエクスポートします.
+     * 
+     * @Export(storage=StorageType.SESSION) public AddDto addDto;
+     * 
+     * 上記のように書かれてときには、Sessionに対してプロパティ名"addDto"でaddDtoがエクスポートされる。
+     * 
+     * @param target
+     *            エクスポート対象オブジェクト
+     * 
+     * @param storage
+     *            保存先のストレージ
      */
     public void exportToStorage(final Object target, final Storage storage) {
-        //ExportアノテーションがgetMethodにあるときにはStorageにComponentを保存する。
-        /*
-         * @Export(storage=StorageType.SESSION)
-         * public AddDto getAddDto() {
-         *       return addDto;
-         * }
-         * 上記のように書かれてときには、Sessionに対してaddDtoが保存される。
-         */
-        
+        final Class resultClass = target.getClass();
+        do{
+            if( resultClass.isArray() ){
+                Object[] resultArray = (Object[])target;
+                for (int index = 0; index < resultArray.length; index++) {
+                    processExportTo(resultArray[index], storage);
+                }
+                break;
+            }
+            if( resultClass.isAssignableFrom(Map.class) ){
+                Collection values = ((Map)target).values();
+                Iterator ite = values.iterator();
+                while (ite.hasNext()) {
+                    processExportTo(ite.next(), storage);
+                }
+                
+                break;
+            }
+            processExportTo(target, storage);
+        } while( false );
+    }
+
+    /**
+     * @param target
+     * @param storage
+     */
+    private void processExportTo(final Object target, final Storage storage) {
         final BeanDesc beanDesc = BeanDescFactory
                 .getBeanDesc(target.getClass());
-
+        
         for (int i = 0; i < beanDesc.getPropertyDescSize(); ++i) {
             final PropertyDesc propertyDesc = beanDesc.getPropertyDesc(i);
-            if (propertyDesc.isReadable()) {
+            if (propertyDesc.isReadable() || propertyDesc.hasReadMethod()) {
                 final String type = annotationHandler.getExportStorageType(
                         beanDesc, propertyDesc);
                 if (isTransferTarget(storage, type)) {
@@ -76,29 +111,55 @@ public class TransferImpl implements Transfer {
             }
         }
     }
+
     /**
-     * 指定されたObjectのwriteMethodにImportアノテーションが存在しているとき
-     * StorageからComponentにセットします。
+     * StorageからtargetにImportアノテーションが指定されているプロパティに値をインポートします.
      * 
-     * @param storage 保存されているストレージ
-     * @param target セットする対象のオブジェクト
+     * @Import(storage=StorageType.SESSION) public AddDto addDto;
+     * 
+     * 上記のように書かれてときには、Sessionデータからプロパティ名"addDto"で取得したObjectがインポートされる。
+     * 
+     * @param storage
+     *            保存されているストレージ
+     * 
+     * @param target
+     *            インポート対象オブジェクト
      */
     public void importToComponent(final Storage storage, final Object target) {
-        /*
-         * @Import(storage=StorageType.SESSION)
-         * public AddDto setAddDto(AddDto addDto) {
-         *       this.addDto = addDto;
-         * }
-         * 上記のように書かれてときには、Sessionデータから取得したObjectがセットされる。
-         */
+        final Class resultClass = target.getClass();
+        do{
+            if( resultClass.isArray() ){
+                Object[] resultArray = (Object[])target;
+                for (int index = 0; index < resultArray.length; index++) {
+                    processImport(storage, resultArray[index]);
+                }
+                break;
+            }
+            if( resultClass.isAssignableFrom(Map.class) ){
+                Collection values = ((Map)target).values();
+                Iterator ite = values.iterator();
+                while (ite.hasNext()) {
+                    processImport(storage, ite.next());
+
+                }
+                
+                break;
+            }
+            processImport(storage, target);
+        } while( false );
         
-        //ImportアノテーションがコンポーネントのsetMethodについているときに、
-        //Storageから取得したComponentをセットする。
+    }
+
+    /**
+     * @param storage
+     * @param target
+     */
+    private void processImport(final Storage storage, final Object target) {
         final BeanDesc beanDesc = BeanDescFactory
                 .getBeanDesc(target.getClass());
         for (int i = 0; i < beanDesc.getPropertyDescSize(); ++i) {
             final PropertyDesc propertyDesc = beanDesc.getPropertyDesc(i);
-            if (propertyDesc.isWritable()) {
+            if (propertyDesc.isWritable() || propertyDesc.hasWriteMethod()) {
                 final String type = annotationHandler.getImportStorageType(
                         beanDesc, propertyDesc);
                 if (isTransferTarget(storage, type)) {
