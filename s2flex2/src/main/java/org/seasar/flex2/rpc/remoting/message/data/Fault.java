@@ -24,30 +24,32 @@ import java.util.Map;
  */
 public class Fault {
 
-    private static final String faultCode = "SERVER.PROCESSING";
+    private static final String faultCode = "Server.Processing";
 
     /**
      * @deprecated Use {@link #faultCode} instead
      */
     private static final String code = faultCode;
-
+    /**
+     *  Text description of the fault.
+     *  エラー、例外が発生したときの内容.例外のgetMessage相当
+     */
     private String faultString;
-
+    /**
+     * Additional details describing the fault.
+     * エラー、例外が発生したときの詳細情報. 例外のstackTrace相当
+     */
     private String faultDetail;
 
     private final String level = "error";
 
     private String type;
-    
+    /**
+     * エラー、例外の原因の発生源
+     */
     private Object rootCause;
     private Map extendedData;
 
-/*
- * 
-    public String faultString;
-    public String faultDetail;
-
- */    
     /**
      * @return Returns the rootCause.
      */
