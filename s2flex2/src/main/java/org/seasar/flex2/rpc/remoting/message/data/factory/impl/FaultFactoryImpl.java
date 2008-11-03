@@ -15,6 +15,8 @@
  */
 package org.seasar.flex2.rpc.remoting.message.data.factory.impl;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,14 +41,19 @@ public class FaultFactoryImpl implements FaultFactory {
      * @return　StackTraceの内容を文字列化したもの
      */
     private static final String getStackTraceString(final Throwable t) {
-        final StackTraceElement[] elements = t.getStackTrace();
-        final StringBuffer buf = new StringBuffer(t.toString());
-        buf.append('\n');
-        for (int i = 0; i < elements.length; ++i) {
-            buf.append(elements[i].toString());
-            buf.append('\n');
-        }
-        return buf.toString();
+        final StringWriter sw = new StringWriter();
+        final PrintWriter pw = new PrintWriter(sw);
+        t.printStackTrace(pw);
+        pw.flush();
+        return sw.toString();
+//        final StackTraceElement[] elements = t.getStackTrace();
+//        final StringBuffer buf = new StringBuffer(t.toString());
+//        buf.append('\n');
+//        for (int i = 0; i < elements.length; ++i) {
+//            buf.append(elements[i].toString());
+//            buf.append('\n');
+//        }
+//       return t.toString();
     }
 
     /**
@@ -68,37 +75,43 @@ public class FaultFactoryImpl implements FaultFactory {
         fault.setType(type);
         fault.setFaultDetail(details);
         fault.setFaultString(description);
-        Throwable rootCause = throwable.getCause();
-        if(rootCause!= null && !throwable.equals(rootCause)){
-            fault.setRootCause(createMap(rootCause));
-        }else{
-            fault.setRootCause(createMap(throwable));
-        }
+//        Throwable rootCause = throwable.getCause();
+        fault.setRootCause(createMap(throwable,true));
+//        
+//        if(rootCause!= null && !throwable.equals(rootCause)){
+//           fault.setRootCause(createMap(rootCause));
+//        }else{
+//            fault.setRootCause(createMap(throwable));
+//        }
         return fault;
     }
     /**
      * 例外クラスからMapを作成して返します
      * @param t 例外クラス
+     * @param hierarchicalAcquisition rootCauseを取得するときにはtrue,それ以外はfalse
      * @return　例外クラスのプロパティをセットしたMapクラス
      */
-    private Map createMap(final Throwable t) {
+    
+    private Map createMap(final Throwable t, final boolean hierarchicalAcquisition) {
         Map m = new HashMap();
         final BeanDesc beanDesc = BeanDescFactory.getBeanDesc(t.getClass());
         PropertyDesc propertyDesc = null;
-        
         for (int i = 0; i < beanDesc.getPropertyDescSize(); ++i) {
             propertyDesc = beanDesc.getPropertyDesc(i);
             if ("stackTrace".equals(propertyDesc.getPropertyName())) {
-                m.put("faultDetail",getStackTraceString(t));
-                m.put("faultString",t.getMessage());
                 continue;
             }
             if("cause".equals(propertyDesc.getPropertyName())  ){
                 Throwable cause = (Throwable)propertyDesc.getValue(t);
                 if(cause!=null){
-                    m.put(propertyDesc.getPropertyName(),createMap(cause));
+                    m.put(propertyDesc.getPropertyName(),createMap(cause,false));
                 }
+                continue;
             }
+            if(propertyDesc.getValue(t) instanceof Throwable){
+                continue;
+            }
+            
             if (propertyDesc.isReadable() && propertyDesc.isWritable()) {
                 m.put(propertyDesc.getPropertyName(), propertyDesc.getValue(t));
             } else if (propertyDesc.hasReadMethod()
@@ -118,7 +131,6 @@ public class FaultFactoryImpl implements FaultFactory {
         return createFault(throwable.getClass().getName(),
                 getStackTraceString(throwable), throwable.getMessage(),throwable);
     }
-
 
     /**
      * @exclude
