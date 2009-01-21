@@ -24,51 +24,78 @@ import org.seasar.framework.container.S2Container;
 
 public class TransferTest extends S2TestCase {
 
-    private final static String PATH = "TransferTest.dicon";
+	private final static String PATH = "TransferTest.dicon";
 
-    private Transfer transfer;
+	private Transfer transfer;
 
-    public TransferTest(String name) {
-        super(name);
-    }
+	public TransferTest(String name) {
+		super(name);
+	}
 
-    public void testExportTo() {
-        HttpSession session = createMockHttpSession();
-        Storage storage = new HttpSessionDataStorage(session);
-        TestClass testClass = createTarget();
-        testClass.setStrData("moji");
-        transfer.exportToStorage(testClass, storage);
-        assertEquals("1", session.getAttribute("strData"), testClass
-                .getStrData());
-    }
+	public void testExportTo() {
+		HttpSession session = createMockHttpSession();
+		Storage storage = new HttpSessionDataStorage(session);
+		TestClass testClass = createSetterGetterTestData();
+		testClass.setStrData("moji");
+		transfer.exportToStorage(testClass, storage);
+		assertEquals("1", session.getAttribute("strData"), testClass
+				.getStrData());
+	}
 
-    public void testImportTo() {
-        HttpSession session = createMockHttpSession();
-        session.setAttribute("strData", "moji");
-        Storage storage = new HttpSessionDataStorage(session);
-        TestClass testClass = createTarget();
-        transfer.importToComponent(storage, testClass);
-        assertEquals("1", testClass.getStrData(), session
-                .getAttribute("strData"));
-    }
+	public void testExportTo2() {
+		final HttpSession session = createMockHttpSession();
+		final Storage storage = new HttpSessionDataStorage(session);
+		final PublicFieldsTestClass pfTestData = createPublicFieldsTestData();
+		pfTestData.strData = "moji";
+		transfer.exportToStorage(pfTestData, storage);
 
-    private HttpSession createMockHttpSession() {
-        HttpSession session = getRequest().getSession();
-        return session;
-    }
+		assertEquals("1", session.getAttribute("strData"), pfTestData.strData);
+	}
 
-    private TestClass createTarget() {
-        TestClass testClass = new TestClass();
-        return testClass;
-    }
+	public void testImportTo() {
+		HttpSession session = createMockHttpSession();
+		session.setAttribute("strData", "moji");
+		Storage storage = new HttpSessionDataStorage(session);
+		TestClass testClass = createSetterGetterTestData();
+		transfer.importToComponent(storage, testClass);
+		assertEquals("1", testClass.getStrData(), session
+				.getAttribute("strData"));
+	}
 
-    protected void setUp() throws Exception {
-        include(PATH);
-        S2Container container = getContainer();
-        transfer = (Transfer) container.getComponent(Transfer.class);
-    }
+	public void testExportTo1() {
+		final HttpSession session = createMockHttpSession();
+		session.setAttribute("strData", "moji");
 
-    protected void tearDown() throws Exception {
-        super.tearDown();
-    }
+		final Storage storage = new HttpSessionDataStorage(session);
+		final PublicFieldsTestClass pfTestData = createPublicFieldsTestData();
+
+		transfer.importToComponent(storage, pfTestData);
+
+		assertEquals("1", pfTestData.strData, session.getAttribute("strData"));
+	}
+
+	private HttpSession createMockHttpSession() {
+		HttpSession session = getRequest().getSession();
+		return session;
+	}
+
+	private TestClass createSetterGetterTestData() {
+		TestClass testData = new TestClass();
+		return testData;
+	}
+
+	private PublicFieldsTestClass createPublicFieldsTestData() {
+		PublicFieldsTestClass testData = new PublicFieldsTestClass();
+		return testData;
+	}
+
+	protected void setUp() throws Exception {
+		include(PATH);
+		S2Container container = getContainer();
+		transfer = (Transfer) container.getComponent(Transfer.class);
+	}
+
+	protected void tearDown() throws Exception {
+		super.tearDown();
+	}
 }

@@ -15,8 +15,6 @@
  */
 package org.seasar.flex2.util.data.transfer.annotation.handler;
 
-import java.lang.reflect.Method;
-
 import org.seasar.flex2.util.data.transfer.annotation.Export;
 import org.seasar.flex2.util.data.transfer.annotation.Import;
 import org.seasar.framework.beans.BeanDesc;
@@ -24,33 +22,43 @@ import org.seasar.framework.beans.PropertyDesc;
 
 public class TigerAnnotationHandler implements AnnotationHandler {
 
-    public String getExportStorageType(final BeanDesc beanDesc,
-            final PropertyDesc propertyDesc) {
-        String type = null;
+	public String getExportStorageType(final BeanDesc beanDesc,
+			final PropertyDesc propertyDesc) {
+		Export exportAnno = null;
 
-        final Method method = propertyDesc.getReadMethod();
-        if (method != null) {
-            final Export storageType = method.getAnnotation(Export.class);
-            if (storageType != null) {
-                type = storageType.storage();
-            }
-        }
+		do {
+			if (propertyDesc.hasReadMethod()) {
+				exportAnno = propertyDesc.getReadMethod().getAnnotation(
+						Export.class);
+				break;
+			}
+			if (propertyDesc.isReadable()) {
+				exportAnno = propertyDesc.getField().getAnnotation(
+						Export.class);
+				break;
+			}
+		} while (false);
 
-        return type;
-    }
+		return (exportAnno != null) ? exportAnno.storage() : null;
+	}
 
-    public String getImportStorageType(final BeanDesc beanDesc,
-            final PropertyDesc propertyDesc) {
-        String type = null;
+	public String getImportStorageType(final BeanDesc beanDesc,
+			final PropertyDesc propertyDesc) {
+		Import importAnno = null;
 
-        final Method method = propertyDesc.getWriteMethod();
-        if (method != null) {
-            final Import storageType = method.getAnnotation(Import.class);
-            if (storageType != null) {
-                type = storageType.storage();
-            }
-        }
+		do {
+			if (propertyDesc.hasWriteMethod()) {
+				importAnno = propertyDesc.getWriteMethod().getAnnotation(
+						Import.class);
+				break;
+			}
+			if (propertyDesc.isWritable()) {
+				importAnno = propertyDesc.getField().getAnnotation(
+						Import.class);
+				break;
+			}
+		} while (false);
 
-        return type;
-    }
+		return (importAnno != null) ? importAnno.storage() : null;
+	}
 }
