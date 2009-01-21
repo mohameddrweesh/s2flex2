@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.seasar.flex2.rpc.remoting.processor.RemotingMessageProcessor;
+import org.seasar.flex2.util.http.HttpSessionUtil;
 import org.seasar.flex2.util.type.BooleanUtil;
 import org.seasar.framework.container.S2Container;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
@@ -77,11 +78,7 @@ public class RemotingGateway extends HttpServlet {
     }
 
     private final void decisionSessionMode(final HttpServletRequest request) {
-        if (isUseSession) {
-            if (request.isRequestedSessionIdValid()) {
-                request.getSession(true);
-            }
-        }
+        HttpSessionUtil.getSessionId(request, isUseSession);
     }
 
     private final String getGatewayVersionParameter(final String name) {
