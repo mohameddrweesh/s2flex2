@@ -60,7 +60,7 @@ public class MessageBodyProcessorImpl implements MessageBodyProcessor {
 
     public Message process(final Message requestMessage) {
         final Message responseMessage = messageFactory.createResponseMessage();
-        requestMessage.setVersion(requestMessage.getVersion());
+        responseMessage.setVersion(requestMessage.getVersion());
         for (int i = 0; i < requestMessage.getBodySize(); ++i) {
             responseMessage.addBody(processBody(requestMessage.getBody(i)));
         }

@@ -42,12 +42,15 @@ public class AppendToGatewayUrlHeaderCreatorImpl implements
 
         MessageHeader header = null;
 
-        final String sessionId = HttpSessionUtil.getSessionId(request,
-                false);
-        if( sessionId != null ){
-            header = messageHeaderFactory.createHeader(
-                    RemotingMessageConstants.APPEND_TO_GATEWAYURL,
-                    sessionDecorator.formatSessionId(sessionId), false);
+        if (!request.isRequestedSessionIdValid()) {
+            final String sessionId = HttpSessionUtil.getSessionId(request,
+                    false);
+
+            if (sessionId != null) {
+                header = messageHeaderFactory.createHeader(
+                        RemotingMessageConstants.APPEND_TO_GATEWAYURL,
+                        sessionDecorator.formatSessionId(sessionId), false);
+            }
         }
 
         return header;
