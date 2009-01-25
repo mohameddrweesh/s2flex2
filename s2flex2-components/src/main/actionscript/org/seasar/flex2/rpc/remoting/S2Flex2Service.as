@@ -277,6 +277,8 @@ package org.seasar.flex2.rpc.remoting {
             
             var resultEvent:ResultEvent=new ResultEvent("result",false,false,result,responder.asyncToken,responder.asyncToken.message);
             dispatchEvent(resultEvent);
+            
+            headers = [];
         }
         
 		/**
@@ -291,6 +293,13 @@ package org.seasar.flex2.rpc.remoting {
             fault.rootCause=result.rootCause;	//2008.04. rootCause added.
             var faultEvent:FaultEvent = new FaultEvent("fault",false,false,fault,responder.asyncToken,responder.asyncToken.message);
             dispatchEvent(faultEvent);
+            
+            headers = [];
+        }
+        
+        protected var headers:Array = [];
+        public function addHeader(operation:String, mustUnderstand:Boolean = false, param:Object = null):void{
+        	headers.push({o:operation,must:mustUnderstand,param:param});
         }
 
         flash_proxy override function callProperty(methodName:*, ...args):*{
@@ -429,7 +438,10 @@ package org.seasar.flex2.rpc.remoting {
         private function setupConnection():void{
             if(_con==null){
                 initConnection();
-            }           
+            }    
+            for each( var header:Object in headers ){
+            	_con.addHeader(header.o,header.must,header.param);
+            }
         }
         /**
         * @private
