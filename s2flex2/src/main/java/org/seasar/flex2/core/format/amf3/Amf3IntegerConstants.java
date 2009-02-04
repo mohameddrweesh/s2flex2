@@ -23,7 +23,7 @@ public interface Amf3IntegerConstants {
 
     int INTEGER_MAX = 0xFFFFFFF;
 
-    int INTEGER_MIN = -0xFFFFFFF;
+    int INTEGER_MIN = -0x10000000;
 
     int INTEGER_INCLUDE_NEXT_SIGN = 0x80;
     
