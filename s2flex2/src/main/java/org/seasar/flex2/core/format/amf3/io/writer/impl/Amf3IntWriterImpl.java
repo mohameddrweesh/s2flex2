@@ -26,8 +26,6 @@ public class Amf3IntWriterImpl {
     protected static final void writeIntData(final int value,
             final DataOutputStream outputStream) throws IOException {
 
-        int maskedInt = value & 0x1fffffff;
-
         if (value < 0) {
             outputStream.writeByte(value >> 22 & INTEGER_DATA_MASK
                     | INTEGER_INCLUDE_NEXT_SIGN);
@@ -37,6 +35,7 @@ public class Amf3IntWriterImpl {
                     | INTEGER_INCLUDE_NEXT_SIGN);
             outputStream.writeByte(value & 0xFF);
         } else {
+            int maskedInt = value & 0x3fffffff;
             if (maskedInt < 0x80) {
                 outputStream.writeByte(maskedInt);
             } else if (maskedInt < 0x4000) {
