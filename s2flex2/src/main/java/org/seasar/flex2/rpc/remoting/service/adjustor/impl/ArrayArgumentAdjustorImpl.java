@@ -23,7 +23,11 @@ public class ArrayArgumentAdjustorImpl implements ArgumentAdjustor {
     private Converter arrayConverter;
 
     public final Object adjust(final Class clazz, final Object arg) {
-        return arrayConverter.convert(arg, clazz);
+        if( arg.getClass().equals(clazz) ){
+            return arg;
+        } else {
+            return arrayConverter.convert(arg, clazz);
+        } 
     }
 
     public boolean isTarget(final Class clazz, final Object arg) {
