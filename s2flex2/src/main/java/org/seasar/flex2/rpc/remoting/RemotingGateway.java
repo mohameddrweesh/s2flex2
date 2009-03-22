@@ -33,7 +33,7 @@ public class RemotingGateway extends HttpServlet {
 
     private static final long serialVersionUID = -5142496558861670626L;
 
-    protected static final String version = "1.1.1-RC";
+    protected static final String version = "1.1.2";
 
     protected static final Logger logger = Logger
             .getLogger(RemotingGateway.class);
