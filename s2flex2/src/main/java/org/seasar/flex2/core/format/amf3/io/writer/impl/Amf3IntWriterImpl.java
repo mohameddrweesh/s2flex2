@@ -35,14 +35,13 @@ public class Amf3IntWriterImpl {
                     | INTEGER_INCLUDE_NEXT_SIGN);
             outputStream.writeByte(value & 0xFF);
         } else {
-            int maskedInt = value & 0x3fffffff;
-            if (maskedInt < 0x80) {
-                outputStream.writeByte(maskedInt);
-            } else if (maskedInt < 0x4000) {
+            if (value < 0x80) {
+                outputStream.writeByte(value);
+            } else if (value < 0x4000) {
                 outputStream.writeByte(value >> 7 & INTEGER_DATA_MASK
                         | INTEGER_INCLUDE_NEXT_SIGN);
                 outputStream.writeByte(value & INTEGER_DATA_MASK);
-            } else if (maskedInt < 0x200000) {
+            } else if (value < 0x200000) {
                 outputStream.writeByte(value >> 14 & INTEGER_DATA_MASK
                         | INTEGER_INCLUDE_NEXT_SIGN);
                 outputStream.writeByte(value >> 7 & INTEGER_DATA_MASK
