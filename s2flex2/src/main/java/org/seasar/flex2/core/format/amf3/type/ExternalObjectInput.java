@@ -15,7 +15,9 @@
  */
 package org.seasar.flex2.core.format.amf3.type;
 
+import java.io.DataInputStream;
 import java.io.ObjectInput;
 
 public interface ExternalObjectInput extends ObjectInput {
+    void initialize(final DataInputStream inputStream);
 }

@@ -19,7 +19,6 @@ import java.io.DataInputStream;
 
 import org.seasar.flex2.core.format.amf3.type.ExternalObjectInput;
 import org.seasar.flex2.core.format.amf3.type.factory.ExternalObjectInputFactory;
-import org.seasar.flex2.core.format.amf3.type.impl.ExternalObjectInputImpl;
 import org.seasar.framework.container.S2Container;
 
 public class ExternalObjectInputFactoryImpl implements
@@ -29,9 +28,9 @@ public class ExternalObjectInputFactoryImpl implements
 
     public ExternalObjectInput createObjectInput(
             final DataInputStream inputStream) {
-        final ExternalObjectInputImpl input = (ExternalObjectInputImpl) container
+        final ExternalObjectInput input = (ExternalObjectInput) container
                 .getComponent(ExternalObjectInput.class);
-        input.setInputStream(inputStream);
+        input.initialize(inputStream);
         return input;
     }
 

@@ -36,7 +36,7 @@ public class ExternalObjectOutputImpl implements ExternalObjectOutput {
         outputStream.flush();
     }
 
-    public void setOutputStream(final DataOutputStream outputStream) {
+    public void initialize(final DataOutputStream outputStream) {
         this.outputStream = outputStream;
     }
 

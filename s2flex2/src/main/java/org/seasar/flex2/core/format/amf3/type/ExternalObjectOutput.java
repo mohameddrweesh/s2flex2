@@ -15,7 +15,9 @@
  */
 package org.seasar.flex2.core.format.amf3.type;
 
+import java.io.DataOutputStream;
 import java.io.ObjectOutput;
 
 public interface ExternalObjectOutput extends ObjectOutput {
+    void initialize(final DataOutputStream outputStream);
 }

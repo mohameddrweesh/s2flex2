@@ -36,6 +36,10 @@ public class ExternalObjectInputImpl implements ExternalObjectInput {
         inputStream.close();
     }
 
+    public void initialize(final DataInputStream inputStream) {
+        this.inputStream = inputStream;
+    }
+
     public int read() throws IOException {
         return inputStream.read();
     }
@@ -111,10 +115,6 @@ public class ExternalObjectInputImpl implements ExternalObjectInput {
 
     public String readUTF() throws IOException {
         return inputStream.readUTF();
-    }
-
-    public void setInputStream(final DataInputStream inputStream) {
-        this.inputStream = inputStream;
     }
 
     public void setReaderFactory(final Amf3DataReaderFactory readerFactory) {

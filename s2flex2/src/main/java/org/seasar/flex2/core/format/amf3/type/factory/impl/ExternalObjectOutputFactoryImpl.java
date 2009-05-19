@@ -19,7 +19,6 @@ import java.io.DataOutputStream;
 
 import org.seasar.flex2.core.format.amf3.type.ExternalObjectOutput;
 import org.seasar.flex2.core.format.amf3.type.factory.ExternalObjectOutputFactory;
-import org.seasar.flex2.core.format.amf3.type.impl.ExternalObjectOutputImpl;
 import org.seasar.framework.container.S2Container;
 
 public class ExternalObjectOutputFactoryImpl implements
@@ -29,9 +28,9 @@ public class ExternalObjectOutputFactoryImpl implements
 
     public ExternalObjectOutput createObjectOutput(
             final DataOutputStream outputStream) {
-        final ExternalObjectOutputImpl output = (ExternalObjectOutputImpl) container
+        final ExternalObjectOutput output = (ExternalObjectOutput) container
                 .getComponent(ExternalObjectOutput.class);
-        output.setOutputStream(outputStream);
+        output.initialize(outputStream);
         return output;
     }
 

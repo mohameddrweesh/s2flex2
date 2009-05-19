@@ -26,15 +26,15 @@ import org.seasar.framework.beans.BeanDesc;
 
 public class Amf3ExternalObjectWriterImpl extends Amf3TypedObjectWriterImpl {
 
-    private ExternalObjectOutputFactory externalizeDataOutputFactory;
+    private ExternalObjectOutputFactory externalObjectOutputFactory;
 
     public boolean isWritableValue(final Object value) {
         return (value instanceof Externalizable);
     }
 
-    public void setExternalizeDataOutputFactory(
+    public void setExternalObjectOutputFactory(
             final ExternalObjectOutputFactory dataOutputFactory) {
-        externalizeDataOutputFactory = dataOutputFactory;
+        externalObjectOutputFactory = dataOutputFactory;
     }
 
     protected final void writeClassDefine(final BeanDesc beanDesc,
@@ -48,7 +48,7 @@ public class Amf3ExternalObjectWriterImpl extends Amf3TypedObjectWriterImpl {
     protected final void writeClassObjectProperties(final Object value,
             final DataOutputStream outputStream) throws IOException {
         final Externalizable externalObject = (Externalizable) value;
-        final ExternalObjectOutput externalizeDataOutput = externalizeDataOutputFactory
+        final ExternalObjectOutput externalizeDataOutput = externalObjectOutputFactory
                 .createObjectOutput(outputStream);
         externalObject.writeExternal(externalizeDataOutput);
     }
