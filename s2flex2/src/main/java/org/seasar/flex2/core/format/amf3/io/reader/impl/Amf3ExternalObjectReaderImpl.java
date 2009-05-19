@@ -28,7 +28,7 @@ import org.seasar.framework.util.ClassUtil;
 public class Amf3ExternalObjectReaderImpl extends AbstractAmf3ObjectReaderImpl
         implements ExternalObjectReader {
 
-    private ExternalObjectInputFactory externalizeDataInputFactory;
+    private ExternalObjectInputFactory externalObjectInputFactory;
 
     public final Externalizable read(final Class clazz,
             final DataInputStream inputStream) throws IOException {
@@ -36,7 +36,7 @@ public class Amf3ExternalObjectReaderImpl extends AbstractAmf3ObjectReaderImpl
                 .newInstance(clazz);
         addObjectReference(externalObject);
 
-        final ExternalObjectInput input = externalizeDataInputFactory
+        final ExternalObjectInput input = externalObjectInputFactory
                 .createObjectInput(inputStream);
         try {
             externalObject.readExternal(input);
@@ -51,9 +51,9 @@ public class Amf3ExternalObjectReaderImpl extends AbstractAmf3ObjectReaderImpl
         return null;
     }
 
-    public void setExternalizeDataInputFactory(
+    public void setExternalObjectInputFactory(
             final ExternalObjectInputFactory dataInputFactory) {
-        externalizeDataInputFactory = dataInputFactory;
+        externalObjectInputFactory = dataInputFactory;
     }
 
     protected Object readInlinedObject(final int reference,
