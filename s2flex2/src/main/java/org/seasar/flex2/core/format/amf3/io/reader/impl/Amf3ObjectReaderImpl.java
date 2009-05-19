@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2007 the Seasar Foundation and the Others.
+ * Copyright 2004-2009 the Seasar Foundation and the Others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -79,8 +79,12 @@ public class Amf3ObjectReaderImpl extends AbstractAmf3TypedObjectReaderImpl
             }
 
             case Amf3Constants.OBJECT_NAME_VALUE_ENCODED: {
-                addClassReference(Amf3Object.class);
-                object = asobjectReader.read(inputStream);
+                if(className.length() == 0 ){
+                    addClassReference(Amf3Object.class);
+                    object = asobjectReader.read(inputStream);
+                } else {
+                    throw new RuntimeException("Unsupport dynamic class type.");
+                }
                 break;
             }
 
