@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2007 the Seasar Foundation and the Others.
+ * Copyright 2004-2009 the Seasar Foundation and the Others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,63 +45,8 @@ public interface Amf3TypeDef {
 
     byte BYTEARRAY = 0x0C;
 
-    /*
-     * 
-     * public static final String TYPE_NULL = "AMF3_NULL";
-     * 
-     * public static final String TYPE_BOOLEAN = "AMF3_BOOLEAN";
-     * 
-     * public static final String TYPE_BOOLEAN_FALSE = "AMF3_BOOLEAN_TRUE";
-     * 
-     * public static final String TYPE_BOOLEAN_TRUE = "AMF3_BOOLEAN_FALSE";
-     * 
-     * public static final String TYPE_INTEGER = "AMF3_INTEGER";
-     * 
-     * public static final String TYPE_NUMBER = "AMF3_NUMBER";
-     * 
-     * public static final String TYPE_BIGNUMBER = "AMF3_BIGNUMBER";
-     * 
-     * public static final String TYPE_STRING = "AMF3_STRING";
-     * 
-     * public static final String TYPE_OBJECT = "AMF3_OBJECT";
-     * 
-     * public static final String TYPE_ARRAY = "AMF3_ARRAY";
-     * 
-     * public static final String TYPE_DATE = "AMF3_DATE";
-     * 
-     * public static final String TYPE_XML = "AMF3_XML";
-     * 
-     * public static final String TYPE_BYTEARRAY = "AMF3_BYTEARRAY";
-     * 
-     * public static final String TYPE_AMF3_DATA_MARKER = "AMF3_DATA_MARKER";
-     * 
-     * private Amf3TypeDef() { }
-     * 
-     * public static final String toString(final byte dataType) { switch
-     * (dataType) {
-     * 
-     * case BOOLEAN_FALSE: return TYPE_BOOLEAN_FALSE;
-     * 
-     * case BOOLEAN_TRUE: return TYPE_BOOLEAN_TRUE;
-     * 
-     * case INTEGER: return TYPE_INTEGER;
-     * 
-     * case NUMBER: return TYPE_NUMBER;
-     * 
-     * case STRING: return TYPE_STRING;
-     * 
-     * case DATE: return TYPE_DATE;
-     * 
-     * case ARRAY: return TYPE_ARRAY;
-     * 
-     * case OBJECT: return TYPE_OBJECT;
-     * 
-     * case XML: return TYPE_XML;
-     * 
-     * case BYTEARRAY: return TYPE_BYTEARRAY;
-     * 
-     * case AMF3_DATA_MARKER: return TYPE_AMF3_DATA_MARKER;
-     * 
-     * case NULL: case UNDEFINED: default: return TYPE_NULL; } }
-     */
+    byte VECTORY = 0x10;
+    
+    byte DICTIONARY = 0x11;
+
 }
