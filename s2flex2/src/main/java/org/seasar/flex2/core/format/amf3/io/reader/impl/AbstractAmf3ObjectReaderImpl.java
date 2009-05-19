@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2007 the Seasar Foundation and the Others.
+ * Copyright 2004-2009 the Seasar Foundation and the Others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,6 +48,10 @@ public abstract class AbstractAmf3ObjectReaderImpl extends Amf3IntReaderImpl {
         getReferences().addObjectReference(object);
     }
 
+    protected final void setObjectReferenceAt(int index, final Object object) {
+        getReferences().setObjectReferenceAt(index,object);
+    }
+    
     protected final void addStringReference(final String object) {
         getReferences().addStringReference(object);
     }
