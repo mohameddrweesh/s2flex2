@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2006 the Seasar Foundation and the Others.
+ * Copyright 2004-2009 the Seasar Foundation and the Others.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -89,9 +89,11 @@ public abstract class AbstractRemotingServiceInvokerImpl implements
 
     private final Object adjustArgument(final Class clazz, final Object arg) {
         Object result = arg;
-        for (int i = 0; i < argumentAdjustors.length; i++) {
-            if (argumentAdjustors[i].isTarget(clazz, result)) {
-                result = argumentAdjustors[i].adjust(clazz, result);
+        if( clazz != arg.getClass()){
+            for (int i = 0; i < argumentAdjustors.length; i++) {
+                if (argumentAdjustors[i].isTarget(clazz, result)) {
+                    result = argumentAdjustors[i].adjust(clazz, result);
+                }
             }
         }
         return result;
@@ -127,9 +129,9 @@ public abstract class AbstractRemotingServiceInvokerImpl implements
         boolean isValid = false;
 
         for (int i = 0; i < methods.length; i++) {
-            final Class[] classes = methods[i].getParameterTypes();
-            if (classes.length == args.length) {
-                adjustArguments(classes, args);
+            final Class[] parameterClasses = methods[i].getParameterTypes();
+            if (parameterClasses.length == args.length) {
+                adjustArguments(parameterClasses, args);
                 isValid = true;
                 break;
             }
