@@ -6,7 +6,6 @@
 >
 	<xi:include href="/dataconverter.dicon"/>
 	<xi:include href="/amf_binder.dicon"/>
-	<xi:include href="/amf3_types.dicon"/>
 
 	<!--
 		reader/writer share data components
@@ -160,21 +159,35 @@
 		amf3ObjectReader 
 	-->
 	<component
-		class="org.seasar.flex2.core.format.amf3.io.reader.impl.Amf3ASObjectReaderImpl"
-	    autoBinding="property"
-	    />
-	<component
-		class="org.seasar.flex2.core.format.amf3.io.reader.impl.Amf3ExternalObjectReaderImpl"
-	    autoBinding="property"
-	    />
-	<component
-		class="org.seasar.flex2.core.format.amf3.io.reader.impl.Amf3TypedObjectReaderImpl"
-	    autoBinding="property"
-	   	/>
-	<component
 		class="org.seasar.flex2.core.format.amf3.io.reader.impl.Amf3ObjectReaderImpl"
 	    autoBinding="property"
-	   	/>
+	   	>
+	   	<property name="asobjectReader">
+			<component
+				class="org.seasar.flex2.core.format.amf3.io.reader.impl.Amf3ASObjectReaderImpl"
+			    autoBinding="property"
+			    />
+	   	</property>
+		<property name="externalObjectReader">
+		<component
+			class="org.seasar.flex2.core.format.amf3.io.reader.impl.Amf3ExternalObjectReaderImpl"
+		    autoBinding="property"
+		    >
+		    <property name="externalObjectInputFactory">
+				<component
+					class="org.seasar.flex2.core.format.amf3.type.factory.impl.ExternalObjectInputFactoryImpl"
+					autoBinding="property"
+					/>
+		    </property>
+	    </component>
+	   	</property>
+		<property name="classTypedObjectReader">
+			<component
+				class="org.seasar.flex2.core.format.amf3.io.reader.impl.Amf3TypedObjectReaderImpl"
+			    autoBinding="property"
+			   	/>
+	   	</property>
+   	</component>
 	<component
 		class="org.seasar.flex2.core.format.amf3.io.reader.impl.Amf3XmlStringReaderImpl"
 	    autoBinding="property"
@@ -182,12 +195,14 @@
 	<component
 		class="org.seasar.flex2.core.format.amf3.io.reader.impl.Amf3ByteArrayReaderImpl"
 	    autoBinding="property"
-	    />
+	    >
+    </component>
 
 	<!-- 
 		amf3 data reader factory components
 	-->
 	<component
+		name="amfDataReaderFactory"
 		class="org.seasar.flex2.core.format.amf3.io.reader.factory.impl.Amf3DataReaderFactoryImpl"
 	    autoBinding="property"
 	    />
@@ -280,7 +295,14 @@
 		name="amf3ExternalObjectWriter"
 		class="org.seasar.flex2.core.format.amf3.io.writer.impl.Amf3ExternalObjectWriterImpl" 
 	    autoBinding="property"
-	    />
+	    >
+	    <property name="externalObjectOutputFactory">
+			<component
+				class="org.seasar.flex2.core.format.amf3.type.factory.impl.ExternalObjectOutputFactoryImpl"
+				autoBinding="property"
+				/>	    
+	    </property>
+    </component>
 	<component
 		name="amf3TypedObjectWriter"
 		class="org.seasar.flex2.core.format.amf3.io.writer.impl.Amf3TypedObjectWriterImpl" 
@@ -295,4 +317,33 @@
 		class="org.seasar.flex2.core.format.amf3.io.writer.factory.impl.Amf3DataWriterFactoryImpl"
 		autoBinding="property"
 	    />
+
+
+	<component
+		class="org.seasar.flex2.core.format.amf3.type.impl.ExternalObjectInputImpl"
+		instance="prototype"
+		autoBinding="property"
+		>
+		<property name="readerFactory">amfDataReaderFactory</property>
+	</component>
+	<component
+		class="org.seasar.flex2.core.format.amf3.type.impl.ExternalObjectOutputImpl"
+		instance="prototype"
+		autoBinding="property"
+		>
+		<property name="writerFactory">amfDataWriterFactory</property>
+	</component>
+
+	<component 
+		class="org.seasar.flex2.core.format.amf3.type.impl.ByteArrayImpl"
+		instance="prototype"
+		autoBinding="property"
+		>
+		<property name="dataReaderFactory">amfDataReaderFactory</property>
+		<property name="dataWriterFactory">amfDataWriterFactory</property>
+	</component>
+	<component
+		class="org.seasar.flex2.core.format.amf3.type.factory.impl.ByteArrayFactoryImpl"
+		autoBinding="property"
+		/>  
 </components>
