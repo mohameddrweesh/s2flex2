@@ -51,7 +51,7 @@ public class Amf3DataWriterFactoryImpl implements Amf3DataWriterFactory {
         this.amf3DataWriters = amf3DataWriters;
     }
 
-    public void setWriterMap(final Amf0DataWriter[] amf0DataWriters) {
+    public void setAmf0DataWriters(final Amf0DataWriter[] amf0DataWriters) {
         this.amf0DataWriters = amf0DataWriters;
     }
 
