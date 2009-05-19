@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN" 
+    "http://www.seasar.org/dtd/components24.dtd">
+<components namespace="remoting"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+>
+    <xi:include href="/remoting_amf3.dicon"/>
+
+	<!-- Type D -->
+	<component
+		class="org.seasar.flex2.core.format.amf3.io.reader.impl.Amf3UnsupportedReaderImpl"
+	    autoBinding="property"
+	    />
+
+	<!-- Type E -->
+	<component
+		class="org.seasar.flex2.core.format.amf3.io.reader.impl.Amf3UnsupportedReaderImpl"
+	    autoBinding="property"
+	    />
+
+	<!-- Type F -->
+	<component
+		class="org.seasar.flex2.core.format.amf3.io.reader.impl.Amf3UnsupportedReaderImpl"
+	    autoBinding="property"
+	    />	    
+
+	<!-- Type 10 -->
+	<component
+		class="org.seasar.flex2.core.format.amf3.io.reader.impl.Amf3VectorReaderImpl"
+	    autoBinding="property"
+	    />
+</components>
